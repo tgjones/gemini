@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:Controls="clr-namespace:Gemini.Contracts.Gui.Controls"
+	x:Class="Gemini.Contracts.Gui.Controls.AbstractButtonView">
+	<DataTemplate DataType="{x:Type Controls:AbstractButton}">
+		<DataTemplate.Resources>
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		</DataTemplate.Resources>
+		<Button ToolTip="{Binding Path=(Controls:IControl.ToolTip)}"
+                Command="{Binding}"
+                Visibility="{Binding Path=(Controls:IControl.Visible), 
+                        Converter={StaticResource BooleanToVisibilityConverter}}"
+                Padding="{Binding Padding}" Margin="{Binding Margin}"
+                IsCancel="{Binding IsCancel}" IsDefault="{Binding IsDefault}">
+			<StackPanel Orientation="Horizontal">
+				<Image Source="{Binding Path=(Controls:IButton.Icon)}"/>
+				<TextBlock Text="{Binding Path=(Controls:IButton.Text)}"/>
+			</StackPanel>
+		</Button>
+	</DataTemplate>
+
+</ResourceDictionary>

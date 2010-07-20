@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="Gemini.Pads.PropertyGrid.PropertyGridView"
+										xmlns:wpg="clr-namespace:WPG;assembly=WPG"
+	xmlns:PropertyGrid="clr-namespace:Gemini.Pads.PropertyGrid">
+	<DataTemplate DataType="{x:Type PropertyGrid:PropertyGrid}">
+		<StackPanel VerticalAlignment="Stretch" Background="White">
+			<wpg:PropertyGrid Instance="{Binding SelectedObject}" ShowDescription="True" ShowPreview="True"
+												VerticalContentAlignment="Stretch" />
+		</StackPanel>
+	</DataTemplate>
+</ResourceDictionary>

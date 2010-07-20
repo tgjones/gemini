@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:DemoDocument="clr-namespace:Gemini.Demo.DemoDocument"
+	x:Class="Gemini.Demo.DemoDocument.DemoDocumentView">
+	<DataTemplate DataType="{x:Type DemoDocument:DemoDocument}">
+		<!-- wrap everything in a dockpanel just so we have a place to capture keyboard input, etc. -->
+		<DockPanel>
+			<Viewport3D Name="viewport3D1" Camera="{Binding Camera}">
+				<ModelVisual3D>
+					<ModelVisual3D.Content>
+						<DirectionalLight x:Name="dirLightMain" Direction="-1,-1,-1">
+						</DirectionalLight>
+					</ModelVisual3D.Content>
+				</ModelVisual3D>
+				<ModelVisual3D>
+					<ModelVisual3D.Content>
+						<GeometryModel3D>
+							<GeometryModel3D.Geometry>
+								<MeshGeometry3D x:Name="meshMain"
+																Positions="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  1 1 1"
+																TriangleIndices="2 3 1  2 1 0  7 1 3  7 5 1  6 5 7  6 4 5  6 2 0  2 0 4  2 7 3  2 6 7  0 1 5  0 5 4">
+								</MeshGeometry3D>
+							</GeometryModel3D.Geometry>
+							<GeometryModel3D.Material>
+								<DiffuseMaterial x:Name="matDiffuseMain">
+									<DiffuseMaterial.Brush>
+										<SolidColorBrush Color="Red"/>
+									</DiffuseMaterial.Brush>
+								</DiffuseMaterial>
+							</GeometryModel3D.Material>
+						</GeometryModel3D>
+					</ModelVisual3D.Content>
+				</ModelVisual3D>
+			</Viewport3D>
+		</DockPanel>
+	</DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,25 @@
+﻿<f:RibbonWindow x:Class="Gemini.Workbench.WorkbenchView"
+								xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+								xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+								xmlns:f="clr-namespace:Fluent;assembly=Fluent"
+								xmlns:local="clr-namespace:Gemini.Workbench"
+								local:AttachedProperties.RegisterCommandBindings="{Binding CommandBindings}"
+								Title="Workbench" Height="768" Width="1024">
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Blue.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+			<DataTemplate x:Key="RibbonGroupBoxItemTemplate">
+				<ContentPresenter Content="{Binding}" />
+			</DataTemplate>
+		</ResourceDictionary>
+	</Window.Resources>
+
+	<DockPanel>
+		<f:Ribbon x:Name="rbnRibbon" DockPanel.Dock="Top" Title="Gemini" />
+		<ContentControl x:Name="mainContent" Content="{Binding Path=LayoutManager}"/>
+	</DockPanel>
+</f:RibbonWindow>
