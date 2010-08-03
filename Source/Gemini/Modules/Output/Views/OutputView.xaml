@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Gemini.Modules.Output.Views.OutputView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <TextBox x:Name="outputText"
+             Text="{Binding Text}" 
+             IsReadOnly="True"
+             VerticalAlignment="Stretch"
+             HorizontalAlignment="Stretch"
+             AcceptsReturn="True" 
+             ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+</UserControl>

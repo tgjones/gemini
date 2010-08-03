@@ -1,0 +1,27 @@
+﻿<f:RibbonWindow x:Class="Gemini.Modules.Shell.Views.ShellView"
+								xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+								xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+								xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
+								xmlns:f="clr-namespace:Fluent;assembly=Fluent"
+								Title="{Binding Title}">
+	<DockPanel>
+		<f:Ribbon x:Name="rbnRibbon" DockPanel.Dock="Top" Title="Gemini Ribbon" />
+
+		<StatusBar DockPanel.Dock="Bottom" >
+			<StatusBarItem>
+				<TextBlock Text="{Binding StatusBar.Message}" />
+			</StatusBarItem>
+		</StatusBar>
+
+		<ad:DockingManager x:Name="Manager">
+			<ad:ResizingPanel Orientation="Vertical">
+				<ad:ResizingPanel Orientation="Horizontal" >
+					<ad:DockablePane x:Name="Left" />
+					<ad:DocumentPane x:Name="Document"/>
+					<ad:DockablePane x:Name="Right" />
+				</ad:ResizingPanel>
+				<ad:DockablePane x:Name="Bottom" />
+			</ad:ResizingPanel>
+		</ad:DockingManager>
+	</DockPanel>
+</f:RibbonWindow>

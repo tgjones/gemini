@@ -1,8 +1,8 @@
-﻿using Osiris.Host;
+﻿using Gemini;
 
-namespace Osiris.Demo.Host
+namespace Gemini.Demo.Host
 {
-	public partial class App : OsirisApplication
+	public partial class App : GeminiApplication
 	{
 		
 	}

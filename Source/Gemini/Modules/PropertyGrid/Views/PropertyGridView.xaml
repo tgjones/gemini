@@ -1,0 +1,6 @@
+﻿<UserControl x:Class="Gemini.Modules.PropertyGrid.Views.PropertyGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:wpg="clr-namespace:WPG;assembly=WPG">
+	<wpg:PropertyGrid Instance="{Binding SelectedObject}" />
+</UserControl>

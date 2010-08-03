@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="Gemini.Demo.Modules.Home.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <TextBlock HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="24"
+               Text="Welcome to the MDI Sample!" />
+</UserControl>
