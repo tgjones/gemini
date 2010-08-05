@@ -96,23 +96,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libraries\AvalonDock\AvalonDock.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Core, Version=1.1.0.39524, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\branches\v1.1\bin\net-3.5\debug\Caliburn.Core.dll</HintPath>
+    <Reference Include="Caliburn.Core">
+      <HintPath>..\..\Libraries\Caliburn\Caliburn.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.PresentationFramework, Version=1.1.0.39524, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\branches\v1.1\bin\net-3.5\debug\Caliburn.PresentationFramework.dll</HintPath>
+    <Reference Include="Caliburn.PresentationFramework">
+      <HintPath>..\..\Libraries\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.StructureMap, Version=1.1.0.49753, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL" />
+    <Reference Include="Caliburn.StructureMap">
+      <HintPath>..\..\Libraries\Caliburn\Caliburn.StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="Fluent">
       <HintPath>..\..\Libraries\FluentRibbon\Fluent.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\branches\v1.1\bin\net-3.5\debug\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\Libraries\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
+    <Reference Include="StructureMap">
+      <HintPath>..\..\Libraries\Caliburn\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
