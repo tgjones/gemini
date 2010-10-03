@@ -41,6 +41,8 @@ namespace Gemini.Modules.Shell.Views
 			};
 		}
 
+		public event EventHandler ActiveDocumentChanged;
+
 		public void InitializeRibbon(IRibbon ribbonModel)
 		{
 			// ToolBarTray.ToolBars isn't a dependency property, so we

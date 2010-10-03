@@ -6,6 +6,8 @@ namespace Gemini.Framework.Services
 {
 	public interface IShell
 	{
+		event EventHandler ActiveDocumentChanged;
+
 		string Title { get; set; }
 
 		IRibbon Ribbon { get; }

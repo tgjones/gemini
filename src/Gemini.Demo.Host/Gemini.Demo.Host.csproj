@@ -70,10 +70,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AvalonDock.Themes">
-      <HintPath>..\..\Libraries\AvalonDock\AvalonDock.Themes.dll</HintPath>
+      <HintPath>..\..\lib\AvalonDock\AvalonDock.Themes.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.PresentationFramework, Version=1.1.0.49753, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Caliburn.PresentationFramework">
+      <HintPath>..\..\lib\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\lib\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -89,7 +93,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WPG">
-      <HintPath>..\..\Libraries\WPG.dll</HintPath>
+      <HintPath>..\..\lib\WPG\WPG.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

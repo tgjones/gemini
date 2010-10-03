@@ -18,6 +18,8 @@ namespace Gemini.Modules.Shell.ViewModels
 		private readonly IStatusBar _statusBar;
 		private readonly IDispatcher _dispatcher;
 
+		public event EventHandler ActiveDocumentChanged;
+
 		public string Title
 		{
 			get { return _title; }
