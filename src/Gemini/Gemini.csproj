@@ -94,25 +94,25 @@
   <ItemGroup>
     <Reference Include="AvalonDock, Version=1.3.3500.0, Culture=neutral, PublicKeyToken=85a1e0ada7ec13e4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libraries\AvalonDock\AvalonDock.dll</HintPath>
+      <HintPath>..\..\lib\AvalonDock\AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Core">
-      <HintPath>..\..\Libraries\Caliburn\Caliburn.Core.dll</HintPath>
+      <HintPath>..\..\lib\Caliburn\Caliburn.Core.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.PresentationFramework">
-      <HintPath>..\..\Libraries\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
+      <HintPath>..\..\lib\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.StructureMap">
-      <HintPath>..\..\Libraries\Caliburn\Caliburn.StructureMap.dll</HintPath>
+      <HintPath>..\..\lib\Caliburn\Caliburn.StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="Fluent">
-      <HintPath>..\..\Libraries\FluentRibbon\Fluent.dll</HintPath>
+      <HintPath>..\..\lib\FluentRibbon\Fluent.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\Libraries\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <HintPath>..\..\lib\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap">
-      <HintPath>..\..\Libraries\Caliburn\StructureMap.dll</HintPath>
+      <HintPath>..\..\lib\Caliburn\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
