@@ -130,7 +130,9 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Properties.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Open.png" />
   </ItemGroup>
