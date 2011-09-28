@@ -1,9 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:Converters="clr-namespace:Gemini.Framework.Converters;assembly=Gemini.Framework"
-	x:Class="Gemini.Resources.c__projects_gemini_source_gemini_resources_primitives_xaml">
-    
-    <Converters:BooleanToVisibilityConverter x:Key="booleanToVisibility" />
-    <Converters:CollapsedWhenNull x:Key="collapsedWhenNull" />
-    
-</ResourceDictionary>

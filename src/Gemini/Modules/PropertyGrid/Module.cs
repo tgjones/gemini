@@ -1,33 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core;
-using Caliburn.PresentationFramework;
+using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
-using Gemini.Framework.Ribbon;
 using Gemini.Framework.Services;
-using Gemini.Modules.PropertyGrid.ViewModels;
 
 namespace Gemini.Modules.PropertyGrid
 {
+	[Export(typeof(IModule))]
 	public class Module : ModuleBase
 	{
-		protected override IEnumerable<ComponentInfo> GetComponents()
+		public override void Initialize()
 		{
-			yield return Singleton<IPropertyGrid, PropertyGridViewModel>();
-		}
-
-		protected override void Initialize()
-		{
-			Ribbon.Tabs
-				.First(x => x.Name == "Home")
-				.Groups.First(x => x.Name == "Tools")
-				.Add(new RibbonButton("Properties", OpenProperties));
+			MainMenu.All.First(x => x.Name == "View")
+				.Add(new MenuItem("Properties", OpenProperties));
 		}
 
 		private static IEnumerable<IResult> OpenProperties()
 		{
-			yield return Show.Tool<IPropertyGrid>(Pane.Right);
+			yield return Show.Tool<IPropertyGrid>(PaneLocation.Right);
 		}
 	}
 }

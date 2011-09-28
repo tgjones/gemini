@@ -1,10 +1,10 @@
-using Caliburn.PresentationFramework.ApplicationModel;
+﻿using Caliburn.Micro;
 
 namespace Gemini.Modules.Output
 {
-	public interface IOutput : IExtendedPresenter
+	public interface IOutput : IScreen
 	{
-		void Clear();
 		void Append(string text);
+		void Clear();
 	}
 }

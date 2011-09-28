@@ -1,15 +1,36 @@
-﻿using Gemini.Framework;
+﻿using System.ComponentModel.Composition;
+using System.Reflection;
+using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.Output;
 
 namespace Gemini.Demo.Modules.Startup
 {
-	public class Module : ModuleBase
+	[Export(typeof(IModule))]
+	public class Module : IModule
 	{
-		protected override void Initialize()
+		[Import]
+		private IShell _shell;
+
+		[Import]
+		private IOutput _output;
+
+		[Import]
+		private IPropertyGrid _propertyGrid;
+
+		[Import]
+		private IResourceManager _resourceManager;
+
+		public void Initialize()
 		{
-			Container.GetInstance<IShell>().Title = "Gemini Demo";
-			Container.GetInstance<IOutput>().Append("Started up");
+			_shell.Title = "Gemini Demo";
+			_shell.StatusBar.Message = "Hello world!";
+			_shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
+				Assembly.GetExecutingAssembly().GetAssemblyName());
+
+			_output.Append("Started up");
+
+			_propertyGrid.SelectedObject = _shell;
 		}
 	}
 }

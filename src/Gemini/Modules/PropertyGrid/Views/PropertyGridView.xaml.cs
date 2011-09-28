@@ -3,7 +3,7 @@
 namespace Gemini.Modules.PropertyGrid.Views
 {
 	/// <summary>
-	/// Interaction logic for OutputView.xaml
+	/// Interaction logic for PropertyGridView.xaml
 	/// </summary>
 	public partial class PropertyGridView : UserControl
 	{

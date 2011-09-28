@@ -2,112 +2,44 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using AvalonDock;
-using Caliburn.PresentationFramework;
-using Fluent;
-using Gemini.Framework.Ribbon;
+using Caliburn.Micro;
 using Gemini.Framework.Services;
-using Microsoft.Practices.ServiceLocation;
-using Caliburn.PresentationFramework.ApplicationModel;
-using Pane = Gemini.Framework.Services.Pane;
 
 namespace Gemini.Modules.Shell.Views
 {
 	/// <summary>
-	/// Interaction logic for Shell.xaml
+	/// Interaction logic for ShellView.xaml
 	/// </summary>
-	public partial class ShellView : RibbonWindow, IShellView
+	public partial class ShellView : Window, IShellView
 	{
-		private readonly Dictionary<Pane, DockablePane> _panes;
-		private readonly IViewStrategy _viewStrategy;
-		private readonly IBinder _binder;
+		public event EventHandler ActiveDocumentChanged;
+
+		private readonly Dictionary<PaneLocation, DockablePane> _panes;
 
 		public ShellView()
-			: this(ServiceLocator.Current.GetInstance<IBinder>(), ServiceLocator.Current.GetInstance<IViewStrategy>()) { }
-
-		public ShellView(IBinder binder, IViewStrategy viewStrategy)
 		{
 			InitializeComponent();
 
-			_viewStrategy = viewStrategy;
-			_binder = binder;
-			_panes = new Dictionary<Pane, DockablePane>
+			_panes = new Dictionary<PaneLocation, DockablePane>
 			{
-				{ Pane.Left, Left },
-				{ Pane.Right, Right },
-				{ Pane.Bottom, Bottom }
+				{ PaneLocation.Left, LeftPane },
+				{ PaneLocation.Right, RightPane },
+				{ PaneLocation.Bottom, BottomPane }
 			};
 		}
 
-		public event EventHandler ActiveDocumentChanged;
-
-		public void InitializeRibbon(IRibbon ribbonModel)
+		public void ShowTool(PaneLocation pane, IScreen model)
 		{
-			// ToolBarTray.ToolBars isn't a dependency property, so we
-			// have to add the Tool Bars manually
-			foreach (IRibbonTab ribbonTabViewModel in ribbonModel.Tabs)
-				InitializeRibbonTab(ribbonTabViewModel);
-
-			foreach (IRibbonBackstageItem ribbonItemViewModel in ribbonModel.BackstageItems)
-			{
-				if (ribbonItemViewModel is RibbonButton)
-				{
-					Fluent.Button childButton = new Fluent.Button();
-					childButton.DataContext = ribbonItemViewModel;
-					childButton.SetBinding(Fluent.Button.TextProperty, "Text");
-					childButton.SetBinding(Caliburn.PresentationFramework.Actions.Action.TargetProperty, new Binding());
-					childButton.SetBinding(Message.AttachProperty, "ActionText");
-					childButton.SetBinding(Fluent.Button.LargeIconProperty, "LargeIcon");
-					childButton.SetBinding(Fluent.Button.IconProperty, "Icon");
-					//childButton.SetBinding(Fluent.Button.VisibilityProperty, "Visibility");
-					//childButton.SetBinding(Fluent.Button.ToolTipProperty, "ToolTip");
-					//childButton.SetBinding(Fluent.Button.SizeDefinitionProperty, "SizeDefinition");
-					rbnRibbon.BackstageItems.Add(childButton);
-				}
-			}
-		}
-
-		private void InitializeRibbonTab(IRibbonTab ribbonTabViewModel)
-		{
-			RibbonTabItem ribbonTab = new RibbonTabItem();
-			ribbonTab.DataContext = ribbonTabViewModel;
-
-			// Bind the Header Property
-			ribbonTab.SetBinding(RibbonTabItem.HeaderProperty, new Binding("Title"));
-
-			foreach (IRibbonGroup ribbonGroupViewModel in ribbonTabViewModel.Groups)
-				InitializeRibbonGroup(ribbonTab, ribbonGroupViewModel);
-
-			rbnRibbon.Tabs.Add(ribbonTab);
-		}
-
-		private void InitializeRibbonGroup(RibbonTabItem ribbonTab, IRibbonGroup ribbonGroupViewModel)
-		{
-			RibbonGroupBox ribbonGroupBox = new RibbonGroupBox();
-			ribbonGroupBox.DataContext = ribbonGroupViewModel;
-
-			// Bind the Header property
-			ribbonGroupBox.SetBinding(RibbonGroupBox.HeaderProperty, new Binding("Title"));
-
-			// Bind the Items property
-			ribbonGroupBox.ItemTemplate = (DataTemplate) FindResource("RibbonGroupBoxItemTemplate");
-			ribbonGroupBox.SetBinding(RibbonGroupBox.ItemsSourceProperty, new Binding("Items"));
-
-			ribbonTab.Groups.Add(ribbonGroupBox);
-		}
-
-		public void ShowTool(Pane pane, IExtendedPresenter model)
-		{
-			var view = _viewStrategy.GetView(model, null, null);
+			var view = ViewLocator.LocateForModel(model, null, null);
 
 			if (view is DockableContent)
 			{
-				DockableContent dockableContentView = (DockableContent) view;
+				DockableContent dockableContentView = (DockableContent)view;
 				dockableContentView.Show(
 					Manager,
-					(AnchorStyle) Enum.Parse(typeof(AnchorStyle), pane.ToString()));
+					(AnchorStyle)Enum.Parse(typeof(AnchorStyle), pane.ToString()));
 			}
 			else
 			{
@@ -120,12 +52,15 @@ namespace Gemini.Modules.Shell.Views
 			}
 		}
 
-		public void OpenDocument(IExtendedPresenter model)
+		public void OpenDocument(IScreen model)
 		{
-			var view = _viewStrategy.GetView(model, null, null);
+			var view = ViewLocator.LocateForModel(model, null, null);
 
 			if (view is DocumentContent)
+			{
 				((DocumentContent) view).Show(Manager);
+				((DocumentContent) view).Activate();
+			}
 			else
 			{
 				var content = CreateContent<DocumentContent>(view, model);
@@ -133,39 +68,27 @@ namespace Gemini.Modules.Shell.Views
 				content.PropertyChanged += HostPropertyChanged;
 				content.Closing += (s, e) => HostClosing(model, e);
 
-				Document.Items.Add(content);
+				DocumentPane.Items.Add(content);
 
-				model.WasShutdown += delegate
-				{
-					Document.Items.Remove(content);
-				};
+				model.Deactivated += (sender, args) => DocumentPane.Items.Remove(content);
 
 				//content.SetAsActive();
 				Manager.ActiveDocument = content;
 			}
 		}
 
-		private T CreateContent<T>(object view, IExtendedPresenter model)
+		private T CreateContent<T>(object view, IScreen model)
 				where T : ManagedContent, new()
 		{
 			var contentControl = new T { Content = view };
 
-			contentControl.SetBinding(
-					ManagedContent.TitleProperty,
-					"DisplayName"
-					);
+			contentControl.SetBinding(ManagedContent.TitleProperty, "DisplayName");
 
-			_binder.Bind(model, contentControl, null);
-
+			ViewModelBinder.Bind(model, contentControl, null);
 			foreach (var binding in InputBindings)
-			{
 				contentControl.InputBindings.Add((InputBinding) binding);
-			}
-
 			foreach (var binding in CommandBindings)
-			{
 				contentControl.CommandBindings.Add((CommandBinding) binding);
-			}
 
 			return contentControl;
 		}
@@ -181,15 +104,15 @@ namespace Gemini.Modules.Shell.Views
 		{
 			if (e.PropertyName != "IsActiveDocument") return;
 
-			var host = (ManagedContent) sender;
+			var host = (ManagedContent)sender;
 
 			if (host.IsActiveDocument)
-				((IShell) DataContext).ActivateDocument((IExtendedPresenter) host.DataContext);
+				((IShell)DataContext).ActivateDocument((IScreen)host.DataContext);
 		}
 
-		private void HostClosing(IExtendedPresenter rootModel, CancelEventArgs e)
+		private void HostClosing(IScreen rootModel, CancelEventArgs e)
 		{
-			((IShell) DataContext).CloseDocument(rootModel, success => { e.Cancel = !success; });
+			((IShell)DataContext).CloseDocument(rootModel);
 		}
 	}
 }

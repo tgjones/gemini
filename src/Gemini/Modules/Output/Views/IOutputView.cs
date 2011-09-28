@@ -1,8 +1,8 @@
-namespace Gemini.Modules.Output.Views
+﻿namespace Gemini.Modules.Output.Views
 {
-    public interface IOutputView
-    {
-        void ScrollToEnd();
-        void SetText(string text);
-    }
+	public interface IOutputView
+	{
+		void ScrollToEnd();
+		void SetText(string text);
+	}
 }

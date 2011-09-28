@@ -1,6 +1,5 @@
-using System;
-using Caliburn.PresentationFramework.ApplicationModel;
-using Gemini.Framework.Ribbon;
+﻿using System;
+using Caliburn.Micro;
 using Gemini.Framework.Services;
 
 namespace Gemini.Modules.Shell.Views
@@ -9,8 +8,7 @@ namespace Gemini.Modules.Shell.Views
 	{
 		event EventHandler ActiveDocumentChanged;
 
-		void InitializeRibbon(IRibbon ribbonModel);
-		void ShowTool(Pane pane, IExtendedPresenter model);
-		void OpenDocument(IExtendedPresenter model);
+		void ShowTool(PaneLocation pane, IScreen model);
+		void OpenDocument(IScreen model);
 	}
 }

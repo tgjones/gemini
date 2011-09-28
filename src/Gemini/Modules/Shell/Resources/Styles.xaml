@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:menus="clr-namespace:Gemini.Framework.Menus" xmlns:cal="http://www.caliburnproject.org">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Menu.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style TargetType="{x:Type MenuItem}" x:Key="menuSeparatorStyle">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type MenuItem}">
+					<Separator Background="#FFBEC3CB" Margin="0,4,0,4" 
+							   IsEnabled="false" Height="1" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type MenuItem}" x:Key="menuStyle">
+		<Setter Property="Icon" Value="{Binding Icon}" />
+		<Setter Property="InputGestureText" Value="{Binding InputGestureText}" />
+		<Setter Property="cal:Action.Target" Value="{Binding}" />
+		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
+	</Style>
+
+	<HierarchicalDataTemplate x:Key="menuTemplate" ItemsSource="{Binding Children}">
+		<ContentPresenter Content="{Binding Path=Text}" RecognizesAccessKey="True" />
+	</HierarchicalDataTemplate>
+
+	<menus:MenuStyleSelector x:Key="menuStyleSelector" />
+</ResourceDictionary>

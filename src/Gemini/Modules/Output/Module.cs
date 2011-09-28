@@ -1,33 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core;
+using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
-using Gemini.Framework.Ribbon;
 using Gemini.Framework.Services;
-using Gemini.Modules.Output.ViewModels;
-using Caliburn.PresentationFramework;
 
 namespace Gemini.Modules.Output
 {
+	[Export(typeof(IModule))]
 	public class Module : ModuleBase
 	{
-		protected override IEnumerable<ComponentInfo> GetComponents()
+		public override void Initialize()
 		{
-			yield return Singleton<IOutput, OutputViewModel>();
-		}
+            MainMenu.All.First(x => x.Name == "View")
+				.Add(new MenuItem("Output", OpenOutput));
+        }
 
-		protected override void Initialize()
-		{
-			Ribbon.Tabs
-				.First(x => x.Name == "Home")
-				.Groups.First(x => x.Name == "Tools")
-				.Add(new RibbonButton("Output", OpenOutput));
-		}
-
-		private static IEnumerable<IResult> OpenOutput()
-		{
-			yield return Show.Tool<IOutput>(Pane.Bottom);
-		}
+        private IEnumerable<IResult> OpenOutput()
+        {
+            yield return Show.Tool<IOutput>(PaneLocation.Bottom);
+        }
 	}
 }

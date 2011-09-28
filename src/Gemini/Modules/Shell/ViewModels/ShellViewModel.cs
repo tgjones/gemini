@@ -1,96 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using Caliburn.Core.Invocation;
-using Caliburn.PresentationFramework.ApplicationModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Windows;
+using System.Windows.Media;
+using Caliburn.Micro;
 using Gemini.Framework;
-using Gemini.Framework.Questions;
-using Gemini.Framework.Ribbon;
+using Gemini.Framework.Menus;
 using Gemini.Framework.Services;
 using Gemini.Modules.Shell.Views;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
-	public class ShellViewModel : ScreenCollectionConductor, IShell
+	[Export(typeof(IShell))]
+	public class ShellViewModel : Conductor<IScreen>.Collection.AllActive, IShell
 	{
-		private string _title;
 		private IShellView _shellView;
-		private readonly IRibbon _ribbon;
-		private readonly IStatusBar _statusBar;
-		private readonly IDispatcher _dispatcher;
 
-		public event EventHandler ActiveDocumentChanged;
+		[ImportMany(typeof(IModule))]
+		private IEnumerable<IModule> _modules;
 
+		private string _title = "[Default Title]";
 		public string Title
 		{
 			get { return _title; }
-			set { _title = value; NotifyOfPropertyChange("Title"); }
+			set
+			{
+				_title = value;
+				NotifyOfPropertyChange(() => Title);
+			}
 		}
 
-		public IRibbon Ribbon
+		private ImageSource _icon;
+		public ImageSource Icon
 		{
-			get { return _ribbon; }
+			get { return _icon; }
+			set
+			{
+				_icon = value;
+				NotifyOfPropertyChange(() => Icon);
+			}
 		}
 
+		[Import]
+		private IMenu _mainMenu;
+		public IMenu MainMenu
+		{
+			get { return _mainMenu; }
+		}
+
+		[Import]
+		private IStatusBar _statusBar;
 		public IStatusBar StatusBar
 		{
 			get { return _statusBar; }
 		}
 
-		public ShellViewModel(IRibbon ribbon, IStatusBar statusBar, IDispatcher dispatcher)
+		public IScreen ActiveItem
 		{
-			_ribbon = ribbon;
-			_statusBar = statusBar;
-			_dispatcher = dispatcher;
+			get { throw new System.NotImplementedException(); }
 		}
 
-		public void ShowTool(Pane pane, IExtendedPresenter model)
-		{
-			_dispatcher.ExecuteOnUIThread(() => _shellView.ShowTool(pane, model));
-		}
-
-		public void OpenDocument(IExtendedPresenter model)
-		{
-			Open(model, success =>
-			{
-				var index = Presenters.IndexOf(model);
-				if (index == -1)
-					_dispatcher.ExecuteOnUIThread(() => _shellView.OpenDocument(model));
-				else _dispatcher.ExecuteOnUIThread(() => _shellView.OpenDocument((IExtendedPresenter) Presenters[index]));
-			});
-		}
-
-		public void CloseDocument(IExtendedPresenter document, Action<bool> completed)
-		{
-			Shutdown(document, completed);
-		}
-
-		public void ActivateDocument(IExtendedPresenter document)
-		{
-			CurrentPresenter = document;
-		}
-
-		public event EventHandler AfterViewLoaded = delegate { };
-
-		public void OnModulesInitialized(EventArgs args)
-		{
-			_dispatcher.ExecuteOnUIThread(() => _shellView.InitializeRibbon(Ribbon));
-		}
-
-		public override void ViewLoaded(object view, object context)
+		protected override void OnViewLoaded(object view)
 		{
 			_shellView = (IShellView) view;
-			AfterViewLoaded(this, EventArgs.Empty);
+			foreach (var module in _modules)
+				module.Initialize();
+			base.OnViewLoaded(view);
 		}
 
-		protected override void ExecuteShutdownModel(ISubordinate model, Action completed)
+		public void ShowTool(PaneLocation pane, IScreen model)
 		{
-			model.Execute(completed);
+			Execute.OnUIThread(() => _shellView.ShowTool(pane, model));
 		}
 
-		protected override void FinalizeShutdown(bool canShutdown, IEnumerable<IPresenter> allowedToShutdown)
+		public void OpenDocument(IScreen model)
 		{
-			if (canShutdown)
-				base.FinalizeShutdown(true, allowedToShutdown);
+			ActivateItem(model);
+			Execute.OnUIThread(() => _shellView.OpenDocument(model));
+		}
+
+		public void CloseDocument(IScreen document)
+		{
+			DeactivateItem(document, true);
+		}
+
+		public void ActivateDocument(IScreen document)
+		{
+			ActivateItem(document);
+		}
+
+		public void Close()
+		{
+			Application.Current.MainWindow.Close();
 		}
 	}
 }
