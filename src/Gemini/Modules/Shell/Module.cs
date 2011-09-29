@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Input;
 using Gemini.Framework;
+using Gemini.Framework.Menus;
 
 namespace Gemini.Modules.Shell
 {
@@ -10,7 +11,7 @@ namespace Gemini.Modules.Shell
 	{
 		public override void Initialize()
 		{
-			MainMenu.All.First(x => x.Name == "Open")
+			((StandardMenuItem) MainMenu.All.First(x => x.Name == "Open"))
 				.WithGlobalShortcut(ModifierKeys.Control, Key.O);
 		}
 	}

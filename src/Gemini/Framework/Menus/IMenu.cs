@@ -3,8 +3,8 @@ using Caliburn.Micro;
 
 namespace Gemini.Framework.Menus
 {
-	public interface IMenu : IObservableCollection<MenuItem>
+	public interface IMenu : IObservableCollection<MenuItemBase>
 	{
-		IEnumerable<MenuItem> All { get; }
+		IEnumerable<MenuItemBase> All { get; }
 	}
 }

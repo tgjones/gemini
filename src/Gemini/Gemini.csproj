@@ -59,11 +59,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Framework\Controls\MenuItem.cs" />
+    <Compile Include="Framework\Controls\Menu.cs" />
     <Compile Include="Framework\IModule.cs" />
+    <Compile Include="Framework\Menus\CheckableMenuItem.cs" />
+    <Compile Include="Framework\Menus\MenuItemBase.cs" />
     <Compile Include="Framework\Menus\IMenu.cs" />
     <Compile Include="Framework\Menus\MenuItem.cs" />
     <Compile Include="Framework\Menus\MenuModel.cs" />
-    <Compile Include="Framework\Menus\MenuSeparatorStyle.cs" />
+    <Compile Include="Framework\Menus\MenuItemSeparator.cs" />
+    <Compile Include="Framework\Menus\StandardMenuItem.cs" />
     <Compile Include="Framework\ModuleBase.cs" />
     <Compile Include="Framework\Results\IOpenResult.cs" />
     <Compile Include="Framework\Results\OpenDocumentResult.cs" />

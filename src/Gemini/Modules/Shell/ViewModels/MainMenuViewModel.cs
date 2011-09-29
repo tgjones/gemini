@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
@@ -21,7 +20,7 @@ namespace Gemini.Modules.Shell.ViewModels
 				new MenuItem("_File")
 				{
 					new MenuItem("_Open", OpenFile).WithIcon(),
-					MenuItem.Separator,
+					MenuItemBase.Separator,
 					new MenuItem("E_xit", Exit),
 				},
 				new MenuItem("_View"));

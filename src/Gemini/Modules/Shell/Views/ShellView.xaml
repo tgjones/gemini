@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Gemini.Modules.Shell.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-		xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
+		xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock" 
+		xmlns:controls="clr-namespace:Gemini.Framework.Controls"
         Title="{Binding Title}" Icon="{Binding Icon}" 
 		Width="1000" Height="800">
 	<Window.Resources>
@@ -13,9 +14,8 @@
 			<ResourceDictionary Source="/AvalonDock.Themes;Component/Themes/Dev2010.xaml"/>
 		</DockPanel.Resources>
 		
-		<Menu ItemsSource="{Binding MainMenu}"
+		<controls:Menu ItemsSource="{Binding MainMenu}"
 			  ItemTemplate="{StaticResource menuTemplate}" 
-              ItemContainerStyleSelector="{StaticResource menuStyleSelector}"
               DockPanel.Dock="Top" />
 
 		<StatusBar DockPanel.Dock="Bottom">

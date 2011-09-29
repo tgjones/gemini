@@ -7,11 +7,8 @@ using Gemini.Modules.Output;
 namespace Gemini.Demo.Modules.Startup
 {
 	[Export(typeof(IModule))]
-	public class Module : IModule
+	public class Module : ModuleBase
 	{
-		[Import]
-		private IShell _shell;
-
 		[Import]
 		private IOutput _output;
 
@@ -21,16 +18,16 @@ namespace Gemini.Demo.Modules.Startup
 		[Import]
 		private IResourceManager _resourceManager;
 
-		public void Initialize()
+		public override void Initialize()
 		{
-			_shell.Title = "Gemini Demo";
-			_shell.StatusBar.Message = "Hello world!";
-			_shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
+			Shell.Title = "Gemini Demo";
+			Shell.StatusBar.Message = "Hello world!";
+			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());
 
 			_output.Append("Started up");
 
-			_propertyGrid.SelectedObject = _shell;
+			_propertyGrid.SelectedObject = Shell;
 		}
 	}
 }

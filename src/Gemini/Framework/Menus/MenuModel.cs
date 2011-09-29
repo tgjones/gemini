@@ -3,13 +3,13 @@ using Caliburn.Micro;
 
 namespace Gemini.Framework.Menus
 {
-	public class MenuModel : BindableCollection<MenuItem>, IMenu
+	public class MenuModel : BindableCollection<MenuItemBase>, IMenu
 	{
-		public IEnumerable<MenuItem> All
+		public IEnumerable<MenuItemBase> All
 		{
 			get
 			{
-				var queue = new Queue<MenuItem>(this);
+				var queue = new Queue<MenuItemBase>(this);
 				while (queue.Count > 0)
 				{
 					var current = queue.Dequeue();
@@ -20,7 +20,7 @@ namespace Gemini.Framework.Menus
 			}
 		}
 
-		public void Add(params MenuItem[] items)
+		public void Add(params MenuItemBase[] items)
 		{
 			items.Apply(Add);
 		}
