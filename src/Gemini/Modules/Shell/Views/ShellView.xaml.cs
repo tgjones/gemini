@@ -70,7 +70,11 @@ namespace Gemini.Modules.Shell.Views
 
 				DocumentPane.Items.Add(content);
 
-				model.Deactivated += (sender, args) => DocumentPane.Items.Remove(content);
+				model.Deactivated += (sender, args) =>
+				{
+					if (args.WasClosed)
+						DocumentPane.Items.Remove(content);
+				};
 
 				//content.SetAsActive();
 				Manager.ActiveDocument = content;

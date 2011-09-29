@@ -11,7 +11,7 @@ using Gemini.Modules.Shell.Views;
 namespace Gemini.Modules.Shell.ViewModels
 {
 	[Export(typeof(IShell))]
-	public class ShellViewModel : Conductor<IScreen>.Collection.AllActive, IShell
+	public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IShell
 	{
 		private IShellView _shellView;
 
@@ -52,11 +52,6 @@ namespace Gemini.Modules.Shell.ViewModels
 		public IStatusBar StatusBar
 		{
 			get { return _statusBar; }
-		}
-
-		public IScreen ActiveItem
-		{
-			get { throw new System.NotImplementedException(); }
 		}
 
 		protected override void OnViewLoaded(object view)
