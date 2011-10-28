@@ -44,6 +44,7 @@ namespace Gemini.Modules.Shell.Views
 			else
 			{
 				var content = CreateContent<DockableContent>(view, model);
+				Bind.SetModel(content, model);
 
 				var host = _panes[pane];
 				host.Items.Add(content);
@@ -64,6 +65,7 @@ namespace Gemini.Modules.Shell.Views
 			else
 			{
 				var content = CreateContent<DocumentContent>(view, model);
+				Bind.SetModel(content, model);
 
 				content.PropertyChanged += HostPropertyChanged;
 				content.Closing += (s, e) => HostClosing(model, e);
