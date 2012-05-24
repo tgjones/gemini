@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Reflection;
+using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.Output;

@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Caliburn.Micro</name>
+    </assembly>
+    <members>
+        <member name="T:Caliburn.Micro.IHandle">
+            <summary>
+              A marker interface for classes that subscribe to messages.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.IHandle`1">
+            <summary>
+              Denotes a class which can handle a particular type of message.
+            </summary>
+            <typeparam name = "TMessage">The type of message to handle.</typeparam>
+        </member>
+        <member name="M:Caliburn.Micro.IHandle`1.Handle(`0)">
+            <summary>
+              Handles the message.
+            </summary>
+            <param name = "message">The message.</param>
+        </member>
+        <member name="T:Caliburn.Micro.IEventAggregator">
+            <summary>
+              Enables loosely-coupled publication of and subscription to events.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.IEventAggregator.Subscribe(System.Object)">
+            <summary>
+              Subscribes an instance to all events declared through implementations of <see cref="T:Caliburn.Micro.IHandle`1"/>
+            </summary>
+            <param name="instance">The instance to subscribe for event publication.</param>
+        </member>
+        <member name="M:Caliburn.Micro.IEventAggregator.Unsubscribe(System.Object)">
+            <summary>
+              Unsubscribes the instance from all events.
+            </summary>
+            <param name = "instance">The instance to unsubscribe.</param>
+        </member>
+        <member name="M:Caliburn.Micro.IEventAggregator.Publish(System.Object)">
+            <summary>
+              Publishes a message.
+            </summary>
+            <param name = "message">The message instance.</param>
+            <remarks>
+              Uses the default thread marshaller during publication.
+            </remarks>
+        </member>
+        <member name="M:Caliburn.Micro.IEventAggregator.Publish(System.Object,System.Action{System.Action})">
+            <summary>
+              Publishes a message.
+            </summary>
+            <param name = "message">The message instance.</param>
+            <param name = "marshal">Allows the publisher to provide a custom thread marshaller for the message publication.</param>
+        </member>
+        <member name="P:Caliburn.Micro.IEventAggregator.PublicationThreadMarshaller">
+            <summary>
+              Gets or sets the default publication thread marshaller.
+            </summary>
+            <value>
+              The default publication thread marshaller.
+            </value>
+        </member>
+        <member name="T:Caliburn.Micro.EventAggregator">
+            <summary>
+              Enables loosely-coupled publication of and subscription to events.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.EventAggregator.DefaultPublicationThreadMarshaller">
+            <summary>
+              The default thread marshaller used for publication;
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.EventAggregator.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Caliburn.Micro.EventAggregator"/> class.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.EventAggregator.Subscribe(System.Object)">
+            <summary>
+              Subscribes an instance to all events declared through implementations of <see cref="T:Caliburn.Micro.IHandle`1"/>
+            </summary>
+            <param name="instance">The instance to subscribe for event publication.</param>
+        </member>
+        <member name="M:Caliburn.Micro.EventAggregator.Unsubscribe(System.Object)">
+            <summary>
+              Unsubscribes the instance from all events.
+            </summary>
+            <param name = "instance">The instance to unsubscribe.</param>
+        </member>
+        <member name="M:Caliburn.Micro.EventAggregator.Publish(System.Object)">
+            <summary>
+              Publishes a message.
+            </summary>
+            <param name = "message">The message instance.</param>
+            <remarks>
+              Does not marshall the the publication to any special thread by default.
+            </remarks>
+        </member>
+        <member name="M:Caliburn.Micro.EventAggregator.Publish(System.Object,System.Action{System.Action})">
+            <summary>
+              Publishes a message.
+            </summary>
+            <param name = "message">The message instance.</param>
+            <param name = "marshal">Allows the publisher to provide a custom thread marshaller for the message publication.</param>
+        </member>
+        <member name="P:Caliburn.Micro.EventAggregator.PublicationThreadMarshaller">
+            <summary>
+              Gets or sets the default publication thread marshaller.
+            </summary>
+            <value>
+              The default publication thread marshaller.
+            </value>
+        </member>
+        <member name="T:Caliburn.Micro.ExtensionMethods">
+            <summary>
+            Generic extension methods used by the framework.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.ExtensionMethods.GetAssemblyName(System.Reflection.Assembly)">
+            <summary>
+            Get's the name of the assembly.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <returns>The assembly's name.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.ExtensionMethods.GetAttributes``1(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            Gets all the attributes of a particular type.
+            </summary>
+            <typeparam name="T">The type of attributes to get.</typeparam>
+            <param name="member">The member to inspect for attributes.</param>
+            <param name="inherit">Whether or not to search for inherited attributes.</param>
+            <returns>The list of attributes found.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.ExtensionMethods.Apply``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Applies the action to each element in the list.
+            </summary>
+            <typeparam name="T">The enumerable item's type.</typeparam>
+            <param name="enumerable">The elements to enumerate.</param>
+            <param name="action">The action to apply to each item in the list.</param>
+        </member>
+        <member name="M:Caliburn.Micro.ExtensionMethods.GetMemberInfo(System.Linq.Expressions.Expression)">
+            <summary>
+            Converts an expression into a <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+            <param name="expression">The expression to convert.</param>
+            <returns>The member info.</returns>
+        </member>
+        <member name="T:Caliburn.Micro.Execute">
+            <summary>
+              Enables easy marshalling of code to the UI thread.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.Execute.InitializeWithDispatcher">
+            <summary>
+              Initializes the framework using the current dispatcher.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.Execute.ResetWithoutDispatcher">
+            <summary>
+              Resets the executor to use a non-dispatcher-based action executor.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.Execute.SetUIThreadMarshaller(System.Action{System.Action})">
+            <summary>
+            Sets a custom UI thread marshaller.
+            </summary>
+            <param name="marshaller">The marshaller.</param>
+        </member>
+        <member name="M:Caliburn.Micro.Execute.OnUIThread(System.Action)">
+            <summary>
+              Executes the action on the UI thread.
+            </summary>
+            <param name = "action">The action to execute.</param>
+        </member>
+        <member name="P:Caliburn.Micro.Execute.InDesignMode">
+            <summary>
+              Indicates whether or not the framework is in design-time mode.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.INotifyPropertyChangedEx">
+            <summary>
+              Extends <see cref="T:Windows.UI.Xaml.Data.INotifyPropertyChanged"/> such that the change event can be raised by external parties.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.INotifyPropertyChangedEx.NotifyOfPropertyChange(System.String)">
+            <summary>
+              Notifies subscribers of the property change.
+            </summary>
+            <param name = "propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Caliburn.Micro.INotifyPropertyChangedEx.Refresh">
+            <summary>
+              Raises a change notification indicating that all bindings should be refreshed.
+            </summary>
+        </member>
+        <member name="P:Caliburn.Micro.INotifyPropertyChangedEx.IsNotifying">
+            <summary>
+              Enables/Disables property change notification.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.PropertyChangedBase">
+            <summary>
+              A base class that implements the infrastructure for property change notification and automatically performs UI thread marshalling.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.#ctor">
+            <summary>
+              Creates an instance of <see cref="T:Caliburn.Micro.PropertyChangedBase"/>.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.Refresh">
+            <summary>
+              Raises a change notification indicating that all bindings should be refreshed.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.NotifyOfPropertyChange(System.String)">
+            <summary>
+              Notifies subscribers of the property change.
+            </summary>
+            <param name = "propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.NotifyOfPropertyChange``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+              Notifies subscribers of the property change.
+            </summary>
+            <typeparam name = "TProperty">The type of the property.</typeparam>
+            <param name = "property">The property expression.</param>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.RaisePropertyChangedEventImmediately(System.String)">
+            <summary>
+              Raises the property changed event immediately.
+            </summary>
+            <param name = "propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.OnDeserialized(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Called when the object is deserialized.
+            </summary>
+            <param name="c">The streaming context.</param>
+        </member>
+        <member name="M:Caliburn.Micro.PropertyChangedBase.ShouldSerializeIsNotifying">
+            <summary>
+            Used to indicate whether or not the IsNotifying property is serialized to Xml.
+            </summary>
+            <returns>Whether or not to serialize the IsNotifying property. The default is false.</returns>
+        </member>
+        <member name="E:Caliburn.Micro.PropertyChangedBase.PropertyChanged">
+            <summary>
+              Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:Caliburn.Micro.PropertyChangedBase.IsNotifying">
+            <summary>
+              Enables/Disables property change notification.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.IObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+              Adds the range.
+            </summary>
+            <param name = "items">The items.</param>
+        </member>
+        <member name="M:Caliburn.Micro.IObservableCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+              Removes the range.
+            </summary>
+            <param name = "items">The items.</param>
+        </member>
+        <member name="T:Caliburn.Micro.BindableCollection`1">
+            <summary>
+            A base collection class that supports automatic UI thread marshalling.
+            </summary>
+            <typeparam name="T">The type of elements contained in the collection.</typeparam>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:Caliburn.Micro.BindableCollection`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+              Initializes a new instance of the <see cref="T:Caliburn.Micro.BindableCollection`1"/> class.
+            </summary>
+            <param name="collection">The collection from which the elements are copied.</param>
+            <exception cref="T:System.ArgumentNullException">
+              The <paramref name="collection"/> parameter cannot be null.
+            </exception>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.NotifyOfPropertyChange(System.String)">
+            <summary>
+              Notifies subscribers of the property change.
+            </summary>
+            <param name = "propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.Refresh">
+            <summary>
+              Raises a change notification indicating that all bindings should be refreshed.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.InsertItem(System.Int32,`0)">
+            <summary>
+              Inserts the item to the specified position.
+            </summary>
+            <param name = "index">The index to insert at.</param>
+            <param name = "item">The item to be inserted.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.InsertItemBase(System.Int32,`0)">
+            <summary>
+              Exposes the base implementation of the <see cref="M:Caliburn.Micro.BindableCollection`1.InsertItem(System.Int32,`0)"/> function.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="item">The item.</param>
+            <remarks>
+              Used to avoid compiler warning regarding unverifiable code.
+            </remarks>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.SetItem(System.Int32,`0)">
+            <summary>
+              Sets the item at the specified position.
+            </summary>
+            <param name = "index">The index to set the item at.</param>
+            <param name = "item">The item to set.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.SetItemBase(System.Int32,`0)">
+            <summary>
+              Exposes the base implementation of the <see cref="M:Caliburn.Micro.BindableCollection`1.SetItem(System.Int32,`0)"/> function.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="item">The item.</param>
+            <remarks>
+              Used to avoid compiler warning regarding unverifiable code.
+            </remarks>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.RemoveItem(System.Int32)">
+            <summary>
+              Removes the item at the specified position.
+            </summary>
+            <param name = "index">The position used to identify the item to remove.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.RemoveItemBase(System.Int32)">
+            <summary>
+              Exposes the base implementation of the <see cref="M:Caliburn.Micro.BindableCollection`1.RemoveItem(System.Int32)"/> function.
+            </summary>
+            <param name="index">The index.</param>
+            <remarks>
+              Used to avoid compiler warning regarding unverifiable code.
+            </remarks>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.ClearItems">
+            <summary>
+              Clears the items contained by the collection.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.ClearItemsBase">
+            <summary>
+              Exposes the base implementation of the <see cref="M:Caliburn.Micro.BindableCollection`1.ClearItems"/> function.
+            </summary>
+            <remarks>
+              Used to avoid compiler warning regarding unverifiable code.
+            </remarks>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+              Raises the <see cref = "E:System.Collections.ObjectModel.ObservableCollection`1.CollectionChanged" /> event with the provided arguments.
+            </summary>
+            <param name = "e">Arguments of the event being raised.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+              Raises the PropertyChanged event with the provided arguments.
+            </summary>
+            <param name = "e">The event data to report in the event.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.OnPropertyChanged(Windows.UI.Xaml.Data.PropertyChangedEventArgs)">
+            <summary>
+              Raises the PropertyChanged event with the provided arguments.
+            </summary>
+            <param name = "e">The event data to report in the event.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+              Adds the range.
+            </summary>
+            <param name = "items">The items.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+              Removes the range.
+            </summary>
+            <param name = "items">The items.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.OnDeserialized(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Called when the object is deserialized.
+            </summary>
+            <param name="c">The streaming context.</param>
+        </member>
+        <member name="M:Caliburn.Micro.BindableCollection`1.ShouldSerializeIsNotifying">
+            <summary>
+            Used to indicate whether or not the IsNotifying property is serialized to Xml.
+            </summary>
+            <returns>Whether or not to serialize the IsNotifying property. The default is false.</returns>
+        </member>
+        <member name="E:Caliburn.Micro.BindableCollection`1.VectorChanged">
+            <summary>
+            Occurs when the vector changes.
+            </summary>
+        </member>
+        <member name="E:Caliburn.Micro.BindableCollection`1.PropertyChanged">
+            <summary>
+              Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:Caliburn.Micro.BindableCollection`1.IsNotifying">
+            <summary>
+              Enables/Disables property change notification.
+            </summary>
+        </member>
+    </members>
+</doc>
