@@ -9,6 +9,10 @@ namespace Gemini.Modules.PropertyGrid.Views
 	{
 		public PropertyGridView()
 		{
+			// The following line simply forces Visual Studio to copy the
+			// WPF Toolkit DLL to the output folder.
+ 			_propertyGrid = null;
+
 			InitializeComponent();
 		}
 	}
