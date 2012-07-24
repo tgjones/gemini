@@ -12,6 +12,11 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
 			get { return "Properties"; }
 		}
 
+		public override PaneLocation PreferredLocation
+		{
+			get { return PaneLocation.Right; }
+		}
+
 		private object _selectedObject;
 		public object SelectedObject
 		{

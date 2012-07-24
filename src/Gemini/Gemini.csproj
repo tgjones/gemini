@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Framework\Controls\LayoutInitializer.cs" />
     <Compile Include="Framework\Controls\MenuItem.cs" />
     <Compile Include="Framework\Controls\Menu.cs" />
     <Compile Include="Framework\Converters\ActiveDocumentConverter.cs" />

@@ -11,16 +11,16 @@ namespace Gemini.Framework.Results
 			return new ShowCommonDialogResult(commonDialog);
 		}
 
-		public static ShowToolResult<TTool> Tool<TTool>(PaneLocation pane)
+		public static ShowToolResult<TTool> Tool<TTool>()
 			where TTool : ITool
 		{
-			return new ShowToolResult<TTool>(pane);
+			return new ShowToolResult<TTool>();
 		}
 
-		public static ShowToolResult<TTool> Tool<TTool>(PaneLocation pane, TTool tool)
+		public static ShowToolResult<TTool> Tool<TTool>(TTool tool)
 			where TTool : ITool
 		{
-			return new ShowToolResult<TTool>(pane, tool);
+			return new ShowToolResult<TTool>(tool);
 		}
 
 		public static OpenDocumentResult Document(IDocument document)

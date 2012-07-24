@@ -8,26 +8,19 @@ namespace Gemini.Framework.Results
 	public class ShowToolResult<TTool> : OpenResultBase<TTool>
 		where TTool : ITool
 	{
-		private readonly PaneLocation _pane;
 		private readonly Func<TTool> _toolLocator = () => IoC.Get<TTool>();
 
 		[Import]
 		private IShell _shell;
 
-		public ShowToolResult(PaneLocation pane)
+		public ShowToolResult()
 		{
-			_pane = pane;
+			
 		}
 
-		public ShowToolResult(PaneLocation pane, TTool tool)
+		public ShowToolResult(TTool tool)
 		{
-			_pane = pane;
 			_toolLocator = () => tool;
-		}
-
-		public PaneLocation Pane
-		{
-			get { return _pane; }
 		}
 
 		public override void Execute(ActionExecutionContext context)
@@ -48,7 +41,7 @@ namespace Gemini.Framework.Results
 				OnCompleted(null);
 			};
 
-			_shell.ShowTool(_pane, tool);
+			_shell.ShowTool(tool);
 		}
 	}
 }

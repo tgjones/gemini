@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Framework.Services;
 using Gemini.Modules.Output.Views;
 
 namespace Gemini.Modules.Output.ViewModels
@@ -14,6 +15,11 @@ namespace Gemini.Modules.Output.ViewModels
 		public override string DisplayName
 		{
 			get { return "Output"; }
+		}
+
+		public override PaneLocation PreferredLocation
+		{
+			get { return PaneLocation.Bottom; }
 		}
 
 		private string _text = string.Empty;

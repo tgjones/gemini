@@ -20,7 +20,7 @@ namespace Gemini.Modules.PropertyGrid
 
 		private static IEnumerable<IResult> OpenProperties()
 		{
-			yield return Show.Tool<IPropertyGrid>(PaneLocation.Right);
+			yield return Show.Tool<IPropertyGrid>();
 		}
 	}
 }

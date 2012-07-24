@@ -5,7 +5,6 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
-using Gemini.Framework.Services;
 
 namespace Gemini.Modules.Output
 {
@@ -20,7 +19,7 @@ namespace Gemini.Modules.Output
 
         private IEnumerable<IResult> OpenOutput()
         {
-            yield return Show.Tool<IOutput>(PaneLocation.Bottom);
+            yield return Show.Tool<IOutput>();
         }
 	}
 }

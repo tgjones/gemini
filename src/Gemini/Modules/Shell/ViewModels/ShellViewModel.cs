@@ -69,10 +69,9 @@ namespace Gemini.Modules.Shell.ViewModels
 			base.OnViewLoaded(view);
 		}
 
-		public void ShowTool(PaneLocation pane, ITool model)
+		public void ShowTool(ITool model)
 		{
 			Tools.Add(model);
-			//Execute.OnUIThread(() => _shellView.ShowTool(pane, model));
 		}
 
 		public void OpenDocument(IDocument model)

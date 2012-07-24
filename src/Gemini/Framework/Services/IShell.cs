@@ -13,7 +13,7 @@ namespace Gemini.Framework.Services
 
 		IScreen ActiveItem { get; }
 
-		void ShowTool(PaneLocation pane, ITool model);
+		void ShowTool(ITool model);
 
 		void OpenDocument(IDocument model);
 		void CloseDocument(IDocument document);
