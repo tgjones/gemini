@@ -14,9 +14,6 @@ namespace Gemini.Demo.Modules.Startup
 		private IOutput _output;
 
 		[Import]
-		private IPropertyGrid _propertyGrid;
-
-		[Import]
 		private IResourceManager _resourceManager;
 
 		public override void Initialize()
@@ -27,8 +24,6 @@ namespace Gemini.Demo.Modules.Startup
 				Assembly.GetExecutingAssembly().GetAssemblyName());
 
 			_output.Append("Started up");
-
-			_propertyGrid.SelectedObject = Shell;
 		}
 	}
 }

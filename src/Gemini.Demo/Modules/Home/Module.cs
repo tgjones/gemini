@@ -6,19 +6,26 @@ using Gemini.Demo.Modules.Home.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
+using Gemini.Framework.Services;
 
 namespace Gemini.Demo.Modules.Home
 {
 	[Export(typeof(IModule))]
 	public class Module : ModuleBase
 	{
+		[Import]
+		private IPropertyGrid _propertyGrid;
+
 		public override void Initialize()
 		{
 			MainMenu.All
 				.First(x => x.Name == "View")
 				.Add(new MenuItem("Home", OpenHome));
 
-			Shell.OpenDocument(IoC.Get<HomeViewModel>());
+			var homeViewModel = IoC.Get<HomeViewModel>();
+			Shell.OpenDocument(homeViewModel);
+
+			_propertyGrid.SelectedObject = homeViewModel;
 		}
 
 		private IEnumerable<IResult> OpenHome()

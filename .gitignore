@@ -15,6 +15,7 @@ Bin
 *.suo
 *.cache
 Thumbs.db
+*.dotCover
  
 # Other useful stuff
 *.bak
