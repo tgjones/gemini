@@ -16,29 +16,31 @@ Gemini allows you to build your WPF application by composing separate modules. T
 way of separating out the code for each part of your application. For example, here is the (very simple)
 module used in the demo program:
 
-	[Export(typeof(IModule))]
-	public class Module : ModuleBase
+```csharp
+[Export(typeof(IModule))]
+public class Module : ModuleBase
+{
+	[Import]
+	private IPropertyGrid _propertyGrid;
+
+	public override void Initialize()
 	{
-		[Import]
-		private IPropertyGrid _propertyGrid;
+		MainMenu.All
+			.First(x => x.Name == "View")
+			.Add(new MenuItem("Home", OpenHome));
 
-		public override void Initialize()
-		{
-			MainMenu.All
-				.First(x => x.Name == "View")
-				.Add(new MenuItem("Home", OpenHome));
+		var homeViewModel = IoC.Get<HomeViewModel>();
+		Shell.OpenDocument(homeViewModel);
 
-			var homeViewModel = IoC.Get<HomeViewModel>();
-			Shell.OpenDocument(homeViewModel);
-
-			_propertyGrid.SelectedObject = homeViewModel;
-		}
-
-		private IEnumerable<IResult> OpenHome()
-		{
-			yield return Show.Document<HomeViewModel>();
-		}
+		_propertyGrid.SelectedObject = homeViewModel;
 	}
+
+	private IEnumerable<IResult> OpenHome()
+	{
+		yield return Show.Document<HomeViewModel>();
+	}
+}
+```
 
 For full details, look at the [demo program](https://github.com/roastedamoeba/gemini/tree/master/src/Gemini.Demo).
 
@@ -56,3 +58,4 @@ I've used Gemini on several of my own projects:
 
 * [Meshellator](http://github.com/roastedamoeba/meshellator)
 * [Rasterizr](http://github.com/roastedamoeba/rasterizr)
+* coming soon...
