@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>GeminiWpf</id>
+		<version>$version$</version>
+		<title>$id$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<description>$description$</description>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<projectUrl>https://github.com/roastedamoeba/gemini</projectUrl>
+		<licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+		<tags>.net40 WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell</tags>
+	</metadata>
+	<files>
+		<file src="..\..\LICENCE.txt" target="." />
+	</files>
+</package>
