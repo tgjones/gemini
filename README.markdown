@@ -2,13 +2,13 @@
 
 ### What is this?
 
-![Screenshot](https://raw.github.com/roastedamoeba/nexus/master/doc/screenshot.png)
-
 Gemini is a WPF framework designed specifically for building IDE-like applications. It is built on:
 
 * AvalonDock
 * Caliburn Micro
 * MEF
+
+![Screenshot](https://github.com/roastedamoeba/gemini/raw/master/doc/screenshot.PNG)
 
 ### What does it do?
 
