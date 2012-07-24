@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.Composition;
-using Caliburn.Micro;
+using Gemini.Framework;
 using Gemini.Framework.Services;
 
 namespace Gemini.Modules.PropertyGrid.ViewModels
 {
 	[Export(typeof(IPropertyGrid))]
-	public class PropertyGridViewModel : Screen, IPropertyGrid
+	public class PropertyGridViewModel : Tool, IPropertyGrid
 	{
 		public override string DisplayName
 		{

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
@@ -7,7 +6,6 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Services;
-using Gemini.Modules.Shell.Views;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
@@ -53,6 +51,17 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return _statusBar; }
 		}
 
+		private readonly BindableCollection<ITool> _tools;
+		public IObservableCollection<ITool> Tools
+		{
+			get { return _tools; }
+		}
+
+		public ShellViewModel()
+		{
+			_tools = new BindableCollection<ITool>();
+		}
+
 		protected override void OnViewLoaded(object view)
 		{
 			foreach (var module in _modules)
@@ -60,22 +69,23 @@ namespace Gemini.Modules.Shell.ViewModels
 			base.OnViewLoaded(view);
 		}
 
-		public void ShowTool(PaneLocation pane, IScreen model)
+		public void ShowTool(PaneLocation pane, ITool model)
 		{
+			Tools.Add(model);
 			//Execute.OnUIThread(() => _shellView.ShowTool(pane, model));
 		}
 
-		public void OpenDocument(IScreen model)
+		public void OpenDocument(IDocument model)
 		{
 			ActivateItem(model);
 		}
 
-		public void CloseDocument(IScreen document)
+		public void CloseDocument(IDocument document)
 		{
 			DeactivateItem(document, true);
 		}
 
-		public void ActivateDocument(IScreen document)
+		public void ActivateDocument(IDocument document)
 		{
 			ActivateItem(document);
 		}

@@ -69,7 +69,10 @@
     <Compile Include="Framework\Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Framework\Converters\LayoutItemViewConverter.cs" />
     <Compile Include="Framework\Document.cs" />
+    <Compile Include="Framework\IDocument.cs" />
     <Compile Include="Framework\IModule.cs" />
+    <Compile Include="Framework\ITool.cs" />
+    <Compile Include="Framework\LayoutItemBase.cs" />
     <Compile Include="Framework\Menus\CheckableMenuItem.cs" />
     <Compile Include="Framework\Menus\MenuItemBase.cs" />
     <Compile Include="Framework\Menus\IMenu.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Framework\Services\IStatusBar.cs" />
     <Compile Include="Framework\Services\PaneLocation.cs" />
     <Compile Include="Framework\Services\ResourceManager.cs" />
+    <Compile Include="Framework\Tool.cs" />
     <Compile Include="Modules\Output\IOutput.cs" />
     <Compile Include="Modules\Output\Module.cs" />
     <Compile Include="Modules\Output\ViewModels\OutputViewModel.cs" />

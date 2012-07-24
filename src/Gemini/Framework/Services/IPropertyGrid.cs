@@ -1,8 +1,6 @@
-﻿using Caliburn.Micro;
-
-namespace Gemini.Framework.Services
+﻿namespace Gemini.Framework.Services
 {
-	public interface IPropertyGrid : IScreen
+	public interface IPropertyGrid : ITool
 	{
 		object SelectedObject { get; set; }
 	}

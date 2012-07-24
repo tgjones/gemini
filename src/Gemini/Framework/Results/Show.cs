@@ -12,18 +12,18 @@ namespace Gemini.Framework.Results
 		}
 
 		public static ShowToolResult<TTool> Tool<TTool>(PaneLocation pane)
-			where TTool : IScreen
+			where TTool : ITool
 		{
 			return new ShowToolResult<TTool>(pane);
 		}
 
 		public static ShowToolResult<TTool> Tool<TTool>(PaneLocation pane, TTool tool)
-			where TTool : IScreen
+			where TTool : ITool
 		{
 			return new ShowToolResult<TTool>(pane, tool);
 		}
 
-		public static OpenDocumentResult Document(IScreen document)
+		public static OpenDocumentResult Document(IDocument document)
 		{
 			return new OpenDocumentResult(document);
 		}
@@ -34,7 +34,7 @@ namespace Gemini.Framework.Results
 		}
 
 		public static OpenDocumentResult Document<T>()
-				where T : IScreen
+				where T : IDocument
 		{
 			return new OpenDocumentResult(typeof(T));
 		}

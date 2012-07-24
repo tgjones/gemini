@@ -6,7 +6,7 @@ using Gemini.Framework.Services;
 namespace Gemini.Framework.Results
 {
 	public class ShowToolResult<TTool> : OpenResultBase<TTool>
-		where TTool : IScreen
+		where TTool : ITool
 	{
 		private readonly PaneLocation _pane;
 		private readonly Func<TTool> _toolLocator = () => IoC.Get<TTool>();

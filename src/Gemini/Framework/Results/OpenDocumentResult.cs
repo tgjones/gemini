@@ -6,16 +6,16 @@ using Gemini.Framework.Services;
 
 namespace Gemini.Framework.Results
 {
-	public class OpenDocumentResult : OpenResultBase<IScreen>
+	public class OpenDocumentResult : OpenResultBase<IDocument>
 	{
-		private readonly IScreen _editor;
+		private readonly IDocument _editor;
 		private readonly Type _editorType;
 		private readonly string _path;
 
 		[Import]
 		private IShell _shell;
 
-		public OpenDocumentResult(IScreen editor)
+		public OpenDocumentResult(IDocument editor)
 		{
 			_editor = editor;
 		}
@@ -34,7 +34,7 @@ namespace Gemini.Framework.Results
 		{
 			var editor = _editor ??
 				(string.IsNullOrEmpty(_path)
-					? (IScreen) IoC.GetInstance(_editorType, null)
+					? (IDocument)IoC.GetInstance(_editorType, null)
 					: GetEditor(_path));
 
 			if (editor == null)
@@ -60,7 +60,7 @@ namespace Gemini.Framework.Results
 			_shell.OpenDocument(editor);
 		}
 
-		private static IScreen GetEditor(string path)
+		private static IDocument GetEditor(string path)
 		{
 			return IoC.GetAllInstances(typeof(IEditorProvider))
 				.Cast<IEditorProvider>()
