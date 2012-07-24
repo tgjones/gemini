@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using AvalonDock;
+using AvalonDock.Layout;
 using Caliburn.Micro;
 using Gemini.Demo.Modules.TextEditor.Views;
 
@@ -54,7 +54,7 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 				_originalText = stream.ReadToEnd();
 			}
 
-			var editor = (EditorView)((DocumentContent)view).Content;
+			var editor = (EditorView) view;
 			editor.textBox.Text = _originalText;
 
 			editor.textBox.TextChanged += delegate

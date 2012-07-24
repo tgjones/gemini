@@ -1,0 +1,3808 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AvalonDock</name>
+    </assembly>
+    <members>
+        <member name="M:AvalonDock.Layout.LayoutElement.OnParentChanging(AvalonDock.Layout.ILayoutContainer,AvalonDock.Layout.ILayoutContainer)">
+            <summary>
+            Provides derived classes an opportunity to handle execute code before to the Parent property changes.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutElement.OnParentChanged(AvalonDock.Layout.ILayoutContainer,AvalonDock.Layout.ILayoutContainer)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Parent property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutFloatingWindowControl.IsDraggingPropertyKey">
+            <summary>
+            IsDragging Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutFloatingWindowControl.SetIsDragging(System.Boolean)">
+            <summary>
+            Provides a secure method for setting the IsDragging property.  
+            This dependency property indicates that this floating window is being dragged.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutFloatingWindowControl.OnIsDraggingChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the IsDragging property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutFloatingWindowControl.OnIsDraggingChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IsDragging property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutFloatingWindowControl.IsMaximizedPropertyKey">
+            <summary>
+            IsMaximized Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutFloatingWindowControl.SetIsMaximized(System.Boolean)">
+            <summary>
+            Provides a secure method for setting the IsMaximized property.  
+            This dependency property indicates if the window is maximized.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutFloatingWindowControl.IsDragging">
+            <summary>
+            Gets the IsDragging property.  This dependency property 
+            indicates that this floating window is being dragged.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutFloatingWindowControl.IsMaximized">
+            <summary>
+            Gets the IsMaximized property.  This dependency property 
+            indicates if the window is maximized.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutFloatingWindowControl.FloatingWindowContentHost.ContentProperty">
+            <summary>
+            Content Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutFloatingWindowControl.FloatingWindowContentHost.OnContentChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Content property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutFloatingWindowControl.FloatingWindowContentHost.OnContentChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Content property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutFloatingWindowControl.FloatingWindowContentHost.Content">
+            <summary>
+            Gets or sets the Content property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Converters.InverseBoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> 
+            Converts a value. 
+            </summary> 
+            <param name="value">The value produced by the binding source.</param> 
+            <param name="targetType">The type of the binding target property.</param> 
+            <param name="parameter">The converter parameter to use.</param> 
+            <param name="culture">The culture to use in the converter.</param> 
+            <returns> 
+            A converted value. If the method returns null, the valid null value is used. 
+            </returns> 
+        </member>
+        <member name="M:AvalonDock.Converters.InverseBoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> 
+            Converts a value. 
+            </summary> 
+            <param name="value">The value that is produced by the binding target.</param> 
+            <param name="targetType">The type to convert to.</param> 
+            <param name="parameter">The converter parameter to use.</param> 
+            <param name="culture">The culture to use in the converter.</param> 
+            <returns> 
+            A converted value. If the method returns null, the valid null value is used. 
+            </returns> 
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAutoHideWindowControl.BackgroundProperty">
+            <summary>
+            Background Dependency Property
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAutoHideWindowControl.Background">
+            <summary>
+            Gets or sets the Background property.  This dependency property 
+            indicates background of the autohide childwindow.
+            </summary>
+        </member>
+        <member name="T:Standard.HCF">
+            <summary>
+            HIGHCONTRAST flags
+            </summary>
+        </member>
+        <member name="T:Standard.BI">
+            <summary>
+            BITMAPINFOHEADER Compression type.  BI_*.
+            </summary>
+        </member>
+        <member name="T:Standard.RGN">
+            <summary>
+            CombingRgn flags.  RGN_*
+            </summary>
+        </member>
+        <member name="F:Standard.RGN.AND">
+            <summary>
+            Creates the intersection of the two combined regions.
+            </summary>
+        </member>
+        <member name="F:Standard.RGN.OR">
+            <summary>
+            Creates the union of two combined regions.
+            </summary>
+        </member>
+        <member name="F:Standard.RGN.XOR">
+            <summary>
+            Creates the union of two combined regions except for any overlapping areas.
+            </summary>
+        </member>
+        <member name="F:Standard.RGN.DIFF">
+            <summary>
+            Combines the parts of hrgnSrc1 that are not part of hrgnSrc2.
+            </summary>
+        </member>
+        <member name="F:Standard.RGN.COPY">
+            <summary>
+            Creates a copy of the region identified by hrgnSrc1.
+            </summary>
+        </member>
+        <member name="T:Standard.OLECMDEXECOPT">
+            <summary>
+            For IWebBrowser2.  OLECMDEXECOPT_*
+            </summary>
+        </member>
+        <member name="T:Standard.OLECMDF">
+            <summary>
+            For IWebBrowser2.  OLECMDF_*
+            </summary>
+        </member>
+        <member name="T:Standard.OLECMDID">
+            <summary>
+            For IWebBrowser2.  OLECMDID_*
+            </summary>
+        </member>
+        <member name="T:Standard.READYSTATE">
+            <summary>
+            For IWebBrowser2.  READYSTATE_*
+            </summary>
+        </member>
+        <member name="T:Standard.DOGIF">
+            <summary>
+            DATAOBJ_GET_ITEM_FLAGS.  DOGIF_*.
+            </summary>
+        </member>
+        <member name="F:Standard.ErrorModes.Default">
+            <summary>Use the system default, which is to display all error dialog boxes.</summary>
+        </member>
+        <member name="F:Standard.ErrorModes.FailCriticalErrors">
+            <summary>
+            The system does not display the critical-error-handler message box. 
+            Instead, the system sends the error to the calling process.
+            </summary>
+        </member>
+        <member name="F:Standard.ErrorModes.NoGpFaultErrorBox">
+            <summary>
+            64-bit Windows:  The system automatically fixes memory alignment faults and makes them 
+            invisible to the application. It does this for the calling process and any descendant processes.
+            After this value is set for a process, subsequent attempts to clear the value are ignored.
+            </summary>
+        </member>
+        <member name="F:Standard.ErrorModes.NoAlignmentFaultExcept">
+            <summary>
+            The system does not display the general-protection-fault message box. 
+            This flag should only be set by debugging applications that handle general 
+            protection (GP) faults themselves with an exception handler.
+            </summary>
+        </member>
+        <member name="F:Standard.ErrorModes.NoOpenFileErrorBox">
+            <summary>
+            The system does not display a message box when it fails to find a file. 
+            Instead, the error is returned to the calling process.
+            </summary>
+        </member>
+        <member name="T:Standard.HT">
+            <summary>
+            Non-client hit test values, HT*
+            </summary>
+        </member>
+        <member name="T:Standard.GCLP">
+            <summary>
+            GetClassLongPtr values, GCLP_*
+            </summary>
+        </member>
+        <member name="T:Standard.GWL">
+            <summary>
+            GetWindowLongPtr values, GWL_*
+            </summary>
+        </member>
+        <member name="T:Standard.SM">
+            <summary>
+            SystemMetrics.  SM_*
+            </summary>
+        </member>
+        <member name="T:Standard.SPI">
+            <summary>
+            SystemParameterInfo values, SPI_*
+            </summary>
+        </member>
+        <member name="T:Standard.SPIF">
+            <summary>
+            SystemParameterInfo flag values, SPIF_*
+            </summary>
+        </member>
+        <member name="T:Standard.CS">
+            <summary>
+            CS_*
+            </summary>
+        </member>
+        <member name="T:Standard.WS">
+            <summary>
+            WindowStyle values, WS_*
+            </summary>
+        </member>
+        <member name="T:Standard.WM">
+            <summary>
+            Window message values, WM_*
+            </summary>
+        </member>
+        <member name="T:Standard.WS_EX">
+            <summary>
+            Window style extended values, WS_EX_*
+            </summary>
+        </member>
+        <member name="T:Standard.DeviceCap">
+            <summary>
+            GetDeviceCaps nIndex values.
+            </summary>
+        </member>
+        <member name="F:Standard.DeviceCap.BITSPIXEL">
+            <summary>Number of bits per pixel
+            </summary>
+        </member>
+        <member name="F:Standard.DeviceCap.PLANES">
+            <summary>
+            Number of planes
+            </summary>
+        </member>
+        <member name="F:Standard.DeviceCap.LOGPIXELSX">
+            <summary>
+            Logical pixels inch in X
+            </summary>
+        </member>
+        <member name="F:Standard.DeviceCap.LOGPIXELSY">
+            <summary>
+            Logical pixels inch in Y
+            </summary>
+        </member>
+        <member name="T:Standard.FOF">
+            <summary>
+            "FILEOP_FLAGS", FOF_*.
+            </summary>
+        </member>
+        <member name="T:Standard.MF">
+            <summary>
+            EnableMenuItem uEnable values, MF_*
+            </summary>
+        </member>
+        <member name="F:Standard.MF.DOES_NOT_EXIST">
+            <summary>
+            Possible return value for EnableMenuItem
+            </summary>
+        </member>
+        <member name="T:Standard.WINDOWTHEMEATTRIBUTETYPE">
+            <summary>Specifies the type of visual style attribute to set on a window.</summary>
+        </member>
+        <member name="F:Standard.WINDOWTHEMEATTRIBUTETYPE.WTA_NONCLIENT">
+            <summary>Non-client area window attributes will be set.</summary>
+        </member>
+        <member name="T:Standard.DWMFLIP3D">
+            <summary>
+            DWMFLIP3DWINDOWPOLICY.  DWMFLIP3D_*
+            </summary>
+        </member>
+        <member name="T:Standard.DWMNCRP">
+            <summary>
+            DWMNCRENDERINGPOLICY. DWMNCRP_*
+            </summary>
+        </member>
+        <member name="T:Standard.DWMWA">
+            <summary>
+            DWMWINDOWATTRIBUTE.  DWMWA_*
+            </summary>
+        </member>
+        <member name="T:Standard.WTNCA">
+            <summary>
+            WindowThemeNonClientAttributes
+            </summary>
+        </member>
+        <member name="F:Standard.WTNCA.NODRAWCAPTION">
+            <summary>Prevents the window caption from being drawn.</summary>
+        </member>
+        <member name="F:Standard.WTNCA.NODRAWICON">
+            <summary>Prevents the system icon from being drawn.</summary>
+        </member>
+        <member name="F:Standard.WTNCA.NOSYSMENU">
+            <summary>Prevents the system icon menu from appearing.</summary>
+        </member>
+        <member name="F:Standard.WTNCA.NOMIRRORHELP">
+            <summary>Prevents mirroring of the question mark, even in right-to-left (RTL) layout.</summary>
+        </member>
+        <member name="F:Standard.WTNCA.VALIDBITS">
+            <summary> A mask that contains all the valid bits.</summary>
+        </member>
+        <member name="T:Standard.SWP">
+            <summary>
+            SetWindowPos options
+            </summary>
+        </member>
+        <member name="T:Standard.SW">
+            <summary>
+            ShowWindow options
+            </summary>
+        </member>
+        <member name="F:Standard.SC.F_ISSECURE">
+            <summary>
+            SCF_ISSECURE
+            </summary>
+        </member>
+        <member name="T:Standard.Status">
+            <summary>
+            GDI+ Status codes
+            </summary>
+        </member>
+        <member name="T:Standard.MSGFLT">
+            <summary>
+            MSGFLT_*.  New in Vista.  Realiased in Windows 7.
+            </summary>
+        </member>
+        <member name="T:Standard.NIM">
+            <summary>
+            Shell_NotifyIcon messages.  NIM_*
+            </summary>
+        </member>
+        <member name="T:Standard.SHARD">
+            <summary>
+            SHAddToRecentDocuments flags.  SHARD_*
+            </summary>
+        </member>
+        <member name="T:Standard.NIF">
+            <summary>
+            Shell_NotifyIcon flags.  NIF_*
+            </summary>
+        </member>
+        <member name="F:Standard.NIF.REALTIME">
+            <summary>
+            Vista only.
+            </summary>
+        </member>
+        <member name="F:Standard.NIF.SHOWTIP">
+            <summary>
+            Vista only.
+            </summary>
+        </member>
+        <member name="T:Standard.NIIF">
+            <summary>
+            Shell_NotifyIcon info flags.  NIIF_*
+            </summary>
+        </member>
+        <member name="F:Standard.NIIF.USER">
+            <summary>XP SP2 and later.</summary>
+        </member>
+        <member name="F:Standard.NIIF.NOSOUND">
+            <summary>XP and later.</summary>
+        </member>
+        <member name="F:Standard.NIIF.LARGE_ICON">
+            <summary>Vista and later.</summary>
+        </member>
+        <member name="F:Standard.NIIF.NIIF_RESPECT_QUIET_TIME">
+            <summary>Windows 7 and later</summary>
+        </member>
+        <member name="F:Standard.NIIF.XP_ICON_MASK">
+            <summary>XP and later.  Native version called NIIF_ICON_MASK.</summary>
+        </member>
+        <member name="T:Standard.AC">
+            <summary>
+            AC_*
+            </summary>
+        </member>
+        <member name="F:Standard.NOTIFYICONDATA.dwState">
+            <summary>
+            The state of the icon.  There are two flags that can be set independently.
+            NIS_HIDDEN = 1.  The icon is hidden.
+            NIS_SHAREDICON = 2.  The icon is shared.
+            </summary>
+        </member>
+        <member name="F:Standard.SHARDAPPIDINFOIDLIST.pidl">
+            <summary>The idlist for the shell item that should be added to the recent docs folder.</summary>
+        </member>
+        <member name="F:Standard.SHARDAPPIDINFOIDLIST.pszAppID">
+            <summary>The id of the application that should be associated with this recent doc.</summary>
+        </member>
+        <member name="T:Standard.WTA_OPTIONS">
+            <summary>Defines options that are used to set window visual style attributes.</summary>
+        </member>
+        <member name="F:Standard.WTA_OPTIONS.dwFlags">
+            <summary>
+            A combination of flags that modify window visual style attributes.
+            Can be a combination of the WTNCA constants.
+            </summary>
+        </member>
+        <member name="F:Standard.WTA_OPTIONS.dwMask">
+            <summary>
+            A bitmask that describes how the values specified in dwFlags should be applied.
+            If the bit corresponding to a value in dwFlags is 0, that flag will be removed.
+            If the bit is 1, the flag will be added.
+            </summary>
+        </member>
+        <member name="F:Standard.MARGINS.cxLeftWidth">
+            <summary>Width of left border that retains its size.</summary>
+        </member>
+        <member name="F:Standard.MARGINS.cxRightWidth">
+            <summary>Width of right border that retains its size.</summary>
+        </member>
+        <member name="F:Standard.MARGINS.cyTopHeight">
+            <summary>Height of top border that retains its size.</summary>
+        </member>
+        <member name="F:Standard.MARGINS.cyBottomHeight">
+            <summary>Height of bottom border that retains its size.</summary>
+        </member>
+        <member name="T:Standard.WndProc">
+            <summary>Delegate declaration that matches native WndProc signatures.</summary>
+        </member>
+        <member name="T:Standard.WndProcHook">
+            <summary>Delegate declaration that matches native WndProc signatures.</summary>
+        </member>
+        <member name="T:Standard.MessageHandler">
+            <summary>Delegate declaration that matches managed WndProc signatures.</summary>
+        </member>
+        <member name="M:Standard.NativeMethods.SetWindowThemeAttribute(System.IntPtr,Standard.WINDOWTHEMEATTRIBUTETYPE,Standard.WTA_OPTIONS@,System.UInt32)">
+            <summary>
+            Sets attributes to control how visual styles are applied to a specified window.
+            </summary>
+            <param name="hwnd">
+            Handle to a window to apply changes to.
+            </param>
+            <param name="eAttribute">
+            Value of type WINDOWTHEMEATTRIBUTETYPE that specifies the type of attribute to set.
+            The value of this parameter determines the type of data that should be passed in the pvAttribute parameter.
+            Can be the following value:
+            <list>WTA_NONCLIENT (Specifies non-client related attributes).</list>
+            pvAttribute must be a pointer of type WTA_OPTIONS.
+            </param>
+            <param name="pvAttribute">
+            A pointer that specifies attributes to set. Type is determined by the value of the eAttribute value.
+            </param>
+            <param name="cbAttribute">
+            Specifies the size, in bytes, of the data pointed to by pvAttribute.
+            </param>
+        </member>
+        <member name="M:Standard.NativeMethods._SystemParametersInfo_NONCLIENTMETRICS(Standard.SPI,System.Int32,Standard.NONCLIENTMETRICS@,Standard.SPIF)">
+            <summary>Overload of SystemParametersInfo for getting and setting NONCLIENTMETRICS.</summary>
+        </member>
+        <member name="M:Standard.NativeMethods._SystemParametersInfo_HIGHCONTRAST(Standard.SPI,System.Int32,Standard.HIGHCONTRAST@,Standard.SPIF)">
+            <summary>Overload of SystemParametersInfo for getting and setting HIGHCONTRAST.</summary>
+        </member>
+        <member name="M:Standard.NativeMethods.SetCurrentProcessExplicitAppUserModelID(System.String)">
+            <summary>
+            Sets the User Model AppID for the current process, enabling Windows to retrieve this ID
+            </summary>
+            <param name="AppID"></param>
+        </member>
+        <member name="M:Standard.NativeMethods.GetCurrentProcessExplicitAppUserModelID(System.String@)">
+            <summary>
+            Retrieves the User Model AppID that has been explicitly set for the current process via SetCurrentProcessExplicitAppUserModelID
+            </summary>
+            <param name="AppID"></param>
+        </member>
+        <member name="M:Standard.DpiHelper.LogicalPixelsToDevice(System.Windows.Point)">
+            <summary>
+            Convert a point in device independent pixels (1/96") to a point in the system coordinates.
+            </summary>
+            <param name="logicalPoint">A point in the logical coordinate system.</param>
+            <returns>Returns the parameter converted to the system's coordinates.</returns>
+        </member>
+        <member name="M:Standard.DpiHelper.DevicePixelsToLogical(System.Windows.Point)">
+            <summary>
+            Convert a point in system coordinates to a point in device independent pixels (1/96").
+            </summary>
+            <param name="logicalPoint">A point in the physical coordinate system.</param>
+            <returns>Returns the parameter converted to the device independent coordinate system.</returns>
+        </member>
+        <member name="T:Standard.Assert">
+            <summary>A static class for verifying assumptions.</summary>
+        </member>
+        <member name="M:Standard.Assert.Evaluate(Standard.Assert.EvaluateFunction)">
+            <summary>
+            Executes the specified argument.
+            </summary>
+            <param name="argument">The function to execute.</param>
+        </member>
+        <member name="M:Standard.Assert.Equals``1(``0,``0)">
+            <summary>Obsolete: Use Standard.Assert.AreEqual instead of Assert.Equals</summary>
+            <typeparam name="T">The generic type to compare for equality.</typeparam>
+            <param name="expected">The first generic type data to compare.  This is is the expected value.</param>
+            <param name="actual">The second generic type data to compare.  This is the actual value.</param>
+        </member>
+        <member name="M:Standard.Assert.AreEqual``1(``0,``0)">
+            <summary>
+            Verifies that two generic type data are equal.  The assertion fails if they are not.
+            </summary>
+            <typeparam name="T">The generic type to compare for equality.</typeparam>
+            <param name="expected">The first generic type data to compare.  This is is the expected value.</param>
+            <param name="actual">The second generic type data to compare.  This is the actual value.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.AreNotEqual``1(``0,``0)">
+            <summary>
+            Verifies that two generic type data are not equal.  The assertion fails if they are.
+            </summary>
+            <typeparam name="T">The generic type to compare for inequality.</typeparam>
+            <param name="notExpected">The first generic type data to compare.  This is is the value that's not expected.</param>
+            <param name="actual">The second generic type data to compare.  This is the actual value.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.Implies(System.Boolean,System.Boolean)">
+            <summary>
+            Verifies that if the specified condition is true, then so is the result.
+            The assertion fails if the condition is true but the result is false.
+            </summary>
+            <param name="condition">if set to <c>true</c> [condition].</param>
+            <param name="result">
+            A second Boolean statement.  If the first was true then so must this be.
+            If the first statement was false then the value of this is ignored.
+            </param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.Implies(System.Boolean,Standard.Assert.ImplicationFunction)">
+            <summary>
+            Lazy evaluation overload.  Verifies that if a condition is true, then so is a secondary value.
+            </summary>
+            <param name="condition">The conditional value.</param>
+            <param name="result">A function to be evaluated for truth if the condition argument is true.</param>
+            <remarks>
+            This overload only evaluates the result if the first condition is true.
+            </remarks>
+        </member>
+        <member name="M:Standard.Assert.IsNeitherNullNorEmpty(System.String)">
+            <summary>
+            Verifies that a string has content.  I.e. it is not null and it is not empty.
+            </summary>
+            <param name="value">The string to verify.</param>
+        </member>
+        <member name="M:Standard.Assert.IsNeitherNullNorWhitespace(System.String)">
+            <summary>
+            Verifies that a string has content.  I.e. it is not null and it is not purely whitespace.
+            </summary>
+            <param name="value">The string to verify.</param>
+        </member>
+        <member name="M:Standard.Assert.IsNotNull``1(``0)">
+            <summary>
+            Verifies the specified value is not null.  The assertion fails if it is.
+            </summary>
+            <typeparam name="T">The generic reference type.</typeparam>
+            <param name="value">The value to check for nullness.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.IsFalse(System.Boolean)">
+            <summary>
+            Verifies that the specified condition is false.  The assertion fails if it is true.
+            </summary>
+            <param name="condition">The expression that should be <c>false</c>.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.IsFalse(System.Boolean,System.String)">
+            <summary>
+            Verifies that the specified condition is false.  The assertion fails if it is true.
+            </summary>
+            <param name="condition">The expression that should be <c>false</c>.</param>
+            <param name="message">The message to display if the condition is <c>true</c>.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.IsTrue(System.Boolean)">
+            <summary>
+            Verifies that the specified condition is true.  The assertion fails if it is not.
+            </summary>
+            <param name="condition">A condition that is expected to be <c>true</c>.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.IsTrue(System.Boolean,System.String)">
+            <summary>
+            Verifies that the specified condition is true.  The assertion fails if it is not.
+            </summary>
+            <param name="condition">A condition that is expected to be <c>true</c>.</param>
+            <param name="message">The message to write in case the condition is <c>false</c>.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.Fail">
+            <summary>
+            This line should never be executed.  The assertion always fails.
+            </summary>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.Fail(System.String)">
+            <summary>
+            This line should never be executed.  The assertion always fails.
+            </summary>
+            <param name="message">The message to display if this function is executed.</param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="M:Standard.Assert.IsNull``1(``0)">
+            <summary>
+            Verifies that the specified object is null.  The assertion fails if it is not.
+            </summary>
+            <param name="item">The item to verify is null.</param>
+        </member>
+        <member name="M:Standard.Assert.BoundedDoubleInc(System.Double,System.Double,System.Double)">
+            <summary>
+            Verifies that the specified value is within the expected range.  The assertion fails if it isn't.
+            </summary>
+            <param name="lowerBoundInclusive">The lower bound inclusive value.</param>
+            <param name="value">The value to verify.</param>
+            <param name="upperBoundInclusive">The upper bound inclusive value.</param>
+        </member>
+        <member name="M:Standard.Assert.BoundedInteger(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Verifies that the specified value is within the expected range.  The assertion fails if it isn't.
+            </summary>
+            <param name="lowerBoundInclusive">The lower bound inclusive value.</param>
+            <param name="value">The value to verify.</param>
+            <param name="upperBoundExclusive">The upper bound exclusive value.</param>
+        </member>
+        <member name="M:Standard.Assert.IsApartmentState(System.Threading.ApartmentState)">
+            <summary>
+            Verify the current thread's apartment state is what's expected.  The assertion fails if it isn't
+            </summary>
+            <param name="expectedState">
+            The expected apartment state for the current thread.
+            </param>
+            <remarks>This breaks into the debugger in the case of a failed assertion.</remarks>
+        </member>
+        <member name="T:Standard.Assert.EvaluateFunction">
+            <summary>A function signature for Assert.Evaluate.</summary>
+        </member>
+        <member name="T:Standard.Assert.ImplicationFunction">
+            <summary>A function signature for Assert.Implies.</summary>
+            <returns>Returns the truth of a predicate.</returns>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutDocumentTabItem.ModelProperty">
+            <summary>
+            Model Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentTabItem.OnModelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Model property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentTabItem.OnModelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Model property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutDocumentTabItem.LayoutItemPropertyKey">
+            <summary>
+            LayoutItem Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentTabItem.SetLayoutItem(AvalonDock.Controls.LayoutItem)">
+            <summary>
+            Provides a secure method for setting the LayoutItem property.  
+            This dependency property indicates the LayoutItem attached to this tag item.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutDocumentTabItem.Model">
+            <summary>
+            Gets or sets the Model property.  This dependency property 
+            indicates the layout content model attached to the tab item.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutDocumentTabItem.LayoutItem">
+            <summary>
+            Gets the LayoutItem property.  This dependency property 
+            indicates the LayoutItem attached to this tag item.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._window">
+            <summary>The Window that's chrome is being modified.</summary>
+        </member>
+        <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._hwnd">
+            <summary>Underlying HWND for the _window.</summary>
+        </member>
+        <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._chromeInfo">
+            <summary>Object that describes the current modifications being made to the chrome.</summary>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._ModifyStyle(Standard.WS,Standard.WS)">
+            <summary>Add and remove a native WindowStyle from the HWND.</summary>
+            <param name="removeStyle">The styles to be removed.  These can be bitwise combined.</param>
+            <param name="addStyle">The styles to be added.  These can be bitwise combined.</param>
+            <returns>Whether the styles of the HWND were modified as a result of this call.</returns>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._GetHwndState">
+            <summary>
+            Get the WindowState as the native HWND knows it to be.  This isn't necessarily the same as what Window thinks.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._GetWindowRect">
+            <summary>
+            Get the bounding rectangle for the window in physical coordinates.
+            </summary>
+            <returns>The bounding rectangle for the window.</returns>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.WindowChromeWorker._UpdateSystemMenu(System.Nullable{System.Windows.WindowState})">
+            <summary>
+            Update the items in the system menu based on the current, or assumed, WindowState.
+            </summary>
+            <param name="assumeState">
+            The state to assume that the Window is in.  This can be null to query the Window's state.
+            </param>
+            <remarks>
+            We want to update the menu while we have some control over whether the caption will be repainted.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Windows.Shell.WindowChromeWorker._HitTestBorders">
+            <summary>
+            Matrix of the HT values to return when responding to NC window messages.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.SystemParameters2.#ctor">
+            <summary>
+            Private constructor.  The public way to access this class is through the static Current property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.DropTargetBase.IsDraggingOverProperty">
+            <summary>
+            IsDraggingOver Attached Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.DropTargetBase.GetIsDraggingOver(System.Windows.DependencyObject)">
+            <summary>
+            Gets the IsDraggingOver property.  This dependency property 
+            indicates if user is dragging a window over the target element.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.DropTargetBase.SetIsDraggingOver(System.Windows.DependencyObject,System.Boolean)">
+            <summary>
+            Sets the IsDraggingOver property.  This dependency property 
+            indicates if user is dragging away a window from the target element.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.AnchorablePaneTitle.ModelProperty">
+            <summary>
+            Model Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.AnchorablePaneTitle.OnModelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Model property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.AnchorablePaneTitle.LayoutItemPropertyKey">
+            <summary>
+            LayoutItem Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.AnchorablePaneTitle.SetLayoutItem(AvalonDock.Controls.LayoutItem)">
+            <summary>
+            Provides a secure method for setting the LayoutItem property.  
+            This dependency property indicates the LayoutItem attached to this tag item.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="P:AvalonDock.Controls.AnchorablePaneTitle.Model">
+            <summary>
+            Gets or sets the Model property.  This dependency property 
+            indicates model attached to this view.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.AnchorablePaneTitle.LayoutItem">
+            <summary>
+            Gets the LayoutItem property.  This dependency property 
+            indicates the LayoutItem attached to this tag item.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutContent.OnIsSelectedChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IsSelected property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutContent.OnIsActiveChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IsActive property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutContent.Close">
+            <summary>
+            Close the content
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutContent.Float">
+            <summary>
+            Float the content in a popup window
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutContent.DockAsDocument">
+            <summary>
+            Dock the content as document
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutContent.Dock">
+            <summary>
+            Re-dock the content to its previous container
+            </summary>
+        </member>
+        <member name="E:AvalonDock.Layout.LayoutContent.Closed">
+            <summary>
+            Event fired when the content is closed (i.e. removed definitely from the layout)
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorSideControl.IsLeftSidePropertyKey">
+            <summary>
+            IsLeftSide Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorSideControl.SetIsLeftSide(System.Boolean)">
+            <summary>
+            Provides a secure method for setting the IsLeftSide property.  
+            This dependency property indicates this control is anchored to left side.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorSideControl.IsTopSidePropertyKey">
+            <summary>
+            IsTopSide Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorSideControl.SetIsTopSide(System.Boolean)">
+            <summary>
+            Provides a secure method for setting the IsTopSide property.  
+            This dependency property indicates this control is anchored to top side.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorSideControl.IsRightSidePropertyKey">
+            <summary>
+            IsRightSide Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorSideControl.SetIsRightSide(System.Boolean)">
+            <summary>
+            Provides a secure method for setting the IsRightSide property.  
+            This dependency property indicates this control is anchored to right side.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorSideControl.IsBottomSidePropertyKey">
+            <summary>
+            IsBottomSide Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorSideControl.SetIsBottomSide(System.Boolean)">
+            <summary>
+            Provides a secure method for setting the IsBottomSide property.  
+            This dependency property indicates if this panel is anchored to bottom side.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorSideControl.IsLeftSide">
+            <summary>
+            Gets the IsLeftSide property.  This dependency property 
+            indicates this control is anchored to left side.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorSideControl.IsTopSide">
+            <summary>
+            Gets the IsTopSide property.  This dependency property 
+            indicates this control is anchored to top side.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorSideControl.IsRightSide">
+            <summary>
+            Gets the IsRightSide property.  This dependency property 
+            indicates this control is anchored to right side.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorSideControl.IsBottomSide">
+            <summary>
+            Gets the IsBottomSide property.  This dependency property 
+            indicates if this panel is anchored to bottom side.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Windows.Shell.SystemCommands.ShowSystemMenu(System.Windows.Window,System.Windows.Point)">
+            <summary>Display the system menu at a specified location.</summary>
+            <param name="screenLocation">The location to display the system menu, in logical screen coordinates.</param>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.TitleProperty">
+            <summary>
+            Title Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnTitleChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Title property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnTitleChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Title property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.IconSourceProperty">
+            <summary>
+            IconSource Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnIconSourceChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the IconSource property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnIconSourceChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IconSource property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.ContentIdProperty">
+            <summary>
+            ContentId Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnContentIdChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the ContentId property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnContentIdChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the ContentId property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.IsSelectedProperty">
+            <summary>
+            IsSelected Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnIsSelectedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the IsSelected property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnIsSelectedChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IsSelected property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.IsActiveProperty">
+            <summary>
+            IsActive Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnIsActiveChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the IsActive property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnIsActiveChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IsActive property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.CanCloseProperty">
+            <summary>
+            CanClose Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCanCloseChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the CanClose property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCanCloseChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the CanClose property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.CanFloatProperty">
+            <summary>
+            CanFloat Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCanFloatChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the CanFloat property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCanFloatChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the CanFloat property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.CloseCommandProperty">
+            <summary>
+            CloseCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCloseCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the CloseCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCloseCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the CloseCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.CoerceCloseCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the CloseCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.FloatCommandProperty">
+            <summary>
+            FloatCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnFloatCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the FloatCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnFloatCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the FloatCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.CoerceFloatCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the FloatCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.DockAsDocumentCommandProperty">
+            <summary>
+            DockAsDocumentCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnDockAsDocumentCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DockAsDocumentCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnDockAsDocumentCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DockAsDocumentCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.CoerceDockAsDocumentCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DockAsDocumentCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.CloseAllButThisCommandProperty">
+            <summary>
+            CloseAllButThisCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCloseAllButThisCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the CloseAllButThisCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnCloseAllButThisCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the CloseAllButThisCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.CoerceCloseAllButThisCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the CloseAllButThisCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.ActivateCommandProperty">
+            <summary>
+            ActivateCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnActivateCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the ActivateCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnActivateCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the ActivateCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.CoerceActivateCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the ActivateCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.NewVerticalTabGroupCommandProperty">
+            <summary>
+            NewVerticalTabGroupCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnNewVerticalTabGroupCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the NewVerticalTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnNewVerticalTabGroupCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the NewVerticalTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.NewHorizontalTabGroupCommandProperty">
+            <summary>
+            NewHorizontalTabGroupCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnNewHorizontalTabGroupCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the NewHorizontalTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnNewHorizontalTabGroupCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the NewHorizontalTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.MoveToNextTabGroupCommandProperty">
+            <summary>
+            MoveToNextTabGroupCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnMoveToNextTabGroupCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the MoveToNextTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnMoveToNextTabGroupCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the MoveToNextTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutItem.MoveToPreviousTabGroupCommandProperty">
+            <summary>
+            MoveToPreviousTabGroupCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnMoveToPreviousTabGroupCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the MoveToPreviousTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutItem.OnMoveToPreviousTabGroupCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the MoveToPreviousTabGroupCommand property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.Title">
+            <summary>
+            Gets or sets the Title property.  This dependency property 
+            indicates the title of the element.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.IconSource">
+            <summary>
+            Gets or sets the IconSource property.  This dependency property 
+            indicates icon associated with the item.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.ContentId">
+            <summary>
+            Gets or sets the ContentId property.  This dependency property 
+            indicates the content id used to retrive content when deserializing layouts.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.IsSelected">
+            <summary>
+            Gets or sets the IsSelected property.  This dependency property 
+            indicates if the item is selected inside its container.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.IsActive">
+            <summary>
+            Gets or sets the IsActive property.  This dependency property 
+            indicates if the item is active in the UI.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.CanClose">
+            <summary>
+            Gets or sets the CanClose property.  This dependency property 
+            indicates if the item can be closed.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.CanFloat">
+            <summary>
+            Gets or sets the CanFloat property.  This dependency property 
+            indicates if user can move the layout element dragging it to another position.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.CloseCommand">
+            <summary>
+            Gets or sets the CloseCommand property.  This dependency property 
+            indicates the command to execute when user click the document close button.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.FloatCommand">
+            <summary>
+            Gets or sets the FloatCommand property.  This dependency property 
+            indicates the command to execute when user click the float button.
+            </summary>
+            <remarks>By default this command move the anchorable inside new floating window.</remarks>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.DockAsDocumentCommand">
+            <summary>
+            Gets or sets the DockAsDocumentCommand property.  This dependency property 
+            indicates the command to execute when user click the DockAsDocument button.
+            </summary>
+            <remarks>By default this command move the anchorable inside the last focused document pane.</remarks>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.CloseAllButThisCommand">
+            <summary>
+            Gets or sets the CloseAllButThisCommand property.  This dependency property 
+            indicates the 'Close All But This' command.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.ActivateCommand">
+            <summary>
+            Gets or sets the ActivateCommand property.  This dependency property 
+            indicates the command to execute when user wants to activate a content (either a Document or an Anchorable).
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.NewVerticalTabGroupCommand">
+            <summary>
+            Gets or sets the NewVerticalTabGroupCommand property.  This dependency property 
+            indicates the new vertical tab group command.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.NewHorizontalTabGroupCommand">
+            <summary>
+            Gets or sets the NewHorizontalTabGroupCommand property.  This dependency property 
+            indicates the new horizontal tab group command.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.MoveToNextTabGroupCommand">
+            <summary>
+            Gets or sets the MoveToNextTabGroupCommand property.  This dependency property 
+            indicates move to next tab group command.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutItem.MoveToPreviousTabGroupCommand">
+            <summary>
+            Gets or sets the MoveToPreviousTabGroupCommand property.  This dependency property 
+            indicates move to rpevious tab group command.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutDocumentItem.DescriptionProperty">
+            <summary>
+            Description Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentItem.OnDescriptionChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Description property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentItem.OnDescriptionChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Description property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutDocumentItem.Description">
+            <summary>
+            Gets or sets the Description property.  This dependency property 
+            indicates the description to display for the document item.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableControl.ModelProperty">
+            <summary>
+            Model Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableControl.OnModelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Model property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableControl.OnModelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Model property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableControl.Model">
+            <summary>
+            Gets or sets the Model property.  This dependency property 
+            indicates the model attached to this view.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.MenuItemEx.IconTemplateProperty">
+            <summary>
+            IconTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.MenuItemEx.OnIconTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the IconTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.MenuItemEx.OnIconTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IconTemplate property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.MenuItemEx.IconTemplateSelectorProperty">
+            <summary>
+            IconTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.MenuItemEx.OnIconTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the IconTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.MenuItemEx.OnIconTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the IconTemplateSelector property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.MenuItemEx.IconTemplate">
+            <summary>
+            Gets or sets the IconTemplate property.  This dependency property 
+            indicates the data template for the icon.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.MenuItemEx.IconTemplateSelector">
+            <summary>
+            Gets or sets the IconTemplateSelector property.  This dependency property 
+            indicates the DataTemplateSelector for the Icon.
+            </summary>
+        </member>
+        <member name="T:AvalonDock.Win32Helper.SetWindowPosFlags">
+            <summary>
+            SetWindowPos Flags
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.SynchronousWindowPosition">
+            <summary>If the calling thread and the thread that owns the window are attached to different input queues,
+            the system posts the request to the thread that owns the window. This prevents the calling thread from
+            blocking its execution while other threads process the request.</summary>
+            <remarks>SWP_ASYNCWINDOWPOS</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DeferErase">
+            <summary>Prevents generation of the WM_SYNCPAINT message.</summary>
+            <remarks>SWP_DEFERERASE</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DrawFrame">
+            <summary>Draws a frame (defined in the window's class description) around the window.</summary>
+            <remarks>SWP_DRAWFRAME</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.FrameChanged">
+            <summary>Applies new frame styles set using the SetWindowLong function. Sends a WM_NCCALCSIZE message to
+            the window, even if the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE
+            is sent only when the window's size is being changed.</summary>
+            <remarks>SWP_FRAMECHANGED</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.HideWindow">
+            <summary>Hides the window.</summary>
+            <remarks>SWP_HIDEWINDOW</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DoNotActivate">
+            <summary>Does not activate the window. If this flag is not set, the window is activated and moved to the
+            top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter
+            parameter).</summary>
+            <remarks>SWP_NOACTIVATE</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DoNotCopyBits">
+            <summary>Discards the entire contents of the client area. If this flag is not specified, the valid
+            contents of the client area are saved and copied back into the client area after the window is sized or
+            repositioned.</summary>
+            <remarks>SWP_NOCOPYBITS</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.IgnoreMove">
+            <summary>Retains the current position (ignores X and Y parameters).</summary>
+            <remarks>SWP_NOMOVE</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DoNotChangeOwnerZOrder">
+            <summary>Does not change the owner window's position in the Z order.</summary>
+            <remarks>SWP_NOOWNERZORDER</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DoNotRedraw">
+            <summary>Does not redraw changes. If this flag is set, no repainting of any kind occurs. This applies to
+            the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent
+            window uncovered as a result of the window being moved. When this flag is set, the application must
+            explicitly invalidate or redraw any parts of the window and parent window that need redrawing.</summary>
+            <remarks>SWP_NOREDRAW</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DoNotReposition">
+            <summary>Same as the SWP_NOOWNERZORDER flag.</summary>
+            <remarks>SWP_NOREPOSITION</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.DoNotSendChangingEvent">
+            <summary>Prevents the window from receiving the WM_WINDOWPOSCHANGING message.</summary>
+            <remarks>SWP_NOSENDCHANGING</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.IgnoreResize">
+            <summary>Retains the current size (ignores the cx and cy parameters).</summary>
+            <remarks>SWP_NOSIZE</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.IgnoreZOrder">
+            <summary>Retains the current Z order (ignores the hWndInsertAfter parameter).</summary>
+            <remarks>SWP_NOZORDER</remarks>
+        </member>
+        <member name="F:AvalonDock.Win32Helper.SetWindowPosFlags.ShowWindow">
+            <summary>Displays the window.</summary>
+            <remarks>SWP_SHOWWINDOW</remarks>
+        </member>
+        <member name="F:AvalonDock.Layout.ChildrenTreeChange.DirectChildrenChanged">
+            <summary>
+            Direct insert/remove operation has been perfomed to the group
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Layout.ChildrenTreeChange.TreeChanged">
+            <summary>
+            An element below in the hierarchy as been added/removed
+            </summary>
+        </member>
+        <member name="T:Standard.Verify">
+            <summary>
+            A static class for retail validated assertions.
+            Instead of breaking into the debugger an exception is thrown.
+            </summary>
+        </member>
+        <member name="M:Standard.Verify.IsApartmentState(System.Threading.ApartmentState,System.String)">
+            <summary>
+            Ensure that the current thread's apartment state is what's expected.
+            </summary>
+            <param name="requiredState">
+            The required apartment state for the current thread.
+            </param>
+            <param name="message">
+            The message string for the exception to be thrown if the state is invalid.
+            </param>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if the calling thread's apartment state is not the same as the requiredState.
+            </exception>
+        </member>
+        <member name="M:Standard.Verify.IsNeitherNullNorEmpty(System.String,System.String)">
+            <summary>
+            Ensure that an argument is neither null nor empty.
+            </summary>
+            <param name="value">The string to validate.</param>
+            <param name="name">The name of the parameter that will be presented if an exception is thrown.</param>
+        </member>
+        <member name="M:Standard.Verify.IsNeitherNullNorWhitespace(System.String,System.String)">
+            <summary>
+            Ensure that an argument is neither null nor does it consist only of whitespace.
+            </summary>
+            <param name="value">The string to validate.</param>
+            <param name="name">The name of the parameter that will be presented if an exception is thrown.</param>
+        </member>
+        <member name="M:Standard.Verify.IsNotDefault``1(``0,System.String)">
+            <summary>Verifies that an argument is not null.</summary>
+            <typeparam name="T">Type of the object to validate.  Must be a class.</typeparam>
+            <param name="obj">The object to validate.</param>
+            <param name="name">The name of the parameter that will be presented if an exception is thrown.</param>
+        </member>
+        <member name="M:Standard.Verify.IsNotNull``1(``0,System.String)">
+            <summary>Verifies that an argument is not null.</summary>
+            <typeparam name="T">Type of the object to validate.  Must be a class.</typeparam>
+            <param name="obj">The object to validate.</param>
+            <param name="name">The name of the parameter that will be presented if an exception is thrown.</param>
+        </member>
+        <member name="M:Standard.Verify.IsNull``1(``0,System.String)">
+            <summary>Verifies that an argument is null.</summary>
+            <typeparam name="T">Type of the object to validate.  Must be a class.</typeparam>
+            <param name="obj">The object to validate.</param>
+            <param name="name">The name of the parameter that will be presented if an exception is thrown.</param>
+        </member>
+        <member name="M:Standard.Verify.IsTrue(System.Boolean,System.String)">
+            <summary>
+            Verifies the specified statement is true.  Throws an ArgumentException if it's not.
+            </summary>
+            <param name="statement">The statement to be verified as true.</param>
+            <param name="name">Name of the parameter to include in the ArgumentException.</param>
+        </member>
+        <member name="M:Standard.Verify.IsTrue(System.Boolean,System.String,System.String)">
+            <summary>
+            Verifies the specified statement is true.  Throws an ArgumentException if it's not.
+            </summary>
+            <param name="statement">The statement to be verified as true.</param>
+            <param name="name">Name of the parameter to include in the ArgumentException.</param>
+            <param name="message">The message to include in the ArgumentException.</param>
+        </member>
+        <member name="M:Standard.Verify.BoundedInteger(System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Verifies that the specified value is within the expected range.  The assertion fails if it isn't.
+            </summary>
+            <param name="lowerBoundInclusive">The lower bound inclusive value.</param>
+            <param name="value">The value to verify.</param>
+            <param name="upperBoundExclusive">The upper bound exclusive value.</param>
+        </member>
+        <member name="M:AvalonDock.Controls.FocusElementManager.GetLastFocusedElement(AvalonDock.Layout.ILayoutElement)">
+            <summary>
+            Get the input element that was focused before user left the layout element
+            </summary>
+            <param name="model">Element to look for</param>
+            <returns>Input element </returns>
+        </member>
+        <member name="M:AvalonDock.Controls.FocusElementManager.GetLastWindowHandle(AvalonDock.Layout.ILayoutElement)">
+            <summary>
+            Get the last window handle focused before user left the element passed as argument
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AvalonDock.Controls.FocusElementManager.SetFocusOnLastElement(AvalonDock.Layout.ILayoutElement)">
+            <summary>
+            Given a layout element tries to set the focus of the keyword where it was before user moved to another element
+            </summary>
+            <param name="model"></param>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableFloatingWindowControl.SingleContentLayoutItemProperty">
+            <summary>
+            SingleContentLayoutItem Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableFloatingWindowControl.OnSingleContentLayoutItemChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the SingleContentLayoutItem property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableFloatingWindowControl.OnSingleContentLayoutItemChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the SingleContentLayoutItem property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableFloatingWindowControl.SingleContentLayoutItem">
+            <summary>
+            Gets or sets the SingleContentLayoutItem property.  This dependency property 
+            indicates the layout item of the selected content when is shown a single anchorable pane.
+            </summary>
+        </member>
+        <member name="T:Standard.ManagedIStream">
+            <summary>
+            Wraps a managed stream instance into an interface pointer consumable by COM.
+            </summary>
+        </member>
+        <member name="M:Standard.ManagedIStream.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the ManagedIStream class with the specified managed Stream object.
+            </summary>
+            <param name="source">
+            The stream that this IStream reference is wrapping.
+            </param>
+        </member>
+        <member name="M:Standard.ManagedIStream.Clone(System.Runtime.InteropServices.ComTypes.IStream@)">
+            <summary>
+            Creates a new stream object with its own seek pointer that
+            references the same bytes as the original stream. 
+            </summary>
+            <param name="ppstm">
+            When this method returns, contains the new stream object. This parameter is passed uninitialized.
+            </param>
+            <remarks>
+            For more information, see the existing documentation for IStream::Clone in the MSDN library.
+            This class doesn't implement Clone.  A COMException is thrown if it is used.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.Commit(System.Int32)">
+            <summary>
+            Ensures that any changes made to a stream object that is open in transacted
+            mode are reflected in the parent storage. 
+            </summary>
+            <param name="grfCommitFlags">
+            A value that controls how the changes for the stream object are committed. 
+            </param>
+            <remarks>
+            For more information, see the existing documentation for IStream::Commit in the MSDN library.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.CopyTo(System.Runtime.InteropServices.ComTypes.IStream,System.Int64,System.IntPtr,System.IntPtr)">
+            <summary>
+            Copies a specified number of bytes from the current seek pointer in the
+            stream to the current seek pointer in another stream. 
+            </summary>
+            <param name="pstm">
+            A reference to the destination stream. 
+            </param>
+            <param name="cb">
+            The number of bytes to copy from the source stream. 
+            </param>
+            <param name="pcbRead">
+            On successful return, contains the actual number of bytes read from the source.
+            (Note the native signature is to a ULARGE_INTEGER*, so 64 bits are written
+            to this parameter on success.)
+            </param>
+            <param name="pcbWritten">
+            On successful return, contains the actual number of bytes written to the destination.
+            (Note the native signature is to a ULARGE_INTEGER*, so 64 bits are written
+            to this parameter on success.)
+            </param>
+        </member>
+        <member name="M:Standard.ManagedIStream.LockRegion(System.Int64,System.Int64,System.Int32)">
+            <summary>
+            Restricts access to a specified range of bytes in the stream. 
+            </summary>
+            <param name="libOffset">
+            The byte offset for the beginning of the range. 
+            </param>
+            <param name="cb">
+            The length of the range, in bytes, to restrict.
+            </param>
+            <param name="dwLockType">
+            The requested restrictions on accessing the range.
+            </param>
+            <remarks>
+            For more information, see the existing documentation for IStream::LockRegion in the MSDN library.
+            This class doesn't implement LockRegion.  A COMException is thrown if it is used.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.Read(System.Byte[],System.Int32,System.IntPtr)">
+            <summary>
+            Reads a specified number of bytes from the stream object into memory starting at the current seek pointer. 
+            </summary>
+            <param name="pv">
+            When this method returns, contains the data read from the stream. This parameter is passed uninitialized.
+            </param>
+            <param name="cb">
+            The number of bytes to read from the stream object. 
+            </param>
+            <param name="pcbRead">
+            A pointer to a ULONG variable that receives the actual number of bytes read from the stream object.
+            </param>
+            <remarks>
+            For more information, see the existing documentation for ISequentialStream::Read in the MSDN library.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.Revert">
+            <summary>
+            Discards all changes that have been made to a transacted stream since the last Commit call.
+            </summary>
+            <remarks>
+            This class doesn't implement Revert.  A COMException is thrown if it is used.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.Seek(System.Int64,System.Int32,System.IntPtr)">
+            <summary>
+            Changes the seek pointer to a new location relative to the beginning of the
+            stream, to the end of the stream, or to the current seek pointer.
+            </summary>
+            <param name="dlibMove">
+            The displacement to add to dwOrigin.
+            </param>
+            <param name="dwOrigin">
+            The origin of the seek. The origin can be the beginning of the file, the current seek pointer, or the end of the file. 
+            </param>
+            <param name="plibNewPosition">
+            On successful return, contains the offset of the seek pointer from the beginning of the stream.
+            (Note the native signature is to a ULARGE_INTEGER*, so 64 bits are written
+            to this parameter on success.)
+            </param>
+            <remarks>
+            For more information, see the existing documentation for IStream::Seek in the MSDN library.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.SetSize(System.Int64)">
+            <summary>
+            Changes the size of the stream object. 
+            </summary>
+            <param name="libNewSize">
+            The new size of the stream as a number of bytes. 
+            </param>
+            <remarks>
+            For more information, see the existing documentation for IStream::SetSize in the MSDN library.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.Stat(System.Runtime.InteropServices.ComTypes.STATSTG@,System.Int32)">
+            <summary>
+            Retrieves the STATSTG structure for this stream. 
+            </summary>
+            <param name="pstatstg">
+            When this method returns, contains a STATSTG structure that describes this stream object.
+            This parameter is passed uninitialized.
+            </param>
+            <param name="grfStatFlag">
+            Members in the STATSTG structure that this method does not return, thus saving some memory allocation operations. 
+            </param>
+        </member>
+        <member name="M:Standard.ManagedIStream.UnlockRegion(System.Int64,System.Int64,System.Int32)">
+            <summary>
+            Removes the access restriction on a range of bytes previously restricted with the LockRegion method.
+            </summary>
+            <param name="libOffset">The byte offset for the beginning of the range.
+            </param>
+            <param name="cb">
+            The length, in bytes, of the range to restrict.
+            </param>
+            <param name="dwLockType">
+            The access restrictions previously placed on the range.
+            </param>
+            <remarks>
+            For more information, see the existing documentation for IStream::UnlockRegion in the MSDN library.
+            This class doesn't implement UnlockRegion.  A COMException is thrown if it is used.
+            </remarks>
+        </member>
+        <member name="M:Standard.ManagedIStream.Write(System.Byte[],System.Int32,System.IntPtr)">
+            <summary>
+            Writes a specified number of bytes into the stream object starting at the current seek pointer.
+            </summary>
+            <param name="pv">
+            The buffer to write this stream to.
+            </param>
+            <param name="cb">
+            The number of bytes to write to the stream. 
+            </param>
+            <param name="pcbWritten">
+            On successful return, contains the actual number of bytes written to the stream object. 
+            If the caller sets this pointer to null, this method does not provide the actual number
+            of bytes written.
+            </param>
+        </member>
+        <member name="M:Standard.ManagedIStream.Dispose">
+            <summary>
+            Releases resources controlled by this object.
+            </summary>
+            <remarks>
+            Dispose can be called multiple times, but trying to use the object
+            after it has been disposed will generally throw ObjectDisposedExceptions.
+            </remarks>
+        </member>
+        <member name="T:Standard.SIATTRIBFLAGS">
+            <summary>ShellItem attribute flags.  SIATTRIBFLAGS_*</summary>
+        </member>
+        <member name="T:Standard.STPF">
+            <summary>
+            Flags for SetTabProperties.  STPF_*
+            </summary>
+            <remarks>The native enum was called STPFLAG.</remarks>
+        </member>
+        <member name="T:Standard.TBPF">
+            <summary>
+            Flags for Setting Taskbar Progress state.  TBPF_*
+            </summary>
+            <remarks>
+            The native enum was called TBPFLAG.
+            </remarks>
+        </member>
+        <member name="T:Standard.THB">
+            <summary>
+            THUMBBUTTON mask.  THB_*
+            </summary>
+        </member>
+        <member name="T:Standard.THBF">
+            <summary>
+            THUMBBUTTON flags.  THBF_*
+            </summary>
+        </member>
+        <member name="T:Standard.GPS">
+            <summary>
+            GetPropertyStoreFlags.  GPS_*.
+            </summary>
+            <remarks>
+            These are new for Vista, but are used in downlevel components
+            </remarks>
+        </member>
+        <member name="T:Standard.KDC">
+            <summary>
+            KNOWNDESTCATEGORY.  KDC_*
+            </summary>
+        </member>
+        <member name="F:Standard.SFGAO.CANCOPY">
+            <summary>Objects can be copied</summary>
+            <remarks>DROPEFFECT_COPY</remarks>
+        </member>
+        <member name="F:Standard.SFGAO.CANMOVE">
+            <summary>Objects can be moved</summary>
+            <remarks>DROPEFFECT_MOVE</remarks>
+        </member>
+        <member name="F:Standard.SFGAO.CANLINK">
+            <summary>Objects can be linked</summary>
+            <remarks>
+            DROPEFFECT_LINK.
+            
+            If this bit is set on an item in the shell folder, a
+            'Create Shortcut' menu item will be added to the File
+            menu and context menus for the item.  If the user selects
+            that command, your IContextMenu::InvokeCommand() will be called
+            with 'link'.
+            That flag will also be used to determine if 'Create Shortcut'
+            should be added when the item in your folder is dragged to another
+            folder.
+            </remarks>
+        </member>
+        <member name="F:Standard.SFGAO.STORAGE">
+            <summary>supports BindToObject(IID_IStorage)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.CANRENAME">
+            <summary>Objects can be renamed</summary>
+        </member>
+        <member name="F:Standard.SFGAO.CANDELETE">
+            <summary>Objects can be deleted</summary>
+        </member>
+        <member name="F:Standard.SFGAO.HASPROPSHEET">
+            <summary>Objects have property sheets</summary>
+        </member>
+        <member name="F:Standard.SFGAO.DROPTARGET">
+            <summary>Objects are drop target</summary>
+        </member>
+        <member name="F:Standard.SFGAO.ENCRYPTED">
+            <summary>Object is encrypted (use alt color)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.ISSLOW">
+            <summary>'Slow' object</summary>
+        </member>
+        <member name="F:Standard.SFGAO.GHOSTED">
+            <summary>Ghosted icon</summary>
+        </member>
+        <member name="F:Standard.SFGAO.LINK">
+            <summary>Shortcut (link)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.SHARE">
+            <summary>Shared</summary>
+        </member>
+        <member name="F:Standard.SFGAO.READONLY">
+            <summary>Read-only</summary>
+        </member>
+        <member name="F:Standard.SFGAO.HIDDEN">
+            <summary> Hidden object</summary>
+        </member>
+        <member name="F:Standard.SFGAO.FILESYSANCESTOR">
+            <summary> May contain children with SFGAO_FILESYSTEM</summary>
+        </member>
+        <member name="F:Standard.SFGAO.FOLDER">
+            <summary>Support BindToObject(IID_IShellFolder)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.FILESYSTEM">
+            <summary>Is a win32 file system object (file/folder/root)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.HASSUBFOLDER">
+            <summary>May contain children with SFGAO_FOLDER (may be slow)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.VALIDATE">
+            <summary>Invalidate cached information (may be slow)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.REMOVABLE">
+            <summary>Is this removeable media?</summary>
+        </member>
+        <member name="F:Standard.SFGAO.COMPRESSED">
+            <summary> Object is compressed (use alt color)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.BROWSABLE">
+            <summary>Supports IShellFolder, but only implements CreateViewObject() (non-folder view)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.NONENUMERATED">
+            <summary>Is a non-enumerated object (should be hidden)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.NEWCONTENT">
+            <summary>Should show bold in explorer tree</summary>
+        </member>
+        <member name="F:Standard.SFGAO.CANMONIKER">
+            <summary>Obsolete</summary>
+        </member>
+        <member name="F:Standard.SFGAO.HASSTORAGE">
+            <summary>Obsolete</summary>
+        </member>
+        <member name="F:Standard.SFGAO.STREAM">
+            <summary>Supports BindToObject(IID_IStream)</summary>
+        </member>
+        <member name="F:Standard.SFGAO.STORAGEANCESTOR">
+            <summary>May contain children with SFGAO_STORAGE or SFGAO_STREAM</summary>
+        </member>
+        <member name="F:Standard.SFGAO.STORAGECAPMASK">
+            <summary>For determining storage capabilities, ie for open/save semantics</summary>
+        </member>
+        <member name="F:Standard.SFGAO.PKEYSFGAOMASK">
+            <summary>
+            Attributes that are masked out for PKEY_SFGAOFlags because they are considered
+            to cause slow calculations or lack context
+            (SFGAO_VALIDATE | SFGAO_ISSLOW | SFGAO_HASSUBFOLDER and others)
+            </summary>
+        </member>
+        <member name="T:Standard.SHCONTF">
+            <summary>
+            IShellFolder::EnumObjects grfFlags bits.  Also called SHCONT
+            </summary>
+        </member>
+        <member name="T:Standard.SHGDN">
+            <summary>
+            IShellFolder::GetDisplayNameOf/SetNameOf uFlags.  Also called SHGDNF.
+            </summary>
+            <remarks>
+            For compatibility with SIGDN, these bits must all sit in the LOW word.
+            </remarks>
+        </member>
+        <member name="T:Standard.SICHINT">
+            <summary>
+            SHELLITEMCOMPAREHINTF.  SICHINT_*.
+            </summary>
+        </member>
+        <member name="F:Standard.SICHINT.DISPLAY">
+            <summary>iOrder based on display in a folder view</summary>
+        </member>
+        <member name="F:Standard.SICHINT.ALLFIELDS">
+            <summary>exact instance compare</summary>
+        </member>
+        <member name="F:Standard.SICHINT.CANONICAL">
+            <summary>iOrder based on canonical name (better performance)</summary>
+        </member>
+        <member name="T:Standard.SIGDN">
+            <summary>
+            ShellItem enum.  SIGDN_*.
+            </summary>
+        </member>
+        <member name="T:Standard.STR_GPS">
+             <summary>
+             STR_GPS_*
+             </summary>
+             <remarks>
+             When requesting a property store through IShellFolder, you can specify the equivalent of
+             GPS_DEFAULT by passing in a null IBindCtx parameter.
+            
+             You can specify the equivalent of GPS_READWRITE by passing a mode of STGM_READWRITE | STGM_EXCLUSIVE
+             in the bind context
+            
+             Here are the string versions of GPS_ flags, passed to IShellFolder::BindToObject() via IBindCtx::RegisterObjectParam()
+             These flags are valid when requesting an IPropertySetStorage or IPropertyStore handler
+            
+             The meaning of these flags are described above.
+            
+             There is no STR_ equivalent for GPS_TEMPORARY because temporary property stores
+             are provided by IShellItem2 only -- not by the underlying IShellFolder.
+             </remarks>
+        </member>
+        <member name="F:Standard.THUMBBUTTON.THBN_CLICKED">
+            <summary>
+            WPARAM value for a THUMBBUTTON being clicked.
+            </summary>
+        </member>
+        <member name="F:Standard.PKEY._fmtid">
+            <summary>fmtid</summary>
+        </member>
+        <member name="F:Standard.PKEY._pid">
+            <summary>pid</summary>
+        </member>
+        <member name="F:Standard.PKEY.Title">
+            <summary>PKEY_Title</summary>
+        </member>
+        <member name="F:Standard.PKEY.AppUserModel_ID">
+            <summary>PKEY_AppUserModel_ID</summary>
+        </member>
+        <member name="F:Standard.PKEY.AppUserModel_IsDestListSeparator">
+            <summary>PKEY_AppUserModel_IsDestListSeparator</summary>
+        </member>
+        <member name="F:Standard.PKEY.AppUserModel_RelaunchCommand">
+            <summary>PKEY_AppUserModel_RelaunchCommand</summary>
+        </member>
+        <member name="F:Standard.PKEY.AppUserModel_RelaunchDisplayNameResource">
+            <summary>PKEY_AppUserModel_RelaunchDisplayNameResource</summary>
+        </member>
+        <member name="F:Standard.PKEY.AppUserModel_RelaunchIconResource">
+            <summary>PKEY_AppUserModel_RelaunchIconResource</summary>
+        </member>
+        <member name="T:Standard.IObjectArray">
+            <summary>Unknown Object Array</summary>
+        </member>
+        <member name="T:Standard.IShellItem">
+            <summary>
+            Shell Namespace helper
+            </summary>
+        </member>
+        <member name="T:Standard.IShellItem2">
+            <summary>
+            Shell Namespace helper 2
+            </summary>
+        </member>
+        <member name="M:Standard.ITaskbarList.HrInit">
+            <summary>
+            This function must be called first to validate use of other members.
+            </summary>
+        </member>
+        <member name="M:Standard.ITaskbarList.AddTab(System.IntPtr)">
+            <summary>
+            This function adds a tab for hwnd to the taskbar.
+            </summary>
+            <param name="hwnd">The HWND for which to add the tab.</param>
+        </member>
+        <member name="M:Standard.ITaskbarList.DeleteTab(System.IntPtr)">
+            <summary>
+            This function deletes a tab for hwnd from the taskbar.
+            </summary>
+            <param name="hwnd">The HWND for which the tab is to be deleted.</param>
+        </member>
+        <member name="M:Standard.ITaskbarList.ActivateTab(System.IntPtr)">
+            <summary>
+            This function activates the tab associated with hwnd on the taskbar.
+            </summary>
+            <param name="hwnd">The HWND for which the tab is to be actuvated.</param>
+        </member>
+        <member name="M:Standard.ITaskbarList.SetActiveAlt(System.IntPtr)">
+            <summary>
+            This function marks hwnd in the taskbar as the active tab.
+            </summary>
+            <param name="hwnd">The HWND to activate.</param>
+        </member>
+        <member name="M:Standard.ITaskbarList2.MarkFullscreenWindow(System.IntPtr,System.Boolean)">
+            <summary>
+            Marks a window as full-screen.
+            </summary>
+            <param name="hwnd">The handle of the window to be marked.</param>
+            <param name="fFullscreen">A Boolean value marking the desired full-screen status of the window.</param>
+            <remarks>
+            Setting the value of fFullscreen to true, the Shell treats this window as a full-screen window, and the taskbar
+            is moved to the bottom of the z-order when this window is active.  Setting the value of fFullscreen to false
+            removes the full-screen marking, but <i>does not</i> cause the Shell to treat the window as though it were
+            definitely not full-screen.  With a false fFullscreen value, the Shell depends on its automatic detection facility
+            to specify how the window should be treated, possibly still flagging the window as full-screen.
+            </remarks>
+        </member>
+        <member name="T:Standard.IApplicationDocumentLists">
+            <summary>
+            Allows an application to retrieve the most recent and frequent documents opened in that app, as reported via SHAddToRecentDocs
+            </summary>
+        </member>
+        <member name="M:Standard.IApplicationDocumentLists.SetAppID(System.String)">
+            <summary>
+            Set the App User Model ID for the application retrieving this list.  If an AppID is not provided via this method,
+            the system will use a heuristically determined ID.  This method must be called before GetList. 
+            </summary>
+            <param name="pszAppID">App Id.</param>
+        </member>
+        <member name="M:Standard.IApplicationDocumentLists.GetList(Standard.APPDOCLISTTYPE,System.UInt32,System.Guid@)">
+            <summary>
+            Retrieve an IEnumObjects or IObjectArray for IShellItems and/or IShellLinks. 
+            Items may appear in both the frequent and recent lists.  
+            </summary>
+            <param name="?"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Standard.IObjectWithAppUserModelId">
+            <summary>
+            Provides access to the App User Model ID on objects supporting this value.
+            </summary>
+        </member>
+        <member name="T:Standard.IObjectWithProgId">
+            <summary>
+            Provides access to the ProgID associated with an object 
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorControl.SidePropertyKey">
+            <summary>
+            Side Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorControl.SetSide(AvalonDock.Layout.AnchorSide)">
+            <summary>
+            Provides a secure method for setting the Side property.  
+            This dependency property indicates the anchor side of the control.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorControl.Side">
+            <summary>
+            Gets the Side property.  This dependency property 
+            indicates the anchor side of the control.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.NavigatorWindow.DocumentsPropertyKey">
+            <summary>
+            Documents Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.NavigatorWindow.SetDocuments(AvalonDock.Controls.LayoutDocumentItem[])">
+            <summary>
+            Provides a secure method for setting the Documents property.  
+            This dependency property indicates the list of documents.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="F:AvalonDock.Controls.NavigatorWindow.AnchorablesPropertyKey">
+            <summary>
+            Anchorables Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.NavigatorWindow.SetAnchorables(System.Collections.Generic.IEnumerable{AvalonDock.Controls.LayoutAnchorableItem})">
+            <summary>
+            Provides a secure method for setting the Anchorables property.  
+            This dependency property indicates the list of anchorables.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="F:AvalonDock.Controls.NavigatorWindow.SelectedDocumentProperty">
+            <summary>
+            SelectedDocument Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.NavigatorWindow.OnSelectedDocumentChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the SelectedDocument property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.NavigatorWindow.OnSelectedDocumentChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the SelectedDocument property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.NavigatorWindow.SelectedAnchorableProperty">
+            <summary>
+            SelectedAnchorable Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.NavigatorWindow.OnSelectedAnchorableChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the SelectedAnchorable property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.NavigatorWindow.OnSelectedAnchorableChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the SelectedAnchorable property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.NavigatorWindow.Documents">
+            <summary>
+            Gets the Documents property.  This dependency property 
+            indicates the list of documents.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.NavigatorWindow.Anchorables">
+            <summary>
+            Gets the Anchorables property.  This dependency property 
+            indicates the list of anchorables.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.NavigatorWindow.SelectedDocument">
+            <summary>
+            Gets or sets the SelectedDocument property.  This dependency property 
+            indicates the selected document.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.NavigatorWindow.SelectedAnchorable">
+            <summary>
+            Gets or sets the SelectedAnchorable property.  This dependency property 
+            indicates the selected anchorable.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Converters.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> 
+            Converts a value. 
+            </summary> 
+            <param name="value">The value produced by the binding source.</param> 
+            <param name="targetType">The type of the binding target property.</param> 
+            <param name="parameter">The converter parameter to use.</param> 
+            <param name="culture">The culture to use in the converter.</param> 
+            <returns> 
+            A converted value. If the method returns null, the valid null value is used. 
+            </returns> 
+        </member>
+        <member name="M:AvalonDock.Converters.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> 
+            Converts a value. 
+            </summary> 
+            <param name="value">The value that is produced by the binding target.</param> 
+            <param name="targetType">The type to convert to.</param> 
+            <param name="parameter">The converter parameter to use.</param> 
+            <param name="culture">The culture to use in the converter.</param> 
+            <returns> 
+            A converted value. If the method returns null, the valid null value is used. 
+            </returns> 
+        </member>
+        <member name="F:AvalonDock.Controls.DropDownControlArea.DropDownContextMenuProperty">
+            <summary>
+            DropDownContextMenu Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.DropDownControlArea.DropDownContextMenuDataContextProperty">
+            <summary>
+            DropDownContextMenuDataContext Dependency Property
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.DropDownControlArea.DropDownContextMenu">
+            <summary>
+            Gets or sets the DropDownContextMenu property.  This dependency property 
+            indicates context menu to show when a right click is detected over the area occpied by the control.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.DropDownControlArea.DropDownContextMenuDataContext">
+            <summary>
+            Gets or sets the DropDownContextMenuDataContext property.  This dependency property 
+            indicates data context to attach when context menu is shown.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableTabItem.ModelProperty">
+            <summary>
+            Model Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableTabItem.OnModelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Model property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableTabItem.OnModelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Model property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableTabItem.LayoutItemPropertyKey">
+            <summary>
+            LayoutItem Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableTabItem.SetLayoutItem(AvalonDock.Controls.LayoutItem)">
+            <summary>
+            Provides a secure method for setting the LayoutItem property.  
+            This dependency property indicates the LayoutItem attached to this tag item.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableTabItem.Model">
+            <summary>
+            Gets or sets the Model property.  This dependency property 
+            indicates model attached to the anchorable tab item.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableTabItem.LayoutItem">
+            <summary>
+            Gets the LayoutItem property.  This dependency property 
+            indicates the LayoutItem attached to this tag item.
+            </summary>
+        </member>
+        <member name="T:Standard.DoubleUtilities">
+            <summary>
+            DoubleUtil uses fixed eps to provide fuzzy comparison functionality for doubles.
+            Note that FP noise is a big problem and using any of these compare 
+            methods is not a complete solution, but rather the way to reduce 
+            the probability of repeating unnecessary work.
+            </summary>
+        </member>
+        <member name="F:Standard.DoubleUtilities.Epsilon">
+            <summary>
+            Epsilon - more or less random, more or less small number.
+            </summary>
+        </member>
+        <member name="M:Standard.DoubleUtilities.AreClose(System.Double,System.Double)">
+            <summary>
+            AreClose returns whether or not two doubles are "close".  That is, whether or 
+            not they are within epsilon of each other.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false. 
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the AreClose comparision.</returns>
+        </member>
+        <member name="M:Standard.DoubleUtilities.LessThan(System.Double,System.Double)">
+            <summary>
+            LessThan returns whether or not the first double is less than the second double.
+            That is, whether or not the first is strictly less than *and* not within epsilon of
+            the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the LessThan comparision.</returns>
+        </member>
+        <member name="M:Standard.DoubleUtilities.GreaterThan(System.Double,System.Double)">
+            <summary>
+            GreaterThan returns whether or not the first double is greater than the second double.
+            That is, whether or not the first is strictly greater than *and* not within epsilon of
+            the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the GreaterThan comparision.</returns>
+        </member>
+        <member name="M:Standard.DoubleUtilities.LessThanOrClose(System.Double,System.Double)">
+            <summary>
+            LessThanOrClose returns whether or not the first double is less than or close to
+            the second double.  That is, whether or not the first is strictly less than or within
+            epsilon of the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the LessThanOrClose comparision.</returns>
+        </member>
+        <member name="M:Standard.DoubleUtilities.GreaterThanOrClose(System.Double,System.Double)">
+            <summary>
+            GreaterThanOrClose returns whether or not the first double is greater than or close to
+            the second double.  That is, whether or not the first is strictly greater than or within
+            epsilon of the other number.
+            There are plenty of ways for this to return false even for numbers which
+            are theoretically identical, so no code calling this should fail to work if this 
+            returns false.
+            </summary>
+            <param name="value1">The first double to compare.</param>
+            <param name="value2">The second double to compare.</param>
+            <returns>The result of the GreaterThanOrClose comparision.</returns>
+        </member>
+        <member name="M:Standard.DoubleUtilities.IsFinite(System.Double)">
+            <summary>
+            Test to see if a double is a finite number (is not NaN or Infinity).
+            </summary>
+            <param name='value'>The value to test.</param>
+            <returns>Whether or not the value is a finite number.</returns>
+        </member>
+        <member name="M:Standard.DoubleUtilities.IsValidSize(System.Double)">
+            <summary>
+            Test to see if a double a valid size value (is finite and > 0).
+            </summary>
+            <param name='value'>The value to test.</param>
+            <returns>Whether or not the value is a valid size value.</returns>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableItem.HideCommandProperty">
+            <summary>
+            HideCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnHideCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the HideCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnHideCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the HideCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.CoerceHideCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the HideCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableItem.AutoHideCommandProperty">
+            <summary>
+            AutoHideCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnAutoHideCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AutoHideCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnAutoHideCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AutoHideCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.CoerceAutoHideCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the AutoHideCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableItem.DockCommandProperty">
+            <summary>
+            DockCommand Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnDockCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DockCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnDockCommandChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DockCommand property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.CoerceDockCommandValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DockCommand value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutAnchorableItem.CanHideProperty">
+            <summary>
+            CanHide Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnCanHideChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the CanHide property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutAnchorableItem.OnCanHideChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the CanHide property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableItem.HideCommand">
+            <summary>
+            Gets or sets the HideCommand property.  This dependency property 
+            indicates the command to execute when an anchorable is hidden.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableItem.AutoHideCommand">
+            <summary>
+            Gets or sets the AutoHideCommand property.  This dependency property 
+            indicates the command to execute when user click the auto hide button.
+            </summary>
+            <remarks>By default this command toggles auto hide state for an anchorable.</remarks>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableItem.DockCommand">
+            <summary>
+            Gets or sets the DockCommand property.  This dependency property 
+            indicates the command to execute when user click the Dock button.
+            </summary>
+            <remarks>By default this command moves the anchorable inside the container pane which previously hosted the object.</remarks>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutAnchorableItem.CanHide">
+            <summary>
+            Gets or sets the CanHide property.  This dependency property 
+            indicates if user can hide the anchorable item.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.DropDownButton.DropDownContextMenuProperty">
+            <summary>
+            DropDownContextMenu Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.DropDownButton.OnDropDownContextMenuChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DropDownContextMenu property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.DropDownButton.OnDropDownContextMenuChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DropDownContextMenu property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.DropDownButton.DropDownContextMenuDataContextProperty">
+            <summary>
+            DropDownContextMenuDataContext Dependency Property
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.DropDownButton.DropDownContextMenu">
+            <summary>
+            Gets or sets the DropDownContextMenu property.  This dependency property 
+            indicates drop down menu to show up when user click on an anchorable menu pin.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.DropDownButton.DropDownContextMenuDataContext">
+            <summary>
+            Gets or sets the DropDownContextMenuDataContext property.  This dependency property 
+            indicates data context to set for drop down context menu.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LayoutProperty">
+            <summary>
+            Layout Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Layout property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutChanged(AvalonDock.Layout.LayoutRoot,AvalonDock.Layout.LayoutRoot)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the <see cref="P:AvalonDock.DockingManager.Layout"/> property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceLayoutValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the <see cref="P:AvalonDock.DockingManager.Layout"/> value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentPaneTemplateProperty">
+            <summary>
+            DocumentPaneTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentPaneTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentPaneTemplate property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorablePaneTemplateProperty">
+            <summary>
+            AnchorablePaneTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorablePaneTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorablePaneDataTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorablePaneTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorablePaneDataTemplate property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorSideTemplateProperty">
+            <summary>
+            AnchorSideTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorGroupTemplateProperty">
+            <summary>
+            AnchorGroupTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorTemplateProperty">
+            <summary>
+            AnchorTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentPaneControlStyleProperty">
+            <summary>
+            DocumentPaneControlStyle Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneControlStyleChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentPaneControlStyle property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneControlStyleChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentPaneControlStyle property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorablePaneControlStyleProperty">
+            <summary>
+            AnchorablePaneControlStyle Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorablePaneControlStyleChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorablePaneControlStyle property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorablePaneControlStyleChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorablePaneControlStyle property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentHeaderTemplateProperty">
+            <summary>
+            DocumentHeaderTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentHeaderTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentHeaderTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentHeaderTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentHeaderTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceDocumentHeaderTemplateValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DocumentHeaderTemplate value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentHeaderTemplateSelectorProperty">
+            <summary>
+            DocumentHeaderTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentHeaderTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentHeaderTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentHeaderTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentHeaderTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceDocumentHeaderTemplateSelectorValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DocumentHeaderTemplateSelector value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentTitleTemplateProperty">
+            <summary>
+            DocumentTitleTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentTitleTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentTitleTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentTitleTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentTitleTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceDocumentTitleTemplateValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DocumentTitleTemplate value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentTitleTemplateSelectorProperty">
+            <summary>
+            DocumentTitleTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentTitleTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentTitleTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentTitleTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentTitleTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceDocumentTitleTemplateSelectorValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DocumentTitleTemplateSelector value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorableTitleTemplateProperty">
+            <summary>
+            AnchorableTitleTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableTitleTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorableTitleTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableTitleTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorableTitleTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceAnchorableTitleTemplateValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the AnchorableTitleTemplate value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorableTitleTemplateSelectorProperty">
+            <summary>
+            AnchorableTitleTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableTitleTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorableTitleTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableTitleTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorableTitleTemplateSelector property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorableHeaderTemplateProperty">
+            <summary>
+            AnchorableHeaderTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableHeaderTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorableHeaderTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableHeaderTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorableHeaderTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceAnchorableHeaderTemplateValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the AnchorableHeaderTemplate value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorableHeaderTemplateSelectorProperty">
+            <summary>
+            AnchorableHeaderTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableHeaderTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorableHeaderTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorableHeaderTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorableHeaderTemplateSelector property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LayoutRootPanelProperty">
+            <summary>
+            LayoutRootPanel Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutRootPanelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the LayoutRootPanel property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutRootPanelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the LayoutRootPanel property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.RightSidePanelProperty">
+            <summary>
+            RightSidePanel Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnRightSidePanelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the RightSidePanel property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnRightSidePanelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the RightSidePanel property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LeftSidePanelProperty">
+            <summary>
+            LeftSidePanel Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLeftSidePanelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the LeftSidePanel property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLeftSidePanelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the LeftSidePanel property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.TopSidePanelProperty">
+            <summary>
+            TopSidePanel Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnTopSidePanelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the TopSidePanel property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnTopSidePanelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the TopSidePanel property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.BottomSidePanelProperty">
+            <summary>
+            BottomSidePanel Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnBottomSidePanelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the BottomSidePanel property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnBottomSidePanelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the BottomSidePanel property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AutoHideWindowPropertyKey">
+            <summary>
+            AutoHideWindow Read-Only Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.SetAutoHideWindow(AvalonDock.Controls.LayoutAutoHideWindowControl)">
+            <summary>
+            Provides a secure method for setting the AutoHideWindow property.  
+            This dependency property indicates the currently shown autohide window.
+            </summary>
+            <param name="value">The new value for the property.</param>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAutoHideWindowChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AutoHideWindow property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAutoHideWindowChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AutoHideWindow property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LayoutItemTemplateProperty">
+            <summary>
+            LayoutItemTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorableTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorableTemplate property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LayoutItemTemplateSelectorProperty">
+            <summary>
+            LayoutItemTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the LayoutItemTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the LayoutItemTemplateSelector property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentsSourceProperty">
+            <summary>
+            DocumentsSource Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentsSourceChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentsSource property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentsSourceChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentsSource property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentContextMenuProperty">
+            <summary>
+            DocumentContextMenu Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorablesSourceProperty">
+            <summary>
+            AnchorablesSource Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorablesSourceChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the AnchorablesSource property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnAnchorablesSourceChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the AnchorablesSource property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.ActiveContentProperty">
+            <summary>
+            ActiveContent Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnActiveContentChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the ActiveContent property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnActiveContentChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the ActiveContent property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.AnchorableContextMenuProperty">
+            <summary>
+            AnchorableContextMenu Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.ThemeProperty">
+            <summary>
+            Theme Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnThemeChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Theme property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnThemeChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Theme property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.GridSplitterWidthProperty">
+            <summary>
+            GridSplitterWidth Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.GridSplitterHeightProperty">
+            <summary>
+            GridSplitterHeight Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentPaneMenuItemHeaderTemplateProperty">
+            <summary>
+            DocumentPaneMenuItemHeaderTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneMenuItemHeaderTemplateChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentPaneMenuItemHeaderTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneMenuItemHeaderTemplateChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentPaneMenuItemHeaderTemplate property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceDocumentPaneMenuItemHeaderTemplateValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DocumentPaneMenuItemHeaderTemplate value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.DocumentPaneMenuItemHeaderTemplateSelectorProperty">
+            <summary>
+            DocumentPaneMenuItemHeaderTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneMenuItemHeaderTemplateSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the DocumentPaneMenuItemHeaderTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnDocumentPaneMenuItemHeaderTemplateSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the DocumentPaneMenuItemHeaderTemplateSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.CoerceDocumentPaneMenuItemHeaderTemplateSelectorValue(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Coerces the DocumentPaneMenuItemHeaderTemplateSelector value.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.IconContentTemplateProperty">
+            <summary>
+            IconContentTemplate Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.IconContentTemplateSelectorProperty">
+            <summary>
+            IconContentTemplateSelector Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LayoutItemContainerStyleProperty">
+            <summary>
+            LayoutItemContainerStyle Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemContainerStyleChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the LayoutItemContainerStyle property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemContainerStyleChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the LayoutItemContainerStyle property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.LayoutItemContainerStyleSelectorProperty">
+            <summary>
+            LayoutItemContainerStyleSelector Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemContainerStyleSelectorChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the LayoutItemContainerStyleSelector property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.DockingManager.OnLayoutItemContainerStyleSelectorChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the LayoutItemContainerStyleSelector property.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.DockingManager.ShowSystemMenuProperty">
+            <summary>
+            ShowSystemMenu Dependency Property
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.Layout">
+            <summary>
+            Gets or sets the Layout property.  This dependency property 
+            indicates layout tree.
+            </summary>
+        </member>
+        <member name="E:AvalonDock.DockingManager.LayoutChanged">
+            <summary>
+            Event fired when <see cref="P:AvalonDock.DockingManager.Layout"/> property changes
+            </summary>
+        </member>
+        <member name="E:AvalonDock.DockingManager.LayoutChanging">
+            <summary>
+            Event fired when <see cref="P:AvalonDock.DockingManager.Layout"/> property is about to be changed
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LayoutUpdateStrategy">
+            <summary>
+            Get or set the strategy object to use when insert an anchorable 
+            in layout
+            </summary>
+            <remarks>Sometimes it's impossible to automatically insert an anchorable in the layout without specifing the target parent pane.
+            Set this property to an object that will be asked to insert the anchorable to the desidered position.</remarks>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentPaneTemplate">
+            <summary>
+            Gets or sets the DocumentPaneDataTemplate property.  This dependency property 
+            indicates .
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorablePaneTemplate">
+            <summary>
+            Gets or sets the AnchorablePaneTemplate property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorSideTemplate">
+            <summary>
+            Gets or sets the AnchorSideTemplate property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorGroupTemplate">
+            <summary>
+            Gets or sets the AnchorGroupTemplate property.  This dependency property 
+            indicates the template used to render the AnchorGroup control.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorTemplate">
+            <summary>
+            Gets or sets the AnchorTemplate property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentPaneControlStyle">
+            <summary>
+            Gets or sets the DocumentPaneControlStyle property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorablePaneControlStyle">
+            <summary>
+            Gets or sets the AnchorablePaneControlStyle property.  This dependency property 
+            indicates the style to apply to AnchorablePaneControl.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentHeaderTemplate">
+            <summary>
+            Gets or sets the DocumentHeaderTemplate property.  This dependency property 
+            indicates data template to use for document header.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentHeaderTemplateSelector">
+            <summary>
+            Gets or sets the DocumentHeaderTemplateSelector property.  This dependency property 
+            indicates the template selector that is used when selcting the data template for the header.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentTitleTemplate">
+            <summary>
+            Gets or sets the DocumentTitleTemplate property.  This dependency property 
+            indicates the datatemplate to use when creating the title for a document.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentTitleTemplateSelector">
+            <summary>
+            Gets or sets the DocumentTitleTemplateSelector property.  This dependency property 
+            indicates the data template selector to use when creating the data template for the title.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorableTitleTemplate">
+            <summary>
+            Gets or sets the AnchorableTitleTemplate property.  This dependency property 
+            indicates the data template to use for anchorables title.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorableTitleTemplateSelector">
+            <summary>
+            Gets or sets the AnchorableTitleTemplateSelector property.  This dependency property 
+            indicates selctor to use when selecting data template for the title of anchorables.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorableHeaderTemplate">
+            <summary>
+            Gets or sets the AnchorableHeaderTemplate property.  This dependency property 
+            indicates the data template to use for anchorable templates.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorableHeaderTemplateSelector">
+            <summary>
+            Gets or sets the AnchorableHeaderTemplateSelector property.  This dependency property 
+            indicates the selector to use when selecting the data template for anchorable headers.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LayoutRootPanel">
+            <summary>
+            Gets or sets the LayoutRootPanel property.  This dependency property 
+            indicates the layout panel control which is attached to the Layout.Root property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.RightSidePanel">
+            <summary>
+            Gets or sets the RightSidePanel property.  This dependency property 
+            indicates right side anchor panel.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LeftSidePanel">
+            <summary>
+            Gets or sets the LeftSidePanel property.  This dependency property 
+            indicates the left side panel control.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.TopSidePanel">
+            <summary>
+            Gets or sets the TopSidePanel property.  This dependency property 
+            indicates top side control panel.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.BottomSidePanel">
+            <summary>
+            Gets or sets the BottomSidePanel property.  This dependency property 
+            indicates bottom side panel control.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AutoHideWindow">
+            <summary>
+            Gets the AutoHideWindow property.  This dependency property 
+            indicates the currently shown autohide window.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LayoutItemTemplate">
+            <summary>
+            Gets or sets the AnchorableTemplate property.  This dependency property 
+            indicates the template to use to render anchorable and document contents.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LayoutItemTemplateSelector">
+            <summary>
+            Gets or sets the LayoutItemTemplateSelector property.  This dependency property 
+            indicates selector object to use for anchorable templates.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentsSource">
+            <summary>
+            Gets or sets the DocumentsSource property.  This dependency property 
+            indicates the source collection of documents.
+            </summary>
+        </member>
+        <member name="E:AvalonDock.DockingManager.DocumentClosing">
+            <summary>
+            Event fired when a document is about to be closed
+            </summary>
+            <remarks>Subscribers have the opportuniy to cancel the operation.</remarks>
+        </member>
+        <member name="E:AvalonDock.DockingManager.DocumentClosed">
+            <summary>
+            Event fired after a document is closed
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentContextMenu">
+            <summary>
+            Gets or sets the DocumentContextMenu property.  This dependency property 
+            indicates context menu to show for documents.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorablesSource">
+            <summary>
+            Gets or sets the AnchorablesSource property.  This dependency property 
+            indicates source collection of anchorables.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.ActiveContent">
+            <summary>
+            Gets or sets the ActiveContent property.  This dependency property 
+            indicates the content currently active.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.AnchorableContextMenu">
+            <summary>
+            Gets or sets the AnchorableContextMenu property.  This dependency property 
+            indicates the context menu to show up for anchorables.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.Theme">
+            <summary>
+            Gets or sets the Theme property.  This dependency property 
+            indicates the theme to use for AvalonDock controls.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.GridSplitterWidth">
+            <summary>
+            Gets or sets the GridSplitterWidth property.  This dependency property 
+            indicates width of grid splitters.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.GridSplitterHeight">
+            <summary>
+            Gets or sets the GridSplitterHeight property.  This dependency property 
+            indicates height of grid splitters.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentPaneMenuItemHeaderTemplate">
+            <summary>
+            Gets or sets the DocumentPaneMenuItemHeaderTemplate property.  This dependency property 
+            indicates the header template to use while creating menu items for the document panes.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.DocumentPaneMenuItemHeaderTemplateSelector">
+            <summary>
+            Gets or sets the DocumentPaneMenuItemHeaderTemplateSelector property.  This dependency property 
+            indicates the data template selector to use for the menu items show when user select the DocumentPane document switch context menu.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.IconContentTemplate">
+            <summary>
+            Gets or sets the IconContentTemplate property.  This dependency property 
+            indicates the data template to use while extracting the icon from model.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.IconContentTemplateSelector">
+            <summary>
+            Gets or sets the IconContentTemplateSelector property.  This dependency property 
+            indicates data template selector to use while selecting the datatamplate for content icons.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LayoutItemContainerStyle">
+            <summary>
+            Gets or sets the LayoutItemContainerStyle property.  This dependency property 
+            indicates the style to apply to LayoutDocumentItem objects. A LayoutDocumentItem object is created when a new LayoutDocument is created inside the current Layout.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.LayoutItemContainerStyleSelector">
+            <summary>
+            Gets or sets the LayoutItemContainerStyleSelector property.  This dependency property 
+            indicates style selector of the LayoutDocumentItemStyle.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.DockingManager.ShowSystemMenu">
+            <summary>
+            Gets or sets the ShowSystemMenu property.  This dependency property 
+            indicates if floating windows should show the system menu when a custom context menu is not defined.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutDocumentControl.ModelProperty">
+            <summary>
+            Model Dependency Property
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentControl.OnModelChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Model property.
+            </summary>
+        </member>
+        <member name="M:AvalonDock.Controls.LayoutDocumentControl.OnModelChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Provides derived classes an opportunity to handle changes to the Model property.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutDocumentControl.Model">
+            <summary>
+            Gets or sets the Model property.  This dependency property 
+            indicates the model attached to this view.
+            </summary>
+        </member>
+        <member name="T:Standard.Win32Error">
+            <summary>
+            Wrapper for common Win32 status codes.
+            </summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_SUCCESS">
+            <summary>The operation completed successfully.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_INVALID_FUNCTION">
+            <summary>Incorrect function.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_FILE_NOT_FOUND">
+            <summary>The system cannot find the file specified.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_PATH_NOT_FOUND">
+            <summary>The system cannot find the path specified.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_TOO_MANY_OPEN_FILES">
+            <summary>The system cannot open the file.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_ACCESS_DENIED">
+            <summary>Access is denied.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_INVALID_HANDLE">
+            <summary>The handle is invalid.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_OUTOFMEMORY">
+            <summary>Not enough storage is available to complete this operation.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_NO_MORE_FILES">
+            <summary>There are no more files.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_SHARING_VIOLATION">
+            <summary>The process cannot access the file because it is being used by another process.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_INVALID_PARAMETER">
+            <summary>The parameter is incorrect.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_INSUFFICIENT_BUFFER">
+            <summary>The data area passed to a system call is too small.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_NESTING_NOT_ALLOWED">
+            <summary>Cannot nest calls to LoadModule.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_KEY_DELETED">
+            <summary>Illegal operation attempted on a registry key that has been marked for deletion.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_NOT_FOUND">
+            <summary>Element not found.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_NO_MATCH">
+            <summary>There was no match for the specified key in the index.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_BAD_DEVICE">
+            <summary>An invalid device was specified.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_CANCELLED">
+            <summary>The operation was canceled by the user.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_CLASS_ALREADY_EXISTS">
+            <summary>The window class was already registered.</summary>
+        </member>
+        <member name="F:Standard.Win32Error.ERROR_INVALID_DATATYPE">
+            <summary>The specified datatype is invalid.</summary>
+        </member>
+        <member name="M:Standard.Win32Error.#ctor(System.Int32)">
+            <summary>
+            Create a new Win32 error.
+            </summary>
+            <param name="i">The integer value of the error.</param>
+        </member>
+        <member name="M:Standard.Win32Error.op_Explicit(Standard.Win32Error)~Standard.HRESULT">
+            <summary>Performs HRESULT_FROM_WIN32 conversion.</summary>
+            <param name="error">The Win32 error being converted to an HRESULT.</param>
+            <returns>The equivilent HRESULT value.</returns>
+        </member>
+        <member name="M:Standard.Win32Error.ToHRESULT">
+            <summary>Performs HRESULT_FROM_WIN32 conversion.</summary>
+            <param name="error">The Win32 error being converted to an HRESULT.</param>
+            <returns>The equivilent HRESULT value.</returns>
+        </member>
+        <member name="M:Standard.Win32Error.GetLastError">
+            <summary>Performs the equivalent of Win32's GetLastError()</summary>
+            <returns>A Win32Error instance with the result of the native GetLastError</returns>
+        </member>
+        <member name="M:Standard.Win32Error.op_Equality(Standard.Win32Error,Standard.Win32Error)">
+            <summary>
+            Compare two Win32 error codes for equality.
+            </summary>
+            <param name="errLeft">The first error code to compare.</param>
+            <param name="errRight">The second error code to compare.</param>
+            <returns>Whether the two error codes are the same.</returns>
+        </member>
+        <member name="M:Standard.Win32Error.op_Inequality(Standard.Win32Error,Standard.Win32Error)">
+            <summary>
+            Compare two Win32 error codes for inequality.
+            </summary>
+            <param name="errLeft">The first error code to compare.</param>
+            <param name="errRight">The second error code to compare.</param>
+            <returns>Whether the two error codes are not the same.</returns>
+        </member>
+        <member name="F:Standard.Facility.Null">
+            <summary>FACILITY_NULL</summary>
+        </member>
+        <member name="F:Standard.Facility.Rpc">
+            <summary>FACILITY_RPC</summary>
+        </member>
+        <member name="F:Standard.Facility.Dispatch">
+            <summary>FACILITY_DISPATCH</summary>
+        </member>
+        <member name="F:Standard.Facility.Storage">
+            <summary>FACILITY_STORAGE</summary>
+        </member>
+        <member name="F:Standard.Facility.Itf">
+            <summary>FACILITY_ITF</summary>
+        </member>
+        <member name="F:Standard.Facility.Win32">
+            <summary>FACILITY_WIN32</summary>
+        </member>
+        <member name="F:Standard.Facility.Windows">
+            <summary>FACILITY_WINDOWS</summary>
+        </member>
+        <member name="F:Standard.Facility.Control">
+            <summary>FACILITY_CONTROL</summary>
+        </member>
+        <member name="F:Standard.Facility.Ese">
+            <summary>MSDN doced facility code for ESE errors.</summary>
+        </member>
+        <member name="F:Standard.Facility.WinCodec">
+            <summary>FACILITY_WINCODEC (WIC)</summary>
+        </member>
+        <member name="T:Standard.HRESULT">
+            <summary>Wrapper for HRESULT status codes.</summary>
+        </member>
+        <member name="F:Standard.HRESULT.S_OK">
+            <summary>S_OK</summary>
+        </member>
+        <member name="F:Standard.HRESULT.S_FALSE">
+            <summary>S_FALSE</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_PENDING">
+            <summary>E_PENDING</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_NOTIMPL">
+            <summary>E_NOTIMPL</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_NOINTERFACE">
+            <summary>E_NOINTERFACE</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_POINTER">
+            <summary>E_POINTER</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_ABORT">
+            <summary>E_ABORT</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_FAIL">
+            <summary>E_FAIL</summary>
+        </member>
+        <member name="F:Standard.HRESULT.E_UNEXPECTED">
+            <summary>E_UNEXPECTED</summary>
+        </member>
+        <member name="F:Standard.HRESULT.STG_E_INVALIDFUNCTION">
+            <summary>STG_E_INVALIDFUNCTION</summary>
+        </member>
+        <member name="F:Standard.HRESULT.REGDB_E_CLASSNOTREG">
+            <summary>REGDB_E_CLASSNOTREG</summary>
+        </member>
+        <member name="F:Standard.HRESULT.DESTS_E_NO_MATCHING_ASSOC_HANDLER">
+            <summary>DESTS_E_NO_MATCHING_ASSOC_HANDLER.  Win7 internal error code for Jump Lists.</summary>
+            <remarks>There is no Assoc Handler for the given item registered by the specified application.</remarks>
+        </member>
+        <member name="F:Standard.HRESULT.DESTS_E_NORECDOCS">
+            <summary>DESTS_E_NORECDOCS.  Win7 internal error code for Jump Lists.</summary>
+            <remarks>The given item is excluded from the recent docs folder by the NoRecDocs bit on its registration.</remarks>
+        </member>
+        <member name="F:Standard.HRESULT.DESTS_E_NOTALLCLEARED">
+            <summary>DESTS_E_NOTALLCLEARED.  Win7 internal error code for Jump Lists.</summary>
+            <remarks>Not all of the items were successfully cleared</remarks>
+        </member>
+        <member name="F:Standard.HRESULT.E_ACCESSDENIED">
+            <summary>E_ACCESSDENIED</summary>
+            <remarks>Win32Error ERROR_ACCESS_DENIED.</remarks>
+        </member>
+        <member name="F:Standard.HRESULT.E_OUTOFMEMORY">
+            <summary>E_OUTOFMEMORY</summary>
+            <remarks>Win32Error ERROR_OUTOFMEMORY.</remarks>
+        </member>
+        <member name="F:Standard.HRESULT.E_INVALIDARG">
+            <summary>E_INVALIDARG</summary>
+            <remarks>Win32Error ERROR_INVALID_PARAMETER.</remarks>
+        </member>
+        <member name="F:Standard.HRESULT.INTSAFE_E_ARITHMETIC_OVERFLOW">
+            <summary>INTSAFE_E_ARITHMETIC_OVERFLOW</summary>
+        </member>
+        <member name="F:Standard.HRESULT.COR_E_OBJECTDISPOSED">
+            <summary>COR_E_OBJECTDISPOSED</summary>
+        </member>
+        <member name="F:Standard.HRESULT.WC_E_GREATERTHAN">
+            <summary>WC_E_GREATERTHAN</summary>
+        </member>
+        <member name="F:Standard.HRESULT.WC_E_SYNTAX">
+            <summary>WC_E_SYNTAX</summary>
+        </member>
+        <member name="M:Standard.HRESULT.#ctor(System.UInt32)">
+            <summary>
+            Create an HRESULT from an integer value.
+            </summary>
+            <param name="i"></param>
+        </member>
+        <member name="M:Standard.HRESULT.ToString">
+            <summary>
+            Get a string representation of this HRESULT.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Standard.HRESULT.ThrowLastError">
+            <summary>
+            Convert the result of Win32 GetLastError() into a raised exception.
+            </summary>
+        </member>
+        <member name="P:Standard.HRESULT.Facility">
+            <summary>
+            retrieve HRESULT_FACILITY
+            </summary>
+        </member>
+        <member name="P:Standard.HRESULT.Code">
+            <summary>
+            retrieve HRESULT_CODE
+            </summary>
+        </member>
+        <member name="T:AvalonDock.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutGridResizerControl.BackgroundWhileDraggingProperty">
+            <summary>
+            BackgroundWhileDragging Dependency Property
+            </summary>
+        </member>
+        <member name="F:AvalonDock.Controls.LayoutGridResizerControl.OpacityWhileDraggingProperty">
+            <summary>
+            OpacityWhileDragging Dependency Property
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutGridResizerControl.BackgroundWhileDragging">
+            <summary>
+            Gets or sets the BackgroundWhileDragging property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="P:AvalonDock.Controls.LayoutGridResizerControl.OpacityWhileDragging">
+            <summary>
+            Gets or sets the OpacityWhileDragging property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:Standard.Utility.RGB(System.Windows.Media.Color)">
+            <summary>The native RGB macro.</summary>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Standard.Utility.ColorFromArgbDword(System.UInt32)">
+            <summary>Convert a native integer that represent a color with an alpha channel into a Color struct.</summary>
+            <param name="color">The integer that represents the color.  Its bits are of the format 0xAARRGGBB.</param>
+            <returns>A Color representation of the parameter.</returns>
+        </member>
+        <member name="M:Standard.Utility._GetBestMatch(System.Collections.Generic.IList{System.Windows.Media.Imaging.BitmapFrame},System.Int32,System.Int32,System.Int32)">
+            From a list of BitmapFrames find the one that best matches the requested dimensions.
+            The methods used here are copied from Win32 sources.  We want to be consistent with
+            system behaviors.
+        </member>
+        <member name="M:Standard.Utility.SafeDeleteFile(System.String)">
+            <summary>
+            Simple guard against the exceptions that File.Delete throws on null and empty strings.
+            </summary>
+            <param name="path">The path to delete.  Unlike File.Delete, this can be null or empty.</param>
+            <remarks>
+            Note that File.Delete, and by extension SafeDeleteFile, does not throw an exception
+            if the file does not exist.
+            </remarks>
+        </member>
+        <member name="M:Standard.Utility.SafeDeleteObject(System.IntPtr@)">
+            <summary>GDI's DeleteObject</summary>
+        </member>
+        <member name="M:Standard.Utility.SafeDisposeImage(System.IntPtr@)">
+            <summary>GDI+'s DisposeImage</summary>
+            <param name="gdipImage"></param>
+        </member>
+        <member name="M:Standard.Utility.GeneratePropertyString(System.Text.StringBuilder,System.String,System.String)">
+            <summary>
+            Utility to help classes catenate their properties for implementing ToString().
+            </summary>
+            <param name="source">The StringBuilder to catenate the results into.</param>
+            <param name="propertyName">The name of the property to be catenated.</param>
+            <param name="value">The value of the property to be catenated.</param>
+        </member>
+        <member name="M:Standard.Utility.GenerateToString``1(``0)">
+            <summary>
+            Generates ToString functionality for a struct.  This is an expensive way to do it,
+            it exists for the sake of debugging while classes are in flux.
+            Eventually this should just be removed and the classes should
+            do this without reflection.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="object"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Standard.Utility.UrlEncode(System.String)">
+            <summary>
+            Encodes a URL string.  Duplicated functionality from System.Web.HttpUtility.UrlEncode.
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+            <remarks>
+            Duplicated from System.Web.HttpUtility because System.Web isn't part of the client profile.
+            URL Encoding replaces ' ' with '+' and unsafe ASCII characters with '%XX'.
+            Safe characters are defined in RFC2396 (http://www.ietf.org/rfc/rfc2396.txt).
+            They are the 7-bit ASCII alphanumerics and the mark characters "-_.!~*'()".
+            This implementation does not treat '~' as a safe character to be consistent with the System.Web version.
+            </remarks>
+        </member>
+        <member name="P:Standard.Utility.IsPresentationFrameworkVersionLessThan4">
+            <summary>
+            Is this using WPF4?
+            </summary>
+            <remarks>
+            There are a few specific bugs in Window in 3.5SP1 and below that require workarounds
+            when handling WM_NCCALCSIZE on the HWND.
+            </remarks>
+        </member>
+        <member name="F:Standard.IID.EnumIdList">
+            <summary>IID_IEnumIDList</summary>
+        </member>
+        <member name="F:Standard.IID.EnumObjects">
+            <summary>IID_IEnumObjects</summary>
+        </member>
+        <member name="F:Standard.IID.HtmlDocument2">
+            <summary>IID_IHTMLDocument2</summary>
+        </member>
+        <member name="F:Standard.IID.ModalWindow">
+            <summary>IID_IModalWindow</summary>
+        </member>
+        <member name="F:Standard.IID.ObjectArray">
+            <summary>IID_IObjectArray</summary>
+        </member>
+        <member name="F:Standard.IID.ObjectCollection">
+            <summary>IID_IObjectCollection</summary>
+        </member>
+        <member name="F:Standard.IID.PropertyNotifySink">
+            <summary>IID_IPropertyNotifySink</summary>
+        </member>
+        <member name="F:Standard.IID.PropertyStore">
+            <summary>IID_IPropertyStore</summary>
+        </member>
+        <member name="F:Standard.IID.ServiceProvider">
+            <summary>IID_IServiceProvider</summary>
+        </member>
+        <member name="F:Standard.IID.ShellFolder">
+            <summary>IID_IShellFolder</summary>
+        </member>
+        <member name="F:Standard.IID.ShellLink">
+            <summary>IID_IShellLink</summary>
+        </member>
+        <member name="F:Standard.IID.ShellItem">
+            <summary>IID_IShellItem</summary>
+        </member>
+        <member name="F:Standard.IID.ShellItem2">
+            <summary>IID_IShellItem2</summary>
+        </member>
+        <member name="F:Standard.IID.ShellItemArray">
+            <summary>IID_IShellItemArray</summary>
+        </member>
+        <member name="F:Standard.IID.TaskbarList">
+            <summary>IID_ITaskbarList</summary>
+        </member>
+        <member name="F:Standard.IID.TaskbarList2">
+            <summary>IID_ITaskbarList2</summary>
+        </member>
+        <member name="F:Standard.IID.Unknown">
+            <summary>IID_IUnknown</summary>
+        </member>
+        <member name="F:Standard.IID.ApplicationDestinations">
+            <summary>IID_IApplicationDestinations</summary>
+        </member>
+        <member name="F:Standard.IID.ApplicationDocumentLists">
+            <summary>IID_IApplicationDocumentLists</summary>
+        </member>
+        <member name="F:Standard.IID.CustomDestinationList">
+            <summary>IID_ICustomDestinationList</summary>
+        </member>
+        <member name="F:Standard.IID.ObjectWithAppUserModelId">
+            <summary>IID_IObjectWithAppUserModelID</summary>
+        </member>
+        <member name="F:Standard.IID.ObjectWithProgId">
+            <summary>IID_IObjectWithProgID</summary>
+        </member>
+        <member name="F:Standard.IID.TaskbarList3">
+            <summary>IID_ITaskbarList3</summary>
+        </member>
+        <member name="F:Standard.IID.TaskbarList4">
+            <summary>IID_ITaskbarList4</summary>
+        </member>
+        <member name="F:Standard.CLSID.TaskbarList">
+            <summary>CLSID_TaskbarList</summary>
+            <remarks>IID_ITaskbarList</remarks>
+        </member>
+        <member name="F:Standard.CLSID.EnumerableObjectCollection">
+            <summary>CLSID_EnumerableObjectCollection</summary>
+            <remarks>IID_IEnumObjects.</remarks>
+        </member>
+        <member name="F:Standard.CLSID.ShellLink">
+            <summary>CLSID_ShellLink</summary>
+            <remarks>IID_IShellLink</remarks>
+        </member>
+        <member name="F:Standard.CLSID.DestinationList">
+            <summary>CLSID_DestinationList</summary>
+            <remarks>IID_ICustomDestinationList</remarks>
+        </member>
+        <member name="F:Standard.CLSID.ApplicationDestinations">
+            <summary>CLSID_ApplicationDestinations</summary>
+            <remarks>IID_IApplicationDestinations</remarks>
+        </member>
+        <member name="F:Standard.CLSID.ApplicationDocumentLists">
+            <summary>CLSID_ApplicationDocumentLists</summary>
+            <remarks>IID_IApplicationDocumentLists</remarks>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutAnchorable.Hide">
+            <summary>
+            Hide this contents
+            </summary>
+            <remarks>Add this content to <see cref="P:AvalonDock.Layout.ILayoutRoot.Hidden"/> collection of parent root.</remarks>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutAnchorable.Show">
+            <summary>
+            Show the content
+            </summary>
+            <remarks>Try to show the content where it was previously hidden.</remarks>
+        </member>
+        <member name="M:AvalonDock.Layout.LayoutAnchorable.AddToLayout(AvalonDock.DockingManager,AvalonDock.Layout.AnchorableShowStrategy)">
+            <summary>
+            Add the anchorable to a DockingManager layout
+            </summary>
+            <param name="manager"></param>
+            <param name="strategy"></param>
+        </member>
+        <member name="P:AvalonDock.Layout.LayoutAnchorable.IsAutoHidden">
+            <summary>
+            Get a value indicating if the anchorable is anchored to a border in an autohide status
+            </summary>
+        </member>
+        <member name="P:Microsoft.Windows.Shell.WindowChrome.CaptionHeight">
+            <summary>The extent of the top of the window to treat as the caption.</summary>
+        </member>
+        <member name="P:Microsoft.Windows.Shell.WindowChrome.ShowSystemMenu">
+            <summary>
+            Gets or sets the ShowSystemMenu property.  This dependency property 
+            indicates if the system menu should be shown at right click on the caption.
+            </summary>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

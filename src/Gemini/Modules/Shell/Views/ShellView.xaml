@@ -1,19 +1,22 @@
 ﻿<Window x:Class="Gemini.Modules.Shell.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-		xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock" 
+		xmlns:ad="http://avalondock.codeplex.com" 
 		xmlns:controls="clr-namespace:Gemini.Framework.Controls"
+		xmlns:converters="clr-namespace:Gemini.Framework.Converters" xmlns:cal="http://www.caliburnproject.org"
         Title="{Binding Title}" Icon="{Binding Icon}" 
 		Width="1000" Height="800">
 	<Window.Resources>
-		<ResourceDictionary Source="../Resources/Styles.xaml" />
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../Resources/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
+			<converters:LayoutItemViewConverter x:Key="LayoutItemViewConverter" />
+		</ResourceDictionary>
 	</Window.Resources>
 
 	<DockPanel>
-		<DockPanel.Resources>
-			<ResourceDictionary Source="/AvalonDock.Themes;Component/Themes/Dev2010.xaml"/>
-		</DockPanel.Resources>
-		
 		<controls:Menu ItemsSource="{Binding MainMenu}"
 			  ItemTemplate="{StaticResource menuTemplate}" 
               DockPanel.Dock="Top" />
@@ -24,15 +27,27 @@
 			</StatusBarItem>
 		</StatusBar>
 
-		<ad:DockingManager x:Name="Manager">
-			<ad:ResizingPanel Orientation="Vertical">
-				<ad:ResizingPanel Orientation="Horizontal">
-					<ad:DockablePane x:Name="LeftPane" ad:ResizingPanel.ResizeWidth="300" />
-					<ad:DocumentPane x:Name="DocumentPane"/>
-					<ad:DockablePane x:Name="RightPane" ad:ResizingPanel.ResizeWidth="300" />
-				</ad:ResizingPanel>
-				<ad:DockablePane x:Name="BottomPane" ad:ResizingPanel.ResizeHeight="300" />
-			</ad:ResizingPanel>
+		<ad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
+						   AnchorablesSource="{Binding Tools}"
+						   ActiveContent="{Binding ActiveItem, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
+			<ad:DockingManager.Theme>
+				<ad:VS2010Theme />
+			</ad:DockingManager.Theme>
+			<ad:DockingManager.LayoutItemTemplateSelector>
+				<controls:LayoutItemTemplateSelector>
+					<controls:LayoutItemTemplateSelector.Template>
+						<DataTemplate>
+							<ContentPresenter Content="{Binding ., Converter={StaticResource LayoutItemViewConverter}}" />
+						</DataTemplate>
+					</controls:LayoutItemTemplateSelector.Template>
+				</controls:LayoutItemTemplateSelector>
+			</ad:DockingManager.LayoutItemTemplateSelector>
+			<ad:DockingManager.LayoutItemContainerStyle>
+				<Style TargetType="{x:Type ad:LayoutItem}">
+					<Setter Property="Title" Value="{Binding Model.DisplayName}" />
+					<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+				</Style>
+			</ad:DockingManager.LayoutItemContainerStyle>
 		</ad:DockingManager>
 	</DockPanel>
 </Window>

@@ -39,5 +39,10 @@ namespace Gemini.Demo.Modules.Home.ViewModels
 			Background = Colors.CornflowerBlue;
 			Foreground = Colors.White;
 		}
+
+		public void Close()
+		{
+			int i = 0;
+		}
 	}
 }

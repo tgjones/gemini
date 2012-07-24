@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using AvalonDock;
+using AvalonDock.Layout;
 using Caliburn.Micro;
 using Gemini.Modules.Output.Views;
 
@@ -43,7 +44,7 @@ namespace Gemini.Modules.Output.ViewModels
 
 		protected override void OnViewLoaded(object view)
 		{
-			_view = (IOutputView)((DockableContent)view).Content;
+			_view = (IOutputView)((LayoutContent)view).Content;
 			_view.SetText(Text);
 			_view.ScrollToEnd();
 		}

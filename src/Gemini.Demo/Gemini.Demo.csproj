@@ -37,12 +37,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AvalonDock, Version=1.3.3571.0, Culture=neutral, PublicKeyToken=85a1e0ada7ec13e4, processorArchitecture=MSIL">
+    <Reference Include="AvalonDock, Version=2.0.1114.0, Culture=neutral, PublicKeyToken=96637cf0d3eefdfb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\AvalonDock\AvalonDock.dll</HintPath>
+      <HintPath>..\packages\AvalonDock.2.0.1114\lib\net40\AvalonDock.dll</HintPath>
     </Reference>
-    <Reference Include="AvalonDock.Themes">
-      <HintPath>..\..\lib\AvalonDock\AvalonDock.Themes.dll</HintPath>
+    <Reference Include="AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\AvalonDock.2.0.1114\lib\net40\AvalonDock.Themes.VS2010.dll</HintPath>
     </Reference>
     <Reference Include="Caliburn.Micro, Version=1.3.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
