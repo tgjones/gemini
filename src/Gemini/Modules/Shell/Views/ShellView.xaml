@@ -12,7 +12,6 @@
 				<ResourceDictionary Source="../Resources/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
-			<converters:LayoutItemViewConverter x:Key="LayoutItemViewConverter" />
 		</ResourceDictionary>
 	</Window.Resources>
 
@@ -33,15 +32,12 @@
 			<ad:DockingManager.Theme>
 				<ad:VS2010Theme />
 			</ad:DockingManager.Theme>
-			<ad:DockingManager.LayoutItemTemplateSelector>
-				<controls:LayoutItemTemplateSelector>
-					<controls:LayoutItemTemplateSelector.Template>
-						<DataTemplate>
-							<ContentPresenter Content="{Binding ., Converter={StaticResource LayoutItemViewConverter}}" />
-						</DataTemplate>
-					</controls:LayoutItemTemplateSelector.Template>
-				</controls:LayoutItemTemplateSelector>
-			</ad:DockingManager.LayoutItemTemplateSelector>
+			<ad:DockingManager.LayoutItemTemplate>
+				<DataTemplate>
+					<ContentControl cal:View.Model="{Binding}"
+									IsTabStop="False" />
+				</DataTemplate>
+			</ad:DockingManager.LayoutItemTemplate>
 			<ad:DockingManager.LayoutItemContainerStyle>
 				<Style TargetType="{x:Type ad:LayoutItem}">
 					<Setter Property="Title" Value="{Binding Model.DisplayName}" />

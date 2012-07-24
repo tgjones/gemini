@@ -1,11 +1,10 @@
 ﻿using System.IO;
-using AvalonDock.Layout;
-using Caliburn.Micro;
 using Gemini.Demo.Modules.TextEditor.Views;
+using Gemini.Framework;
 
 namespace Gemini.Demo.Modules.TextEditor.ViewModels
 {
-	public class EditorViewModel : Screen
+	public class EditorViewModel : Document
 	{
 		private string _originalText;
 		private string _path;

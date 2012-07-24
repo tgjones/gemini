@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Media;
 using Caliburn.Micro;
+using Gemini.Framework;
 
 namespace Gemini.Demo.Modules.Home.ViewModels
 {
 	[Export(typeof(HomeViewModel))]
-	public class HomeViewModel : Screen
+	public class HomeViewModel : Document
 	{
 		private Color _background;
 		public Color Background
@@ -38,11 +39,6 @@ namespace Gemini.Demo.Modules.Home.ViewModels
 		{
 			Background = Colors.CornflowerBlue;
 			Foreground = Colors.White;
-		}
-
-		public void Close()
-		{
-			int i = 0;
 		}
 	}
 }
