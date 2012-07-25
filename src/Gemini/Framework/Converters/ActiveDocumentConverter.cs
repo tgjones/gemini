@@ -8,7 +8,7 @@ namespace Gemini.Framework.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			if (value is IScreen)
+			if (value is IDocument)
 				return value;
 
 			return Binding.DoNothing;
@@ -16,7 +16,7 @@ namespace Gemini.Framework.Converters
 
 		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			if (value is IScreen)
+			if (value is IDocument)
 				return value;
 
 			return Binding.DoNothing;
