@@ -46,6 +46,23 @@
 					<Setter Property="IconSource" Value="{Binding Model.IconSource}" />
 				</Style>
 			</ad:DockingManager.LayoutItemContainerStyle>
+			<ad:DockingManager.LayoutItemContainerStyleSelector>
+				<controls:PanesStyleSelector>
+					<controls:PanesStyleSelector.DocumentStyle>
+						<Style TargetType="{x:Type ad:LayoutItem}">
+							<Setter Property="Title" Value="{Binding Model.DisplayName}" />
+							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+						</Style>
+					</controls:PanesStyleSelector.DocumentStyle>
+					<controls:PanesStyleSelector.ToolStyle>
+						<Style TargetType="{x:Type ad:LayoutAnchorableItem}">
+							<Setter Property="Title" Value="{Binding Model.DisplayName}" />
+							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+							<Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+						</Style>
+					</controls:PanesStyleSelector.ToolStyle>
+				</controls:PanesStyleSelector>
+			</ad:DockingManager.LayoutItemContainerStyleSelector>
 			<ad:DockingManager.LayoutUpdateStrategy>
 				<controls:LayoutInitializer />
 			</ad:DockingManager.LayoutUpdateStrategy>

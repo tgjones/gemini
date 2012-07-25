@@ -67,6 +67,7 @@
     <Compile Include="Framework\Controls\LayoutInitializer.cs" />
     <Compile Include="Framework\Controls\MenuItem.cs" />
     <Compile Include="Framework\Controls\Menu.cs" />
+    <Compile Include="Framework\Controls\PanesStyleSelector.cs" />
     <Compile Include="Framework\Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Framework\Converters\LayoutItemViewConverter.cs" />
     <Compile Include="Framework\Document.cs" />
