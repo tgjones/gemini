@@ -4,8 +4,8 @@
 
 Gemini is a WPF framework designed specifically for building IDE-like applications. It is built on:
 
-* AvalonDock
-* Caliburn Micro
+* [AvalonDock](http://avalondock.codeplex.com)
+* [Caliburn Micro](http://caliburnmicro.codeplex.com/)
 * MEF
 
 ![Screenshot](https://github.com/roastedamoeba/gemini/raw/master/doc/screenshot.PNG)
@@ -59,3 +59,7 @@ I've used Gemini on several of my own projects:
 * [Meshellator](http://github.com/roastedamoeba/meshellator)
 * [Rasterizr](http://github.com/roastedamoeba/rasterizr)
 * coming soon...
+
+### Acknowledgements
+
+Much of the original ideas and code came from [Rob Eisenberg](http://www.bluespire.com/), creator of the [Caliburn Micro](http://caliburnmicro.codeplex.com/) framework. I have extended and modified his code to integrate better with AvalonDock 2.0, which natively supports MVVM-style binding.
