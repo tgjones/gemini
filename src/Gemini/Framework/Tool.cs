@@ -11,5 +11,21 @@ namespace Gemini.Framework
 		{
 			get { return null; }
 		}
+
+		private bool _isVisible;
+		public bool IsVisible
+		{
+			get { return _isVisible; }
+			set
+			{
+				_isVisible = value;
+				NotifyOfPropertyChange(() => IsVisible);
+			}
+		}
+
+		protected Tool()
+		{
+			IsVisible = true;
+		}
 	}
 }

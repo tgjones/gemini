@@ -13,6 +13,7 @@
 				<ResourceDictionary Source="../Resources/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
+			<ad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		</ResourceDictionary>
 	</Window.Resources>
 
@@ -52,6 +53,7 @@
 							<Setter Property="Title" Value="{Binding Model.DisplayName, Mode=OneWay}" />
 							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
 							<Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+							<Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
 						</Style>
 					</controls:PanesStyleSelector.ToolStyle>
 				</controls:PanesStyleSelector>
