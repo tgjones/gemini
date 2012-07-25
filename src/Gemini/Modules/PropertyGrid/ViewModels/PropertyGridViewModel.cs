@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 
@@ -15,6 +16,11 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
 		public override PaneLocation PreferredLocation
 		{
 			get { return PaneLocation.Right; }
+		}
+
+		public override Uri IconSource
+		{
+			get { return new Uri("pack://application:,,,/Gemini;component/Resources/Icons/Properties.png"); }
 		}
 
 		private object _selectedObject;

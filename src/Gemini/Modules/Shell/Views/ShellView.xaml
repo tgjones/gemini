@@ -43,6 +43,7 @@
 				<Style TargetType="{x:Type ad:LayoutItem}">
 					<Setter Property="Title" Value="{Binding Model.DisplayName}" />
 					<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+					<Setter Property="IconSource" Value="{Binding Model.IconSource}" />
 				</Style>
 			</ad:DockingManager.LayoutItemContainerStyle>
 			<ad:DockingManager.LayoutUpdateStrategy>

@@ -13,7 +13,6 @@ namespace Gemini.Framework.Controls
 		{
 			if (anchorableToShow.Content is ITool)
 			{
-				// TODO: Create appropriate pane if it's missing
 				var preferredLocation = ((ITool) anchorableToShow.Content).PreferredLocation;
 				string paneName = GetPaneName(preferredLocation);
 				var toolsPane = layout.Descendents().OfType<LayoutAnchorablePane>().FirstOrDefault(d => d.Name == paneName);
