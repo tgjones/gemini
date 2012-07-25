@@ -49,13 +49,10 @@
 				<controls:LayoutInitializer />
 			</ad:DockingManager.LayoutUpdateStrategy>
 			<ad:LayoutRoot>
-				<ad:LayoutPanel Orientation="Vertical">
-					<ad:LayoutPanel Orientation="Horizontal">
-						<ad:LayoutAnchorablePane Name="LeftPane" DockWidth="300" />
-						<ad:LayoutDocumentPane x:Name="DocumentPane" />
-						<ad:LayoutAnchorablePane Name="RightPane" DockWidth="300" />
+				<ad:LayoutPanel x:Name="VerticalPanel" Orientation="Vertical">
+					<ad:LayoutPanel x:Name="HorizontalPanel" Orientation="Horizontal">
+						<ad:LayoutDocumentPane />
 					</ad:LayoutPanel>
-					<ad:LayoutAnchorablePane Name="BottomPane" DockHeight="300" />
 				</ad:LayoutPanel>
 			</ad:LayoutRoot>
 		</ad:DockingManager>

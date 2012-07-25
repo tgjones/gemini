@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using AvalonDock.Layout;
 using Gemini.Framework.Services;
 
@@ -11,13 +13,41 @@ namespace Gemini.Framework.Controls
 		{
 			if (anchorableToShow.Content is ITool)
 			{
-				string paneName = GetPaneName(((ITool) anchorableToShow.Content).PreferredLocation);
+				// TODO: Create appropriate pane if it's missing
+				var preferredLocation = ((ITool) anchorableToShow.Content).PreferredLocation;
+				string paneName = GetPaneName(preferredLocation);
 				var toolsPane = layout.Descendents().OfType<LayoutAnchorablePane>().FirstOrDefault(d => d.Name == paneName);
-				if (toolsPane != null)
+				if (toolsPane == null)
 				{
-					toolsPane.Children.Add(anchorableToShow);
-					return true;
+					switch (preferredLocation)
+					{
+						case PaneLocation.Left:
+						{
+							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
+							toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel) };
+							parent.InsertChildAt(0, toolsPane);
+						}
+							break;
+						case PaneLocation.Right:
+						{
+							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
+							toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel) };
+							parent.Children.Add(toolsPane);
+						}
+							break;
+						case PaneLocation.Bottom:
+						{
+							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Vertical);
+							toolsPane = new LayoutAnchorablePane { DockHeight = new GridLength(200, GridUnitType.Pixel) };
+							parent.Children.Add(toolsPane);
+						}
+							break;
+						default:
+							throw new ArgumentOutOfRangeException();
+					}
 				}
+				toolsPane.Children.Add(anchorableToShow);
+				return true;
 			}
 
 			return false;
