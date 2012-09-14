@@ -6,7 +6,7 @@
 		xmlns:converters="clr-namespace:Gemini.Framework.Converters"
 		xmlns:cal="http://www.caliburnproject.org"
         Title="{Binding Title}" Icon="{Binding Icon}" 
-		Width="1000" Height="800">
+		Width="1000" Height="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
