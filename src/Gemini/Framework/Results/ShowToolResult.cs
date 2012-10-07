@@ -35,6 +35,10 @@ namespace Gemini.Framework.Results
 
 			tool.Deactivated += (s, e) =>
 			{
+
+				if (!e.WasClosed)
+					return;
+
 				if (_onShutDown != null)
 					_onShutDown(tool);
 
