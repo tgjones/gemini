@@ -23,7 +23,7 @@ namespace Gemini.Demo.Modules.Startup
 			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());
 
-			_output.Append("Started up");
+			_output.AppendLine("Started up");
 		}
 	}
 }

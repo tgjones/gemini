@@ -17,9 +17,21 @@ namespace Gemini.Modules.Output.Views
 			outputText.ScrollToEnd();
 		}
 
+		public void Clear()
+		{
+			outputText.Clear();
+		}
+
+		public void AppendText(string text)
+		{
+			outputText.AppendText(text);
+			ScrollToEnd();
+		}
+
 		public void SetText(string text)
 		{
 			outputText.Text = text;
+			ScrollToEnd();
 		}
 	}
 }

@@ -1,5 +1,9 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Text;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -10,7 +14,10 @@ namespace Gemini.Modules.Output.ViewModels
 	[Export(typeof(IOutput))]
 	public class OutputViewModel : Tool, IOutput
 	{
+		private readonly StringBuilder _stringBuilder;
+		private readonly OutputWriter _writer;
 		private IOutputView _view;
+		private event EventHandler TextChanged;
 
 		public override string DisplayName
 		{
@@ -22,36 +29,59 @@ namespace Gemini.Modules.Output.ViewModels
 			get { return PaneLocation.Bottom; }
 		}
 
-		private string _text = string.Empty;
-		public string Text
+		public TextWriter Writer
 		{
-			get { return _text; }
-			set
-			{
-				_text = value;
+			get { return _writer; }
+		}
 
-				NotifyOfPropertyChange(() => Text);
+		public OutputViewModel()
+		{
+			_stringBuilder = new StringBuilder();
+			_writer = new OutputWriter(this);
 
-				if (_view != null)
-					Execute.OnUIThread(() => _view.ScrollToEnd());
-			}
+			Observable.FromEventPattern<EventHandler, EventArgs>(h => TextChanged += h, h => TextChanged -= h)
+				.Throttle(TimeSpan.FromSeconds(1))
+				.Subscribe(_ =>
+				{
+					if (_view != null)
+						Execute.OnUIThread(() => _view.SetText(_stringBuilder.ToString()));
+				});
 		}
 
 		public void Clear()
 		{
-			Text = string.Empty;
+			if (_view != null)
+				Execute.OnUIThread(() => _view.Clear());
+			_stringBuilder.Clear();
+		}
+
+		public void AppendLine(string text)
+		{
+			Append(text + Environment.NewLine);
 		}
 
 		public void Append(string text)
 		{
-			Text += text + Environment.NewLine;
+			_stringBuilder.Append(text);
+			OnTextChanged(EventArgs.Empty);
+		}
+
+		private void OnTextChanged(EventArgs e)
+		{
+			EventHandler handler = TextChanged;
+			if (handler != null) handler(this, e);
 		}
 
 		protected override void OnViewLoaded(object view)
 		{
 			_view = (IOutputView) view;
-			_view.SetText(Text);
+			_view.SetText(_stringBuilder.ToString());
 			_view.ScrollToEnd();
 		}
+	}
+
+	internal class TextAppendedEventArgs : EventArgs
+	{
+		public string Text { get; set; }
 	}
 }
