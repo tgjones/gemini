@@ -6,7 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<TextBox x:Name="outputText"
-			 Text="{Binding Text}" 
              IsReadOnly="True"
              VerticalAlignment="Stretch"
              HorizontalAlignment="Stretch"
