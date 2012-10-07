@@ -9,13 +9,9 @@ namespace Gemini.Framework
 		{
 			get
 			{
-				return _closeCommand ?? (_closeCommand = new RelayCommand(p => TryClose(), p =>
-				{
-					bool canClose = false;
-					CanClose(r => canClose = r);
-					return canClose;
-				}));
+				return _closeCommand ?? (_closeCommand = new RelayCommand(p => TryClose(null), p => true));
 			}
 		}
+
 	}
 }
