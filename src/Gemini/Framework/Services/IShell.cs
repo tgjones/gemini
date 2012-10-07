@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Menus;
 
@@ -6,6 +7,7 @@ namespace Gemini.Framework.Services
 {
 	public interface IShell
 	{
+		WindowState WindowState { get; set; }
 		string Title { get; set; }
 		ImageSource Icon { get; set; }
 		IMenu MainMenu { get; }

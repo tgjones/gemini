@@ -15,6 +15,17 @@ namespace Gemini.Modules.Shell.ViewModels
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
 
+		private WindowState _windowState = WindowState.Normal;
+		public WindowState WindowState
+		{
+			get { return _windowState; }
+			set
+			{
+				_windowState = value;
+				NotifyOfPropertyChange(() => WindowState);
+			}
+		}
+
 		private string _title = "[Default Title]";
 		public string Title
 		{
