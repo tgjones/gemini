@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Extended.Wpf.Toolkit</id>
+    <version>1.7.0</version>
+    <title>Extended WPF Toolkit</title>
+    <authors>Xceed</authors>
+    <owners>Xceed</owners>
+    <licenseUrl>http://wpftoolkit.codeplex.com/license</licenseUrl>
+    <projectUrl>http://wpftoolkit.codeplex.com/</projectUrl>
+    <iconUrl>http://xceed.com/images/SocialNetworks/LogoXCEEDTwitter.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Extended WPF Toolkit is a collection of WPF controls, components and utilities made available outside the normal WPF Toolkit. Provides 30 controls, all provided under the Microsoft Public License for maximum freedom. Two new controls, Zoombox and Pie, have been added in the latest release (v1.7), as well as a variety of minor updates and bug fixes. Documentation, source, and discussions are hosted on CodePlex at http://wpftoolkit.codeplex.com.</description>
+    <summary>The Extended WPF Toolkit is a collection of WPF controls and components made available outside the normal WPF Toolkit. This release adds 2 new controls.</summary>
+    <releaseNotes>Provides 2 new controls, Zoombox and Pie, as well as various updates and bug fixes.</releaseNotes>
+    <copyright>Copyright © Xceed Software Inc. 2010-2012</copyright>
+    <tags>WPF toolkit</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="PresentationCore" targetFramework=".NETFramework3.5, .NETFramework4.0" />
+      <frameworkAssembly assemblyName="PresentationFramework" targetFramework=".NETFramework3.5, .NETFramework4.0" />
+      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework3.5, .NETFramework4.0" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework3.5, .NETFramework4.0" />
+      <frameworkAssembly assemblyName="System.Xaml" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
