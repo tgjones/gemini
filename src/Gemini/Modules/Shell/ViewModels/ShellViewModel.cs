@@ -10,7 +10,7 @@ using Gemini.Framework.Services;
 namespace Gemini.Modules.Shell.ViewModels
 {
 	[Export(typeof(IShell))]
-	public class ShellViewModel : Conductor<IScreen>.Collection.OneActive, IShell
+	public class ShellViewModel : Conductor<IDocument>.Collection.OneActive, IShell
 	{
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
@@ -66,6 +66,11 @@ namespace Gemini.Modules.Shell.ViewModels
 		public IObservableCollection<ITool> Tools
 		{
 			get { return _tools; }
+		}
+
+		public IObservableCollection<IDocument> Documents
+		{
+			get { return Items; }
 		}
 
 		public ShellViewModel()

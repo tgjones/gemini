@@ -13,7 +13,10 @@ namespace Gemini.Framework.Services
 		IMenu MainMenu { get; }
 		IStatusBar StatusBar { get; }
 
-		IScreen ActiveItem { get; }
+		IDocument ActiveItem { get; }
+
+		IObservableCollection<IDocument> Documents { get; }
+		IObservableCollection<ITool> Tools { get; }
 
 		void ShowTool(ITool model);
 
