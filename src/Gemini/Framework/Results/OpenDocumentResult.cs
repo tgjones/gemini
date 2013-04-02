@@ -51,18 +51,16 @@ namespace Gemini.Framework.Results
 
 			editor.Deactivated += (s, e) =>
 			{
-
 				if (!e.WasClosed)
 					return;
 
 				if (_onShutDown != null)
 					_onShutDown(editor);
-
-				OnCompleted(null);
-
 			};
 
 			_shell.OpenDocument(editor);
+
+			OnCompleted(null);
 		}
 
 		private static IDocument GetEditor(string path)
