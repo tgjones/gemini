@@ -23,21 +23,21 @@ namespace Gemini.Framework.Controls
 						case PaneLocation.Left:
 						{
 							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
-							toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel) };
+							toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel), Name = paneName };
 							parent.InsertChildAt(0, toolsPane);
 						}
 							break;
 						case PaneLocation.Right:
 						{
 							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
-							toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel) };
+                            toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel), Name = paneName };
 							parent.Children.Add(toolsPane);
 						}
 							break;
 						case PaneLocation.Bottom:
 						{
 							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Vertical);
-							toolsPane = new LayoutAnchorablePane { DockHeight = new GridLength(200, GridUnitType.Pixel) };
+                            toolsPane = new LayoutAnchorablePane { DockHeight = new GridLength(200, GridUnitType.Pixel), Name = paneName };
 							parent.Children.Add(toolsPane);
 						}
 							break;
