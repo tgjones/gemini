@@ -128,6 +128,7 @@
     <Resource Include="Resources\Icons\Open.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Gemini.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
