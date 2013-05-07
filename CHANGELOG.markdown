@@ -9,4 +9,6 @@
 
 ### Resolved Issues
 
+* \#5 Provide a way to override ShellViewModel, and other built-in exports (rumata28).
+
 * \#6 Fixed adding two panels on the same side during initialization (luuksommers).
