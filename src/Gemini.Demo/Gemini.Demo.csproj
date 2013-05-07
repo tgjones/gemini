@@ -114,6 +114,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gemini.Modules.Output\Gemini.Modules.Output.csproj">
+      <Project>{B78AACC8-5A16-4951-83AD-B78D1C80A258}</Project>
+      <Name>Gemini.Modules.Output</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gemini\Gemini.csproj">
       <Project>{13DBFC87-C152-4A86-94B0-D9944BEEF647}</Project>
       <Name>Gemini</Name>
