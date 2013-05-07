@@ -12,7 +12,7 @@
 		<licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
 		<tags>.net40 WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell Output</tags>
 		<dependencies>
-			<dependency id="Gemini" version="$version$" />
+			<dependency id="GeminiWpf" version="$version$" />
 		</dependencies>
 	</metadata>
 	<files>
