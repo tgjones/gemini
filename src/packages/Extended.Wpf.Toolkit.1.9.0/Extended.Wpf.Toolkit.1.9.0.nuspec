@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>Extended.Wpf.Toolkit</id>
-    <version>1.7.0</version>
+    <version>1.9.0</version>
     <title>Extended WPF Toolkit</title>
     <authors>Xceed</authors>
     <owners>Xceed</owners>
@@ -10,9 +10,9 @@
     <projectUrl>http://wpftoolkit.codeplex.com/</projectUrl>
     <iconUrl>http://xceed.com/images/SocialNetworks/LogoXCEEDTwitter.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The Extended WPF Toolkit is a collection of WPF controls, components and utilities made available outside the normal WPF Toolkit. Provides 30 controls, all provided under the Microsoft Public License for maximum freedom. Two new controls, Zoombox and Pie, have been added in the latest release (v1.7), as well as a variety of minor updates and bug fixes. Documentation, source, and discussions are hosted on CodePlex at http://wpftoolkit.codeplex.com.</description>
-    <summary>The Extended WPF Toolkit is a collection of WPF controls and components made available outside the normal WPF Toolkit. This release adds 2 new controls.</summary>
-    <releaseNotes>Provides 2 new controls, Zoombox and Pie, as well as various updates and bug fixes.</releaseNotes>
+    <description>Extended WPF Toolkit is the number one collection of WPF controls, components and utilities for creating next generation Windows applications. Provides 37 controls, all offered under the Microsoft Public License for maximum freedom. In v1.9: a record-breaking 70 improvements and the addition of 2D WPF layouts, which work with the new layout-to-layout animation control, SwitchPanel. Documentation, source, and discussions are hosted on CodePlex at http://wpftoolkit.codeplex.com.</description>
+    <summary>Extended WPF Toolkit is the number one collection of WPF controls for creating next-gen Windows apps. This release provides a record-breaking 70 improvements and a new animated WPF layout control.</summary>
+    <releaseNotes>Features a record-breaking 70 improvements and the addition of 2D WPF layouts, which work with the new layout-to-layout animation control, SwitchPanel.</releaseNotes>
     <copyright>Copyright © Xceed Software Inc. 2010-2012</copyright>
     <tags>WPF toolkit</tags>
     <frameworkAssemblies>
