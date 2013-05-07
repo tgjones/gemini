@@ -82,6 +82,7 @@
     <Compile Include="Modules\Home\Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
     <Compile Include="Modules\TextEditor\ViewModels\EditorViewModel.cs" />
