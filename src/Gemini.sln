@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Tests", "Gemini.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Output", "Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{B78AACC8-5A16-4951-83AD-B78D1C80A258}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.PropertyGrid", "Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj", "{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B78AACC8-5A16-4951-83AD-B78D1C80A258}.Release|x86.ActiveCfg = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -58,10 +58,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WPFToolkit.Extended, Version=1.7.4644.13122, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Extended.Wpf.Toolkit.1.7.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
@@ -96,18 +92,12 @@
     <Compile Include="Framework\Services\IInputManager.cs" />
     <Compile Include="Framework\Services\InputBindingTrigger.cs" />
     <Compile Include="Framework\Services\InputManager.cs" />
-    <Compile Include="Framework\Services\IPropertyGrid.cs" />
     <Compile Include="Framework\Services\IResourceManager.cs" />
     <Compile Include="Framework\Services\IShell.cs" />
     <Compile Include="Framework\Services\IStatusBar.cs" />
     <Compile Include="Framework\Services\PaneLocation.cs" />
     <Compile Include="Framework\Services\ResourceManager.cs" />
     <Compile Include="Framework\Tool.cs" />
-    <Compile Include="Modules\PropertyGrid\Module.cs" />
-    <Compile Include="Modules\PropertyGrid\ViewModels\PropertyGridViewModel.cs" />
-    <Compile Include="Modules\PropertyGrid\Views\PropertyGridView.xaml.cs">
-      <DependentUpon>PropertyGridView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Shell\Module.cs" />
     <Compile Include="Modules\Shell\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="Modules\Shell\Views\ShellView.xaml.cs">
@@ -118,10 +108,6 @@
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Modules\PropertyGrid\Views\PropertyGridView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Modules\Shell\Resources\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

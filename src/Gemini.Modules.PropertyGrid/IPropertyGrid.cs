@@ -1,4 +1,6 @@
-﻿namespace Gemini.Framework.Services
+﻿using Gemini.Framework;
+
+namespace Gemini.Modules.PropertyGrid
 {
 	public interface IPropertyGrid : ITool
 	{

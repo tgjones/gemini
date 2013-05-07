@@ -118,6 +118,10 @@
       <Project>{B78AACC8-5A16-4951-83AD-B78D1C80A258}</Project>
       <Name>Gemini.Modules.Output</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj">
+      <Project>{8080cb9a-9389-4b4d-9adf-bef7fefcac55}</Project>
+      <Name>Gemini.Modules.PropertyGrid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gemini\Gemini.csproj">
       <Project>{13DBFC87-C152-4A86-94B0-D9944BEEF647}</Project>
       <Name>Gemini</Name>
