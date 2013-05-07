@@ -7,6 +7,7 @@ using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
+using Gemini.Modules.PropertyGrid;
 
 namespace Gemini.Demo.Modules.Home
 {
