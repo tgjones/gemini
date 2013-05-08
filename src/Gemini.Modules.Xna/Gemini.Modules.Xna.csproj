@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ClippingHwndHost.cs" />
     <Compile Include="Controls\GraphicsDeviceControl.cs" />
     <Compile Include="Controls\GraphicsDeviceEventArgs.cs" />
     <Compile Include="Controls\GraphicsDeviceService.cs" />

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Gemini.Demo.Xna.Modules.SceneViewer.Primitives
+namespace Gemini.Demo.Xna.Primitives
 {
     /// <summary>
     /// Base class for simple geometric primitive models. This provides a vertex
@@ -75,7 +75,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Primitives
         /// this method copies the vertex and index data into GPU format buffers, ready
         /// for efficient rendering.
         /// </summary>
-        protected void InitializePrimitive(GraphicsDevice graphicsDevice)
+        public void Initialize(GraphicsDevice graphicsDevice)
         {
             // Create a vertex declaration, describing the format of our vertex data.
 

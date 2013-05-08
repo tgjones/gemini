@@ -6,9 +6,8 @@
 #endregion
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace Gemini.Demo.Xna.Modules.SceneViewer.Primitives
+namespace Gemini.Demo.Xna.Primitives
 {
     /// <summary>
     /// Geometric primitive class for drawing cubes.
@@ -18,15 +17,15 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Primitives
         /// <summary>
         /// Constructs a new cube primitive, using default settings.
         /// </summary>
-        public CubePrimitive(GraphicsDevice graphicsDevice)
-            : this(graphicsDevice, 1)
+        public CubePrimitive()
+            : this(1)
         {
         }
 
         /// <summary>
         /// Constructs a new cube primitive, with the specified size.
         /// </summary>
-        public CubePrimitive(GraphicsDevice graphicsDevice, float size)
+        public CubePrimitive(float size)
         {
             // A cube has six faces, each one pointing in a different direction.
             Vector3[] normals =
@@ -61,8 +60,6 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Primitives
                 AddVertex((normal + side1 + side2) * size / 2, normal);
                 AddVertex((normal + side1 - side2) * size / 2, normal);
             }
-
-            InitializePrimitive(graphicsDevice);
         }
     }
 }

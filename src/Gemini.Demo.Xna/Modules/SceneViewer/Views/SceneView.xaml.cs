@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using Gemini.Demo.Xna.Modules.SceneViewer.Primitives;
+using Gemini.Demo.Xna.Primitives;
 using Gemini.Modules.Xna.Controls;
 using Microsoft.Xna.Framework;
 
@@ -10,7 +10,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
     /// </summary>
     public partial class SceneView : UserControl
     {
-        private CubePrimitive _cube;
+        private readonly CubePrimitive _cube;
 
         // A yaw and pitch applied to the viewport based on input
         private float _yaw;
@@ -19,6 +19,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
         public SceneView()
         {
             InitializeComponent();
+            _cube = new CubePrimitive();
         }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
         private void OnGraphicsControlLoadContent(object sender, GraphicsDeviceEventArgs e)
         {
             // Create our 3D cube object
-            _cube = new CubePrimitive(e.GraphicsDevice);
+            _cube.Initialize(e.GraphicsDevice);
         }
 
         /// <summary>

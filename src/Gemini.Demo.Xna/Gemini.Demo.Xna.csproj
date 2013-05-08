@@ -75,10 +75,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\PrimitiveList\Controls\RotatableCubeControl.cs" />
+    <Compile Include="Modules\PrimitiveList\Module.cs" />
+    <Compile Include="Modules\PrimitiveList\ViewModels\PrimitiveListViewModel.cs" />
+    <Compile Include="Modules\PrimitiveList\Views\PrimitiveListView.xaml.cs">
+      <DependentUpon>PrimitiveListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\SceneViewer\Module.cs" />
-    <Compile Include="Modules\SceneViewer\Primitives\CubePrimitive.cs" />
-    <Compile Include="Modules\SceneViewer\Primitives\GeometricPrimitive.cs" />
-    <Compile Include="Modules\SceneViewer\Primitives\VertexPositionNormal.cs" />
+    <Compile Include="Primitives\CubePrimitive.cs" />
+    <Compile Include="Primitives\GeometricPrimitive.cs" />
+    <Compile Include="Primitives\VertexPositionNormal.cs" />
     <Compile Include="Modules\SceneViewer\ViewModels\SceneViewModel.cs" />
     <Compile Include="Modules\SceneViewer\Views\SceneView.xaml.cs">
       <DependentUpon>SceneView.xaml</DependentUpon>
@@ -109,6 +115,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Modules\PrimitiveList\Views\PrimitiveListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\SceneViewer\Views\SceneView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
