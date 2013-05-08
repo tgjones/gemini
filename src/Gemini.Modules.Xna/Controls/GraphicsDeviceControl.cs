@@ -279,8 +279,7 @@ namespace Gemini.Modules.Xna.Controls
             _graphicsService.GraphicsDevice.Viewport = viewport;
 
             // Invoke the event to render this control
-            if (RenderXna != null)
-                RenderXna(this, new GraphicsDeviceEventArgs(_graphicsService.GraphicsDevice));
+            RaiseRenderXna(new GraphicsDeviceEventArgs(_graphicsService.GraphicsDevice));
 
             // Present to the screen, but only use the visible area of the back buffer
             _graphicsService.GraphicsDevice.Present(viewport.Bounds, null, _hWnd);
@@ -340,12 +339,25 @@ namespace Gemini.Modules.Xna.Controls
                 _graphicsService = GraphicsDeviceService.AddRef(_hWnd, (int) ActualWidth, (int) ActualHeight);
 
                 // Invoke the LoadContent event
-                if (LoadContent != null)
-                    LoadContent(this, new GraphicsDeviceEventArgs(_graphicsService.GraphicsDevice));
+                RaiseLoadContent(new GraphicsDeviceEventArgs(_graphicsService.GraphicsDevice));
             }
         }
 
-        void OnXnaWindowHostSizeChanged(object sender, SizeChangedEventArgs e)
+        protected virtual void RaiseLoadContent(GraphicsDeviceEventArgs args)
+        {
+            var handler = LoadContent;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseRenderXna(GraphicsDeviceEventArgs args)
+        {
+            var handler = RenderXna;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        private void OnXnaWindowHostSizeChanged(object sender, SizeChangedEventArgs e)
         {
             // If we have a reference to the GraphicsDeviceService, we must reset it based on our updated size
             if (_graphicsService != null)
@@ -365,8 +377,7 @@ namespace Gemini.Modules.Xna.Controls
             if (_mouseInWindow)
             {
                 _mouseInWindow = false;
-                if (HwndMouseLeave != null)
-                    HwndMouseLeave(this, new HwndMouseEventArgs(_mouseState));
+                RaiseHwndMouseLeave(new HwndMouseEventArgs(_mouseState));
             }
 
             ReleaseMouseCapture();
@@ -462,85 +473,66 @@ namespace Gemini.Modules.Xna.Controls
             {
                 case NativeMethods.WM_LBUTTONDOWN:
                     _mouseState.LeftButton = MouseButtonState.Pressed;
-                    if (HwndLButtonDown != null)
-                        HwndLButtonDown(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndLButtonDown(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_LBUTTONUP:
                     _mouseState.LeftButton = MouseButtonState.Released;
-                    if (HwndLButtonUp != null)
-                        HwndLButtonUp(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndLButtonUp(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_LBUTTONDBLCLK:
-                    if (HwndLButtonDblClick != null)
-                        HwndLButtonDblClick(this, new HwndMouseEventArgs(_mouseState, MouseButton.Left));
+                    RaiseHwndLButtonDblClick(new HwndMouseEventArgs(_mouseState, MouseButton.Left));
                     break;
                 case NativeMethods.WM_RBUTTONDOWN:
                     _mouseState.RightButton = MouseButtonState.Pressed;
-                    if (HwndRButtonDown != null)
-                        HwndRButtonDown(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndRButtonDown(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_RBUTTONUP:
                     _mouseState.RightButton = MouseButtonState.Released;
-                    if (HwndRButtonUp != null)
-                        HwndRButtonUp(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndRButtonDown(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_RBUTTONDBLCLK:
-                    if (HwndRButtonDblClick != null)
-                        HwndRButtonDblClick(this, new HwndMouseEventArgs(_mouseState, MouseButton.Right));
+                    RaiseHwndRButtonDblClick(new HwndMouseEventArgs(_mouseState, MouseButton.Right));
                     break;
                 case NativeMethods.WM_MBUTTONDOWN:
                     _mouseState.MiddleButton = MouseButtonState.Pressed;
-                    if (HwndMButtonDown != null)
-                        HwndMButtonDown(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndMButtonDown(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_MBUTTONUP:
                     _mouseState.MiddleButton = MouseButtonState.Released;
-                    if (HwndMButtonUp != null)
-                        HwndMButtonUp(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndMButtonUp(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_MBUTTONDBLCLK:
-                    if (HwndMButtonDblClick != null)
-                        HwndMButtonDblClick(this, new HwndMouseEventArgs(_mouseState, MouseButton.Middle));
+                    RaiseHwndMButtonDblClick(new HwndMouseEventArgs(_mouseState, MouseButton.Middle));
                     break;
                 case NativeMethods.WM_XBUTTONDOWN:
                     if (((int) wParam & NativeMethods.MK_XBUTTON1) != 0)
                     {
                         _mouseState.X1Button = MouseButtonState.Pressed;
-                        if (HwndX1ButtonDown != null)
-                            HwndX1ButtonDown(this, new HwndMouseEventArgs(_mouseState));
+                        RaiseHwndX1ButtonDown(new HwndMouseEventArgs(_mouseState));
                     }
                     else if (((int) wParam & NativeMethods.MK_XBUTTON2) != 0)
                     {
                         _mouseState.X2Button = MouseButtonState.Pressed;
-                        if (HwndX2ButtonDown != null)
-                            HwndX2ButtonDown(this, new HwndMouseEventArgs(_mouseState));
+                        RaiseHwndX2ButtonDown(new HwndMouseEventArgs(_mouseState));
                     }
                     break;
                 case NativeMethods.WM_XBUTTONUP:
                     if (((int) wParam & NativeMethods.MK_XBUTTON1) != 0)
                     {
                         _mouseState.X1Button = MouseButtonState.Released;
-                        if (HwndX1ButtonUp != null)
-                            HwndX1ButtonUp(this, new HwndMouseEventArgs(_mouseState));
+                        RaiseHwndX1ButtonUp(new HwndMouseEventArgs(_mouseState));
                     }
                     else if (((int) wParam & NativeMethods.MK_XBUTTON2) != 0)
                     {
                         _mouseState.X2Button = MouseButtonState.Released;
-                        if (HwndX2ButtonUp != null)
-                            HwndX2ButtonUp(this, new HwndMouseEventArgs(_mouseState));
+                        RaiseHwndX2ButtonUp(new HwndMouseEventArgs(_mouseState));
                     }
                     break;
                 case NativeMethods.WM_XBUTTONDBLCLK:
                     if (((int) wParam & NativeMethods.MK_XBUTTON1) != 0)
-                    {
-                        if (HwndX1ButtonDblClick != null)
-                            HwndX1ButtonDblClick(this, new HwndMouseEventArgs(_mouseState, MouseButton.XButton1));
-                    }
+                        RaiseHwndX1ButtonDblClick(new HwndMouseEventArgs(_mouseState, MouseButton.XButton1));
                     else if (((int) wParam & NativeMethods.MK_XBUTTON2) != 0)
-                    {
-                        if (HwndX2ButtonDblClick != null)
-                            HwndX2ButtonDblClick(this, new HwndMouseEventArgs(_mouseState, MouseButton.XButton2));
-                    }
+                        RaiseHwndX2ButtonDblClick(new HwndMouseEventArgs(_mouseState, MouseButton.XButton2));
                     break;
                 case NativeMethods.WM_MOUSEMOVE:
                     // If the application isn't in focus, we don't handle this message
@@ -561,8 +553,7 @@ namespace Gemini.Modules.Xna.Controls
                         // so we don't get weird deltas happening when the move event fires
                         _mouseState.PreviousPosition = _mouseState.Position;
 
-                        if (HwndMouseEnter != null)
-                            HwndMouseEnter(this, new HwndMouseEventArgs(_mouseState));
+                        RaiseHwndMouseEnter(new HwndMouseEventArgs(_mouseState));
 
                         // send the track mouse event so that we get the WM_MOUSELEAVE message
                         var tme = new NativeMethods.TRACKMOUSEEVENT
@@ -576,10 +567,7 @@ namespace Gemini.Modules.Xna.Controls
 
                     // Only fire the mouse move if the position actually changed
                     if (_mouseState.Position != _mouseState.PreviousPosition)
-                    {
-                        if (HwndMouseMove != null)
-                            HwndMouseMove(this, new HwndMouseEventArgs(_mouseState));
-                    }
+                        RaiseHwndMouseMove(new HwndMouseEventArgs(_mouseState));
 
                     break;
                 case NativeMethods.WM_MOUSELEAVE:
@@ -593,12 +581,138 @@ namespace Gemini.Modules.Xna.Controls
                     // marks the mouse as not being in the window.
                     ResetMouseState();
 
-                    if (HwndMouseLeave != null)
-                        HwndMouseLeave(this, new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndMouseLeave(new HwndMouseEventArgs(_mouseState));
+
                     break;
             }
 
             return base.WndProc(hwnd, msg, wParam, lParam, ref handled);
+        }
+
+        protected virtual void RaiseHwndLButtonDown(HwndMouseEventArgs args)
+        {
+            var handler = HwndLButtonDown;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndLButtonUp(HwndMouseEventArgs args)
+        {
+            var handler = HwndLButtonUp;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndRButtonDown(HwndMouseEventArgs args)
+        {
+            var handler = HwndRButtonDown;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndRButtonUp(HwndMouseEventArgs args)
+        {
+            var handler = HwndRButtonUp;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMButtonDown(HwndMouseEventArgs args)
+        {
+            var handler = HwndMButtonDown;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMButtonUp(HwndMouseEventArgs args)
+        {
+            var handler = HwndMButtonUp;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndLButtonDblClick(HwndMouseEventArgs args)
+        {
+            var handler = HwndLButtonDblClick;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndRButtonDblClick(HwndMouseEventArgs args)
+        {
+            var handler = HwndRButtonDblClick;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMButtonDblClick(HwndMouseEventArgs args)
+        {
+            var handler = HwndMButtonDblClick;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMouseEnter(HwndMouseEventArgs args)
+        {
+            var handler = HwndMouseEnter;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndX1ButtonDown(HwndMouseEventArgs args)
+        {
+            var handler = HwndX1ButtonDown;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndX1ButtonUp(HwndMouseEventArgs args)
+        {
+            var handler = HwndX1ButtonUp;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndX2ButtonDown(HwndMouseEventArgs args)
+        {
+            var handler = HwndX2ButtonDown;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndX2ButtonUp(HwndMouseEventArgs args)
+        {
+            var handler = HwndX2ButtonUp;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndX1ButtonDblClick(HwndMouseEventArgs args)
+        {
+            var handler = HwndX1ButtonDblClick;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndX2ButtonDblClick(HwndMouseEventArgs args)
+        {
+            var handler = HwndX2ButtonDblClick;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMouseLeave(HwndMouseEventArgs args)
+        {
+            var handler = HwndMouseLeave;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMouseMove(HwndMouseEventArgs args)
+        {
+            var handler = HwndMouseMove;
+            if (handler != null)
+                handler(this, args);
         }
 
         #endregion

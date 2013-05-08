@@ -8,7 +8,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Gemini.Demo.Xna.Modules.SceneViewer.Primitives
+namespace Gemini.Demo.Xna.Primitives
 {
     /// <summary>
     /// Custom vertex type for vertices that have just a

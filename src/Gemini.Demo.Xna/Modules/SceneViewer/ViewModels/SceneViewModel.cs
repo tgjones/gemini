@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework;
+﻿using Gemini.Framework;
 
 namespace Gemini.Demo.Xna.Modules.SceneViewer.ViewModels
 {
-	[Export(typeof(SceneViewModel))]
 	public class SceneViewModel : Document
 	{
 		public override string DisplayName
