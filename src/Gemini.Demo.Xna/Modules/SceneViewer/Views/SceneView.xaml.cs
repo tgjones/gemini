@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using Gemini.Demo.Xna.Primitives;
 using Gemini.Modules.Xna.Controls;
 using Microsoft.Xna.Framework;
@@ -8,7 +10,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
     /// <summary>
     /// Interaction logic for SceneView.xaml
     /// </summary>
-    public partial class SceneView : UserControl
+    public partial class SceneView : UserControl, IDisposable
     {
         private readonly CubePrimitive _cube;
 
@@ -20,6 +22,11 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
         {
             InitializeComponent();
             _cube = new CubePrimitive();
+        }
+
+        public void Dispose()
+        {
+            GraphicsControl.Dispose();
         }
 
         /// <summary>

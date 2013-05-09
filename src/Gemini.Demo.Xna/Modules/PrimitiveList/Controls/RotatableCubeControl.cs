@@ -73,6 +73,8 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.Controls
                 _yaw += (float) (args.Position.X - args.PreviousPosition.X) * .01f;
                 _pitch += (float) (args.Position.Y - args.PreviousPosition.Y) * .01f;
             }
+
+            base.RaiseHwndMouseMove(args);
         }
 
         /// <summary>

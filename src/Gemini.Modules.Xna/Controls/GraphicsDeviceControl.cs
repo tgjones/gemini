@@ -7,11 +7,13 @@
 #endregion
 
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using Gemini.Modules.Xna.Services;
 using Gemini.Modules.Xna.Util;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -176,6 +178,10 @@ namespace Gemini.Modules.Xna.Controls
 
             // We use the CompositionTarget.Rendering event to trigger the control to draw itself
             CompositionTarget.Rendering += OnCompositionTargetRendering;
+
+            // Check whether the application is active (it almost certainly is, at this point).
+            if (Application.Current.Windows.Cast<Window>().Any(x => x.IsActive))
+                _applicationHasFocus = true;
         }
 
         protected override void Dispose(bool disposing)
@@ -187,8 +193,15 @@ namespace Gemini.Modules.Xna.Controls
                 _graphicsService = null;
             }
 
-            // Unhook the Rendering event so we no longer attempt to draw
+            // Unhook all events.
             CompositionTarget.Rendering -= OnCompositionTargetRendering;
+            if (Application.Current != null)
+            {
+                Application.Current.Activated -= OnApplicationActivated;
+                Application.Current.Deactivated -= OnApplicationDeactivated;
+            }
+            SizeChanged -= OnXnaWindowHostSizeChanged;
+            Loaded -= OnXnaWindowHostLoaded;
 
             base.Dispose(disposing);
         }
@@ -270,8 +283,8 @@ namespace Gemini.Modules.Xna.Controls
                 return;
 
             // This piece of code is copied from the WinForms equivalent
-            string deviceResetError = HandleDeviceReset(width, height);
-            if (!string.IsNullOrEmpty(deviceResetError))
+            var deviceResetStatus = HandleDeviceReset(width, height);
+            if (deviceResetStatus != GraphicsDeviceResetStatus.Normal)
                 return;
 
             // Create the active viewport to which we'll render our content
@@ -286,12 +299,13 @@ namespace Gemini.Modules.Xna.Controls
         }
 
         /// <summary>
-        /// Helper used by BeginDraw. This checks the graphics device status,
+        /// Helper used by <see cref="OnCompositionTargetRendering"/>. 
+        /// This checks the graphics device status,
         /// making sure it is big enough for drawing the current control, and
         /// that the device is not lost. Returns an error string if the device
         /// could not be reset.
         /// </summary>
-        private string HandleDeviceReset(int width, int height)
+        private GraphicsDeviceResetStatus HandleDeviceReset(int width, int height)
         {
             bool deviceNeedsReset;
 
@@ -299,7 +313,7 @@ namespace Gemini.Modules.Xna.Controls
             {
                 case GraphicsDeviceStatus.Lost:
                     // If the graphics device is lost, we cannot use it at all.
-                    return "Graphics device lost";
+                    return GraphicsDeviceResetStatus.Lost;
 
                 case GraphicsDeviceStatus.NotReset:
                     // If device is in the not-reset state, we should try to reset it.
@@ -322,13 +336,20 @@ namespace Gemini.Modules.Xna.Controls
                 {
                     _graphicsService.ResetDevice(width, height);
                 }
-                catch (Exception e)
+                catch
                 {
-                    return "Graphics device reset failed\n\n" + e;
+                    return GraphicsDeviceResetStatus.ResetFailed;
                 }
             }
 
-            return null;
+            return GraphicsDeviceResetStatus.Normal;
+        }
+
+        private enum GraphicsDeviceResetStatus
+        {
+            Normal,
+            Lost,
+            ResetFailed
         }
 
         private void OnXnaWindowHostLoaded(object sender, RoutedEventArgs e)
@@ -336,7 +357,7 @@ namespace Gemini.Modules.Xna.Controls
             // If we don't yet have a GraphicsDeviceService reference, we must add one for this control
             if (_graphicsService == null)
             {
-                _graphicsService = GraphicsDeviceService.AddRef(_hWnd, (int) ActualWidth, (int) ActualHeight);
+                _graphicsService = GraphicsDeviceService.AddRef((int) ActualWidth, (int) ActualHeight);
 
                 // Invoke the LoadContent event
                 RaiseLoadContent(new GraphicsDeviceEventArgs(_graphicsService.GraphicsDevice));
@@ -401,16 +422,16 @@ namespace Gemini.Modules.Xna.Controls
 
             // Fire any events
             var args = new HwndMouseEventArgs(_mouseState);
-            if (fireL && HwndLButtonUp != null)
-                HwndLButtonUp(this, args);
-            if (fireM && HwndMButtonUp != null)
-                HwndMButtonUp(this, args);
-            if (fireR && HwndRButtonUp != null)
-                HwndRButtonUp(this, args);
-            if (fireX1 && HwndX1ButtonUp != null)
-                HwndX1ButtonUp(this, args);
-            if (fireX2 && HwndX2ButtonUp != null)
-                HwndX2ButtonUp(this, args);
+            if (fireL)
+                RaiseHwndLButtonUp(args);
+            if (fireM)
+                RaiseHwndMButtonUp(args);
+            if (fireR)
+                RaiseHwndRButtonUp(args);
+            if (fireX1)
+                RaiseHwndX1ButtonUp(args);
+            if (fireX2)
+                RaiseHwndX2ButtonUp(args);
 
             // The mouse is no longer considered to be in our window
             _mouseInWindow = false;
