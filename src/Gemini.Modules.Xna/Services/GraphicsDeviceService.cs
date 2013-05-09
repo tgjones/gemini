@@ -7,10 +7,14 @@
 #endregion
 
 using System;
+using System.ComponentModel.Composition;
 using System.Threading;
+using System.Windows;
+using System.Windows.Interop;
+using Caliburn.Micro;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Gemini.Modules.Xna.Controls
+namespace Gemini.Modules.Xna.Services
 {
     /// <summary>
     /// Helper class responsible for creating and managing the GraphicsDevice.
@@ -20,11 +24,10 @@ namespace Gemini.Modules.Xna.Controls
     /// interface, which provides notification events for when the device is reset
     /// or disposed.
     /// </summary>
-    class GraphicsDeviceService : IGraphicsDeviceService
+    [Export(typeof(IGraphicsDeviceService))]
+    [Export(typeof(GraphicsDeviceService))]
+    public class GraphicsDeviceService : IGraphicsDeviceService
     {
-        // Singleton device service instance.
-        private static readonly GraphicsDeviceService SingletonInstance = new GraphicsDeviceService();
-
         // Keep track of how many controls are sharing the singletonInstance.
         private static int _referenceCount;
 
@@ -38,9 +41,12 @@ namespace Gemini.Modules.Xna.Controls
         /// </summary>
         public GraphicsDevice GraphicsDevice
         {
-            get { return _graphicsDevice; }
+            get
+            {
+                EnsureGraphicsDevice();
+                return _graphicsDevice;
+            }
         }
-
 
         // IGraphicsDeviceService events.
         public event EventHandler<EventArgs> DeviceCreated;
@@ -52,19 +58,34 @@ namespace Gemini.Modules.Xna.Controls
         /// Constructor is private, because this is a singleton class:
         /// client controls should use the public AddRef method instead.
         /// </summary>
-        private GraphicsDeviceService() { }
+        [Obsolete("This constructor shouldn't be called directly. Instead, you should get the (singleton) instance from the IoC container.")]
+        public GraphicsDeviceService() { }
+
+        private void EnsureGraphicsDevice()
+        {
+            if (_graphicsDevice != null)
+                return;
+
+            // Create the device using the main window handle, and a placeholder size (1,1).
+            // The actual size doesn't matter because whenever we render using this GraphicsDevice,
+            // we will make sure the back buffer is large enough for the window we're rendering into.
+            // Also, the handle doesn't matter because we call GraphicsDevice.Present(...) with the
+            // actual window handle to render into.
+            CreateDevice(new WindowInteropHelper(Application.Current.MainWindow).Handle, 1, 1);
+        }
 
         private void CreateDevice(IntPtr windowHandle, int width, int height)
         {
-            _parameters = new PresentationParameters();
-
-            _parameters.BackBufferWidth = Math.Max(width, 1);
-            _parameters.BackBufferHeight = Math.Max(height, 1);
-            _parameters.BackBufferFormat = SurfaceFormat.Color;
-            _parameters.DepthStencilFormat = DepthFormat.Depth24;
-            _parameters.DeviceWindowHandle = windowHandle;
-            _parameters.PresentationInterval = PresentInterval.Immediate;
-            _parameters.IsFullScreen = false;
+            _parameters = new PresentationParameters
+            {
+                BackBufferWidth = Math.Max(width, 1),
+                BackBufferHeight = Math.Max(height, 1),
+                BackBufferFormat = SurfaceFormat.Color,
+                DepthStencilFormat = DepthFormat.Depth24,
+                DeviceWindowHandle = windowHandle,
+                PresentationInterval = PresentInterval.Immediate,
+                IsFullScreen = false
+            };
 
             _graphicsDevice = new GraphicsDevice(
                 GraphicsAdapter.DefaultAdapter,
@@ -75,23 +96,23 @@ namespace Gemini.Modules.Xna.Controls
                 DeviceCreated(this, EventArgs.Empty);
         }
 
-
         /// <summary>
         /// Gets a reference to the singleton instance.
         /// </summary>
-        public static GraphicsDeviceService AddRef(IntPtr windowHandle, int width, int height)
+        public static GraphicsDeviceService AddRef(int width, int height)
         {
+            var singletonInstance = IoC.Get<GraphicsDeviceService>();
+
             // Increment the "how many controls sharing the device" reference count.
             if (Interlocked.Increment(ref _referenceCount) == 1)
             {
                 // If this is the first control to start using the
                 // device, we must create the device.
-                SingletonInstance.CreateDevice(windowHandle, width, height);
+                singletonInstance.EnsureGraphicsDevice();
             }
 
-            return SingletonInstance;
+            return singletonInstance;
         }
-
 
         /// <summary>
         /// Releases a reference to the singleton instance.
@@ -114,7 +135,6 @@ namespace Gemini.Modules.Xna.Controls
                 _graphicsDevice = null;
             }
         }
-
         
         /// <summary>
         /// Resets the graphics device to whichever is bigger out of the specified

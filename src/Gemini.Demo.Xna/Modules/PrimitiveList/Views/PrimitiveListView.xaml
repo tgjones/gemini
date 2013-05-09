@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Gemini.Demo.Xna.Modules.PrimitiveList.Controls"
              xmlns:gemini="http://schemas.timjones.tw/gemini"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"> 
 	<gemini:ClippingHwndHost>
 		<gemini:ClippingHwndHost.Content>
 			<ScrollViewer Background="White">
