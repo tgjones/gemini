@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -9,7 +9,6 @@ namespace Gemini.Modules.Xna.Controls
 {
     public class ClippingHwndHost : HwndHost
     {
-        private readonly Guid _uniqueId;
         private HwndSource _source;
 
         public static readonly DependencyProperty ContentProperty = DependencyProperty.Register(
@@ -19,10 +18,20 @@ namespace Gemini.Modules.Xna.Controls
         private static void OnContentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var hwndHost = (ClippingHwndHost) d;
+
             if (e.OldValue != null)
+            {
+                if (hwndHost._source != null)
+                    hwndHost._source.RootVisual = null;
                 hwndHost.RemoveLogicalChild(e.OldValue);
+            }
+
             if (e.NewValue != null)
+            {
                 hwndHost.AddLogicalChild(e.NewValue);
+                if (hwndHost._source != null)
+                    hwndHost._source.RootVisual = (Visual) e.NewValue;
+            }
         }
 
         public Visual Content
@@ -31,21 +40,27 @@ namespace Gemini.Modules.Xna.Controls
             set { SetValue(ContentProperty, value); }
         }
 
-        public ClippingHwndHost()
+        protected override IEnumerator LogicalChildren
         {
-            _uniqueId = Guid.NewGuid();
+            get
+            {
+                if (Content != null)
+                    yield return Content;
+            }
         }
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
-            var param = new HwndSourceParameters("GeminiClippingHwndHost" + _uniqueId)
+            var param = new HwndSourceParameters("GeminiClippingHwndHost", (int) Width, (int) Height)
             {
                 ParentWindow = hwndParent.Handle,
-                WindowStyle = NativeMethods.WS_VISIBLE | NativeMethods.WS_CHILD
+                WindowStyle = NativeMethods.WS_VISIBLE | NativeMethods.WS_CHILD,
             };
-            param.SetSize((int) Width, (int) Height);
 
-            _source = new HwndSource(param) { RootVisual = Content };
+            _source = new HwndSource(param)
+            {
+                RootVisual = Content
+            };
 
             return new HandleRef(null, _source.Handle);
         }
@@ -54,6 +69,14 @@ namespace Gemini.Modules.Xna.Controls
         {
             _source.Dispose();
             _source = null;
+        }
+
+        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
+        {
+            // If we don't do this, HwndHost doesn't seem to pick up on all size changes.
+            UpdateWindowPos();
+
+            base.OnRenderSizeChanged(sizeInfo);
         }
     }
 }
