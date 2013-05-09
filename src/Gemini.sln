@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Xna", "Gemin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.Xna", "Gemini.Demo.Xna\Gemini.Demo.Xna.csproj", "{9F269618-D57F-42A1-9C8E-71291BB10588}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector", "Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj", "{0F8463BD-C1B0-4F2B-855D-49B6963B3337}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,16 @@ Global
 		{9F269618-D57F-42A1-9C8E-71291BB10588}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9F269618-D57F-42A1-9C8E-71291BB10588}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9F269618-D57F-42A1-9C8E-71291BB10588}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0F8463BD-C1B0-4F2B-855D-49B6963B3337}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
