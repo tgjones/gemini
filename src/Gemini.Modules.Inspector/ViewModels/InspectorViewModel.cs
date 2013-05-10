@@ -17,8 +17,13 @@ namespace Gemini.Modules.Inspector.ViewModels
             get { return PaneLocation.Right; }
         }
 
-        private object _selectedObject;
-        public object SelectedObject
+        public override double PreferredWidth
+        {
+            get { return 300; }
+        }
+
+        private IInspectableObject _selectedObject;
+        public IInspectableObject SelectedObject
         {
             get { return _selectedObject; }
             set

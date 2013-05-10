@@ -14,6 +14,16 @@ namespace Gemini.Framework
 
 		public abstract PaneLocation PreferredLocation { get; }
 
+	    public virtual double PreferredWidth
+	    {
+            get { return 200; }
+	    }
+
+        public virtual double PreferredHeight
+        {
+            get { return 200; }
+        }
+
 		public virtual Uri IconSource
 		{
 			get { return null; }
