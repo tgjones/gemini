@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="800">
 	<UserControl.Resources>
 		<BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 	</UserControl.Resources>
@@ -17,8 +17,7 @@
 			<Grid.Background>
 				<SolidColorBrush Color="{Binding Background, FallbackValue=White}" />
 			</Grid.Background>
-			<TextBlock Grid.Column="0"
-				   HorizontalAlignment="Center"
+			<TextBlock Grid.Column="0" TextAlignment="{Binding TextAlignment, FallbackValue=Center}"
 				   VerticalAlignment="Center"
 				   FontSize="24"
 				   Text="Welcome to the Gemini Demo!">

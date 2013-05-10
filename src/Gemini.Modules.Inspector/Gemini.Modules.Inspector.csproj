@@ -67,6 +67,10 @@
     <Compile Include="Inspectors\CollapsibleGroupView.xaml.cs">
       <DependentUpon>CollapsibleGroupView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inspectors\EnumEditorView.xaml.cs">
+      <DependentUpon>EnumEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors\EnumEditorViewModel.cs" />
     <Compile Include="Inspectors\IInspector.cs" />
     <Compile Include="Inspectors\CollapsibleGroupViewModel.cs" />
     <Compile Include="Inspectors\ColorEditorView.xaml.cs">
@@ -111,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inspectors\ColorEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inspectors\EnumEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Gemini.Demo.Modules.Home.ViewModels;
 using Gemini.Framework;
@@ -49,6 +50,10 @@ namespace Gemini.Demo.Modules.Home
 		                new ColorEditorViewModel
 		                {
 		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "Foreground")
+		                },
+                        new EnumEditorViewModel<TextAlignment>
+		                {
+		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "TextAlignment")
 		                }
 		            }),
 		            new CollapsibleGroupViewModel("Right Panel", new IInspector[]
