@@ -60,10 +60,14 @@
     <Compile Include="BoundPropertyDescriptor.cs" />
     <Compile Include="Controls\LabelledControl.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
+    <Compile Include="InspectableObject.cs" />
+    <Compile Include="InspectableObjectBuilder.cs" />
+    <Compile Include="InspectorBuilder.cs" />
     <Compile Include="Inspectors\CheckBoxEditorView.xaml.cs">
       <DependentUpon>CheckBoxEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inspectors\CheckBoxEditorViewModel.cs" />
+    <Compile Include="Inspectors\CollapsibleGroupBuilder.cs" />
     <Compile Include="Inspectors\CollapsibleGroupView.xaml.cs">
       <DependentUpon>CollapsibleGroupView.xaml</DependentUpon>
     </Compile>
@@ -71,6 +75,7 @@
       <DependentUpon>EnumEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inspectors\EnumEditorViewModel.cs" />
+    <Compile Include="Inspectors\IEditor.cs" />
     <Compile Include="Inspectors\IInspector.cs" />
     <Compile Include="Inspectors\CollapsibleGroupViewModel.cs" />
     <Compile Include="Inspectors\ColorEditorView.xaml.cs">
@@ -91,6 +96,7 @@
     <Compile Include="Inspectors\RangeEditorViewModel.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ExpressionUtility.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="Views\InspectorView.xaml.cs">
       <DependentUpon>InspectorView.xaml</DependentUpon>
