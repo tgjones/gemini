@@ -4,6 +4,7 @@ using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
+using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
 
 namespace Gemini.Demo.Modules.Startup
@@ -26,6 +27,8 @@ namespace Gemini.Demo.Modules.Startup
 				Assembly.GetExecutingAssembly().GetAssemblyName());
 
 			_output.AppendLine("Started up");
+
+		    Shell.ShowTool(IoC.Get<IInspectorTool>());
 		}
 	}
 }

@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Gemini.Modules.Inspector.Inspectors.ColorEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
+             mc:Ignorable="d">
+	<local:LabelledControl Label="{Binding Name}">
+		<xctk:ColorPicker SelectedColor="{Binding Value}" Width="70" HorizontalAlignment="Left" />
+	</local:LabelledControl>
+</UserControl>
