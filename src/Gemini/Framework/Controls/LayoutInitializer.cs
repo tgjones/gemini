@@ -11,39 +11,40 @@ namespace Gemini.Framework.Controls
 	{
 		public bool BeforeInsertAnchorable(LayoutRoot layout, LayoutAnchorable anchorableToShow, ILayoutContainer destinationContainer)
 		{
-			if (anchorableToShow.Content is ITool)
+		    var tool = anchorableToShow.Content as ITool;
+		    if (tool != null)
 			{
-				var preferredLocation = ((ITool) anchorableToShow.Content).PreferredLocation;
+				var preferredLocation = tool.PreferredLocation;
 				string paneName = GetPaneName(preferredLocation);
 				var toolsPane = layout.Descendents().OfType<LayoutAnchorablePane>().FirstOrDefault(d => d.Name == paneName);
 				if (toolsPane == null)
 				{
-					switch (preferredLocation)
-					{
-						case PaneLocation.Left:
-						{
-							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
-							toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel), Name = paneName };
-							parent.InsertChildAt(0, toolsPane);
-						}
-							break;
-						case PaneLocation.Right:
-						{
-							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
-                            toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(200, GridUnitType.Pixel), Name = paneName };
-							parent.Children.Add(toolsPane);
-						}
-							break;
-						case PaneLocation.Bottom:
-						{
-							var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Vertical);
-                            toolsPane = new LayoutAnchorablePane { DockHeight = new GridLength(200, GridUnitType.Pixel), Name = paneName };
-							parent.Children.Add(toolsPane);
-						}
-							break;
-						default:
-							throw new ArgumentOutOfRangeException();
-					}
+                    switch (preferredLocation)
+                    {
+                        case PaneLocation.Left:
+                            {
+                                var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
+                                toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel), Name = paneName };
+                                parent.InsertChildAt(0, toolsPane);
+                            }
+                            break;
+                        case PaneLocation.Right:
+                            {
+                                var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Horizontal);
+                                toolsPane = new LayoutAnchorablePane { DockWidth = new GridLength(tool.PreferredWidth, GridUnitType.Pixel), Name = paneName };
+                                parent.Children.Add(toolsPane);
+                            }
+                            break;
+                        case PaneLocation.Bottom:
+                            {
+                                var parent = layout.Descendents().OfType<LayoutPanel>().First(d => d.Orientation == Orientation.Vertical);
+                                toolsPane = new LayoutAnchorablePane { DockHeight = new GridLength(tool.PreferredHeight, GridUnitType.Pixel), Name = paneName };
+                                parent.Children.Add(toolsPane);
+                            }
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
 				}
 				toolsPane.Children.Add(anchorableToShow);
 				return true;
