@@ -4,6 +4,6 @@ namespace Gemini.Modules.Inspector
 {
 	public interface IInspectorTool : ITool
 	{
-		object SelectedObject { get; set; }
+        IInspectableObject SelectedObject { get; set; }
 	}
 }
