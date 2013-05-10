@@ -6,8 +6,80 @@
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+		<SolidColorBrush x:Key="GlyphBrush" Color="#444" />
+		
+		<ControlTemplate x:Key="ExpanderToggleButton" TargetType="ToggleButton">
+			<Border Name="Border" 
+					CornerRadius="2,0,0,0">
+				<Path Name="Arrow"
+					  Fill="{StaticResource GlyphBrush}"
+					  HorizontalAlignment="Center"
+					  VerticalAlignment="Center"
+					  Data="M 0 0 L 0 8 L 4 4 Z"/>
+			</Border>
+			<ControlTemplate.Triggers>
+				<Trigger Property="IsChecked" Value="True">
+					<Setter TargetName="Arrow" Property="Data"
+							Value="M 0 0 L 4 4 L 8 0 Z" />
+				</Trigger>
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Foreground"
+							Value="{StaticResource DisabledForegroundBrush}"/>
+					<Setter TargetName="Arrow" Property="Fill"
+							Value="{StaticResource DisabledForegroundBrush}" />
+				</Trigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
+
+		<Style TargetType="Expander">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Expander">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Name="ContentRow" Height="0"/>
+							</Grid.RowDefinitions>
+							<Border Name="Border" Grid.Row="0" 
+									Background="{StaticResource {x:Static SystemColors.ControlLightBrushKey}}">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="20" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<ToggleButton IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+												  OverridesDefaultStyle="True" 
+												  Template="{StaticResource ExpanderToggleButton}" />
+									<ContentPresenter Grid.Column="1"
+													  Margin="4" 
+													  ContentSource="Header" 
+													  RecognizesAccessKey="True" />
+								</Grid>
+							</Border>
+							<Border Name="Content" Grid.Row="1">
+								<ContentPresenter />
+							</Border>
+						</Grid>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsExpanded" Value="True">
+								<Setter TargetName="ContentRow" Property="Height"
+										Value="{Binding DesiredHeight, ElementName=Content}" />
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="False">
+								<Setter Property="Foreground"
+										Value="{StaticResource DisabledForegroundBrush}"/>
+							</Trigger>
+
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
     <Grid>
-		<Expander Header="{Binding Name}" IsExpanded="True">
+		<Expander Header="{Binding Name, FallbackValue='Test'}" IsExpanded="True">
 			<ItemsControl ItemsSource="{Binding Children}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
