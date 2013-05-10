@@ -16,11 +16,11 @@
 				<ColumnDefinition Width="1*" MinWidth="30" />
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="X" />
-			<local:NumericTextBox Grid.Column="1" Value="{Binding X}" VerticalAlignment="Bottom" />
+			<local:NumericTextBox Grid.Column="1" Value="{Binding X}" VerticalAlignment="Center" />
 			<Label Grid.Column="2" Content="Y" />
-			<local:NumericTextBox Grid.Column="3" Value="{Binding Y}" VerticalAlignment="Bottom" />
+			<local:NumericTextBox Grid.Column="3" Value="{Binding Y}" VerticalAlignment="Center" />
 			<Label Grid.Column="4" Content="Z" />
-			<local:NumericTextBox Grid.Column="5" Value="{Binding Z}" VerticalAlignment="Bottom" />
+			<local:NumericTextBox Grid.Column="5" Value="{Binding Z}" VerticalAlignment="Center" />
 		</Grid>
 	</local:LabelledControl>
 </UserControl>
