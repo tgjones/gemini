@@ -40,6 +40,10 @@
 							<Setter TargetName="TextBlock" Property="Visibility" Value="Hidden" />
 							<Setter TargetName="TextBox" Property="Visibility" Value="Visible" />
 						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter TargetName="TextBlock" Property="Foreground"
+									Value="{StaticResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" />
+						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>
 			</Setter.Value>
