@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using Gemini.Framework;
@@ -42,6 +43,18 @@ namespace Gemini.Demo.Modules.Home.ViewModels
 				NotifyOfPropertyChange(() => Foreground);
 			}
 		}
+
+        private TextAlignment _textAlignment;
+        [DisplayName("Text Alignment")]
+        public TextAlignment TextAlignment
+        {
+            get { return _textAlignment; }
+            set
+            {
+                _textAlignment = value;
+                NotifyOfPropertyChange(() => TextAlignment);
+            }
+        }
 
         private Point3D _cameraPosition;
         [DisplayName("Camera Position")]
@@ -88,6 +101,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
 		{
 			Background = Colors.CornflowerBlue;
 			Foreground = Colors.White;
+		    TextAlignment = TextAlignment.Center;
 		    CameraPosition = new Point3D(6, 5, 4);
 		    CameraFieldOfView = 45;
 		    LightPosition = new Point3D(0, 5, 0);
