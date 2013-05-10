@@ -1,6 +1,6 @@
 ﻿namespace Gemini.Modules.Inspector.Inspectors
 {
-    public abstract class EditorBase<TValue> : InspectorBase
+    public abstract class EditorBase<TValue> : InspectorBase, IEditor
     {
         public override string Name
         {

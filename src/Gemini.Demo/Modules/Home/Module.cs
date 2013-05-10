@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Windows;
 using Caliburn.Micro;
 using Gemini.Demo.Modules.Home.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Modules.Inspector;
-using Gemini.Modules.Inspector.Inspectors;
 using Gemini.Modules.PropertyGrid;
 
 namespace Gemini.Demo.Modules.Home
@@ -33,45 +31,17 @@ namespace Gemini.Demo.Modules.Home
 
 			_propertyGrid.SelectedObject = homeViewModel;
 
-		    _inspectorTool.SelectedObject = new InspectableObject(
-		        new IInspector[]
-		        {
-		            new CollapsibleGroupViewModel("Left Panel", new IInspector[]
-		            {
-		                new CheckBoxEditorViewModel
-		                {
-		                    BoundPropertyDescriptor =
-		                        BoundPropertyDescriptor.FromProperty(homeViewModel, "IsLeftPanelVisible")
-		                },
-		                new ColorEditorViewModel
-		                {
-		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "Background")
-		                },
-		                new ColorEditorViewModel
-		                {
-		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "Foreground")
-		                },
-                        new EnumEditorViewModel<TextAlignment>
-		                {
-		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "TextAlignment")
-		                }
-		            }),
-		            new CollapsibleGroupViewModel("Right Panel", new IInspector[]
-		            {
-		                new Point3DEditorViewModel
-		                {
-		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "CameraPosition")
-		                },
-		                new RangeEditorViewModel(1, 180)
-		                {
-		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "CameraFieldOfView")
-		                },
-		                new Point3DEditorViewModel
-		                {
-		                    BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(homeViewModel, "LightPosition")
-		                }
-		            })
-		        });
+		    _inspectorTool.SelectedObject = new InspectableObjectBuilder()
+                .WithCollapsibleGroup("Left Panel", b => b
+                    .WithCheckBoxEditor(homeViewModel, x => x.IsLeftPanelVisible)
+                    .WithColorEditor(homeViewModel, x => x.Background)
+                    .WithColorEditor(homeViewModel, x => x.Foreground)
+                    .WithEnumEditor(homeViewModel, x => x.TextAlignment))
+                .WithCollapsibleGroup("Right Panel", b => b
+                    .WithPoint3DEditor(homeViewModel, x => x.CameraPosition)
+                    .WithRangeEditor(homeViewModel, x => x.CameraFieldOfView, 1, 180)
+                    .WithPoint3DEditor(homeViewModel, x => x.LightPosition))
+		        .ToInspectableObject();
 		}
 
 		private IEnumerable<IResult> OpenHome()
