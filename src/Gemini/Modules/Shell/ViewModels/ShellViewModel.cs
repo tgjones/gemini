@@ -87,10 +87,11 @@ namespace Gemini.Modules.Shell.ViewModels
 
 		public void ShowTool(ITool model)
 		{
-			if (Tools.Contains(model))
-				model.IsVisible = true;
-			else
-				Tools.Add(model);
+		    if (Tools.Contains(model))
+		        model.IsVisible = true;
+		    else
+		        Tools.Add(model);
+		    model.IsSelected = true;
 		}
 
 		public void OpenDocument(IDocument model)
