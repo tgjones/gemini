@@ -97,6 +97,7 @@
     <Compile Include="Framework\Services\IStatusBar.cs" />
     <Compile Include="Framework\Services\PaneLocation.cs" />
     <Compile Include="Framework\Services\ResourceManager.cs" />
+    <Compile Include="Framework\Services\ServiceProvider.cs" />
     <Compile Include="Framework\Tool.cs" />
     <Compile Include="Modules\Shell\Module.cs" />
     <Compile Include="Modules\Shell\ViewModels\MainMenuViewModel.cs" />
