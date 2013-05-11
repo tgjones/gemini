@@ -89,7 +89,7 @@ namespace Gemini.Modules.Xna.Services
 
             _graphicsDevice = new GraphicsDevice(
                 GraphicsAdapter.DefaultAdapter,
-                GraphicsProfile.Reach,
+                GraphicsProfile.HiDef,
                 _parameters);
 
             if (DeviceCreated != null)
