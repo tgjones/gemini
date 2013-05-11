@@ -1,5 +1,6 @@
 ﻿using System;
 using Gemini.Framework;
+using Microsoft.Xna.Framework;
 
 namespace Gemini.Demo.Xna.Modules.SceneViewer.ViewModels
 {
@@ -9,6 +10,17 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.ViewModels
 		{
 			get { return "3D Scene"; }
 		}
+
+	    private Vector3 _position;
+	    public Vector3 Position
+	    {
+            get { return _position; }
+            set
+            {
+                _position = value;
+                NotifyOfPropertyChange(() => Position);
+            }
+	    }
 
         protected override void OnDeactivate(bool close)
         {
