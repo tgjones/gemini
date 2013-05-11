@@ -29,6 +29,17 @@ namespace Gemini.Framework
 			get { return null; }
 		}
 
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                NotifyOfPropertyChange(() => IsSelected);
+            }
+        }
+
 		private bool _isVisible;
 		public bool IsVisible
 		{

@@ -12,6 +12,7 @@ namespace Gemini.Framework
         double PreferredWidth { get; }
         double PreferredHeight { get; }
 
+        bool IsSelected { get; set; }
 		bool IsVisible { get; set; }
 	}
 }
