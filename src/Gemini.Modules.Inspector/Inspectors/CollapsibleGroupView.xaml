@@ -65,13 +65,12 @@
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsExpanded" Value="True">
 								<Setter TargetName="ContentRow" Property="Height"
-										Value="{Binding DesiredHeight, ElementName=Content}" />
+										Value="{Binding Height, ElementName=Content}" />
 							</Trigger>
 							<Trigger Property="IsEnabled" Value="False">
 								<Setter Property="Foreground"
 										Value="{StaticResource DisabledForegroundBrush}"/>
 							</Trigger>
-
 						</ControlTemplate.Triggers>
 					</ControlTemplate>
 				</Setter.Value>
