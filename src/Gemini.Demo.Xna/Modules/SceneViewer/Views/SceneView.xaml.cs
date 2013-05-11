@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Controls;
+using Gemini.Demo.Xna.Modules.SceneViewer.ViewModels;
 using Gemini.Demo.Xna.Primitives;
 using Gemini.Modules.Xna.Controls;
 using Microsoft.Xna.Framework;
@@ -46,7 +46,8 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
             e.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // Create the world-view-projection matrices for the cube and camera
-            Matrix world = Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0f);
+            var position = ((SceneViewModel) DataContext).Position;
+            Matrix world = Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0f) * Matrix.CreateTranslation(position);
             Matrix view = Matrix.CreateLookAt(new Vector3(0, 0, 2.5f), Vector3.Zero, Vector3.Up);
             Matrix projection = Matrix.CreatePerspectiveFieldOfView(1, e.GraphicsDevice.Viewport.AspectRatio, 1, 10);
 
