@@ -44,13 +44,18 @@ namespace Gemini
 
 			var batch = new CompositionBatch();
 
-			batch.AddExportedValue<IWindowManager>(new WindowManager());
-			batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-			batch.AddExportedValue(_container);
+		    BindServices(batch);
             batch.AddExportedValue(mainCatalog);
 
 			_container.Compose(batch);
 		}
+
+        protected virtual void BindServices(CompositionBatch batch)
+        {
+            batch.AddExportedValue<IWindowManager>(new WindowManager());
+            batch.AddExportedValue<IEventAggregator>(new EventAggregator());
+            batch.AddExportedValue(_container);
+        }
 
 		protected override object GetInstance(Type serviceType, string key)
 		{
