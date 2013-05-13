@@ -54,15 +54,30 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.1.9.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.1.9.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Inspectors\XnaColorEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Inspectors\Vector3EditorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\XnaColorToColorConverter.cs" />
     <Compile Include="InspectorExtensions.cs" />
+    <Compile Include="Inspectors\XnaColorEditorView.xaml.cs">
+      <DependentUpon>XnaColorEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors\XnaColorEditorViewModel.cs" />
     <Compile Include="Inspectors\Vector3EditorView.xaml.cs">
       <DependentUpon>Vector3EditorView.xaml</DependentUpon>
     </Compile>
