@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 
@@ -7,6 +8,8 @@ namespace Gemini.Modules.Inspector.ViewModels
     [Export(typeof(IInspectorTool))]
     public class InspectorViewModel : Tool, IInspectorTool
     {
+        public event EventHandler SelectedObjectChanged;
+
         public override string DisplayName
         {
             get { return "Inspector"; }
@@ -23,6 +26,7 @@ namespace Gemini.Modules.Inspector.ViewModels
         }
 
         private IInspectableObject _selectedObject;
+
         public IInspectableObject SelectedObject
         {
             get { return _selectedObject; }
@@ -30,7 +34,14 @@ namespace Gemini.Modules.Inspector.ViewModels
             {
                 _selectedObject = value;
                 NotifyOfPropertyChange(() => SelectedObject);
+                RaiseSelectedObjectChanged();
             }
+        }
+
+        private void RaiseSelectedObjectChanged()
+        {
+            EventHandler handler = SelectedObjectChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
     }
 }
