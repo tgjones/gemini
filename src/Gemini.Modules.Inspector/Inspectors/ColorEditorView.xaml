@@ -7,8 +7,13 @@
              xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
              mc:Ignorable="d">
 	<local:LabelledControl Label="{Binding Name}">
-		<xctk:ColorPicker SelectedColor="{Binding Value}"
+		<StackPanel Orientation="Horizontal">
+			<xctk:ColorPicker SelectedColor="{Binding Value}"
 						  HorizontalAlignment="Left"
 						  Height="23" Width="70" />
+			<local:ScreenColorPicker x:Name="ScreenColorPicker" Margin="3 0 0 0"
+									 ColorHovered="OnScreenColorPickerColorHovered"
+									 ColorPicked="OnScreenColorPickerColorPicked" />
+		</StackPanel>
 	</local:LabelledControl>
 </UserControl>
