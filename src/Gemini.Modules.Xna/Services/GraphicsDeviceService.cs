@@ -143,16 +143,22 @@ namespace Gemini.Modules.Xna.Services
         /// </summary>
         public void ResetDevice(int width, int height)
         {
-            if (DeviceResetting != null)
-                DeviceResetting(this, EventArgs.Empty);
+            int newWidth = Math.Max(_parameters.BackBufferWidth, width);
+            int newHeight = Math.Max(_parameters.BackBufferHeight, height);
 
-            _parameters.BackBufferWidth = Math.Max(_parameters.BackBufferWidth, width);
-            _parameters.BackBufferHeight = Math.Max(_parameters.BackBufferHeight, height);
+            if (newWidth != _parameters.BackBufferWidth || newHeight != _parameters.BackBufferHeight)
+            {
+                if (DeviceResetting != null)
+                    DeviceResetting(this, EventArgs.Empty);
 
-            _graphicsDevice.Reset(_parameters);
+                _parameters.BackBufferWidth = newWidth;
+                _parameters.BackBufferHeight = newHeight;
 
-            if (DeviceReset != null)
-                DeviceReset(this, EventArgs.Empty);
+                _graphicsDevice.Reset(_parameters);
+
+                if (DeviceReset != null)
+                    DeviceReset(this, EventArgs.Empty);
+            }
         }
     }
 }
