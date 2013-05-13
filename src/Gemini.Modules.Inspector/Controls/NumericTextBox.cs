@@ -17,13 +17,36 @@ namespace Gemini.Modules.Inspector.Controls
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             "Value", typeof(double), typeof(NumericTextBox),
-            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, null, OnCoerceValue));
+
+        private static object OnCoerceValue(DependencyObject d, object basevalue)
+        {
+            return ((NumericTextBox) d).CoerceValue((double) basevalue);
+        }
 
         public double Value
         {
             get { return (double) GetValue(ValueProperty); }
             set { SetValue(ValueProperty, value); }
         }
+
+		public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
+			"Minimum", typeof(double?), typeof(NumericTextBox));
+
+		public double? Minimum
+		{
+			get { return (double?)GetValue(MinimumProperty); }
+			set { SetValue(MinimumProperty, value); }
+		}
+
+		public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
+			"Maximum", typeof(double?), typeof(NumericTextBox));
+
+		public double? Maximum
+		{
+			get { return (double?)GetValue(MaximumProperty); }
+			set { SetValue(MaximumProperty, value); }
+		}
 
         public static readonly DependencyProperty ModeProperty = DependencyProperty.Register(
             "Mode", typeof(NumericTextBoxMode), typeof(NumericTextBox),
@@ -58,7 +81,7 @@ namespace Gemini.Modules.Inspector.Controls
                 mouseMoved = true;
 
                 var newPosition = System.Windows.Forms.Cursor.Position;
-                Value += (newPosition.X - originalPosition.X) / 50.0;
+                Value = CoerceValue(Value + (newPosition.X - originalPosition.X) / 50.0);
 
                 System.Windows.Forms.Cursor.Position = originalPosition;
             };
@@ -71,6 +94,7 @@ namespace Gemini.Modules.Inspector.Controls
                 if (!mouseMoved)
                 {
                     Mode = NumericTextBoxMode.TextBox;
+                    _textBox.SelectAll();
                     _textBox.Focus();
                 }
             };
@@ -84,6 +108,15 @@ namespace Gemini.Modules.Inspector.Controls
             _textBox.LostFocus += (sender, e) => Mode = NumericTextBoxMode.Normal;
 
             base.OnApplyTemplate();
+        }
+
+        private double CoerceValue(double newValue)
+        {
+            if (Minimum != null && newValue < Minimum.Value)
+                return Minimum.Value;
+            if (Maximum != null && newValue > Maximum.Value)
+                return Maximum.Value;
+            return newValue;
         }
     }
 
