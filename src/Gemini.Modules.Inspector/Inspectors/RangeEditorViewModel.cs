@@ -1,21 +1,21 @@
 ﻿namespace Gemini.Modules.Inspector.Inspectors
 {
-    public class RangeEditorViewModel : EditorBase<double>
+    public class RangeEditorViewModel<T> : EditorBase<T>
     {
-        private readonly double _minimum;
-        private readonly double _maximum;
+        private readonly T _minimum;
+        private readonly T _maximum;
 
-        public double Minimum
+        public T Minimum
         {
             get { return _minimum; }
         }
 
-        public double Maximum
+        public T Maximum
         {
             get { return _maximum; }
         }
 
-        public RangeEditorViewModel(double minimum, double maximum)
+        public RangeEditorViewModel(T minimum, T maximum)
         {
             _minimum = minimum;
             _maximum = maximum;

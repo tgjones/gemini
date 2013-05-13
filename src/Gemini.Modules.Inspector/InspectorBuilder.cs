@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using Gemini.Modules.Inspector.Inspectors;
 using Gemini.Modules.Inspector.Util;
 
@@ -28,14 +30,14 @@ namespace Gemini.Modules.Inspector
             return (TBuilder) this;
         }
 
-        public TBuilder WithCheckBoxEditor<T, TProperty>(T instance, Expression<Func<T, TProperty>> propertyExpression)
+        public TBuilder WithCheckBoxEditor<T>(T instance, Expression<Func<T, bool>> propertyExpression)
         {
-            return WithEditor<T, TProperty, CheckBoxEditorViewModel>(instance, propertyExpression);
+            return WithEditor<T, bool, CheckBoxEditorViewModel>(instance, propertyExpression);
         }
 
-        public TBuilder WithColorEditor<T, TProperty>(T instance, Expression<Func<T, TProperty>> propertyExpression)
+        public TBuilder WithColorEditor<T>(T instance, Expression<Func<T, Color>> propertyExpression)
         {
-            return WithEditor<T, TProperty, ColorEditorViewModel>(instance, propertyExpression);
+            return WithEditor<T, Color, ColorEditorViewModel>(instance, propertyExpression);
         }
 
         public TBuilder WithEnumEditor<T, TProperty>(T instance, Expression<Func<T, TProperty>> propertyExpression)
@@ -43,14 +45,19 @@ namespace Gemini.Modules.Inspector
             return WithEditor<T, TProperty, EnumEditorViewModel<TProperty>>(instance, propertyExpression);
         }
 
-        public TBuilder WithPoint3DEditor<T, TProperty>(T instance, Expression<Func<T, TProperty>> propertyExpression)
+        public TBuilder WithPoint3DEditor<T>(T instance, Expression<Func<T, Point3D>> propertyExpression)
         {
-            return WithEditor<T, TProperty, Point3DEditorViewModel>(instance, propertyExpression);
+            return WithEditor<T, Point3D, Point3DEditorViewModel>(instance, propertyExpression);
         }
 
-        public TBuilder WithRangeEditor<T, TProperty>(T instance, Expression<Func<T, TProperty>> propertyExpression, double minimum, double maximum)
+        public TBuilder WithRangeEditor<T>(T instance, Expression<Func<T, float>> propertyExpression, float minimum, float maximum)
         {
-            return WithEditor(instance, propertyExpression, new RangeEditorViewModel(minimum, maximum));
+            return WithEditor(instance, propertyExpression, new RangeEditorViewModel<float>(minimum, maximum));
+        }
+
+        public TBuilder WithRangeEditor<T>(T instance, Expression<Func<T, double>> propertyExpression, double minimum, double maximum)
+        {
+            return WithEditor(instance, propertyExpression, new RangeEditorViewModel<double>(minimum, maximum));
         }
 
         public TBuilder WithEditor<T, TProperty, TEditor>(T instance, Expression<Func<T, TProperty>> propertyExpression)
