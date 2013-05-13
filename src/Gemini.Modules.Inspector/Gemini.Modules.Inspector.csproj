@@ -60,6 +60,7 @@
     <Compile Include="BoundPropertyDescriptor.cs" />
     <Compile Include="Controls\LabelledControl.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
+    <Compile Include="Controls\ScreenColorPicker.cs" />
     <Compile Include="InspectableObject.cs" />
     <Compile Include="InspectableObjectBuilder.cs" />
     <Compile Include="InspectorBuilder.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Views\InspectorView.xaml.cs">
       <DependentUpon>InspectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Win32\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gemini\Gemini.csproj">
@@ -145,7 +147,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\eyedropper_16xLG.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

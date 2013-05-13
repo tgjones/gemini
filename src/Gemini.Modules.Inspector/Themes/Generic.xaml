@@ -22,8 +22,8 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-	
-    <Style TargetType="local:NumericTextBox">
+
+	<Style TargetType="local:NumericTextBox">
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="local:NumericTextBox">
@@ -45,6 +45,16 @@
 									Value="{StaticResource {x:Static SystemColors.InactiveCaptionTextBrushKey}}" />
 						</Trigger>
 					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="local:ScreenColorPicker">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="local:ScreenColorPicker">
+					<Image Source="/Gemini.Modules.Inspector;component/Resources/eyedropper_16xLG.png" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
