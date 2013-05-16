@@ -80,8 +80,12 @@ namespace Gemini.Modules.Shell.ViewModels
 
 		protected override void OnViewLoaded(object view)
 		{
+            foreach (var module in _modules)
+                module.PreInitialize();
 			foreach (var module in _modules)
 				module.Initialize();
+            foreach (var module in _modules)
+                module.PostInitialize();
 			base.OnViewLoaded(view);
 		}
 

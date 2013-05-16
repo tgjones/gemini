@@ -2,6 +2,8 @@
 {
 	public interface IModule
 	{
+        void PreInitialize();
 		void Initialize();
+        void PostInitialize();
 	}
 }
