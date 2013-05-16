@@ -33,6 +33,9 @@ namespace Gemini.Modules.Xna.Controls
         // The HWND we present to when rendering
         private IntPtr _hWnd;
 
+        // For holding previous hWnd focus
+        private IntPtr _hWndPrev;
+
         // The GraphicsDeviceService that provides and manages our GraphicsDevice
         private GraphicsDeviceService _graphicsService;
 
@@ -159,6 +162,11 @@ namespace Gemini.Modules.Xna.Controls
         /// Invoked when the control gets a mouse leave message.
         /// </summary>
         public event EventHandler<HwndMouseEventArgs> HwndMouseLeave;
+
+        /// <summary>
+        /// Invoked when the control recieves a mouse wheel delta.
+        /// </summary>
+        public event EventHandler<HwndMouseEventArgs> HwndMouseWheel;
 
         #endregion
 
@@ -492,6 +500,13 @@ namespace Gemini.Modules.Xna.Controls
         {
             switch (msg)
             {
+                case NativeMethods.WM_MOUSEWHEEL:
+                    if (_mouseInWindow)
+                    {
+                        int delta = wParam.ToInt32();
+                        RaiseHwndMouseWheel(new HwndMouseEventArgs(_mouseState, delta, 0));
+                    }
+                    break;
                 case NativeMethods.WM_LBUTTONDOWN:
                     _mouseState.LeftButton = MouseButtonState.Pressed;
                     RaiseHwndLButtonDown(new HwndMouseEventArgs(_mouseState));
@@ -576,6 +591,10 @@ namespace Gemini.Modules.Xna.Controls
 
                         RaiseHwndMouseEnter(new HwndMouseEventArgs(_mouseState));
 
+                        // Track the previously focused window, and set focus to this window.
+                        _hWndPrev = NativeMethods.GetFocus();
+                        NativeMethods.SetFocus(_hWnd);
+
                         // send the track mouse event so that we get the WM_MOUSELEAVE message
                         var tme = new NativeMethods.TRACKMOUSEEVENT
                         {
@@ -603,6 +622,8 @@ namespace Gemini.Modules.Xna.Controls
                     ResetMouseState();
 
                     RaiseHwndMouseLeave(new HwndMouseEventArgs(_mouseState));
+
+                    NativeMethods.SetFocus(_hWndPrev);
 
                     break;
             }
@@ -732,6 +753,13 @@ namespace Gemini.Modules.Xna.Controls
         protected virtual void RaiseHwndMouseMove(HwndMouseEventArgs args)
         {
             var handler = HwndMouseMove;
+            if (handler != null)
+                handler(this, args);
+        }
+
+        protected virtual void RaiseHwndMouseWheel(HwndMouseEventArgs args)
+        {
+            var handler = HwndMouseWheel;
             if (handler != null)
                 handler(this, args);
         }

@@ -12,6 +12,9 @@
 									  RenderXna="OnGraphicsControlRenderXna" 
 									  HwndMouseMove="OnGraphicsControlMouseMove"
 									  HwndLButtonDown="OnGraphicsControlHwndLButtonDown"
-									  HwndLButtonUp="OnGraphicsControlHwndLButtonUp" />
+									  HwndLButtonUp="OnGraphicsControlHwndLButtonUp"
+									  HwndMouseWheel="OnGraphicsControlHwndMouseWheel"
+									  KeyDown="OnGraphicsControlKeyDown"
+									  KeyUp="OnGraphicsControlKeyUp" />
 	</Grid>
 </UserControl>

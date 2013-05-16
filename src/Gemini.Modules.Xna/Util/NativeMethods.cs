@@ -33,6 +33,7 @@ namespace Gemini.Modules.Xna.Util
         public const int WM_MBUTTONDOWN = 0x0207;
         public const int WM_MBUTTONUP = 0x0208;
         public const int WM_MBUTTONDBLCLK = 0x0209;
+        public const int WM_MOUSEWHEEL = 0x020A;
         public const int WM_XBUTTONDOWN = 0x020B;
         public const int WM_XBUTTONUP = 0x020C;
         public const int WM_XBUTTONDBLCLK = 0x020D;
@@ -137,6 +138,12 @@ namespace Gemini.Modules.Xna.Util
 
         [DllImport("user32.dll")]
         public static extern int ScreenToClient(IntPtr hWnd, ref POINT pt);
+
+        [DllImport("user32.dll")]
+        public static extern int SetFocus(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetFocus();
 
         #endregion
 
