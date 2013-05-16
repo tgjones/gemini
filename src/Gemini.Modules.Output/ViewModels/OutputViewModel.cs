@@ -39,7 +39,7 @@ namespace Gemini.Modules.Output.ViewModels
 			_writer = new OutputWriter(this);
 
 			Observable.FromEventPattern<EventHandler, EventArgs>(h => TextChanged += h, h => TextChanged -= h)
-				.Throttle(TimeSpan.FromSeconds(1))
+				.Buffer(TimeSpan.FromSeconds(0.1), 1000)
 				.Subscribe(_ =>
 				{
 					if (_view != null)
