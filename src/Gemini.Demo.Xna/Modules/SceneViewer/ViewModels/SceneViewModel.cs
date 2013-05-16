@@ -6,7 +6,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.ViewModels
 {
 	public class SceneViewModel : Document
 	{
-		public override string DisplayName
+	    public override string DisplayName
 		{
 			get { return "3D Scene"; }
 		}
@@ -21,8 +21,8 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.ViewModels
                 NotifyOfPropertyChange(() => Position);
             }
 	    }
-
-        protected override void OnDeactivate(bool close)
+        
+	    protected override void OnDeactivate(bool close)
         {
             if (close)
             {

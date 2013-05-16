@@ -133,6 +133,10 @@
       <Project>{0f8463bd-c1b0-4f2b-855d-49b6963b3337}</Project>
       <Name>Gemini.Modules.Inspector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gemini.Modules.Output\Gemini.Modules.Output.csproj">
+      <Project>{b78aacc8-5a16-4951-83ad-b78d1c80a258}</Project>
+      <Name>Gemini.Modules.Output</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gemini.Modules.Xna\Gemini.Modules.Xna.csproj">
       <Project>{DCE32AFD-5E68-45CF-B540-5294930E249E}</Project>
       <Name>Gemini.Modules.Xna</Name>
