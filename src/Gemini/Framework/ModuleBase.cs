@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Services;
+using Gemini.Framework.ToolBars;
 
 namespace Gemini.Framework
 {
@@ -18,6 +19,11 @@ namespace Gemini.Framework
 		{
 			get { return _shell.MainMenu; }
 		}
+
+        protected IToolBar ToolBar
+        {
+            get { return _shell.ToolBar; }
+        }
 
         public virtual void PreInitialize()
         {
