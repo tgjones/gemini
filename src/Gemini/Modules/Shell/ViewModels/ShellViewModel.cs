@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Framework.Services;
+using Gemini.Framework.ToolBars;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
@@ -54,6 +55,24 @@ namespace Gemini.Modules.Shell.ViewModels
 		{
 			get { return _mainMenu; }
 		}
+
+        private bool _isToolBarVisible;
+        public bool IsToolBarVisible
+        {
+            get { return _isToolBarVisible; }
+            set
+            {
+                _isToolBarVisible = value;
+                NotifyOfPropertyChange(() => IsToolBarVisible);
+            }
+        }
+
+        [Import]
+        private IToolBar _toolBar;
+        public IToolBar ToolBar
+        {
+            get { return _toolBar; }
+        }
 
 		[Import]
 		private IStatusBar _statusBar;

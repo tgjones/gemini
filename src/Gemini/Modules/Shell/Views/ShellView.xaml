@@ -19,9 +19,14 @@
 	</Window.Resources>
 
 	<DockPanel>
-		<controls:Menu ItemsSource="{Binding MainMenu}"
-			  ItemTemplate="{StaticResource menuTemplate}" 
-              DockPanel.Dock="Top" />
+		<StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+			<controls:Menu ItemsSource="{Binding MainMenu}"
+						   ItemTemplate="{StaticResource menuTemplate}" />
+
+			<ToolBarTray Visibility="{Binding IsToolBarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+				<controls:ToolBar ItemsSource="{Binding ToolBar}" />
+			</ToolBarTray>
+		</StackPanel>
 
 		<StatusBar DockPanel.Dock="Bottom">
 			<StatusBarItem>

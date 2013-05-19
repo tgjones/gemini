@@ -2,6 +2,7 @@
 using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Menus;
+using Gemini.Framework.ToolBars;
 
 namespace Gemini.Framework.Services
 {
@@ -10,7 +11,12 @@ namespace Gemini.Framework.Services
 		WindowState WindowState { get; set; }
 		string Title { get; set; }
 		ImageSource Icon { get; set; }
+
 		IMenu MainMenu { get; }
+
+        bool IsToolBarVisible { get; set; }
+        IToolBar ToolBar { get; }
+
 		IStatusBar StatusBar { get; }
 
 		IDocument ActiveItem { get; }

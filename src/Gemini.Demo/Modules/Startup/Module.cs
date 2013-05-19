@@ -22,6 +22,7 @@ namespace Gemini.Demo.Modules.Startup
 		{
 			Shell.WindowState = WindowState.Maximized;
 			Shell.Title = "Gemini Demo";
+            Shell.IsToolBarVisible = true;
 			Shell.StatusBar.Message = "Hello world!";
 			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());
