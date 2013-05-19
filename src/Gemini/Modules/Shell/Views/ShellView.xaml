@@ -23,9 +23,8 @@
 			<controls:Menu ItemsSource="{Binding MainMenu}"
 						   ItemTemplate="{StaticResource menuTemplate}" />
 
-			<ToolBarTray Visibility="{Binding IsToolBarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-				<controls:ToolBar ItemsSource="{Binding ToolBar}" />
-			</ToolBarTray>
+			<ToolBarTray x:Name="ToolBarTray" 
+						 Visibility="{Binding ToolBars.Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
 		</StackPanel>
 
 		<StatusBar DockPanel.Dock="Bottom">

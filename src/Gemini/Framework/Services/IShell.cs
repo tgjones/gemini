@@ -13,10 +13,7 @@ namespace Gemini.Framework.Services
 		ImageSource Icon { get; set; }
 
 		IMenu MainMenu { get; }
-
-        bool IsToolBarVisible { get; set; }
-        IToolBar ToolBar { get; }
-
+        IToolBars ToolBars { get; }
 		IStatusBar StatusBar { get; }
 
 		IDocument ActiveItem { get; }

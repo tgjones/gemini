@@ -77,6 +77,11 @@ namespace Gemini.Framework.ToolBars
 			return WithIcon(Assembly.GetCallingAssembly(), path);
 		}
 
+        public StandardToolBarItem WithIcon(Assembly source)
+        {
+            return WithIcon(source, "Resources/Icons/" + Name.Replace(" ", string.Empty) + ".png");
+        }
+
         public StandardToolBarItem WithIcon(Assembly source, string path)
 		{
 			var manager = IoC.Get<IResourceManager>();

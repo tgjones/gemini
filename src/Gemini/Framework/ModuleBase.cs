@@ -20,9 +20,9 @@ namespace Gemini.Framework
 			get { return _shell.MainMenu; }
 		}
 
-        protected IToolBar ToolBar
+        protected IToolBars ToolBars
         {
-            get { return _shell.ToolBar; }
+            get { return _shell.ToolBars; }
         }
 
         public virtual void PreInitialize()
