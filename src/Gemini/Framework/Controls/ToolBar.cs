@@ -29,7 +29,7 @@ namespace Gemini.Framework.Controls
             return new Button
             {
                 Style = (Style) FindResource("ToolBarButton")
-            }; ;
+            };
         }
     }
 }

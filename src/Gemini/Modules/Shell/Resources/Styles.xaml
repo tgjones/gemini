@@ -22,7 +22,7 @@
 		   BasedOn="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}">
 		<Setter Property="Content" Value="{Binding Icon}" />
 		<Setter Property="ToolTip" Value="{Binding InputGestureText}" />
-		<Setter Property="IsEnabled" Value="{Binding IsChecked}" />
+		<Setter Property="IsChecked" Value="{Binding IsChecked}" />
 		<Setter Property="cal:Action.Target" Value="{Binding}" />
 		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
 	</Style>
