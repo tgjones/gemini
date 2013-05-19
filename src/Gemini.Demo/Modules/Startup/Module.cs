@@ -1,11 +1,15 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Framework.Results;
 using Gemini.Framework.Services;
+using Gemini.Framework.ToolBars;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using Microsoft.Win32;
 
 namespace Gemini.Demo.Modules.Startup
 {
@@ -20,9 +24,14 @@ namespace Gemini.Demo.Modules.Startup
 
 		public override void Initialize()
 		{
+            Shell.ToolBars.Visible = true;
+		    Shell.ToolBars.Add(new ToolBarModel
+		    {
+		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly)
+		    });
+
 			Shell.WindowState = WindowState.Maximized;
 			Shell.Title = "Gemini Demo";
-            Shell.IsToolBarVisible = true;
 			Shell.StatusBar.Message = "Hello world!";
 			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());
@@ -31,5 +40,12 @@ namespace Gemini.Demo.Modules.Startup
 
 		    Shell.ShowTool(IoC.Get<IInspectorTool>());
 		}
+
+        private IEnumerable<IResult> OpenFile()
+        {
+            var dialog = new OpenFileDialog();
+            yield return Show.Dialog(dialog);
+            yield return Show.Document(dialog.FileName);
+        }
 	}
 }
