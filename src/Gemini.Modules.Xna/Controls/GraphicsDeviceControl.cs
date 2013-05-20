@@ -503,7 +503,7 @@ namespace Gemini.Modules.Xna.Controls
                 case NativeMethods.WM_MOUSEWHEEL:
                     if (_mouseInWindow)
                     {
-                        int delta = wParam.ToInt32();
+                        int delta = NativeMethods.GetWheelDeltaWParam(wParam.ToInt32());
                         RaiseHwndMouseWheel(new HwndMouseEventArgs(_mouseState, delta, 0));
                     }
                     break;

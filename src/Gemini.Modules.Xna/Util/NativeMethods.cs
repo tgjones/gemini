@@ -159,6 +159,11 @@ namespace Gemini.Modules.Xna.Util
             return HighWord(lParam);
         }
 
+        public static int GetWheelDeltaWParam(int wParam)
+        {
+            return HighWord(wParam);
+        }
+
         public static int LowWord(int input)
         {
             return (int)(input & 0xffff);
