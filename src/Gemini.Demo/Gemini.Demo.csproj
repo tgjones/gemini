@@ -82,6 +82,11 @@
     <Compile Include="Modules\Home\Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Settings\Module.cs" />
+    <Compile Include="Modules\Settings\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
@@ -134,6 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Modules\Home\Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\Settings\Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

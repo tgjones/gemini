@@ -72,6 +72,7 @@
     <Compile Include="Framework\IDocument.cs" />
     <Compile Include="Framework\IModule.cs" />
     <Compile Include="Framework\ITool.cs" />
+    <Compile Include="Framework\IWindow.cs" />
     <Compile Include="Framework\LayoutItemBase.cs" />
     <Compile Include="Framework\Menus\CheckableMenuItem.cs" />
     <Compile Include="Framework\Menus\MenuItemBase.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Framework\Results\Show.cs" />
     <Compile Include="Framework\Results\ShowCommonDialogResult.cs" />
     <Compile Include="Framework\Results\ShowToolResult.cs" />
+    <Compile Include="Framework\Results\ShowWindowResult.cs" />
     <Compile Include="Framework\Services\ExtensionMethods.cs" />
     <Compile Include="Framework\Services\IEditorProvider.cs" />
     <Compile Include="Framework\Services\IInputManager.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Framework\ToolBars\ToolBarItemBase.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemSeparator.cs" />
     <Compile Include="Framework\ToolBars\ToolBars.cs" />
+    <Compile Include="Framework\Window.cs" />
     <Compile Include="Modules\Shell\Module.cs" />
     <Compile Include="Modules\Shell\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
