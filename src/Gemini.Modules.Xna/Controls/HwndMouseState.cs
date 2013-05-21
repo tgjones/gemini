@@ -43,13 +43,8 @@ namespace Gemini.Modules.Xna.Controls
         public MouseButtonState X2Button;
         
         /// <summary>
-        /// The current position of the mouse.
+        /// The current position of the mouse in screen coordinates.
         /// </summary>
-        public Point Position;
-
-        /// <summary>
-        /// The previous position of the mouse.
-        /// </summary>
-        public Point PreviousPosition;
+        public Point ScreenPosition;
     }
 }

@@ -19,6 +19,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
         private readonly CubePrimitive _cube;
 
         // A yaw and pitch applied to the viewport based on input
+        private System.Windows.Point _previousPosition;
         private float _yaw;
         private float _pitch;
 
@@ -46,7 +47,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
         /// <summary>
         /// Invoked when our second control is ready to render.
         /// </summary>
-        private void OnGraphicsControlRenderXna(object sender, GraphicsDeviceEventArgs e)
+        private void OnGraphicsControlDraw(object sender, DrawEventArgs e)
         {
             e.GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -61,27 +62,33 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
         }
 
         // Invoked when the mouse moves over the second viewport
-        private void OnGraphicsControlMouseMove(object sender, HwndMouseEventArgs e)
+        private void OnGraphicsControlMouseMove(object sender, MouseEventArgs e)
         {
+            var position = e.GetPosition(this);
+
             // If the left or right buttons are down, we adjust the yaw and pitch of the cube
             if (e.LeftButton == MouseButtonState.Pressed ||
                 e.RightButton == MouseButtonState.Pressed)
             {
-                _yaw += (float) (e.Position.X - e.PreviousPosition.X) * .01f;
-                _pitch += (float) (e.Position.Y - e.PreviousPosition.Y) * .01f;
+                _yaw += (float) (position.X - _previousPosition.X) * .01f;
+                _pitch += (float) (position.Y - _previousPosition.Y) * .01f;
+                GraphicsControl.Invalidate();
             }
+
+            _previousPosition = position;
         }
 
         // We use the left mouse button to do exclusive capture of the mouse so we can drag and drag
         // to rotate the cube without ever leaving the control
-        private void OnGraphicsControlHwndLButtonDown(object sender, HwndMouseEventArgs e)
+        private void OnGraphicsControlHwndLButtonDown(object sender, MouseEventArgs e)
         {
             _output.AppendLine("Mouse left button down");
+            _previousPosition = e.GetPosition(this);
             GraphicsControl.CaptureMouse();
             GraphicsControl.Focus();
         }
 
-        private void OnGraphicsControlHwndLButtonUp(object sender, HwndMouseEventArgs e)
+        private void OnGraphicsControlHwndLButtonUp(object sender, MouseEventArgs e)
         {
             _output.AppendLine("Mouse left button up");
             GraphicsControl.ReleaseMouseCapture();
@@ -97,9 +104,9 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Views
             _output.AppendLine("Key up: " + e.Key);
         }
 
-        private void OnGraphicsControlHwndMouseWheel(object sender, HwndMouseEventArgs e)
+        private void OnGraphicsControlHwndMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            _output.AppendLine("Mouse wheel: " + e.WheelDelta);
+            _output.AppendLine("Mouse wheel: " + e.Delta);
         }
     }
 }

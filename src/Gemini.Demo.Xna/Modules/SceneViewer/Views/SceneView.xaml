@@ -7,14 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<Grid>
-		<gemini:GraphicsDeviceControl x:Name="GraphicsControl"
-									  LoadContent="OnGraphicsControlLoadContent"
-									  RenderXna="OnGraphicsControlRenderXna" 
-									  HwndMouseMove="OnGraphicsControlMouseMove"
-									  HwndLButtonDown="OnGraphicsControlHwndLButtonDown"
-									  HwndLButtonUp="OnGraphicsControlHwndLButtonUp"
-									  HwndMouseWheel="OnGraphicsControlHwndMouseWheel"
-									  KeyDown="OnGraphicsControlKeyDown"
-									  KeyUp="OnGraphicsControlKeyUp" />
+		<gemini:DrawingSurface x:Name="GraphicsControl"
+							   LoadContent="OnGraphicsControlLoadContent"
+							   Draw="OnGraphicsControlDraw" 
+							   MouseMove="OnGraphicsControlMouseMove"
+							   MouseLeftButtonDown="OnGraphicsControlHwndLButtonDown"
+							   MouseLeftButtonUp="OnGraphicsControlHwndLButtonUp"
+							   MouseWheel="OnGraphicsControlHwndMouseWheel"
+							   KeyDown="OnGraphicsControlKeyDown"
+							   KeyUp="OnGraphicsControlKeyUp" />
 	</Grid>
 </UserControl>

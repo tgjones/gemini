@@ -8,6 +8,7 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.Controls
     public class RotatableCubeControl : GraphicsDeviceControl
     {
         private float _yaw, _pitch;
+        private System.Windows.Point _originalPosition;
 
         public static readonly DependencyProperty PrimitiveProperty = DependencyProperty.Register(
             "Primitive", typeof(GeometricPrimitive), typeof(RotatableCubeControl));
@@ -44,7 +45,7 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.Controls
         /// </summary>
         protected override void RaiseRenderXna(GraphicsDeviceEventArgs args)
         {
-            args.GraphicsDevice.Clear(Color.CornflowerBlue);
+            args.GraphicsDevice.Clear(Color.LightGreen);
 
             if (Primitive != null)
             {
@@ -67,11 +68,14 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.Controls
         protected override void RaiseHwndMouseMove(HwndMouseEventArgs args)
         {
             // If the left or right buttons are down, we adjust the yaw and pitch of the cube
-            if (args.LeftButton == System.Windows.Input.MouseButtonState.Pressed ||
-                args.RightButton == System.Windows.Input.MouseButtonState.Pressed)
+            if (IsMouseCaptured)
             {
-                _yaw += (float) (args.Position.X - args.PreviousPosition.X) * .01f;
-                _pitch += (float) (args.Position.Y - args.PreviousPosition.Y) * .01f;
+                var position = HwndMouse.GetCursorPosition();
+
+                _yaw += (float) (position.X - _originalPosition.X) * .01f;
+                _pitch += (float) (position.Y - _originalPosition.Y) * .01f;
+
+                HwndMouse.SetCursorPosition(_originalPosition);
             }
 
             base.RaiseHwndMouseMove(args);
@@ -84,12 +88,15 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.Controls
         /// <param name="args"></param>
         protected override void RaiseHwndLButtonDown(HwndMouseEventArgs args)
         {
+            _originalPosition = HwndMouse.GetCursorPosition();
             CaptureMouse();
+            HwndMouse.HideCursor();
             base.RaiseHwndLButtonDown(args);
         }
 
         protected override void RaiseHwndLButtonUp(HwndMouseEventArgs args)
         {
+            HwndMouse.ShowCursor();
             ReleaseMouseCapture();
             base.RaiseHwndLButtonUp(args);
         }

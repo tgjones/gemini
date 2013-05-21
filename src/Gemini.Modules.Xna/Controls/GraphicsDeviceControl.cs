@@ -45,19 +45,14 @@ namespace Gemini.Modules.Xna.Controls
         // Track if the mouse is in the window
         private bool _mouseInWindow;
 
+        // Track the previous mouse position
+        private Point _previousPosition;
+
         // Track the mouse state
         private readonly HwndMouseState _mouseState = new HwndMouseState();
 
         // Tracking whether we've "capture" the mouse
         private bool _isMouseCaptured;
-
-        // The screen coordinates of the mouse when captured
-        private int _capturedMouseX;
-        private int _capturedMouseY;
-
-        // The client coordinates of the mouse when captured
-        private int _capturedMouseClientX;
-        private int _capturedMouseClientY;
 
         #endregion
 
@@ -170,6 +165,15 @@ namespace Gemini.Modules.Xna.Controls
 
         #endregion
 
+        #region Properties
+
+        public new bool IsMouseCaptured
+        {
+            get { return _isMouseCaptured; }
+        }
+
+        #endregion
+
         #region Construction and Disposal
 
         public GraphicsDeviceControl()
@@ -233,20 +237,8 @@ namespace Gemini.Modules.Xna.Controls
             if (_isMouseCaptured)
                 return;
 
-            NativeMethods.ShowCursor(false);
+            NativeMethods.SetCapture(_hWnd);
             _isMouseCaptured = true;
-
-            // Store the current cursor position so we can reset the cursor back
-            // whenever we get a move message
-            var p = new NativeMethods.POINT();
-            NativeMethods.GetCursorPos(ref p);
-            _capturedMouseX = p.X;
-            _capturedMouseY = p.Y;
-
-            // Get the client position of this point
-            NativeMethods.ScreenToClient(_hWnd, ref p);
-            _capturedMouseClientX = p.X;
-            _capturedMouseClientY = p.Y;
         }
 
         /// <summary>
@@ -254,11 +246,11 @@ namespace Gemini.Modules.Xna.Controls
         /// </summary>
         public new void ReleaseMouseCapture()
         {
-            // Don't do anything if the mouse isn't captured
+            // Don't do anything if the mouse is not captured
             if (!_isMouseCaptured)
                 return;
 
-            NativeMethods.ShowCursor(true);
+            NativeMethods.ReleaseCapture();
             _isMouseCaptured = false;
         }
 
@@ -268,16 +260,6 @@ namespace Gemini.Modules.Xna.Controls
 
         private void OnCompositionTargetRendering(object sender, EventArgs e)
         {
-            // If we've captured the mouse, reset the cursor back to the captured position
-            if (_isMouseCaptured &&
-                (int) _mouseState.Position.X != _capturedMouseX &&
-                (int) _mouseState.Position.Y != _capturedMouseY)
-            {
-                NativeMethods.SetCursorPos(_capturedMouseX, _capturedMouseY);
-
-                _mouseState.Position = _mouseState.PreviousPosition = new Point(_capturedMouseClientX, _capturedMouseClientY);
-            }
-
             // If we have no graphics service, we can't draw
             if (_graphicsService == null)
                 return;
@@ -524,7 +506,7 @@ namespace Gemini.Modules.Xna.Controls
                     break;
                 case NativeMethods.WM_RBUTTONUP:
                     _mouseState.RightButton = MouseButtonState.Released;
-                    RaiseHwndRButtonDown(new HwndMouseEventArgs(_mouseState));
+                    RaiseHwndRButtonUp(new HwndMouseEventArgs(_mouseState));
                     break;
                 case NativeMethods.WM_RBUTTONDBLCLK:
                     RaiseHwndRButtonDblClick(new HwndMouseEventArgs(_mouseState, MouseButton.Right));
@@ -576,18 +558,13 @@ namespace Gemini.Modules.Xna.Controls
                         break;
 
                     // record the prevous and new position of the mouse
-                    _mouseState.PreviousPosition = _mouseState.Position;
-                    _mouseState.Position = new Point(
+                    _mouseState.ScreenPosition = PointToScreen(new Point(
                         NativeMethods.GetXLParam((int) lParam),
-                        NativeMethods.GetYLParam((int) lParam));
+                        NativeMethods.GetYLParam((int) lParam)));
 
                     if (!_mouseInWindow)
                     {
                         _mouseInWindow = true;
-
-                        // if the mouse is just entering, use the same position for the previous state
-                        // so we don't get weird deltas happening when the move event fires
-                        _mouseState.PreviousPosition = _mouseState.Position;
 
                         RaiseHwndMouseEnter(new HwndMouseEventArgs(_mouseState));
 
@@ -605,9 +582,10 @@ namespace Gemini.Modules.Xna.Controls
                         NativeMethods.TrackMouseEvent(ref tme);
                     }
 
-                    // Only fire the mouse move if the position actually changed
-                    if (_mouseState.Position != _mouseState.PreviousPosition)
+                    if (_mouseState.ScreenPosition != _previousPosition)
                         RaiseHwndMouseMove(new HwndMouseEventArgs(_mouseState));
+
+                    _previousPosition = _mouseState.ScreenPosition;
 
                     break;
                 case NativeMethods.WM_MOUSELEAVE:
