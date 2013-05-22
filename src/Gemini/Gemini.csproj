@@ -83,6 +83,7 @@
     <Compile Include="Framework\ModuleBase.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\Results\IOpenResult.cs" />
+    <Compile Include="Framework\Results\LambdaResult.cs" />
     <Compile Include="Framework\Results\OpenDocumentResult.cs" />
     <Compile Include="Framework\Results\OpenResultBase.cs" />
     <Compile Include="Framework\Results\Show.cs" />
