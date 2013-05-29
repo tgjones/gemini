@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.IO;
-using System.Reactive.Linq;
 using System.Text;
 using Caliburn.Micro;
 using Gemini.Framework;
@@ -13,10 +12,9 @@ namespace Gemini.Modules.Output.ViewModels
 	[Export(typeof(IOutput))]
 	public class OutputViewModel : Tool, IOutput
 	{
-		private readonly StringBuilder _stringBuilder;
+        private readonly StringBuilder _stringBuilder;
 		private readonly OutputWriter _writer;
 		private IOutputView _view;
-		private event EventHandler TextChanged;
 
 		public override string DisplayName
 		{
@@ -37,14 +35,6 @@ namespace Gemini.Modules.Output.ViewModels
 		{
 			_stringBuilder = new StringBuilder();
 			_writer = new OutputWriter(this);
-
-			Observable.FromEventPattern<EventHandler, EventArgs>(h => TextChanged += h, h => TextChanged -= h)
-				.Buffer(TimeSpan.FromSeconds(0.1), 1000)
-				.Subscribe(_ =>
-				{
-					if (_view != null)
-						Execute.OnUIThread(() => _view.SetText(_stringBuilder.ToString()));
-				});
 		}
 
 		public void Clear()
@@ -62,13 +52,13 @@ namespace Gemini.Modules.Output.ViewModels
 		public void Append(string text)
 		{
 			_stringBuilder.Append(text);
-			OnTextChanged(EventArgs.Empty);
+			OnTextChanged();
 		}
 
-		private void OnTextChanged(EventArgs e)
+		private void OnTextChanged()
 		{
-			EventHandler handler = TextChanged;
-			if (handler != null) handler(this, e);
+            if (_view != null)
+                Execute.OnUIThread(() => _view.SetText(_stringBuilder.ToString()));
 		}
 
 		protected override void OnViewLoaded(object view)
@@ -77,10 +67,5 @@ namespace Gemini.Modules.Output.ViewModels
 			_view.SetText(_stringBuilder.ToString());
 			_view.ScrollToEnd();
 		}
-	}
-
-	internal class TextAppendedEventArgs : EventArgs
-	{
-		public string Text { get; set; }
 	}
 }
