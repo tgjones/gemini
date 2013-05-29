@@ -16,6 +16,9 @@ Bin
 *.cache
 Thumbs.db
 *.dotCover
+
+# NuGet Packages Directory
+packages
  
 # Other useful stuff
 *.bak
