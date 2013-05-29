@@ -37,15 +37,21 @@ namespace Gemini.Modules.ErrorList
             }
         }
 
-        private string _file;
-        public string File
+        private string _path;
+        public string Path
         {
-            get { return _file; }
+            get { return _path; }
             set
             {
-                _file = value;
-                NotifyOfPropertyChange(() => File);
+                _path = value;
+                NotifyOfPropertyChange(() => _path);
+                NotifyOfPropertyChange("File");
             }
+        }
+
+        public string File
+        {
+            get { return System.IO.Path.GetFileName(Path); }
         }
 
         private int? _line;
@@ -68,6 +74,24 @@ namespace Gemini.Modules.ErrorList
                 _column = value;
                 NotifyOfPropertyChange(() => Column);
             }
+        }
+
+        public System.Action OnClick { get; set; }
+
+        public ErrorListItem(ErrorListItemType itemType, int number, string description,
+            string path = null, int? line = null, int? column = null)
+        {
+            _itemType = itemType;
+            _number = number;
+            _description = description;
+            _path = path;
+            _line = line;
+            _column = column;
+        }
+
+        public ErrorListItem()
+        {
+            
         }
     }
 }

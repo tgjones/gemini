@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gemini.Demo</RootNamespace>
     <AssemblyName>Gemini.Demo</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -37,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Caliburn.Micro, Version=1.5.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
@@ -96,6 +98,8 @@
     <Compile Include="Modules\Home\Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\ScriptRunner\Module.cs" />
+    <Compile Include="Modules\ScriptRunner\Results\CompileCodeResult.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
@@ -129,6 +133,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj">
+      <Project>{f1ceeddc-a1dc-4a7a-8a86-fa4c72bfbae1}</Project>
+      <Name>Gemini.Modules.CodeCompiler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj">
       <Project>{1b56487b-cd40-4d94-8a62-c15f7e13d2fc}</Project>
       <Name>Gemini.Modules.CodeEditor</Name>

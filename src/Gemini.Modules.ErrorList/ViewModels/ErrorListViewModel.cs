@@ -104,5 +104,15 @@ namespace Gemini.Modules.ErrorList.ViewModels
                 NotifyOfPropertyChange("MessageItemCount");
             };
         }
+
+        public void AddItem(ErrorListItemType itemType, string description, 
+            string path = null, int? line = null, int? column = null,
+            System.Action onClick = null)
+        {
+            Items.Add(new ErrorListItem(itemType, Items.Count + 1, description, path, line, column)
+            {
+                OnClick = onClick
+            });
+        }
     }
 }

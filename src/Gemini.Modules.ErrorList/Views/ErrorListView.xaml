@@ -16,8 +16,12 @@
 													  MessageImageSource="../Resources/MessageColor.png"
 													  WarningImageSource="../Resources/WarningColor.png" />
 	</UserControl.Resources>
-	<StackPanel Orientation="Vertical">
-		<gemini:ToolPaneToolBar>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<gemini:ToolPaneToolBar Grid.Row="0">
 			<ToggleButton IsChecked="{Binding ShowErrors}">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="../Resources/ErrorColor.png" />
@@ -42,8 +46,9 @@
 				</StackPanel>
 			</ToggleButton>
 		</gemini:ToolPaneToolBar>
-		<DataGrid ItemsSource="{Binding FilteredItems}" AutoGenerateColumns="False" IsReadOnly="True"
-				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke">
+		<DataGrid Grid.Row="1" ItemsSource="{Binding FilteredItems}" AutoGenerateColumns="False" IsReadOnly="True"
+				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke"
+				  MouseDoubleClick="OnDataGridMouseDoubleClick">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Width="SizeToCells">
 					<DataGridTemplateColumn.CellTemplate>
@@ -54,10 +59,10 @@
 				</DataGridTemplateColumn>
 				<DataGridTextColumn Width="SizeToCells" Binding="{Binding Number}" />
 				<DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}" />
-				<DataGridTextColumn Width="SizeToCells" MinWidth="100" Header="File" Binding="{Binding File}" />
-				<DataGridTextColumn Width="70" Header="Line" Binding="{Binding Line}" />
-				<DataGridTextColumn Width="70" Header="Column" Binding="{Binding Column}" />
+				<DataGridTextColumn Width="SizeToCells" MinWidth="150" Header="File" Binding="{Binding File}" />
+				<DataGridTextColumn Width="80" Header="Line" Binding="{Binding Line}" />
+				<DataGridTextColumn Width="80" Header="Column" Binding="{Binding Column}" />
 			</DataGrid.Columns>
 		</DataGrid>
-	</StackPanel>
+	</Grid>
 </UserControl>

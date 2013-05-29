@@ -11,7 +11,7 @@ namespace Gemini.Modules.ErrorList.Design
                 ItemType = ErrorListItemType.Error,
                 Number = 1,
                 Description = "This is an error.",
-                File = "File1.txt",
+                Path = "File1.txt",
                 Line = 42,
                 Column = 24
             });
@@ -20,7 +20,7 @@ namespace Gemini.Modules.ErrorList.Design
                 ItemType = ErrorListItemType.Warning,
                 Number = 2,
                 Description = "This is a warning.",
-                File = "File1.txt",
+                Path = "File1.txt",
                 Line = 1,
                 Column = 2
             });

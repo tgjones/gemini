@@ -11,6 +11,12 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         private string _path;
         private string _fileName;
         private bool _isDirty;
+        private ICodeEditorView _view;
+
+        public string Path
+        {
+            get { return _path; }
+        }
 
         public override string DisplayName
         {
@@ -44,7 +50,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         public void Open(string path)
         {
             _path = path;
-            _fileName = Path.GetFileName(_path);
+            _fileName = System.IO.Path.GetFileName(_path);
         }
 
         protected override void OnViewLoaded(object view)
@@ -52,23 +58,29 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             using (var stream = File.OpenText(_path))
                 _originalText = stream.ReadToEnd();
 
-            var editor = (ICodeEditorView) view;
-            editor.TextEditor.Text = _originalText;
+            _view = (ICodeEditorView) view;
+            _view.TextEditor.Text = _originalText;
 
-            editor.TextEditor.TextChanged += delegate
+            _view.TextEditor.TextChanged += delegate
             {
-                IsDirty = string.Compare(_originalText, editor.TextEditor.Text) != 0;
+                IsDirty = string.Compare(_originalText, _view.TextEditor.Text) != 0;
             };
 
-            var fileExtension = Path.GetExtension(_fileName).ToLower();
+            var fileExtension = System.IO.Path.GetExtension(_fileName).ToLower();
             var highlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(fileExtension);
-            editor.TextEditor.SyntaxHighlighting = highlightingDefinition;
+            _view.TextEditor.SyntaxHighlighting = highlightingDefinition;
         }
 
         public override bool Equals(object obj)
         {
             var other = obj as CodeEditorViewModel;
             return other != null && string.Compare(_path, other._path) == 0;
+        }
+
+        public void Save()
+        {
+            File.WriteAllText(_path, _view.TextEditor.Text);
+            IsDirty = false;
         }
     }
 }
