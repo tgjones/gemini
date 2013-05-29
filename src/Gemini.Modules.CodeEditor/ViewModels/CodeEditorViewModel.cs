@@ -79,7 +79,10 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         public void Save()
         {
-            File.WriteAllText(_path, _view.TextEditor.Text);
+            var newText = _view.TextEditor.Text;
+            File.WriteAllText(_path, newText);
+            _originalText = newText;
+
             IsDirty = false;
         }
     }
