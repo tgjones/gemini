@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Gemini.Framework.Controls">
+	<LinearGradientBrush x:Key="ToolBarHorizontalBackground" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#FFFFFF" Offset="0"/>
+		<GradientStop Color="#FFFBFF" Offset="0.5"/>
+		<GradientStop Color="#F7F7F7" Offset="1"/>
+	</LinearGradientBrush>
+	<LinearGradientBrush x:Key="ToolBarToggleButtonVerticalBackground" EndPoint="1,0" StartPoint="0,0">
+		<GradientStop Color="#ECECEC" Offset="0"/>
+		<GradientStop Color="#DDDDDD" Offset="0.5"/>
+		<GradientStop Color="#A0A0A0" Offset="1"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="ToolBarButtonHover" Color="#C2E0FF"/>
+	<LinearGradientBrush x:Key="ToolBarVerticalBackground" EndPoint="1,0" StartPoint="0,0">
+		<GradientStop Color="#FFFFFF" Offset="0"/>
+		<GradientStop Color="#FFFBFF" Offset="0.5"/>
+		<GradientStop Color="#F7F7F7" Offset="1"/>
+	</LinearGradientBrush>
+	<LinearGradientBrush x:Key="ToolBarToggleButtonHorizontalBackground" EndPoint="0,1" StartPoint="0,0">
+		<GradientStop Color="#ECECEC" Offset="0"/>
+		<GradientStop Color="#DDDDDD" Offset="0.5"/>
+		<GradientStop Color="#A0A0A0" Offset="1"/>
+	</LinearGradientBrush>
+	<SolidColorBrush x:Key="ToolBarMenuBorder" Color="#808080"/>
+	<SolidColorBrush x:Key="ToolBarSubMenuBackground" Color="#FDFDFD"/>
+	<Style TargetType="{x:Type controls:ToolPaneToolBar}">
+		<Setter Property="Background" Value="{StaticResource ToolBarHorizontalBackground}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToolBar}">
+					<Grid x:Name="Grid" Margin="1,1,1,1" SnapsToDevicePixels="true">
+						<Border x:Name="MainPanelBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+							<DockPanel KeyboardNavigation.TabIndex="1" KeyboardNavigation.TabNavigation="Local">
+								<ContentPresenter x:Name="ToolBarHeader" ContentSource="Header" HorizontalAlignment="Center" Margin="4,0,4,0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
+								<ToolBarPanel x:Name="PART_ToolBarPanel" IsItemsHost="true" Margin="0,1,2,2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+							</DockPanel>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="Header" Value="{x:Null}">
+							<Setter Property="Visibility" TargetName="ToolBarHeader" Value="Collapsed"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+</ResourceDictionary>
