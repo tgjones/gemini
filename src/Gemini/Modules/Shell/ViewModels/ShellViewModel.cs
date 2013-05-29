@@ -86,7 +86,29 @@ namespace Gemini.Modules.Shell.ViewModels
 		public ShellViewModel()
 		{
 			_tools = new BindableCollection<ITool>();
+
+            // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
+            // is applied, or the bug is fixed in another way.
+		    _tools.Add(new DummyTool(PaneLocation.Left));
+            _tools.Add(new DummyTool(PaneLocation.Right));
+            _tools.Add(new DummyTool(PaneLocation.Bottom));
 		}
+
+        private class DummyTool : Tool
+        {
+            private readonly PaneLocation _preferredLocation;
+
+            public override PaneLocation PreferredLocation
+            {
+                get { return _preferredLocation; }
+            }
+
+            public DummyTool(PaneLocation preferredLocation)
+            {
+                _preferredLocation = preferredLocation;
+                IsVisible = false;
+            }
+        }
 
 		protected override void OnViewLoaded(object view)
 		{

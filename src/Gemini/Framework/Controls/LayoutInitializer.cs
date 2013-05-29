@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using AvalonDock.Layout;
 using Gemini.Framework.Services;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Gemini.Framework.Controls
 {
@@ -72,5 +72,15 @@ namespace Gemini.Framework.Controls
 		{
 			
 		}
+
+	    public bool BeforeInsertDocument(LayoutRoot layout, LayoutDocument anchorableToShow, ILayoutContainer destinationContainer)
+	    {
+            return false;
+	    }
+
+	    public void AfterInsertDocument(LayoutRoot layout, LayoutDocument anchorableShown)
+	    {
+	        
+	    }
 	}
 }
