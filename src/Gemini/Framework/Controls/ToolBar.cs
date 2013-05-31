@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Gemini.Framework.ToolBars;
+using Xceed.Wpf.Toolkit;
 
 namespace Gemini.Framework.Controls
 {
@@ -24,6 +25,12 @@ namespace Gemini.Framework.Controls
                 return new ToggleButton
                 {
                     Style = (Style) FindResource("ToolBarToggleButton")
+                };
+
+            if (_currentItem is SplitToolBarItem)
+                return new SplitButton
+                {
+                    Style = (Style) FindResource("ToolBarSplitButton")
                 };
 
             return new Button

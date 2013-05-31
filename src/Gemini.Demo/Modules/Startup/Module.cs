@@ -9,6 +9,7 @@ using Gemini.Framework.Services;
 using Gemini.Framework.ToolBars;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using Gemini.Modules.UndoRedo;
 using Microsoft.Win32;
 
 namespace Gemini.Demo.Modules.Startup
@@ -27,7 +28,10 @@ namespace Gemini.Demo.Modules.Startup
             Shell.ToolBars.Visible = true;
 		    Shell.ToolBars.Add(new ToolBarModel
 		    {
-		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly)
+		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly),
+                ToolBarItemBase.Separator,
+                UndoRedoToolBarItems.CreateUndoToolbarItem(),
+                UndoRedoToolBarItems.CreateRedoToolbarItem()
 		    });
 
 			Shell.WindowState = WindowState.Maximized;

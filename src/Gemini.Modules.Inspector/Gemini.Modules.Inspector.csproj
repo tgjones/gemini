@@ -80,6 +80,7 @@
     <Compile Include="InspectableObject.cs" />
     <Compile Include="InspectableObjectBuilder.cs" />
     <Compile Include="InspectorBuilder.cs" />
+    <Compile Include="Inspectors\ChangeObjectValueAction.cs" />
     <Compile Include="Inspectors\CheckBoxEditorView.xaml.cs">
       <DependentUpon>CheckBoxEditorView.xaml</DependentUpon>
     </Compile>

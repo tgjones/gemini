@@ -1,4 +1,7 @@
-﻿namespace Gemini.Modules.Inspector.Inspectors
+﻿using Caliburn.Micro;
+using Gemini.Modules.UndoRedo;
+
+namespace Gemini.Modules.Inspector.Inspectors
 {
     public abstract class EditorBase<TValue> : InspectorBase, IEditor
     {
@@ -14,7 +17,8 @@
             get { return (TValue) BoundPropertyDescriptor.Value; }
             set
             {
-                BoundPropertyDescriptor.Value = value;
+                IoC.Get<IUndoRedoManager>().ExecuteAction(
+                    new ChangeObjectValueAction(BoundPropertyDescriptor, value));
                 NotifyOfPropertyChange(() => Value);
             }
         }

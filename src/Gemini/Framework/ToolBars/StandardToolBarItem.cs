@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Reflection;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
@@ -20,9 +20,18 @@ namespace Gemini.Framework.ToolBars
 			set { _text = value; NotifyOfPropertyChange(() => Text); }
 		}
 
-		public Image Icon { get; private set; }
+	    private ImageSource _icon;
+	    public ImageSource Icon
+	    {
+	        get { return _icon; }
+	        set
+	        {
+                _icon = value;
+	            NotifyOfPropertyChange(() => Icon);
+	        }
+	    }
 
-		public string ActionText
+	    public string ActionText
 		{
 			get { return "Execute"; }
 		}
@@ -85,15 +94,7 @@ namespace Gemini.Framework.ToolBars
         public StandardToolBarItem WithIcon(Assembly source, string path)
 		{
 			var manager = IoC.Get<IResourceManager>();
-			var iconSource = manager.GetBitmap(path, source.GetAssemblyName());
-
-			if (source != null)
-				Icon = new Image
-				{
-					Source = iconSource,
-					Width = 16,
-					Height = 16
-				};
+			Icon = manager.GetBitmap(path, source.GetAssemblyName());
 
 			return this;
 		}
