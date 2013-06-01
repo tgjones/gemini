@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Menus;
@@ -8,6 +9,9 @@ namespace Gemini.Framework.Services
 {
 	public interface IShell
 	{
+        event EventHandler ActiveDocumentChanging;
+        event EventHandler ActiveDocumentChanged;
+
 		WindowState WindowState { get; set; }
 		string Title { get; set; }
 		ImageSource Icon { get; set; }

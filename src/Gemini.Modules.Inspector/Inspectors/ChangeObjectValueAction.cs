@@ -10,7 +10,13 @@ namespace Gemini.Modules.Inspector.Inspectors
 
         public string Name
         {
-            get { return "Change Object Value"; }
+            get
+            {
+                return string.Format("Change {0} from {1} to {2}",
+                    _boundPropertyDescriptor.PropertyDescriptor.DisplayName,
+                    _originalValue,
+                    _newValue);
+            }
         }
 
         public ChangeObjectValueAction(BoundPropertyDescriptor boundPropertyDescriptor, object newValue)

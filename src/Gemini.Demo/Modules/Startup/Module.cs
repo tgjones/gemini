@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
 using Gemini.Framework.ToolBars;
@@ -43,6 +45,12 @@ namespace Gemini.Demo.Modules.Startup
 			_output.AppendLine("Started up");
 
 		    Shell.ShowTool(IoC.Get<IInspectorTool>());
+
+            MainMenu.All.First(x => x.Name == "View")
+                .Add(new MenuItem("History", OpenHistory));
+
+		    var historyTool = IoC.Get<IHistoryTool>();
+            Shell.ShowTool(historyTool);
 		}
 
         private IEnumerable<IResult> OpenFile()
@@ -50,6 +58,11 @@ namespace Gemini.Demo.Modules.Startup
             var dialog = new OpenFileDialog();
             yield return Show.Dialog(dialog);
             yield return Show.Document(dialog.FileName);
+        }
+
+        private static IEnumerable<IResult> OpenHistory()
+        {
+            yield return Show.Tool<IHistoryTool>();
         }
 	}
 }

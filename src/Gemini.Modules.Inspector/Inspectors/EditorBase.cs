@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Gemini.Modules.UndoRedo;
+using Gemini.Framework.Services;
 
 namespace Gemini.Modules.Inspector.Inspectors
 {
@@ -17,7 +17,7 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return (TValue) BoundPropertyDescriptor.Value; }
             set
             {
-                IoC.Get<IUndoRedoManager>().ExecuteAction(
+                IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
                     new ChangeObjectValueAction(BoundPropertyDescriptor, value));
                 NotifyOfPropertyChange(() => Value);
             }

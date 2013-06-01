@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.Composition;
-using Caliburn.Micro;
-using Gemini.Framework.Collections;
+﻿using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo.Services
 {
-    [Export(typeof(IUndoRedoManager))]
     public class UndoRedoManager : IUndoRedoManager
     {
-        private readonly ObservableStack<IUndoableAction> _undoStack;
-        private readonly ObservableStack<IUndoableAction> _redoStack;
+        private readonly BindableCollection<IUndoableAction> _undoStack;
+        private readonly BindableCollection<IUndoableAction> _redoStack;
 
         public IObservableCollection<IUndoableAction> UndoStack
         {
@@ -22,14 +19,14 @@ namespace Gemini.Modules.UndoRedo.Services
 
         public UndoRedoManager()
         {
-            _undoStack = new ObservableStack<IUndoableAction>();
-            _redoStack = new ObservableStack<IUndoableAction>();
+            _undoStack = new BindableCollection<IUndoableAction>();
+            _redoStack = new BindableCollection<IUndoableAction>();
         }
 
         public void ExecuteAction(IUndoableAction action)
         {
             action.Execute();
-            _undoStack.Push(action);
+            Push(_undoStack, action);
             _redoStack.Clear();
         }
 
@@ -37,9 +34,9 @@ namespace Gemini.Modules.UndoRedo.Services
         {
             for (int i = 0; i < actionCount; i++)
             {
-                var action = _undoStack.Pop();
+                var action = Pop(_undoStack);
                 action.Undo();
-                _redoStack.Push(action);
+                Push(_redoStack, action);
             }
         }
 
@@ -47,10 +44,22 @@ namespace Gemini.Modules.UndoRedo.Services
         {
             for (int i = 0; i < actionCount; i++)
             {
-                var action = _redoStack.Pop();
+                var action = Pop(_redoStack);
                 action.Execute();
-                _undoStack.Push(action);
+                Push(_undoStack, action);
             }
+        }
+
+        private static void Push(BindableCollection<IUndoableAction> stack, IUndoableAction action)
+        {
+            stack.Add(action);
+        }
+
+        private static IUndoableAction Pop(BindableCollection<IUndoableAction> stack)
+        {
+            var item = stack[stack.Count - 1];
+            stack.RemoveAt(stack.Count - 1);
+            return item;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
@@ -15,6 +16,9 @@ namespace Gemini.Modules.Shell.ViewModels
 	[Export(typeof(IShell))]
 	public class ShellViewModel : Conductor<IDocument>.Collection.OneActive, IShell
 	{
+        public event EventHandler ActiveDocumentChanging;
+        public event EventHandler ActiveDocumentChanged;
+
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
 
@@ -155,6 +159,24 @@ namespace Gemini.Modules.Shell.ViewModels
 		{
 			ActivateItem(document);
 		}
+
+        public override void ActivateItem(IDocument item)
+        {
+            var handler = ActiveDocumentChanging;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+
+            base.ActivateItem(item);
+        }
+
+        protected override void OnActivationProcessed(IDocument item, bool success)
+        {
+            var handler = ActiveDocumentChanged;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+
+            base.OnActivationProcessed(item, success);
+        }
 
 		public void Close()
 		{
