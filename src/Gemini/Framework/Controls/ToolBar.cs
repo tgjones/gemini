@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Gemini.Framework.ToolBars;
+
 namespace Gemini.Framework.Controls
 {
     public class ToolBar : System.Windows.Controls.ToolBar

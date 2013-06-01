@@ -11,6 +11,7 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/Gemini;component/Themes/VS2010/Theme.xaml" />
 				<ResourceDictionary Source="../Resources/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
