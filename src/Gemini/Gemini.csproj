@@ -116,7 +116,6 @@
     <Compile Include="Framework\Services\ServiceProvider.cs" />
     <Compile Include="Framework\Tool.cs" />
     <Compile Include="Framework\ToolBars\IToolBars.cs" />
-    <Compile Include="Framework\ToolBars\SplitToolBarItem.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItem.cs" />
     <Compile Include="Framework\ToolBars\ToggleToolBarItem.cs" />
     <Compile Include="Framework\ToolBars\IToolBar.cs" />
@@ -132,7 +131,6 @@
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\StatusBar\StatusBarViewModel.cs" />
-    <Compile Include="Modules\UndoRedo\Converters\HoveredIndexToBackgroundConverter.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IUndoableAction.cs" />
@@ -141,12 +139,8 @@
     <Compile Include="Modules\UndoRedo\Services\UndoRedoManager.cs" />
     <Compile Include="Modules\UndoRedo\UndoRedoToolbarItems.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryViewModel.cs" />
-    <Compile Include="Modules\UndoRedo\ViewModels\UndoListViewModel.cs" />
     <Compile Include="Modules\UndoRedo\Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\UndoRedo\Views\UndoListView.xaml.cs">
-      <DependentUpon>UndoListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
@@ -161,10 +155,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\UndoRedo\Views\HistoryView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\UndoRedo\Views\UndoListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

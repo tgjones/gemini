@@ -27,12 +27,6 @@ namespace Gemini.Framework.Controls
                     Style = (Style) FindResource("ToolBarToggleButton")
                 };
 
-            if (_currentItem is SplitToolBarItem)
-                return new SplitButton
-                {
-                    Style = (Style) FindResource("ToolBarSplitButton")
-                };
-
             return new Button
             {
                 Style = (Style) FindResource("ToolBarButton")
