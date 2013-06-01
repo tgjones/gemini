@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework;
@@ -66,10 +67,30 @@ namespace Gemini.Modules.UndoRedo.ViewModels
         private void RefreshHistory()
         {
             _historyItems.Clear();
-            foreach (var action in _undoRedoManager.UndoStack)
-                _historyItems.Add(new HistoryItemViewModel(action, HistoryItemType.Undo));
-            foreach (var action in _undoRedoManager.RedoStack)
-                _historyItems.Add(new HistoryItemViewModel(action, HistoryItemType.Redo));
+            for (int i = 0; i < _undoRedoManager.UndoStack.Count; i++)
+                _historyItems.Add(new HistoryItemViewModel(_undoRedoManager.UndoStack[i],
+                    (i == _undoRedoManager.UndoStack.Count - 1) ? HistoryItemType.Current : HistoryItemType.Undo));
+            for (int i = _undoRedoManager.RedoStack.Count - 1; i >= 0; i--)
+                _historyItems.Add(new HistoryItemViewModel(
+                    _undoRedoManager.RedoStack[i], 
+                    HistoryItemType.Redo));
+        }
+
+        public void UndoOrRedoTo(HistoryItemViewModel item)
+        {
+            switch (item.ItemType)
+            {
+                case HistoryItemType.Undo:
+                    _undoRedoManager.UndoTo(item.Action);
+                    break;
+                case HistoryItemType.Current:
+                    break;
+                case HistoryItemType.Redo:
+                    _undoRedoManager.RedoTo(item.Action);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

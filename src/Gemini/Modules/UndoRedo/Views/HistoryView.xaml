@@ -9,18 +9,30 @@
 		<ItemsControl ItemsSource="{Binding HistoryItems}" ScrollViewer.CanContentScroll="True">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Text="{Binding Name}" Padding="5 2 5 2">
-						<TextBlock.Style>
-							<Style TargetType="TextBlock">
+					<Border Padding="5 2 5 2" BorderBrush="LightGray" BorderThickness="0 0 0 1"
+						MouseLeftButtonUp="HistoryItemMouseLeftButtonUp">
+						<Border.Style>
+							<Style TargetType="Border">
 								<Style.Triggers>
-									<DataTrigger Binding="{Binding ItemType}" Value="Redo">
-										<Setter Property="Foreground" Value="LightGray" />
-										<Setter Property="FontStyle" Value="Italic" />
+									<DataTrigger Binding="{Binding ItemType}" Value="Current">
+										<Setter Property="Background" Value="LightGray" />
 									</DataTrigger>
 								</Style.Triggers>
 							</Style>
-						</TextBlock.Style>
-					</TextBlock>
+						</Border.Style>
+						<TextBlock Text="{Binding Name}">
+							<TextBlock.Style>
+								<Style TargetType="TextBlock">
+									<Style.Triggers>
+										<DataTrigger Binding="{Binding ItemType}" Value="Redo">
+											<Setter Property="Foreground" Value="DarkGray" />
+											<Setter Property="FontStyle" Value="Italic" />
+										</DataTrigger>
+									</Style.Triggers>
+								</Style>
+							</TextBlock.Style>
+						</TextBlock>
+					</Border>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>

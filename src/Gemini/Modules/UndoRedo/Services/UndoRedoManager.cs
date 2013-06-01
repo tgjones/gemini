@@ -40,6 +40,18 @@ namespace Gemini.Modules.UndoRedo.Services
             }
         }
 
+        public void UndoTo(IUndoableAction action)
+        {
+            while (true)
+            {
+                if (Peek(_undoStack) == action)
+                    return;
+                var thisAction = Pop(_undoStack);
+                thisAction.Undo();
+                Push(_redoStack, thisAction);
+            }
+        }
+
         public void Redo(int actionCount)
         {
             for (int i = 0; i < actionCount; i++)
@@ -48,6 +60,23 @@ namespace Gemini.Modules.UndoRedo.Services
                 action.Execute();
                 Push(_undoStack, action);
             }
+        }
+
+        public void RedoTo(IUndoableAction action)
+        {
+            while (true)
+            {
+                var thisAction = Pop(_redoStack);
+                thisAction.Execute();
+                Push(_undoStack, thisAction);
+                if (thisAction == action)
+                    return;
+            }
+        }
+
+        private static IUndoableAction Peek(BindableCollection<IUndoableAction> stack)
+        {
+            return stack[stack.Count - 1];
         }
 
         private static void Push(BindableCollection<IUndoableAction> stack, IUndoableAction action)

@@ -2,8 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Gemini.Framework.ToolBars;
-using Xceed.Wpf.Toolkit;
-
 namespace Gemini.Framework.Controls
 {
     public class ToolBar : System.Windows.Controls.ToolBar

@@ -10,6 +10,9 @@ namespace Gemini.Modules.UndoRedo
         void ExecuteAction(IUndoableAction action);
 
         void Undo(int actionCount);
+        void UndoTo(IUndoableAction action);
+
         void Redo(int actionCount);
+        void RedoTo(IUndoableAction action);
     }
 }

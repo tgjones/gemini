@@ -3,6 +3,7 @@
     public enum HistoryItemType
     {
         Undo,
+        Current,
         Redo
     }
 }

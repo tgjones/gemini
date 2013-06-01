@@ -16,15 +16,10 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             get { return _action.Name; }
         }
 
-        private HistoryItemType _itemType;
+        private readonly HistoryItemType _itemType;
         public HistoryItemType ItemType
         {
             get { return _itemType; }
-            set
-            {
-                _itemType = value;
-                NotifyOfPropertyChange(() => ItemType);
-            }
         }
 
         public HistoryItemViewModel(IUndoableAction action, HistoryItemType itemType)
