@@ -48,9 +48,6 @@ namespace Gemini.Demo.Modules.Startup
 
             MainMenu.All.First(x => x.Name == "View")
                 .Add(new MenuItem("History", OpenHistory));
-
-		    var historyTool = IoC.Get<IHistoryTool>();
-            Shell.ShowTool(historyTool);
 		}
 
         private IEnumerable<IResult> OpenFile()
