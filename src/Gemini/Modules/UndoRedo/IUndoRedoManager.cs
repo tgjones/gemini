@@ -11,6 +11,7 @@ namespace Gemini.Modules.UndoRedo
 
         void Undo(int actionCount);
         void UndoTo(IUndoableAction action);
+        void UndoAll();
 
         void Redo(int actionCount);
         void RedoTo(IUndoableAction action);

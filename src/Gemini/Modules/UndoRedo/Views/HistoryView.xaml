@@ -6,35 +6,37 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<Grid Background="{StaticResource {x:Static SystemColors.ControlLightLightBrushKey}}">
-		<ItemsControl ItemsSource="{Binding HistoryItems}" ScrollViewer.CanContentScroll="True">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<Border Padding="5 2 5 2" BorderBrush="LightGray" BorderThickness="0 0 0 1"
-						MouseLeftButtonUp="HistoryItemMouseLeftButtonUp">
-						<Border.Style>
-							<Style TargetType="Border">
-								<Style.Triggers>
-									<DataTrigger Binding="{Binding ItemType}" Value="Current">
-										<Setter Property="Background" Value="LightGray" />
-									</DataTrigger>
-								</Style.Triggers>
-							</Style>
-						</Border.Style>
-						<TextBlock Text="{Binding Name}">
-							<TextBlock.Style>
-								<Style TargetType="TextBlock">
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<ItemsControl ItemsSource="{Binding HistoryItems}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border Padding="5 2 5 2" BorderBrush="LightGray" BorderThickness="0 0 0 1"
+							MouseLeftButtonUp="HistoryItemMouseLeftButtonUp">
+							<Border.Style>
+								<Style TargetType="Border">
 									<Style.Triggers>
-										<DataTrigger Binding="{Binding ItemType}" Value="Redo">
-											<Setter Property="Foreground" Value="DarkGray" />
-											<Setter Property="FontStyle" Value="Italic" />
+										<DataTrigger Binding="{Binding ItemType}" Value="Current">
+											<Setter Property="Background" Value="LightGray" />
 										</DataTrigger>
 									</Style.Triggers>
 								</Style>
-							</TextBlock.Style>
-						</TextBlock>
-					</Border>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+							</Border.Style>
+							<TextBlock Text="{Binding Name}">
+								<TextBlock.Style>
+									<Style TargetType="TextBlock">
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding ItemType}" Value="Redo">
+												<Setter Property="Foreground" Value="DarkGray" />
+												<Setter Property="FontStyle" Value="Italic" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
     </Grid>
 </UserControl>

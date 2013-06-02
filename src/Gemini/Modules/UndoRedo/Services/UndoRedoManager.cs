@@ -52,6 +52,11 @@ namespace Gemini.Modules.UndoRedo.Services
             }
         }
 
+        public void UndoAll()
+        {
+            Undo(_undoStack.Count);
+        }
+
         public void Redo(int actionCount)
         {
             for (int i = 0; i < actionCount; i++)
