@@ -5,6 +5,7 @@
 		xmlns:converters="clr-namespace:Gemini.Framework.Converters"
 		xmlns:cal="http://www.caliburnproject.org"
         xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:statusbar="clr-namespace:Gemini.Modules.StatusBar.Controls"
         Title="{Binding Title}" Icon="{Binding Icon}" 
 		Width="1000" Height="800" WindowStartupLocation="CenterScreen"
         WindowState="{Binding WindowState}">
@@ -28,11 +29,20 @@
 						 Visibility="{Binding ToolBars.Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
 		</StackPanel>
 
-		<StatusBar DockPanel.Dock="Bottom">
-			<StatusBarItem>
-				<TextBlock Text="{Binding StatusBar.Message}" />
-			</StatusBarItem>
-		</StatusBar>
+		<statusbar:StatusBarEx DockPanel.Dock="Bottom" ItemsSource="{Binding StatusBar.Items}" IsTabStop="False"
+							   Style="{StaticResource {x:Type StatusBar}}">
+			<StatusBar.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Grid x:Name="StatusBarGrid" />
+				</ItemsPanelTemplate>
+			</StatusBar.ItemsPanel>
+			<StatusBar.ItemContainerStyle>
+				<Style TargetType="StatusBarItem" BasedOn="{StaticResource {x:Type StatusBarItem}}">
+					<Setter Property="Grid.Column" Value="{Binding Index}" />
+					<Setter Property="Content" Value="{Binding Message}" />
+				</Style>
+			</StatusBar.ItemContainerStyle>
+		</statusbar:StatusBarEx>
 
 		<xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
 						   AnchorablesSource="{Binding Tools}"

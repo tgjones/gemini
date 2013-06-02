@@ -1,21 +1,35 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Micro;
-using Gemini.Framework.Services;
 
 namespace Gemini.Modules.StatusBar
 {
 	[Export(typeof(IStatusBar))]
 	public class StatusBarViewModel : PropertyChangedBase, IStatusBar
 	{
-		private string _message;
-		public string Message
-		{
-			get { return _message; }
-			set
-			{
-				_message = value;
-				NotifyOfPropertyChange(() => Message);
-			}
-		}
+        private readonly StatusBarItemCollection _items;
+	    public IObservableCollection<StatusBarItemViewModel> Items
+	    {
+            get { return _items; }
+	    }
+
+        public StatusBarViewModel()
+        {
+            _items = new StatusBarItemCollection();
+        }
+
+        private class StatusBarItemCollection : BindableCollection<StatusBarItemViewModel>
+        {
+            protected override void InsertItemBase(int index, StatusBarItemViewModel item)
+            {
+                item.Index = index;
+                base.InsertItemBase(index, item);
+            }
+
+            protected override void SetItemBase(int index, StatusBarItemViewModel item)
+            {
+                item.Index = index;
+                base.SetItemBase(index, item);
+            }
+        }
 	}
 }

@@ -4,6 +4,7 @@ using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Menus;
 using Gemini.Framework.ToolBars;
+using Gemini.Modules.StatusBar;
 
 namespace Gemini.Framework.Services
 {

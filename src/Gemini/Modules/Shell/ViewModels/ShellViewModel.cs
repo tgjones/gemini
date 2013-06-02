@@ -10,6 +10,7 @@ using Gemini.Framework.Menus;
 using Gemini.Framework.Services;
 using Gemini.Framework.ToolBars;
 using Gemini.Modules.Shell.Views;
+using Gemini.Modules.StatusBar;
 
 namespace Gemini.Modules.Shell.ViewModels
 {

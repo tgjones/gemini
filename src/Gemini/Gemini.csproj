@@ -110,7 +110,8 @@
     <Compile Include="Framework\Services\InputManager.cs" />
     <Compile Include="Framework\Services\IResourceManager.cs" />
     <Compile Include="Framework\Services\IShell.cs" />
-    <Compile Include="Framework\Services\IStatusBar.cs" />
+    <Compile Include="Modules\StatusBar\Controls\StatusBarEx.cs" />
+    <Compile Include="Modules\StatusBar\IStatusBar.cs" />
     <Compile Include="Framework\Services\PaneLocation.cs" />
     <Compile Include="Framework\Services\ResourceManager.cs" />
     <Compile Include="Framework\Services\ServiceProvider.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Modules\Shell\Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\StatusBar\StatusBarItemViewModel.cs" />
     <Compile Include="Modules\StatusBar\StatusBarViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />

@@ -11,6 +11,7 @@ using Gemini.Framework.Services;
 using Gemini.Framework.ToolBars;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using Gemini.Modules.StatusBar;
 using Gemini.Modules.UndoRedo;
 using Microsoft.Win32;
 
@@ -38,7 +39,11 @@ namespace Gemini.Demo.Modules.Startup
 
 			Shell.WindowState = WindowState.Maximized;
 			Shell.Title = "Gemini Demo";
-			Shell.StatusBar.Message = "Hello world!";
+
+            Shell.StatusBar.Items.Add(new StatusBarItemViewModel("Hello world!", new GridLength(1, GridUnitType.Star)));
+            Shell.StatusBar.Items.Add(new StatusBarItemViewModel("Ln 44", new GridLength(100)));
+            Shell.StatusBar.Items.Add(new StatusBarItemViewModel("Col 79", new GridLength(100)));
+
 			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());
 
