@@ -12,6 +12,7 @@ using Gemini.Framework.ToolBars;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
 using Gemini.Modules.StatusBar;
+using Gemini.Modules.StatusBar.ViewModels;
 using Gemini.Modules.UndoRedo;
 using Microsoft.Win32;
 

@@ -1,12 +1,20 @@
 ﻿using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
+using Gemini.Modules.StatusBar.ViewModels;
 
 namespace Gemini.Modules.StatusBar.Controls
 {
     public class StatusBarEx : System.Windows.Controls.Primitives.StatusBar
     {
+        static StatusBarEx()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(StatusBarEx),
+                new FrameworkPropertyMetadata(typeof(StatusBarEx)));
+        }
+
         private Grid ItemsHost
         {
             get
@@ -26,6 +34,8 @@ namespace Gemini.Modules.StatusBar.Controls
         private void RefreshGridColumns()
         {
             var grid = ItemsHost;
+            if (grid == null)
+                return;
             grid.ColumnDefinitions.Clear();
             foreach (var item in Items.Cast<StatusBarItemViewModel>())
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = item.Width });

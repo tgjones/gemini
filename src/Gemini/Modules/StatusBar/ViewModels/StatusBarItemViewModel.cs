@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Caliburn.Micro;
 
-namespace Gemini.Modules.StatusBar
+namespace Gemini.Modules.StatusBar.ViewModels
 {
     public class StatusBarItemViewModel : PropertyChangedBase
     {

@@ -131,8 +131,11 @@
     <Compile Include="Modules\Shell\Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\StatusBar\StatusBarItemViewModel.cs" />
-    <Compile Include="Modules\StatusBar\StatusBarViewModel.cs" />
+    <Compile Include="Modules\StatusBar\ViewModels\StatusBarItemViewModel.cs" />
+    <Compile Include="Modules\StatusBar\ViewModels\StatusBarViewModel.cs" />
+    <Compile Include="Modules\StatusBar\Views\StatusBarView.xaml.cs">
+      <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IUndoableAction.cs" />
@@ -155,6 +158,10 @@
     <Page Include="Modules\Shell\Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\StatusBar\Views\StatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\UndoRedo\Views\HistoryView.xaml">
       <SubType>Designer</SubType>

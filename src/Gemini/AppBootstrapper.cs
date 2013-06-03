@@ -13,6 +13,16 @@ namespace Gemini
 	{
 		private CompositionContainer _container;
 
+        protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        {
+            // TODO: Support multiple themes.
+            Application.Resources.MergedDictionaries.Add(new System.Windows.ResourceDictionary
+            {
+                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
+            });
+            base.OnStartup(sender, e);
+        }
+
 		/// <summary>
 		/// By default, we are configured to use MEF
 		/// </summary>

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Micro;
 
-namespace Gemini.Modules.StatusBar
+namespace Gemini.Modules.StatusBar.ViewModels
 {
 	[Export(typeof(IStatusBar))]
 	public class StatusBarViewModel : PropertyChangedBase, IStatusBar

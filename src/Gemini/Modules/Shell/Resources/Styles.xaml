@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:cal="http://www.caliburnproject.org"
-					xmlns:controls="clr-namespace:Gemini.Framework.Controls"
-                    xmlns:status="clr-namespace:Gemini.Modules.StatusBar.Controls">
+					xmlns:controls="clr-namespace:Gemini.Framework.Controls">
 	<Style x:Key="MenuItem" TargetType="{x:Type controls:MenuItem}">
 		<Setter Property="Icon" Value="{Binding Icon}" />
 		<Setter Property="InputGestureText" Value="{Binding InputGestureText}" />
