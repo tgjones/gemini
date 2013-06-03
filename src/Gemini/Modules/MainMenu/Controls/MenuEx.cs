@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-namespace Gemini.Framework.Controls
+namespace Gemini.Modules.MainMenu.Controls
 {
-	public class Menu : System.Windows.Controls.Menu
+	public class MenuEx : System.Windows.Controls.Menu
 	{
 		private object _currentItem;
 
@@ -14,7 +14,7 @@ namespace Gemini.Framework.Controls
 
 		protected override DependencyObject GetContainerForItemOverride()
 		{
-			return MenuItem.GetContainer(this, _currentItem);
+			return MenuItemEx.GetContainer(this, _currentItem);
 		}
 	}
 }

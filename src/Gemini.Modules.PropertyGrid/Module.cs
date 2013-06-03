@@ -3,9 +3,9 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Micro;
 using Gemini.Framework;
-using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
+using Gemini.Modules.MainMenu.Models;
 
 namespace Gemini.Modules.PropertyGrid
 {

@@ -6,7 +6,7 @@ Original license: GNU Lesser General Public License (LGPL) v2.1
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-	xmlns:local="clr-namespace:Gemini.Framework.Controls">
+	xmlns:local="clr-namespace:Gemini.Framework.Controls" xmlns:controls="clr-namespace:Gemini.Modules.MainMenu.Controls">
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="Brushes.xaml" />
 		<ResourceDictionary Source="StatusBar.xaml" />
@@ -37,7 +37,7 @@ Original license: GNU Lesser General Public License (LGPL) v2.1
 		<!--  BasedOn="{StaticResource {x:Type Menu}" -->
 		<Setter Property="Background" Value="{StaticResource MenuBackground}" />
 	</Style>
-	<Style TargetType="{x:Type local:Menu}">
+	<Style TargetType="{x:Type controls:MenuEx}">
 		<!--  BasedOn="{StaticResource {x:Type Menu}" -->
 		<Setter Property="Background" Value="{StaticResource MenuBackground}" />
 	</Style>

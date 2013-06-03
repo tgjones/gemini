@@ -6,9 +6,9 @@ using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Controls;
-using Gemini.Framework.Menus;
 using Gemini.Framework.Services;
 using Gemini.Framework.ToolBars;
+using Gemini.Modules.MainMenu;
 using Gemini.Modules.Shell.Views;
 using Gemini.Modules.StatusBar;
 

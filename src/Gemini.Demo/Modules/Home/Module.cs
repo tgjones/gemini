@@ -4,9 +4,9 @@ using System.Linq;
 using Caliburn.Micro;
 using Gemini.Demo.Modules.Home.ViewModels;
 using Gemini.Framework;
-using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Modules.Inspector;
+using Gemini.Modules.MainMenu.Models;
 using Gemini.Modules.PropertyGrid;
 
 namespace Gemini.Demo.Modules.Home

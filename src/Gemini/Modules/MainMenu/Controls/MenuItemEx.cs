@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Gemini.Framework.Menus;
+using Gemini.Modules.MainMenu.Models;
 
-namespace Gemini.Framework.Controls
+namespace Gemini.Modules.MainMenu.Controls
 {
-	public class MenuItem : System.Windows.Controls.MenuItem
+	public class MenuItemEx : System.Windows.Controls.MenuItem
 	{
 		private object _currentItem;
 
@@ -25,7 +25,7 @@ namespace Gemini.Framework.Controls
 				return new Separator { Style = (Style)frameworkElement.FindResource(SeparatorStyleKey) };
 
 			string styleKey = (item is CheckableMenuItem) ? "CheckableMenuItem" : "MenuItem";
-			return new MenuItem { Style = (Style)frameworkElement.FindResource(styleKey) };
+			return new MenuItemEx { Style = (Style)frameworkElement.FindResource(styleKey) };
 		}
 	}
 }

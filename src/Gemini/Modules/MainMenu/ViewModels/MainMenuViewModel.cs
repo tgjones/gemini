@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
-using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
+using Gemini.Modules.MainMenu.Models;
 using Microsoft.Win32;
 
-namespace Gemini.Modules.Shell.ViewModels
+namespace Gemini.Modules.MainMenu.ViewModels
 {
 	[Export(typeof(IMenu))]
 	public class MainMenuViewModel : MenuModel

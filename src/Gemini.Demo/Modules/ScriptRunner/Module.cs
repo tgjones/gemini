@@ -3,9 +3,9 @@ using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Demo.Modules.ScriptRunner.Results;
 using Gemini.Framework;
-using Gemini.Framework.Menus;
 using Gemini.Modules.CodeCompiler;
 using Gemini.Modules.CodeEditor.ViewModels;
+using Gemini.Modules.MainMenu.Models;
 
 namespace Gemini.Demo.Modules.ScriptRunner
 {

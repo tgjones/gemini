@@ -20,8 +20,7 @@
 
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-			<controls:Menu ItemsSource="{Binding MainMenu}"
-						   ItemTemplate="{StaticResource menuTemplate}" />
+			<ContentControl cal:View.Model="{Binding MainMenu}" />
 
 			<ToolBarTray x:Name="ToolBarTray" 
 						 Visibility="{Binding ToolBars.Visible, Converter={StaticResource BoolToVisibilityConverter}}" />

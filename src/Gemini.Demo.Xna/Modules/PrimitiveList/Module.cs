@@ -4,8 +4,8 @@ using System.Linq;
 using Caliburn.Micro;
 using Gemini.Demo.Xna.Modules.PrimitiveList.ViewModels;
 using Gemini.Framework;
-using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
+using Gemini.Modules.MainMenu.Models;
 
 namespace Gemini.Demo.Xna.Modules.PrimitiveList
 {

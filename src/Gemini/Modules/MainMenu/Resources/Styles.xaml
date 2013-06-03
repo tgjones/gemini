@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:cal="http://www.caliburnproject.org"
+                    xmlns:controls="clr-namespace:Gemini.Modules.MainMenu.Controls">
+	<Style x:Key="MenuItem" TargetType="{x:Type controls:MenuItemEx}">
+		<Setter Property="Icon" Value="{Binding Icon}" />
+		<Setter Property="InputGestureText" Value="{Binding InputGestureText}" />
+		<Setter Property="cal:Action.Target" Value="{Binding}" />
+		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
+	</Style>
+
+	<Style x:Key="CheckableMenuItem" TargetType="{x:Type controls:MenuItemEx}"
+		   BasedOn="{StaticResource MenuItem}">
+		<Setter Property="IsCheckable" Value="True" />
+		<Setter Property="IsChecked" Value="{Binding IsChecked}" />
+	</Style>
+
+	<HierarchicalDataTemplate x:Key="menuTemplate" ItemsSource="{Binding Children}">
+		<ContentPresenter Content="{Binding Path=Text}" RecognizesAccessKey="True" />
+	</HierarchicalDataTemplate>
+</ResourceDictionary>

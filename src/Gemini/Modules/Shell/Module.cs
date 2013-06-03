@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows.Input;
 using Gemini.Framework;
-using Gemini.Framework.Menus;
+using Gemini.Modules.MainMenu.Models;
 
 namespace Gemini.Modules.Shell
 {

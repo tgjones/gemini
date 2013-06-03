@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
-namespace Gemini.Framework.Menus
+namespace Gemini.Modules.MainMenu.Models
 {
 	public class StandardMenuItem : MenuItemBase
 	{

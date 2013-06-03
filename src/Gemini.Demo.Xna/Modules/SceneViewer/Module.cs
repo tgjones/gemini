@@ -4,10 +4,10 @@ using System.Linq;
 using Caliburn.Micro;
 using Gemini.Demo.Xna.Modules.SceneViewer.ViewModels;
 using Gemini.Framework;
-using Gemini.Framework.Menus;
 using Gemini.Framework.Results;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Inspector.Xna;
+using Gemini.Modules.MainMenu.Models;
 
 namespace Gemini.Demo.Xna.Modules.SceneViewer
 {

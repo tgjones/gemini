@@ -10,5 +10,6 @@
              VerticalAlignment="Stretch"
              HorizontalAlignment="Stretch"
              AcceptsReturn="True" 
+			 FontFamily="Consolas"
              ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 </UserControl>

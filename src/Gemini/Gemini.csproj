@@ -75,8 +75,8 @@
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Controls\LayoutInitializer.cs" />
-    <Compile Include="Framework\Controls\MenuItem.cs" />
-    <Compile Include="Framework\Controls\Menu.cs" />
+    <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
+    <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
     <Compile Include="Framework\Controls\PanesStyleSelector.cs" />
     <Compile Include="Framework\Controls\ToolBar.cs" />
     <Compile Include="Framework\Controls\ToolPaneToolBar.cs" />
@@ -87,13 +87,13 @@
     <Compile Include="Framework\IModule.cs" />
     <Compile Include="Framework\ITool.cs" />
     <Compile Include="Framework\LayoutItemBase.cs" />
-    <Compile Include="Framework\Menus\CheckableMenuItem.cs" />
-    <Compile Include="Framework\Menus\MenuItemBase.cs" />
-    <Compile Include="Framework\Menus\IMenu.cs" />
-    <Compile Include="Framework\Menus\MenuItem.cs" />
-    <Compile Include="Framework\Menus\MenuModel.cs" />
-    <Compile Include="Framework\Menus\MenuItemSeparator.cs" />
-    <Compile Include="Framework\Menus\StandardMenuItem.cs" />
+    <Compile Include="Modules\MainMenu\Models\CheckableMenuItem.cs" />
+    <Compile Include="Modules\MainMenu\Models\MenuItemBase.cs" />
+    <Compile Include="Modules\MainMenu\IMenu.cs" />
+    <Compile Include="Modules\MainMenu\Models\MenuItem.cs" />
+    <Compile Include="Modules\MainMenu\Models\MenuModel.cs" />
+    <Compile Include="Modules\MainMenu\Models\MenuItemSeparator.cs" />
+    <Compile Include="Modules\MainMenu\Models\StandardMenuItem.cs" />
     <Compile Include="Framework\ModuleBase.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\Results\IOpenResult.cs" />
@@ -110,6 +110,9 @@
     <Compile Include="Framework\Services\InputManager.cs" />
     <Compile Include="Framework\Services\IResourceManager.cs" />
     <Compile Include="Framework\Services\IShell.cs" />
+    <Compile Include="Modules\MainMenu\Views\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\StatusBar\Controls\StatusBarEx.cs" />
     <Compile Include="Modules\StatusBar\IStatusBar.cs" />
     <Compile Include="Framework\Services\PaneLocation.cs" />
@@ -126,7 +129,7 @@
     <Compile Include="Framework\ToolBars\ToolBarItemSeparator.cs" />
     <Compile Include="Framework\ToolBars\ToolBars.cs" />
     <Compile Include="Modules\Shell\Module.cs" />
-    <Compile Include="Modules\Shell\ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="Modules\MainMenu\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -151,6 +154,14 @@
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Modules\MainMenu\Resources\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MainMenu\Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\Shell\Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

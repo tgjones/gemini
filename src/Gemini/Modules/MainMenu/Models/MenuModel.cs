@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Caliburn.Micro;
 
-namespace Gemini.Framework.Menus
+namespace Gemini.Modules.MainMenu.Models
 {
 	public class MenuModel : BindableCollection<MenuItemBase>, IMenu
 	{

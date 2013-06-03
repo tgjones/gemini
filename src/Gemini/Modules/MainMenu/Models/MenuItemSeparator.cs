@@ -1,4 +1,4 @@
-﻿namespace Gemini.Framework.Menus
+﻿namespace Gemini.Modules.MainMenu.Models
 {
 	public class MenuItemSeparator : MenuItemBase
 	{
