@@ -74,10 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="Framework\Controls\LayoutInitializer.cs" />
+    <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
-    <Compile Include="Framework\Controls\PanesStyleSelector.cs" />
+    <Compile Include="Modules\Shell\Controls\PanesStyleSelector.cs" />
     <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
     <Compile Include="Framework\Controls\ToolPaneToolBar.cs" />
     <Compile Include="Framework\Converters\ActiveDocumentConverter.cs" />

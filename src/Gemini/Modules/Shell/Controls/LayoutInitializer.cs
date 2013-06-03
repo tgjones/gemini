@@ -2,10 +2,11 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Gemini.Framework;
 using Gemini.Framework.Services;
 using Xceed.Wpf.AvalonDock.Layout;
 
-namespace Gemini.Framework.Controls
+namespace Gemini.Modules.Shell.Controls
 {
 	public class LayoutInitializer : ILayoutUpdateStrategy
 	{

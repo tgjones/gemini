@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Gemini.Framework;
 
-namespace Gemini.Framework.Controls
+namespace Gemini.Modules.Shell.Controls
 {
 	public class PanesStyleSelector : StyleSelector
 	{
