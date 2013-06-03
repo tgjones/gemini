@@ -10,9 +10,6 @@
         WindowState="{Binding WindowState}">
 	<Window.Resources>
 		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="../Resources/Styles.xaml" />
-			</ResourceDictionary.MergedDictionaries>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
 			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		</ResourceDictionary>
@@ -21,9 +18,7 @@
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Top" Orientation="Vertical">
 			<ContentControl cal:View.Model="{Binding MainMenu}" />
-
-			<ToolBarTray x:Name="ToolBarTray" 
-						 Visibility="{Binding ToolBars.Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
+			<ContentControl cal:View.Model="{Binding ToolBars}" />
 		</StackPanel>
 
 		<ContentControl DockPanel.Dock="Bottom" cal:View.Model="{Binding StatusBar}" IsTabStop="False" />

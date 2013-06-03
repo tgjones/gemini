@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
-using Gemini.Framework.ToolBars;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.StatusBar;
+using Gemini.Modules.ToolBars;
 
 namespace Gemini.Framework.Services
 {

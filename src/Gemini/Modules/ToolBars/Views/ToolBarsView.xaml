@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Gemini.Modules.ToolBars.Views.ToolBarsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xcad="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="300">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="../Resources/Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<ToolBarTray x:Name="ToolBarTray" 
+				 Visibility="{Binding Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
+</UserControl>

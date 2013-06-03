@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Gemini.Framework.ToolBars;
+using Gemini.Modules.ToolBars.Models;
 
-namespace Gemini.Framework.Controls
+namespace Gemini.Modules.ToolBars.Controls
 {
-    public class ToolBar : System.Windows.Controls.ToolBar
+    public class ToolBarEx : System.Windows.Controls.ToolBar
     {
         private object _currentItem;
 

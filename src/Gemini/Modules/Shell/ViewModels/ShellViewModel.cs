@@ -7,10 +7,10 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Controls;
 using Gemini.Framework.Services;
-using Gemini.Framework.ToolBars;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.Shell.Views;
 using Gemini.Modules.StatusBar;
+using Gemini.Modules.ToolBars;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
@@ -123,16 +123,6 @@ namespace Gemini.Modules.Shell.ViewModels
 				module.Initialize();
             foreach (var module in _modules)
                 module.PostInitialize();
-
-            // TODO: Ideally, the ToolBarTray control would expose ToolBars
-            // as a dependency property. We could use an attached property
-            // to workaround this. But for now, toolbars need to be
-            // created prior to the following code being run.
-            foreach (var toolBar in ToolBars)
-                ((IShellView) view).ToolBarTray.ToolBars.Add(new ToolBar
-                {
-                    ItemsSource = toolBar
-                });
 
 			base.OnViewLoaded(view);
 		}

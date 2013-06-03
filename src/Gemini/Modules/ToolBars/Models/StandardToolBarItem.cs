@@ -6,7 +6,7 @@ using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
-namespace Gemini.Framework.ToolBars
+namespace Gemini.Modules.ToolBars.Models
 {
 	public class StandardToolBarItem : ToolBarItemBase
     {

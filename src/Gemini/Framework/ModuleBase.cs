@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Gemini.Framework.Services;
-using Gemini.Framework.ToolBars;
 using Gemini.Modules.MainMenu;
+using Gemini.Modules.ToolBars;
 
 namespace Gemini.Framework
 {

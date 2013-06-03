@@ -7,12 +7,11 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
-using Gemini.Framework.ToolBars;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.MainMenu.Models;
 using Gemini.Modules.Output;
-using Gemini.Modules.StatusBar;
 using Gemini.Modules.StatusBar.ViewModels;
+using Gemini.Modules.ToolBars.Models;
 using Gemini.Modules.UndoRedo;
 using Microsoft.Win32;
 
@@ -30,7 +29,7 @@ namespace Gemini.Demo.Modules.Startup
 		public override void Initialize()
 		{
             Shell.ToolBars.Visible = true;
-		    Shell.ToolBars.Add(new ToolBarModel
+		    Shell.ToolBars.Items.Add(new ToolBarModel
 		    {
 		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly),
                 ToolBarItemBase.Separator,

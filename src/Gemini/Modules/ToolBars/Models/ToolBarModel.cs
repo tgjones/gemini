@@ -1,6 +1,6 @@
 ﻿using Caliburn.Micro;
 
-namespace Gemini.Framework.ToolBars
+namespace Gemini.Modules.ToolBars.Models
 {
 	public class ToolBarModel : BindableCollection<ToolBarItemBase>, IToolBar
 	{

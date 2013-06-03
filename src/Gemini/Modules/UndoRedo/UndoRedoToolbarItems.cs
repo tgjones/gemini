@@ -5,7 +5,7 @@ using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
-using Gemini.Framework.ToolBars;
+using Gemini.Modules.ToolBars.Models;
 
 namespace Gemini.Modules.UndoRedo
 {

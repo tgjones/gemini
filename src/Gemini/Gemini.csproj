@@ -78,7 +78,7 @@
     <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
     <Compile Include="Framework\Controls\PanesStyleSelector.cs" />
-    <Compile Include="Framework\Controls\ToolBar.cs" />
+    <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
     <Compile Include="Framework\Controls\ToolPaneToolBar.cs" />
     <Compile Include="Framework\Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Framework\Converters\LayoutItemViewConverter.cs" />
@@ -119,18 +119,17 @@
     <Compile Include="Framework\Services\ResourceManager.cs" />
     <Compile Include="Framework\Services\ServiceProvider.cs" />
     <Compile Include="Framework\Tool.cs" />
-    <Compile Include="Framework\ToolBars\IToolBars.cs" />
-    <Compile Include="Framework\ToolBars\ToolBarItem.cs" />
-    <Compile Include="Framework\ToolBars\ToggleToolBarItem.cs" />
-    <Compile Include="Framework\ToolBars\IToolBar.cs" />
-    <Compile Include="Framework\ToolBars\StandardToolBarItem.cs" />
-    <Compile Include="Framework\ToolBars\ToolBarModel.cs" />
-    <Compile Include="Framework\ToolBars\ToolBarItemBase.cs" />
-    <Compile Include="Framework\ToolBars\ToolBarItemSeparator.cs" />
-    <Compile Include="Framework\ToolBars\ToolBars.cs" />
+    <Compile Include="Modules\ToolBars\IToolBars.cs" />
+    <Compile Include="Modules\ToolBars\Models\ToolBarItem.cs" />
+    <Compile Include="Modules\ToolBars\Models\ToggleToolBarItem.cs" />
+    <Compile Include="Modules\ToolBars\IToolBar.cs" />
+    <Compile Include="Modules\ToolBars\Models\StandardToolBarItem.cs" />
+    <Compile Include="Modules\ToolBars\Models\ToolBarModel.cs" />
+    <Compile Include="Modules\ToolBars\Models\ToolBarItemBase.cs" />
+    <Compile Include="Modules\ToolBars\Models\ToolBarItemSeparator.cs" />
+    <Compile Include="Modules\ToolBars\ViewModels\ToolBarsViewModel.cs" />
     <Compile Include="Modules\Shell\Module.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuViewModel.cs" />
-    <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -138,6 +137,10 @@
     <Compile Include="Modules\StatusBar\ViewModels\StatusBarViewModel.cs" />
     <Compile Include="Modules\StatusBar\Views\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\ToolBars\Views\IToolBarView.cs" />
+    <Compile Include="Modules\ToolBars\Views\ToolBarsView.xaml.cs">
+      <DependentUpon>ToolBarsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
@@ -166,11 +169,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modules\Shell\Resources\Styles.xaml">
+    <Page Include="Modules\ToolBars\Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\StatusBar\Views\StatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ToolBars\Views\ToolBarsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

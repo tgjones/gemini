@@ -1,4 +1,4 @@
-﻿namespace Gemini.Framework.ToolBars
+﻿namespace Gemini.Modules.ToolBars.Models
 {
 	public class ToolBarItemSeparator : ToolBarItemBase
 	{

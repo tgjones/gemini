@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace Gemini.Framework.Controls
 {
-    public class ToolPaneToolBar : System.Windows.Controls.ToolBar
+    public class ToolPaneToolBar : ToolBar
     {
         static ToolPaneToolBar()
         {
