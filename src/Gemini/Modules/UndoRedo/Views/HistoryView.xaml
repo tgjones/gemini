@@ -2,11 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dd="clr-namespace:Gemini.Modules.UndoRedo.Design"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-	<Grid Background="{StaticResource {x:Static SystemColors.ControlLightLightBrushKey}}">
-		<ScrollViewer VerticalScrollBarVisibility="Auto">
+             d:DesignHeight="300" d:DesignWidth="300"
+			 d:DataContext="{d:DesignInstance dd:DesignTimeHistoryViewModel, IsDesignTimeCreatable=True}"
+			 Background="{StaticResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Slider Grid.Column="0" Orientation="Vertical" Value="{Binding SelectedIndex}"
+				Minimum="1" Maximum="{Binding HistoryItems.Count}"
+				IsDirectionReversed="True" Margin="3 0 3 0" />
+		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
 			<ItemsControl ItemsSource="{Binding HistoryItems}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
@@ -38,5 +48,5 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
-    </Grid>
+	</Grid>
 </UserControl>

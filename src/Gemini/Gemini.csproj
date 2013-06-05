@@ -142,6 +142,7 @@
     <Compile Include="Modules\ToolBars\Views\ToolBarsView.xaml.cs">
       <DependentUpon>ToolBarsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IUndoableAction.cs" />

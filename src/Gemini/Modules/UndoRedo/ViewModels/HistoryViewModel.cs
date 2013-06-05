@@ -42,6 +42,19 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             }
         }
 
+        private bool _internallyTriggeredChange;
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                _selectedIndex = value;
+                NotifyOfPropertyChange(() => SelectedIndex);
+                TriggerInternalHistoryChange(() => UndoOrRedoToInternal(HistoryItems[value - 1]));
+            }
+        }
+
         public IObservableCollection<HistoryItemViewModel> HistoryItems
         {
             get { return _historyItems; }
@@ -51,6 +64,9 @@ namespace Gemini.Modules.UndoRedo.ViewModels
         public HistoryViewModel(IShell shell)
         {
             _historyItems = new BindableCollection<HistoryItemViewModel>();
+
+            if (shell == null)
+                return;
 
             shell.ActiveDocumentChanged += (sender, e) =>
             {
@@ -77,13 +93,35 @@ namespace Gemini.Modules.UndoRedo.ViewModels
                 _historyItems.Add(new HistoryItemViewModel(
                     _undoRedoManager.RedoStack[i], 
                     HistoryItemType.Redo));
+
+            if (!_internallyTriggeredChange)
+                UpdateSelectedIndexOnly(_historyItems.Count);
         }
 
         public void UndoOrRedoTo(HistoryItemViewModel item)
         {
+            TriggerInternalHistoryChange(() => UndoOrRedoToInternal(item));
+            UpdateSelectedIndexOnly(_historyItems.IndexOf(_historyItems.First(x => x.Action == item.Action)) + 1);
+        }
+
+        private void TriggerInternalHistoryChange(System.Action callback)
+        {
+            _internallyTriggeredChange = true;
+            callback();
+            _internallyTriggeredChange = false;
+        }
+
+        private void UpdateSelectedIndexOnly(int selectedIndex)
+        {
+            _selectedIndex = selectedIndex;
+            NotifyOfPropertyChange(() => SelectedIndex);
+        }
+
+        private void UndoOrRedoToInternal(HistoryItemViewModel item)
+        {
             switch (item.ItemType)
             {
-                case HistoryItemType.InitialState :
+                case HistoryItemType.InitialState:
                     _undoRedoManager.UndoAll();
                     break;
                 case HistoryItemType.Undo:
