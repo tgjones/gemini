@@ -75,7 +75,6 @@
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
-    <Compile Include="Modules\Clipboard\IClipboard.cs" />
     <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
