@@ -4,11 +4,12 @@ using System.Reflection;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Caliburn.Micro;
+using Gemini.Framework;
 using Gemini.Framework.Services;
 
 namespace Gemini.Modules.MainMenu.Models
 {
-	public class StandardMenuItem : MenuItemBase
+	public class StandardMenuItem : MenuItemBase, IExecutableItem
 	{
 		private readonly Func<bool> _canExecute = () => true;
 		private KeyGesture _keyGesture;
@@ -57,6 +58,11 @@ namespace Gemini.Modules.MainMenu.Models
 		{
 			_canExecute = canExecute;
 		}
+
+        public void RaiseCanExecuteChanged()
+        {
+            NotifyOfPropertyChange(() => CanExecute);
+        }
 
 		#region Fluent interface
 

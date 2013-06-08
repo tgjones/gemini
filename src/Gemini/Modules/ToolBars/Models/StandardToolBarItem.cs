@@ -4,11 +4,12 @@ using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
 using Caliburn.Micro;
+using Gemini.Framework;
 using Gemini.Framework.Services;
 
 namespace Gemini.Modules.ToolBars.Models
 {
-	public class StandardToolBarItem : ToolBarItemBase
+	public class StandardToolBarItem : ToolBarItemBase, IExecutableItem
     {
 		private readonly Func<bool> _canExecute = () => true;
 		private KeyGesture _keyGesture;
@@ -66,6 +67,11 @@ namespace Gemini.Modules.ToolBars.Models
 		{
 			_canExecute = canExecute;
 		}
+
+        public void RaiseCanExecuteChanged()
+        {
+            NotifyOfPropertyChange(() => CanExecute);
+        }
 
 		#region Fluent interface
 

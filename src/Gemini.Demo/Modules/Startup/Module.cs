@@ -33,8 +33,8 @@ namespace Gemini.Demo.Modules.Startup
 		    {
 		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly),
                 ToolBarItemBase.Separator,
-                UndoRedoToolBarItems.CreateUndoToolbarItem(),
-                UndoRedoToolBarItems.CreateRedoToolbarItem()
+                new UndoToolBarItem(),
+                new RedoToolBarItem()
 		    });
 
 			Shell.WindowState = WindowState.Maximized;
