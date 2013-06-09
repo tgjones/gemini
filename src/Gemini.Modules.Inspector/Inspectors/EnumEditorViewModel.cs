@@ -27,4 +27,28 @@ namespace Gemini.Modules.Inspector.Inspectors
             }).ToList();
         }
     }
+
+    public class EnumValueViewModel
+    {
+        public object Value { get; set; }
+        public string Text { get; set; }
+    }
+
+    public class EnumEditorViewModel : EditorBase<Enum>
+    {
+        private readonly List<EnumValueViewModel> _items;
+        public IEnumerable<EnumValueViewModel> Items
+        {
+            get { return _items; }
+        }
+
+        public EnumEditorViewModel(Type enumType)
+        {
+            _items = Enum.GetValues(enumType).Cast<object>().Select(x => new EnumValueViewModel
+            {
+                Value = x,
+                Text = Enum.GetName(enumType, x)
+            }).ToList();
+        }
+    }
 }

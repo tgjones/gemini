@@ -40,6 +40,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -77,6 +78,11 @@
     <Compile Include="Controls\LabelledControl.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\ScreenColorPicker.cs" />
+    <Compile Include="Conventions\DefaultPropertyInspectors.cs" />
+    <Compile Include="Conventions\EnumPropertyEditorBuilder.cs" />
+    <Compile Include="Conventions\PropertyEditorBuilder.cs" />
+    <Compile Include="Conventions\RangePropertyEditorBuilder.cs" />
+    <Compile Include="Conventions\StandardPropertyEditorBuilder.cs" />
     <Compile Include="InspectableObject.cs" />
     <Compile Include="InspectableObjectBuilder.cs" />
     <Compile Include="InspectorBuilder.cs" />
@@ -89,6 +95,10 @@
     <Compile Include="Inspectors\CollapsibleGroupView.xaml.cs">
       <DependentUpon>CollapsibleGroupView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inspectors\TextBoxEditorView.xaml.cs">
+      <DependentUpon>TextBoxEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors\TextBoxEditorViewModel.cs" />
     <Compile Include="Inspectors\EnumEditorView.xaml.cs">
       <DependentUpon>EnumEditorView.xaml</DependentUpon>
     </Compile>
@@ -152,6 +162,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inspectors\RangeEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inspectors\TextBoxEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

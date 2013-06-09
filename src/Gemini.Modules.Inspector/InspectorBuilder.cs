@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using Gemini.Modules.Inspector.Conventions;
 using Gemini.Modules.Inspector.Inspectors;
 using Gemini.Modules.Inspector.Util;
 
@@ -72,6 +74,29 @@ namespace Gemini.Modules.Inspector
             var propertyName = ExpressionUtility.GetPropertyName(propertyExpression);
             editor.BoundPropertyDescriptor = BoundPropertyDescriptor.FromProperty(instance, propertyName);
             _inspectors.Add(editor);
+            return (TBuilder) this;
+        }
+
+        public TBuilder WithObject(object instance)
+        {
+            var properties = TypeDescriptor.GetProperties(instance);
+            foreach (PropertyDescriptor property in properties)
+            {
+                if (property.IsReadOnly || !property.IsBrowsable)
+                    continue;
+
+                var editor = DefaultPropertyInspectors.CreateEditor(property);
+                if (editor != null)
+                {
+                    editor.BoundPropertyDescriptor = new BoundPropertyDescriptor
+                    {
+                        PropertyDescriptor = property,
+                        PropertyOwner = instance
+                    };
+                    _inspectors.Add(editor);
+                }
+            }
+
             return (TBuilder) this;
         }
     }

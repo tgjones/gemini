@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
@@ -69,7 +70,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
         }
 
         private double _cameraFieldOfView;
-        [DisplayName("Field of View")]
+        [DisplayName("Field of View"), Range(1.0, 180.0)]
         public double CameraFieldOfView
         {
             get { return _cameraFieldOfView; }

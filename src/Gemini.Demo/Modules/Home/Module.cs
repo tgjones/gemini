@@ -38,9 +38,7 @@ namespace Gemini.Demo.Modules.Home
                     .WithColorEditor(homeViewModel, x => x.Foreground)
                     .WithEnumEditor(homeViewModel, x => x.TextAlignment))
                 .WithCollapsibleGroup("Right Panel", b => b
-                    .WithPoint3DEditor(homeViewModel, x => x.CameraPosition)
-                    .WithRangeEditor(homeViewModel, x => x.CameraFieldOfView, 1, 180)
-                    .WithPoint3DEditor(homeViewModel, x => x.LightPosition))
+                    .WithObject(homeViewModel))
 		        .ToInspectableObject();
 		}
 
