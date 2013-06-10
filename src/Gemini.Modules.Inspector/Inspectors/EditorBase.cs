@@ -1,10 +1,13 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Gemini.Framework.Services;
 
 namespace Gemini.Modules.Inspector.Inspectors
 {
-    public abstract class EditorBase<TValue> : InspectorBase, IEditor
+    public abstract class EditorBase<TValue> : InspectorBase, IEditor, IDisposable
     {
+        private BoundPropertyDescriptor _boundPropertyDescriptor;
+
         public override string Name
         {
             get { return BoundPropertyDescriptor.PropertyDescriptor.DisplayName; }
@@ -20,7 +23,22 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
-        public BoundPropertyDescriptor BoundPropertyDescriptor { get; set; }
+        public BoundPropertyDescriptor BoundPropertyDescriptor
+        {
+            get { return _boundPropertyDescriptor; }
+            set
+            {
+                if (_boundPropertyDescriptor != null)
+                    _boundPropertyDescriptor.ValueChanged -= OnValueChanged;
+                _boundPropertyDescriptor = value;
+                value.ValueChanged += OnValueChanged;
+            }
+        }
+
+        private void OnValueChanged(object sender, EventArgs e)
+        {
+            NotifyOfPropertyChange(() => Value);
+        }
 
         public TValue Value
         {
@@ -31,6 +49,12 @@ namespace Gemini.Modules.Inspector.Inspectors
                     new ChangeObjectValueAction(BoundPropertyDescriptor, value));
                 NotifyOfPropertyChange(() => Value);
             }
+        }
+
+        public void Dispose()
+        {
+            if (_boundPropertyDescriptor != null)
+                _boundPropertyDescriptor.ValueChanged -= OnValueChanged;
         }
     }
 }

@@ -88,11 +88,7 @@ namespace Gemini.Modules.Inspector
                 var editor = DefaultPropertyInspectors.CreateEditor(property);
                 if (editor != null)
                 {
-                    editor.BoundPropertyDescriptor = new BoundPropertyDescriptor
-                    {
-                        PropertyDescriptor = property,
-                        PropertyOwner = instance
-                    };
+                    editor.BoundPropertyDescriptor = new BoundPropertyDescriptor(instance, property);
                     _inspectors.Add(editor);
                 }
             }
