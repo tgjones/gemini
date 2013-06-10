@@ -8,6 +8,8 @@ namespace Gemini.Framework
 	{
 		ICommand CloseCommand { get; }
 
+        string ContentId { get; }
+
 		PaneLocation PreferredLocation { get; }
         double PreferredWidth { get; }
         double PreferredHeight { get; }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Reflection;
@@ -23,8 +24,16 @@ namespace Gemini.Demo.Modules.Startup
 		[Import]
 		private IOutput _output;
 
+        [Import]
+        private IInspectorTool _inspectorTool;
+
 		[Import]
 		private IResourceManager _resourceManager;
+
+        public override IEnumerable<Type> DefaultTools
+        {
+            get { yield return typeof(IInspectorTool); }
+        }
 
 		public override void Initialize()
 		{
@@ -49,11 +58,22 @@ namespace Gemini.Demo.Modules.Startup
 
 			_output.AppendLine("Started up");
 
-		    Shell.ShowTool(IoC.Get<IInspectorTool>());
-
             MainMenu.All.First(x => x.Name == "View")
                 .Add(new MenuItem("History", OpenHistory));
+
+		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
+		    RefreshInspector();
 		}
+
+        private void RefreshInspector()
+        {
+            if (Shell.ActiveItem != null)
+                _inspectorTool.SelectedObject = new InspectableObjectBuilder()
+                       .WithObjectProperties(Shell.ActiveItem, pd => true)
+                       .ToInspectableObject();
+            else
+                _inspectorTool.SelectedObject = null;
+        }
 
         private IEnumerable<IResult> OpenFile()
         {

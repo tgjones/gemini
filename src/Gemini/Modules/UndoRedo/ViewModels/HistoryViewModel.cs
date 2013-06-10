@@ -36,8 +36,11 @@ namespace Gemini.Modules.UndoRedo.ViewModels
                 }
 
                 _undoRedoManager = value;
-                _undoRedoManager.UndoStack.CollectionChanged += OnUndoRedoStackChanged;
-                _undoRedoManager.RedoStack.CollectionChanged += OnUndoRedoStackChanged;
+                if (_undoRedoManager != null)
+                {
+                    _undoRedoManager.UndoStack.CollectionChanged += OnUndoRedoStackChanged;
+                    _undoRedoManager.RedoStack.CollectionChanged += OnUndoRedoStackChanged;
+                }
                 RefreshHistory();
             }
         }
@@ -70,7 +73,7 @@ namespace Gemini.Modules.UndoRedo.ViewModels
 
             shell.ActiveDocumentChanged += (sender, e) =>
             {
-                UndoRedoManager = shell.ActiveItem.UndoRedoManager;
+                UndoRedoManager = (shell.ActiveItem != null) ? shell.ActiveItem.UndoRedoManager : null;
             };
             if (shell.ActiveItem != null)
                 UndoRedoManager = shell.ActiveItem.UndoRedoManager;
@@ -84,15 +87,18 @@ namespace Gemini.Modules.UndoRedo.ViewModels
         private void RefreshHistory()
         {
             _historyItems.Clear();
-            _historyItems.Add(new HistoryItemViewModel("Initial State",
-                (_undoRedoManager.UndoStack.Any() ? HistoryItemType.InitialState : HistoryItemType.Current)));
-            for (int i = 0; i < _undoRedoManager.UndoStack.Count; i++)
-                _historyItems.Add(new HistoryItemViewModel(_undoRedoManager.UndoStack[i],
-                    (i == _undoRedoManager.UndoStack.Count - 1) ? HistoryItemType.Current : HistoryItemType.Undo));
-            for (int i = _undoRedoManager.RedoStack.Count - 1; i >= 0; i--)
-                _historyItems.Add(new HistoryItemViewModel(
-                    _undoRedoManager.RedoStack[i], 
-                    HistoryItemType.Redo));
+            if (_undoRedoManager != null)
+            {
+                _historyItems.Add(new HistoryItemViewModel("Initial State",
+                    (_undoRedoManager.UndoStack.Any() ? HistoryItemType.InitialState : HistoryItemType.Current)));
+                for (int i = 0; i < _undoRedoManager.UndoStack.Count; i++)
+                    _historyItems.Add(new HistoryItemViewModel(_undoRedoManager.UndoStack[i],
+                        (i == _undoRedoManager.UndoStack.Count - 1) ? HistoryItemType.Current : HistoryItemType.Undo));
+                for (int i = _undoRedoManager.RedoStack.Count - 1; i >= 0; i--)
+                    _historyItems.Add(new HistoryItemViewModel(
+                        _undoRedoManager.RedoStack[i],
+                        HistoryItemType.Redo));
+            }
 
             if (!_internallyTriggeredChange)
                 UpdateSelectedIndexOnly(_historyItems.Count);

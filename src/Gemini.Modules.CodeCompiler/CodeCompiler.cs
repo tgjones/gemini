@@ -29,19 +29,20 @@ namespace Gemini.Modules.CodeCompiler
             _errorList = errorList;
         }
 
-        public void Compile(IEnumerable<string> fileNames, IEnumerable<string> references, string outputName)
+        public Assembly Compile(IEnumerable<SyntaxTree> syntaxTrees, IEnumerable<MetadataReference> references, string outputName)
         {
             _output.AppendLine("------ Compile started");
 
-            var syntaxTrees = fileNames.Select(x => SyntaxTree.ParseFile(x)).ToList();
+            GC.Collect();
 
             var compilation = Compilation.Create(outputName)
                 .WithOptions(new CompilationOptions(OutputKind.DynamicallyLinkedLibrary))
-                .AddReferences(references.Select(MetadataReference.CreateAssemblyReference))
+                .AddReferences(references)
                 .AddSyntaxTrees(syntaxTrees);
 
             var moduleBuilder = AppDomain.CurrentDomain
-                .DefineDynamicAssembly(new AssemblyName(outputName), AssemblyBuilderAccess.RunAndCollect)
+                .DefineDynamicAssembly(new AssemblyName(outputName),
+                    AssemblyBuilderAccess.RunAndCollect)
                 .DefineDynamicModule(outputName);
 
             var result = compilation.Emit(moduleBuilder);
@@ -49,6 +50,8 @@ namespace Gemini.Modules.CodeCompiler
             ProcessResult(result);
 
             _output.AppendLine("------ Compile finished");
+
+            return moduleBuilder.Assembly;
         }
 
         private void ProcessResult(ReflectionEmitResult result)

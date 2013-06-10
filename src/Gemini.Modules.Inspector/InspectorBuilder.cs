@@ -77,12 +77,12 @@ namespace Gemini.Modules.Inspector
             return (TBuilder) this;
         }
 
-        public TBuilder WithObject(object instance)
+        public TBuilder WithObjectProperties(object instance, Func<PropertyDescriptor, bool> propertyFilter)
         {
             var properties = TypeDescriptor.GetProperties(instance);
             foreach (PropertyDescriptor property in properties)
             {
-                if (property.IsReadOnly || !property.IsBrowsable)
+                if (property.IsReadOnly || !property.IsBrowsable || !propertyFilter(property))
                     continue;
 
                 var editor = DefaultPropertyInspectors.CreateEditor(property);

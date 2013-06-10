@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
              mc:Ignorable="d" d:DesignWidth="300">
 	<local:LabelledControl>
-		<CheckBox IsChecked="{Binding Value}" Content="{Binding Name, FallbackValue='Property Name'}"
+		<CheckBox IsChecked="{Binding Value}" 
+				  Content="{Binding Name, FallbackValue='Property Name'}"
+				  ToolTip="{Binding Description}"
 				  VerticalAlignment="Center"/>
 	</local:LabelledControl>
 </UserControl>

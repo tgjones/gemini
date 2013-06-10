@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using Gemini.Modules.Inspector.Controls;
+using Gemini.Modules.Inspector.Xna.Converters;
 
 namespace Gemini.Modules.Inspector.Xna.Inspectors
 {
@@ -10,6 +12,16 @@ namespace Gemini.Modules.Inspector.Xna.Inspectors
         public XnaColorEditorView()
         {
             InitializeComponent();
+        }
+
+        private void OnScreenColorPickerColorHovered(object sender, ColorEventArgs e)
+        {
+            ((XnaColorEditorViewModel) DataContext).Value = XnaColorToColorConverter.Convert(e.Color);
+        }
+
+        private void OnScreenColorPickerColorPicked(object sender, ColorEventArgs e)
+        {
+            ((XnaColorEditorViewModel) DataContext).Value = XnaColorToColorConverter.Convert(e.Color);
         }
     }
 }

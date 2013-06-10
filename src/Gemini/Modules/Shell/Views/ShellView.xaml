@@ -7,7 +7,8 @@
         xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
         Title="{Binding Title}" Icon="{Binding Icon}" 
 		Width="1000" Height="800" WindowStartupLocation="CenterScreen"
-        WindowState="{Binding WindowState}">
+        WindowState="{Binding WindowState}"
+		Unloaded="OnWindowUnloaded">
 	<Window.Resources>
 		<ResourceDictionary>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
@@ -45,6 +46,7 @@
 					</controls:PanesStyleSelector.DocumentStyle>
 					<controls:PanesStyleSelector.ToolStyle>
 						<Style TargetType="{x:Type xcad:LayoutAnchorableItem}">
+							<Setter Property="ContentId" Value="{Binding Model.ContentId}" />
 							<Setter Property="Title" Value="{Binding Model.DisplayName, Mode=OneWay}" />
 							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
 							<Setter Property="IconSource" Value="{Binding Model.IconSource}" />

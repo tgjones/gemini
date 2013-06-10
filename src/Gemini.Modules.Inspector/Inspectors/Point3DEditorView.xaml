@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
              mc:Ignorable="d" d:DesignWidth="300">
-	<local:LabelledControl Label="{Binding Name}">
+	<local:LabelledControl Label="{Binding Name}" ToolTip="{Binding Description}">
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="1*" MinWidth="30" />
+				<ColumnDefinition Width="1*" MinWidth="20" />
 				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="1*" MinWidth="30" />
+				<ColumnDefinition Width="1*" MinWidth="20" />
 				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="1*" MinWidth="30" />
+				<ColumnDefinition Width="1*" MinWidth="20" />
 			</Grid.ColumnDefinitions>
 			<Label Grid.Column="0" Content="X" />
 			<local:NumericTextBox Grid.Column="1" Value="{Binding X}" VerticalAlignment="Center" />

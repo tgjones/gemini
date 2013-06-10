@@ -45,6 +45,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\net40\Caliburn.Micro.dll</HintPath>
     </Reference>
+    <Reference Include="HelixToolkit.Wpf">
+      <HintPath>..\packages\HelixToolkit.2013.1.16.1\lib\NET45\HelixToolkit.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=4.3.1.9429, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AvalonEdit.4.3.1.9430\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Compilers, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Roslyn.Compilers.Common.1.2.20906.2\lib\net45\Roslyn.Compilers.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Compilers.CSharp, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Roslyn.Compilers.CSharp.1.2.20906.2\lib\net45\Roslyn.Compilers.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -95,12 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\Home\Module.cs" />
+    <Compile Include="Modules\Home\ViewModels\CubeViewModel.cs" />
     <Compile Include="Modules\Home\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Modules\Home\ViewModels\IDemoScript.cs" />
+    <Compile Include="Modules\Home\Views\CubeView.xaml.cs">
+      <DependentUpon>CubeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Home\Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\ScriptRunner\Module.cs" />
-    <Compile Include="Modules\ScriptRunner\Results\CompileCodeResult.cs" />
+    <Compile Include="Modules\Home\Views\ICubeView.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
@@ -164,6 +183,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Modules\Home\Views\CubeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\Home\Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -6,7 +6,7 @@
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
              mc:Ignorable="d">
-	<local:LabelledControl Label="{Binding Name}">
+	<local:LabelledControl Label="{Binding Name}" ToolTip="{Binding Description}">
 		<StackPanel Orientation="Horizontal">
 			<xctk:ColorPicker SelectedColor="{Binding Value}"
 						  HorizontalAlignment="Left"

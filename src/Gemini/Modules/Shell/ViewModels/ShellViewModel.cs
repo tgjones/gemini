@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework;
-using Gemini.Framework.Controls;
 using Gemini.Framework.Services;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.Shell.Views;
@@ -22,6 +22,8 @@ namespace Gemini.Modules.Shell.ViewModels
 
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
+
+	    private bool _closing;
 
 		private WindowState _windowState = WindowState.Normal;
 		public WindowState WindowState
@@ -92,13 +94,17 @@ namespace Gemini.Modules.Shell.ViewModels
 		{
 			_tools = new BindableCollection<ITool>();
 
-            // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
-            // is applied, or the bug is fixed in another way.
-		    _tools.Add(new DummyTool(PaneLocation.Left));
-            _tools.Add(new DummyTool(PaneLocation.Right));
-            _tools.Add(new DummyTool(PaneLocation.Bottom));
+		    if (!LayoutUtility.HasPersistedLayout)
+		    {
+		        // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
+		        // is applied, or the bug is fixed in another way.
+		        _tools.Add(new DummyTool(PaneLocation.Left));
+		        _tools.Add(new DummyTool(PaneLocation.Right));
+		        _tools.Add(new DummyTool(PaneLocation.Bottom));
+		    }
 		}
 
+        [Export(typeof(DummyTool))]
         private class DummyTool : Tool
         {
             private readonly PaneLocation _preferredLocation;
@@ -113,6 +119,8 @@ namespace Gemini.Modules.Shell.ViewModels
                 _preferredLocation = preferredLocation;
                 IsVisible = false;
             }
+
+            private DummyTool() {}
         }
 
 		protected override void OnViewLoaded(object view)
@@ -121,10 +129,18 @@ namespace Gemini.Modules.Shell.ViewModels
                 module.PreInitialize();
 			foreach (var module in _modules)
 				module.Initialize();
+
+            var shellView = (IShellView) view;
+		    if (!LayoutUtility.HasPersistedLayout)
+		        foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
+		            ShowTool((ITool) IoC.GetInstance(defaultTool, null));
+		    else
+		        shellView.LoadLayout();
+
             foreach (var module in _modules)
                 module.PostInitialize();
 
-			base.OnViewLoaded(view);
+		    base.OnViewLoaded(view);
 		}
 
 		public void ShowTool(ITool model)
@@ -153,6 +169,9 @@ namespace Gemini.Modules.Shell.ViewModels
 
         public override void ActivateItem(IDocument item)
         {
+            if (_closing)
+                return;
+
             var handler = ActiveDocumentChanging;
             if (handler != null)
                 handler(this, EventArgs.Empty);
@@ -167,6 +186,35 @@ namespace Gemini.Modules.Shell.ViewModels
                 handler(this, EventArgs.Empty);
 
             base.OnActivationProcessed(item, success);
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            // Workaround for a complex bug that occurs when
+            // (a) the window has multiple documents open, and
+            // (b) the last document is NOT active
+            // 
+            // The issue manifests itself with a crash in
+            // the call to base.ActivateItem(item), above,
+            // saying that the collection can't be changed
+            // in a CollectionChanged event handler.
+            // 
+            // The issue occurs because:
+            // - Caliburn.Micro sees the window is closing, and calls Items.Clear()
+            // - AvalonDock handles the CollectionChanged event, and calls Remove()
+            //   on each of the open documents.
+            // - If removing a document causes another to become active, then AvalonDock
+            //   sets a new ActiveContent.
+            // - We have a WPF binding from Caliburn.Micro's ActiveItem to AvalonDock's
+            //   ActiveContent property, so ActiveItem gets updated.
+            // - The document no longer exists in Items, beacuse that collection was cleared,
+            //   but Caliburn.Micro helpfully adds it again - which causes the crash.
+            //
+            // My workaround is to use the following _closing variable, and ignore activation
+            // requests that occur when _closing is true.
+            _closing = true;
+
+            base.OnDeactivate(close);
         }
 
 		public void Close()

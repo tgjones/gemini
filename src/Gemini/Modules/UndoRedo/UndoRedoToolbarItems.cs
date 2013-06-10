@@ -61,7 +61,7 @@ namespace Gemini.Modules.UndoRedo
 
         public static bool CanExecuteUndo()
         {
-            return IoC.Get<IShell>().ActiveItem.UndoRedoManager.UndoStack.Any();
+            return IoC.Get<IShell>().ActiveItem != null && IoC.Get<IShell>().ActiveItem.UndoRedoManager.UndoStack.Any();
         }
 
         public static IEnumerable<IResult> ExecuteRedo()
@@ -71,7 +71,7 @@ namespace Gemini.Modules.UndoRedo
 
         public static bool CanExecuteRedo()
         {
-            return IoC.Get<IShell>().ActiveItem.UndoRedoManager.RedoStack.Any();
+            return IoC.Get<IShell>().ActiveItem != null && IoC.Get<IShell>().ActiveItem.UndoRedoManager.RedoStack.Any();
         }
 
         public static void SubscribeToHistoryEvents(IExecutableItem toolBarItem,

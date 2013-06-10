@@ -10,6 +10,16 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return BoundPropertyDescriptor.PropertyDescriptor.DisplayName; }
         }
 
+        public string Description
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(BoundPropertyDescriptor.PropertyDescriptor.Description))
+                    return BoundPropertyDescriptor.PropertyDescriptor.Description;
+                return Name;
+            }
+        }
+
         public BoundPropertyDescriptor BoundPropertyDescriptor { get; set; }
 
         public TValue Value

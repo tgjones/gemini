@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.Composition;
+using System.Linq;
 using System.Windows.Input;
 using Gemini.Framework.Services;
 
@@ -12,7 +14,24 @@ namespace Gemini.Framework
 			get { return _closeCommand ?? (_closeCommand = new RelayCommand(p => IsVisible = false, p => true)); }
 		}
 
-		public abstract PaneLocation PreferredLocation { get; }
+	    public virtual string ContentId
+	    {
+            get { return ExportType.AssemblyQualifiedName; }
+	    }
+
+	    private Type ExportType
+	    {
+	        get
+	        {
+	            var exportAttribute = GetType().GetCustomAttributes(typeof(ExportAttribute), false)
+                    .Cast<ExportAttribute>().FirstOrDefault();
+                if (exportAttribute != null)
+	                return exportAttribute.ContractType;
+	            throw new Exception("Tool must have an [Export] attribute.");
+	        }
+	    }
+
+	    public abstract PaneLocation PreferredLocation { get; }
 
 	    public virtual double PreferredWidth
 	    {

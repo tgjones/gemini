@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Gemini.Framework.Services;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.ToolBars;
@@ -24,6 +26,11 @@ namespace Gemini.Framework
         {
             get { return _shell.ToolBars; }
         }
+
+	    public virtual IEnumerable<Type> DefaultTools
+	    {
+            get { yield break; }
+	    }
 
         public virtual void PreInitialize()
         {

@@ -12,6 +12,7 @@
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
 							<Label Grid.Column="0" Content="{TemplateBinding Label}"
+								   ToolTip="{TemplateBinding ToolTip}"
 								   ContentStringFormat="{}{0}:"
 								   HorizontalContentAlignment="Right" />
 							<ContentControl Grid.Column="1" 

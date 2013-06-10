@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gemini="clr-namespace:Gemini.Modules.Inspector.Controls;assembly=Gemini.Modules.Inspector"
-             mc:Ignorable="d" d:DesignWidth="300">
-	<gemini:LabelledControl Label="{Binding Name}">
+             mc:Ignorable="d" d:DesignWidth="200">
+	<gemini:LabelledControl Label="{Binding Name}" ToolTip="{Binding Description}">
 		<Grid>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="20" />
