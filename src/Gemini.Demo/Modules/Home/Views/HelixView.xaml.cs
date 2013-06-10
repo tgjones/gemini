@@ -3,16 +3,16 @@
 namespace Gemini.Demo.Modules.Home.Views
 {
     /// <summary>
-    /// Interaction logic for CubeView.xaml
+    /// Interaction logic for HelixView.xaml
     /// </summary>
-    public partial class CubeView : UserControl, ICubeView
+    public partial class HelixView : UserControl, IHelixView
     {
         public ICSharpCode.AvalonEdit.TextEditor TextEditor
         {
             get { return CodeEditor; }
         }
 
-        public CubeView()
+        public HelixView()
         {
             InitializeComponent();
         }

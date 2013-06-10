@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Gemini.Demo.Modules.Home.Views.CubeView"
+﻿<UserControl x:Class="Gemini.Demo.Modules.Home.Views.HelixView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -28,7 +28,7 @@
 					<helix:HelixVisual3D.Transform>
 						<RotateTransform3D>
 							<RotateTransform3D.Rotation>
-								<AxisAngleRotation3D Axis="0 1 0" Angle="{Binding CubeAngle}" />
+								<AxisAngleRotation3D Axis="0 1 0" Angle="{Binding RotationAngle}" />
 							</RotateTransform3D.Rotation>
 						</RotateTransform3D>
 					</helix:HelixVisual3D.Transform>

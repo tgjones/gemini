@@ -31,7 +31,7 @@ namespace Gemini.Demo.Modules.Home
         {
             var homeViewModel = IoC.Get<HomeViewModel>();
             Shell.OpenDocument(homeViewModel);
-            Shell.OpenDocument(IoC.Get<CubeViewModel>());
+            Shell.OpenDocument(IoC.Get<HelixViewModel>());
             _propertyGrid.SelectedObject = homeViewModel;
         }
 
@@ -42,7 +42,7 @@ namespace Gemini.Demo.Modules.Home
 
         private IEnumerable<IResult> OpenCube()
         {
-            yield return Show.Document<CubeViewModel>();
+            yield return Show.Document<HelixViewModel>();
         }
 	}
 }

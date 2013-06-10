@@ -2,6 +2,6 @@
 {
     public interface IDemoScript
     {
-        void Execute(CubeViewModel viewModel);
+        void Execute(HelixViewModel viewModel);
     }
 }

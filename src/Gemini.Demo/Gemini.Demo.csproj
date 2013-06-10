@@ -110,16 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\Home\Module.cs" />
-    <Compile Include="Modules\Home\ViewModels\CubeViewModel.cs" />
+    <Compile Include="Modules\Home\ViewModels\HelixViewModel.cs" />
     <Compile Include="Modules\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="Modules\Home\ViewModels\IDemoScript.cs" />
-    <Compile Include="Modules\Home\Views\CubeView.xaml.cs">
-      <DependentUpon>CubeView.xaml</DependentUpon>
+    <Compile Include="Modules\Home\Views\HelixView.xaml.cs">
+      <DependentUpon>HelixView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Home\Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Home\Views\ICubeView.cs" />
+    <Compile Include="Modules\Home\Views\IHelixView.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
@@ -183,7 +183,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Modules\Home\Views\CubeView.xaml">
+    <Page Include="Modules\Home\Views\HelixView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

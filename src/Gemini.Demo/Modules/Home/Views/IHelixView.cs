@@ -1,6 +1,6 @@
 ﻿namespace Gemini.Demo.Modules.Home.Views
 {
-    public interface ICubeView
+    public interface IHelixView
     {
         ICSharpCode.AvalonEdit.TextEditor TextEditor { get; }  
     }

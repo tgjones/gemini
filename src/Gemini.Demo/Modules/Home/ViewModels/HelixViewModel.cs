@@ -15,13 +15,13 @@ using Roslyn.Compilers.CSharp;
 
 namespace Gemini.Demo.Modules.Home.ViewModels
 {
-    [Export(typeof(CubeViewModel))]
-    public class CubeViewModel : Document
+    [Export(typeof(HelixViewModel))]
+    public class HelixViewModel : Document
     {
         private readonly ICodeCompiler _codeCompiler;
         private readonly List<IDemoScript> _scripts;
 
-        private ICubeView _cubeView;
+        private IHelixView _helixView;
 
         private Point3D _cameraPosition;
         [DisplayName("Camera Position"), Description("Position of the camera in 3D space")]
@@ -59,25 +59,25 @@ namespace Gemini.Demo.Modules.Home.ViewModels
             }
         }
 
-        private double _cubeAngle;
-        [DisplayName("Cube Angle")]
-        public double CubeAngle
+        private double _rotationAngle;
+        [DisplayName("Rotation Angle")]
+        public double RotationAngle
         {
-            get { return _cubeAngle; }
+            get { return _rotationAngle; }
             set
             {
-                _cubeAngle = value;
-                NotifyOfPropertyChange(() => CubeAngle);
+                _rotationAngle = value;
+                NotifyOfPropertyChange(() => RotationAngle);
             }
         }
 
         public override string DisplayName
         {
-            get { return "Cube"; }
+            get { return "Helix"; }
         }
 
         [ImportingConstructor]
-        public CubeViewModel(ICodeCompiler codeCompiler)
+        public HelixViewModel(ICodeCompiler codeCompiler)
         {
             _codeCompiler = codeCompiler;
             _scripts = new List<IDemoScript>();
@@ -85,23 +85,23 @@ namespace Gemini.Demo.Modules.Home.ViewModels
             CameraPosition = new Point3D(6, 5, 4);
             CameraFieldOfView = 45;
             LightPosition = new Point3D(0, 5, 0);
-            CubeAngle = 0;
+            RotationAngle = 0;
         }
 
         protected override void OnViewLoaded(object view)
         {
-            _cubeView = (ICubeView) view;
+            _helixView = (IHelixView) view;
 
-            _cubeView.TextEditor.Text = @"public class MyClass : Gemini.Demo.Modules.Home.ViewModels.IDemoScript
+            _helixView.TextEditor.Text = @"public class MyClass : Gemini.Demo.Modules.Home.ViewModels.IDemoScript
 {
-    public void Execute(Gemini.Demo.Modules.Home.ViewModels.CubeViewModel viewModel)
+    public void Execute(Gemini.Demo.Modules.Home.ViewModels.HelixViewModel viewModel)
     {
-        viewModel.CubeAngle += 0.1;
+        viewModel.RotationAngle += 0.1;
     }
 }
 ";
 
-            _cubeView.TextEditor.TextChanged += (sender, e) => CompileScripts();
+            _helixView.TextEditor.TextChanged += (sender, e) => CompileScripts();
             CompositionTarget.Rendering += OnRendering;
             CompileScripts();
 
@@ -115,7 +115,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
                 _scripts.Clear();
 
                 var newAssembly = _codeCompiler.Compile(
-                    new[] { SyntaxTree.ParseText(_cubeView.TextEditor.Text) },
+                    new[] { SyntaxTree.ParseText(_helixView.TextEditor.Text) },
                     new[]
                         {
                             MetadataReference.CreateAssemblyReference("mscorlib"),
