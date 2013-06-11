@@ -33,5 +33,16 @@ namespace Gemini.Modules.Inspector.Inspectors
                 NotifyOfPropertyChange(() => Z);
             }
         }
+
+        public override void NotifyOfPropertyChange(string propertyName)
+        {
+            if (propertyName == "Value")
+            {
+                NotifyOfPropertyChange(() => X);
+                NotifyOfPropertyChange(() => Y);
+                NotifyOfPropertyChange(() => Z);
+            }
+            base.NotifyOfPropertyChange(propertyName);
+        }
     }
 }

@@ -120,6 +120,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
                         {
                             MetadataReference.CreateAssemblyReference("mscorlib"),
                             MetadataReference.CreateAssemblyReference("System"),
+                            MetadataReference.CreateAssemblyReference("PresentationCore"),
                             new MetadataFileReference(typeof(IResult).Assembly.Location),
                             new MetadataFileReference(typeof(AppBootstrapper).Assembly.Location),
                             new MetadataFileReference(GetType().Assembly.Location)
