@@ -66,6 +66,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BezierLine.cs" />
     <Compile Include="Controls\ConnectorItem.cs" />
     <Compile Include="Controls\GraphControl.cs" />
     <Compile Include="Controls\ElementItem.cs" />

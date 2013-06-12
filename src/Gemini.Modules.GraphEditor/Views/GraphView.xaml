@@ -76,7 +76,7 @@
 			
 			<local:GraphControl.ConnectionItemTemplate>
 				<DataTemplate DataType="vm:ConnectionViewModel">
-					<Line Stroke="Black" StrokeThickness="2"
+					<local:BezierLine Stroke="Black" StrokeThickness="2"
 						  X1="{Binding From.Position.X}" Y1="{Binding From.Position.Y}"
 						  X2="{Binding To.Position.X}" Y2="{Binding To.Position.Y}" />
 				</DataTemplate>
