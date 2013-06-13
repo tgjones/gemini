@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
 
@@ -6,6 +7,8 @@ namespace Gemini.Modules.GraphEditor.ViewModels
 {
     public class ConnectorViewModel : PropertyChangedBase
     {
+        public event EventHandler PositionChanged;
+
         private readonly ElementViewModel _element;
         public ElementViewModel Element
         {
@@ -37,6 +40,7 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             {
                 _position = value;
                 NotifyOfPropertyChange(() => Position);
+                RaisePositionChanged();
             }
         }
 
@@ -44,6 +48,12 @@ namespace Gemini.Modules.GraphEditor.ViewModels
         {
             _element = element;
             _connections = new BindableCollection<ConnectionViewModel>();
+        }
+
+        private void RaisePositionChanged()
+        {
+            var handler = PositionChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
     }
 }

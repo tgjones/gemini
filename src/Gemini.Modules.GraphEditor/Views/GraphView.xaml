@@ -85,8 +85,8 @@
 					<local:GraphControl.ConnectionItemTemplate>
 						<DataTemplate DataType="vm:ConnectionViewModel">
 							<local:BezierLine Stroke="Black" StrokeThickness="2"
-									X1="{Binding From.Position.X}" Y1="{Binding From.Position.Y}"
-									X2="{Binding To.Position.X}" Y2="{Binding To.Position.Y}" />
+									X1="{Binding FromPosition.X}" Y1="{Binding FromPosition.Y}"
+									X2="{Binding ToPosition.X}" Y2="{Binding ToPosition.Y}" />
 						</DataTemplate>
 					</local:GraphControl.ConnectionItemTemplate>
 				</local:GraphControl>
