@@ -4,25 +4,25 @@ namespace Gemini.Modules.GraphEditor.Controls
 {
     public abstract class ConnectionDragEventArgs : RoutedEventArgs
     {
-        private readonly object _element;
-        private readonly object _sourceConnector;
+        private readonly ElementItem _elementItem;
+        private readonly ConnectorItem _sourceConnectorItem;
 
-        public object Element
+        public ElementItem ElementItem
         {
-            get { return _element; }
+            get { return _elementItem; }
         }
 
-        public object SourceConnector
+        public ConnectorItem SourceConnector
         {
-            get { return _sourceConnector; }
+            get { return _sourceConnectorItem; }
         }
 
         protected ConnectionDragEventArgs(RoutedEvent routedEvent, object source,
-            object element, object sourceConnector)
+            ElementItem elementItem, ConnectorItem sourceConnectorItem)
             : base(routedEvent, source)
         {
-            _element = element;
-            _sourceConnector = sourceConnector;
+            _elementItem = elementItem;
+            _sourceConnectorItem = sourceConnectorItem;
         }
     }
 }

@@ -7,8 +7,8 @@ namespace Gemini.Modules.GraphEditor.Controls
         public object Connection { get; set; }
 
         public ConnectionDragStartedEventArgs(RoutedEvent routedEvent, object source,
-            object element, object connector)
-            : base(routedEvent, source, element, connector)
+            ElementItem elementItem, ConnectorItem connectorItem)
+            : base(routedEvent, source, elementItem, connectorItem)
         {
         }
     }

@@ -12,8 +12,8 @@ namespace Gemini.Modules.GraphEditor.Controls
         }
 
         internal ConnectionDraggingEventArgs(RoutedEvent routedEvent, object source,
-            object node, object connection, object connector)
-            : base(routedEvent, source, node, connector)
+            ElementItem elementItem, object connection, ConnectorItem connectorItem)
+            : base(routedEvent, source, elementItem, connectorItem)
         {
             _connection = connection;
         }

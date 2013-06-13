@@ -3,6 +3,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using Gemini.Modules.GraphEditor.Util;
 
 namespace Gemini.Modules.GraphEditor.Controls
 {
@@ -10,7 +12,7 @@ namespace Gemini.Modules.GraphEditor.Controls
     // Thank you Ashley Davis!
     public class GraphControl : Control
     {
-        private ElementItemsControl _elementItemsControl = null;
+        private ElementItemsControl _elementItemsControl;
 
         static GraphControl()
         {
@@ -82,10 +84,6 @@ namespace Gemini.Modules.GraphEditor.Controls
             "ConnectionDragStarted", RoutingStrategy.Bubble, typeof(ConnectionDragStartedEventHandler), 
             typeof(GraphControl));
 
-        public static readonly RoutedEvent QueryConnectionFeedbackEvent = EventManager.RegisterRoutedEvent(
-            "QueryConnectionFeedback", RoutingStrategy.Bubble, typeof(QueryConnectionFeedbackEventHandler), 
-            typeof(GraphControl));
-
         public static readonly RoutedEvent ConnectionDraggingEvent = EventManager.RegisterRoutedEvent(
             "ConnectionDragging", RoutingStrategy.Bubble, typeof(ConnectionDraggingEventHandler), 
             typeof(GraphControl));
@@ -98,12 +96,6 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             add { AddHandler(ConnectionDragStartedEvent, value); }
             remove { RemoveHandler(ConnectionDragStartedEvent, value); }
-        }
-
-        public event QueryConnectionFeedbackEventHandler QueryConnectionFeedback
-        {
-            add { AddHandler(QueryConnectionFeedbackEvent, value); }
-            remove { RemoveHandler(QueryConnectionFeedbackEvent, value); }
         }
 
         public event ConnectionDraggingEventHandler ConnectionDragging
@@ -155,26 +147,71 @@ namespace Gemini.Modules.GraphEditor.Controls
 
         #region Connection dragging
 
-        private ConnectorItem _sourceConnector;
+        private ConnectorItem _draggingSourceConnector;
+        private object _draggingConnectionDataContext;
 
         private void OnConnectorItemDragStarted(object sender, ConnectorItemDragStartedEventArgs e)
         {
             e.Handled = true;
 
-            _sourceConnector = (ConnectorItem) e.OriginalSource;
-            var elementItem = _sourceConnector.ParentElementItem;
+            _draggingSourceConnector = (ConnectorItem) e.OriginalSource;
 
+            var eventArgs = new ConnectionDragStartedEventArgs(ConnectionDragStartedEvent, this, 
+                _draggingSourceConnector.ParentElementItem, _draggingSourceConnector);
+            RaiseEvent(eventArgs);
 
+            _draggingConnectionDataContext = eventArgs.Connection;
+
+            if (_draggingConnectionDataContext == null)
+                e.Cancel = true;
         }
 
         private void OnConnectorItemDragging(object sender, ConnectorItemDraggingEventArgs e)
         {
-            throw new System.NotImplementedException();
+            e.Handled = true;
+
+            var connectionDraggingEventArgs =
+                new ConnectionDraggingEventArgs(ConnectionDraggingEvent, this,
+                    _draggingSourceConnector.ParentElementItem, _draggingConnectionDataContext,
+                    _draggingSourceConnector);
+            RaiseEvent(connectionDraggingEventArgs);
         }
 
         private void OnConnectorItemDragCompleted(object sender, ConnectorItemDragCompletedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            e.Handled = true;
+
+            var mousePoint = Mouse.GetPosition(this);
+
+            var destinationConnectorItem = DetermineConnectorItemDraggedOver(mousePoint);
+
+            RaiseEvent(new ConnectionDragCompletedEventArgs(ConnectionDragCompletedEvent, this, 
+                _draggingSourceConnector.ParentElementItem, _draggingConnectionDataContext,
+                _draggingSourceConnector, destinationConnectorItem));
+
+            _draggingSourceConnector = null;
+            _draggingConnectionDataContext = null;
+        }
+
+        private ConnectorItem DetermineConnectorItemDraggedOver(Point hitPoint)
+        {
+            HitTestResult result = null;
+            VisualTreeHelper.HitTest(_elementItemsControl, null,
+                delegate(HitTestResult hitTestResult)
+                {
+                    result = hitTestResult;
+                    return HitTestResultBehavior.Stop;
+                },
+                new PointHitTestParameters(hitPoint));
+
+            if (result == null || result.VisualHit == null)
+                return null;
+
+            var hitItem = result.VisualHit as FrameworkElement;
+            if (hitItem == null)
+                return null;
+
+            return VisualTreeUtility.FindParent<ConnectorItem>(hitItem);
         }
 
         #endregion

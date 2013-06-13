@@ -79,7 +79,6 @@
     <Compile Include="Controls\GraphControl.cs" />
     <Compile Include="Controls\ElementItem.cs" />
     <Compile Include="Controls\ElementItemsControl.cs" />
-    <Compile Include="Controls\QueryConnectionFeedbackEventArgs.cs" />
     <Compile Include="Controls\ZoomAndPanControl.cs" />
     <Compile Include="Controls\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
