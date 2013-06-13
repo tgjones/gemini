@@ -68,7 +68,7 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             connection.ToPosition = currentDragPoint;
         }
 
-        public void ConnectionDragCompleted(ConnectionViewModel newConnection, ConnectorViewModel sourceConnector, ConnectorViewModel destinationConnector)
+        public void OnConnectionDragCompleted(ConnectionViewModel newConnection, ConnectorViewModel sourceConnector, ConnectorViewModel destinationConnector)
         {
             if (destinationConnector == null)
             {

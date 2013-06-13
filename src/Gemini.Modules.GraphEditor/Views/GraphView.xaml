@@ -23,7 +23,10 @@
 									PreviewMouseRightButtonDown="OnGraphControlRightMouseButtonDown"
 									PreviewMouseRightButtonUp="OnGraphControlRightMouseButtonUp"
 									PreviewMouseMove="OnGraphControlMouseMove"
-									PreviewMouseWheel="OnGraphControlMouseWheel">
+									PreviewMouseWheel="OnGraphControlMouseWheel"
+									ConnectionDragStarted="OnGraphControlConnectionDragStarted"
+									ConnectionDragging="OnGraphControlConnectionDragging"
+									ConnectionDragCompleted="OnGraphControlConnectionDragCompleted">
 					<local:GraphControl.ElementItemContainerStyle>
 						<Style TargetType="{x:Type local:ElementItem}">
 							<Setter Property="X" Value="{Binding X}" />

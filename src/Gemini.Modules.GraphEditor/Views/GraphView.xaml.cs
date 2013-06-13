@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Gemini.Modules.GraphEditor.Controls;
+using Gemini.Modules.GraphEditor.ViewModels;
 
 namespace Gemini.Modules.GraphEditor.Views
 {
@@ -10,6 +12,11 @@ namespace Gemini.Modules.GraphEditor.Views
     public partial class GraphView : UserControl
     {
         private Point _originalContentMouseDownPoint;
+
+        private GraphViewModel ViewModel
+        {
+            get { return (GraphViewModel) DataContext; }
+        }
 
         public GraphView()
         {
@@ -52,6 +59,31 @@ namespace Gemini.Modules.GraphEditor.Views
                 e.GetPosition(GraphControl));
 
             e.Handled = true;
+        }
+
+        private void OnGraphControlConnectionDragStarted(object sender, ConnectionDragStartedEventArgs e)
+        {
+            var sourceConnector = (ConnectorViewModel) e.SourceConnector.DataContext;
+            var currentDragPoint = Mouse.GetPosition(GraphControl);
+            var connection = ViewModel.OnConnectionDragStarted(sourceConnector, currentDragPoint);
+            e.Connection = connection;
+        }
+
+        private void OnGraphControlConnectionDragging(object sender, ConnectionDraggingEventArgs e)
+        {
+            var currentDragPoint = Mouse.GetPosition(GraphControl);
+            var connection = (ConnectionViewModel) e.Connection;
+            ViewModel.OnConnectionDragging(currentDragPoint, connection);
+        }
+
+        private void OnGraphControlConnectionDragCompleted(object sender, ConnectionDragCompletedEventArgs e)
+        {
+            var sourceConnector = (ConnectorViewModel) e.SourceConnector.DataContext;
+            var destinationConnector = (e.DestinationConnectorItem != null)
+                ? (ConnectorViewModel) e.DestinationConnectorItem.DataContext
+                : null;
+            var newConnection = (ConnectionViewModel) e.Connection;
+            ViewModel.OnConnectionDragCompleted(newConnection, sourceConnector, destinationConnector);
         }
     }
 }
