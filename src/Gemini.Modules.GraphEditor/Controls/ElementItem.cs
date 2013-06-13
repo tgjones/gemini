@@ -17,6 +17,8 @@ namespace Gemini.Modules.GraphEditor.Controls
                 new FrameworkPropertyMetadata(typeof(ElementItem)));
         }
 
+        #region Dependency properties
+
         public static readonly DependencyProperty XProperty = DependencyProperty.Register(
             "X", typeof(double), typeof(ElementItem),
             new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -37,18 +39,38 @@ namespace Gemini.Modules.GraphEditor.Controls
             set { SetValue(YProperty, value); }
         }
 
-        private ElementItemsControl ParentElementItemsControl
+        public static readonly DependencyProperty ZIndexProperty = DependencyProperty.Register(
+            "ZIndex", typeof(int), typeof(ElementItem),
+            new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public int ZIndex
         {
-            get { return VisualTreeUtility.FindParent<ElementItemsControl>(this); }
+            get { return (int) GetValue(ZIndexProperty); }
+            set { SetValue(ZIndexProperty, value); }
+        }
+
+        #endregion
+
+        private GraphControl ParentGraphControl
+        {
+            get { return VisualTreeUtility.FindParent<GraphControl>(this); }
+        }
+
+        #region Mouse input
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            BringToFront();
+            base.OnMouseDown(e);
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             DoSelection();
 
-            var parentElementItemsControl = ParentElementItemsControl;
-            if (parentElementItemsControl != null)
-                _lastMousePosition = e.GetPosition(parentElementItemsControl);
+            var parentGraphControl = ParentGraphControl;
+            if (parentGraphControl != null)
+                _lastMousePosition = e.GetPosition(parentGraphControl);
 
             _isLeftMouseButtonDown = true;
 
@@ -59,11 +81,11 @@ namespace Gemini.Modules.GraphEditor.Controls
 
         private void DoSelection()
         {
-            var parentElementItemsControl = ParentElementItemsControl;
-            if (parentElementItemsControl == null)
+            var parentGraphControl = ParentGraphControl;
+            if (parentGraphControl == null)
                 return;
 
-            parentElementItemsControl.SelectedItems.Clear();
+            parentGraphControl.SelectedElements.Clear();
             IsSelected = true;
         }
 
@@ -71,7 +93,7 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             if (_isDragging)
             {
-                var newMousePosition = e.GetPosition(ParentElementItemsControl);
+                var newMousePosition = e.GetPosition(ParentGraphControl);
                 var delta = newMousePosition - _lastMousePosition;
 
                 X += delta.X;
@@ -106,6 +128,18 @@ namespace Gemini.Modules.GraphEditor.Controls
             e.Handled = true;
 
             base.OnMouseLeftButtonUp(e);
+        }
+
+        #endregion
+
+        internal void BringToFront()
+        {
+            var parentGraphControl = ParentGraphControl;
+            if (parentGraphControl == null)
+                return;
+
+            var maxZ = parentGraphControl.GetMaxZIndex();
+            ZIndex = maxZ + 1;
         }
     }
 }

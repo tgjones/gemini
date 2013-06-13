@@ -6,6 +6,7 @@
 	<Style TargetType="local:ElementItem">
 		<Setter Property="Canvas.Left" Value="{Binding X, RelativeSource={RelativeSource Self}, Mode=TwoWay}" />
 		<Setter Property="Canvas.Top" Value="{Binding Y, RelativeSource={RelativeSource Self}, Mode=TwoWay}" />
+		<Setter Property="Canvas.ZIndex" Value="{Binding ZIndex, RelativeSource={RelativeSource Self}, Mode=TwoWay}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="local:ElementItem">
@@ -23,6 +24,16 @@
 							BorderBrush="{TemplateBinding BorderBrush}"
 							BorderThickness="{TemplateBinding BorderThickness}">
 						<Grid>
+							<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
+										  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
+										  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<Canvas />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+							</ItemsControl>
+							
 							<local:ElementItemsControl x:Name="PART_ElementItemsControl"
 													   ItemsSource="{TemplateBinding ElementsSource}"
 													   ItemContainerStyle="{TemplateBinding ElementItemContainerStyle}"
@@ -33,16 +44,6 @@
 									</ControlTemplate>
 								</ListBox.Template>
 							</local:ElementItemsControl>
-
-							<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
-										  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
-										  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
-								<ItemsControl.ItemsPanel>
-									<ItemsPanelTemplate>
-										<Canvas />
-									</ItemsPanelTemplate>
-								</ItemsControl.ItemsPanel>
-							</ItemsControl>
 						</Grid>
 					</Border>
 				</ControlTemplate>

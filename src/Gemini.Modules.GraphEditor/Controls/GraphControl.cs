@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -75,6 +76,11 @@ namespace Gemini.Modules.GraphEditor.Controls
 
         #endregion
 
+        public IList SelectedElements
+        {
+            get { return _elementItemsControl.SelectedItems; }
+        }
+
         public override void OnApplyTemplate()
         {
             _elementItemsControl = (ElementItemsControl) Template.FindName("PART_ElementItemsControl", this);
@@ -85,6 +91,15 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             _elementItemsControl.SelectedItems.Clear();
             base.OnMouseLeftButtonDown(e);
+        }
+
+        internal int GetMaxZIndex()
+        {
+            return _elementItemsControl.Items.Cast<object>()
+                .Select(item => (ElementItem) _elementItemsControl.ItemContainerGenerator.ContainerFromItem(item))
+                .Select(elementItem => elementItem.ZIndex)
+                .Concat(new[] { 0 })
+                .Max();
         }
     }
 }

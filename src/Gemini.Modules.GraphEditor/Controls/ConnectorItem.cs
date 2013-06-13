@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Gemini.Modules.GraphEditor.Util;
 
 namespace Gemini.Modules.GraphEditor.Controls
@@ -13,6 +14,8 @@ namespace Gemini.Modules.GraphEditor.Controls
                 new FrameworkPropertyMetadata(typeof(ConnectorItem)));
         }
 
+        #region Dependency properties
+
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
             "Position", typeof(Point), typeof(ConnectorItem));
 
@@ -20,6 +23,13 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             get { return (Point) GetValue(PositionProperty); }
             set { SetValue(PositionProperty, value); }
+        }
+
+        #endregion
+
+        private ElementItem ParentElementItem
+        {
+            get { return VisualTreeUtility.FindParent<ElementItem>(this); }
         }
 
         public ConnectorItem()
@@ -46,5 +56,15 @@ namespace Gemini.Modules.GraphEditor.Controls
             var centerPoint = new Point(ActualWidth / 2, ActualHeight / 2);
             Position = TransformToAncestor(parentGraphControl).Transform(centerPoint);
         }
+
+        #region Mouse input
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            ParentElementItem.Focus();
+            base.OnMouseLeftButtonDown(e);
+        }
+
+        #endregion
     }
 }
