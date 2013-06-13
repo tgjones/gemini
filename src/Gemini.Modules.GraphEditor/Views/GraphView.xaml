@@ -10,77 +10,87 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
-			 Background="White">
+			 Background="WhiteSmoke">
 	<UserControl.Resources>
 		<conv:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 	</UserControl.Resources>
 	<Grid>
-		<local:GraphControl ElementsSource="{Binding Elements}" ConnectionsSource="{Binding Connections}">
-			<local:GraphControl.ElementItemContainerStyle>
-				<Style TargetType="{x:Type local:ElementItem}">
-					<Setter Property="X" Value="{Binding X}" />
-					<Setter Property="Y" Value="{Binding Y}" />
-					<Setter Property="IsSelected" Value="{Binding IsSelected}" />
-				</Style>
-			</local:GraphControl.ElementItemContainerStyle>
-			
-			<local:GraphControl.ElementItemTemplate>
-				<DataTemplate DataType="vm:ElementViewModel">
-					<DataTemplate.Resources>
-						<Style TargetType="local:ConnectorItem">
-							<Setter Property="Position" Value="{Binding Position, Mode=OneWayToSource}" />
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="local:ConnectorItem">
-										<Ellipse Width="15" Height="15" Margin="0 0 0 5"
-												 Fill="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
+		<ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+			<local:ZoomAndPanControl x:Name="ZoomAndPanControl" Background="WhiteSmoke">
+				<local:GraphControl x:Name="GraphControl" Background="White"
+									ElementsSource="{Binding Elements}" ConnectionsSource="{Binding Connections}"
+									Width="3000" Height="2000"
+									PreviewMouseRightButtonDown="OnGraphControlRightMouseButtonDown"
+									PreviewMouseRightButtonUp="OnGraphControlRightMouseButtonUp"
+									PreviewMouseMove="OnGraphControlMouseMove"
+									PreviewMouseWheel="OnGraphControlMouseWheel">
+					<local:GraphControl.ElementItemContainerStyle>
+						<Style TargetType="{x:Type local:ElementItem}">
+							<Setter Property="X" Value="{Binding X}" />
+							<Setter Property="Y" Value="{Binding Y}" />
+							<Setter Property="IsSelected" Value="{Binding IsSelected}" />
 						</Style>
-					</DataTemplate.Resources>
-					<Border x:Name="ElementBorder" BorderThickness="1" BorderBrush="Black" Width="100" 
-							Background="WhiteSmoke" Padding="5">
-						<StackPanel Orientation="Vertical">
-							<TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />
-							<Grid Margin="-10 5 -10 0">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto" />
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
-								<ItemsControl Grid.Column="0" ItemsSource="{Binding InputConnectors}">
-									<ItemsControl.ItemTemplate>
-										<DataTemplate>
-											<local:ConnectorItem />
-										</DataTemplate>
-									</ItemsControl.ItemTemplate>
-								</ItemsControl>
-								<ItemsControl Grid.Column="2" ItemsSource="{Binding OutputConnectors}">
-									<ItemsControl.ItemTemplate>
-										<DataTemplate>
-											<local:ConnectorItem />
-										</DataTemplate>
-									</ItemsControl.ItemTemplate>
-								</ItemsControl>
-							</Grid>
-						</StackPanel>
-					</Border>
-					<DataTemplate.Triggers>
-						<DataTrigger Binding="{Binding IsSelected}" Value="True">
-							<Setter TargetName="ElementBorder" Property="Background" Value="DodgerBlue" />
-						</DataTrigger>
-					</DataTemplate.Triggers>
-				</DataTemplate>
-			</local:GraphControl.ElementItemTemplate>
+					</local:GraphControl.ElementItemContainerStyle>
 			
-			<local:GraphControl.ConnectionItemTemplate>
-				<DataTemplate DataType="vm:ConnectionViewModel">
-					<local:BezierLine Stroke="Black" StrokeThickness="2"
-						  X1="{Binding From.Position.X}" Y1="{Binding From.Position.Y}"
-						  X2="{Binding To.Position.X}" Y2="{Binding To.Position.Y}" />
-				</DataTemplate>
-			</local:GraphControl.ConnectionItemTemplate>
-		</local:GraphControl>
+					<local:GraphControl.ElementItemTemplate>
+						<DataTemplate DataType="vm:ElementViewModel">
+							<DataTemplate.Resources>
+								<Style TargetType="local:ConnectorItem">
+									<Setter Property="Position" Value="{Binding Position, Mode=OneWayToSource}" />
+									<Setter Property="Template">
+										<Setter.Value>
+											<ControlTemplate TargetType="local:ConnectorItem">
+												<Ellipse Width="15" Height="15" Margin="0 0 0 5"
+															Fill="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
+											</ControlTemplate>
+										</Setter.Value>
+									</Setter>
+								</Style>
+							</DataTemplate.Resources>
+							<Border x:Name="ElementBorder" BorderThickness="1" BorderBrush="Black" Width="100" 
+									Background="WhiteSmoke" Padding="5">
+								<StackPanel Orientation="Vertical">
+									<TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />
+									<Grid Margin="-10 5 -10 0">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto" />
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+										<ItemsControl Grid.Column="0" ItemsSource="{Binding InputConnectors}">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<local:ConnectorItem />
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+										<ItemsControl Grid.Column="2" ItemsSource="{Binding OutputConnectors}">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<local:ConnectorItem />
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</Grid>
+								</StackPanel>
+							</Border>
+							<DataTemplate.Triggers>
+								<DataTrigger Binding="{Binding IsSelected}" Value="True">
+									<Setter TargetName="ElementBorder" Property="Background" Value="DodgerBlue" />
+								</DataTrigger>
+							</DataTemplate.Triggers>
+						</DataTemplate>
+					</local:GraphControl.ElementItemTemplate>
+			
+					<local:GraphControl.ConnectionItemTemplate>
+						<DataTemplate DataType="vm:ConnectionViewModel">
+							<local:BezierLine Stroke="Black" StrokeThickness="2"
+									X1="{Binding From.Position.X}" Y1="{Binding From.Position.Y}"
+									X2="{Binding To.Position.X}" Y2="{Binding To.Position.Y}" />
+						</DataTemplate>
+					</local:GraphControl.ConnectionItemTemplate>
+				</local:GraphControl>
+			</local:ZoomAndPanControl>
+		</ScrollViewer>
 	</Grid>
 </UserControl>

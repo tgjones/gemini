@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Gemini.Modules.GraphEditor.Controls
 {
+    // Inspired by reading http://www.codeproject.com/Articles/85603/A-WPF-custom-control-for-zooming-and-panning
+    // Thank you Ashley Davis!
     public class GraphControl : Control
     {
+        private ElementItemsControl _elementItemsControl = null;
+
         static GraphControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(GraphControl),
@@ -69,5 +74,17 @@ namespace Gemini.Modules.GraphEditor.Controls
         }
 
         #endregion
+
+        public override void OnApplyTemplate()
+        {
+            _elementItemsControl = (ElementItemsControl) Template.FindName("PART_ElementItemsControl", this);
+            base.OnApplyTemplate();
+        }
+
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            _elementItemsControl.SelectedItems.Clear();
+            base.OnMouseLeftButtonDown(e);
+        }
     }
 }

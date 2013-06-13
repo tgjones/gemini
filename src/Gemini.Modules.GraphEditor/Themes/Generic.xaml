@@ -19,27 +19,60 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="local:GraphControl">
-					<Grid>
-						<local:ElementItemsControl ItemsSource="{TemplateBinding ElementsSource}"
-												   ItemContainerStyle="{TemplateBinding ElementItemContainerStyle}"
-												   ItemTemplate="{TemplateBinding ElementItemTemplate}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<Canvas />
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-						</local:ElementItemsControl>
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid>
+							<local:ElementItemsControl x:Name="PART_ElementItemsControl"
+													   ItemsSource="{TemplateBinding ElementsSource}"
+													   ItemContainerStyle="{TemplateBinding ElementItemContainerStyle}"
+													   ItemTemplate="{TemplateBinding ElementItemTemplate}">
+								<ListBox.Template>
+									<ControlTemplate TargetType="ListBox">
+										<Canvas IsItemsHost="True" />
+									</ControlTemplate>
+								</ListBox.Template>
+							</local:ElementItemsControl>
 
-						<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
-									  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
-									  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
-							<ItemsControl.ItemsPanel>
-								<ItemsPanelTemplate>
-									<Canvas />
-								</ItemsPanelTemplate>
-							</ItemsControl.ItemsPanel>
-						</ItemsControl>
-					</Grid>
+							<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
+										  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
+										  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<Canvas />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+							</ItemsControl>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:ZoomAndPanControl}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:ZoomAndPanControl}">
+					<Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+
+						<!-- 
+                        The ContentPresenter is used to scale and offset the content of ZoomAndPanControl.
+                    
+                        A transforms computed from 'ContentScale', 'ContentOffsetX' and 'ContentOffsetY' are assigned 
+                        to the 'RenderTransform' property in OnApplyTemplate in ZoomAndPanControl.cs.
+                        
+                        The alignment is set to top-left.  This allows the content offset to be used to place
+                        the content in the center of the viewport when the viewport is bigger than the content.
+                        -->
+						<ContentPresenter 
+							x:Name="PART_Content"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top" />
+
+					</Border>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

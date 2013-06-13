@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Gemini.Modules.GraphEditor.Controls
 {
@@ -19,12 +18,6 @@ namespace Gemini.Modules.GraphEditor.Controls
         public ElementItemsControl()
         {
             SelectionMode = SelectionMode.Extended;
-        }
-
-        protected override void OnMouseDown(MouseButtonEventArgs e)
-        {
-            SelectedItems.Clear();
-            base.OnMouseDown(e);
         }
     }
 }

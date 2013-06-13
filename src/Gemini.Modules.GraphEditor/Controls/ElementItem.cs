@@ -52,6 +52,8 @@ namespace Gemini.Modules.GraphEditor.Controls
 
             _isLeftMouseButtonDown = true;
 
+            e.Handled = true;
+
             base.OnMouseLeftButtonDown(e);
         }
 
@@ -82,6 +84,9 @@ namespace Gemini.Modules.GraphEditor.Controls
                 _isDragging = true;
                 CaptureMouse();
             }
+
+            e.Handled = true;
+
             base.OnMouseMove(e);
         }
 
@@ -97,6 +102,8 @@ namespace Gemini.Modules.GraphEditor.Controls
                     _isDragging = false;
                 }
             }
+
+            e.Handled = true;
 
             base.OnMouseLeftButtonUp(e);
         }
