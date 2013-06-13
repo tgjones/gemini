@@ -69,6 +69,9 @@
     <Compile Include="Controls\AnimationHelper.cs" />
     <Compile Include="Controls\BezierLine.cs" />
     <Compile Include="Controls\ConnectorItem.cs" />
+    <Compile Include="Controls\ConnectorItemDragCompletedEventArgs.cs" />
+    <Compile Include="Controls\ConnectorItemDraggingEventArgs.cs" />
+    <Compile Include="Controls\ConnectorItemDragStartedEventArgs.cs" />
     <Compile Include="Controls\GraphControl.cs" />
     <Compile Include="Controls\ElementItem.cs" />
     <Compile Include="Controls\ElementItemsControl.cs" />
