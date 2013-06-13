@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Gemini.Modules.GraphEditor.Controls
 {
-    // Inspired by reading http://www.codeproject.com/Articles/85603/A-WPF-custom-control-for-zooming-and-panning
+    // Inspired by studying http://www.codeproject.com/Articles/182683/NetworkView-A-WPF-custom-control-for-visualizing-a
     // Thank you Ashley Davis!
     public class GraphControl : Control
     {
@@ -76,9 +76,60 @@ namespace Gemini.Modules.GraphEditor.Controls
 
         #endregion
 
+        #region Routed events
+
+        public static readonly RoutedEvent ConnectionDragStartedEvent = EventManager.RegisterRoutedEvent(
+            "ConnectionDragStarted", RoutingStrategy.Bubble, typeof(ConnectionDragStartedEventHandler), 
+            typeof(GraphControl));
+
+        public static readonly RoutedEvent QueryConnectionFeedbackEvent = EventManager.RegisterRoutedEvent(
+            "QueryConnectionFeedback", RoutingStrategy.Bubble, typeof(QueryConnectionFeedbackEventHandler), 
+            typeof(GraphControl));
+
+        public static readonly RoutedEvent ConnectionDraggingEvent = EventManager.RegisterRoutedEvent(
+            "ConnectionDragging", RoutingStrategy.Bubble, typeof(ConnectionDraggingEventHandler), 
+            typeof(GraphControl));
+
+        public static readonly RoutedEvent ConnectionDragCompletedEvent = EventManager.RegisterRoutedEvent(
+            "ConnectionDragCompleted", RoutingStrategy.Bubble, typeof(ConnectionDragCompletedEventHandler), 
+            typeof(GraphControl));
+
+        public event ConnectionDragStartedEventHandler ConnectionDragStarted
+        {
+            add { AddHandler(ConnectionDragStartedEvent, value); }
+            remove { RemoveHandler(ConnectionDragStartedEvent, value); }
+        }
+
+        public event QueryConnectionFeedbackEventHandler QueryConnectionFeedback
+        {
+            add { AddHandler(QueryConnectionFeedbackEvent, value); }
+            remove { RemoveHandler(QueryConnectionFeedbackEvent, value); }
+        }
+
+        public event ConnectionDraggingEventHandler ConnectionDragging
+        {
+            add { AddHandler(ConnectionDraggingEvent, value); }
+            remove { RemoveHandler(ConnectionDraggingEvent, value); }
+        }
+
+        public event ConnectionDragCompletedEventHandler ConnectionDragCompleted
+        {
+            add { AddHandler(ConnectionDragCompletedEvent, value); }
+            remove { RemoveHandler(ConnectionDragCompletedEvent, value); }
+        }
+
+        #endregion
+
         public IList SelectedElements
         {
             get { return _elementItemsControl.SelectedItems; }
+        }
+
+        public GraphControl()
+        {
+            AddHandler(ConnectorItem.ConnectorDragStartedEvent, new ConnectorItemDragStartedEventHandler(OnConnectorItemDragStarted));
+            AddHandler(ConnectorItem.ConnectorDraggingEvent, new ConnectorItemDraggingEventHandler(OnConnectorItemDragging));
+            AddHandler(ConnectorItem.ConnectorDragCompletedEvent, new ConnectorItemDragCompletedEventHandler(OnConnectorItemDragCompleted));
         }
 
         public override void OnApplyTemplate()
@@ -101,5 +152,31 @@ namespace Gemini.Modules.GraphEditor.Controls
                 .Concat(new[] { 0 })
                 .Max();
         }
+
+        #region Connection dragging
+
+        private ConnectorItem _sourceConnector;
+
+        private void OnConnectorItemDragStarted(object sender, ConnectorItemDragStartedEventArgs e)
+        {
+            e.Handled = true;
+
+            _sourceConnector = (ConnectorItem) e.OriginalSource;
+            var elementItem = _sourceConnector.ParentElementItem;
+
+
+        }
+
+        private void OnConnectorItemDragging(object sender, ConnectorItemDraggingEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void OnConnectorItemDragCompleted(object sender, ConnectorItemDragCompletedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
     }
 }

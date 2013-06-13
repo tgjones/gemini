@@ -51,7 +51,7 @@ namespace Gemini.Modules.GraphEditor.Controls
             get { return VisualTreeUtility.FindParent<GraphControl>(this); }
         }
 
-        private ElementItem ParentElementItem
+        internal ElementItem ParentElementItem
         {
             get { return VisualTreeUtility.FindParent<ElementItem>(this); }
         }

@@ -68,6 +68,10 @@
   <ItemGroup>
     <Compile Include="Controls\AnimationHelper.cs" />
     <Compile Include="Controls\BezierLine.cs" />
+    <Compile Include="Controls\ConnectionDragCompletedEventArgs.cs" />
+    <Compile Include="Controls\ConnectionDragEventArgs.cs" />
+    <Compile Include="Controls\ConnectionDraggingEventArgs.cs" />
+    <Compile Include="Controls\ConnectionDragStartedEventArgs.cs" />
     <Compile Include="Controls\ConnectorItem.cs" />
     <Compile Include="Controls\ConnectorItemDragCompletedEventArgs.cs" />
     <Compile Include="Controls\ConnectorItemDraggingEventArgs.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="Controls\GraphControl.cs" />
     <Compile Include="Controls\ElementItem.cs" />
     <Compile Include="Controls\ElementItemsControl.cs" />
+    <Compile Include="Controls\QueryConnectionFeedbackEventArgs.cs" />
     <Compile Include="Controls\ZoomAndPanControl.cs" />
     <Compile Include="Controls\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
