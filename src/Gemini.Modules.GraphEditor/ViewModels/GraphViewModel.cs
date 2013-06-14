@@ -34,16 +34,18 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             var element2 = AddElement(300, 150, "Multiply");
 
             Connections.Add(new ConnectionViewModel(
-                element1.OutputConnectors[0], 
+                element1.OutputConnector, 
                 element2.InputConnectors[0]));
+
+            element1.IsSelected = true;
         }
 
         public ElementViewModel AddElement(double x, double y, string name)
         {
             var element = new ElementViewModel { X = x, Y = y, Name = name };
-            element.InputConnectors.Add(new ConnectorViewModel(element) { Color = Colors.Red });
-            element.InputConnectors.Add(new ConnectorViewModel(element) { Color = Colors.Blue });
-            element.OutputConnectors.Add(new ConnectorViewModel(element) { Color = Colors.Green });
+            element.InputConnectors.Add(new InputConnectorViewModel(element, "Foreground", Colors.DodgerBlue));
+            element.InputConnectors.Add(new InputConnectorViewModel(element, "Background", Colors.DarkSeaGreen));
+            element.OutputConnector = new OutputConnectorViewModel(element, "Output", Colors.DodgerBlue);
             _elements.Add(element);
             return element;
         }

@@ -48,22 +48,26 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             }
         }
 
-        private readonly BindableCollection<ConnectorViewModel> _inputConnectors;
-        public IObservableCollection<ConnectorViewModel> InputConnectors
+        private readonly BindableCollection<InputConnectorViewModel> _inputConnectors;
+        public IObservableCollection<InputConnectorViewModel> InputConnectors
         {
             get { return _inputConnectors; }
         }
 
-        private readonly BindableCollection<ConnectorViewModel> _outputConnectors;
-        public IObservableCollection<ConnectorViewModel> OutputConnectors
+        private OutputConnectorViewModel _outputConnector;
+        public OutputConnectorViewModel OutputConnector
         {
-            get { return _outputConnectors; }
+            get { return _outputConnector; }
+            set
+            {
+                _outputConnector = value;
+                NotifyOfPropertyChange(() => OutputConnector);
+            }
         }
 
         public ElementViewModel()
         {
-            _inputConnectors = new BindableCollection<ConnectorViewModel>();
-            _outputConnectors = new BindableCollection<ConnectorViewModel>();
+            _inputConnectors = new BindableCollection<InputConnectorViewModel>();
         }
     }
 }

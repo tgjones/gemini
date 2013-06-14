@@ -23,28 +23,44 @@
 					<Border Background="{TemplateBinding Background}"
 							BorderBrush="{TemplateBinding BorderBrush}"
 							BorderThickness="{TemplateBinding BorderThickness}">
-						<Grid>
-							<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
-										  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
-										  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
-								<ItemsControl.ItemsPanel>
-									<ItemsPanelTemplate>
-										<Canvas />
-									</ItemsPanelTemplate>
-								</ItemsControl.ItemsPanel>
-							</ItemsControl>
+						<Border>
+							<Border.Background>
+								<VisualBrush TileMode="Tile" 
+											 Viewport="0,0,25,25" ViewportUnits="Absolute"
+											 Viewbox="0,0,25,25" ViewboxUnits="Absolute">
+									<VisualBrush.Visual>
+										<Border BorderThickness="0 0 1 1"
+												Height="25" Width="25">
+											<Border.BorderBrush>
+												<SolidColorBrush Color="#77A9A9A9" />
+											</Border.BorderBrush>
+										</Border>
+									</VisualBrush.Visual>
+								</VisualBrush>
+							</Border.Background>
+							<Grid>
+								<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
+											  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
+											  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<Canvas />
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+								</ItemsControl>
 							
-							<local:ElementItemsControl x:Name="PART_ElementItemsControl"
-													   ItemsSource="{TemplateBinding ElementsSource}"
-													   ItemContainerStyle="{TemplateBinding ElementItemContainerStyle}"
-													   ItemTemplate="{TemplateBinding ElementItemTemplate}">
-								<ListBox.Template>
-									<ControlTemplate TargetType="ListBox">
-										<Canvas IsItemsHost="True" />
-									</ControlTemplate>
-								</ListBox.Template>
-							</local:ElementItemsControl>
-						</Grid>
+								<local:ElementItemsControl x:Name="PART_ElementItemsControl"
+														   ItemsSource="{TemplateBinding ElementsSource}"
+														   ItemContainerStyle="{TemplateBinding ElementItemContainerStyle}"
+														   ItemTemplate="{TemplateBinding ElementItemTemplate}">
+									<ListBox.Template>
+										<ControlTemplate TargetType="ListBox">
+											<Canvas IsItemsHost="True" />
+										</ControlTemplate>
+									</ListBox.Template>
+								</local:ElementItemsControl>
+							</Grid>
+						</Border>
 					</Border>
 				</ControlTemplate>
 			</Setter.Value>

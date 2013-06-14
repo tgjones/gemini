@@ -99,9 +99,12 @@
     </Compile>
     <Compile Include="Util\VisualTreeUtility.cs" />
     <Compile Include="ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="ViewModels\ConnectorDirection.cs" />
     <Compile Include="ViewModels\ConnectorViewModel.cs" />
     <Compile Include="ViewModels\ElementViewModel.cs" />
     <Compile Include="ViewModels\GraphViewModel.cs" />
+    <Compile Include="ViewModels\InputConnectorViewModel.cs" />
+    <Compile Include="ViewModels\OutputConnectorViewModel.cs" />
     <Compile Include="Views\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
     </Compile>

@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:Gemini.Modules.GraphEditor.ViewModels"
              xmlns:conv="clr-namespace:Gemini.Modules.GraphEditor.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500"
+             d:DesignHeight="500" d:DesignWidth="500"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
 			 Background="WhiteSmoke">
 	<UserControl.Resources>
@@ -17,7 +17,7 @@
 	<Grid>
 		<ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
 			<local:ZoomAndPanControl x:Name="ZoomAndPanControl" Background="WhiteSmoke">
-				<local:GraphControl x:Name="GraphControl" Background="White"
+				<local:GraphControl x:Name="GraphControl" Background="Gray"
 									ElementsSource="{Binding Elements}" ConnectionsSource="{Binding Connections}"
 									Width="3000" Height="2000"
 									PreviewMouseRightButtonDown="OnGraphControlRightMouseButtonDown"
@@ -43,43 +43,62 @@
 									<Setter Property="Template">
 										<Setter.Value>
 											<ControlTemplate TargetType="local:ConnectorItem">
-												<Ellipse Width="15" Height="15" Margin="0 0 0 5"
+												<Rectangle Width="5" Height="10" Margin="0 0 0 5"
 															Fill="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
 											</ControlTemplate>
 										</Setter.Value>
 									</Setter>
 								</Style>
 							</DataTemplate.Resources>
-							<Border x:Name="ElementBorder" BorderThickness="1" BorderBrush="Black" Width="100" 
-									Background="WhiteSmoke" Padding="5">
-								<StackPanel Orientation="Vertical">
-									<TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />
-									<Grid Margin="-10 5 -10 0">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto" />
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="Auto" />
-										</Grid.ColumnDefinitions>
-										<ItemsControl Grid.Column="0" ItemsSource="{Binding InputConnectors}">
-											<ItemsControl.ItemTemplate>
-												<DataTemplate>
-													<local:ConnectorItem />
-												</DataTemplate>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-										<ItemsControl Grid.Column="2" ItemsSource="{Binding OutputConnectors}">
-											<ItemsControl.ItemTemplate>
-												<DataTemplate>
-													<local:ConnectorItem />
-												</DataTemplate>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-									</Grid>
-								</StackPanel>
+							<Border x:Name="HighlightBorder" 
+									BorderThickness="2" Padding="2" CornerRadius="4">
+								<Border CornerRadius="4" Background="WhiteSmoke">
+									<Border.Effect>
+										<DropShadowEffect Color="DarkGray" ShadowDepth="0" 
+														  BlurRadius="10" />
+									</Border.Effect>
+									<StackPanel Orientation="Vertical">
+										<Border Background="LightSkyBlue" Padding="5 2 2 2" BorderBrush="DodgerBlue"
+												BorderThickness="0 0 0 1" CornerRadius="2 2 0 0">
+											<TextBlock HorizontalAlignment="Stretch" Text="{Binding Name}" />
+										</Border>
+										<Rectangle Grid.Column="1" Width="100" Height="100"
+												   Fill="Black" Margin="5" />
+										<Border BorderBrush="LightGray" BorderThickness="0 1 0 0">
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto" />
+													<ColumnDefinition Width="1" />
+													<ColumnDefinition Width="Auto" />
+												</Grid.ColumnDefinitions>
+												<ItemsControl Grid.Column="0" ItemsSource="{Binding InputConnectors}" 
+															  BorderThickness="0 0 1 0" BorderBrush="LightGray"
+															  VerticalAlignment="Top" Padding="0 5 5 0">
+													<ItemsControl.ItemTemplate>
+														<DataTemplate>
+															<StackPanel Orientation="Horizontal" Height="20">
+																<local:ConnectorItem />
+																<TextBlock Text="{Binding Name}" FontSize="11" VerticalAlignment="Top"
+																		   Margin="3 0 0 0"/>
+															</StackPanel>
+														</DataTemplate>
+													</ItemsControl.ItemTemplate>
+												</ItemsControl>
+												<Border Grid.Column="2" VerticalAlignment="Top" Padding="5 5 0 0">
+													<StackPanel Orientation="Horizontal" Height="20">
+														<TextBlock Text="{Binding OutputConnector.Name}" FontSize="11" VerticalAlignment="Top"
+																   Margin="0 0 3 0"/>
+														<local:ConnectorItem DataContext="{Binding OutputConnector}" />
+													</StackPanel>
+												</Border>
+											</Grid>
+										</Border>
+									</StackPanel>
+								</Border>
 							</Border>
 							<DataTemplate.Triggers>
 								<DataTrigger Binding="{Binding IsSelected}" Value="True">
-									<Setter TargetName="ElementBorder" Property="Background" Value="DodgerBlue" />
+									<Setter TargetName="HighlightBorder" Property="BorderBrush" Value="Yellow" />
 								</DataTrigger>
 							</DataTemplate.Triggers>
 						</DataTemplate>
@@ -87,7 +106,7 @@
 			
 					<local:GraphControl.ConnectionItemTemplate>
 						<DataTemplate DataType="vm:ConnectionViewModel">
-							<local:BezierLine Stroke="Black" StrokeThickness="2"
+							<local:BezierLine Stroke="LightSkyBlue" StrokeThickness="1"
 									X1="{Binding FromPosition.X}" Y1="{Binding FromPosition.Y}"
 									X2="{Binding ToPosition.X}" Y2="{Binding ToPosition.Y}" />
 						</DataTemplate>

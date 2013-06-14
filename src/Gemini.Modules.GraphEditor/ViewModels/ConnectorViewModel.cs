@@ -5,7 +5,12 @@ using Caliburn.Micro;
 
 namespace Gemini.Modules.GraphEditor.ViewModels
 {
-    public class ConnectorViewModel : PropertyChangedBase
+    public enum ConnectorDataType
+    {
+        
+    }
+
+    public abstract class ConnectorViewModel : PropertyChangedBase
     {
         public event EventHandler PositionChanged;
 
@@ -21,15 +26,16 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             get { return _connections; }
         }
 
-        private Color _color = Colors.Black;
+        private readonly string _name;
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        private readonly Color _color = Colors.Black;
         public Color Color
         {
             get { return _color; }
-            set
-            {
-                _color = value;
-                NotifyOfPropertyChange(() => Color);
-            }
         }
 
         private Point _position;
@@ -44,9 +50,13 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             }
         }
 
-        public ConnectorViewModel(ElementViewModel element)
+        public abstract ConnectorDirection ConnectorDirection { get; }
+
+        protected ConnectorViewModel(ElementViewModel element, string name, Color color)
         {
             _element = element;
+            _name = name;
+            _color = color;
             _connections = new BindableCollection<ConnectionViewModel>();
         }
 
