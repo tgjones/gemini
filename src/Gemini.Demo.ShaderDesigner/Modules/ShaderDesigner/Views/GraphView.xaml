@@ -65,7 +65,7 @@
 										<Border>
 											<Grid>
 												<Grid.ColumnDefinitions>
-													<ColumnDefinition Width="Auto" />
+													<ColumnDefinition Width="Auto" MinWidth="50" />
 													<ColumnDefinition Width="1" />
 													<ColumnDefinition Width="Auto" />
 												</Grid.ColumnDefinitions>
@@ -85,8 +85,10 @@
 												<Border Grid.Column="2" VerticalAlignment="Top">
 													<StackPanel Orientation="Vertical">
 														<Border Padding="5" BorderBrush="LightGray" BorderThickness="0 0 0 1">
-															<Rectangle Grid.Column="1" Width="100" Height="100"
-																	   Fill="Black" />
+															<Border BorderBrush="Black" BorderThickness="1" 
+																	Width="100" Height="100">
+																<Image Source="{Binding PreviewImage}" Stretch="Fill" />
+															</Border>
 														</Border>
 														<StackPanel Orientation="Horizontal" Height="20" Margin="5 5 0 0"
 																	HorizontalAlignment="Right">

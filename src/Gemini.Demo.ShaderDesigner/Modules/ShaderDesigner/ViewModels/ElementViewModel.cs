@@ -1,8 +1,10 @@
-﻿using Caliburn.Micro;
+﻿using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
-    public class ElementViewModel : PropertyChangedBase
+    public abstract class ElementViewModel : PropertyChangedBase
     {
         private double _x;
         public double X
@@ -48,6 +50,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             }
         }
 
+        public abstract BitmapSource PreviewImage { get; }
+
         private readonly BindableCollection<InputConnectorViewModel> _inputConnectors;
         public IObservableCollection<InputConnectorViewModel> InputConnectors
         {
@@ -65,9 +69,20 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             }
         }
 
-        public ElementViewModel()
+        protected ElementViewModel()
         {
             _inputConnectors = new BindableCollection<InputConnectorViewModel>();
+            _name = GetType().Name;
+        }
+
+        protected void AddInputConnector(string name, Color color)
+        {
+            InputConnectors.Add(new InputConnectorViewModel(this, name, color));
+        }
+
+        protected void SetOutputConnector(string name, Color color)
+        {
+            OutputConnector = new OutputConnectorViewModel(this, name, color);
         }
     }
 }

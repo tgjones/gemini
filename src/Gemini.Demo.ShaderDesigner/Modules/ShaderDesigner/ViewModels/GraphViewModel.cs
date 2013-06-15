@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using Caliburn.Micro;
+using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Design;
+using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Util;
+using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements;
 using Gemini.Framework;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
@@ -30,22 +32,29 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             _elements = new BindableCollection<ElementViewModel>();
             _connections = new BindableCollection<ConnectionViewModel>();
 
-            var element1 = AddElement(100, 100, "Add");
-            var element2 = AddElement(400, 250, "Multiply");
+            var element1 = AddElement<ImageSource>(100, 50);
+            element1.Bitmap = BitmapUtility.CreateFromBytes(DesignTimeImages.Desert);
+
+            var element2 = AddElement<ImageSource>(100, 300);
+            element2.Bitmap = BitmapUtility.CreateFromBytes(DesignTimeImages.Tulips);
+
+            var element3 = AddElement<Add>(400, 250);
 
             Connections.Add(new ConnectionViewModel(
-                element1.OutputConnector, 
-                element2.InputConnectors[0]));
+                element1.OutputConnector,
+                element3.InputConnectors[0]));
+
+            Connections.Add(new ConnectionViewModel(
+                element2.OutputConnector,
+                element3.InputConnectors[1]));
 
             element1.IsSelected = true;
         }
 
-        public ElementViewModel AddElement(double x, double y, string name)
+        public TElement AddElement<TElement>(double x, double y)
+            where TElement : ElementViewModel, new()
         {
-            var element = new ElementViewModel { X = x, Y = y, Name = name };
-            element.InputConnectors.Add(new InputConnectorViewModel(element, "Foreground", Colors.DodgerBlue));
-            element.InputConnectors.Add(new InputConnectorViewModel(element, "Background", Colors.DarkSeaGreen));
-            element.OutputConnector = new OutputConnectorViewModel(element, "Output", Colors.DodgerBlue);
+            var element = new TElement { X = x, Y = y };
             _elements.Add(element);
             return element;
         }

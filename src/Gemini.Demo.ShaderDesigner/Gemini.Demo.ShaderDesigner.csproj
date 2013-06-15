@@ -88,10 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\ShaderDesigner\Design\DesignTimeGraphViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\Design\DesignTimeImages.cs" />
     <Compile Include="Modules\ShaderDesigner\Module.cs" />
+    <Compile Include="Modules\ShaderDesigner\Util\BitmapUtility.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectionViewModel.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectorDirection.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectorViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\Add.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\ImageSource.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\ElementViewModel.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\GraphViewModel.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\InputConnectorViewModel.cs" />
@@ -138,7 +142,6 @@
       <Name>Gemini</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="Modules\ShaderDesigner\Resources\Styles.xaml">
       <SubType>Designer</SubType>
