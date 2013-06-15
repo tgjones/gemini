@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:Gemini.Modules.GraphEditor.ViewModels"
              xmlns:conv="clr-namespace:Gemini.Modules.GraphEditor.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="500"
+             d:DesignHeight="500" d:DesignWidth="700"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
 			 Background="WhiteSmoke">
 	<UserControl.Resources>
@@ -62,9 +62,7 @@
 												BorderThickness="0 0 0 1" CornerRadius="2 2 0 0">
 											<TextBlock HorizontalAlignment="Stretch" Text="{Binding Name}" />
 										</Border>
-										<Rectangle Grid.Column="1" Width="100" Height="100"
-												   Fill="Black" Margin="5" />
-										<Border BorderBrush="LightGray" BorderThickness="0 1 0 0">
+										<Border>
 											<Grid>
 												<Grid.ColumnDefinitions>
 													<ColumnDefinition Width="Auto" />
@@ -72,7 +70,6 @@
 													<ColumnDefinition Width="Auto" />
 												</Grid.ColumnDefinitions>
 												<ItemsControl Grid.Column="0" ItemsSource="{Binding InputConnectors}" 
-															  BorderThickness="0 0 1 0" BorderBrush="LightGray"
 															  VerticalAlignment="Top" Padding="0 5 5 0">
 													<ItemsControl.ItemTemplate>
 														<DataTemplate>
@@ -84,11 +81,19 @@
 														</DataTemplate>
 													</ItemsControl.ItemTemplate>
 												</ItemsControl>
-												<Border Grid.Column="2" VerticalAlignment="Top" Padding="5 5 0 0">
-													<StackPanel Orientation="Horizontal" Height="20">
-														<TextBlock Text="{Binding OutputConnector.Name}" FontSize="11" VerticalAlignment="Top"
-																   Margin="0 0 3 0"/>
-														<local:ConnectorItem DataContext="{Binding OutputConnector}" />
+												<Border Grid.Column="1" Background="LightGray" />
+												<Border Grid.Column="2" VerticalAlignment="Top">
+													<StackPanel Orientation="Vertical">
+														<Border Padding="5" BorderBrush="LightGray" BorderThickness="0 0 0 1">
+															<Rectangle Grid.Column="1" Width="100" Height="100"
+																	   Fill="Black" />
+														</Border>
+														<StackPanel Orientation="Horizontal" Height="20" Margin="5 5 0 0"
+																	HorizontalAlignment="Right">
+															<TextBlock Text="{Binding OutputConnector.Name}" FontSize="11" VerticalAlignment="Top"
+																	   Margin="0 0 3 0"/>
+															<local:ConnectorItem DataContext="{Binding OutputConnector}" />
+														</StackPanel>
 													</StackPanel>
 												</Border>
 											</Grid>

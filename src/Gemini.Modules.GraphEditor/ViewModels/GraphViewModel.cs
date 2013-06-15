@@ -31,7 +31,7 @@ namespace Gemini.Modules.GraphEditor.ViewModels
             _connections = new BindableCollection<ConnectionViewModel>();
 
             var element1 = AddElement(100, 100, "Add");
-            var element2 = AddElement(300, 150, "Multiply");
+            var element2 = AddElement(400, 250, "Multiply");
 
             Connections.Add(new ConnectionViewModel(
                 element1.OutputConnector, 
