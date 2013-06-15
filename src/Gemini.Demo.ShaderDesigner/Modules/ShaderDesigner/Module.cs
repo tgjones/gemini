@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
+using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels;
 using Gemini.Framework;
-using Gemini.Modules.GraphEditor.ViewModels;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner
 {

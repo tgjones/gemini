@@ -60,10 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\GraphView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\AnimationHelper.cs" />
@@ -82,7 +78,6 @@
     <Compile Include="Controls\ZoomAndPanControl.cs" />
     <Compile Include="Controls\ZoomAndPanControl_IScrollInfo.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
-    <Compile Include="Design\DesignTimeGraphViewModel.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -98,16 +93,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Util\VisualTreeUtility.cs" />
-    <Compile Include="ViewModels\ConnectionViewModel.cs" />
-    <Compile Include="ViewModels\ConnectorDirection.cs" />
-    <Compile Include="ViewModels\ConnectorViewModel.cs" />
-    <Compile Include="ViewModels\ElementViewModel.cs" />
-    <Compile Include="ViewModels\GraphViewModel.cs" />
-    <Compile Include="ViewModels\InputConnectorViewModel.cs" />
-    <Compile Include="ViewModels\OutputConnectorViewModel.cs" />
-    <Compile Include="Views\GraphView.xaml.cs">
-      <DependentUpon>GraphView.xaml</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

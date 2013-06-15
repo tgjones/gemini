@@ -87,7 +87,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\ShaderDesigner\Design\DesignTimeGraphViewModel.cs" />
     <Compile Include="Modules\ShaderDesigner\Module.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectorDirection.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectorViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\ElementViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\GraphViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\InputConnectorViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\OutputConnectorViewModel.cs" />
+    <Compile Include="Modules\ShaderDesigner\Views\GraphView.xaml.cs">
+      <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -132,6 +143,10 @@
     <Page Include="Modules\ShaderDesigner\Resources\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\ShaderDesigner\Views\GraphView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

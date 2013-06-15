@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels;
 using Gemini.Modules.GraphEditor.Controls;
-using Gemini.Modules.GraphEditor.ViewModels;
 
-namespace Gemini.Modules.GraphEditor.Views
+namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
 {
     /// <summary>
     /// Interaction logic for GraphView.xaml

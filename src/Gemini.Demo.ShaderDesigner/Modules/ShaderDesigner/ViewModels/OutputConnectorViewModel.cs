@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace Gemini.Modules.GraphEditor.ViewModels
+namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class OutputConnectorViewModel : ConnectorViewModel
     {

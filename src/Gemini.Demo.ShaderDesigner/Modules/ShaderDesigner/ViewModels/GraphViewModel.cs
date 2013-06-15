@@ -4,7 +4,7 @@ using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework;
 
-namespace Gemini.Modules.GraphEditor.ViewModels
+namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class GraphViewModel : Document
     {
