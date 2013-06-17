@@ -99,8 +99,13 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
         {
             if (e.Data.GetDataPresent(ToolboxDragDrop.DataFormat))
             {
+                var mousePosition = e.GetPosition(GraphControl);
+
                 var toolboxItem = (ToolboxItem) e.Data.GetData(ToolboxDragDrop.DataFormat);
                 var element = (ElementViewModel) Activator.CreateInstance(toolboxItem.ItemType);
+                element.X = mousePosition.X;
+                element.Y = mousePosition.Y;
+
                 var viewModel = (GraphViewModel) DataContext;
                 viewModel.Elements.Add(element);
             }
