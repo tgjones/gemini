@@ -1,8 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels;
 using Gemini.Modules.GraphEditor.Controls;
+using Gemini.Modules.Toolbox;
+using Gemini.Modules.Toolbox.Models;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
 {
@@ -84,6 +87,23 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
                 : null;
             var newConnection = (ConnectionViewModel) e.Connection;
             ViewModel.OnConnectionDragCompleted(newConnection, sourceConnector, destinationConnector);
+        }
+
+        private void OnGraphControlDragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(ToolboxDragDrop.DataFormat))
+                e.Effects = DragDropEffects.None;
+        }
+
+        private void OnGraphControlDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(ToolboxDragDrop.DataFormat))
+            {
+                var toolboxItem = (ToolboxItem) e.Data.GetData(ToolboxDragDrop.DataFormat);
+                var element = (ElementViewModel) Activator.CreateInstance(toolboxItem.ItemType);
+                var viewModel = (GraphViewModel) DataContext;
+                viewModel.Elements.Add(element);
+            }
         }
     }
 }

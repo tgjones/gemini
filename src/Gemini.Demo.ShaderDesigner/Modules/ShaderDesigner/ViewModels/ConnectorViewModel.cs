@@ -20,12 +20,6 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             get { return _element; }
         }
 
-        private readonly BindableCollection<ConnectionViewModel> _connections;
-        public IObservableCollection<ConnectionViewModel> Connections
-        {
-            get { return _connections; }
-        }
-
         private readonly string _name;
         public string Name
         {
@@ -57,7 +51,6 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             _element = element;
             _name = name;
             _color = color;
-            _connections = new BindableCollection<ConnectionViewModel>();
         }
 
         private void RaisePositionChanged()

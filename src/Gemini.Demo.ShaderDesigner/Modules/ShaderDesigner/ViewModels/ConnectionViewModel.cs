@@ -6,8 +6,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class ConnectionViewModel : PropertyChangedBase
     {
-        private ConnectorViewModel _from;
-        public ConnectorViewModel From
+        private OutputConnectorViewModel _from;
+        public OutputConnectorViewModel From
         {
             get { return _from; }
             set
@@ -31,8 +31,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             }
         }
 
-        private ConnectorViewModel _to;
-        public ConnectorViewModel To
+        private InputConnectorViewModel _to;
+        public InputConnectorViewModel To
         {
             get { return _to; }
             set
@@ -40,7 +40,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
                 if (_to != null)
                 {
                     _to.PositionChanged -= OnToPositionChanged;
-                    _to.Connections.Remove(this);
+                    _to.Connection = null;
                 }
 
                 _to = value;
@@ -48,7 +48,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
                 if (_to != null)
                 {
                     _to.PositionChanged += OnToPositionChanged;
-                    _to.Connections.Add(this);
+                    _to.Connection = this;
                     ToPosition = _to.Position;
                 }
 
@@ -78,7 +78,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             }
         }
 
-        public ConnectionViewModel(ConnectorViewModel from, ConnectorViewModel to)
+        public ConnectionViewModel(OutputConnectorViewModel from, InputConnectorViewModel to)
         {
             From = from;
             To = to;

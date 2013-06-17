@@ -43,7 +43,6 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Activities.Presentation" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -74,17 +73,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
+    <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
     <Compile Include="Modules\Shell\Controls\PanesStyleSelector.cs" />
+    <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\LayoutUtility.cs" />
     <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
     <Compile Include="Framework\Controls\ToolPaneToolBar.cs" />
-    <Compile Include="Framework\Converters\ActiveDocumentConverter.cs" />
-    <Compile Include="Framework\Converters\LayoutItemViewConverter.cs" />
+    <Compile Include="Modules\Shell\Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Framework\Document.cs" />
     <Compile Include="Framework\IDocument.cs" />
     <Compile Include="Framework\IModule.cs" />
@@ -145,6 +146,19 @@
     <Compile Include="Modules\ToolBars\Views\ToolBarsView.xaml.cs">
       <DependentUpon>ToolBarsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Toolbox\Design\DesignTimeToolboxViewModel.cs" />
+    <Compile Include="Modules\Toolbox\Models\ToolboxItem.cs" />
+    <Compile Include="Modules\Toolbox\Services\ToolboxService.cs" />
+    <Compile Include="Modules\Toolbox\ToolboxItemAttribute.cs" />
+    <Compile Include="Modules\Toolbox\IToolbox.cs" />
+    <Compile Include="Modules\Toolbox\Services\IToolboxService.cs" />
+    <Compile Include="Modules\Toolbox\Module.cs" />
+    <Compile Include="Modules\Toolbox\ToolboxDragDrop.cs" />
+    <Compile Include="Modules\Toolbox\ViewModels\ToolboxItemViewModel.cs" />
+    <Compile Include="Modules\Toolbox\ViewModels\ToolboxViewModel.cs" />
+    <Compile Include="Modules\Toolbox\Views\ToolboxView.xaml.cs">
+      <DependentUpon>ToolboxView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
@@ -185,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\Toolbox\Views\ToolboxView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\UndoRedo\Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,7 +228,9 @@
     <None Include="Gemini.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Modules\Toolbox\Resources\Sigma.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Open.png" />
     <Resource Include="Resources\Icons\Redo.png" />

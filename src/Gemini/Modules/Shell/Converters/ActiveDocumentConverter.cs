@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using Gemini.Framework;
 
-namespace Gemini.Framework.Converters
+namespace Gemini.Modules.Shell.Converters
 {
 	public class ActiveDocumentConverter : IValueConverter
 	{

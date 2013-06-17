@@ -1,14 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Gemini.Modules.GraphEditor.Util
+namespace Gemini.Framework
 {
-    internal static class VisualTreeUtility
+    public static class VisualTreeUtility
     {
         public static T FindParent<T>(DependencyObject child)
             where T : DependencyObject
         {
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+            var parentObject = VisualTreeHelper.GetParent(child);
 
             if (parentObject == null) 
                 return null;

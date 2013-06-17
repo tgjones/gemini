@@ -1,6 +1,8 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
+using Gemini.Modules.Toolbox;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
@@ -80,9 +82,9 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             InputConnectors.Add(new InputConnectorViewModel(this, name, color));
         }
 
-        protected void SetOutputConnector(string name, Color color)
+        protected void SetOutputConnector(string name, Color color, Func<BitmapSource> valueCallback)
         {
-            OutputConnector = new OutputConnectorViewModel(this, name, color);
+            OutputConnector = new OutputConnectorViewModel(this, name, color, valueCallback);
         }
     }
 }

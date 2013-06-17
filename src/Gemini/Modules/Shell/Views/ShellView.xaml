@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
         xmlns:controls="clr-namespace:Gemini.Modules.Shell.Controls"
-		xmlns:converters="clr-namespace:Gemini.Framework.Converters"
 		xmlns:cal="http://www.caliburnproject.org"
         xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters"
         Title="{Binding Title}" Icon="{Binding Icon}" 
 		Width="1000" Height="800" WindowStartupLocation="CenterScreen"
         WindowState="{Binding WindowState}"
@@ -12,6 +12,7 @@
 	<Window.Resources>
 		<ResourceDictionary>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
+			<converters:NullableValueConverter x:Key="NullableValueConverter" />
 			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		</ResourceDictionary>
 	</Window.Resources>
@@ -49,7 +50,7 @@
 							<Setter Property="ContentId" Value="{Binding Model.ContentId}" />
 							<Setter Property="Title" Value="{Binding Model.DisplayName, Mode=OneWay}" />
 							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
-							<Setter Property="IconSource" Value="{Binding Model.IconSource}" />
+							<Setter Property="IconSource" Value="{Binding Model.IconSource, Converter={StaticResource NullableValueConverter}}" />
 							<Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
 							<Setter Property="Visibility" Value="{Binding Model.IsVisible, Mode=TwoWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={x:Static Visibility.Hidden}}"/>
 						</Style>

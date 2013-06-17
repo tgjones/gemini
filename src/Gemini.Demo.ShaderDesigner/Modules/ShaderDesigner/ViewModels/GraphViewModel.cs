@@ -48,6 +48,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
                 element2.OutputConnector,
                 element3.InputConnectors[1]));
 
+            element3.Process();
+
             element1.IsSelected = true;
         }
 
@@ -61,11 +63,12 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 
         public ConnectionViewModel OnConnectionDragStarted(ConnectorViewModel sourceConnector, Point currentDragPoint)
         {
-            // TODO: Check that source connector is an output connector.
+            if (!(sourceConnector is OutputConnectorViewModel))
+                return null;
 
             var connection = new ConnectionViewModel
             {
-                From = sourceConnector,
+                From = (OutputConnectorViewModel) sourceConnector,
                 ToPosition = currentDragPoint
             };
 
@@ -81,30 +84,26 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 
         public void OnConnectionDragCompleted(ConnectionViewModel newConnection, ConnectorViewModel sourceConnector, ConnectorViewModel destinationConnector)
         {
-            if (destinationConnector == null)
+            if (destinationConnector == null 
+                || !(destinationConnector is InputConnectorViewModel)
+                || sourceConnector.Element == destinationConnector.Element)
             {
                 Connections.Remove(newConnection);
                 return;
             }
 
-            // TODO: Check that destination connector is an input connector.
-
-            if (sourceConnector.Element == destinationConnector.Element)
-            {
-                Connections.Remove(newConnection);
-                return;
-            }
-
-            var existingConnection = FindConnection(sourceConnector, destinationConnector);
+            var existingConnection = FindConnection(
+                (OutputConnectorViewModel) sourceConnector, 
+                (InputConnectorViewModel) destinationConnector);
             if (existingConnection != null)
                 Connections.Remove(existingConnection);
 
-            newConnection.To = destinationConnector;
+            newConnection.To = (InputConnectorViewModel) destinationConnector;
         }
 
         private static ConnectionViewModel FindConnection(
-            ConnectorViewModel sourceConnector, 
-            ConnectorViewModel destinationConnector)
+            OutputConnectorViewModel sourceConnector, 
+            InputConnectorViewModel destinationConnector)
         {
             return sourceConnector.Connections.FirstOrDefault(connection => connection.To == destinationConnector);
         }

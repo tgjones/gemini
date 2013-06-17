@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Gemini.Modules.GraphEditor.Util;
+using Gemini.Framework;
 
 namespace Gemini.Modules.GraphEditor.Controls
 {
