@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
-using Gemini.Modules.Toolbox;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public abstract class ElementViewModel : PropertyChangedBase
     {
+        public event EventHandler InputConnectorConnectionChanged;
+
+        public const int PreviewSize = 100;
+
         private double _x;
         public double X
         {
@@ -55,7 +60,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
         public abstract BitmapSource PreviewImage { get; }
 
         private readonly BindableCollection<InputConnectorViewModel> _inputConnectors;
-        public IObservableCollection<InputConnectorViewModel> InputConnectors
+        public IList<InputConnectorViewModel> InputConnectors
         {
             get { return _inputConnectors; }
         }
@@ -71,6 +76,16 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             }
         }
 
+        public IEnumerable<ConnectionViewModel> AttachedConnections
+        {
+            get
+            {
+                return _inputConnectors.Select(x => x.Connection)
+                    .Union(_outputConnector.Connections)
+                    .Where(x => x != null);
+            }
+        }
+
         protected ElementViewModel()
         {
             _inputConnectors = new BindableCollection<InputConnectorViewModel>();
@@ -79,12 +94,20 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 
         protected void AddInputConnector(string name, Color color)
         {
-            InputConnectors.Add(new InputConnectorViewModel(this, name, color));
+            var inputConnector = new InputConnectorViewModel(this, name, color);
+            inputConnector.ConnectionChanged += (sender, e) => RaiseInputConnectorConnectionChanged();
+            _inputConnectors.Add(inputConnector);
         }
 
         protected void SetOutputConnector(string name, Color color, Func<BitmapSource> valueCallback)
         {
             OutputConnector = new OutputConnectorViewModel(this, name, color, valueCallback);
+        }
+
+        protected virtual void RaiseInputConnectorConnectionChanged()
+        {
+            EventHandler handler = InputConnectorConnectionChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
     }
 }

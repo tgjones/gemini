@@ -3,8 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using Gemini.Framework;
 
 namespace Gemini.Modules.GraphEditor.Controls
 {
@@ -181,37 +179,12 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             e.Handled = true;
 
-            var mousePoint = Mouse.GetPosition(this);
-
-            var destinationConnectorItem = DetermineConnectorItemDraggedOver(mousePoint);
-
             RaiseEvent(new ConnectionDragCompletedEventArgs(ConnectionDragCompletedEvent, this, 
                 _draggingSourceConnector.ParentElementItem, _draggingConnectionDataContext,
-                _draggingSourceConnector, destinationConnectorItem));
-
+                _draggingSourceConnector));
+             
             _draggingSourceConnector = null;
             _draggingConnectionDataContext = null;
-        }
-
-        private ConnectorItem DetermineConnectorItemDraggedOver(Point hitPoint)
-        {
-            HitTestResult result = null;
-            VisualTreeHelper.HitTest(_elementItemsControl, null,
-                delegate(HitTestResult hitTestResult)
-                {
-                    result = hitTestResult;
-                    return HitTestResultBehavior.Stop;
-                },
-                new PointHitTestParameters(hitPoint));
-
-            if (result == null || result.VisualHit == null)
-                return null;
-
-            var hitItem = result.VisualHit as FrameworkElement;
-            if (hitItem == null)
-                return null;
-
-            return VisualTreeUtility.FindParent<ConnectorItem>(hitItem);
         }
 
         #endregion

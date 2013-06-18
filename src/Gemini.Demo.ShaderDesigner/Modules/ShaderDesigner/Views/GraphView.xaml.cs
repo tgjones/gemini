@@ -26,6 +26,19 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
             InitializeComponent();
         }
 
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            Focus();
+            base.OnPreviewMouseDown(e);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+                ((GraphViewModel) DataContext).DeleteSelectedElements();
+            base.OnKeyDown(e);
+        }
+
         private void OnGraphControlRightMouseButtonDown(object sender, MouseButtonEventArgs e)
         {
             _originalContentMouseDownPoint = e.GetPosition(GraphControl);
@@ -81,12 +94,10 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
 
         private void OnGraphControlConnectionDragCompleted(object sender, ConnectionDragCompletedEventArgs e)
         {
+            var currentDragPoint = Mouse.GetPosition(GraphControl);
             var sourceConnector = (ConnectorViewModel) e.SourceConnector.DataContext;
-            var destinationConnector = (e.DestinationConnectorItem != null)
-                ? (ConnectorViewModel) e.DestinationConnectorItem.DataContext
-                : null;
             var newConnection = (ConnectionViewModel) e.Connection;
-            ViewModel.OnConnectionDragCompleted(newConnection, sourceConnector, destinationConnector);
+            ViewModel.OnConnectionDragCompleted(currentDragPoint, newConnection, sourceConnector);
         }
 
         private void OnGraphControlDragEnter(object sender, DragEventArgs e)

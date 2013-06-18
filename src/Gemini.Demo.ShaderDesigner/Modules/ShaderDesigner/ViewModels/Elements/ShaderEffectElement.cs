@@ -1,37 +1,21 @@
-﻿using System;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
 {
-    public abstract class ShaderEffectElement : ElementViewModel
+    public abstract class ShaderEffectElement : DynamicElement
     {
-        private BitmapSource _previewImage;
-
-        public override BitmapSource PreviewImage
+        protected override void PrepareDrawingVisual(DrawingVisual drawingVisual)
         {
-            get { return _previewImage; }
+            drawingVisual.Effect = GetEffect();
         }
 
-        public void Process()
+        protected override void Draw(DrawingContext drawingContext, Rect bounds)
         {
-            var dv = new DrawingVisual();
-            var shaderEffect = GetEffect();
-            dv.Effect = shaderEffect;
-
-            DrawingContext dc = dv.RenderOpen();
-
-            dc.DrawRectangle(new SolidColorBrush(Colors.Transparent), null, new System.Windows.Rect(0, 0, 100, 100));
-            dc.Close();
-
-            var rtb = new RenderTargetBitmap(100, 100, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(dv);
-
-            if (shaderEffect is IDisposable)
-                ((IDisposable) shaderEffect).Dispose();
-
-            _previewImage = rtb;
+            drawingContext.DrawRectangle(
+                new SolidColorBrush(Colors.Transparent), null,
+                bounds);
         }
 
         protected abstract Effect GetEffect();

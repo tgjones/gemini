@@ -3,10 +3,10 @@ using System.Windows.Media;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ShaderEffects
 {
-	internal class AddEffect : ShaderEffectBase<AddEffect>
+    internal class MultiplyEffect : ShaderEffectBase<MultiplyEffect>
 	{
-		public static readonly DependencyProperty Input1Property = RegisterPixelShaderSamplerProperty(
-            "Input1", typeof(AddEffect), 0);
+        public static readonly DependencyProperty Input1Property = RegisterPixelShaderSamplerProperty(
+            "Input1", typeof(MultiplyEffect), 0);
 
 		public Brush Input1
 		{
@@ -15,7 +15,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ShaderEffects
 		}
 
         public static readonly DependencyProperty Input2Property = RegisterPixelShaderSamplerProperty(
-            "Input2", typeof(AddEffect), 1);
+            "Input2", typeof(MultiplyEffect), 1);
 
 		public Brush Input2
 		{
@@ -23,7 +23,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ShaderEffects
 		    set { SetValue(Input2Property, value); }
 		}
 
-		public AddEffect()
+        public MultiplyEffect()
 		{
 			UpdateShaderValue(Input1Property);
             UpdateShaderValue(Input2Property);

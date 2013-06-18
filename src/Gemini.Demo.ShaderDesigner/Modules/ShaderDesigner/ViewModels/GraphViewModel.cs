@@ -48,8 +48,6 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
                 element2.OutputConnector,
                 element3.InputConnectors[1]));
 
-            element3.Process();
-
             element1.IsSelected = true;
         }
 
@@ -79,33 +77,52 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 
         public void OnConnectionDragging(Point currentDragPoint, ConnectionViewModel connection)
         {
-            connection.ToPosition = currentDragPoint;
+            // If current drag point is close to an input connector, show its snapped position.
+            var nearbyConnector = FindNearbyInputConnector(currentDragPoint);
+            connection.ToPosition = (nearbyConnector != null)
+                ? nearbyConnector.Position
+                : currentDragPoint;
         }
 
-        public void OnConnectionDragCompleted(ConnectionViewModel newConnection, ConnectorViewModel sourceConnector, ConnectorViewModel destinationConnector)
+        public void OnConnectionDragCompleted(Point currentDragPoint, ConnectionViewModel newConnection, ConnectorViewModel sourceConnector)
         {
-            if (destinationConnector == null 
-                || !(destinationConnector is InputConnectorViewModel)
-                || sourceConnector.Element == destinationConnector.Element)
+            var nearbyConnector = FindNearbyInputConnector(currentDragPoint);
+
+            if (nearbyConnector == null || sourceConnector.Element == nearbyConnector.Element)
             {
                 Connections.Remove(newConnection);
                 return;
             }
 
-            var existingConnection = FindConnection(
-                (OutputConnectorViewModel) sourceConnector, 
-                (InputConnectorViewModel) destinationConnector);
+            var existingConnection = nearbyConnector.Connection;
             if (existingConnection != null)
                 Connections.Remove(existingConnection);
 
-            newConnection.To = (InputConnectorViewModel) destinationConnector;
+            newConnection.To = nearbyConnector;
         }
 
-        private static ConnectionViewModel FindConnection(
-            OutputConnectorViewModel sourceConnector, 
-            InputConnectorViewModel destinationConnector)
+        private InputConnectorViewModel FindNearbyInputConnector(Point mousePosition)
         {
-            return sourceConnector.Connections.FirstOrDefault(connection => connection.To == destinationConnector);
+            return Elements.SelectMany(x => x.InputConnectors)
+                .FirstOrDefault(x => AreClose(x.Position, mousePosition, 10));
+        }
+
+        private static bool AreClose(Point point1, Point point2, double distance)
+        {
+            return (point1 - point2).Length < distance;
+        }
+
+        public void DeleteElement(ElementViewModel element)
+        {
+            Connections.RemoveRange(element.AttachedConnections);
+            Elements.Remove(element);
+        }
+
+        public void DeleteSelectedElements()
+        {
+            Elements.Where(x => x.IsSelected)
+                .ToList()
+                .ForEach(DeleteElement);
         }
     }
 }

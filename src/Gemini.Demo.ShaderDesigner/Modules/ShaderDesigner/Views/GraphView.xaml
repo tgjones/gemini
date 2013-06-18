@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
-			 Background="WhiteSmoke">
+			 Background="WhiteSmoke" Focusable="True">
 	<UserControl.Resources>
 		<converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 	</UserControl.Resources>

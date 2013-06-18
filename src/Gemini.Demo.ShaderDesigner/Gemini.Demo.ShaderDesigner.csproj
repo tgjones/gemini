@@ -96,6 +96,8 @@
     <Compile Include="Modules\ShaderDesigner\Design\DesignTimeImages.cs" />
     <Compile Include="Modules\ShaderDesigner\Module.cs" />
     <Compile Include="Modules\ShaderDesigner\ShaderEffects\AddEffect.cs" />
+    <Compile Include="Modules\ShaderDesigner\ShaderEffects\MultiplyEffect.cs" />
+    <Compile Include="Modules\ShaderDesigner\ShaderEffects\ShaderEffectBase.cs" />
     <Compile Include="Modules\ShaderDesigner\Util\BitmapUtility.cs" />
     <Compile Include="Modules\ShaderDesigner\Util\FastBitmap.cs" />
     <Compile Include="Modules\ShaderDesigner\Util\ShaderEffectUtility.cs" />
@@ -103,6 +105,9 @@
     <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectorDirection.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\ConnectorViewModel.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\Add.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\ColorInput.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\DynamicElement.cs" />
+    <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\Multiply.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\ImageSource.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\Elements\ShaderEffectElement.cs" />
     <Compile Include="Modules\ShaderDesigner\ViewModels\ElementViewModel.cs" />
@@ -163,6 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <Effect Include="Modules\ShaderDesigner\ShaderEffects\AddEffect.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Effect Include="Modules\ShaderDesigner\ShaderEffects\MultiplyEffect.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

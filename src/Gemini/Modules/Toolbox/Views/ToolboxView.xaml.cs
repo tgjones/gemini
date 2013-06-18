@@ -45,6 +45,9 @@ namespace Gemini.Modules.Toolbox.Views
                 var listBoxItem = VisualTreeUtility.FindParent<ListBoxItem>(
                     (DependencyObject) e.OriginalSource);
 
+                if (listBoxItem == null)
+                    return;
+
                 var itemViewModel = (ToolboxItemViewModel) ListBox.ItemContainerGenerator.
                     ItemFromContainer(listBoxItem);
 

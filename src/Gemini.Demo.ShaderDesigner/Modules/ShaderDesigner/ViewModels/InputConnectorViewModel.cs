@@ -1,10 +1,13 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class InputConnectorViewModel : ConnectorViewModel
     {
+        public event EventHandler ConnectionChanged;
+
         public override ConnectorDirection ConnectorDirection
         {
             get { return ConnectorDirection.Input; }
@@ -17,6 +20,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             set
             {
                 _connection = value;
+                if (ConnectionChanged != null)
+                    ConnectionChanged(this, EventArgs.Empty);
                 NotifyOfPropertyChange(() => Connection);
             }
         }
