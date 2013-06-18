@@ -77,6 +77,11 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
             e.Handled = true;
         }
 
+        private void OnGraphControlSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.OnSelectionChanged();
+        }
+
         private void OnGraphControlConnectionDragStarted(object sender, ConnectionDragStartedEventArgs e)
         {
             var sourceConnector = (ConnectorViewModel) e.SourceConnector.DataContext;
@@ -117,8 +122,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Views
                 element.X = mousePosition.X;
                 element.Y = mousePosition.Y;
 
-                var viewModel = (GraphViewModel) DataContext;
-                viewModel.Elements.Add(element);
+                ViewModel.Elements.Add(element);
             }
         }
     }

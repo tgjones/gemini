@@ -10,7 +10,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
         public OutputConnectorViewModel From
         {
             get { return _from; }
-            set
+            private set
             {
                 if (_from != null)
                 {
@@ -84,9 +84,9 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             To = to;
         }
 
-        public ConnectionViewModel()
+        public ConnectionViewModel(OutputConnectorViewModel from)
         {
-            
+            From = from;
         }
 
         private void OnFromPositionChanged(object sender, EventArgs e)

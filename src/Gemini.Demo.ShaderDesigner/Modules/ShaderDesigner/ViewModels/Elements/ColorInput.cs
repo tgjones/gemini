@@ -7,12 +7,22 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
     [ToolboxItem(typeof(GraphViewModel), "Color", "Generators")]
     public class ColorInput : DynamicElement
     {
-        public Color Color { get; set; }
+        private Color _color;
+        public Color Color
+        {
+            get { return _color; }
+            set
+            {
+                _color = value;
+                UpdatePreviewImage();
+                NotifyOfPropertyChange(() => Color);
+            }
+        }
 
         public ColorInput()
         {
             Color = Colors.Red;
-            Process();
+            UpdatePreviewImage();
         }
 
         protected override void Draw(DrawingContext drawingContext, Rect bounds)

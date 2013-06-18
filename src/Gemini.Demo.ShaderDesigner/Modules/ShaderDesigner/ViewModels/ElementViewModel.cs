@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -9,11 +10,13 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public abstract class ElementViewModel : PropertyChangedBase
     {
-        public event EventHandler InputConnectorConnectionChanged;
+        public event EventHandler OutputChanged;
 
-        public const int PreviewSize = 100;
+        public const double PreviewSize = 100;
 
         private double _x;
+
+        [Browsable(false)]
         public double X
         {
             get { return _x; }
@@ -25,6 +28,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
         }
 
         private double _y;
+
+        [Browsable(false)]
         public double Y
         {
             get { return _y; }
@@ -36,6 +41,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
         }
 
         private string _name;
+
+        [Browsable(false)]
         public string Name
         {
             get { return _name; }
@@ -47,6 +54,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
         }
 
         private bool _isSelected;
+
+        [Browsable(false)]
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -95,7 +104,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
         protected void AddInputConnector(string name, Color color)
         {
             var inputConnector = new InputConnectorViewModel(this, name, color);
-            inputConnector.ConnectionChanged += (sender, e) => RaiseInputConnectorConnectionChanged();
+            inputConnector.SourceChanged += (sender, e) => OnInputConnectorConnectionChanged();
             _inputConnectors.Add(inputConnector);
         }
 
@@ -104,9 +113,14 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             OutputConnector = new OutputConnectorViewModel(this, name, color, valueCallback);
         }
 
-        protected virtual void RaiseInputConnectorConnectionChanged()
+        protected virtual void OnInputConnectorConnectionChanged()
         {
-            EventHandler handler = InputConnectorConnectionChanged;
+            
+        }
+
+        protected virtual void RaiseOutputChanged()
+        {
+            EventHandler handler = OutputChanged;
             if (handler != null) handler(this, EventArgs.Empty);
         }
     }

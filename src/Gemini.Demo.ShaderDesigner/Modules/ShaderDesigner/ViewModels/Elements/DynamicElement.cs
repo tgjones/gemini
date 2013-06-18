@@ -26,7 +26,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
 
         protected abstract void Draw(DrawingContext drawingContext, Rect bounds);
 
-        protected void Process()
+        protected void UpdatePreviewImage()
         {
             var dv = new DrawingVisual();
             PrepareDrawingVisual(dv);
@@ -35,7 +35,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
             Draw(dc, new Rect(0, 0, PreviewSize, PreviewSize));
             dc.Close();
 
-            var rtb = new RenderTargetBitmap(PreviewSize, PreviewSize, 96, 96, PixelFormats.Pbgra32);
+            var rtb = new RenderTargetBitmap((int) PreviewSize, (int) PreviewSize, 96, 96, PixelFormats.Pbgra32);
             rtb.Render(dv);
 
             if (dv.Effect is IDisposable)
@@ -43,11 +43,13 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
 
             _previewImage = rtb;
             NotifyOfPropertyChange("PreviewImage");
+
+            RaiseOutputChanged();
         }
 
-        protected override void RaiseInputConnectorConnectionChanged()
+        protected override void OnInputConnectorConnectionChanged()
         {
-            Process();
+            UpdatePreviewImage();
         }
     }
 }

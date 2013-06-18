@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace Gemini.Modules.GraphEditor.Controls
@@ -110,6 +111,8 @@ namespace Gemini.Modules.GraphEditor.Controls
 
         #endregion
 
+        public event SelectionChangedEventHandler SelectionChanged;
+
         public IList SelectedElements
         {
             get { return _elementItemsControl.SelectedItems; }
@@ -125,7 +128,15 @@ namespace Gemini.Modules.GraphEditor.Controls
         public override void OnApplyTemplate()
         {
             _elementItemsControl = (ElementItemsControl) Template.FindName("PART_ElementItemsControl", this);
+            _elementItemsControl.SelectionChanged += OnElementItemsControlSelectChanged;
             base.OnApplyTemplate();
+        }
+
+        private void OnElementItemsControlSelectChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var handler = SelectionChanged;
+            if (handler != null)
+                handler(this, new SelectionChangedEventArgs(Selector.SelectionChangedEvent, e.RemovedItems, e.AddedItems));
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)

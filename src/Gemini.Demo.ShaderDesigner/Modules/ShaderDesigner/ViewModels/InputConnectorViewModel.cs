@@ -6,7 +6,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class InputConnectorViewModel : ConnectorViewModel
     {
-        public event EventHandler ConnectionChanged;
+        public event EventHandler SourceChanged;
 
         public override ConnectorDirection ConnectorDirection
         {
@@ -19,11 +19,19 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             get { return _connection; }
             set
             {
+                if (_connection != null)
+                    _connection.From.Element.OutputChanged -= OnSourceElementOutputChanged;
                 _connection = value;
-                if (ConnectionChanged != null)
-                    ConnectionChanged(this, EventArgs.Empty);
+                if (_connection != null)
+                    _connection.From.Element.OutputChanged += OnSourceElementOutputChanged;
+                RaiseSourceChanged();
                 NotifyOfPropertyChange(() => Connection);
             }
+        }
+
+        private void OnSourceElementOutputChanged(object sender, EventArgs e)
+        {
+            RaiseSourceChanged();
         }
 
         public BitmapSource Value
@@ -41,6 +49,13 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             : base(element, name, color)
         {
             
+        }
+
+        private void RaiseSourceChanged()
+        {
+            var handler = SourceChanged;
+            if (handler!= null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

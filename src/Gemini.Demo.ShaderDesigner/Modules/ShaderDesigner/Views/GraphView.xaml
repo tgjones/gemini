@@ -24,6 +24,7 @@
 									PreviewMouseRightButtonUp="OnGraphControlRightMouseButtonUp"
 									PreviewMouseMove="OnGraphControlMouseMove"
 									PreviewMouseWheel="OnGraphControlMouseWheel"
+									SelectionChanged="OnGraphControlSelectionChanged"
 									ConnectionDragStarted="OnGraphControlConnectionDragStarted"
 									ConnectionDragging="OnGraphControlConnectionDragging"
 									ConnectionDragCompleted="OnGraphControlConnectionDragCompleted"
@@ -89,7 +90,8 @@
 													<StackPanel Orientation="Vertical">
 														<Border Padding="5" BorderBrush="LightGray" BorderThickness="0 0 0 1">
 															<Border BorderBrush="Black" BorderThickness="1" 
-																	Width="100" Height="100">
+																	Width="{x:Static vm:ElementViewModel.PreviewSize}"
+																	Height="{x:Static vm:ElementViewModel.PreviewSize}">
 																<Image Source="{Binding PreviewImage}" Stretch="Fill" />
 															</Border>
 														</Border>

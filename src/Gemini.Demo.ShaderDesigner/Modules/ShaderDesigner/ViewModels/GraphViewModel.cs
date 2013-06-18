@@ -1,15 +1,21 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Design;
 using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Util;
 using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements;
 using Gemini.Framework;
+using Gemini.Modules.Inspector;
+using ImageSource = Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements.ImageSource;
 
 namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class GraphViewModel : Document
     {
+        private readonly IInspectorTool _inspectorTool;
+
         public override string DisplayName
         {
             get { return "[New Graph]"; }
@@ -27,18 +33,25 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             get { return _connections; }
         }
 
-        public GraphViewModel()
+        public IEnumerable<ElementViewModel> SelectedElements
+        {
+            get { return _elements.Where(x => x.IsSelected); }
+        }
+           
+        public GraphViewModel(IInspectorTool inspectorTool)
         {
             _elements = new BindableCollection<ElementViewModel>();
             _connections = new BindableCollection<ConnectionViewModel>();
 
+            _inspectorTool = inspectorTool;
+
             var element1 = AddElement<ImageSource>(100, 50);
             element1.Bitmap = BitmapUtility.CreateFromBytes(DesignTimeImages.Desert);
 
-            var element2 = AddElement<ImageSource>(100, 300);
-            element2.Bitmap = BitmapUtility.CreateFromBytes(DesignTimeImages.Tulips);
+            var element2 = AddElement<ColorInput>(100, 300);
+            element2.Color = Colors.Green;
 
-            var element3 = AddElement<Add>(400, 250);
+            var element3 = AddElement<Multiply>(400, 250);
 
             Connections.Add(new ConnectionViewModel(
                 element1.OutputConnector,
@@ -64,9 +77,8 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             if (!(sourceConnector is OutputConnectorViewModel))
                 return null;
 
-            var connection = new ConnectionViewModel
+            var connection = new ConnectionViewModel((OutputConnectorViewModel) sourceConnector)
             {
-                From = (OutputConnectorViewModel) sourceConnector,
                 ToPosition = currentDragPoint
             };
 
@@ -123,6 +135,18 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
             Elements.Where(x => x.IsSelected)
                 .ToList()
                 .ForEach(DeleteElement);
+        }
+
+        public void OnSelectionChanged()
+        {
+            var selectedElements = SelectedElements.ToList();
+
+            if (selectedElements.Count == 1)
+                _inspectorTool.SelectedObject = new InspectableObjectBuilder()
+                    .WithObjectProperties(selectedElements[0], x => true)
+                    .ToInspectableObject();
+            else
+                _inspectorTool.SelectedObject = null;
         }
     }
 }
