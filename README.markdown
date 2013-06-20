@@ -125,7 +125,30 @@ TODO
 
 ### ErrorList module
 
-TODO
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-errorlist.png)
+
+Reproduces the error list tool window from Visual Studio. Can be used to show errors, warning, or information.
+
+#### NuGet package
+
+* [Gemini.Modules.ErrorList](http://nuget.org/packages/Gemini.Modules.ErrorList/)
+
+#### Dependencies
+
+* None
+
+#### Usage
+
+```csharp
+var errorList = IoC.Get<IErrorList>();
+errorList.Clear();
+errorList.AddItem(
+	ErrorListItemType.Error,
+	"Description of the error",
+    @"C:\MyFile.txt",
+    1, // Line
+	20); // Character
+```
 
 ### GraphEditor module
 
@@ -177,7 +200,7 @@ Gemini includes three sample applications:
 
 Showcases many of the available modules.
 
-* [Source code](src/Gemini.Demo)
+* [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo)
 
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo.png)
 
@@ -185,7 +208,7 @@ Showcases many of the available modules.
 
 Showcases the GraphEditor, Inspector and Toolbox modules.
 
-* [Source code](src/Gemini.Demo.FilterDesigner)
+* [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo.FilterDesigner)
 
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo-filter-designer.png)
 
@@ -193,7 +216,7 @@ Showcases the GraphEditor, Inspector and Toolbox modules.
 
 Showcases the Xna module.
 
-* [Source code](src/Gemini.Demo.Xna)
+* [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo.Xna)
   
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo-xna.png)
 
