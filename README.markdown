@@ -90,7 +90,7 @@ Several more modules ship with Gemini, and are available as
 * Xna
 
 For more information about these modules, see below. In general, each module adds some combination
-of menu items, tool panes, document types and services.
+of menu items, tool window, document types and services.
 
 ### Shell module
 
@@ -129,6 +129,10 @@ TODO
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-errorlist.png)
 
 Reproduces the error list tool window in Visual Studio. Can be used to show errors, warning, or information.
+
+#### Provides
+
+* `IErrorList` tool window
 
 #### NuGet package
 
@@ -186,6 +190,10 @@ TODO
 
 Much like the output tool window in Visual Studio.
 
+#### Provides
+
+* `IOutput` tool window
+
 #### NuGet package
 
 * [Gemini.Modules.Output](http://nuget.org/packages/Gemini.Modules.Output/)
@@ -208,6 +216,10 @@ output.AppendLine("Started up");
 Pretty much does what it says on the tin. It uses the PropertyGrid control from the
 Extended WPF Toolkit.
 
+#### Provides
+
+* `IPropertyGrid` tool window
+
 #### NuGet package
 
 * [Gemini.Modules.PropertyGrid](http://nuget.org/packages/Gemini.Modules.PropertyGrid/)
@@ -225,7 +237,60 @@ propertyGrid.SelectedObject = myObject;
 
 ### Xna module
 
-TODO
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-xna.png)
+
+Provides a number of utilities and controls for working with XNA content in WPF. In the screenshot above,
+the document on the left uses `DrawingSurface`, and the tool window on the right uses `GraphicsDeviceControl`.
+Note that the `GraphicsDeviceControl` is clipped correctly against its parent `ScrollViewer` bounds.
+
+#### Provides
+
+* `GraphicsDeviceService` service that implements XNA's `IGraphicsDeviceService`
+* `ClippingHwndHost` control that clips hosted Win32 content to a WPF control's bounds
+
+The Xna module includes 2 alternatives for hosting XNA content in WPF:
+
+* `DrawingSurface` control that uses `D3DImage` as described
+  [here](http://blog.bozalina.com/2010/11/xna-40-and-wpf.html).
+* `GraphicsDeviceControl` control that implements Nick Gravelyn's technique for hosting
+  WPF content using an HwndHost, described [here](http://blogs.msdn.com/b/nicgrave/archive/2011/03/25/wpf-hosting-for-xna-game-studio-4-0.aspx)
+
+#### NuGet package
+
+* [Gemini.Modules.Xna](http://nuget.org/packages/Gemini.Modules.Xna/)
+
+#### Dependencies
+
+* [XNA 4.0](http://www.microsoft.com/en-us/download/details.aspx?id=23714)
+
+#### Usage
+
+Both `DrawingSurface` and `GraphicsDeviceControl` provide similar APIs, but they are
+subtly different. `DrawingSurface` works seamlessly with WPF mouse and keyboard input,
+but `GraphicsDeviceControl` routes mouse input through its own set of methods
+(`RaiseHwndLButtonDown` etc.).
+
+```csharp
+public class MyDrawingSurface : DrawingSurface
+{
+    protected override RaiseDraw(DrawEventArgs args)
+    {
+        args.GraphicsDevice.Clear(Color.LightGreen);
+        base.RaiseDraw(args);
+    }
+}
+```
+
+```csharp
+public class MyGraphicsDeviceControl : GraphicsDeviceControl
+{
+    protected override void RaiseRenderXna(GraphicsDeviceEventArgs args)
+    {
+        args.GraphicsDevice.Clear(Color.LightGreen);
+        base.RaiseRenderXna(args);
+    }
+}
+```
 
 ## Sample applications
 
