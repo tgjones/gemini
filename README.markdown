@@ -8,7 +8,7 @@ Gemini is a WPF framework designed specifically for building IDE-like applicatio
 * [Caliburn Micro](http://caliburnmicro.codeplex.com/)
 * [MEF](http://msdn.microsoft.com/en-us/library/dd460648.aspx)
 
-![Screenshot](doc/gemini-everything.png)
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-everything.png)
 
 ## Getting started
 
@@ -63,31 +63,33 @@ public class Module : ModuleBase
 }
 ```
 
-For full details, look at the [demo program](src/Gemini.Demo).
+For full details, look at the [demo program](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo).
 
 ## What modules are built-in?
 
 Gemini itself is built out of six core modules:
 
-* [Shell](#shell-module)
-* [MainMenu](#mainmenu-module)
-* [StatusBar](#statusbar-module)
-* [ToolBars](#toolbars-module)
-* [Toolbox](#toolbox-module)
-* [UndoRedo](#undoredo-module)
+* Shell
+* MainMenu
+* StatusBar
+* ToolBars
+* Toolbox
+* UndoRedo
 
 Several more modules ship with Gemini, and are available as 
 [NuGet packages](http://nuget.org/packages?q=Gemini.Modules) as described above:
 
-* [CodeCompiler](#codecompiler-module)
-* [CodeEditor](#codeeditor-module)
-* [ErrorList](#errorlist-module)
-* [GraphEditor](#grapheditor-module)
-* [Inspector](#inspector-module)
-* [Inspector.Xna](#inspectorxna-module)
-* [Output](#output-module)
-* [PropertyGrid](#propertygrid-module)
-* [Xna](#xna-module)
+* CodeCompiler
+* CodeEditor
+* ErrorList
+* GraphEditor
+* Inspector
+* Inspector.Xna
+* Output
+* PropertyGrid
+* Xna
+
+For more information about these modules, see below.
 
 ### Shell module
 
@@ -143,7 +145,14 @@ TODO
 
 ### PropertyGrid module
 
-![Screenshot](doc/gemini-module-propertygrid.png)
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-propertygrid.png)
+
+Pretty much does what it says on the tin. It uses the PropertyGrid control from the
+Extended WPF Toolkit.
+
+#### NuGet package
+
+* [Gemini.Modules.PropertyGrid](http://nuget.org/packages/Gemini.Modules.PropertyGrid/)
 
 #### Dependencies
 
@@ -170,7 +179,7 @@ Showcases many of the available modules.
 
 * [Source code](src/Gemini.Demo)
 
-![Screenshot](doc/gemini-demo.png)
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo.png)
 
 ### Gemini.Demo.FilterDesigner
 
@@ -178,7 +187,7 @@ Showcases the GraphEditor, Inspector and Toolbox modules.
 
 * [Source code](src/Gemini.Demo.FilterDesigner)
 
-![Screenshot](doc/gemini-demo-filter-designer.png)
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo-filter-designer.png)
 
 ### Gemini.Demo.Xna
 
@@ -186,7 +195,7 @@ Showcases the Xna module.
 
 * [Source code](src/Gemini.Demo.Xna)
   
-![Screenshot](doc/gemini-demo-xna.png)
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo-xna.png)
 
 ## What projects use Gemini?
 
