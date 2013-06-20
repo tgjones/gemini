@@ -8,6 +8,8 @@ Gemini is a WPF framework designed specifically for building IDE-like applicatio
 * [Caliburn Micro](http://caliburnmicro.codeplex.com/)
 * [MEF](http://msdn.microsoft.com/en-us/library/dd460648.aspx)
 
+![Screenshot](doc/gemini-everything.png)
+
 ## Getting started
 
 By far the easiest way to get started with Gemini is to use the various NuGet packages.
