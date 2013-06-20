@@ -21,7 +21,7 @@ namespace Gemini.Demo.ShaderDesigner.Modules.Startup
 
 		public override void Initialize()
 		{
-			Shell.Title = "Gemini Shader Designer Demo";
+			Shell.Title = "Gemini Filter Designer Demo";
 		}
 	}
 }
