@@ -7,7 +7,17 @@ namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
     [ToolboxItem(typeof(GraphViewModel), "Image Source", "Generators")]
     public class ImageSource : ElementViewModel
     {
-        public BitmapSource Bitmap { get; set; }
+        private BitmapSource _bitmap;
+        public BitmapSource Bitmap
+        {
+            get { return _bitmap; }
+            set
+            {
+                _bitmap = value;
+                NotifyOfPropertyChange(() => PreviewImage);
+                RaiseOutputChanged();
+            }
+        }
 
         public override BitmapSource PreviewImage
         {

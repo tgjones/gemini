@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
 using Gemini.Modules.Inspector.Inspectors;
 
@@ -28,7 +29,9 @@ namespace Gemini.Modules.Inspector.Conventions
                 new StandardPropertyEditorBuilder<float, TextBoxEditorViewModel<float>>(),
                 new StandardPropertyEditorBuilder<int, TextBoxEditorViewModel<int>>(),
                 new StandardPropertyEditorBuilder<Point3D, Point3DEditorViewModel>(),
-                new StandardPropertyEditorBuilder<string, TextBoxEditorViewModel<string>>()
+                new StandardPropertyEditorBuilder<string, TextBoxEditorViewModel<string>>(),
+
+                new StandardPropertyEditorBuilder<BitmapSource, BitmapSourceEditorViewModel>()
             };
         }
 

@@ -86,6 +86,9 @@
     <Compile Include="InspectableObject.cs" />
     <Compile Include="InspectableObjectBuilder.cs" />
     <Compile Include="InspectorBuilder.cs" />
+    <Compile Include="Inspectors\BitmapSourceEditorView.xaml.cs">
+      <DependentUpon>BitmapSourceEditorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inspectors\ChangeObjectValueAction.cs" />
     <Compile Include="Inspectors\CheckBoxEditorView.xaml.cs">
       <DependentUpon>CheckBoxEditorView.xaml</DependentUpon>
@@ -95,6 +98,7 @@
     <Compile Include="Inspectors\CollapsibleGroupView.xaml.cs">
       <DependentUpon>CollapsibleGroupView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inspectors\BitmapSourceEditorViewModel.cs" />
     <Compile Include="Inspectors\TextBoxEditorView.xaml.cs">
       <DependentUpon>TextBoxEditorView.xaml</DependentUpon>
     </Compile>
@@ -141,6 +145,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Inspectors\BitmapSourceEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Inspectors\CheckBoxEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
