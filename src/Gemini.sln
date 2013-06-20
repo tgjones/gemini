@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeCompiler
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.GraphEditor", "Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj", "{F8204886-1F61-4247-B7B2-EA5E518162F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.ShaderDesigner", "Gemini.Demo.ShaderDesigner\Gemini.Demo.ShaderDesigner.csproj", "{742E5923-C633-40E0-BFD4-8C2CF2D9675B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.FilterDesigner", "Gemini.Demo.FilterDesigner\Gemini.Demo.FilterDesigner.csproj", "{742E5923-C633-40E0-BFD4-8C2CF2D9675B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
