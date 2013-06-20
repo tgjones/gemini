@@ -63,7 +63,7 @@ public class Module : ModuleBase
 }
 ```
 
-For full details, look at the [demo program](https://github.com/roastedamoeba/gemini/tree/master/src/Gemini.Demo).
+For full details, look at the [demo program](src/Gemini.Demo).
 
 ## What modules are built-in?
 
@@ -153,13 +153,13 @@ TODO
 
 Gemini's source code includes three sample applications:
 
-* [Gemini.Demo](https://github.com/tgjones/gemini/tree/master/src/Gemini.Demo) - 
+* [Gemini.Demo](src/Gemini.Demo) - 
   showcases many of the available modules.
   ![Screenshot](doc/gemini-demo.png)
-* [Gemini.Demo.FilterDesigner](https://github.com/tgjones/gemini/tree/master/src/Gemini.Demo.FilterDesigner) - 
+* [Gemini.Demo.FilterDesigner](src/Gemini.Demo.FilterDesigner) - 
   showcases the GraphEditor, Inspector and Toolbox modules.
   ![Screenshot](doc/gemini-demo-filter-designer.png)
-* [Gemini.Demo.Xna](https://github.com/tgjones/gemini/tree/master/src/Gemini.Demo.Xna) - 
+* [Gemini.Demo.Xna](src/Gemini.Demo.Xna) - 
   showcases the Xna module.
   ![Screenshot](doc/gemini-demo-xna.png)
 
