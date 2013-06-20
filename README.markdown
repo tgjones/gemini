@@ -89,7 +89,8 @@ Several more modules ship with Gemini, and are available as
 * PropertyGrid
 * Xna
 
-For more information about these modules, see below.
+For more information about these modules, see below. In general, each module adds some combination
+of menu items, tool panes, document types and services.
 
 ### Shell module
 
@@ -127,7 +128,7 @@ TODO
 
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-errorlist.png)
 
-Reproduces the error list tool window from Visual Studio. Can be used to show errors, warning, or information.
+Reproduces the error list tool window in Visual Studio. Can be used to show errors, warning, or information.
 
 #### NuGet package
 
@@ -146,8 +147,25 @@ errorList.AddItem(
 	ErrorListItemType.Error,
 	"Description of the error",
     @"C:\MyFile.txt",
+    1,   // Line
+    20); // Column
+```
+
+You can optionally provide a callback that will be executed when the user double-clicks on an item:
+
+```csharp
+errorList.AddItem(
+	ErrorListItemType.Error,
+	"Description of the error",
+    @"C:\MyFile.txt",
     1, // Line
-	20); // Character
+    20, // Character
+    () =>
+    {
+        var openDocumentResult = new OpenDocumentResult(@"C:\MyFile.txt");
+        IoC.BuildUp(openDocumentResult);
+        openDocumentResult.Execute(null);
+    });
 ```
 
 ### GraphEditor module
@@ -164,7 +182,24 @@ TODO
 
 ### Output module
 
-TODO
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-output.png)
+
+Much like the output tool window in Visual Studio.
+
+#### NuGet package
+
+* [Gemini.Modules.Output](http://nuget.org/packages/Gemini.Modules.Output/)
+
+#### Dependencies
+
+* None
+
+#### Usage
+
+```csharp
+var output = IoC.Get<IOutput>();
+output.AppendLine("Started up");
+```
 
 ### PropertyGrid module
 
