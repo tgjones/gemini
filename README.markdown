@@ -69,99 +69,113 @@ For full details, look at the [demo program](src/Gemini.Demo).
 
 Gemini itself is built out of six core modules:
 
-* [Shell](#module-shell)
-* [MainMenu](#module-mainmenu)
-* [StatusBar](#module-statusbar)
-* [ToolBars](#module-toolbars)
-* [Toolbox](#module-toolbox)
-* [UndoRedo](#module-undoredo)
+* [Shell](#shell-module)
+* [MainMenu](#mainmenu-module)
+* [StatusBar](#statusbar-module)
+* [ToolBars](#toolbars-module)
+* [Toolbox](#toolbox-module)
+* [UndoRedo](#undoredo-module)
 
 Several more modules ship with Gemini, and are available as 
 [NuGet packages](http://nuget.org/packages?q=Gemini.Modules) as described above:
 
-* [CodeCompiler](#module-codecompiler)
-* [CodeEditor](#module-codeeditor)
-* [ErrorList](#module-errorlist)
-* [GraphEditor](#module-grapheditor)
-* [Inspector](#module-inspector)
-* [Inspector.Xna](#module-inspector-xna)
-* [Output](#module-output)
-* [PropertyGrid](#module-propertygrid)
-* [Xna](#module-xna)
+* [CodeCompiler](#codecompiler-module)
+* [CodeEditor](#codeeditor-module)
+* [ErrorList](#errorlist-module)
+* [GraphEditor](#grapheditor-module)
+* [Inspector](#inspector-module)
+* [Inspector.Xna](#inspectorxna-module)
+* [Output](#output-module)
+* [PropertyGrid](#propertygrid-module)
+* [Xna](#xna-module)
 
-### <a id="module-shell"></a>Shell module
-
-TODO
-
-### <a id="module-mainmenu"></a>MainMenu module
+### Shell module
 
 TODO
 
-### <a id="module-statusbar"></a>StatusBar module
+### MainMenu module
 
 TODO
 
-### <a id="module-toolbars"></a>ToolBars module
+### StatusBar module
 
 TODO
 
-### <a id="module-toolbox"></a>Toolbox module
+### ToolBars module
 
 TODO
 
-### <a id="module-undoredo"></a>UndoRedo module
+### Toolbox module
 
 TODO
 
-### <a id="module-codecompiler"></a>CodeCompiler module
+### UndoRedo module
 
 TODO
 
-### <a id="module-codeeditor"></a>CodeEditor module
+### CodeCompiler module
 
 TODO
 
-### <a id="module-errorlist"></a>ErrorList module
+### CodeEditor module
 
 TODO
 
-### <a id="module-grapheditor"></a>GraphEditor module
+### ErrorList module
 
 TODO
 
-### <a id="module-inspector"></a>Inspector module
+### GraphEditor module
 
 TODO
 
-### <a id="module-inspector-xna"></a>Inspector.Xna module
+### Inspector module
 
 TODO
 
-### <a id="module-output"></a>Output module
+### Inspector.Xna module
 
 TODO
 
-### <a id="module-propertygrid"></a>PropertyGrid module
+### Output module
 
 TODO
 
-### <a id="module-xna"></a>Xna module
+### PropertyGrid module
+
+TODO
+
+### Xna module
 
 TODO
 
 ## Sample applications
 
-Gemini's source code includes three sample applications:
+Gemini includes three sample applications:
 
-* [Gemini.Demo](src/Gemini.Demo) - 
-  showcases many of the available modules.
-  ![Screenshot](doc/gemini-demo.png)
-* [Gemini.Demo.FilterDesigner](src/Gemini.Demo.FilterDesigner) - 
-  showcases the GraphEditor, Inspector and Toolbox modules.
-  ![Screenshot](doc/gemini-demo-filter-designer.png)
-* [Gemini.Demo.Xna](src/Gemini.Demo.Xna) - 
-  showcases the Xna module.
-  ![Screenshot](doc/gemini-demo-xna.png)
+### Gemini.Demo
+
+Showcases many of the available modules.
+
+* [Source code](src/Gemini.Demo)
+
+![Screenshot](doc/gemini-demo.png)
+
+### Gemini.Demo.FilterDesigner
+
+Showcases the GraphEditor, Inspector and Toolbox modules.
+
+* [Source code](src/Gemini.Demo.FilterDesigner)
+
+![Screenshot](doc/gemini-demo-filter-designer.png)
+
+### Gemini.Demo.Xna
+
+Showcases the Xna module.
+
+* [Source code](src/Gemini.Demo.Xna)
+  
+![Screenshot](doc/gemini-demo-xna.png)
 
 ## What projects use Gemini?
 
