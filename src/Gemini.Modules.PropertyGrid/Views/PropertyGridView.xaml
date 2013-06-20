@@ -6,5 +6,5 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 			 mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 	<xctk:PropertyGrid x:Name="_propertyGrid" SelectedObject="{Binding SelectedObject}"
-					   ShowSortOptions="False" IsCategorized="False" />
+					   ShowSortOptions="False" IsCategorized="False"/>
 </UserControl>

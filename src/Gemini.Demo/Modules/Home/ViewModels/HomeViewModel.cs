@@ -6,6 +6,7 @@ using Gemini.Framework;
 
 namespace Gemini.Demo.Modules.Home.ViewModels
 {
+    [DisplayName("Home View Model")]
 	[Export(typeof(HomeViewModel))]
 	public class HomeViewModel : Document
 	{

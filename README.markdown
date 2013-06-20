@@ -143,7 +143,18 @@ TODO
 
 ### PropertyGrid module
 
-TODO
+![Screenshot](doc/gemini-module-propertygrid.png)
+
+#### Dependencies
+
+* [Extended WPF Toolkit](http://wpftoolkit.codeplex.com/)
+
+#### Usage
+
+```csharp
+var propertyGrid = IoC.Get<IPropertyGrid>();
+propertyGrid.SelectedObject = myObject;
+```
 
 ### Xna module
 
