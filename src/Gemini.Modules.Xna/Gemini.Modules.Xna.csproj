@@ -76,6 +76,9 @@
     <Compile Include="Util\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Gemini.Modules.Xna.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
