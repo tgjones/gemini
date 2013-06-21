@@ -45,8 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\net40\Caliburn.Micro.dll</HintPath>
     </Reference>
-    <Reference Include="HelixToolkit.Wpf">
-      <HintPath>..\packages\HelixToolkit.2013.1.16.1\lib\NET45\HelixToolkit.Wpf.dll</HintPath>
+    <Reference Include="HelixToolkit.Wpf, Version=2013.1.19.1, Culture=neutral, PublicKeyToken=52aa3500039caf0d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HelixToolkit.2013.1.19.1\lib\NET45\HelixToolkit.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=4.3.1.9429, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
