@@ -44,13 +44,9 @@ namespace Gemini.Demo.Modules.Home.ViewModels
             }
         }
 
-		public override string DisplayName
-		{
-			get { return "Home"; }
-		}
-
 		public HomeViewModel()
 		{
+		    DisplayName = "Home";
 			Background = Colors.CornflowerBlue;
 			Foreground = Colors.White;
 		    TextAlignment = TextAlignment.Center;

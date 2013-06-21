@@ -18,11 +18,6 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.ViewModels
             get { return PaneLocation.Right; }
         }
 
-        public override string DisplayName
-        {
-            get { return "Primitive List"; }
-        }
-
         public IList<PrimitiveWithColor> Primitives
         {
             get { return _primitives; }
@@ -30,6 +25,8 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.ViewModels
 
         public PrimitiveListViewModel()
         {
+            DisplayName = "Primitive List";
+
             _primitives = new List<PrimitiveWithColor>(
                 new[] { Color.Blue, Color.Red, Color.Yellow, Color.Green, Color.Gold, Color.Fuchsia, Color.Black, Color.SlateBlue }
                     .Select(x => new PrimitiveWithColor

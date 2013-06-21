@@ -71,14 +71,11 @@ namespace Gemini.Demo.Modules.Home.ViewModels
             }
         }
 
-        public override string DisplayName
-        {
-            get { return "Helix"; }
-        }
-
         [ImportingConstructor]
         public HelixViewModel(ICodeCompiler codeCompiler)
         {
+            DisplayName = "Helix";
+
             _codeCompiler = codeCompiler;
             _scripts = new List<IDemoScript>();
 

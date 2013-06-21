@@ -17,11 +17,6 @@ namespace Gemini.Modules.ErrorList.ViewModels
             get { return PaneLocation.Bottom; }
         }
 
-        public override string DisplayName
-        {
-            get { return "Error List"; }
-        }
-
         public IObservableCollection<ErrorListItem> Items
         {
             get { return _items; }
@@ -95,6 +90,8 @@ namespace Gemini.Modules.ErrorList.ViewModels
 
         public ErrorListViewModel()
         {
+            DisplayName = "Error List";
+
             _items = new BindableCollection<ErrorListItem>();
             _items.CollectionChanged += (sender, e) =>
             {

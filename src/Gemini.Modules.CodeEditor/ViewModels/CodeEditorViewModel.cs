@@ -18,16 +18,6 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             get { return _path; }
         }
 
-        public override string DisplayName
-        {
-            get
-            {
-                if (IsDirty)
-                    return _fileName + "*";
-                return _fileName;
-            }
-        }
-
         public bool IsDirty
         {
             get { return _isDirty; }
@@ -38,7 +28,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
                 _isDirty = value;
                 NotifyOfPropertyChange(() => IsDirty);
-                NotifyOfPropertyChange(() => DisplayName);
+                UpdateDisplayName();
             }
         }
 
@@ -51,6 +41,12 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         {
             _path = path;
             _fileName = System.IO.Path.GetFileName(_path);
+            UpdateDisplayName();
+        }
+
+        private void UpdateDisplayName()
+        {
+            DisplayName = (IsDirty) ? _fileName + "*" : _fileName;
         }
 
         protected override void OnViewLoaded(object view)

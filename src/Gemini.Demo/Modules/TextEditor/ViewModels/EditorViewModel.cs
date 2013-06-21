@@ -11,16 +11,6 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 		private string _fileName;
 		private bool _isDirty;
 
-		public override string DisplayName
-		{
-			get
-			{
-				if (IsDirty)
-					return _fileName + "*";
-				return _fileName;
-			}
-		}
-
 		public bool IsDirty
 		{
 			get { return _isDirty; }
@@ -31,7 +21,7 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 
 				_isDirty = value;
 				NotifyOfPropertyChange(() => IsDirty);
-				NotifyOfPropertyChange(() => DisplayName);
+			    UpdateDisplayName();
 			}
 		}
 
@@ -44,7 +34,13 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 		{
 			_path = path;
 			_fileName = Path.GetFileName(_path);
+		    UpdateDisplayName();
 		}
+
+        private void UpdateDisplayName()
+        {
+            DisplayName = (IsDirty) ? _fileName + "*" : _fileName;
+        }
 
 		protected override void OnViewLoaded(object view)
 		{

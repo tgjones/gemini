@@ -21,11 +21,6 @@ namespace Gemini.Modules.Toolbox.ViewModels
             get { return PaneLocation.Left; }
         }
 
-        public override string DisplayName
-        {
-            get { return "Toolbox"; }
-        }
-
         private readonly BindableCollection<ToolboxItemViewModel> _items;
         public IObservableCollection<ToolboxItemViewModel> Items
         {
@@ -35,6 +30,8 @@ namespace Gemini.Modules.Toolbox.ViewModels
         [ImportingConstructor]
         public ToolboxViewModel(IShell shell, IToolboxService toolboxService)
         {
+            DisplayName = "Toolbox";
+
             _items = new BindableCollection<ToolboxItemViewModel>();
             
             var groupedItems = CollectionViewSource.GetDefaultView(_items);

@@ -18,11 +18,6 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             get { return PaneLocation.Right; }
         }
 
-        public override string DisplayName
-        {
-            get { return "History"; }
-        }
-
         private IUndoRedoManager _undoRedoManager;
         public IUndoRedoManager UndoRedoManager
         {
@@ -66,6 +61,8 @@ namespace Gemini.Modules.UndoRedo.ViewModels
         [ImportingConstructor]
         public HistoryViewModel(IShell shell)
         {
+            DisplayName = "History";
+
             _historyItems = new BindableCollection<HistoryItemViewModel>();
 
             if (shell == null)

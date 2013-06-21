@@ -10,11 +10,6 @@ namespace Gemini.Modules.Inspector.ViewModels
     {
         public event EventHandler SelectedObjectChanged;
 
-        public override string DisplayName
-        {
-            get { return "Inspector"; }
-        }
-
         public override PaneLocation PreferredLocation
         {
             get { return PaneLocation.Right; }
@@ -36,6 +31,11 @@ namespace Gemini.Modules.Inspector.ViewModels
                 NotifyOfPropertyChange(() => SelectedObject);
                 RaiseSelectedObjectChanged();
             }
+        }
+
+        public InspectorViewModel()
+        {
+            DisplayName = "Inspector";
         }
 
         private void RaiseSelectedObjectChanged()

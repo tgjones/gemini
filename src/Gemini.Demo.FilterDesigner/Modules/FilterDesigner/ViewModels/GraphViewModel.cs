@@ -16,11 +16,6 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
     {
         private readonly IInspectorTool _inspectorTool;
 
-        public override string DisplayName
-        {
-            get { return "[New Graph]"; }
-        }
-
         private readonly BindableCollection<ElementViewModel> _elements;
         public IObservableCollection<ElementViewModel> Elements
         {
@@ -40,6 +35,8 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
            
         public GraphViewModel(IInspectorTool inspectorTool)
         {
+            DisplayName = "[New Graph]";
+
             _elements = new BindableCollection<ElementViewModel>();
             _connections = new BindableCollection<ConnectionViewModel>();
 

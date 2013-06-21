@@ -16,11 +16,6 @@ namespace Gemini.Modules.Output.ViewModels
 		private readonly OutputWriter _writer;
 		private IOutputView _view;
 
-		public override string DisplayName
-		{
-			get { return "Output"; }
-		}
-
 		public override PaneLocation PreferredLocation
 		{
 			get { return PaneLocation.Bottom; }
@@ -33,6 +28,7 @@ namespace Gemini.Modules.Output.ViewModels
 
 		public OutputViewModel()
 		{
+		    DisplayName = "Output";
 			_stringBuilder = new StringBuilder();
 			_writer = new OutputWriter(this);
 		}

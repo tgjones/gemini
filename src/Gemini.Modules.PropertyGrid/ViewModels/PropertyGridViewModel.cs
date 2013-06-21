@@ -8,11 +8,6 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
 	[Export(typeof(IPropertyGrid))]
 	public class PropertyGridViewModel : Tool, IPropertyGrid
 	{
-		public override string DisplayName
-		{
-			get { return "Properties"; }
-		}
-
 		public override PaneLocation PreferredLocation
 		{
 			get { return PaneLocation.Right; }
@@ -33,5 +28,10 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
 				NotifyOfPropertyChange(() => SelectedObject);
 			}
 		}
+
+        public PropertyGridViewModel()
+        {
+            DisplayName = "Properties";
+        }
 	}
 }
