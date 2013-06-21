@@ -34,8 +34,9 @@ namespace Gemini.Modules.Toolbox.Services
         public IEnumerable<ToolboxItem> GetToolboxItems(Type documentType)
         {
             IEnumerable<ToolboxItem> result;
-            _toolboxItems.TryGetValue(documentType, out result);
-            return result;
+            if (_toolboxItems.TryGetValue(documentType, out result))
+                return result;
+            return new List<ToolboxItem>();
         }
     }
 }
