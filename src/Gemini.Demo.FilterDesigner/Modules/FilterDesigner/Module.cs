@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Micro;
-using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels;
+using Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner
 {
     [Export(typeof(IModule))]
     public class Module : ModuleBase

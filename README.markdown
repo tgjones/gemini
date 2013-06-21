@@ -350,7 +350,7 @@ public class ImageSource : ElementViewModel
 }
 ```
 
-Handling dropping onto a document (this code is from [`GraphView.xaml.cs`](https://github.com/tgjones/gemini/blob/master/src/Gemini.Demo.FilterDesigner/Modules/ShaderDesigner/Views/GraphView.xaml.cs)):
+Handling dropping onto a document (this code is from [`GraphView.xaml.cs`](https://github.com/tgjones/gemini/blob/master/src/Gemini.Demo.FilterDesigner/Modules/FilterDesigner/Views/GraphView.xaml.cs)):
 
 ```csharp
 private void OnGraphControlDragEnter(object sender, DragEventArgs e)

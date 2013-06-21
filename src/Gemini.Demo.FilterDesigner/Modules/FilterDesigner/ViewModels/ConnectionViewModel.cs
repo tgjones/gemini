@@ -2,7 +2,7 @@
 using System.Windows;
 using Caliburn.Micro;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
 {
     public class ConnectionViewModel : PropertyChangedBase
     {

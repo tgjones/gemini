@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels.Elements
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels.Elements
 {
     public abstract class DynamicElement : ElementViewModel
     {

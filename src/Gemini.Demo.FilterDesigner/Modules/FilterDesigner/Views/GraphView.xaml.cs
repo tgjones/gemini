@@ -2,12 +2,12 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels;
+using Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels;
 using Gemini.Modules.GraphEditor.Controls;
 using Gemini.Modules.Toolbox;
 using Gemini.Modules.Toolbox.Models;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Views
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Views
 {
     /// <summary>
     /// Interaction logic for GraphView.xaml

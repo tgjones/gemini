@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using Gemini.Modules.Toolbox;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels.Elements
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels.Elements
 {
     [ToolboxItem(typeof(GraphViewModel), "Color", "Generators")]
     public class ColorInput : DynamicElement

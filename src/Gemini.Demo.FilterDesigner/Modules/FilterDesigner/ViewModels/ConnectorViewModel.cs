@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
 {
     public enum ConnectorDataType
     {

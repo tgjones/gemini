@@ -8,7 +8,7 @@
 				<ResourceDictionary>
 					<gemini:AppBootstrapper x:Key="bootstrapper" />
 				</ResourceDictionary>
-				<ResourceDictionary Source="Modules/ShaderDesigner/Resources/Styles.xaml" />
+				<ResourceDictionary Source="Modules/FilterDesigner/Resources/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

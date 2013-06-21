@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Effects;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Util
 {
     internal static class ShaderEffectUtility
     {
@@ -9,7 +9,7 @@ namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util
         {
             return new PixelShader
             {
-                UriSource = new Uri(@"pack://application:,,,/Gemini.Demo.ShaderDesigner;component/Modules/ShaderDesigner/ShaderEffects/" + name + ".ps")
+                UriSource = new Uri(@"pack://application:,,,/Gemini.Demo.FilterDesigner;component/Modules/FilterDesigner/ShaderEffects/" + name + ".ps")
             };
         }
     }

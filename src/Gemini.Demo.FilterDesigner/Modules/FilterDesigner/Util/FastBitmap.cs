@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Util
 {
     public class FastBitmap : IDisposable
     {

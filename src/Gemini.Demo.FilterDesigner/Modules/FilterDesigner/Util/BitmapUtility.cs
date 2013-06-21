@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util
+namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Util
 {
     internal static class BitmapUtility
     {
