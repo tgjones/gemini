@@ -49,9 +49,9 @@ namespace Gemini.Demo.Modules.Startup
 			Shell.WindowState = WindowState.Maximized;
 			Shell.Title = "Gemini Demo";
 
-            Shell.StatusBar.Items.Add(new StatusBarItemViewModel("Hello world!", new GridLength(1, GridUnitType.Star)));
-            Shell.StatusBar.Items.Add(new StatusBarItemViewModel("Ln 44", new GridLength(100)));
-            Shell.StatusBar.Items.Add(new StatusBarItemViewModel("Col 79", new GridLength(100)));
+            Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
+            Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
+            Shell.StatusBar.AddItem("Col 79", new GridLength(100));
 
 			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());

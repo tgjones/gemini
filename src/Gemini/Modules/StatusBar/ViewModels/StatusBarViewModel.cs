@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using System.Windows;
 using Caliburn.Micro;
 
 namespace Gemini.Modules.StatusBar.ViewModels
@@ -12,12 +13,17 @@ namespace Gemini.Modules.StatusBar.ViewModels
             get { return _items; }
 	    }
 
-        public StatusBarViewModel()
+	    public StatusBarViewModel()
         {
             _items = new StatusBarItemCollection();
         }
 
-        private class StatusBarItemCollection : BindableCollection<StatusBarItemViewModel>
+	    public void AddItem(string message, GridLength width)
+	    {
+	        Items.Add(new StatusBarItemViewModel(message, width));
+	    }
+
+	    private class StatusBarItemCollection : BindableCollection<StatusBarItemViewModel>
         {
             protected override void InsertItemBase(int index, StatusBarItemViewModel item)
             {
