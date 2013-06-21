@@ -137,7 +137,7 @@ public class PropertyGridViewModel : Tool, IPropertyGrid
 ```
 
 For more details on creating documents and tools, look at the 
-[demo program](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo)
+[demo program](https://github.com/tgjones/gemini/master/src/Gemini.Demo)
 and the source code for the built-in modules.
 
 ## What modules are built-in?
@@ -168,6 +168,8 @@ For more information about these modules, see below. In general, each module add
 of menu items, tool window, document types and services.
 
 ### Shell module
+
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-shell.png)
 
 The shell module:
 
@@ -222,6 +224,8 @@ public interface IShell
 ```
 
 ### MainMenu module
+
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-mainmenu.png)
 
 Adds a main menu to the top of the window.
 
@@ -461,7 +465,7 @@ source file.
 
 #### Usage
 
-This example is from `[HelixViewModel](https://github.com/tgjones/gemini/blob/master/src/Gemini.Demo/Modules/Home/ViewModels/HelixViewModel.cs)` in one of the sample applications.
+This example is from [HelixViewModel](https://github.com/tgjones/gemini/blob/master/src/Gemini.Demo/Modules/Home/ViewModels/HelixViewModel.cs) in one of the sample applications.
 
 ```csharp
 var newAssembly = _codeCompiler.Compile(
@@ -478,7 +482,7 @@ var newAssembly = _codeCompiler.Compile(
     "GeminiDemoScript");
 ```
 
-As soon as there are no references to `newAssembly`, it will be eligible for garbage collection.
+Once there are no references to `newAssembly`, it will be eligible for garbage collection.
 
 ### CodeEditor module
 
@@ -572,7 +576,7 @@ from Ashley Davis's [CodeProject article](http://www.codeproject.com/Articles/18
 * `GraphControl` control
 * `ConnectorItem` control
 * `BezierLine` control
-* `ZoomAndPanControl` from [this CodeProject article](http://www.codeproject.com/Articles/85603/A-WPF-custom-control-for-zooming-and-panning)
+* `ZoomAndPanControl` control from [this CodeProject article](http://www.codeproject.com/Articles/85603/A-WPF-custom-control-for-zooming-and-panning)
 
 #### NuGet package
 
