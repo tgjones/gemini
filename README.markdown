@@ -12,6 +12,35 @@ Gemini is a WPF framework designed specifically for building IDE-like applicatio
 
 ## Getting started
 
+If you are creating a new WPF application, follow these steps:
+
+* Install the [Gemini](http://nuget.org/packages/GeminiWpf/) NuGet package.
+* Delete `MainWindow.xaml` - you don't need it.
+* Open `App.xaml` and delete the `StartupUri="MainWindow.xaml"` attribute.
+* Add `xmlns:gemini="http://schemas.timjones.tw/gemini"` to `App.xaml`.
+* Add `<gemini:AppBootstrapper x:Key="bootstrapper" />` to a `ResourceDictionary` within `<Application.Resources>`.
+
+So the whole `App.xaml` should look something like this:
+
+```xml
+<Application x:Class="Gemini.Demo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:gemini="http://schemas.timjones.tw/gemini">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <gemini:AppBootstrapper x:Key="bootstrapper" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+```
+
+Now hit F5 and see a very empty application!
+
 By far the easiest way to get started with Gemini is to use the various NuGet packages.
 First, install the base Gemini package (note that the package ID is `GeminiWpf`, to
 distinguish it from another NuGet package with the same name):
