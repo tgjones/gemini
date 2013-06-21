@@ -1,9 +1,9 @@
 ﻿using System.Windows.Media;
 using System.Windows.Media.Effects;
-using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ShaderEffects;
+using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ShaderEffects;
 using Gemini.Modules.Toolbox;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels.Elements
 {
     [ToolboxItem(typeof(GraphViewModel), "Add", "Maths")]
     public class Add : ShaderEffectElement

@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class InputConnectorViewModel : ConnectorViewModel
     {

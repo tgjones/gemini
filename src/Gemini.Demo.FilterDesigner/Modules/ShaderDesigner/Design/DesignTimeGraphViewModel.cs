@@ -1,6 +1,6 @@
-﻿using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels;
+﻿using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Design
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Design
 {
     public class DesignTimeGraphViewModel : GraphViewModel
     {

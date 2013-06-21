@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Effects;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Util
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util
 {
     internal static class ShaderEffectUtility
     {

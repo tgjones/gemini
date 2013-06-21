@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ShaderEffects
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ShaderEffects
 {
     internal class MultiplyEffect : ShaderEffectBase<MultiplyEffect>
 	{

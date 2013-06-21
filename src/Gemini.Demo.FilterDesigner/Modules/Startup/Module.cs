@@ -5,7 +5,7 @@ using Gemini.Framework;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Toolbox;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.Startup
+namespace Gemini.Demo.FilterDesigner.Modules.Startup
 {
 	[Export(typeof(IModule))]
 	public class Module : ModuleBase

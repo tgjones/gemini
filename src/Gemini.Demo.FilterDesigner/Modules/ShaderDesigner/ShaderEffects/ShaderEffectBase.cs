@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Media.Effects;
-using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Util;
+using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ShaderEffects
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ShaderEffects
 {
     internal class ShaderEffectBase<T> : ShaderEffect, IDisposable
     {

@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels.Elements
 {
     public abstract class ShaderEffectElement : DynamicElement
     {

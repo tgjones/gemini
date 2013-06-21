@@ -6,7 +6,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels
 {
     public abstract class ElementViewModel : PropertyChangedBase
     {

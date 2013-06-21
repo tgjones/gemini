@@ -1,4 +1,4 @@
-﻿namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Design
+﻿namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Design
 {
     internal static class DesignTimeImages
     {

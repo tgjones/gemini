@@ -1,4 +1,4 @@
-﻿namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
+﻿namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels
 {
     public enum ConnectorDirection
     {

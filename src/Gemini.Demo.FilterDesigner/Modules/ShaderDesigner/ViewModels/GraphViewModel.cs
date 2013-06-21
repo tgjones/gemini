@@ -3,14 +3,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
-using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Design;
-using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.Util;
-using Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements;
+using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Design;
+using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.Util;
+using Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels.Elements;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
-using ImageSource = Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels.Elements.ImageSource;
+using ImageSource = Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels.Elements.ImageSource;
 
-namespace Gemini.Demo.ShaderDesigner.Modules.ShaderDesigner.ViewModels
+namespace Gemini.Demo.FilterDesigner.Modules.ShaderDesigner.ViewModels
 {
     public class GraphViewModel : Document
     {
