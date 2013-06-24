@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
-using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
@@ -13,11 +12,6 @@ namespace Gemini
 	public class AppBootstrapper : Bootstrapper<IShell>
 	{
 		private CompositionContainer _container;
-
-        protected override void OnStartup(object sender, StartupEventArgs e)
-        {
-            base.OnStartup(sender, e);
-        }
 
 		/// <summary>
 		/// By default, we are configured to use MEF
