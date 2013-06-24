@@ -25,6 +25,25 @@ namespace Gemini.Modules.Shell.ViewModels
 
 	    private bool _closing;
 
+        private ResourceDictionary _currentTheme;
+        public ResourceDictionary CurrentTheme
+        {
+            get { return _currentTheme; }
+            set
+            {
+                if (_currentTheme == value)
+                    return;
+
+                if (_currentTheme != null)
+                    Application.Current.Resources.MergedDictionaries.Remove(_currentTheme);
+
+                _currentTheme = value;
+
+                if (_currentTheme != null)
+                    Application.Current.Resources.MergedDictionaries.Add(_currentTheme);
+            }
+        }
+
 		private WindowState _windowState = WindowState.Normal;
 		public WindowState WindowState
 		{
@@ -130,7 +149,16 @@ namespace Gemini.Modules.Shell.ViewModels
 			foreach (var module in _modules)
 				module.Initialize();
 
-            var shellView = (IShellView) view;
+            // If after initialization no theme was loaded, load the default one
+		    if (_currentTheme == null)
+		    {
+		        CurrentTheme = new ResourceDictionary
+		        {
+		            Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
+		        };
+		    }
+
+		    var shellView = (IShellView) view;
 		    if (!LayoutUtility.HasPersistedLayout)
 		        foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
 		            ShowTool((ITool) IoC.GetInstance(defaultTool, null));
