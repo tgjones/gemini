@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.ReflectionModel;
 using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
@@ -13,13 +14,8 @@ namespace Gemini
 	{
 		private CompositionContainer _container;
 
-        protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
+        protected override void OnStartup(object sender, StartupEventArgs e)
         {
-            // TODO: Support multiple themes.
-            Application.Resources.MergedDictionaries.Add(new System.Windows.ResourceDictionary
-            {
-                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
-            });
             base.OnStartup(sender, e);
         }
 
