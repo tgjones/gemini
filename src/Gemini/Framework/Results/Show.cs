@@ -38,5 +38,17 @@ namespace Gemini.Framework.Results
 		{
 			return new OpenDocumentResult(typeof(T));
 		}
-	}
+
+        public static ShowWindowResult<TWindow> Window<TWindow>()
+                where TWindow : IWindow
+        {
+            return new ShowWindowResult<TWindow>();
+        }
+
+        public static ShowWindowResult<TWindow> Window<TWindow>(TWindow window)
+            where TWindow : IWindow
+        {
+            return new ShowWindowResult<TWindow>(window);
+        }
+    }
 }
