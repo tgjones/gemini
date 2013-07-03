@@ -1,7 +1,10 @@
-﻿namespace Gemini.Modules.Shell.Views
+﻿using System;
+using Gemini.Framework;
+
+namespace Gemini.Modules.Shell.Views
 {
     public interface IShellView
     {
-        void LoadLayout();
+        void LoadLayout(Action<ITool> addToolCallback);
     }
 }

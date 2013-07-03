@@ -163,7 +163,7 @@ namespace Gemini.Modules.Shell.ViewModels
 		        foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
 		            ShowTool((ITool) IoC.GetInstance(defaultTool, null));
 		    else
-		        shellView.LoadLayout();
+		        shellView.LoadLayout(ShowTool);
 
             foreach (var module in _modules)
                 module.PostInitialize();

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
@@ -24,7 +22,7 @@ namespace Gemini.Modules.Shell.Views
 	        SaveLayout();
 	    }
 
-        public void LoadLayout()
+        public void LoadLayout(Action<ITool> addToolCallback)
         {
             var layoutSerializer = new XmlLayoutSerializer(Manager);
             layoutSerializer.LayoutSerializationCallback += (s, e) =>
@@ -40,6 +38,7 @@ namespace Gemini.Modules.Shell.Views
                         if (tool != null)
                         {
                             e.Content = tool;
+                            addToolCallback(tool);
                             tool.IsVisible = anchorable.IsVisible;
                             if (anchorable.IsActive)
                                 tool.Activate();
