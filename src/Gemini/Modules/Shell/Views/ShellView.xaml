@@ -7,8 +7,7 @@
         xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters"
         Title="{Binding Title}" Icon="{Binding Icon}" 
 		Width="1000" Height="800" WindowStartupLocation="CenterScreen"
-        WindowState="{Binding WindowState}"
-		Unloaded="OnWindowUnloaded">
+        WindowState="{Binding WindowState}">
 	<Window.Resources>
 		<ResourceDictionary>
 			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
@@ -41,8 +40,11 @@
 				<controls:PanesStyleSelector>
 					<controls:PanesStyleSelector.DocumentStyle>
 						<Style TargetType="{x:Type xcad:LayoutItem}">
+                            <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
 							<Setter Property="Title" Value="{Binding Model.DisplayName, Mode=OneWay}" />
 							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
+                            <Setter Property="IconSource" Value="{Binding Model.IconSource, Converter={StaticResource NullableValueConverter}}" />
+                            <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
 						</Style>
 					</controls:PanesStyleSelector.DocumentStyle>
 					<controls:PanesStyleSelector.ToolStyle>

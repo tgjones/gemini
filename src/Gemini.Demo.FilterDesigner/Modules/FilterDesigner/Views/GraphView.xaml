@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700"
-			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
+			 d:DataContext="{d:DesignInstance d:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
 			 Background="WhiteSmoke" Focusable="True">
 	<UserControl.Resources>
 		<converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
