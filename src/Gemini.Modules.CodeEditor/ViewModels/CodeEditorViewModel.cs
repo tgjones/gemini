@@ -7,6 +7,7 @@ using ICSharpCode.AvalonEdit.Highlighting;
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
     [Export(typeof(CodeEditorViewModel))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CodeEditorViewModel : Document
     {
         private string _originalText;
