@@ -13,7 +13,7 @@ namespace Gemini.Framework
 	    }
 
 		private ICommand _closeCommand;
-		public ICommand CloseCommand
+		public override ICommand CloseCommand
 		{
 		    get { return _closeCommand ?? (_closeCommand = new RelayCommand(p => TryClose(null), p => true)); }
 		}

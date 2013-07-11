@@ -1,10 +1,13 @@
-﻿using System.IO;
+﻿using System.ComponentModel.Composition;
+using System.IO;
 using Gemini.Framework;
 using Gemini.Modules.CodeEditor.Views;
 using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
+    [Export(typeof(CodeEditorViewModel))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CodeEditorViewModel : Document
     {
         private string _originalText;
@@ -42,6 +45,16 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             _path = path;
             _fileName = System.IO.Path.GetFileName(_path);
             UpdateDisplayName();
+        }
+
+        public override void SaveState(BinaryWriter writer)
+        {
+            writer.Write(_path);
+        }
+
+        public override void LoadState(BinaryReader reader)
+        {
+            Open(reader.ReadString());
         }
 
         private void UpdateDisplayName()
