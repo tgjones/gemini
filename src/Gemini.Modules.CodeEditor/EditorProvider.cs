@@ -1,24 +1,20 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.IO;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.CodeEditor.ViewModels;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Gemini.Modules.CodeEditor
 {
 	[Export(typeof(IEditorProvider))]
 	public class EditorProvider : IEditorProvider
 	{
-		private readonly List<string> _extensions = new List<string>
-        {
-            ".cs"
-        };
-
 		public bool Handles(string path)
 		{
 			var extension = Path.GetExtension(path);
-			return _extensions.Contains(extension);
+
+		    return HighlightingManager.Instance.GetDefinitionByExtension(extension) != null;
 		}
 
 		public IDocument Create(string path)
