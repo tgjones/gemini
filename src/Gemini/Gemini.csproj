@@ -75,7 +75,6 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
-    <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -110,18 +109,11 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return Items; }
 		}
 
-        public const string StateFile = @".\ApplicationState.bin";
-
-        public static bool HasPersistedState
-        {
-            get { return File.Exists(StateFile); }
-        }
-
 		public ShellViewModel()
 		{
 			_tools = new BindableCollection<ITool>();
 
-		    if (!HasPersistedState)
+		    if (!LayoutUtility.HasPersistedLayout)
 		    {
 		        // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
 		        // is applied, or the bug is fixed in another way.
@@ -167,13 +159,13 @@ namespace Gemini.Modules.Shell.ViewModels
 		    }
 
 		    var shellView = (IShellView) view;
-		    if (!HasPersistedState)
+		    if (!LayoutUtility.HasPersistedLayout)
 		        foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
 		            ShowTool((ITool) IoC.GetInstance(defaultTool, null));
 		    else
-		        LoadState(StateFile, shellView);
+		        shellView.LoadLayout(ShowTool);
 
-		    foreach (var module in _modules)
+            foreach (var module in _modules)
                 module.PostInitialize();
 
 		    base.OnViewLoaded(view);
@@ -250,8 +242,6 @@ namespace Gemini.Modules.Shell.ViewModels
             // requests that occur when _closing is true.
             _closing = true;
 
-            SaveState(StateFile);
-
             base.OnDeactivate(close);
         }
 
@@ -259,169 +249,5 @@ namespace Gemini.Modules.Shell.ViewModels
 		{
 			Application.Current.MainWindow.Close();
 		}
-
-	    private void SaveState(string fileName)
-	    {
-	        FileStream stream = null;
-
-	        try
-	        {
-	            stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-
-	            using (var writer = new BinaryWriter(stream))
-	            {
-	                stream = null;
-
-	                IEnumerable<ILayoutItem> itemStates = Documents.Concat(Tools.Cast<ILayoutItem>());
-
-	                int itemCount = 0;
-	                // reserve some space for items count, it'll be updated later
-	                writer.Write(itemCount);
-
-	                foreach (ILayoutItem item in itemStates)
-	                {
-	                    ExportAttribute exportAttribute =
-	                        item.GetType()
-	                            .GetCustomAttributes(typeof (ExportAttribute), false)
-	                            .Cast<ExportAttribute>()
-	                            .FirstOrDefault();
-
-	                    string typeName = null;
-
-	                    if (exportAttribute != null && exportAttribute.ContractType != null)
-	                    {
-	                        typeName = exportAttribute.ContractType.AssemblyQualifiedName;
-	                    }
-
-	                    if (string.IsNullOrEmpty(typeName))
-	                    {
-	                        continue;
-	                    }
-
-	                    writer.Write(typeName);
-	                    writer.Write(item.ContentId);
-
-	                    // Here's the tricky part. Because some items might fail to save their state, or they might be removed (a plug-in assembly deleted and etc.)
-	                    // we need to save the item's state size to be able to skip the data during deserialization.
-	                    // Save surrent stream position. We'll need it later.
-	                    long stateSizePosition = writer.BaseStream.Position;
-
-	                    // Reserve some space for item state size
-	                    writer.Write(0L);
-
-	                    long stateSize;
-
-	                    try
-	                    {
-	                        long stateStartPosition = writer.BaseStream.Position;
-	                        item.SaveState(writer);
-	                        stateSize = writer.BaseStream.Position - stateStartPosition;
-	                    }
-	                    catch
-	                    {
-	                        stateSize = 0;
-	                    }
-
-	                    // Go back to the position before item's state and write the actual value.
-	                    writer.BaseStream.Seek(stateSizePosition, SeekOrigin.Begin);
-	                    writer.Write(stateSize);
-
-	                    if (stateSize > 0)
-	                    {
-	                        // Got to the end of the stream
-	                        writer.BaseStream.Seek(0, SeekOrigin.End);
-	                    }
-
-	                    itemCount++;
-	                }
-
-	                writer.BaseStream.Seek(0, SeekOrigin.Begin);
-	                writer.Write(itemCount);
-                    writer.BaseStream.Seek(0, SeekOrigin.End);
-
-                    var shellView = Views.Values.Single() as IShellView;
-                    if (shellView != null)
-                        shellView.SaveLayout(writer.BaseStream);
-	            }
-	        }
-	        catch
-	        {
-	            if (stream != null)
-	            {
-	                stream.Close();
-	            }
-	        }
-	    }
-
-
-        private void LoadState(string fileName, IShellView shellView)
-        {
-            var layoutItems = new Dictionary<string, ILayoutItem>();
-
-            if (!File.Exists(fileName))
-            {
-                return;
-            }
-
-            FileStream stream = null;
-
-            try
-            {
-                stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-
-                using (var reader = new BinaryReader(stream))
-                {
-                    stream = null;
-
-                    int count = reader.ReadInt32();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        string typeName = reader.ReadString();
-                        string contentId = reader.ReadString();
-                        long stateEndPosition = reader.ReadInt64();
-                        stateEndPosition += reader.BaseStream.Position;
-
-                        var contentType = Type.GetType(typeName);
-                        bool skipStateData = true;
-
-                        if (contentType != null)
-                        {
-                            var contentInstance = IoC.GetInstance(contentType, null) as ILayoutItem;
-
-                            if (contentInstance != null)
-                            {
-                                layoutItems.Add(contentId, contentInstance);
-
-                                try
-                                {
-                                    contentInstance.LoadState(reader);
-                                    skipStateData = false;
-                                }
-                                catch
-                                {
-                                    skipStateData = true;
-                                }
-                            }
-                        }
-
-                        // Skip state data block if we couldn't read it.
-                        if (skipStateData)
-                        {
-                            reader.BaseStream.Seek(stateEndPosition, SeekOrigin.Begin);
-                        }
-                    }
-
-                    shellView.LoadLayout(reader.BaseStream, ShowTool, OpenDocument, layoutItems);
-                }
-            }
-            catch
-            {
-                if (stream != null)
-                {
-                    stream.Close();
-                }
-            }
-        }
 	}
 }

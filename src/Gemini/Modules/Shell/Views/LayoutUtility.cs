@@ -1,73 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Gemini.Framework;
-using Xceed.Wpf.AvalonDock;
-using Xceed.Wpf.AvalonDock.Layout;
-using Xceed.Wpf.AvalonDock.Layout.Serialization;
+﻿using System.IO;
 
 namespace Gemini.Modules.Shell.Views
 {
     internal static class LayoutUtility
     {
-        public static void SaveLayout(DockingManager manager, Stream stream)
+        public const string LayoutFile = @".\AvalonDock.Layout.config";
+
+        public static bool HasPersistedLayout
         {
-            var layoutSerializer = new XmlLayoutSerializer(manager);
-            layoutSerializer.Serialize(stream);
-        }
-
-        public static void LoadLayout(DockingManager manager, Stream stream, Action<IDocument> addDocumentCallback,
-                                      Action<ITool> addToolCallback, Dictionary<string, ILayoutItem> items)
-        {
-            var layoutSerializer = new XmlLayoutSerializer(manager);
-
-            layoutSerializer.LayoutSerializationCallback += (s, e) =>
-                {
-                    ILayoutItem item;
-                    if (items.TryGetValue(e.Model.ContentId, out item))
-                    {
-                        e.Content = item;
-
-                        var tool = item as ITool;
-                        var anchorable = e.Model as LayoutAnchorable;
-
-                        var document = item as IDocument;
-                        var layoutDocument = e.Model as LayoutDocument;
-
-                        if (tool != null && anchorable != null)
-                        {
-                            addToolCallback(tool);
-                            tool.IsVisible = anchorable.IsVisible;
-
-                            if (anchorable.IsActive)
-                                tool.Activate();
-
-                            tool.IsSelected = e.Model.IsSelected;
-
-                            return;
-                        }
-
-                        if (document != null && layoutDocument != null)
-                        {
-                            addDocumentCallback(document);
-
-                            document.IsSelected = layoutDocument.IsSelected;
-
-                            return;
-                        }
-                    }
-
-                    // Don't create any panels if something went wrong.
-                    e.Cancel = true;
-                };
-
-            try
-            {
-                layoutSerializer.Deserialize(stream);
-            }
-            catch
-            {
-            }
+            get { return File.Exists(LayoutFile); }
         }
     }
 }

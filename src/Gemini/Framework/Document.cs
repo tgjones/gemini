@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Gemini.Modules.UndoRedo;
 using Gemini.Modules.UndoRedo.Services;
 
@@ -16,7 +13,7 @@ namespace Gemini.Framework
 	    }
 
 		private ICommand _closeCommand;
-		public override ICommand CloseCommand
+		public ICommand CloseCommand
 		{
 		    get { return _closeCommand ?? (_closeCommand = new RelayCommand(p => TryClose(null), p => true)); }
 		}
