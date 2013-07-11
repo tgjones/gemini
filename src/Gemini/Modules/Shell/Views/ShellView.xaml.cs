@@ -1,65 +1,29 @@
 ﻿using System;
-using System.Windows;
-using Caliburn.Micro;
+using System.Collections.Generic;
+using System.IO;
 using Gemini.Framework;
-using Xceed.Wpf.AvalonDock.Layout;
-using Xceed.Wpf.AvalonDock.Layout.Serialization;
 
 namespace Gemini.Modules.Shell.Views
 {
     /// <summary>
 	/// Interaction logic for ShellView.xaml
 	/// </summary>
-	public partial class ShellView : Window, IShellView
+	public partial class ShellView : IShellView
     {
 	    public ShellView()
 		{
 			InitializeComponent();
 		}
 
-	    private void OnWindowUnloaded(object sender, RoutedEventArgs e)
+        public void LoadLayout(Stream stream, Action<ITool> addToolCallback, Action<IDocument> addDocumentCallback,
+                               Dictionary<string, ILayoutItem> itemsState)
 	    {
-	        SaveLayout();
+            LayoutUtility.LoadLayout(Manager, stream, addDocumentCallback, addToolCallback, itemsState);
 	    }
 
-        public void LoadLayout(Action<ITool> addToolCallback)
+        public void SaveLayout(Stream stream)
         {
-            var layoutSerializer = new XmlLayoutSerializer(Manager);
-            layoutSerializer.LayoutSerializationCallback += (s, e) =>
-            {
-                var anchorable = e.Model as LayoutAnchorable;
-
-                if (anchorable != null)
-                {
-                    var toolType = Type.GetType(e.Model.ContentId);
-                    if (toolType != null)
-                    {
-                        var tool = IoC.GetInstance(toolType, null) as ITool;
-                        if (tool != null)
-                        {
-                            e.Content = tool;
-                            addToolCallback(tool);
-                            tool.IsVisible = anchorable.IsVisible;
-                            if (anchorable.IsActive)
-                                tool.Activate();
-                            tool.IsSelected = anchorable.IsSelected;
-                        }
-                    }
-                }
-            };
-            try
-            {
-                layoutSerializer.Deserialize(LayoutUtility.LayoutFile);
-            }
-            catch
-            {
-            }
-        }
-
-        private void SaveLayout()
-        {
-            var layoutSerializer = new XmlLayoutSerializer(Manager);
-            layoutSerializer.Serialize(LayoutUtility.LayoutFile);
+            LayoutUtility.SaveLayout(Manager, stream);
         }
 	}
 }
