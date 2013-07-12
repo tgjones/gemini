@@ -13,8 +13,11 @@ namespace Gemini.Modules.Toolbox
     {
         public override void Initialize()
         {
-            MainMenu.All.First(x => x.Name == "View")
-                .Add(new MenuItem("Toolbox", OpenToolbox));
+            if (MainMenu.All.FirstOrDefault(x => x.Name == "View") != null)
+            {
+                MainMenu.All.First(x => x.Name == "View")
+                    .Add(new MenuItem("Toolbox", OpenToolbox));
+            }
         }
 
         private static IEnumerable<IResult> OpenToolbox()

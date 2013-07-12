@@ -58,8 +58,11 @@ namespace Gemini.Demo.Modules.Startup
 
 			_output.AppendLine("Started up");
 
-            MainMenu.All.First(x => x.Name == "View")
-                .Add(new MenuItem("History", OpenHistory));
+            if(MainMenu.All.FirstOrDefault(x => x.Name == "View") != null)
+            {
+                MainMenu.All.First(x => x.Name == "View")
+                    .Add(new MenuItem("History", OpenHistory));
+            }
 
 		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
 		    RefreshInspector();

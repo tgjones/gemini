@@ -13,8 +13,11 @@ namespace Gemini.Modules.Output
 	{
 		public override void Initialize()
 		{
-            MainMenu.All.First(x => x.Name == "View")
-				.Add(new MenuItem("Output", OpenOutput));
+            if (MainMenu.All.FirstOrDefault(x => x.Name == "View") != null)
+            {
+                MainMenu.All.First(x => x.Name == "View")
+				    .Add(new MenuItem("Output", OpenOutput));
+            } 
         }
 
         private IEnumerable<IResult> OpenOutput()

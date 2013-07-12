@@ -14,8 +14,11 @@ namespace Gemini.Modules.PropertyGrid
 	{
 		public override void Initialize()
 		{
-			MainMenu.All.First(x => x.Name == "View")
-				.Add(new MenuItem("Properties", OpenProperties).WithIcon());
+            if (MainMenu.All.FirstOrDefault(x => x.Name == "View") != null)
+            {
+			    MainMenu.All.First(x => x.Name == "View")
+				    .Add(new MenuItem("Properties", OpenProperties).WithIcon());
+            }
 		}
 
 		private static IEnumerable<IResult> OpenProperties()

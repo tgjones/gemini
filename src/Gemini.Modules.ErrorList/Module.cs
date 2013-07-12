@@ -13,8 +13,11 @@ namespace Gemini.Modules.ErrorList
     {
         public override void Initialize()
         {
-            MainMenu.All.First(x => x.Name == "View")
-                .Add(new MenuItem("Error List", OpenErrorList));
+            if (MainMenu.All.FirstOrDefault(x => x.Name == "View") != null)
+            {
+                MainMenu.All.First(x => x.Name == "View")
+                    .Add(new MenuItem("Error List", OpenErrorList));
+            }
         }
 
         private static IEnumerable<IResult> OpenErrorList()
