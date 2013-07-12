@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
+using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.CodeEditor.ViewModels;
@@ -10,16 +12,24 @@ namespace Gemini.Modules.CodeEditor
 	[Export(typeof(IEditorProvider))]
 	public class EditorProvider : IEditorProvider
 	{
-		public bool Handles(string path)
+	    private readonly HighlightingManager _highlightingManager;
+
+	    [ImportingConstructor]
+        public EditorProvider(HighlightingManager highlightingManager)
+        {
+            _highlightingManager = highlightingManager;
+        }
+
+        public bool Handles(string path)
 		{
 			var extension = Path.GetExtension(path);
 
-		    return HighlightingManager.Instance.GetDefinitionByExtension(extension) != null;
+            return extension != null && _highlightingManager.GetDefinitionByExtension(extension) != null;
 		}
 
 		public IDocument Create(string path)
 		{
-			var editor = new CodeEditorViewModel();
+            var editor = IoC.Get<CodeEditorViewModel>();
 			editor.Open(path);
 			return editor;
 		}

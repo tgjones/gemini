@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
 using Gemini.Framework;
 using Gemini.Modules.CodeEditor.Views;
@@ -9,11 +10,18 @@ namespace Gemini.Modules.CodeEditor.ViewModels
     [Export(typeof(CodeEditorViewModel))]
     public class CodeEditorViewModel : Document
     {
+        private readonly HighlightingManager _highlightingManager;
         private string _originalText;
         private string _path;
         private string _fileName;
         private bool _isDirty;
         private ICodeEditorView _view;
+
+        [ImportingConstructor]
+        public CodeEditorViewModel(HighlightingManager highlightingManager)
+        {
+            _highlightingManager = highlightingManager;
+        }
 
         public string Path
         {
@@ -75,7 +83,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             };
 
             var fileExtension = System.IO.Path.GetExtension(_fileName).ToLower();
-            var highlightingDefinition = HighlightingManager.Instance.GetDefinitionByExtension(fileExtension);
+            var highlightingDefinition = _highlightingManager.GetDefinitionByExtension(fileExtension);
             _view.TextEditor.SyntaxHighlighting = highlightingDefinition;
         }
 
