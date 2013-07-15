@@ -1,4 +1,3 @@
-using Caliburn.Micro;
 using Gemini.Framework.Services;
 
 namespace Gemini.Framework

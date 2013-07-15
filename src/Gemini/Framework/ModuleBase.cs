@@ -27,6 +27,11 @@ namespace Gemini.Framework
             get { return _shell.ToolBars; }
         }
 
+        public virtual IEnumerable<IDocument> DefaultDocuments
+        {
+            get { yield break; }
+        }
+
 	    public virtual IEnumerable<Type> DefaultTools
 	    {
             get { yield break; }

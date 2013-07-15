@@ -16,7 +16,16 @@ namespace Gemini.Demo.Modules.Home
 		[Import]
 		private IPropertyGrid _propertyGrid;
 
-		public override void Initialize()
+	    public override IEnumerable<IDocument> DefaultDocuments
+	    {
+	        get
+	        {
+                yield return IoC.Get<HomeViewModel>();
+                yield return IoC.Get<HelixViewModel>();
+	        }
+	    }
+
+	    public override void Initialize()
 		{
 			MainMenu.All
 				.First(x => x.Name == "View")
@@ -29,10 +38,7 @@ namespace Gemini.Demo.Modules.Home
 
         public override void PostInitialize()
         {
-            var homeViewModel = IoC.Get<HomeViewModel>();
-            Shell.OpenDocument(homeViewModel);
-            Shell.OpenDocument(IoC.Get<HelixViewModel>());
-            _propertyGrid.SelectedObject = homeViewModel;
+            _propertyGrid.SelectedObject = IoC.Get<HomeViewModel>();
         }
 
 		private IEnumerable<IResult> OpenHome()
