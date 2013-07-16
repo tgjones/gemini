@@ -6,17 +6,20 @@
              xmlns:controls="clr-namespace:Gemini.Modules.StatusBar.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-	<controls:StatusBarEx ItemsSource="{Binding Items}">
+	<UserControl.Resources>
+		<Style x:Key="StatusBarItemStyle" TargetType="StatusBarItem">
+			<Setter Property="Grid.Column" Value="{Binding Index}" />
+			<Setter Property="Content" Value="{Binding Message}" />
+		</Style>
+	</UserControl.Resources>
+	<StatusBar x:Name="StatusBar" ItemsSource="{Binding Items}">
 		<StatusBar.ItemsPanel>
 			<ItemsPanelTemplate>
-				<Grid x:Name="StatusBarGrid" />
+				<Grid x:Name="StatusBarGrid" Loaded="OnStatusBarGridLoaded" />
 			</ItemsPanelTemplate>
 		</StatusBar.ItemsPanel>
 		<StatusBar.ItemContainerStyle>
-			<Style TargetType="StatusBarItem" BasedOn="{StaticResource {x:Type StatusBarItem}}">
-				<Setter Property="Grid.Column" Value="{Binding Index}" />
-				<Setter Property="Content" Value="{Binding Message}" />
-			</Style>
+			<controls:DynamicStyle ResourceKey="StatusBarItemStyle" BasedOn="{x:Type StatusBarItem}" />
 		</StatusBar.ItemContainerStyle>
-	</controls:StatusBarEx>
+	</StatusBar>
 </UserControl>

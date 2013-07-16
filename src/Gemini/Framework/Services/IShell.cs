@@ -13,6 +13,10 @@ namespace Gemini.Framework.Services
         event EventHandler ActiveDocumentChanging;
         event EventHandler ActiveDocumentChanged;
 
+	    event EventHandler CurrentThemeChanged;
+
+        ResourceDictionary CurrentTheme { get; set; }
+
 		WindowState WindowState { get; set; }
 		string Title { get; set; }
 		ImageSource Icon { get; set; }

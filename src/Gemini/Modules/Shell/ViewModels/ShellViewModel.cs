@@ -20,6 +20,7 @@ namespace Gemini.Modules.Shell.ViewModels
 	{
         public event EventHandler ActiveDocumentChanging;
         public event EventHandler ActiveDocumentChanged;
+        public event EventHandler CurrentThemeChanged;
 
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
@@ -42,6 +43,9 @@ namespace Gemini.Modules.Shell.ViewModels
 
                 if (_currentTheme != null)
                     Application.Current.Resources.MergedDictionaries.Add(_currentTheme);
+
+                if (CurrentThemeChanged != null)
+                    CurrentThemeChanged(this, EventArgs.Empty);
             }
         }
 
@@ -159,12 +163,10 @@ namespace Gemini.Modules.Shell.ViewModels
 
 	        // If after initialization no theme was loaded, load the default one
 	        if (_currentTheme == null)
-	        {
 	            CurrentTheme = new ResourceDictionary
 	            {
 	                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
 	            };
-	        }
 
 	        var shellView = (IShellView) view;
 	        if (!HasPersistedState)
