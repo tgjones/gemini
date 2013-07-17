@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -12,6 +13,8 @@ using ImageSource = Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
 {
+    [Export(typeof(GraphViewModel))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class GraphViewModel : Document
     {
         private readonly IInspectorTool _inspectorTool;
@@ -32,7 +35,8 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels
         {
             get { return _elements.Where(x => x.IsSelected); }
         }
-           
+          
+        [ImportingConstructor]
         public GraphViewModel(IInspectorTool inspectorTool)
         {
             DisplayName = "[New Graph]";

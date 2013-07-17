@@ -48,11 +48,9 @@ namespace Gemini.Modules.Shell.Views
                         }
 
                         if (document != null && layoutDocument != null)
-        {
+                        {
                             addDocumentCallback(document);
-
                             document.IsSelected = layoutDocument.IsSelected;
-
                             return;
                         }
                     }

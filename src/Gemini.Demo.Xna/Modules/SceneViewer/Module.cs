@@ -16,7 +16,12 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer
 	{
 	    private readonly IInspectorTool _inspectorTool;
 
-        [ImportingConstructor]
+	    public override IEnumerable<IDocument> DefaultDocuments
+	    {
+            get { yield return new SceneViewModel(); }
+	    }
+
+	    [ImportingConstructor]
 	    public Module(IInspectorTool inspectorTool)
         {
             _inspectorTool = inspectorTool;
@@ -28,12 +33,11 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer
 				.First(x => x.Name == "View")
 				.Add(new MenuItem("3D Scene", OpenScene));
 
-	        var viewModel = new SceneViewModel();
-			Shell.OpenDocument(viewModel);
-
-	        _inspectorTool.SelectedObject = new InspectableObjectBuilder()
-                .WithVector3Editor(viewModel, x => x.Position)
-	            .ToInspectableObject();
+	        var sceneViewModel = Shell.Documents.OfType<SceneViewModel>().FirstOrDefault();
+            if (sceneViewModel != null)
+	            _inspectorTool.SelectedObject = new InspectableObjectBuilder()
+                    .WithVector3Editor(sceneViewModel, x => x.Position)
+	                .ToInspectableObject();
 		}
 
 		private IEnumerable<IResult> OpenScene()

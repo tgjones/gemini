@@ -85,6 +85,7 @@
     <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\LayoutUtility.cs" />
+    <Compile Include="Modules\StatusBar\Controls\DynamicStyleExtension.cs" />
     <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
     <Compile Include="Framework\Controls\ToolPaneToolBar.cs" />
     <Compile Include="Modules\Shell\Converters\ActiveDocumentConverter.cs" />
@@ -121,7 +122,6 @@
     <Compile Include="Modules\MainMenu\Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\StatusBar\Controls\StatusBarEx.cs" />
     <Compile Include="Modules\StatusBar\IStatusBar.cs" />
     <Compile Include="Framework\Services\PaneLocation.cs" />
     <Compile Include="Framework\Services\ResourceManager.cs" />

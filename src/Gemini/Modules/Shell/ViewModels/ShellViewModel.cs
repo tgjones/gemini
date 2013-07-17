@@ -20,6 +20,7 @@ namespace Gemini.Modules.Shell.ViewModels
 	{
         public event EventHandler ActiveDocumentChanging;
         public event EventHandler ActiveDocumentChanged;
+        public event EventHandler CurrentThemeChanged;
 
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
@@ -42,6 +43,9 @@ namespace Gemini.Modules.Shell.ViewModels
 
                 if (_currentTheme != null)
                     Application.Current.Resources.MergedDictionaries.Add(_currentTheme);
+
+                if (CurrentThemeChanged != null)
+                    CurrentThemeChanged(this, EventArgs.Empty);
             }
         }
 
@@ -150,36 +154,40 @@ namespace Gemini.Modules.Shell.ViewModels
             private DummyTool() {}
         }
 
-		protected override void OnViewLoaded(object view)
-		{
-            foreach (var module in _modules)
-                module.PreInitialize();
-			foreach (var module in _modules)
-				module.Initialize();
+	    protected override void OnViewLoaded(object view)
+	    {
+	        foreach (var module in _modules)
+	            module.PreInitialize();
+	        foreach (var module in _modules)
+	            module.Initialize();
 
-            // If after initialization no theme was loaded, load the default one
-		    if (_currentTheme == null)
-		    {
-		        CurrentTheme = new ResourceDictionary
-		        {
-		            Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
-		        };
-		    }
+	        // If after initialization no theme was loaded, load the default one
+	        if (_currentTheme == null)
+	            CurrentTheme = new ResourceDictionary
+	            {
+	                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
+	            };
 
-		    var shellView = (IShellView) view;
-		    if (!HasPersistedState)
-		        foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
-		            ShowTool((ITool) IoC.GetInstance(defaultTool, null));
-		    else
-		        LoadState(StateFile, shellView);
+	        var shellView = (IShellView) view;
+	        if (!HasPersistedState)
+	        {
+	            foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
+	                OpenDocument(defaultDocument);
+	            foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
+	                ShowTool((ITool) IoC.GetInstance(defaultTool, null));
+	        }
+	        else
+	        {
+	            LoadState(StateFile, shellView);
+	        }
 
-            foreach (var module in _modules)
-                module.PostInitialize();
+	        foreach (var module in _modules)
+	            module.PostInitialize();
 
-		    base.OnViewLoaded(view);
-		}
+	        base.OnViewLoaded(view);
+	    }
 
-		public void ShowTool(ITool model)
+	    public void ShowTool(ITool model)
 		{
 		    if (Tools.Contains(model))
 		        model.IsVisible = true;
