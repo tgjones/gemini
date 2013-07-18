@@ -1,9 +1,7 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.IO;
 using Gemini.Framework;
 using Gemini.Modules.CodeEditor.Views;
-using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
@@ -11,7 +9,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CodeEditorViewModel : Document
     {
-        private readonly HighlightingManager _highlightingManager;
+        private readonly LanguageDefinitionManager _languageDefinitionManager;
         private string _originalText;
         private string _path;
         private string _fileName;
@@ -19,9 +17,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         private ICodeEditorView _view;
 
         [ImportingConstructor]
-        public CodeEditorViewModel(HighlightingManager highlightingManager)
+        public CodeEditorViewModel(LanguageDefinitionManager languageDefinitionManager)
         {
-            _highlightingManager = highlightingManager;
+            _languageDefinitionManager = languageDefinitionManager;
         }
 
         public string Path
@@ -84,8 +82,10 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             };
 
             var fileExtension = System.IO.Path.GetExtension(_fileName).ToLower();
-            var highlightingDefinition = _highlightingManager.GetDefinitionByExtension(fileExtension);
-            _view.TextEditor.SyntaxHighlighting = highlightingDefinition;
+
+            ILanguageDefinition languageDefinition = _languageDefinitionManager.GetDefinitionByExtension(fileExtension);
+
+            SetLanguage(languageDefinition);
         }
 
         public override bool Equals(object obj)
@@ -101,6 +101,18 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             _originalText = newText;
 
             IsDirty = false;
+        }
+
+        private void SetLanguage(ILanguageDefinition languageDefinition)
+        {
+            if (languageDefinition == null)
+            {
+                _view.TextEditor.SyntaxHighlighting = null;
+            }
+            else
+            {
+                _view.TextEditor.SyntaxHighlighting = languageDefinition.SyntaxHighlighting;
+            }
         }
     }
 }
