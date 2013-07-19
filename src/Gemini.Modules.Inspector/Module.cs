@@ -13,8 +13,11 @@ namespace Gemini.Modules.Inspector
 	{
 		public override void Initialize()
 		{
-			MainMenu.All.First(x => x.Name == "View")
-				.Add(new MenuItem("Inspector", OpenInspector));
+            if (MainMenu.All.FirstOrDefault(x => x.Name == "View") != null)
+            {
+			    MainMenu.All.First(x => x.Name == "View")
+				    .Add(new MenuItem("Inspector", OpenInspector));
+            }
 		}
 
 		private static IEnumerable<IResult> OpenInspector()
