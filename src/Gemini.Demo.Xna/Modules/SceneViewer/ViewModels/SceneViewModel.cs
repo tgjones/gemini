@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using Gemini.Framework;
 using Microsoft.Xna.Framework;
 
 namespace Gemini.Demo.Xna.Modules.SceneViewer.ViewModels
 {
+    [Export(typeof(SceneViewModel))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
 	public class SceneViewModel : Document
 	{
 	    private Vector3 _position;

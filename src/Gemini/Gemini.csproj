@@ -76,6 +76,7 @@
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
+    <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />
@@ -175,6 +176,10 @@
     <Compile Include="Modules\UndoRedo\Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\MainWindow\ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Modules\MainWindow\Views\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
   </ItemGroup>
@@ -210,6 +215,10 @@
     <Page Include="Modules\UndoRedo\Views\HistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\MainWindow\Views\MainWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>

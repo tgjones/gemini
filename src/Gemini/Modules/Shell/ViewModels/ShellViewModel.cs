@@ -49,39 +49,6 @@ namespace Gemini.Modules.Shell.ViewModels
             }
         }
 
-		private WindowState _windowState = WindowState.Normal;
-		public WindowState WindowState
-		{
-			get { return _windowState; }
-			set
-			{
-				_windowState = value;
-				NotifyOfPropertyChange(() => WindowState);
-			}
-		}
-
-		private string _title = "[Default Title]";
-		public string Title
-		{
-			get { return _title; }
-			set
-			{
-				_title = value;
-				NotifyOfPropertyChange(() => Title);
-			}
-		}
-
-		private ImageSource _icon;
-		public ImageSource Icon
-		{
-			get { return _icon; }
-			set
-			{
-				_icon = value;
-				NotifyOfPropertyChange(() => Icon);
-			}
-		}
-
 		[Import]
 		private IMenu _mainMenu;
 		public IMenu MainMenu

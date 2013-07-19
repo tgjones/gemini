@@ -5,9 +5,6 @@ using Gemini.Framework;
 
 namespace Gemini.Modules.Shell.Views
 {
-    /// <summary>
-	/// Interaction logic for ShellView.xaml
-	/// </summary>
 	public partial class ShellView : IShellView
     {
 	    public ShellView()

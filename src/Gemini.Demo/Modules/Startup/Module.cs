@@ -46,14 +46,14 @@ namespace Gemini.Demo.Modules.Startup
                 new RedoToolBarItem()
 		    });
 
-			Shell.WindowState = WindowState.Maximized;
-			Shell.Title = "Gemini Demo";
+            MainWindow.WindowState = WindowState.Maximized;
+            MainWindow.Title = "Gemini Demo";
 
             Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
             Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
             Shell.StatusBar.AddItem("Col 79", new GridLength(100));
 
-			Shell.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
+            MainWindow.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
 				Assembly.GetExecutingAssembly().GetAssemblyName());
 
 			_output.AppendLine("Started up");

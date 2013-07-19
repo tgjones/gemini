@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.StatusBar;
@@ -16,10 +15,6 @@ namespace Gemini.Framework.Services
 	    event EventHandler CurrentThemeChanged;
 
         ResourceDictionary CurrentTheme { get; set; }
-
-		WindowState WindowState { get; set; }
-		string Title { get; set; }
-		ImageSource Icon { get; set; }
 
 		IMenu MainMenu { get; }
         IToolBars ToolBars { get; }

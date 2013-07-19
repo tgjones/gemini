@@ -9,7 +9,7 @@ using Gemini.Framework.Services;
 
 namespace Gemini
 {
-	public class AppBootstrapper : Bootstrapper<IShell>
+	public class AppBootstrapper : Bootstrapper<IMainWindow>
 	{
 		private CompositionContainer _container;
 
