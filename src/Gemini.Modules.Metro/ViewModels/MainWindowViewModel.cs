@@ -6,6 +6,6 @@ namespace Gemini.Modules.Metro.ViewModels
     [Export(typeof(IMainWindow))]
     public class MainWindowViewModel : Gemini.Modules.MainWindow.ViewModels.MainWindowViewModel
     {
-         
+        
     }
 }

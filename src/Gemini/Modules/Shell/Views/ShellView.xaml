@@ -26,11 +26,9 @@
 		<ContentControl DockPanel.Dock="Bottom" cal:View.Model="{Binding StatusBar}" IsTabStop="False" />
 
 		<xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
-						   AnchorablesSource="{Binding Tools}"
-						   ActiveContent="{Binding ActiveItem, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
-			<xcad:DockingManager.Theme>
-				<xcad:VS2010Theme />
-			</xcad:DockingManager.Theme>
+							 AnchorablesSource="{Binding Tools}"
+							 ActiveContent="{Binding ActiveItem, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+							 Theme="{DynamicResource AvalonDockTheme}">
 			<xcad:DockingManager.LayoutItemTemplate>
 				<DataTemplate>
 					<ContentControl cal:View.Model="{Binding}"
