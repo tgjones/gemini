@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cal="http://www.caliburnproject.org"
         Title="{Binding Title}" Icon="{Binding Icon}" 
-		Width="1000" Height="800" WindowStartupLocation="CenterScreen"
+		Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}" 
+		WindowStartupLocation="CenterScreen"
         WindowState="{Binding WindowState}">
 	<Grid>
 		<ContentControl cal:View.Model="{Binding Shell}" />

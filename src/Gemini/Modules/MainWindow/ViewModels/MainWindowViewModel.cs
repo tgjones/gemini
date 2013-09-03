@@ -20,6 +20,28 @@ namespace Gemini.Modules.MainWindow.ViewModels
             }
         }
 
+        private double _width = 1000.0;
+        public double Width
+        {
+            get { return _width; }
+            set
+            {
+                _width = value;
+                NotifyOfPropertyChange(() => Width);
+            }
+        }
+
+        private double _height = 800.0;
+        public double Height
+        {
+            get { return _height; }
+            set
+            {
+                _height = value;
+                NotifyOfPropertyChange(() => Height);
+            }
+        }
+
         private string _title = "[Default Title]";
         public string Title
         {
