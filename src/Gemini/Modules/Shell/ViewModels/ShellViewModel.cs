@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -173,11 +172,6 @@ namespace Gemini.Modules.Shell.ViewModels
 		public void CloseDocument(IDocument document)
 		{
 			DeactivateItem(document, true);
-		}
-
-		public void ActivateDocument(IDocument document)
-		{
-			ActivateItem(document);
 		}
 
         public override void ActivateItem(IDocument item)

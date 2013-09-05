@@ -29,7 +29,6 @@ namespace Gemini.Framework.Services
 
 		void OpenDocument(IDocument model);
 		void CloseDocument(IDocument document);
-		void ActivateDocument(IDocument document);
 
 		void Close();
 	}
