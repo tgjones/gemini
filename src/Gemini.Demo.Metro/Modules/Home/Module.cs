@@ -2,13 +2,13 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Micro;
-using Gemini.Demo.Modules.Home.ViewModels;
+using Gemini.Demo.Metro.Modules.Home.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Results;
 using Gemini.Modules.MainMenu.Models;
 using Gemini.Modules.PropertyGrid;
 
-namespace Gemini.Demo.Modules.Home
+namespace Gemini.Demo.Metro.Modules.Home
 {
 	[Export(typeof(IModule))]
 	public class Module : ModuleBase
@@ -21,7 +21,6 @@ namespace Gemini.Demo.Modules.Home
 	        get
 	        {
                 yield return IoC.Get<HomeViewModel>();
-                yield return IoC.Get<HelixViewModel>();
 	        }
 	    }
 
@@ -30,10 +29,6 @@ namespace Gemini.Demo.Modules.Home
 			MainMenu.All
 				.First(x => x.Name == "View")
 				.Add(new MenuItem("Home", OpenHome));
-
-            MainMenu.All
-                .First(x => x.Name == "View")
-                .Add(new MenuItem("Helix", OpenHelix));
 		}
 
         public override void PostInitialize()
@@ -46,10 +41,5 @@ namespace Gemini.Demo.Modules.Home
 		{
 			yield return Show.Document<HomeViewModel>();
 		}
-
-        private IEnumerable<IResult> OpenHelix()
-        {
-            yield return Show.Document<HelixViewModel>();
-        }
 	}
 }

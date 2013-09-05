@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Gemini.Framework;
+using Gemini.Modules.ErrorList;
+using Gemini.Modules.Inspector;
+using Gemini.Modules.Output;
 using Gemini.Modules.Toolbox;
+using Gemini.Modules.UndoRedo;
 
 namespace Gemini.Demo.Metro.Modules.Startup
 {
@@ -13,6 +17,10 @@ namespace Gemini.Demo.Metro.Modules.Startup
         {
             get
             {
+                yield return typeof(IErrorList);
+                yield return typeof(IHistoryTool);
+                yield return typeof(IInspectorTool);
+                yield return typeof(IOutput);
                 yield return typeof(IToolbox);
             }
         }
