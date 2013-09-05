@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
@@ -7,7 +8,7 @@ using Gemini.Framework.Services;
 namespace Gemini.Modules.MainWindow.ViewModels
 {
     [Export(typeof(IMainWindow))]
-    public class MainWindowViewModel : PropertyChangedBase, IMainWindow
+    public class MainWindowViewModel : Conductor<IShell>, IMainWindow, IPartImportsSatisfiedNotification
     {
         private WindowState _windowState = WindowState.Normal;
         public WindowState WindowState
@@ -69,6 +70,11 @@ namespace Gemini.Modules.MainWindow.ViewModels
         public IShell Shell
         {
             get { return _shell; }
+        }
+
+        void IPartImportsSatisfiedNotification.OnImportsSatisfied()
+        {
+            ActivateItem(_shell);
         }
     }
 }

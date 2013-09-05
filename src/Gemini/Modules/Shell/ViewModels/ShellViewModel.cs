@@ -90,6 +90,8 @@ namespace Gemini.Modules.Shell.ViewModels
 
 		public ShellViewModel()
 		{
+		    ((IActivate) this).Activate();
+
 			_tools = new BindableCollection<ITool>();
 
 		    if (!HasPersistedState)
@@ -327,7 +329,6 @@ namespace Gemini.Modules.Shell.ViewModels
 	            }
 	        }
 	    }
-
 
         private void LoadState(string fileName, IShellView shellView)
         {

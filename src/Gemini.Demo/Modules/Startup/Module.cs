@@ -11,7 +11,6 @@ using Gemini.Framework.Services;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.MainMenu.Models;
 using Gemini.Modules.Output;
-using Gemini.Modules.StatusBar.ViewModels;
 using Gemini.Modules.ToolBars.Models;
 using Gemini.Modules.UndoRedo;
 using Microsoft.Win32;

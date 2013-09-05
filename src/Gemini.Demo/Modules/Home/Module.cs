@@ -39,6 +39,7 @@ namespace Gemini.Demo.Modules.Home
         public override void PostInitialize()
         {
             _propertyGrid.SelectedObject = IoC.Get<HomeViewModel>();
+            Shell.OpenDocument(IoC.Get<HomeViewModel>());
         }
 
 		private IEnumerable<IResult> OpenHome()

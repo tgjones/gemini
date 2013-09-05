@@ -7,7 +7,7 @@ using Gemini.Modules.ToolBars;
 
 namespace Gemini.Framework.Services
 {
-	public interface IShell
+    public interface IShell : IGuardClose, IDeactivate
 	{
         event EventHandler ActiveDocumentChanging;
         event EventHandler ActiveDocumentChanged;
