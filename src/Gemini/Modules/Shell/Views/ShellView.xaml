@@ -11,7 +11,6 @@
              d:DesignHeight="800" d:DesignWidth="600">
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
 			<converters:NullableValueConverter x:Key="NullableValueConverter" />
 			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		</ResourceDictionary>
@@ -27,7 +26,7 @@
 
 		<xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
 							 AnchorablesSource="{Binding Tools}"
-							 ActiveContent="{Binding ActiveItem, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}"
+							 ActiveContent="{Binding CurrentActiveItem, Mode=TwoWay}"
 							 Theme="{DynamicResource AvalonDockTheme}">
 			<xcad:DockingManager.LayoutItemTemplate>
 				<DataTemplate>

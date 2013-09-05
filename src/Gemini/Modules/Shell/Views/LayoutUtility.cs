@@ -50,6 +50,11 @@ namespace Gemini.Modules.Shell.Views
                         if (document != null && layoutDocument != null)
                         {
                             addDocumentCallback(document);
+
+                            // Nasty hack to get around issue that occurs if documents are loaded from state,
+                            // and more documents are opened programmatically.
+                            layoutDocument.GetType().GetProperty("IsLastFocusedDocument").SetValue(layoutDocument, false, null);
+
                             document.IsSelected = layoutDocument.IsSelected;
                             return;
                         }

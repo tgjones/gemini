@@ -69,6 +69,19 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return _statusBar; }
 		}
 
+	    private ILayoutItem _currentActiveItem;
+	    public ILayoutItem CurrentActiveItem
+	    {
+	        get { return _currentActiveItem; }
+	        set
+	        {
+	            _currentActiveItem = value;
+                if (value is IDocument)
+                    ActivateItem((IDocument) value);
+                NotifyOfPropertyChange(() => CurrentActiveItem);
+	        }
+	    }
+
 		private readonly BindableCollection<ITool> _tools;
 		public IObservableCollection<ITool> Tools
 		{
@@ -162,6 +175,7 @@ namespace Gemini.Modules.Shell.ViewModels
 		    else
 		        Tools.Add(model);
 		    model.IsSelected = true;
+	        CurrentActiveItem = model;
 		}
 
 		public void OpenDocument(IDocument model)
@@ -191,6 +205,9 @@ namespace Gemini.Modules.Shell.ViewModels
             var handler = ActiveDocumentChanged;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+
+            if (CurrentActiveItem != item)
+                CurrentActiveItem = item;
 
             base.OnActivationProcessed(item, success);
         }
