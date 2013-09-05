@@ -28,6 +28,8 @@
 
 * \#16 StatusBar items do not draw to the correct column
 
+* \#21 Tools are not highlighted when opened programmatically
+
 ## 0.3.0 - 2013-06-21
 
 ### Major Changes
