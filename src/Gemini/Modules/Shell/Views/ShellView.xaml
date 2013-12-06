@@ -1,20 +1,20 @@
-﻿<Window x:Class="Gemini.Modules.Shell.Views.ShellView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-        xmlns:controls="clr-namespace:Gemini.Modules.Shell.Controls"
-		xmlns:cal="http://www.caliburnproject.org"
-        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
-        xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters"
-        Title="{Binding Title}" Icon="{Binding Icon}" 
-		Width="1000" Height="800" WindowStartupLocation="CenterScreen"
-        WindowState="{Binding WindowState}">
-	<Window.Resources>
+﻿<UserControl x:Class="Gemini.Modules.Shell.Views.ShellView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+			 xmlns:controls="clr-namespace:Gemini.Modules.Shell.Controls"
+			 xmlns:cal="http://www.caliburnproject.org"
+			 xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+			 xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="600">
+	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:ActiveDocumentConverter x:Key="ActiveDocumentConverter" />
 			<converters:NullableValueConverter x:Key="NullableValueConverter" />
 			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 		</ResourceDictionary>
-	</Window.Resources>
+	</UserControl.Resources>
 
 	<DockPanel>
 		<StackPanel DockPanel.Dock="Top" Orientation="Vertical">
@@ -25,11 +25,9 @@
 		<ContentControl DockPanel.Dock="Bottom" cal:View.Model="{Binding StatusBar}" IsTabStop="False" />
 
 		<xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
-						   AnchorablesSource="{Binding Tools}"
-						   ActiveContent="{Binding ActiveItem, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
-			<xcad:DockingManager.Theme>
-				<xcad:VS2010Theme />
-			</xcad:DockingManager.Theme>
+							 AnchorablesSource="{Binding Tools}"
+							 ActiveContent="{Binding CurrentActiveItem, Mode=TwoWay}"
+							 Theme="{DynamicResource AvalonDockTheme}">
 			<xcad:DockingManager.LayoutItemTemplate>
 				<DataTemplate>
 					<ContentControl cal:View.Model="{Binding}"
@@ -71,4 +69,4 @@
 			</xcad:LayoutRoot>
 		</xcad:DockingManager>
 	</DockPanel>
-</Window>
+</UserControl>

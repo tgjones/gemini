@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.StatusBar;
@@ -8,7 +7,7 @@ using Gemini.Modules.ToolBars;
 
 namespace Gemini.Framework.Services
 {
-	public interface IShell
+    public interface IShell : IGuardClose, IDeactivate
 	{
         event EventHandler ActiveDocumentChanging;
         event EventHandler ActiveDocumentChanged;
@@ -16,10 +15,6 @@ namespace Gemini.Framework.Services
 	    event EventHandler CurrentThemeChanged;
 
         ResourceDictionary CurrentTheme { get; set; }
-
-		WindowState WindowState { get; set; }
-		string Title { get; set; }
-		ImageSource Icon { get; set; }
 
 		IMenu MainMenu { get; }
         IToolBars ToolBars { get; }
@@ -34,7 +29,6 @@ namespace Gemini.Framework.Services
 
 		void OpenDocument(IDocument model);
 		void CloseDocument(IDocument document);
-		void ActivateDocument(IDocument document);
 
 		void Close();
 	}

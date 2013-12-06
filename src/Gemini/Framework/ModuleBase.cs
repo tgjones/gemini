@@ -9,6 +9,14 @@ namespace Gemini.Framework
 {
 	public abstract class ModuleBase : IModule
 	{
+        [Import]
+        private IMainWindow _mainWindow;
+
+	    protected IMainWindow MainWindow
+	    {
+	        get { return _mainWindow; }
+	    }
+
 		[Import]
 		private IShell _shell;
 

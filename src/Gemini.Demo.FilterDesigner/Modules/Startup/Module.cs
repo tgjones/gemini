@@ -21,7 +21,7 @@ namespace Gemini.Demo.FilterDesigner.Modules.Startup
 
 		public override void Initialize()
 		{
-			Shell.Title = "Gemini Filter Designer Demo";
+			MainWindow.Title = "Gemini Filter Designer Demo";
 		}
 	}
 }

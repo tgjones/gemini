@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -49,39 +48,6 @@ namespace Gemini.Modules.Shell.ViewModels
             }
         }
 
-		private WindowState _windowState = WindowState.Normal;
-		public WindowState WindowState
-		{
-			get { return _windowState; }
-			set
-			{
-				_windowState = value;
-				NotifyOfPropertyChange(() => WindowState);
-			}
-		}
-
-		private string _title = "[Default Title]";
-		public string Title
-		{
-			get { return _title; }
-			set
-			{
-				_title = value;
-				NotifyOfPropertyChange(() => Title);
-			}
-		}
-
-		private ImageSource _icon;
-		public ImageSource Icon
-		{
-			get { return _icon; }
-			set
-			{
-				_icon = value;
-				NotifyOfPropertyChange(() => Icon);
-			}
-		}
-
 		[Import]
 		private IMenu _mainMenu;
 		public IMenu MainMenu
@@ -103,6 +69,19 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return _statusBar; }
 		}
 
+	    private ILayoutItem _currentActiveItem;
+	    public ILayoutItem CurrentActiveItem
+	    {
+	        get { return _currentActiveItem; }
+	        set
+	        {
+	            _currentActiveItem = value;
+                if (value is IDocument)
+                    ActivateItem((IDocument) value);
+                NotifyOfPropertyChange(() => CurrentActiveItem);
+	        }
+	    }
+
 		private readonly BindableCollection<ITool> _tools;
 		public IObservableCollection<ITool> Tools
 		{
@@ -123,6 +102,8 @@ namespace Gemini.Modules.Shell.ViewModels
 
 		public ShellViewModel()
 		{
+		    ((IActivate) this).Activate();
+
 			_tools = new BindableCollection<ITool>();
 
 		    if (!HasPersistedState)
@@ -194,6 +175,7 @@ namespace Gemini.Modules.Shell.ViewModels
 		    else
 		        Tools.Add(model);
 		    model.IsSelected = true;
+	        CurrentActiveItem = model;
 		}
 
 		public void OpenDocument(IDocument model)
@@ -204,11 +186,6 @@ namespace Gemini.Modules.Shell.ViewModels
 		public void CloseDocument(IDocument document)
 		{
 			DeactivateItem(document, true);
-		}
-
-		public void ActivateDocument(IDocument document)
-		{
-			ActivateItem(document);
 		}
 
         public override void ActivateItem(IDocument item)
@@ -228,6 +205,9 @@ namespace Gemini.Modules.Shell.ViewModels
             var handler = ActiveDocumentChanged;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+
+            if (CurrentActiveItem != item)
+                CurrentActiveItem = item;
 
             base.OnActivationProcessed(item, success);
         }
@@ -360,7 +340,6 @@ namespace Gemini.Modules.Shell.ViewModels
 	            }
 	        }
 	    }
-
 
         private void LoadState(string fileName, IShellView shellView)
         {

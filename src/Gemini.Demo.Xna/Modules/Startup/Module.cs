@@ -8,7 +8,7 @@ namespace Gemini.Demo.Xna.Modules.Startup
 	{
 		public override void Initialize()
 		{
-			Shell.Title = "Gemini XNA Demo";
+			MainWindow.Title = "Gemini XNA Demo";
 		}
 	}
 }

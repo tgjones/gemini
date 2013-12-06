@@ -1,0 +1,24 @@
+﻿<mahapps:MetroWindow x:Class="Gemini.Modules.Metro.Views.MainWindowView"
+					 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					 xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+					 xmlns:cal="http://www.caliburnproject.org"
+					 Title="{Binding Title}" Icon="{Binding Icon}" 
+					 Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}" 
+					 WindowStartupLocation="CenterScreen"
+					 WindowState="{Binding WindowState}">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<Grid>
+		<ContentControl cal:View.Model="{Binding Shell}" />
+	</Grid>
+</mahapps:MetroWindow>
