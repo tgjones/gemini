@@ -268,6 +268,11 @@ namespace Gemini.Modules.Shell.ViewModels
 
 	                foreach (ILayoutItem item in itemStates)
 	                {
+	                    if (!item.ShouldReopenOnStart)
+	                    {
+	                        continue;
+	                    }
+
 	                    ExportAttribute exportAttribute =
 	                        item.GetType()
 	                            .GetCustomAttributes(typeof (ExportAttribute), false)

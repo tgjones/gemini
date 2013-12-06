@@ -34,6 +34,12 @@ namespace Gemini.Framework
 			}
 		}
 
+        public override bool ShouldReopenOnStart
+        {
+            // Tool windows should always reopen on app start by default.
+            get { return true; }
+        }
+
 		protected Tool()
 		{
 			IsVisible = true;
