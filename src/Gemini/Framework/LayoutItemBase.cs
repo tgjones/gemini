@@ -37,6 +37,11 @@ namespace Gemini.Framework
 			}
 		}
 
+        public virtual bool ShouldReopenOnStart
+        {
+            get { return false; }
+        }
+
 		public virtual void LoadState(BinaryReader reader)
 		{
 		}

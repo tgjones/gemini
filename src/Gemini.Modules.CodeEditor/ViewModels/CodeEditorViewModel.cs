@@ -41,6 +41,11 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             }
         }
 
+        public override bool ShouldReopenOnStart
+        {
+            get { return true; }
+        }
+
         public override void CanClose(System.Action<bool> callback)
         {
             callback(!IsDirty);
