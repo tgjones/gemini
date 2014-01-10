@@ -65,7 +65,6 @@ namespace Gemini.Modules.SharpDX.Controls
 		{
 			SetRenderTargetDX10(null);
 			Disposer.RemoveAndDispose(ref _renderTarget);
-
 			DeviceService.EndD3D();
 		}
 

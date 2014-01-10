@@ -116,7 +116,8 @@ namespace Gemini.Modules.SharpDX.Controls
 
 			RaiseUnloadContent(new GraphicsDeviceEventArgs(_graphicsDevice));
 
-            _d3DSurface.IsFrontBufferAvailableChanged -= OnIsFrontBufferAvailableChanged;
+            if (_d3DSurface != null)
+                _d3DSurface.IsFrontBufferAvailableChanged -= OnIsFrontBufferAvailableChanged;
             Source = null;
 
             Disposer.RemoveAndDispose(ref _d3DSurface);

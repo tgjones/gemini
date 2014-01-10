@@ -44,6 +44,7 @@
 */
 
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Interop;
 using Gemini.Modules.SharpDX.Util;
@@ -64,7 +65,9 @@ namespace Gemini.Modules.SharpDX.Services
 
 		public static void StartD3D(Window parentWindow)
 		{
-			if (_activeClients != 0)
+            _activeClients++;
+
+			if (_activeClients > 1)
 				return;
 
 			_d3DContext = new Direct3DEx();
@@ -80,13 +83,13 @@ namespace Gemini.Modules.SharpDX.Services
 			_d3DDevice = new DeviceEx(_d3DContext, 0, DeviceType.Hardware, IntPtr.Zero, 
 				CreateFlags.HardwareVertexProcessing | CreateFlags.Multithreaded | CreateFlags.FpuPreserve,
 				presentParameters);
-
-			_activeClients++;
 		}
 
 		public static void EndD3D()
 		{
 			_activeClients--;
+            if (_activeClients < 0)
+                throw new InvalidOperationException();
 
 			if (_activeClients != 0)
 				return;
