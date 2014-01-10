@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Gemini.Demo.SharpDX.Modules.SceneViewer.ViewModels;
 using Gemini.Modules.SharpDX.Controls;
 using SharpDX;
-using SharpDX.Direct3D11;
 using SharpDX.Toolkit.Graphics;
-using RasterizerState = SharpDX.Toolkit.Graphics.RasterizerState;
 using Texture2D = SharpDX.Toolkit.Graphics.Texture2D;
 
 namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
@@ -14,13 +13,15 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
     public partial class SceneView : UserControl
     {
 	    private BasicEffect _basicEffect;
-		private GeometricPrimitive _teapot;
 	    private Texture2D _texture;
 
         // A yaw and pitch applied to the viewport based on input
         private System.Windows.Point _previousPosition;
         private float _yaw;
         private float _pitch;
+
+        private GeometricPrimitive[] _geometricPrimitives;
+        private int _primitiveIndex;
 
         public SceneView()
         {
@@ -40,9 +41,17 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
 	        };
 	        _basicEffect.EnableDefaultLighting();
 
-			_teapot = GeometricPrimitive.Teapot.New(e.GraphicsDevice);
+            _geometricPrimitives = new[]
+            {
+                GeometricPrimitive.Cube.New(e.GraphicsDevice),
+                GeometricPrimitive.Cylinder.New(e.GraphicsDevice),
+                GeometricPrimitive.GeoSphere.New(e.GraphicsDevice),
+                GeometricPrimitive.Teapot.New(e.GraphicsDevice),
+                GeometricPrimitive.Torus.New(e.GraphicsDevice)
+            };
+            _primitiveIndex = 0;
 
-	        _texture = Texture2D.Load(e.GraphicsDevice, "Modules/SceneViewer/Resources/GeneticaMortarlessBlocks.jpg");
+	        _texture = Texture2D.Load(e.GraphicsDevice, "Modules/SceneViewer/Resources/tile_aqua.png");
 	        _basicEffect.Texture = _texture;
 	        _basicEffect.TextureEnabled = true;
         }
@@ -62,14 +71,14 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
 			        (float) e.GraphicsDevice.BackBuffer.Width / e.GraphicsDevice.BackBuffer.Height,
 			        0.1f, 100.0f);
 
-			_teapot.Draw(_basicEffect);
+            _geometricPrimitives[_primitiveIndex].Draw(_basicEffect);
         }
 
-        // Invoked when the mouse moves over the second viewport
 	    private void OnGraphicsControlUnloadContent(object sender, GraphicsDeviceEventArgs e)
 	    {
 			_texture.Dispose();
-		    _teapot.Dispose();
+            foreach (var primitive in _geometricPrimitives)
+		        primitive.Dispose();
 		    _basicEffect.Dispose();
 	    }
 
@@ -90,7 +99,6 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
         }
 
 	    // We use the left mouse button to do exclusive capture of the mouse so we can drag and drag
-
 	    // to rotate the cube without ever leaving the control
 
 	    private void OnGraphicsControlHwndLButtonDown(object sender, MouseEventArgs e)
@@ -103,6 +111,13 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
 	    private void OnGraphicsControlHwndLButtonUp(object sender, MouseEventArgs e)
         {
             GraphicsControl.ReleaseMouseCapture();
+        }
+
+        private void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            var newIndex = _primitiveIndex + 1;
+            newIndex %= _geometricPrimitives.Length;
+            _primitiveIndex = newIndex;
         }
     }
 }

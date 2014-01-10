@@ -14,5 +14,11 @@
 							   MouseMove="OnGraphicsControlMouseMove"
 							   MouseLeftButtonDown="OnGraphicsControlHwndLButtonDown"
 							   MouseLeftButtonUp="OnGraphicsControlHwndLButtonUp" />
+        <Button Click="OnButtonClick" 
+                Width="100" Height="30" 
+                Content="Change Model" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="10"/>
 	</Grid>
 </UserControl>

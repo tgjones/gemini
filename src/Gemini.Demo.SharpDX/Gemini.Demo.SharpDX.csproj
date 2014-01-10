@@ -163,7 +163,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Modules\SceneViewer\Resources\GeneticaMortarlessBlocks.jpg">
+    <Content Include="Modules\SceneViewer\Resources\tile_aqua.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
