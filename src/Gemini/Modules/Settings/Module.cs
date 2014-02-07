@@ -14,20 +14,20 @@ namespace Gemini.Modules.Settings
 	{
 		public override void Initialize()
 		{
-		    MenuItemBase toolsMenu = MainMenu.All.FirstOrDefault(x => x.Name == "Tools");
+		    MenuItemBase toolsMenu = MainMenu.All.FirstOrDefault(x => x.Name == "_Tools");
 
 		    if (toolsMenu == null)
 		    {
-		        toolsMenu = new MenuItem("Tools");
+		        toolsMenu = new MenuItem("_Tools");
                 MainMenu.Add(toolsMenu);
 		    }
 
-		    toolsMenu.Add(new MenuItem("Options", OpenSettings));
+		    toolsMenu.Add(new MenuItem("_Options", OpenSettings));
 		}
 
 		private IEnumerable<IResult> OpenSettings()
 		{
-			yield return Show.Window<SettingsViewModel>();
+			yield return Show.Dialog<SettingsViewModel>();
 		}
 	}
 }
