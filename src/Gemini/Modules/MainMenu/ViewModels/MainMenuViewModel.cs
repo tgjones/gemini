@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
 using Gemini.Modules.MainMenu.Models;
 using Microsoft.Win32;
+using ExtensionMethods = Gemini.Framework.Services.ExtensionMethods;
 
 namespace Gemini.Modules.MainMenu.ViewModels
 {
@@ -13,6 +15,11 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	{
 		[Import] 
 		private IShell _shell;
+
+	    private bool _autoHide;
+
+	    private readonly SettingsPropertyChangedEventManager<Properties.Settings> _settingsEventManager =
+	        new SettingsPropertyChangedEventManager<Properties.Settings>(Properties.Settings.Default);
 
 		public MainMenuViewModel()
 		{
@@ -24,6 +31,24 @@ namespace Gemini.Modules.MainMenu.ViewModels
 					new MenuItem("E_xit", Exit),
 				},
 				new MenuItem("_View"));
+
+            _settingsEventManager.AddListener(s => s.AutoHideMainMenu, value => { AutoHide = value; });
+		}
+
+	    public bool AutoHide
+	    {
+	        get { return _autoHide; }
+	        private set
+	        {
+	            if (_autoHide == value)
+	            {
+	                return;
+	            }
+
+	            _autoHide = value;
+
+	            NotifyOfPropertyChange(ExtensionMethods.GetPropertyName(() => AutoHide));
+	        }
 		}
 
 		private IEnumerable<IResult> OpenFile()
