@@ -81,6 +81,10 @@
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
+    <Compile Include="Modules\MainMenu\ViewModels\MainMenuSettingsViewModel.cs" />
+    <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
+      <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Settings\ISettingsEditor.cs" />
     <Compile Include="Modules\Settings\Module.cs" />
     <Compile Include="Modules\Settings\ViewModels\SettingsPageViewModel.cs" />
@@ -200,6 +204,10 @@
     <Page Include="Modules\MainMenu\Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\MainMenu\Views\MainMenuView.xaml">
       <SubType>Designer</SubType>
