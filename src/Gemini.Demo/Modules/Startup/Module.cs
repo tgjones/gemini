@@ -77,7 +77,7 @@ namespace Gemini.Demo.Modules.Startup
         private IEnumerable<IResult> OpenFile()
         {
             var dialog = new OpenFileDialog();
-            yield return Show.Dialog(dialog);
+            yield return Show.CommonDialog(dialog);
             yield return Show.Document(dialog.FileName);
         }
 

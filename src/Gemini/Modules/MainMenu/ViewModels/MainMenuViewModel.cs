@@ -29,7 +29,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 		private IEnumerable<IResult> OpenFile()
 		{
 			var dialog = new OpenFileDialog();
-			yield return Show.Dialog(dialog);
+			yield return Show.CommonDialog(dialog);
 			yield return Show.Document(dialog.FileName);
 		}
 

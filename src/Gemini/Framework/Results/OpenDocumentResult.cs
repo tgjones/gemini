@@ -39,7 +39,7 @@ namespace Gemini.Framework.Results
 
 			if (editor == null)
 			{
-				OnCompleted(null);
+				OnCompleted(null, true);
 				return;
 			}
 
@@ -60,7 +60,7 @@ namespace Gemini.Framework.Results
 
 			_shell.OpenDocument(editor);
 
-			OnCompleted(null);
+			OnCompleted(null, false);
 		}
 
 		private static IDocument GetEditor(string path)

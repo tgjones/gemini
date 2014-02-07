@@ -30,10 +30,10 @@ namespace Gemini.Framework.Results
 		//    };
 		//}
 
-		protected virtual void OnCompleted(Exception exception)
+		protected virtual void OnCompleted(Exception exception, bool wasCancelled)
 		{
 			if (Completed != null)
-				Completed(this, new ResultCompletionEventArgs { Error = exception });
+				Completed(this, new ResultCompletionEventArgs { Error = exception, WasCancelled = wasCancelled});
 		}
 
 		public abstract void Execute(ActionExecutionContext context);

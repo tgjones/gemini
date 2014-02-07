@@ -6,7 +6,7 @@ namespace Gemini.Framework.Results
 {
 	public static class Show
 	{
-		public static ShowCommonDialogResult Dialog(CommonDialog commonDialog)
+		public static ShowCommonDialogResult CommonDialog(CommonDialog commonDialog)
 		{
 			return new ShowCommonDialogResult(commonDialog);
 		}
@@ -49,6 +49,18 @@ namespace Gemini.Framework.Results
             where TWindow : IWindow
         {
             return new ShowWindowResult<TWindow>(window);
+        }
+
+        public static ShowDialogResult<TWindow> Dialog<TWindow>()
+                where TWindow : IWindow
+        {
+            return new ShowDialogResult<TWindow>();
+        }
+
+        public static ShowDialogResult<TWindow> Dialog<TWindow>(TWindow window)
+            where TWindow : IWindow
+        {
+            return new ShowDialogResult<TWindow>(window);
         }
     }
 }

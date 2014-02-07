@@ -15,7 +15,7 @@ namespace Gemini.Modules.Settings.ViewModels
 
         public SettingsViewModel()
         {
-            CancelCommand = new RelayCommand(o => TryClose());
+            CancelCommand = new RelayCommand(o => TryClose(false));
             OkCommand = new RelayCommand(SaveChanges);
 
             DisplayName = "Options";
@@ -89,7 +89,7 @@ namespace Gemini.Modules.Settings.ViewModels
                 settingsEditor.ApplyChanges();
             }
 
-            TryClose();
+            TryClose(true);
         }
     }
 }

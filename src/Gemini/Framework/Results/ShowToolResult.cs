@@ -41,7 +41,7 @@ namespace Gemini.Framework.Results
 				if (_onShutDown != null)
 					_onShutDown(tool);
 
-				OnCompleted(null);
+				OnCompleted(null, false);
 			};
 
 			_shell.ShowTool(tool);

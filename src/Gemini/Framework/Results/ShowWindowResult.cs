@@ -40,7 +40,7 @@ namespace Gemini.Framework.Results
                 if (_onShutDown != null)
                     _onShutDown(window);
 
-                OnCompleted(null);
+                OnCompleted(null, false);
             };
 
             WindowManager.ShowWindow(window);
