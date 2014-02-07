@@ -79,7 +79,9 @@
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
+    <Compile Include="Modules\Settings\ISettingsEditor.cs" />
     <Compile Include="Modules\Settings\Module.cs" />
+    <Compile Include="Modules\Settings\ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="Modules\Settings\ViewModels\SettingsViewModel.cs" />
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -196,6 +198,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignData Include="Modules\Settings\SampleData\SettingsViewModelSampleData.xaml">
+      <SubType>
+      </SubType>
+    </DesignData>
     <Page Include="Modules\Settings\Views\SettingsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -261,6 +267,7 @@
     <Resource Include="Resources\Icons\Redo.png" />
     <Resource Include="Resources\Icons\Undo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
