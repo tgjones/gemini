@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Gemini.Framework;
 
-namespace Gemini.Demo.Modules.Settings.ViewModels
+namespace Gemini.Modules.Settings.ViewModels
 {
 	[Export(typeof(SettingsViewModel))]
 	public class SettingsViewModel : WindowBase

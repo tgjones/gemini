@@ -121,11 +121,6 @@
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Home\Views\IHelixView.cs" />
-    <Compile Include="Modules\Settings\Module.cs" />
-    <Compile Include="Modules\Settings\ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
@@ -196,10 +191,6 @@
     <Page Include="Modules\Home\Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Settings\Views\SettingsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\TextEditor\Views\EditorView.xaml">
       <SubType>Designer</SubType>

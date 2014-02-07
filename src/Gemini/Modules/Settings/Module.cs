@@ -2,12 +2,12 @@
 using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Micro;
-using Gemini.Demo.Modules.Settings.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Results;
 using Gemini.Modules.MainMenu.Models;
+using Gemini.Modules.Settings.ViewModels;
 
-namespace Gemini.Demo.Modules.Settings
+namespace Gemini.Modules.Settings
 {
 	[Export(typeof(IModule))]
 	public class Module : ModuleBase
