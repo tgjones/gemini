@@ -36,21 +36,19 @@ namespace Gemini.Modules.Settings.ViewModels
             {
                 List<SettingsPageViewModel> parentCollection = GetParentCollection(settingsEditor, pages);
 
-                SettingsPageViewModel existingPage =
+                SettingsPageViewModel page =
                     parentCollection.FirstOrDefault(m => m.Name == settingsEditor.SettingsPageName);
 
-                if (existingPage != null && existingPage.Editor == null)
+                if (page == null)
                 {
-                    existingPage.Editor = settingsEditor;
-                }
-                else
-                {
-                    parentCollection.Add(new SettingsPageViewModel
+                    page = new SettingsPageViewModel
                     {
-                        Editor = settingsEditor,
-                        Name = settingsEditor.SettingsPageName
-                    });
+                        Name = settingsEditor.SettingsPageName,
+                    };
+                    parentCollection.Add(page);
                 }
+
+                page.Editors.Add(settingsEditor);
             }
 
             Pages = pages;
