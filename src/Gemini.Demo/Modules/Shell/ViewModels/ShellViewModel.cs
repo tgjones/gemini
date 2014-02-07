@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows;
 using Caliburn.Micro;
+using Gemini.Demo.Properties;
 using Gemini.Framework.Services;
 using Gemini.Modules.Shell.Views;
 
@@ -32,7 +33,13 @@ namespace Gemini.Demo.Modules.Shell.ViewModels
 
             public void Execute(ActionExecutionContext context)
             {
-                var result = MessageBox.Show("Are you sure you want to exit?", "Confirm", MessageBoxButton.YesNo);
+                var result = System.Windows.MessageBoxResult.Yes;
+
+                if (Settings.Default.ConfirmExit)
+                {
+                    result = MessageBox.Show("Are you sure you want to exit?", "Confirm", MessageBoxButton.YesNo);
+                }
+
                 Completed(this, new ResultCompletionEventArgs { WasCancelled = (result != System.Windows.MessageBoxResult.Yes) });
             }
         }
