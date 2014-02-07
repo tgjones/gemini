@@ -14,8 +14,15 @@ namespace Gemini.Modules.Settings
 	{
 		public override void Initialize()
 		{
-            MainMenu.All.First(x => x.Name == "View")
-                .Add(new MenuItem("Settings", OpenSettings));
+		    MenuItemBase toolsMenu = MainMenu.All.FirstOrDefault(x => x.Name == "Tools");
+
+		    if (toolsMenu == null)
+		    {
+		        toolsMenu = new MenuItem("Tools");
+                MainMenu.Add(toolsMenu);
+		    }
+
+		    toolsMenu.Add(new MenuItem("Options", OpenSettings));
 		}
 
 		private IEnumerable<IResult> OpenSettings()
