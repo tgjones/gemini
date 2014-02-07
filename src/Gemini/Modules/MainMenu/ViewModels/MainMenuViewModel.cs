@@ -21,7 +21,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	    private readonly SettingsPropertyChangedEventManager<Properties.Settings> _settingsEventManager =
 	        new SettingsPropertyChangedEventManager<Properties.Settings>(Properties.Settings.Default);
 
-		public MainMenuViewModel()
+	    public MainMenuViewModel()
 		{
 			Add(
 				new MenuItem("_File")
@@ -32,6 +32,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 				},
 				new MenuItem("_View"));
 
+	        _autoHide = Properties.Settings.Default.AutoHideMainMenu;
             _settingsEventManager.AddListener(s => s.AutoHideMainMenu, value => { AutoHide = value; });
 		}
 
@@ -49,9 +50,9 @@ namespace Gemini.Modules.MainMenu.ViewModels
 
 	            NotifyOfPropertyChange(ExtensionMethods.GetPropertyName(() => AutoHide));
 	        }
-		}
+	    }
 
-		private IEnumerable<IResult> OpenFile()
+	    private IEnumerable<IResult> OpenFile()
 		{
 			var dialog = new OpenFileDialog();
 			yield return Show.CommonDialog(dialog);
