@@ -11,7 +11,7 @@ namespace Gemini.Modules.Inspector.Inspectors
         public IEnumerable<IResult> Choose()
         {
             var fileDialog = new OpenFileDialog();
-            yield return Show.Dialog(fileDialog);
+            yield return Show.CommonDialog(fileDialog);
             
             using (var stream = fileDialog.OpenFile())
             {

@@ -1,0 +1,94 @@
+﻿<ViewModels:SettingsViewModel xmlns:ViewModels="clr-namespace:Gemini.Modules.Settings.ViewModels" DisplayName="Tempor adipiscing" IsNotifying="True" IsInitialized="False" IsActive="True">
+	<ViewModels:SettingsViewModel.Pages>
+		<ViewModels:SettingsPageViewModel Name="Nam sed">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Aliquam aenean"/>
+				<ViewModels:SettingsPageViewModel Name="Dis curabitur vestibulum phasellus"/>
+				<ViewModels:SettingsPageViewModel Name="Mauris class est"/>
+				<ViewModels:SettingsPageViewModel Name="Nullam curae"/>
+				<ViewModels:SettingsPageViewModel Name="Maecenas donec aptent cras adipiscing"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Parturient duis hac praesent auctor">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Consequat integer convallis accumsan congue"/>
+				<ViewModels:SettingsPageViewModel Name="Bibendum leo cursus"/>
+				<ViewModels:SettingsPageViewModel Name="Dignissim mus etiam"/>
+				<ViewModels:SettingsPageViewModel Name="Fusce dictumst"/>
+				<ViewModels:SettingsPageViewModel Name="Nunc vestibulum vestibulum"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Lorem quisque eleifend">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Elementum amet facilisis facilisi"/>
+				<ViewModels:SettingsPageViewModel Name="Morbi faucibus fermentum"/>
+				<ViewModels:SettingsPageViewModel Name="Ante fringilla arcu"/>
+				<ViewModels:SettingsPageViewModel Name="Nec nulla"/>
+				<ViewModels:SettingsPageViewModel Name="Non dictum habitant inceptos adipiscing"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Proin per lectus diam augue">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Habitasse eget"/>
+				<ViewModels:SettingsPageViewModel Name="Libero sed"/>
+				<ViewModels:SettingsPageViewModel Name="Dolor vivamus elit fames"/>
+				<ViewModels:SettingsPageViewModel Name="Sem interdum aliquam"/>
+				<ViewModels:SettingsPageViewModel Name="Ligula hendrerit felis sit parturient"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Litora vel lobortis aliquet">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Enim ipsum nascetur himenaeos erat"/>
+				<ViewModels:SettingsPageViewModel Name="Vestibulum nam blandit vestibulum"/>
+				<ViewModels:SettingsPageViewModel Name="Pharetra eros nibh"/>
+				<ViewModels:SettingsPageViewModel Name="Commodo luctus justo conubia"/>
+				<ViewModels:SettingsPageViewModel Name="Nisi lacus"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Magnis nisl adipiscing">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Cubilia sed mattis placerat pulvinar"/>
+				<ViewModels:SettingsPageViewModel Name="Dapibus mauris"/>
+				<ViewModels:SettingsPageViewModel Name="Sagittis dis imperdiet"/>
+				<ViewModels:SettingsPageViewModel Name="Est malesuada senectus"/>
+				<ViewModels:SettingsPageViewModel Name="Hac egestas euismod sociosqu"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Parturient mollis">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Feugiat suscipit lorem montes nostra"/>
+				<ViewModels:SettingsPageViewModel Name="Ornare vestibulum magna vestibulum platea"/>
+				<ViewModels:SettingsPageViewModel Name="Torquent nunc gravida"/>
+				<ViewModels:SettingsPageViewModel Name="Primis iaculis ultrices odio"/>
+				<ViewModels:SettingsPageViewModel Name="Massa leo rutrum metus"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Vehicula penatibus adipiscing porttitor orci">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Morbi tincidunt"/>
+				<ViewModels:SettingsPageViewModel Name="Sapien tristique mus lacinia neque"/>
+				<ViewModels:SettingsPageViewModel Name="Parturient volutpat netus pede"/>
+				<ViewModels:SettingsPageViewModel Name="Maecenas vestibulum nulla"/>
+				<ViewModels:SettingsPageViewModel Name="Ultricies quam semper quis"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Porta praesent laoreet sociis nec">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Purus risus"/>
+				<ViewModels:SettingsPageViewModel Name="Urna accumsan taciti cras venenatis"/>
+				<ViewModels:SettingsPageViewModel Name="Vulputate tellus"/>
+				<ViewModels:SettingsPageViewModel Name="Natoque velit"/>
+				<ViewModels:SettingsPageViewModel Name="Non per vestibulum"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+		<ViewModels:SettingsPageViewModel Name="Duis vitae">
+			<ViewModels:SettingsPageViewModel.Children>
+				<ViewModels:SettingsPageViewModel Name="Nunc curabitur posuere"/>
+				<ViewModels:SettingsPageViewModel Name="Bibendum amet potenti pretium"/>
+				<ViewModels:SettingsPageViewModel Name="Class dictumst eleifend sed"/>
+				<ViewModels:SettingsPageViewModel Name="Curae rhoncus sodales ante viverra"/>
+				<ViewModels:SettingsPageViewModel Name="Phasellus consequat sem"/>
+			</ViewModels:SettingsPageViewModel.Children>
+		</ViewModels:SettingsPageViewModel>
+	</ViewModels:SettingsViewModel.Pages>
+</ViewModels:SettingsViewModel>

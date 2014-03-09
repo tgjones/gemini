@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gemini.Demo.Properties {
+namespace Gemini.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -25,13 +25,13 @@ namespace Gemini.Demo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ConfirmExit {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoHideMainMenu {
             get {
-                return ((bool)(this["ConfirmExit"]));
+                return ((bool)(this["AutoHideMainMenu"]));
             }
             set {
-                this["ConfirmExit"] = value;
+                this["AutoHideMainMenu"] = value;
             }
         }
     }

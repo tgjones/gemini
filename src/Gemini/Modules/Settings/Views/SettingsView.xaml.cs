@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Gemini.Demo.Modules.Settings.Views
+namespace Gemini.Modules.Settings.Views
 {
     /// <summary>
     /// Interaction logic for SettingsView.xaml

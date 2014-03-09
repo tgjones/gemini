@@ -1,0 +1,59 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:cal="http://www.caliburnproject.org" x:Class="Gemini.Modules.Settings.Views.SettingsView" Width="512"
+    Height="300" MinWidth="512" MinHeight="300" mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
+    d:DataContext="{d:DesignData Source=../SampleData/SettingsViewModelSampleData.xaml}" WindowStyle="ToolWindow">
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="12" />
+            <ColumnDefinition Width="*" MinWidth="230" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        
+        <ScrollViewer Grid.Row="0" Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl HorizontalContentAlignment="Stretch"
+                  ItemsSource="{Binding ElementName=TreeView, Path=SelectedValue}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  BorderBrush="{x:Null}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl cal:View.Model="{Binding}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 12 0 0" HorizontalAlignment="Right"
+              IsSharedSizeScope="True">
+            <Grid.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                    <Setter Property="Margin" Value="12 0 0 0" />
+                </Style>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="WindowButtons" />
+                <ColumnDefinition SharedSizeGroup="WindowButtons" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Command="{Binding OkCommand}">OK</Button>
+            <Button Grid.Column="1" MinWidth="80" Command="{Binding CancelCommand}">Cancel</Button>
+        </Grid>
+    </Grid>
+</Window>

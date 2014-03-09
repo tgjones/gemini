@@ -1,0 +1,12 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dd="clr-namespace:Gemini.Demo.Modules.Shell.ViewModels"
+    x:Class="Gemini.Demo.Modules.Shell.Views.DemoApplicationSettingsView" mc:Ignorable="d" d:DesignHeight="300"
+    d:DesignWidth="300" d:DataContext="{d:DesignInstance dd:DemoApplicationSettingsViewModel}">
+    <Grid>
+        <CheckBox IsChecked="{Binding ConfirmExit}">Confirm application exit</CheckBox>
+    </Grid>
+</UserControl>
