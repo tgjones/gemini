@@ -829,6 +829,11 @@ I've used Gemini on several of my own projects:
 * [SlimShader](http://github.com/tgjones/slimshader)
 * coming soon...
 
+## Development dependencies
+
+To build the XNA module and demo on your own machine, you'll need to install
+[XNA 4.0 Game Studio](http://www.microsoft.com/en-us/download/details.aspx?id=23714).
+
 ## Acknowledgements
 
 * Many of the original ideas, and much of the early code came from [Rob Eisenberg](http://www.bluespire.com/), 
