@@ -3,12 +3,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:cal="http://www.caliburnproject.org" x:Class="Gemini.Modules.Settings.Views.SettingsView" Width="512"
-    Height="300" MinWidth="512" MinHeight="300" mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
-    d:DataContext="{d:DesignData Source=../SampleData/SettingsViewModelSampleData.xaml}" WindowStyle="ToolWindow">
+    xmlns:cal="http://www.caliburnproject.org"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:behaviors="clr-namespace:Gemini.Framework.Behaviors"
+    x:Class="Gemini.Modules.Settings.Views.SettingsView" 
+    mc:Ignorable="d" 
+    d:DataContext="{d:DesignData Source=../SampleData/SettingsViewModelSampleData.xaml}"
+    Background="{x:Static SystemColors.ControlBrush}"
+    Width="760" Height="500" MinWidth="512" MinHeight="300" 
+    ResizeMode="CanResizeWithGrip" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner">
     <Grid Margin="12">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="250" />
             <ColumnDefinition Width="12" />
             <ColumnDefinition Width="*" MinWidth="230" />
         </Grid.ColumnDefinitions>
@@ -18,7 +24,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors">
+        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors" 
+                  Background="Transparent">
+            <i:Interaction.Behaviors>
+                <behaviors:BindableTreeViewSelectedItemBehavior SelectedItem="{Binding SelectedPage, Mode=TwoWay}" />
+            </i:Interaction.Behaviors>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                     <TextBlock Text="{Binding Name}" />
@@ -26,24 +36,35 @@
             </TreeView.ItemTemplate>
         </TreeView>
         
-        <ScrollViewer Grid.Row="0" Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl HorizontalContentAlignment="Stretch"
-                  ItemsSource="{Binding ElementName=TreeView, Path=SelectedValue}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  BorderBrush="{x:Null}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl cal:View.Model="{Binding}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+            
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl HorizontalContentAlignment="Stretch"
+                      ItemsSource="{Binding ElementName=TreeView, Path=SelectedValue}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      BorderBrush="{x:Null}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            <Rectangle Grid.Row="1" Height="1" Fill="{x:Static SystemColors.ActiveBorderBrush}"
+                       VerticalAlignment="Bottom"/>
+        </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0 12 0 0" HorizontalAlignment="Right"
               IsSharedSizeScope="True">
             <Grid.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                     <Setter Property="Margin" Value="12 0 0 0" />
+                    <Setter Property="Padding" Value="4" />
                 </Style>
             </Grid.Resources>
 
@@ -52,8 +73,8 @@
                 <ColumnDefinition SharedSizeGroup="WindowButtons" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Command="{Binding OkCommand}">OK</Button>
-            <Button Grid.Column="1" MinWidth="80" Command="{Binding CancelCommand}">Cancel</Button>
+            <Button Grid.Column="0" IsDefault="True" Command="{Binding OkCommand}">OK</Button>
+            <Button Grid.Column="1" IsCancel="True" MinWidth="80" Command="{Binding CancelCommand}">Cancel</Button>
         </Grid>
     </Grid>
 </Window>

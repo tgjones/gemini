@@ -12,6 +12,7 @@ namespace Gemini.Modules.Settings.ViewModels
     public class SettingsViewModel : WindowBase
     {
         private IEnumerable<ISettingsEditor> _settingsEditors;
+        private SettingsPageViewModel _selectedPage;
 
         public SettingsViewModel()
         {
@@ -22,6 +23,17 @@ namespace Gemini.Modules.Settings.ViewModels
         }
 
         public List<SettingsPageViewModel> Pages { get; private set; }
+
+        public SettingsPageViewModel SelectedPage
+        {
+            get { return _selectedPage; }
+            set
+            {
+                _selectedPage = value;
+                NotifyOfPropertyChange(() => SelectedPage);
+            }
+        }
+
         public ICommand CancelCommand { get; private set; }
         public ICommand OkCommand { get; private set; }
 
@@ -52,6 +64,19 @@ namespace Gemini.Modules.Settings.ViewModels
             }
 
             Pages = pages;
+            SelectedPage = GetFirstLeafPageRecursive(pages);
+        }
+
+        private static SettingsPageViewModel GetFirstLeafPageRecursive(List<SettingsPageViewModel> pages)
+        {
+            if (!pages.Any())
+                return null;
+
+            var firstPage = pages.First();
+            if (!firstPage.Children.Any())
+                return firstPage;
+
+            return GetFirstLeafPageRecursive(firstPage.Children);
         }
 
         private List<SettingsPageViewModel> GetParentCollection(ISettingsEditor settingsEditor,
