@@ -6,6 +6,7 @@
              xmlns:converters="clr-namespace:Gemini.Modules.GraphEditor.Converters;assembly=Gemini.Modules.GraphEditor"
              xmlns:local="clr-namespace:Gemini.Modules.GraphEditor.Controls;assembly=Gemini.Modules.GraphEditor"
              xmlns:vm="clr-namespace:Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels"
+             xmlns:dd="clr-namespace:Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Design"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
