@@ -11,7 +11,7 @@ namespace Gemini
 {
 	public class AppBootstrapper : Bootstrapper<IMainWindow>
 	{
-		private CompositionContainer _container;
+		protected CompositionContainer Container;
 
 		/// <summary>
 		/// By default, we are configured to use MEF
@@ -38,29 +38,29 @@ namespace Gemini
                     .Select(x => new AssemblyCatalog(x)));
 		    var mainProvider = new CatalogExportProvider(mainCatalog);
 
-			_container = new CompositionContainer(priorityProvider, mainProvider);
-		    priorityProvider.SourceProvider = _container;
-		    mainProvider.SourceProvider = _container;
+			Container = new CompositionContainer(priorityProvider, mainProvider);
+		    priorityProvider.SourceProvider = Container;
+		    mainProvider.SourceProvider = Container;
 
 			var batch = new CompositionBatch();
 
 		    BindServices(batch);
             batch.AddExportedValue(mainCatalog);
 
-			_container.Compose(batch);
+			Container.Compose(batch);
 		}
 
 	    protected virtual void BindServices(CompositionBatch batch)
         {
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-            batch.AddExportedValue(_container);
+            batch.AddExportedValue(Container);
         }
 
 		protected override object GetInstance(Type serviceType, string key)
 		{
 			string contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
-			var exports = _container.GetExportedValues<object>(contract);
+			var exports = Container.GetExportedValues<object>(contract);
 
 			if (exports.Count() > 0)
 				return exports.First();
@@ -70,12 +70,12 @@ namespace Gemini
 
 		protected override IEnumerable<object> GetAllInstances(Type serviceType)
 		{
-			return _container.GetExportedValues<object>(AttributedModelServices.GetContractName(serviceType));
+			return Container.GetExportedValues<object>(AttributedModelServices.GetContractName(serviceType));
 		}
 
 		protected override void BuildUp(object instance)
 		{
-			_container.SatisfyImportsOnce(instance);
+			Container.SatisfyImportsOnce(instance);
 		}
 	}
 }
