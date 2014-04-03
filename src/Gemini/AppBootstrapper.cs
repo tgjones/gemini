@@ -11,7 +11,7 @@ namespace Gemini
 {
 	public class AppBootstrapper : Bootstrapper<IMainWindow>
 	{
-		protected CompositionContainer Container;
+		protected CompositionContainer Container { get; set; }
 
 		/// <summary>
 		/// By default, we are configured to use MEF
