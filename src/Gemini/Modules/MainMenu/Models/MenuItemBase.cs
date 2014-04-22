@@ -59,5 +59,9 @@ namespace Gemini.Modules.MainMenu.Models
 			}
 		}
 
+		public bool Remove(string name)
+		{
+			return Children.Remove(this[name]);
+		}
 	}
 }

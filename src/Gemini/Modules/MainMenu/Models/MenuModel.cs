@@ -33,5 +33,10 @@ namespace Gemini.Modules.MainMenu.Models
 				return Items.FirstOrDefault(x => x.Name == key);
 			}
 		}
+
+		public bool Remove(string name)
+		{
+			return Items.Remove(this[name]);
+		}
 	}
 }
