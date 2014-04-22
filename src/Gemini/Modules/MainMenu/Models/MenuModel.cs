@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
 
 namespace Gemini.Modules.MainMenu.Models
@@ -23,6 +24,14 @@ namespace Gemini.Modules.MainMenu.Models
 		public void Add(params MenuItemBase[] items)
 		{
 			items.Apply(Add);
+		}
+
+		public MenuItemBase this[string key]
+		{
+			get
+			{
+				return Items.FirstOrDefault(x => x.Name == key);
+			}
 		}
 	}
 }
