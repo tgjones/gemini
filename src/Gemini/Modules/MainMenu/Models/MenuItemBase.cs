@@ -19,18 +19,19 @@ namespace Gemini.Modules.MainMenu.Models
 
 		public IObservableCollection<MenuItemBase> Children { get; private set; }
 
-		public virtual string Name
-		{
-			get { return "-"; }
-		}
+        public virtual string Name {
+            get;
+            private set;
+        }
 
 		#endregion
 
 		#region Constructors
 
-		protected MenuItemBase()
+		protected MenuItemBase(string name = null)
 		{
 			Children = new BindableCollection<MenuItemBase>();
+            this.Name = name ?? "-";
 		}
 
 		#endregion
