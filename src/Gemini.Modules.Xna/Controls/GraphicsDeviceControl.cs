@@ -286,6 +286,7 @@ namespace Gemini.Modules.Xna.Controls
 
             // Present to the screen, but only use the visible area of the back buffer
             _graphicsService.GraphicsDevice.Present(viewport.Bounds, null, _hWnd);
+            //_graphicsService.GraphicsDevice.Present();
         }
 
         /// <summary>

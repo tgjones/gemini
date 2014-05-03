@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo", "Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
 EndProject
@@ -53,6 +53,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{87C5CCCC-7448-4802-B35F-C0BEA3FF880D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.SharpDX", "Gemini.Demo.SharpDX\Gemini.Demo.SharpDX.csproj", "{6C67C98D-1E3F-4362-8D18-F66BC19B0A1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.MonoGame", "Gemini.Modules.MonoGame\Gemini.Modules.MonoGame.csproj", "{9472DFF6-74BF-460F-8DFA-037A3479EBE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.MonoGame", "Gemini.Demo.MonoGame\Gemini.Demo.MonoGame.csproj", "{C723324B-E0FA-4F77-A616-F2B96F4C4198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.MonoGame", "Gemini.Modules.Inspector.MonoGame\Gemini.Modules.Inspector.MonoGame.csproj", "{4775F2B0-F284-40D8-9738-BCD9B56F7273}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -244,15 +250,46 @@ Global
 		{6C67C98D-1E3F-4362-8D18-F66BC19B0A1E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6C67C98D-1E3F-4362-8D18-F66BC19B0A1E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6C67C98D-1E3F-4362-8D18-F66BC19B0A1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9472DFF6-74BF-460F-8DFA-037A3479EBE0}.Release|x86.ActiveCfg = Release|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198}.Release|x86.ActiveCfg = Release|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{9F269618-D57F-42A1-9C8E-71291BB10588} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{742E5923-C633-40E0-BFD4-8C2CF2D9675B} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{771D29EE-65DA-4B04-A168-46CB325DA448} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
-		{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{6C67C98D-1E3F-4362-8D18-F66BC19B0A1E} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
+		{C723324B-E0FA-4F77-A616-F2B96F4C4198} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 	EndGlobalSection
 EndGlobal
