@@ -8,5 +8,6 @@ namespace Gemini.Modules.MainMenu
 	{
 		IEnumerable<MenuItemBase> All { get; }
 		MenuItemBase this[string key] { get; }
+	    bool Remove(string name);
 	}
 }
