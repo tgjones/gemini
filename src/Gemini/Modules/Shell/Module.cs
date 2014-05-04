@@ -11,8 +11,9 @@ namespace Gemini.Modules.Shell
 	{
 		public override void Initialize()
 		{
-			((StandardMenuItem) MainMenu.All.First(x => x.Name == "Open"))
-				.WithGlobalShortcut(ModifierKeys.Control, Key.O);
+			var menuItem = (StandardMenuItem) MainMenu.All.FirstOrDefault(x => x.Name == "Open");
+			if (menuItem != null)
+				menuItem.WithGlobalShortcut(ModifierKeys.Control, Key.O);
 		}
 	}
 }

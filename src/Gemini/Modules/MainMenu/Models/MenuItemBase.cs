@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
 
 namespace Gemini.Modules.MainMenu.Models
@@ -48,6 +49,19 @@ namespace Gemini.Modules.MainMenu.Models
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
+		}
+
+		public MenuItemBase this[string key]
+		{
+			get
+			{
+				return Children.FirstOrDefault(x => x.Name == key);
+			}
+		}
+
+		public bool Remove(string name)
+		{
+			return Children.Remove(this[name]);
 		}
 	}
 }
