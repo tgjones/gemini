@@ -1,19 +1,17 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Windows.Markup;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-using System.Windows.Markup;
-
 [assembly: AssemblyTitle("Gemini.Modules.MonoGame")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("MonoGame module for Gemini, providing WPF integration for MonoGame content.")]
+[assembly: AssemblyConfiguration("Retail")]
+[assembly: AssemblyCompany("Tim Jones")]
 [assembly: AssemblyProduct("Gemini.Modules.MonoGame")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©2014 Tim Jones")]
+[assembly: AssemblyTrademark("timjones.tw")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

@@ -74,6 +74,9 @@
     <Compile Include="Util\Disposer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Gemini.Modules.MonoGame.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
