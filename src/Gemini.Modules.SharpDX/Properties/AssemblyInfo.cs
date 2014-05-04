@@ -8,12 +8,12 @@ using System.Runtime.InteropServices;
 using System.Windows.Markup;
 
 [assembly: AssemblyTitle("Gemini.Modules.SharpDX")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("SharpDX module for Gemini, providing integration for SharpDX/Direct3D content in WPF.")]
+[assembly: AssemblyConfiguration("Retail")]
+[assembly: AssemblyCompany("Tim Jones")]
 [assembly: AssemblyProduct("Gemini.Modules.SharpDX")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©2014 Tim Jones")]
+[assembly: AssemblyTrademark("timjones.tw")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

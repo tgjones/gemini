@@ -81,6 +81,9 @@
     <Compile Include="Util\Texture2DExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Gemini.Modules.SharpDX.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
