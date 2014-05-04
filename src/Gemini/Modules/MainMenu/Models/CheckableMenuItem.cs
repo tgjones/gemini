@@ -23,17 +23,30 @@ namespace Gemini.Modules.MainMenu.Models
 			
 		}
 
+        public CheckableMenuItem(string name, string text)
+            : this(name, text, null, null) { }
+
 		public CheckableMenuItem(string text, Func<bool, IEnumerable<IResult>> execute)
 			: base(text)
 		{
 			_execute = execute;
 		}
 
+        public CheckableMenuItem(string name, string text, Func<bool, IEnumerable<IResult>> execute) 
+            : this(name, text, execute, null) { }
+
 		public CheckableMenuItem(string text, Func<bool, IEnumerable<IResult>> execute, Func<bool> canExecute)
 			: base(text, canExecute)
 		{
 			_execute = execute;
 		}
+
+        public CheckableMenuItem(string name, string text, Func<bool, IEnumerable<IResult>> execute, Func<bool> canExecute)
+            : base(name, text, canExecute)
+        {
+            this._execute = execute;
+        }
+
 
 		#endregion
 

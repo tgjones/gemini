@@ -82,6 +82,7 @@
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
+    <Compile Include="Modules\MainMenu\Models\KnownItemNames.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuSettingsViewModel.cs" />
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
@@ -200,6 +201,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Modules\MainMenu\Resources\Styles.xaml">
@@ -288,7 +294,12 @@
     <Resource Include="Resources\Icons\Redo.png" />
     <Resource Include="Resources\Icons\Undo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

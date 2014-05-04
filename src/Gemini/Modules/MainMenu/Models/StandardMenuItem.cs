@@ -33,11 +33,6 @@ namespace Gemini.Modules.MainMenu.Models
 			get { return _canExecute(); }
 		}
 
-		public override string Name
-		{
-			get { return string.IsNullOrEmpty(Text) ? null : Text.Replace("_", string.Empty); }
-		}
-
 		public string InputGestureText
 		{
 			get
@@ -48,16 +43,29 @@ namespace Gemini.Modules.MainMenu.Models
 			}
 		}
 
-		public StandardMenuItem(string text)
+        public StandardMenuItem(string text)
+            : base(string.IsNullOrEmpty(text) ? null : text.Replace("_", string.Empty))
 		{
 			Text = text;
 		}
 
+        public StandardMenuItem(string name, string text)
+            : base(name)
+        {
+            this.Text = text;
+        }
+
 		public StandardMenuItem(string text, Func<bool> canExecute)
 			: this(text)
 		{
-			_canExecute = canExecute;
+			_canExecute = canExecute ?? (() => true);
 		}
+
+        public StandardMenuItem(string name, string text, Func<bool> canExecute)
+            : this(name, text)
+        {
+            this._canExecute = canExecute ?? (() => true);
+        }
 
         public void RaiseCanExecuteChanged()
         {

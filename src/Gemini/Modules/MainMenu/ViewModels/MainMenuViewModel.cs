@@ -24,13 +24,13 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	    public MainMenuViewModel()
 		{
 			Add(
-				new MenuItem("_File")
+				new MenuItem(KnownItemNames.File, Properties.Resources.MenuItemFile)
 				{
-					new MenuItem("_Open", OpenFile).WithIcon(),
+					new MenuItem(KnownItemNames.Open, Properties.Resources.MenuItemOpen, OpenFile).WithIcon(),
 					MenuItemBase.Separator,
-					new MenuItem("E_xit", Exit),
+					new MenuItem(KnownItemNames.Exit, Properties.Resources.MenuItemExit, Exit),
 				},
-				new MenuItem("_View"));
+				new MenuItem(KnownItemNames.View, Properties.Resources.MenuItemView));
 
 	        _autoHide = Properties.Settings.Default.AutoHideMainMenu;
             _settingsEventManager.AddListener(s => s.AutoHideMainMenu, value => { AutoHide = value; });

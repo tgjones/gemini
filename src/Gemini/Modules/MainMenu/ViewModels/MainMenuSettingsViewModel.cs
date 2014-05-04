@@ -28,7 +28,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 
         public string SettingsPageName
         {
-            get { return "General"; }
+            get { return Properties.Resources.SettingsPageGeneral; }
         }
 
         public string SettingsPagePath
