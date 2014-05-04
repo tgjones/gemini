@@ -36,6 +36,8 @@ namespace Gemini.Demo.Modules.Startup
 
 		public override void Initialize()
 		{
+		    Shell.ShowFloatingWindowsInTaskbar = true;
+
             Shell.ToolBars.Visible = true;
 		    Shell.ToolBars.Items.Add(new ToolBarModel
 		    {

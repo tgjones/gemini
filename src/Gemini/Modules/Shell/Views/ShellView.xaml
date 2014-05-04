@@ -24,11 +24,12 @@
 
 		<ContentControl DockPanel.Dock="Bottom" cal:View.Model="{Binding StatusBar}" IsTabStop="False" />
 
-		<xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
+        <xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
 							 AnchorablesSource="{Binding Tools}"
 							 ActiveContent="{Binding CurrentActiveItem, Mode=TwoWay}"
-							 Theme="{DynamicResource AvalonDockTheme}">
-			<xcad:DockingManager.LayoutItemTemplate>
+							 Theme="{DynamicResource AvalonDockTheme}"
+                             LayoutUpdated="OnManagerLayoutUpdated">
+            <xcad:DockingManager.LayoutItemTemplate>
 				<DataTemplate>
 					<ContentControl cal:View.Model="{Binding}"
 									IsTabStop="False" />
@@ -57,10 +58,10 @@
 					</controls:PanesStyleSelector.ToolStyle>
 				</controls:PanesStyleSelector>
 			</xcad:DockingManager.LayoutItemContainerStyleSelector>
-			<xcad:DockingManager.LayoutUpdateStrategy>
-				<controls:LayoutInitializer />
-			</xcad:DockingManager.LayoutUpdateStrategy>
-			<xcad:LayoutRoot>
+            <xcad:DockingManager.LayoutUpdateStrategy>
+                <controls:LayoutInitializer />
+            </xcad:DockingManager.LayoutUpdateStrategy>
+            <xcad:LayoutRoot>
 				<xcad:LayoutPanel x:Name="VerticalPanel" Orientation="Vertical">
 					<xcad:LayoutPanel x:Name="HorizontalPanel" Orientation="Horizontal">
 						<xcad:LayoutDocumentPane />

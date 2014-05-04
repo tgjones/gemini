@@ -16,6 +16,8 @@ namespace Gemini.Framework.Services
 
         ResourceDictionary CurrentTheme { get; set; }
 
+        bool ShowFloatingWindowsInTaskbar { get; set; }
+        
 		IMenu MainMenu { get; }
         IToolBars ToolBars { get; }
 		IStatusBar StatusBar { get; }

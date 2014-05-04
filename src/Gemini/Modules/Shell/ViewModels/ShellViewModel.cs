@@ -24,6 +24,7 @@ namespace Gemini.Modules.Shell.ViewModels
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
 
+	    private IShellView _shellView;
 	    private bool _closing;
 
         private ResourceDictionary _currentTheme;
@@ -93,6 +94,19 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return Items; }
 		}
 
+	    private bool _showFloatingWindowsInTaskbar;
+	    public bool ShowFloatingWindowsInTaskbar
+	    {
+	        get { return _showFloatingWindowsInTaskbar; }
+	        set
+	        {
+	            _showFloatingWindowsInTaskbar = value;
+	            NotifyOfPropertyChange(() => ShowFloatingWindowsInTaskbar);
+	            if (_shellView != null)
+	                _shellView.UpdateFloatingWindows();
+	        }
+	    }
+
         public const string StateFile = @".\ApplicationState.bin";
 
         public static bool HasPersistedState
@@ -149,7 +163,7 @@ namespace Gemini.Modules.Shell.ViewModels
 	                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
 	            };
 
-	        var shellView = (IShellView) view;
+            _shellView = (IShellView) view;
 	        if (!HasPersistedState)
 	        {
 	            foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
@@ -159,7 +173,7 @@ namespace Gemini.Modules.Shell.ViewModels
 	        }
 	        else
 	        {
-	            LoadState(StateFile, shellView);
+                LoadState(StateFile, _shellView);
 	        }
 
 	        foreach (var module in _modules)

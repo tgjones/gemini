@@ -11,5 +11,7 @@ namespace Gemini.Modules.Shell.Views
                         Dictionary<string, ILayoutItem> itemsState);
 
         void SaveLayout(Stream stream);
+
+        void UpdateFloatingWindows();
     }
 }
