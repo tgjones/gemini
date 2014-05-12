@@ -1,5 +1,27 @@
 # Overview
 
+## 0.5.0 - 2014-05-12
+
+### New Features
+
+* Added SharpDX module
+
+* \#23 Added ShouldReopenOnStart property for layout items (Roman Novitsky)
+
+* \#28 Added Settings module (Roman Novitsky)
+
+* \#34 AppBootstrapper.Container is now available to subclasses (Tristyn Stimpson)
+
+* \#40 Added support for removing main menu items (Andrey Orlov)
+
+* \#42 Added support for menu localization (crowbar27)
+
+* \#39 Added MonoGame module
+
+### Resolved Issues
+
+* \#36 Exports are now lazy-loaded to prevent multiple initialization
+
 ## 0.4.0 - 2013-09-05
 
 ### Major Changes
