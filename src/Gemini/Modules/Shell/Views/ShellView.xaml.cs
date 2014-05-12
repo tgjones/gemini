@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using Gemini.Framework;
 using Gemini.Modules.Shell.ViewModels;
 using Xceed.Wpf.AvalonDock.Layout;
@@ -34,9 +35,14 @@ namespace Gemini.Modules.Shell.Views
 
 	    public void UpdateFloatingWindows()
 	    {
+	        var mainWindow = Window.GetWindow(this);
+	        var mainWindowIcon = (mainWindow != null) ? mainWindow.Icon : null;
             var showFloatingWindowsInTaskbar = ((ShellViewModel) DataContext).ShowFloatingWindowsInTaskbar;
-            foreach (var window in Manager.FloatingWindows)
-                window.ShowInTaskbar = showFloatingWindowsInTaskbar;
+	        foreach (var window in Manager.FloatingWindows)
+	        {
+                window.Icon = mainWindowIcon;
+	            window.ShowInTaskbar = showFloatingWindowsInTaskbar;
+	        }
 	    }
 	}
 }
