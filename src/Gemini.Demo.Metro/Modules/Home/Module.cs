@@ -18,17 +18,12 @@ namespace Gemini.Demo.Metro.Modules.Home
 
 	    public override IEnumerable<IDocument> DefaultDocuments
 	    {
-	        get
-	        {
-                yield return IoC.Get<HomeViewModel>();
-	        }
+	        get { yield return IoC.Get<HomeViewModel>(); }
 	    }
 
 	    public override void Initialize()
-		{
-			MainMenu.All
-				.First(x => x.Name == "View")
-				.Add(new MenuItem("Home", OpenHome));
+	    {
+	        MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Home", OpenHome));
 		}
 
         public override void PostInitialize()

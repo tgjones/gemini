@@ -20,19 +20,16 @@ namespace Gemini.Modules.MainMenu.Models
 
 		public IObservableCollection<MenuItemBase> Children { get; private set; }
 
-        public virtual string Name {
-            get;
-            private set;
-        }
+	    public virtual string Name { get; private set; }
 
-		#endregion
+	    #endregion
 
 		#region Constructors
 
 		protected MenuItemBase(string name = null)
 		{
 			Children = new BindableCollection<MenuItemBase>();
-            this.Name = name ?? "-";
+            Name = name ?? "-";
 		}
 
 		#endregion
@@ -52,17 +49,14 @@ namespace Gemini.Modules.MainMenu.Models
 			return GetEnumerator();
 		}
 
-		public MenuItemBase this[string key]
+		public MenuItemBase Find(string name)
 		{
-			get
-			{
-				return Children.FirstOrDefault(x => x.Name == key);
-			}
+		    return Children.FirstOrDefault(x => x.Name == name);
 		}
 
 		public bool Remove(string name)
 		{
-			return Children.Remove(this[name]);
+			return Children.Remove(Find(name));
 		}
 	}
 }

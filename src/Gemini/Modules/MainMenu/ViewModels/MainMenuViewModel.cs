@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
@@ -24,13 +24,13 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	    public MainMenuViewModel()
 		{
 			Add(
-				new MenuItem(KnownItemNames.File, Properties.Resources.MenuItemFile)
+				new MenuItem(KnownMenuItemNames.File, Properties.Resources.MenuItemFile)
 				{
-					new MenuItem(KnownItemNames.Open, Properties.Resources.MenuItemOpen, OpenFile).WithIcon(),
+					new MenuItem(KnownMenuItemNames.FileOpen, Properties.Resources.MenuItemOpen, OpenFile).WithIcon(),
 					MenuItemBase.Separator,
-					new MenuItem(KnownItemNames.Exit, Properties.Resources.MenuItemExit, Exit),
+					new MenuItem(KnownMenuItemNames.FileExit, Properties.Resources.MenuItemExit, Exit),
 				},
-				new MenuItem(KnownItemNames.View, Properties.Resources.MenuItemView));
+                new MenuItem(KnownMenuItemNames.View, Properties.Resources.MenuItemView));
 
 	        _autoHide = Properties.Settings.Default.AutoHideMainMenu;
             _settingsEventManager.AddListener(s => s.AutoHideMainMenu, value => { AutoHide = value; });

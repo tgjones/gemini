@@ -29,9 +29,7 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer
 
 	    public override void Initialize()
 		{
-			MainMenu.All
-				.First(x => x.Name == "View")
-				.Add(new MenuItem("3D Scene", OpenScene));
+            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("3D Scene", OpenScene));
 
 	        var sceneViewModel = Shell.Documents.OfType<SceneViewModel>().FirstOrDefault();
             if (sceneViewModel != null)

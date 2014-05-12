@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Results;
@@ -13,8 +12,9 @@ namespace Gemini.Modules.ErrorList
     {
         public override void Initialize()
         {
-            MainMenu.All.First(x => x.Name == "View")
-                .Add(new MenuItem("Error List", OpenErrorList));
+            var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
+            if (viewMenuItem != null)
+                viewMenuItem.Add(new MenuItem("Error List", OpenErrorList));
         }
 
         private static IEnumerable<IResult> OpenErrorList()

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Caliburn.Micro;
 using Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels;
 using Gemini.Framework;
@@ -20,8 +19,7 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner
 
         public override void Initialize()
         {
-            MainMenu.All.First(x => x.Name == "File")
-                .Children.Insert(1, new MenuItem("Open Graph", OpenGraph));
+            MainMenu.Find(KnownMenuItemNames.File).Children.Insert(1, new MenuItem("Open Graph", OpenGraph));
         }
 
         private static IEnumerable<IResult> OpenGraph()
