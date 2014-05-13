@@ -78,6 +78,7 @@
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
+    <Compile Include="Framework\Services\GeminiExportAttribute.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
