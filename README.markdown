@@ -1,5 +1,7 @@
 # Gemini
 
+[![Build status](https://ci.appveyor.com/api/projects/status/cbbi2f0hvds25qnd)](https://ci.appveyor.com/project/tgjones/gemini)
+
 ## What is this?
 
 Gemini is a WPF framework designed specifically for building IDE-like applications. It builds on some excellent libraries:
