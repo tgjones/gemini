@@ -77,12 +77,13 @@ namespace Gemini.Modules.Shell.ViewModels
             {
                 _currentActiveItem = value;
                 if (value is IDocument)
-                    ActivateItem((IDocument) value);
+                    ActivateItem((IDocument)value);
                 NotifyOfPropertyChange(() => CurrentActiveItem);
             }
         }
 
         private readonly BindableCollection<ITool> _tools;
+
         public IObservableCollection<ITool> Tools
         {
             get { return _tools; }
@@ -93,16 +94,33 @@ namespace Gemini.Modules.Shell.ViewModels
             get { return Items; }
         }
 
-        public const string StateFile = @".\ApplicationState.bin";
+        private string _stateFile= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ApplicationState.bin");
+        private bool _stateFileLoaded;
 
-        public static bool HasPersistedState
+        /// <summary>
+        /// The location where ApplicationState.bin will be saved to and loaded from.
+        /// The default location is the executable file directory (AppDomain.CurrentDomain.BaseDirectory + "ApplicationState.bin).
+        /// </summary>
+        public string StateFile
+        {
+            get { return _stateFile; }
+            set
+            {
+                if(_stateFileLoaded)
+                    throw new InvalidOperationException(
+                        "StateFile can not be set after PostInitialize() has been called on all IModules.");
+                _stateFile = value;
+            }
+        }
+
+        public bool HasPersistedState
         {
             get { return File.Exists(StateFile); }
         }
 
         public ShellViewModel()
         {
-            ((IActivate) this).Activate();
+            ((IActivate)this).Activate();
 
             _tools = new BindableCollection<ITool>();
 
@@ -132,7 +150,7 @@ namespace Gemini.Modules.Shell.ViewModels
                 IsVisible = false;
             }
 
-            private DummyTool() {}
+            private DummyTool() { }
         }
 
         protected override void OnViewLoaded(object view)
@@ -149,13 +167,13 @@ namespace Gemini.Modules.Shell.ViewModels
                     Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
                 };
 
-            var shellView = (IShellView) view;
+            var shellView = (IShellView)view;
             if (!HasPersistedState)
             {
                 foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
                     OpenDocument(defaultDocument);
                 foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
-                    ShowTool((ITool) IoC.GetInstance(defaultTool, null));
+                    ShowTool((ITool)IoC.GetInstance(defaultTool, null));
             }
             else
             {
@@ -359,6 +377,7 @@ namespace Gemini.Modules.Shell.ViewModels
 
         private void LoadState(string fileName, IShellView shellView)
         {
+            _stateFileLoaded = true;
             var layoutItems = new Dictionary<string, ILayoutItem>();
 
             if (!File.Exists(fileName))
@@ -418,7 +437,7 @@ namespace Gemini.Modules.Shell.ViewModels
                     shellView.LoadLayout(reader.BaseStream, ShowTool, OpenDocument, layoutItems);
                 }
             }
-            finally 
+            finally
             {
                 if (stream != null)
                 {
