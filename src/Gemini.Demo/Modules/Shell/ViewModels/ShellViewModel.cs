@@ -31,7 +31,7 @@ namespace Gemini.Demo.Modules.Shell.ViewModels
         {
             public event EventHandler<ResultCompletionEventArgs> Completed;
 
-            public void Execute(ActionExecutionContext context)
+            public void Execute(CoroutineExecutionContext context)
             {
                 var result = System.Windows.MessageBoxResult.Yes;
 

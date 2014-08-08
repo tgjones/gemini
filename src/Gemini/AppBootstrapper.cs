@@ -9,9 +9,16 @@ using Gemini.Framework.Services;
 
 namespace Gemini
 {
-	public class AppBootstrapper : Bootstrapper<IMainWindow>
+    using System.Windows;
+
+    public class AppBootstrapper : BootstrapperBase
 	{
 		protected CompositionContainer Container { get; set; }
+
+        public AppBootstrapper()
+        {
+            this.Initialize();
+        }
 
 		/// <summary>
 		/// By default, we are configured to use MEF
@@ -77,5 +84,11 @@ namespace Gemini
 		{
 			Container.SatisfyImportsOnce(instance);
 		}
+
+	    protected override void OnStartup(object sender, StartupEventArgs e)
+	    {
+	        base.OnStartup(sender, e);
+            DisplayRootViewFor<IMainWindow>();
+	    }
 	}
 }

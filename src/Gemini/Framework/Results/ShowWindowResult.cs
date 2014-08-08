@@ -22,7 +22,7 @@ namespace Gemini.Framework.Results
             _windowLocator = () => window;
         }
 
-        public override void Execute(ActionExecutionContext context)
+        public override void Execute(CoroutineExecutionContext context)
         {
             var window = _windowLocator();
 

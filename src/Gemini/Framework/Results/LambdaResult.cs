@@ -5,14 +5,14 @@ namespace Gemini.Framework.Results
 {
     public class LambdaResult : IResult
     {
-        private readonly Action<ActionExecutionContext> _lambda;
+        private readonly Action<CoroutineExecutionContext> _lambda;
 
-        public LambdaResult(Action<ActionExecutionContext> lambda)
+        public LambdaResult(Action<CoroutineExecutionContext> lambda)
         {
             _lambda = lambda;
         }
 
-        public void Execute(ActionExecutionContext context)
+        public void Execute(CoroutineExecutionContext context)
         {
             _lambda(context);
 

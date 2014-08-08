@@ -30,7 +30,7 @@ namespace Gemini.Framework.Results
 			_editorType = editorType;
 		}
 
-		public override void Execute(ActionExecutionContext context)
+		public override void Execute(CoroutineExecutionContext context)
 		{
 			var editor = _editor ??
 				(string.IsNullOrEmpty(_path)
