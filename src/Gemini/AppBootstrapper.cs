@@ -10,6 +10,7 @@ using Gemini.Framework.Services;
 namespace Gemini
 {
     using System.Windows;
+    using System.Reflection;
 
     public class AppBootstrapper : BootstrapperBase
 	{
@@ -37,7 +38,7 @@ namespace Gemini
 		    var priorityAssemblies = SelectAssemblies().ToList();
 		    var priorityCatalog = new AggregateCatalog(priorityAssemblies.Select(x => new AssemblyCatalog(x)));
 		    var priorityProvider = new CatalogExportProvider(priorityCatalog);
-
+            
             // Now get all other assemblies (excluding the priority assemblies).
 			var mainCatalog = new AggregateCatalog(
                 AssemblySource.Instance
@@ -90,5 +91,10 @@ namespace Gemini
 	        base.OnStartup(sender, e);
             DisplayRootViewFor<IMainWindow>();
 	    }
+
+        protected override IEnumerable<System.Reflection.Assembly> SelectAssemblies()
+        {
+            return new[] { Assembly.GetEntryAssembly() };
+        }
 	}
 }
