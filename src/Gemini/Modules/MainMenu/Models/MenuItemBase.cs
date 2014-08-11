@@ -36,7 +36,10 @@ namespace Gemini.Modules.MainMenu.Models
 
 		public void Add(params MenuItemBase[] menuItems)
 		{
-			menuItems.Apply(Children.Add);
+		    foreach (var item in menuItems)
+		    {
+		        Children.Add(item);
+		    }
 		}
 
 		public IEnumerator<MenuItemBase> GetEnumerator()
