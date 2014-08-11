@@ -303,30 +303,40 @@ namespace Gemini.Modules.Shell.ViewModels
 	                // reserve some space for items count, it'll be updated later
 	                writer.Write(itemCount);
 
-	                foreach (ILayoutItem item in itemStates)
+	                foreach (var item in itemStates)
 	                {
 	                    if (!item.ShouldReopenOnStart)
-	                    {
 	                        continue;
-	                    }
 
-	                    ExportAttribute exportAttribute =
-	                        item.GetType()
-	                            .GetCustomAttributes(typeof (ExportAttribute), false)
-	                            .Cast<ExportAttribute>()
-	                            .FirstOrDefault();
+                        var itemType = item.GetType();
+                        List<ExportAttribute> exportAttributes = itemType
+                                .GetCustomAttributes(typeof(ExportAttribute), false)
+                                .Cast<ExportAttribute>().ToList();
+                        var geminiExport = exportAttributes.OfType<GeminiExportAttribute>().FirstOrDefault();
+                        var itemTypeName = itemType.AssemblyQualifiedName;
 
-	                    string typeName = null;
+                        // throw exceptions here, instead of failing silently. These are design time errors.
+                        if (exportAttributes.Count == 0)
+                            throw new InvalidOperationException(string.Format(
+                                "A ViewModel that participates in LayoutItem.ShouldReopenOnStart must be decorated with an ExportAttribute, infringing type is {0}", itemType));
+                        if (exportAttributes.Count > 1 && geminiExport == null)
+                            throw new InvalidOperationException(string.Format(
+                                "Ambiguity between multiple MEF exports on {0}. Mark one Mef export as a GeminiExport.", itemType));
+                        if (string.IsNullOrEmpty(itemTypeName))
+                            throw new Exception(string.Format(
+                                "Could not retrieve the assembly qualified type name for {0}, most likely because the type is generic.", itemType));
+                        // TODO: it is possible to save generic types. It requires that every generic parameter is saved, along with its position in the generic tree... A lot of work.
 
-	                    if (exportAttribute != null && exportAttribute.ContractType != null)
-	                    {
-	                        typeName = exportAttribute.ContractType.AssemblyQualifiedName;
-	                    }
-
-	                    if (string.IsNullOrEmpty(typeName))
-	                    {
-	                        continue;
-	                    }
+                        // find the type name of the export
+                        var mainExportAttribute = (geminiExport == null || geminiExport.ContractName == null || geminiExport.ContractType == null)
+                            ? exportAttributes.First()
+                            : geminiExport;
+                        string typeName;
+                        if (mainExportAttribute.ContractName != null)
+                            typeName = mainExportAttribute.ContractName;
+                        else if (mainExportAttribute.ContractType != null)
+                            typeName = mainExportAttribute.ContractType.AssemblyQualifiedName;
+                        else typeName = itemTypeName;
 
 	                    writer.Write(typeName);
 	                    writer.Write(item.ContentId);
@@ -378,7 +388,7 @@ namespace Gemini.Modules.Shell.ViewModels
 	        {
 	            if (stream != null)
 	            {
-	                stream.Close();
+	                stream.Dispose();
 	            }
 	        }
 	    }
