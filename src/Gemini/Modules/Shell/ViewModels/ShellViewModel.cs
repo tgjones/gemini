@@ -305,7 +305,7 @@ namespace Gemini.Modules.Shell.ViewModels
                         // TODO: it is possible to save generic types. It requires that every generic parameter is saved, along with its position in the generic tree... A lot of work.
 
                         // find the type name of the export
-                        var mainExportAttribute = (geminiExport == null || geminiExport.ContractName == null || geminiExport.ContractType == null)
+                        var mainExportAttribute = (geminiExport == null || (string.IsNullOrWhiteSpace(geminiExport.ContractName) && geminiExport.ContractType == null))
                             ? exportAttributes.First()
                             : geminiExport;
                         string typeName;
