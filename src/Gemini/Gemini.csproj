@@ -112,7 +112,6 @@
     <Compile Include="Framework\Commands\ICommandRouter.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\Converters.cs" />
-    <Compile Include="Framework\GeminiExportAttribute.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\Menus\CommandMenuItemDefinition.cs" />

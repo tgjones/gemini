@@ -15,9 +15,9 @@ using Gemini.Modules.ToolBars;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
-	[Export(typeof(IShell))]
-	public class ShellViewModel : Conductor<IDocument>.Collection.OneActive, IShell
-	{
+    [Export(typeof(IShell))]
+    public class ShellViewModel : Conductor<IDocument>.Collection.OneActive, IShell
+    {
         public event EventHandler ActiveDocumentChanging;
         public event EventHandler ActiveDocumentChanged;
 
@@ -41,10 +41,10 @@ namespace Gemini.Modules.Shell.ViewModels
         private IShellView _shellView;
 	    private bool _closing;
 
-		public IMenu MainMenu
-		{
-			get { return _mainMenu; }
-		}
+        public IMenu MainMenu
+        {
+            get { return _mainMenu; }
+        }
 
         public IToolBars ToolBars
         {
@@ -74,29 +74,29 @@ namespace Gemini.Modules.Shell.ViewModels
 	        }
 	    }
 
-		private readonly BindableCollection<ITool> _tools;
-		public IObservableCollection<ITool> Tools
-		{
-			get { return _tools; }
-		}
+        private readonly BindableCollection<ITool> _tools;
+        public IObservableCollection<ITool> Tools
+        {
+            get { return _tools; }
+        }
 
-		public IObservableCollection<IDocument> Documents
-		{
-			get { return Items; }
-		}
+        public IObservableCollection<IDocument> Documents
+        {
+            get { return Items; }
+        }
 
-	    private bool _showFloatingWindowsInTaskbar;
-	    public bool ShowFloatingWindowsInTaskbar
-	    {
-	        get { return _showFloatingWindowsInTaskbar; }
-	        set
-	        {
-	            _showFloatingWindowsInTaskbar = value;
-	            NotifyOfPropertyChange(() => ShowFloatingWindowsInTaskbar);
-	            if (_shellView != null)
-	                _shellView.UpdateFloatingWindows();
-	        }
-	    }
+        private bool _showFloatingWindowsInTaskbar;
+        public bool ShowFloatingWindowsInTaskbar
+        {
+            get { return _showFloatingWindowsInTaskbar; }
+            set
+            {
+                _showFloatingWindowsInTaskbar = value;
+                NotifyOfPropertyChange(() => ShowFloatingWindowsInTaskbar);
+                if (_shellView != null)
+                    _shellView.UpdateFloatingWindows();
+            }
+        }
 
 	    public virtual string StateFile
 	    {
@@ -108,21 +108,21 @@ namespace Gemini.Modules.Shell.ViewModels
             get { return File.Exists(StateFile); }
         }
 
-		public ShellViewModel()
-		{
-		    ((IActivate) this).Activate();
+        public ShellViewModel()
+        {
+            ((IActivate)this).Activate();
 
-			_tools = new BindableCollection<ITool>();
+            _tools = new BindableCollection<ITool>();
 
-		    if (!HasPersistedState)
-		    {
-		        // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
-		        // is applied, or the bug is fixed in another way.
-		        _tools.Add(new DummyTool(PaneLocation.Left));
-		        _tools.Add(new DummyTool(PaneLocation.Right));
-		        _tools.Add(new DummyTool(PaneLocation.Bottom));
-		    }
-		}
+            if (!HasPersistedState)
+            {
+                // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
+                // is applied, or the bug is fixed in another way.
+                _tools.Add(new DummyTool(PaneLocation.Left));
+                _tools.Add(new DummyTool(PaneLocation.Right));
+                _tools.Add(new DummyTool(PaneLocation.Bottom));
+            }
+        }
 
         [Export(typeof(DummyTool))]
         private class DummyTool : Tool
@@ -140,7 +140,7 @@ namespace Gemini.Modules.Shell.ViewModels
                 IsVisible = false;
             }
 
-            private DummyTool() {}
+            private DummyTool() { }
         }
 
 	    protected override void OnViewLoaded(object view)
@@ -158,24 +158,24 @@ namespace Gemini.Modules.Shell.ViewModels
 	        if (_themeManager.CurrentTheme == null)
 	            _themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName);
 
-            _shellView = (IShellView) view;
-	        if (!HasPersistedState)
-	        {
-	            foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
-	                OpenDocument(defaultDocument);
-	            foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
-	                ShowTool((ITool) IoC.GetInstance(defaultTool, null));
-	        }
-	        else
-	        {
+            _shellView = (IShellView)view;
+            if (!HasPersistedState)
+            {
+                foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
+                    OpenDocument(defaultDocument);
+                foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
+                    ShowTool((ITool)IoC.GetInstance(defaultTool, null));
+            }
+            else
+            {
                 LoadState(StateFile, _shellView);
-	        }
+            }
 
-	        foreach (var module in _modules)
-	            module.PostInitialize();
+            foreach (var module in _modules)
+                module.PostInitialize();
 
-	        base.OnViewLoaded(view);
-	    }
+            base.OnViewLoaded(view);
+        }
 
 	    public void ShowTool<TTool>()
             where TTool : ITool
@@ -280,12 +280,12 @@ namespace Gemini.Modules.Shell.ViewModels
             base.OnDeactivate(close);
         }
 
-		public void Close()
-		{
-			Application.Current.MainWindow.Close();
-		}
+        public void Close()
+        {
+            Application.Current.MainWindow.Close();
+        }
 
-	    private void SaveState(string fileName)
+        private void SaveState(string fileName)
 	    {
 	        FileStream stream = null;
 
@@ -312,38 +312,37 @@ namespace Gemini.Modules.Shell.ViewModels
                         List<ExportAttribute> exportAttributes = itemType
                                 .GetCustomAttributes(typeof(ExportAttribute), false)
                                 .Cast<ExportAttribute>().ToList();
-                        var geminiExport = exportAttributes.OfType<GeminiExportAttribute>().FirstOrDefault();
                         var itemTypeName = itemType.AssemblyQualifiedName;
+
+                        // get exports with explicit types
+	                    var exportTypes = exportAttributes
+	                        .Select(att => att.ContractType)
+	                        .Where(type => type != null && type.IsAssignableFrom(typeof(ILayoutItem)))
+	                        .ToList();
 
                         // throw exceptions here, instead of failing silently. These are design time errors.
                         if (exportAttributes.Count == 0)
                             throw new InvalidOperationException(string.Format(
-                                "A ViewModel that participates in LayoutItem.ShouldReopenOnStart must be decorated with an ExportAttribute, infringing type is {0}", itemType));
-                        if (exportAttributes.Count > 1 && geminiExport == null)
+                                "A ViewModel that participates in LayoutItem.ShouldReopenOnStart must be decorated with an ExportAttribute, infringing type is {0}.", itemType));
+                        if(exportTypes.Count>1)
                             throw new InvalidOperationException(string.Format(
-                                "Ambiguity between multiple MEF exports on {0}. Mark one Mef export as a GeminiExport.", itemType));
-                        if (string.IsNullOrEmpty(itemTypeName))
-                            throw new Exception(string.Format(
-                                "Could not retrieve the assembly qualified type name for {0}, most likely because the type is generic.", itemType));
+                                "A ViewModel that participates in LayoutItem.ShouldReopenOnStart can't be decorated with more than one ExportAttribute which inherits from ILayoutItem. infringing type is {0}.", itemType));
+
+                        var firstExport = exportAttributes.FirstOrDefault();
+                        var selectedTypeName = firstExport != null ? firstExport.ContractType.AssemblyQualifiedName : itemTypeName;
+	                    var selectedType = firstExport != null ? firstExport.ContractType : itemType;
+
+                        if (string.IsNullOrEmpty(selectedTypeName))
+                            throw new InvalidOperationException(string.Format(
+                                "Could not retrieve the assembly qualified type name for {0}, most likely because the type is generic.", selectedType));
                         // TODO: it is possible to save generic types. It requires that every generic parameter is saved, along with its position in the generic tree... A lot of work.
-
-                        // find the type name of the export
-                        var mainExportAttribute = (geminiExport == null || (string.IsNullOrWhiteSpace(geminiExport.ContractName) && geminiExport.ContractType == null))
-                            ? exportAttributes.First()
-                            : geminiExport;
-                        string typeName;
-                        if (mainExportAttribute.ContractName != null)
-                            typeName = mainExportAttribute.ContractName;
-                        else if (mainExportAttribute.ContractType != null)
-                            typeName = mainExportAttribute.ContractType.AssemblyQualifiedName;
-                        else typeName = itemTypeName;
-
-	                    writer.Write(typeName);
+                        
+	                    writer.Write(selectedTypeName);
 	                    writer.Write(item.ContentId);
 
 	                    // Here's the tricky part. Because some items might fail to save their state, or they might be removed (a plug-in assembly deleted and etc.)
 	                    // we need to save the item's state size to be able to skip the data during deserialization.
-	                    // Save surrent stream position. We'll need it later.
+	                    // Save current stream position. We'll need it later.
 	                    long stateSizePosition = writer.BaseStream.Position;
 
 	                    // Reserve some space for item state size
