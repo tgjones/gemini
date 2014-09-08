@@ -24,7 +24,7 @@ namespace Gemini.Modules.Toolbox.ViewModels
 
         public virtual Uri IconSource
         {
-            get { return null; }
+            get { return _model.IconSource; }
         }
 
         public ToolboxItemViewModel(ToolboxItem model)

@@ -4,7 +4,7 @@ using Gemini.Modules.Toolbox;
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels.Elements
 {
-    [ToolboxItem(typeof(GraphViewModel), "Image Source", "Generators")]
+    [ToolboxItem(typeof(GraphViewModel), "Image Source", "Generators", "pack://application:,,,/Modules/FilterDesigner/Resources/image.png")]
     public class ImageSource : ElementViewModel
     {
         private BitmapSource _bitmap;

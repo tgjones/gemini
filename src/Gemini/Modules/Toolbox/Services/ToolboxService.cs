@@ -24,7 +24,8 @@ namespace Gemini.Modules.Toolbox.Services
                         DocumentType = attribute.DocumentType,
                         Name = attribute.Name,
                         Category = attribute.Category,
-                        ItemType = x
+                        IconSource = (attribute.IconSource != null) ? new Uri(attribute.IconSource) : null,
+                        ItemType = x,
                     };
                 })
                 .GroupBy(x => x.DocumentType)

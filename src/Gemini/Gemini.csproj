@@ -287,9 +287,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Modules\Toolbox\Resources\Sigma.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Icons\Open.png" />
     <Resource Include="Resources\Icons\Redo.png" />
     <Resource Include="Resources\Icons\Undo.png" />

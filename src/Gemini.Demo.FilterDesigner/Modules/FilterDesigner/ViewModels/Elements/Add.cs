@@ -1,11 +1,12 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using System.Windows.Media.Effects;
 using Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ShaderEffects;
 using Gemini.Modules.Toolbox;
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels.Elements
 {
-    [ToolboxItem(typeof(GraphViewModel), "Add", "Maths")]
+    [ToolboxItem(typeof(GraphViewModel), "Add", "Maths", "pack://application:,,,/Modules/FilterDesigner/Resources/action_add_16xLG.png")]
     public class Add : ShaderEffectElement
     {
         protected override Effect GetEffect()

@@ -5,7 +5,7 @@ using Gemini.Modules.Toolbox;
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels.Elements
 {
-    [ToolboxItem(typeof(GraphViewModel), "Multiply", "Maths")]
+    [ToolboxItem(typeof(GraphViewModel), "Multiply", "Maths", "pack://application:,,,/Modules/FilterDesigner/Resources/active_x_16xLG.png")]
     public class Multiply : ShaderEffectElement
     {
         protected override Effect GetEffect()
