@@ -82,6 +82,7 @@
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
+    <Compile Include="Framework\Controls\DynamicStyle.cs" />
     <Compile Include="Modules\MainMenu\Models\KnownItemNames.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuSettingsViewModel.cs" />
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">

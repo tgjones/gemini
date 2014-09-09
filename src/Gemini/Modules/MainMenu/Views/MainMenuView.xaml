@@ -11,5 +11,6 @@
 	<UserControl.Resources>
 		<ResourceDictionary Source="../Resources/Styles.xaml" />
 	</UserControl.Resources>
-    <controls:MenuEx ItemsSource="{Binding}" ItemTemplate="{StaticResource menuTemplate}" AutoHide="{Binding AutoHide}" />
+    <controls:MenuEx ItemsSource="{Binding}" ItemTemplate="{StaticResource menuTemplate}" AutoHide="{Binding AutoHide}"
+                     Style="{DynamicResource {x:Type Menu}}" />
 </UserControl>
