@@ -21,7 +21,7 @@ namespace Gemini.Framework.Results
         [Import]
         public IWindowManager WindowManager { get; set; }
 
-        public override void Execute(ActionExecutionContext context)
+        public override void Execute(CoroutineExecutionContext context)
         {
             TWindow window = _windowLocator();
 

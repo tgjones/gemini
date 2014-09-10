@@ -9,9 +9,17 @@ using Gemini.Framework.Services;
 
 namespace Gemini
 {
-	public class AppBootstrapper : Bootstrapper<IMainWindow>
+    using System.Windows;
+    using System.Reflection;
+
+    public class AppBootstrapper : BootstrapperBase
 	{
 		protected CompositionContainer Container { get; set; }
+
+        public AppBootstrapper()
+        {
+            this.Initialize();
+        }
 
 		/// <summary>
 		/// By default, we are configured to use MEF
@@ -30,7 +38,7 @@ namespace Gemini
 		    var priorityAssemblies = SelectAssemblies().ToList();
 		    var priorityCatalog = new AggregateCatalog(priorityAssemblies.Select(x => new AssemblyCatalog(x)));
 		    var priorityProvider = new CatalogExportProvider(priorityCatalog);
-
+            
             // Now get all other assemblies (excluding the priority assemblies).
 			var mainCatalog = new AggregateCatalog(
                 AssemblySource.Instance
@@ -77,5 +85,16 @@ namespace Gemini
 		{
 			Container.SatisfyImportsOnce(instance);
 		}
+
+	    protected override void OnStartup(object sender, StartupEventArgs e)
+	    {
+	        base.OnStartup(sender, e);
+            DisplayRootViewFor<IMainWindow>();
+	    }
+
+        protected override IEnumerable<System.Reflection.Assembly> SelectAssemblies()
+        {
+            return new[] { Assembly.GetEntryAssembly() };
+        }
 	}
 }
