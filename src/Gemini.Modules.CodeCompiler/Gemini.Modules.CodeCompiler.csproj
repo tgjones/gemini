@@ -35,9 +35,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Caliburn.Micro, Version=1.5.2.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\net45\Caliburn.Micro.dll</HintPath>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\packages\Caliburn.Micro.Core.2.0.0\lib\net45\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform">
+      <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Roslyn.Compilers">
       <HintPath>..\packages\Roslyn.Compilers.Common.1.2.20906.2\lib\net45\Roslyn.Compilers.dll</HintPath>
@@ -49,7 +51,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Caliburn.Micro.1.5.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Caliburn.Micro.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -63,6 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Gemini.Modules.CodeCompiler.nuspec">
       <SubType>Designer</SubType>
     </None>

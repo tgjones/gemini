@@ -36,7 +36,7 @@ namespace Gemini.Framework.Results
 				Completed(this, new ResultCompletionEventArgs { Error = exception, WasCancelled = wasCancelled});
 		}
 
-		public abstract void Execute(ActionExecutionContext context);
+		public abstract void Execute(CoroutineExecutionContext context);
 
 		public event EventHandler<ResultCompletionEventArgs> Completed;
 	}

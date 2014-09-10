@@ -23,7 +23,7 @@ namespace Gemini.Framework.Results
 			_toolLocator = () => tool;
 		}
 
-		public override void Execute(ActionExecutionContext context)
+		public override void Execute(CoroutineExecutionContext context)
 		{
 			var tool = _toolLocator();
 

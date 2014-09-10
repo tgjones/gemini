@@ -15,7 +15,7 @@ namespace Gemini.Framework.Results
 			_commonDialog = commonDialog;
 		}
 
-		public void Execute(ActionExecutionContext context)
+		public void Execute(CoroutineExecutionContext context)
 		{
 			var result = _commonDialog.ShowDialog().GetValueOrDefault(false);
 			Completed(this, new ResultCompletionEventArgs { WasCancelled = !result });
