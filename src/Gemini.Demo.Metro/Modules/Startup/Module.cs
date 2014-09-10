@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Results;
@@ -41,6 +42,10 @@ namespace Gemini.Demo.Metro.Modules.Startup
                 new UndoToolBarItem(),
                 new RedoToolBarItem()
 		    });
+
+            Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
+            Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
+            Shell.StatusBar.AddItem("Col 79", new GridLength(100));
         }
 
         private IEnumerable<IResult> OpenFile()

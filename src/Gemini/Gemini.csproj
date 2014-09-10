@@ -104,7 +104,6 @@
     <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\LayoutUtility.cs" />
-    <Compile Include="Modules\StatusBar\Controls\DynamicStyleExtension.cs" />
     <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
     <Compile Include="Framework\Controls\ToolPaneToolBar.cs" />
     <Compile Include="Framework\Document.cs" />

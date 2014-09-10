@@ -1,5 +1,6 @@
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Gemini.Framework.Controls
 {
@@ -39,6 +40,43 @@ namespace Gemini.Framework.Controls
             var mergedStyles = GetMergedStyles<FrameworkElement>(target, GetBaseStyle(target), GetDerivedStyle(target));
             var element = (FrameworkElement) target;
             element.Style = mergedStyles;
+        }
+
+        public static readonly DependencyProperty ItemContainerBaseStyleProperty = DependencyProperty.RegisterAttached(
+            "ItemContainerBaseStyle", typeof(Style), typeof(DynamicStyle),
+            new PropertyMetadata(OnItemContainerStylesChanged));
+
+        public static Style GetItemContainerBaseStyle(DependencyObject obj)
+        {
+            return (Style) obj.GetValue(ItemContainerBaseStyleProperty);
+        }
+
+        public static void SetItemContainerBaseStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(ItemContainerBaseStyleProperty, value);
+        }
+
+        public static readonly DependencyProperty ItemContainerDerivedStyleProperty = DependencyProperty.RegisterAttached(
+            "ItemContainerDerivedStyle", typeof(Style), typeof(DynamicStyle),
+            new PropertyMetadata(OnItemContainerStylesChanged));
+
+        public static Style GetItemContainerDerivedStyle(DependencyObject obj)
+        {
+            return (Style) obj.GetValue(ItemContainerDerivedStyleProperty);
+        }
+
+        public static void SetItemContainerDerivedStyle(DependencyObject obj, Style value)
+        {
+            obj.SetValue(ItemContainerDerivedStyleProperty, value);
+        }
+
+        private static void OnItemContainerStylesChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
+        {
+            var mergedStyles = GetMergedStyles<ItemsControl>(target,
+                GetItemContainerBaseStyle(target), 
+                GetItemContainerDerivedStyle(target));
+            var element = (ItemsControl) target;
+            element.ItemContainerStyle = mergedStyles;
         }
 
         public static Style GetMergedStyles<T>(DependencyObject target, Style baseStyle, Style derivedStyle)
