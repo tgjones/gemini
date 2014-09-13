@@ -1,6 +1,6 @@
 # Gemini
 
-[![Build status](https://ci.appveyor.com/api/projects/status/cbbi2f0hvds25qnd)](https://ci.appveyor.com/project/tgjones/gemini)
+[![Build status](https://ci.appveyor.com/api/projects/status/f5089id2gbl273ik/branch/master)](https://ci.appveyor.com/project/tgjones/gemini/branch/master)
 
 ## What is this?
 
@@ -61,6 +61,18 @@ on other modules, but this is taken care of by the NuGet package dependency syst
 * [Gemini.Modules.Output](http://nuget.org/packages/Gemini.Modules.Output/)
 * [Gemini.Modules.PropertyGrid](http://nuget.org/packages/Gemini.Modules.PropertyGrid/)
 * [Gemini.Modules.Xna](http://nuget.org/packages/Gemini.Modules.Xna/)
+
+## Continuous builds
+
+We use AppVeyor to build Gemini after every commit to the master branch,
+and also to generate pre-release NuGet packages so you can try out new features immediately.
+
+To access the pre-release NuGet packages, you'll need to add a custom package source in Visual Studio,
+pointing to this URL:
+
+https://ci.appveyor.com/nuget/gemini-g66c82jjbsu1
+
+Make sure you select "Include Prelease" when searching for NuGet packages.
 
 ## What does it do?
 
