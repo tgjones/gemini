@@ -23,23 +23,23 @@ namespace Gemini.Demo.Modules.Startup
 		[Import]
 		private IOutput _output;
 
-        [Import]
-        private IInspectorTool _inspectorTool;
+		[Import]
+		private IInspectorTool _inspectorTool;
 
 		[Import]
 		private IResourceManager _resourceManager;
 
-        public override IEnumerable<Type> DefaultTools
-        {
-            get { yield return typeof(IInspectorTool); }
-        }
+		public override IEnumerable<Type> DefaultTools
+		{
+			get { yield return typeof(IInspectorTool); }
+		}
 
 		public override void Initialize()
 		{
-		    Shell.ShowFloatingWindowsInTaskbar = true;
+			Shell.ShowFloatingWindowsInTaskbar = true;
 
-            Shell.ToolBars.Visible = true;
-		    Shell.ToolBars.Items.Add(new ToolBarModel
+			Shell.ToolBars.Visible = true;
+			Shell.ToolBars.Items.Add(new ToolBarModel
 		    {
 		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly).WithToolTip("Open"),
                 ToolBarItemBase.Separator,
@@ -47,44 +47,52 @@ namespace Gemini.Demo.Modules.Startup
                 new RedoToolBarItem()
 		    });
 
-            MainWindow.WindowState = WindowState.Maximized;
-            MainWindow.Title = "Gemini Demo";
+			Shell.ToolBars.Items.Add(new ToolBarModel
+		    {
+		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly).WithToolTip("Open"),
+                ToolBarItemBase.Separator,
+                new UndoToolBarItem(),
+                new RedoToolBarItem()
+		    });
 
-            Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
-            Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
-            Shell.StatusBar.AddItem("Col 79", new GridLength(100));
+			MainWindow.WindowState = WindowState.Maximized;
+			MainWindow.Title = "Gemini Demo";
 
-            MainWindow.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
-				Assembly.GetExecutingAssembly().GetAssemblyName());
+			Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
+			Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
+			Shell.StatusBar.AddItem("Col 79", new GridLength(100));
+
+			MainWindow.Icon = _resourceManager.GetBitmap("Resources/Icon.png",
+			Assembly.GetExecutingAssembly().GetAssemblyName());
 
 			_output.AppendLine("Started up");
 
-            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("History", OpenHistory));
+			MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("History", OpenHistory));
 
-		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
-		    RefreshInspector();
+			Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
+			RefreshInspector();
 		}
 
-        private void RefreshInspector()
-        {
-            if (Shell.ActiveItem != null)
-                _inspectorTool.SelectedObject = new InspectableObjectBuilder()
-                       .WithObjectProperties(Shell.ActiveItem, pd => true)
-                       .ToInspectableObject();
-            else
-                _inspectorTool.SelectedObject = null;
-        }
+		private void RefreshInspector()
+		{
+			if (Shell.ActiveItem != null)
+				_inspectorTool.SelectedObject = new InspectableObjectBuilder()
+						 .WithObjectProperties(Shell.ActiveItem, pd => true)
+						 .ToInspectableObject();
+			else
+				_inspectorTool.SelectedObject = null;
+		}
 
-        private IEnumerable<IResult> OpenFile()
-        {
-            var dialog = new OpenFileDialog();
-            yield return Show.CommonDialog(dialog);
-            yield return Show.Document(dialog.FileName);
-        }
+		private IEnumerable<IResult> OpenFile()
+		{
+			var dialog = new OpenFileDialog();
+			yield return Show.CommonDialog(dialog);
+			yield return Show.Document(dialog.FileName);
+		}
 
-        private static IEnumerable<IResult> OpenHistory()
-        {
-            yield return Show.Tool<IHistoryTool>();
-        }
+		private static IEnumerable<IResult> OpenHistory()
+		{
+			yield return Show.Tool<IHistoryTool>();
+		}
 	}
 }
