@@ -41,7 +41,7 @@ namespace Gemini.Demo.Modules.Startup
             Shell.ToolBars.Visible = true;
 		    Shell.ToolBars.Items.Add(new ToolBarModel
 		    {
-		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly),
+		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly).WithToolTip("Open"),
                 ToolBarItemBase.Separator,
                 new UndoToolBarItem(),
                 new RedoToolBarItem()

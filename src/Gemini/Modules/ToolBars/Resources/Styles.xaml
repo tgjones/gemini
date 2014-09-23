@@ -19,7 +19,8 @@
 	<Style x:Key="ToolBarToggleButton" TargetType="{x:Type ToggleButton}" 
 		   BasedOn="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}">
 		<Setter Property="Content" Value="{StaticResource ToolBarButtonImage}" />
-		<Setter Property="ToolTip" Value="{Binding InputGestureText}" />
+		<Setter Property="ToolTip" Value="{Binding FullToolTip}" />
+        <Setter Property="ToolTipService.IsEnabled" Value="{Binding HasToolTip}" />
 		<Setter Property="IsChecked" Value="{Binding IsChecked}" />
 		<Setter Property="cal:Action.Target" Value="{Binding}" />
 		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
@@ -28,7 +29,8 @@
 	<Style x:Key="ToolBarButton" TargetType="{x:Type Button}" 
 		   BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
 		<Setter Property="Content" Value="{StaticResource ToolBarButtonImage}" />
-		<Setter Property="ToolTip" Value="{Binding InputGestureText}" />
+        <Setter Property="ToolTip" Value="{Binding FullToolTip}" />
+        <Setter Property="ToolTipService.IsEnabled" Value="{Binding HasToolTip}" />
 		<Setter Property="cal:Action.Target" Value="{Binding}" />
 		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
 	</Style>

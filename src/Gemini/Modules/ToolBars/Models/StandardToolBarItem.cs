@@ -47,15 +47,34 @@ namespace Gemini.Modules.ToolBars.Models
 			get { return string.IsNullOrEmpty(Text) ? null : Text.Replace("_", string.Empty); }
 		}
 
-		public string InputGestureText
-		{
-			get
-			{
-				return _keyGesture == null
-					? string.Empty
-					: _keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
-			}
-		}
+	    private string _toolTip;
+	    public string ToolTip
+	    {
+            get { return _toolTip; }
+	        set
+	        {
+                _toolTip = value;
+                NotifyOfPropertyChange(() => FullToolTip);
+	            NotifyOfPropertyChange(() => HasToolTip);
+	        }
+	    }
+
+	    public string FullToolTip
+	    {
+	        get
+	        {
+	            var inputGestureText = (_keyGesture != null)
+	                ? string.Format(" ({0})", _keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture))
+	                : string.Empty;
+
+	            return string.Format("{0}{1}", _toolTip, inputGestureText).Trim();
+	        }
+	    }
+
+	    public bool HasToolTip
+	    {
+            get { return !string.IsNullOrWhiteSpace(FullToolTip); }
+	    }
 
 		public StandardToolBarItem(string text)
 		{
@@ -104,6 +123,18 @@ namespace Gemini.Modules.ToolBars.Models
 
 			return this;
 		}
+
+        /// <summary>
+        /// Set the default tool tip text for the button.
+        /// </summary>
+        /// <param name="text">The text to display not including the shortcut gesture.
+        /// This is added automatically.</param>
+        /// <returns></returns>
+        public StandardToolBarItem WithToolTip(string text)
+        {
+            ToolTip = text;
+            return this;
+        }
 
 		#endregion
 	}

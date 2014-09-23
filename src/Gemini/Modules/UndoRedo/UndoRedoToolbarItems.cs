@@ -37,7 +37,7 @@ namespace Gemini.Modules.UndoRedo
         public UndoToolBarItem()
             : base("Undo", UndoRedoToolBarItems.ExecuteUndo, UndoRedoToolBarItems.CanExecuteUndo)
         {
-            WithGlobalShortcut(ModifierKeys.Control, Key.Z).WithIcon();
+            WithGlobalShortcut(ModifierKeys.Control, Key.Z).WithIcon().WithToolTip("Undo");
             UndoRedoToolBarItems.SubscribeToHistoryEvents(this, m => m.UndoStack);
         }
     }
@@ -47,7 +47,7 @@ namespace Gemini.Modules.UndoRedo
         public RedoToolBarItem()
             : base("Redo", UndoRedoToolBarItems.ExecuteRedo, UndoRedoToolBarItems.CanExecuteRedo)
         {
-            WithGlobalShortcut(ModifierKeys.Control, Key.Y).WithIcon();
+            WithGlobalShortcut(ModifierKeys.Control, Key.Y).WithIcon().WithToolTip("Redo");
             UndoRedoToolBarItems.SubscribeToHistoryEvents(this, m => m.RedoStack);
         }
     }
