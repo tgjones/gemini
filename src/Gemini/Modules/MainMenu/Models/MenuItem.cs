@@ -44,7 +44,7 @@ namespace Gemini.Modules.MainMenu.Models
 
 		public IEnumerable<IResult> Execute()
 		{
-			return _execute != null ? _execute() : new IResult[] { };
+			return _execute != null && CanExecute ? _execute() : new IResult[] { };
 		}
 	}
 }
