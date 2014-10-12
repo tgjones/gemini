@@ -107,9 +107,12 @@ namespace Gemini.Modules.Shell.ViewModels
 	        }
 	    }
 
-        public const string StateFile = @".\ApplicationState.bin";
+	    public virtual string StateFile
+	    {
+	        get { return @".\ApplicationState.bin"; }
+	    }
 
-        public static bool HasPersistedState
+        public bool HasPersistedState
         {
             get { return File.Exists(StateFile); }
         }

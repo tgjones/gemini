@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;

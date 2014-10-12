@@ -92,7 +92,7 @@ namespace Gemini
             DisplayRootViewFor<IMainWindow>();
 	    }
 
-        protected override IEnumerable<System.Reflection.Assembly> SelectAssemblies()
+        protected override IEnumerable<Assembly> SelectAssemblies()
         {
             return new[] { Assembly.GetEntryAssembly() };
         }
