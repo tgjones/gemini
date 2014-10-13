@@ -14,18 +14,18 @@ using Gemini.Modules.ToolBars;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
-	[Export(typeof(IShell))]
-	public class ShellViewModel : Conductor<IDocument>.Collection.OneActive, IShell
-	{
+    [Export(typeof(IShell))]
+    public class ShellViewModel : Conductor<IDocument>.Collection.OneActive, IShell
+    {
         public event EventHandler ActiveDocumentChanging;
         public event EventHandler ActiveDocumentChanged;
         public event EventHandler CurrentThemeChanged;
 
-		[ImportMany(typeof(IModule))]
-		private IEnumerable<IModule> _modules;
+        [ImportMany(typeof(IModule))]
+        private IEnumerable<IModule> _modules;
 
-	    private IShellView _shellView;
-	    private bool _closing;
+        private IShellView _shellView;
+        private bool _closing;
 
         private ResourceDictionary _currentTheme;
         public ResourceDictionary CurrentTheme
@@ -49,12 +49,12 @@ namespace Gemini.Modules.Shell.ViewModels
             }
         }
 
-		[Import]
-		private IMenu _mainMenu;
-		public IMenu MainMenu
-		{
-			get { return _mainMenu; }
-		}
+        [Import]
+        private IMenu _mainMenu;
+        public IMenu MainMenu
+        {
+            get { return _mainMenu; }
+        }
 
         [Import]
         private IToolBars _toolBars;
@@ -63,49 +63,49 @@ namespace Gemini.Modules.Shell.ViewModels
             get { return _toolBars; }
         }
 
-		[Import]
-		private IStatusBar _statusBar;
-		public IStatusBar StatusBar
-		{
-			get { return _statusBar; }
-		}
+        [Import]
+        private IStatusBar _statusBar;
+        public IStatusBar StatusBar
+        {
+            get { return _statusBar; }
+        }
 
-	    private ILayoutItem _currentActiveItem;
-	    public ILayoutItem CurrentActiveItem
-	    {
-	        get { return _currentActiveItem; }
-	        set
-	        {
-	            _currentActiveItem = value;
+        private ILayoutItem _currentActiveItem;
+        public ILayoutItem CurrentActiveItem
+        {
+            get { return _currentActiveItem; }
+            set
+            {
+                _currentActiveItem = value;
                 if (value is IDocument)
-                    ActivateItem((IDocument) value);
+                    ActivateItem((IDocument)value);
                 NotifyOfPropertyChange(() => CurrentActiveItem);
-	        }
-	    }
+            }
+        }
 
-		private readonly BindableCollection<ITool> _tools;
-		public IObservableCollection<ITool> Tools
-		{
-			get { return _tools; }
-		}
+        private readonly BindableCollection<ITool> _tools;
+        public IObservableCollection<ITool> Tools
+        {
+            get { return _tools; }
+        }
 
-		public IObservableCollection<IDocument> Documents
-		{
-			get { return Items; }
-		}
+        public IObservableCollection<IDocument> Documents
+        {
+            get { return Items; }
+        }
 
-	    private bool _showFloatingWindowsInTaskbar;
-	    public bool ShowFloatingWindowsInTaskbar
-	    {
-	        get { return _showFloatingWindowsInTaskbar; }
-	        set
-	        {
-	            _showFloatingWindowsInTaskbar = value;
-	            NotifyOfPropertyChange(() => ShowFloatingWindowsInTaskbar);
-	            if (_shellView != null)
-	                _shellView.UpdateFloatingWindows();
-	        }
-	    }
+        private bool _showFloatingWindowsInTaskbar;
+        public bool ShowFloatingWindowsInTaskbar
+        {
+            get { return _showFloatingWindowsInTaskbar; }
+            set
+            {
+                _showFloatingWindowsInTaskbar = value;
+                NotifyOfPropertyChange(() => ShowFloatingWindowsInTaskbar);
+                if (_shellView != null)
+                    _shellView.UpdateFloatingWindows();
+            }
+        }
 
 	    public virtual string StateFile
 	    {
@@ -117,21 +117,21 @@ namespace Gemini.Modules.Shell.ViewModels
             get { return File.Exists(StateFile); }
         }
 
-		public ShellViewModel()
-		{
-		    ((IActivate) this).Activate();
+        public ShellViewModel()
+        {
+            ((IActivate)this).Activate();
 
-			_tools = new BindableCollection<ITool>();
+            _tools = new BindableCollection<ITool>();
 
-		    if (!HasPersistedState)
-		    {
-		        // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
-		        // is applied, or the bug is fixed in another way.
-		        _tools.Add(new DummyTool(PaneLocation.Left));
-		        _tools.Add(new DummyTool(PaneLocation.Right));
-		        _tools.Add(new DummyTool(PaneLocation.Bottom));
-		    }
-		}
+            if (!HasPersistedState)
+            {
+                // This workaround is necessary until https://avalondock.codeplex.com/workitem/15577
+                // is applied, or the bug is fixed in another way.
+                _tools.Add(new DummyTool(PaneLocation.Left));
+                _tools.Add(new DummyTool(PaneLocation.Right));
+                _tools.Add(new DummyTool(PaneLocation.Bottom));
+            }
+        }
 
         [Export(typeof(DummyTool))]
         private class DummyTool : Tool
@@ -149,61 +149,61 @@ namespace Gemini.Modules.Shell.ViewModels
                 IsVisible = false;
             }
 
-            private DummyTool() {}
+            private DummyTool() { }
         }
 
-	    protected override void OnViewLoaded(object view)
-	    {
-	        foreach (var module in _modules)
-	            module.PreInitialize();
-	        foreach (var module in _modules)
-	            module.Initialize();
+        protected override void OnViewLoaded(object view)
+        {
+            foreach (var module in _modules)
+                module.PreInitialize();
+            foreach (var module in _modules)
+                module.Initialize();
 
-	        // If after initialization no theme was loaded, load the default one
-	        if (_currentTheme == null)
-	            CurrentTheme = new ResourceDictionary
-	            {
-	                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
-	            };
+            // If after initialization no theme was loaded, load the default one
+            if (_currentTheme == null)
+                CurrentTheme = new ResourceDictionary
+                {
+                    Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
+                };
 
-            _shellView = (IShellView) view;
-	        if (!HasPersistedState)
-	        {
-	            foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
-	                OpenDocument(defaultDocument);
-	            foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
-	                ShowTool((ITool) IoC.GetInstance(defaultTool, null));
-	        }
-	        else
-	        {
+            _shellView = (IShellView)view;
+            if (!HasPersistedState)
+            {
+                foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
+                    OpenDocument(defaultDocument);
+                foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
+                    ShowTool((ITool)IoC.GetInstance(defaultTool, null));
+            }
+            else
+            {
                 LoadState(StateFile, _shellView);
-	        }
+            }
 
-	        foreach (var module in _modules)
-	            module.PostInitialize();
+            foreach (var module in _modules)
+                module.PostInitialize();
 
-	        base.OnViewLoaded(view);
-	    }
+            base.OnViewLoaded(view);
+        }
 
-	    public void ShowTool(ITool model)
-		{
-		    if (Tools.Contains(model))
-		        model.IsVisible = true;
-		    else
-		        Tools.Add(model);
-		    model.IsSelected = true;
-	        CurrentActiveItem = model;
-		}
+        public void ShowTool(ITool model)
+        {
+            if (Tools.Contains(model))
+                model.IsVisible = true;
+            else
+                Tools.Add(model);
+            model.IsSelected = true;
+            CurrentActiveItem = model;
+        }
 
-		public void OpenDocument(IDocument model)
-		{
-			ActivateItem(model);
-		}
+        public void OpenDocument(IDocument model)
+        {
+            ActivateItem(model);
+        }
 
-		public void CloseDocument(IDocument document)
-		{
-			DeactivateItem(document, true);
-		}
+        public void CloseDocument(IDocument document)
+        {
+            DeactivateItem(document, true);
+        }
 
         public override void ActivateItem(IDocument item)
         {
@@ -260,108 +260,140 @@ namespace Gemini.Modules.Shell.ViewModels
             base.OnDeactivate(close);
         }
 
-		public void Close()
-		{
-			Application.Current.MainWindow.Close();
-		}
+        public void Close()
+        {
+            Application.Current.MainWindow.Close();
+        }
 
-	    private void SaveState(string fileName)
-	    {
-	        FileStream stream = null;
+        private void SaveState(string fileName)
+        {
+            FileStream stream = null;
 
-	        try
-	        {
-	            stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+            try
+            {
+                stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
-	            using (var writer = new BinaryWriter(stream))
-	            {
-	                stream = null;
+                using (var writer = new BinaryWriter(stream))
+                {
+                    stream = null;
 
-	                IEnumerable<ILayoutItem> itemStates = Documents.Concat(Tools.Cast<ILayoutItem>());
+                    IEnumerable<ILayoutItem> itemStates = Documents.Concat(Tools.Cast<ILayoutItem>());
 
-	                int itemCount = 0;
-	                // reserve some space for items count, it'll be updated later
-	                writer.Write(itemCount);
+                    int itemCount = 0;
+                    // reserve some space for items count, it'll be updated later
+                    writer.Write(itemCount);
 
-	                foreach (ILayoutItem item in itemStates)
-	                {
-	                    if (!item.ShouldReopenOnStart)
-	                    {
-	                        continue;
-	                    }
+                    foreach (var item in itemStates)
+                    {
+                        if (!item.ShouldReopenOnStart)
+                            continue;
 
-	                    ExportAttribute exportAttribute =
-	                        item.GetType()
-	                            .GetCustomAttributes(typeof (ExportAttribute), false)
-	                            .Cast<ExportAttribute>()
-	                            .FirstOrDefault();
+                        var itemType = item.GetType();
+                        List<ExportAttribute> exportAttributes = itemType
+                                .GetCustomAttributes(typeof(ExportAttribute), false)
+                                .Cast<ExportAttribute>().ToList();
 
-	                    string typeName = null;
+                        var layoutType = typeof (ILayoutItem);
+                        // get exports with explicit types or names that inherit from ILayoutItem
+                        var exportTypes = (from att in exportAttributes
+                                           // select the contract type if it is of type ILayoutitem. else null
+                                           let typeFromContract = att.ContractType != null
+                                               && layoutType.IsAssignableFrom(att.ContractType) ? att.ContractType : null
+                                           // select the contract name if it is of type ILayoutItem. else null
+                                           let typeFromQualifiedName = GetTypeFromContractNameAsILayoutItem(att)
+                                           // select the viewmodel tpye if it is of type ILayoutItem. else null
+                                           let typeFromViewModel = layoutType.IsAssignableFrom(itemType) ? itemType : null
+                                           // att.ContractType overrides att.ContractName if both are set.
+                                           // fall back to the ViewModel type of neither are defined.
+                                           let type = typeFromContract ?? typeFromQualifiedName ?? typeFromViewModel
+                                           where type != null
+                                           select type).ToList();
+                        
+                        // throw exceptions here, instead of failing silently. These are design time errors.
+                        var firstExport = exportTypes.FirstOrDefault();
+                        if (firstExport == null)
+                            throw new InvalidOperationException(string.Format(
+                                "A ViewModel that participates in LayoutItem.ShouldReopenOnStart must be decorated with an ExportAttribute who's ContractType that inherits from ILayoutItem, infringing type is {0}.", itemType));
+                        if (exportTypes.Count > 1)
+                            throw new InvalidOperationException(string.Format(
+                                "A ViewModel that participates in LayoutItem.ShouldReopenOnStart can't be decorated with more than one ExportAttribute which inherits from ILayoutItem. infringing type is {0}.", itemType));
 
-	                    if (exportAttribute != null && exportAttribute.ContractType != null)
-	                    {
-	                        typeName = exportAttribute.ContractType.AssemblyQualifiedName;
-	                    }
+                        var selectedTypeName = firstExport.AssemblyQualifiedName;
 
-	                    if (string.IsNullOrEmpty(typeName))
-	                    {
-	                        continue;
-	                    }
+                        if (string.IsNullOrEmpty(selectedTypeName))
+                            throw new InvalidOperationException(string.Format(
+                                "Could not retrieve the assembly qualified type name for {0}, most likely because the type is generic.", firstExport));
+                        // TODO: it is possible to save generic types. It requires that every generic parameter is saved, along with its position in the generic tree... A lot of work.
 
-	                    writer.Write(typeName);
-	                    writer.Write(item.ContentId);
+                        writer.Write(selectedTypeName);
+                        writer.Write(item.ContentId);
 
-	                    // Here's the tricky part. Because some items might fail to save their state, or they might be removed (a plug-in assembly deleted and etc.)
-	                    // we need to save the item's state size to be able to skip the data during deserialization.
-	                    // Save surrent stream position. We'll need it later.
-	                    long stateSizePosition = writer.BaseStream.Position;
+                        // Here's the tricky part. Because some items might fail to save their state, or they might be removed (a plug-in assembly deleted and etc.)
+                        // we need to save the item's state size to be able to skip the data during deserialization.
+                        // Save current stream position. We'll need it later.
+                        long stateSizePosition = writer.BaseStream.Position;
 
-	                    // Reserve some space for item state size
-	                    writer.Write(0L);
+                        // Reserve some space for item state size
+                        writer.Write(0L);
 
-	                    long stateSize;
+                        long stateSize;
 
-	                    try
-	                    {
-	                        long stateStartPosition = writer.BaseStream.Position;
-	                        item.SaveState(writer);
-	                        stateSize = writer.BaseStream.Position - stateStartPosition;
-	                    }
-	                    catch
-	                    {
-	                        stateSize = 0;
-	                    }
+                        try
+                        {
+                            long stateStartPosition = writer.BaseStream.Position;
+                            item.SaveState(writer);
+                            stateSize = writer.BaseStream.Position - stateStartPosition;
+                        }
+                        catch
+                        {
+                            stateSize = 0;
+                        }
 
-	                    // Go back to the position before item's state and write the actual value.
-	                    writer.BaseStream.Seek(stateSizePosition, SeekOrigin.Begin);
-	                    writer.Write(stateSize);
+                        // Go back to the position before item's state and write the actual value.
+                        writer.BaseStream.Seek(stateSizePosition, SeekOrigin.Begin);
+                        writer.Write(stateSize);
 
-	                    if (stateSize > 0)
-	                    {
-	                        // Got to the end of the stream
-	                        writer.BaseStream.Seek(0, SeekOrigin.End);
-	                    }
+                        if (stateSize > 0)
+                        {
+                            // Got to the end of the stream
+                            writer.BaseStream.Seek(0, SeekOrigin.End);
+                        }
 
-	                    itemCount++;
-	                }
+                        itemCount++;
+                    }
 
-	                writer.BaseStream.Seek(0, SeekOrigin.Begin);
-	                writer.Write(itemCount);
+                    writer.BaseStream.Seek(0, SeekOrigin.Begin);
+                    writer.Write(itemCount);
                     writer.BaseStream.Seek(0, SeekOrigin.End);
 
                     var shellView = Views.Values.Single() as IShellView;
                     if (shellView != null)
                         shellView.SaveLayout(writer.BaseStream);
-	            }
-	        }
-	        catch
-	        {
-	            if (stream != null)
-	            {
-	                stream.Close();
-	            }
-	        }
-	    }
+                }
+            }
+            catch
+            {
+                if (stream != null)
+                {
+                    stream.Dispose();
+                }
+            }
+        }
+
+        Type GetTypeFromContractNameAsILayoutItem(ExportAttribute attribute)
+        {
+            if (attribute == null)
+                return null;
+
+            string typeName;
+            if ((typeName = attribute.ContractName) == null)
+                return null;
+
+            var type = Type.GetType(typeName);
+            if (type == null || !typeof(ILayoutItem).IsInstanceOfType(type))
+                return null;
+            return type;
+        }
 
         private void LoadState(string fileName, IShellView shellView)
         {
@@ -432,5 +464,5 @@ namespace Gemini.Modules.Shell.ViewModels
                 }
             }
         }
-	}
+    }
 }

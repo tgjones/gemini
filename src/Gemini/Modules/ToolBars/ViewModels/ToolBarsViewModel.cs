@@ -32,7 +32,10 @@ namespace Gemini.Modules.ToolBars.ViewModels
 
         public void Add(params IToolBar[] items)
         {
-            items.Apply(Items.Add);
+            foreach (var item in items)
+            {
+                Items.Add(item);
+            }
         }
 
         protected override void OnViewLoaded(object view)
