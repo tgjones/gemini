@@ -27,7 +27,7 @@ namespace Gemini.Modules.CodeEditor
 
 		public IDocument Create(string path)
 		{
-            var editor = IoC.Get<CodeEditorViewModel>();
+         var editor = IoC.Get<CodeEditorViewModel>();
 			editor.Open(path);
 			return editor;
 		}

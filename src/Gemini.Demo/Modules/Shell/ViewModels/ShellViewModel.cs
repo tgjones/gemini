@@ -40,7 +40,10 @@ namespace Gemini.Demo.Modules.Shell.ViewModels
                     result = MessageBox.Show("Are you sure you want to exit?", "Confirm", MessageBoxButton.YesNo);
                 }
 
-                Completed(this, new ResultCompletionEventArgs { WasCancelled = (result != System.Windows.MessageBoxResult.Yes) });
+                Completed(this, new ResultCompletionEventArgs 
+					 { 
+						 WasCancelled = (result != System.Windows.MessageBoxResult.Yes) 
+					 });
             }
         }
     }

@@ -1,4 +1,8 @@
-﻿<ViewModels:SettingsViewModel xmlns:ViewModels="clr-namespace:Gemini.Modules.Settings.ViewModels" DisplayName="Tempor adipiscing" IsNotifying="True" IsInitialized="False" IsActive="True">
+﻿<ViewModels:SettingsViewModel xmlns:ViewModels="clr-namespace:Gemini.Modules.Settings.ViewModels" 
+										DisplayName="Tempor adipiscing" 
+										IsNotifying="True" 
+										IsInitialized="False" 
+										IsActive="True">
 	<ViewModels:SettingsViewModel.Pages>
 		<ViewModels:SettingsPageViewModel Name="Nam sed">
 			<ViewModels:SettingsPageViewModel.Children>
