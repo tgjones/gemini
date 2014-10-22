@@ -35,7 +35,7 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
         {
 	        _basicEffect = new BasicEffect(e.GraphicsDevice)
 	        {
-		        View = Matrix.LookAtLH(new Vector3(0, 0, 3), new Vector3(0, 0, 0), Vector3.UnitY),
+		        View = Matrix.LookAtRH(new Vector3(0, 0, 3), new Vector3(0, 0, 0), Vector3.UnitY),
 		        World = Matrix.Identity,
 		        PreferPerPixelLighting = true
 	        };
@@ -67,7 +67,7 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
 			_basicEffect.World = Matrix.RotationYawPitchRoll(_yaw, _pitch, 0f) 
 				* Matrix.Translation(position);
 	        _basicEffect.Projection =
-		        Matrix.PerspectiveFovLH((float) Math.PI / 4.0f,
+		        Matrix.PerspectiveFovRH((float) Math.PI / 4.0f,
 			        (float) e.GraphicsDevice.BackBuffer.Width / e.GraphicsDevice.BackBuffer.Height,
 			        0.1f, 100.0f);
 
@@ -90,7 +90,7 @@ namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
             if (e.LeftButton == MouseButtonState.Pressed ||
                 e.RightButton == MouseButtonState.Pressed)
             {
-                _yaw -= (float) (position.X - _previousPosition.X) * .01f;
+                _yaw += (float) (position.X - _previousPosition.X) * .01f;
                 _pitch += (float) (position.Y - _previousPosition.Y) * .01f;
                 GraphicsControl.Invalidate();
             }
