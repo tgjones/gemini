@@ -154,6 +154,10 @@ namespace Gemini.Modules.Shell.ViewModels
 
 	    protected override void OnViewLoaded(object view)
 	    {
+            foreach (var module in _modules)
+                foreach (var globalResourceDictionary in module.GlobalResourceDictionaries)
+                    Application.Current.Resources.MergedDictionaries.Add(globalResourceDictionary);
+
 	        foreach (var module in _modules)
 	            module.PreInitialize();
 	        foreach (var module in _modules)

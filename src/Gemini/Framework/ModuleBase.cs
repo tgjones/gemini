@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Windows;
 using Gemini.Framework.Services;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.ToolBars;
@@ -33,6 +34,11 @@ namespace Gemini.Framework
         protected IToolBars ToolBars
         {
             get { return _shell.ToolBars; }
+        }
+
+        public virtual IEnumerable<ResourceDictionary> GlobalResourceDictionaries
+        {
+            get { yield break; }
         }
 
         public virtual IEnumerable<IDocument> DefaultDocuments

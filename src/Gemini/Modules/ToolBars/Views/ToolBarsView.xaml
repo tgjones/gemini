@@ -7,12 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
 	<UserControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="../Resources/Styles.xaml" />
-			</ResourceDictionary.MergedDictionaries>
-			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-		</ResourceDictionary>
+        <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 	</UserControl.Resources>
 	<ToolBarTray x:Name="ToolBarTray" 
 				 Visibility="{Binding Visible, Converter={StaticResource BoolToVisibilityConverter}}" />

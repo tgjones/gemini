@@ -155,6 +155,7 @@
     <Compile Include="Modules\ToolBars\Models\ToolBarModel.cs" />
     <Compile Include="Modules\ToolBars\Models\ToolBarItemBase.cs" />
     <Compile Include="Modules\ToolBars\Models\ToolBarItemSeparator.cs" />
+    <Compile Include="Modules\ToolBars\Module.cs" />
     <Compile Include="Modules\ToolBars\ViewModels\ToolBarsViewModel.cs" />
     <Compile Include="Modules\Shell\Module.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuViewModel.cs" />
