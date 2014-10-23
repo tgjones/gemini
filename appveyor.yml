@@ -14,3 +14,8 @@ assembly_info:
 build:
   project: src/Gemini.sln
   publish_nuget: true
+
+before_build:
+  - cmd: cd src
+  - cmd: nuget restore
+  - cmd: cd ..
