@@ -69,7 +69,7 @@ namespace Gemini.Demo.Modules.Startup
         {
             if (Shell.ActiveItem != null)
                 _inspectorTool.SelectedObject = new InspectableObjectBuilder()
-                       .WithObjectProperties(Shell.ActiveItem, pd => true)
+                       .WithObjectProperties(Shell.ActiveItem, pd => pd.ComponentType == Shell.ActiveItem.GetType())
                        .ToInspectableObject();
             else
                 _inspectorTool.SelectedObject = null;
