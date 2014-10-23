@@ -36,7 +36,16 @@ namespace Gemini.Framework.Services
 
 			protected override void Invoke(object parameter)
 			{
-				Action.Invoke(_handler, "Execute");
+                var context = new ActionExecutionContext
+                {
+                    Target = _handler,
+                    Message = new ActionMessage { MethodName = "Execute" },
+                    Method = _handler.GetType().GetMethod("Execute")
+                };
+			    ActionMessage.PrepareContext(context);
+
+                if (context.CanExecute())
+				    ActionMessage.InvokeAction(context);
 			}
 		}
 	}
