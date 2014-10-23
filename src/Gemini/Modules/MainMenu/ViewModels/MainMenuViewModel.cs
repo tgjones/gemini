@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework.Results;
@@ -16,6 +17,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 		private IShell _shell;
 
 	    private bool _autoHide;
+		private int newCounter = 1;
 
 	    private readonly SettingsPropertyChangedEventManager<Properties.Settings> _settingsEventManager =
 	        new SettingsPropertyChangedEventManager<Properties.Settings>(Properties.Settings.Default);
@@ -25,6 +27,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 			Add(
 				new MenuItem(KnownMenuItemNames.File, Properties.Resources.MenuItemFile)
 				{
+					new MenuItem(KnownMenuItemNames.New, Properties.Resources.MenuItemNew, NewFile),
 					new MenuItem(KnownMenuItemNames.FileOpen, Properties.Resources.MenuItemOpen, OpenFile).WithIcon(),
 					MenuItemBase.Separator,
 					new MenuItem(KnownMenuItemNames.FileExit, Properties.Resources.MenuItemExit, Exit),
@@ -50,6 +53,11 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	            NotifyOfPropertyChange(ExtensionMethods.GetPropertyName(() => AutoHide));
 	        }
 	    }
+
+		 private IEnumerable<IResult> NewFile()
+		 {
+			 yield return Show.Document(String.Format("New {0}", newCounter++));
+		 }
 
 	    private IEnumerable<IResult> OpenFile()
 		{

@@ -37,6 +37,7 @@ namespace Gemini.Modules.CodeEditor
             // Create built in language definitions
             var languageDefinitions = new List<ILanguageDefinition>
                 {
+						  new DefaultLanguageDefinition("Text", new[] {"", ".txt"}),
                     new DefaultLanguageDefinition("C#", new[] {".cs"}),
                     new DefaultLanguageDefinition("JavaScript", new[] {".js"}),
                     new DefaultLanguageDefinition("HTML", new[] {".htm", ".html"}),

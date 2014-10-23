@@ -123,6 +123,9 @@
   <data name="MenuItemFile" xml:space="preserve">
     <value>_File</value>
   </data>
+  <data name="MenuItemNew" xml:space="preserve">
+    <value>_New</value>
+  </data>
   <data name="MenuItemOpen" xml:space="preserve">
     <value>_Open</value>
   </data>

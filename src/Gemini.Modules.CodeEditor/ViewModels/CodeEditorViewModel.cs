@@ -75,8 +75,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         protected override void OnViewLoaded(object view)
         {
-            using (var stream = File.OpenText(_path))
-                _originalText = stream.ReadToEnd();
+			  if (File.Exists(_path))
+					using (var stream = File.OpenText(_path))
+						 _originalText = stream.ReadToEnd();
 
             _view = (ICodeEditorView) view;
             _view.TextEditor.Text = _originalText;
