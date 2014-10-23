@@ -79,6 +79,15 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _New.
+        /// </summary>
+        internal static string MenuItemFileNew {
+            get {
+                return ResourceManager.GetString("MenuItemFileNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Open.
         /// </summary>
         internal static string MenuItemOpen {

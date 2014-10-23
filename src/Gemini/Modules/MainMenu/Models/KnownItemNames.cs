@@ -8,6 +8,7 @@ namespace Gemini.Modules.MainMenu.Models {
     public static class KnownMenuItemNames
     {
         public const string File = "File";
+        public const string FileNew = "FileNew";
         public const string FileOpen = "FileOpen";
         public const string FileExit = "FileExit";
         public const string View = "View";

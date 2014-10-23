@@ -16,13 +16,25 @@ namespace Gemini.Demo.Modules.TextEditor
             ".cmd"
         };
 
+        public IEnumerable<EditorFileType> FileTypes
+        {
+            get { yield return new EditorFileType("Text File", ".txt"); }
+        }
+
 		public bool Handles(string path)
 		{
 			var extension = Path.GetExtension(path);
 			return _extensions.Contains(extension);
 		}
 
-		public IDocument Create(string path)
+        public IDocument CreateNew(string name)
+        {
+            var editor = new EditorViewModel();
+            editor.New(name);
+            return editor;
+        }
+
+		public IDocument Open(string path)
 		{
 			var editor = new EditorViewModel();
 			editor.Open(path);

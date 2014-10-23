@@ -1,6 +1,4 @@
-﻿using Caliburn.Micro;
-using Gemini.Framework.Services;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 
 namespace Gemini.Framework.Results
 {

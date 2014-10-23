@@ -30,6 +30,13 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 			callback(!IsDirty);
 		}
 
+	    public void New(string name)
+	    {
+	        _fileName = name;
+	        _originalText = string.Empty;
+            UpdateDisplayName();
+	    }
+
 		public void Open(string path)
 		{
 			_path = path;
@@ -44,12 +51,11 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 
 		protected override void OnViewLoaded(object view)
 		{
-			using (var stream = File.OpenText(_path))
-			{
-				_originalText = stream.ReadToEnd();
-			}
+            if (_path != null)
+                using (var stream = File.OpenText(_path))
+                    _originalText = stream.ReadToEnd();
 
-			var editor = (EditorView) view;
+		    var editor = (EditorView) view;
 			editor.textBox.Text = _originalText;
 
 			editor.textBox.TextChanged += delegate

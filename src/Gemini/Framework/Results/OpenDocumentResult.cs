@@ -68,7 +68,7 @@ namespace Gemini.Framework.Results
 			return IoC.GetAllInstances(typeof(IEditorProvider))
 				.Cast<IEditorProvider>()
 				.Where(provider => provider.Handles(path))
-				.Select(provider => provider.Create(path))
+				.Select(provider => provider.Open(path))
 				.FirstOrDefault();
 		}
 	}

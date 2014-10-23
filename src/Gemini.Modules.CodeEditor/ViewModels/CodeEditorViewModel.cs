@@ -51,6 +51,12 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             callback(!IsDirty);
         }
 
+        public void New(string name)
+        {
+            _fileName = name;
+            UpdateDisplayName();
+        }
+
         public void Open(string path)
         {
             _path = path;
@@ -75,8 +81,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         protected override void OnViewLoaded(object view)
         {
-            using (var stream = File.OpenText(_path))
-                _originalText = stream.ReadToEnd();
+            if (_path != null)
+                using (var stream = File.OpenText(_path))
+                    _originalText = stream.ReadToEnd();
 
             _view = (ICodeEditorView) view;
             _view.TextEditor.Text = _originalText;

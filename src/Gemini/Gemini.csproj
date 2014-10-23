@@ -89,6 +89,7 @@
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
+    <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
@@ -307,6 +308,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
