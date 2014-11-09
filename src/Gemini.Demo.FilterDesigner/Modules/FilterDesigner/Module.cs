@@ -19,7 +19,7 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner
 
         public override void Initialize()
         {
-            MainMenu.Find(KnownMenuItemNames.File).Children.Insert(1, new MenuItem("Open Graph", OpenGraph));
+            //MainMenu.Find(KnownMenuItemNames.File).Children.Insert(1, new MenuItem("Open Graph", OpenGraph));
         }
 
         private static IEnumerable<IResult> OpenGraph()

@@ -12,9 +12,9 @@ namespace Gemini.Modules.Inspector
 	{
 		public override void Initialize()
 		{
-            var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
-            if (viewMenuItem != null)
-                viewMenuItem.Add(new MenuItem("Inspector", OpenInspector));
+            //var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
+            //if (viewMenuItem != null)
+            //    viewMenuItem.Add(new MenuItem("Inspector", OpenInspector));
 		}
 
 		private static IEnumerable<IResult> OpenInspector()

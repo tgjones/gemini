@@ -26,14 +26,14 @@ namespace Gemini.Modules.MainMenu.Models
 			items.Apply(Add);
 		}
 
-	    public MenuItemBase Find(string name)
-	    {
-	        return Items.FirstOrDefault(x => x.Name == name);
-	    }
+        //public MenuItemBase Find(string name)
+        //{
+        //    return Items.FirstOrDefault(x => x.Name == name);
+        //}
 
-	    public bool Remove(string name)
-		{
-			return Items.Remove(Find(name));
-		}
+        //public bool Remove(string name)
+        //{
+        //    return Items.Remove(Find(name));
+        //}
 	}
 }

@@ -25,7 +25,7 @@ namespace Gemini.Modules.MainMenu.Controls
 			if (item is MenuItemSeparator)
 				return new Separator { Style = (Style)frameworkElement.FindResource(SeparatorStyleKey) };
 
-			string styleKey = (item is CheckableMenuItem) ? "CheckableMenuItem" : "MenuItem";
+			const string styleKey = "MenuItem";
 
 		    var result = new MenuItemEx();
             result.SetResourceReference(DynamicStyle.BaseStyleProperty, typeof(System.Windows.Controls.MenuItem));

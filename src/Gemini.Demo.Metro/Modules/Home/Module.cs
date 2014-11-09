@@ -23,7 +23,7 @@ namespace Gemini.Demo.Metro.Modules.Home
 
 	    public override void Initialize()
 	    {
-	        MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Home", OpenHome));
+	        //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Home", OpenHome));
 		}
 
         public override void PostInitialize()

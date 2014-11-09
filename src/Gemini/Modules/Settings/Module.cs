@@ -13,15 +13,15 @@ namespace Gemini.Modules.Settings
 	{
 		public override void Initialize()
 		{
-		    var toolsMenu = MainMenu.Find(KnownMenuItemNames.Tools);
+            //var toolsMenu = MainMenu.Find(KnownMenuItemNames.Tools);
 
-		    if (toolsMenu == null)
-		    {
-		        toolsMenu = new MenuItem(KnownMenuItemNames.Tools, "_Tools");
-                MainMenu.Add(toolsMenu);
-		    }
+            //if (toolsMenu == null)
+            //{
+            //    toolsMenu = new MenuItem(KnownMenuItemNames.Tools, "_Tools");
+            //    MainMenu.Add(toolsMenu);
+            //}
 
-		    toolsMenu.Add(new MenuItem("_Options", OpenSettings));
+            //toolsMenu.Add(new MenuItem("_Options", OpenSettings));
 		}
 
 		private static IEnumerable<IResult> OpenSettings()

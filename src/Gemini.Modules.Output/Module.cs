@@ -12,9 +12,9 @@ namespace Gemini.Modules.Output
 	{
 		public override void Initialize()
 		{
-            var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
-            if (viewMenuItem != null)
-                viewMenuItem.Add(new MenuItem("Output", OpenOutput));
+            //var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
+            //if (viewMenuItem != null)
+            //    viewMenuItem.Add(new MenuItem("Output", OpenOutput));
         }
 
         private IEnumerable<IResult> OpenOutput()

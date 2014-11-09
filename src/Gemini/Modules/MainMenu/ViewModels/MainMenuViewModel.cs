@@ -15,6 +15,9 @@ namespace Gemini.Modules.MainMenu.ViewModels
 		[Import] 
 		private IShell _shell;
 
+        [Import]
+        private IMenuBuilder _menuBuilder;
+
 	    [ImportMany]
         private IEditorProvider[] _editorProviders;
 
@@ -23,17 +26,16 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	    private readonly SettingsPropertyChangedEventManager<Properties.Settings> _settingsEventManager =
 	        new SettingsPropertyChangedEventManager<Properties.Settings>(Properties.Settings.Default);
 
-        [ImportingConstructor]
 	    public MainMenuViewModel()
 	    {
-            Add(
-				new MenuItem(KnownMenuItemNames.File, Properties.Resources.MenuItemFile)
-				{
-					new MenuItem(KnownMenuItemNames.FileOpen, Properties.Resources.MenuItemOpen, OpenFile).WithIcon(),
-					MenuItemBase.Separator,
-					new MenuItem(KnownMenuItemNames.FileExit, Properties.Resources.MenuItemExit, Exit),
-				},
-                new MenuItem(KnownMenuItemNames.View, Properties.Resources.MenuItemView));
+            //Add(
+            //    new MenuItem(KnownMenuItemNames.File, Properties.Resources.MenuItemFile)
+            //    {
+            //        new MenuItem(KnownMenuItemNames.FileOpen, Properties.Resources.MenuItemOpen, OpenFile).WithIcon(),
+            //        MenuItemBase.Separator,
+            //        new MenuItem(KnownMenuItemNames.FileExit, Properties.Resources.MenuItemExit, Exit),
+            //    },
+            //    new MenuItem(KnownMenuItemNames.View, Properties.Resources.MenuItemView));
 
 	        _autoHide = Properties.Settings.Default.AutoHideMainMenu;
             _settingsEventManager.AddListener(s => s.AutoHideMainMenu, value => { AutoHide = value; });
@@ -70,15 +72,17 @@ namespace Gemini.Modules.MainMenu.ViewModels
 
 	    void IPartImportsSatisfiedNotification.OnImportsSatisfied()
 	    {
-            var fileNewMenuItem = new MenuItem(KnownMenuItemNames.FileNew, Properties.Resources.MenuItemFileNew);
-            foreach (var editorProvider in _editorProviders)
-                foreach (var editorFileType in editorProvider.FileTypes)
-                    fileNewMenuItem.Add(new MenuItem(
-                        editorFileType.FileExtension, editorFileType.Name,
-                        () => CreateNewFile(editorProvider, editorFileType)));
+            //var fileNewMenuItem = new MenuItem(KnownMenuItemNames.FileNew, Properties.Resources.MenuItemFileNew);
+            //foreach (var editorProvider in _editorProviders)
+            //    foreach (var editorFileType in editorProvider.FileTypes)
+            //        fileNewMenuItem.Add(new MenuItem(
+            //            editorFileType.FileExtension, editorFileType.Name,
+            //            () => CreateNewFile(editorProvider, editorFileType)));
 
-            var fileMenuItem = Find(KnownMenuItemNames.File);
-            fileMenuItem.Children.Insert(0, fileNewMenuItem);
+            //var fileMenuItem = Find(KnownMenuItemNames.File);
+            //fileMenuItem.Children.Insert(0, fileNewMenuItem);
+
+	        _menuBuilder.BuildMenuBar(MenuDefinitions.MainMenuBar, this);
 	    }
 
 	    private int _newFileCounter = 1;

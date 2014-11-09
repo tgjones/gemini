@@ -27,8 +27,8 @@ namespace Gemini.Demo.Modules.Home
 
 	    public override void Initialize()
 		{
-            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Home", OpenHome));
-            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Helix", OpenHelix));
+            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Home", OpenHome));
+            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Helix", OpenHelix));
 		}
 
         public override void PostInitialize()

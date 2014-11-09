@@ -12,9 +12,9 @@ namespace Gemini.Modules.ErrorList
     {
         public override void Initialize()
         {
-            var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
-            if (viewMenuItem != null)
-                viewMenuItem.Add(new MenuItem("Error List", OpenErrorList));
+            //var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
+            //if (viewMenuItem != null)
+            //    viewMenuItem.Add(new MenuItem("Error List", OpenErrorList));
         }
 
         private static IEnumerable<IResult> OpenErrorList()

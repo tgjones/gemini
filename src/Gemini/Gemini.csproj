@@ -83,17 +83,31 @@
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Behaviors\BindableTreeViewSelectedItemBehavior.cs" />
+    <Compile Include="Framework\Commands\Command.cs" />
+    <Compile Include="Framework\Commands\CommandDefinition.cs" />
+    <Compile Include="Framework\Commands\CommandHandler.cs" />
+    <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
+    <Compile Include="Framework\Commands\CommandRouter.cs" />
+    <Compile Include="Framework\Commands\CommandService.cs" />
+    <Compile Include="Framework\Commands\ICommandService.cs" />
+    <Compile Include="Framework\Commands\TargetableCommand.cs" />
+    <Compile Include="Framework\Commands\ICommandRouter.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
+    <Compile Include="Framework\Menus\MenuDefinition.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
     <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
+    <Compile Include="Framework\Threading\TaskUtility.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Framework\Controls\DynamicStyle.cs" />
+    <Compile Include="Modules\MainMenu\IMenuBuilder.cs" />
+    <Compile Include="Modules\MainMenu\MenuBuilder.cs" />
     <Compile Include="Modules\MainMenu\Models\KnownItemNames.cs" />
+    <Compile Include="Modules\MainMenu\MenuDefinitions.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuSettingsViewModel.cs" />
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
@@ -105,11 +119,15 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenFileCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\ExitCommandHandler.cs" />
     <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
     <Compile Include="Modules\Shell\Controls\PanesStyleSelector.cs" />
     <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
+    <Compile Include="Modules\Shell\MenuDefinitions.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\LayoutUtility.cs" />
     <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
@@ -120,13 +138,11 @@
     <Compile Include="Framework\ITool.cs" />
     <Compile Include="Framework\IWindow.cs" />
     <Compile Include="Framework\LayoutItemBase.cs" />
-    <Compile Include="Modules\MainMenu\Models\CheckableMenuItem.cs" />
     <Compile Include="Modules\MainMenu\Models\MenuItemBase.cs" />
     <Compile Include="Modules\MainMenu\IMenu.cs" />
-    <Compile Include="Modules\MainMenu\Models\MenuItem.cs" />
     <Compile Include="Modules\MainMenu\Models\MenuModel.cs" />
     <Compile Include="Modules\MainMenu\Models\MenuItemSeparator.cs" />
-    <Compile Include="Modules\MainMenu\Models\StandardMenuItem.cs" />
+    <Compile Include="Modules\MainMenu\Models\MenuItem.cs" />
     <Compile Include="Framework\ModuleBase.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\Results\IOpenResult.cs" />
@@ -162,7 +178,6 @@
     <Compile Include="Modules\ToolBars\Models\ToolBarItemSeparator.cs" />
     <Compile Include="Modules\ToolBars\Module.cs" />
     <Compile Include="Modules\ToolBars\ViewModels\ToolBarsViewModel.cs" />
-    <Compile Include="Modules\Shell\Module.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuViewModel.cs" />
     <Compile Include="Modules\Shell\Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
@@ -189,14 +204,18 @@
     <Compile Include="Modules\Toolbox\Views\ToolboxView.xaml.cs">
       <DependentUpon>ToolboxView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\UndoRedo\Commands\RedoCommandDefinition.cs" />
+    <Compile Include="Modules\UndoRedo\Commands\UndoCommandDefinition.cs" />
+    <Compile Include="Modules\UndoRedo\Commands\RedoCommandHandler.cs" />
+    <Compile Include="Modules\UndoRedo\Commands\UndoCommandHandler.cs" />
     <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
+    <Compile Include="Modules\UndoRedo\Module.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IUndoableAction.cs" />
     <Compile Include="Modules\UndoRedo\IUndoRedoManager.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemType.cs" />
     <Compile Include="Modules\UndoRedo\Services\UndoRedoManager.cs" />
-    <Compile Include="Modules\UndoRedo\UndoRedoToolbarItems.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\Views\HistoryView.xaml.cs">
       <DependentUpon>HistoryView.xaml</DependentUpon>

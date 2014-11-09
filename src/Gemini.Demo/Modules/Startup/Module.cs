@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Framework.Commands;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
 using Gemini.Modules.Inspector;
@@ -43,11 +44,11 @@ namespace Gemini.Demo.Modules.Startup
 		    {
 		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly).WithToolTip("Open"),
                 ToolBarItemBase.Separator,
-                new UndoToolBarItem(),
-                new RedoToolBarItem()
+                //new UndoToolBarItem(),
+                //new RedoToolBarItem()
 		    });
 
-            MainWindow.WindowState = WindowState.Maximized;
+            //MainWindow.WindowState = WindowState.Maximized;
             MainWindow.Title = "Gemini Demo";
 
             Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
@@ -59,7 +60,7 @@ namespace Gemini.Demo.Modules.Startup
 
 			_output.AppendLine("Started up");
 
-            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("History", OpenHistory));
+            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("History", OpenHistory));
 
 		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
 		    RefreshInspector();
@@ -69,8 +70,8 @@ namespace Gemini.Demo.Modules.Startup
         {
             if (Shell.ActiveItem != null)
                 _inspectorTool.SelectedObject = new InspectableObjectBuilder()
-                       .WithObjectProperties(Shell.ActiveItem, pd => pd.ComponentType == Shell.ActiveItem.GetType())
-                       .ToInspectableObject();
+                    .WithObjectProperties(Shell.ActiveItem, pd => pd.ComponentType == Shell.ActiveItem.GetType())
+                    .ToInspectableObject();
             else
                 _inspectorTool.SelectedObject = null;
         }

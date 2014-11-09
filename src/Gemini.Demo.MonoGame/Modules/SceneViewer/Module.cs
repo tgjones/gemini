@@ -29,7 +29,7 @@ namespace Gemini.Demo.MonoGame.Modules.SceneViewer
 
 	    public override void Initialize()
 		{
-            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("3D Scene", OpenScene));
+            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("3D Scene", OpenScene));
 		}
 
 	    public override void PostInitialize()

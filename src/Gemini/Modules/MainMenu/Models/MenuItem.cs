@@ -1,50 +1,59 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
+using System.Windows.Input;
 using Caliburn.Micro;
+using Gemini.Framework.Commands;
+using Gemini.Framework.Menus;
 
 namespace Gemini.Modules.MainMenu.Models
 {
-	public class MenuItem : StandardMenuItem
+	public class MenuItem : MenuItemBase
 	{
-		private readonly Func<IEnumerable<IResult>> _execute;
+	    private readonly MenuDefinitionBase _menuDefinition;
 
-		#region Constructors
-
-		public MenuItem(string text)
-			: base(text)
+		public string Text
 		{
-			
+            get { return _menuDefinition.Text; }
 		}
 
-        public MenuItem(string name, string text)
-            : this(name, text, null, null) { }
+	    public bool HasIcon
+	    {
+	        get { return IconSource != null; }
+	    }
 
-		public MenuItem(string text, Func<IEnumerable<IResult>> execute)
-			: base(text)
+        public Uri IconSource
+	    {
+            get { return _menuDefinition.IconSource; }
+	    }
+
+		public string InputGestureText
 		{
-			_execute = execute;
+			get
+			{
+                return _menuDefinition.KeyGesture == null
+					? string.Empty
+                    : _menuDefinition.KeyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
+			}
 		}
 
-        public MenuItem(string name, string text, Func<IEnumerable<IResult>> execute) 
-            : this(name, text, execute, null) { }
+	    public ICommand Command
+	    {
+	        get
+	        {
+                if (_menuDefinition.CommandDefinition != null)
+                    return new TargetableCommand(IoC.Get<ICommandService>().GetCommand(_menuDefinition.CommandDefinition));
+	            return null;
+	        }
+	    }
 
-		public MenuItem(string text, Func<IEnumerable<IResult>> execute, Func<bool> canExecute)
-			: base(text, canExecute)
-		{
-			_execute = execute;
-		}
-
-        public MenuItem(string name, string text, Func<IEnumerable<IResult>> execute, Func<bool> canExecute)
-            : base(name, text, canExecute)
+        public bool IsChecked
         {
-            this._execute = execute;
+            get { return false; } // TODO
         }
 
-		#endregion
-
-		public IEnumerable<IResult> Execute()
-		{
-			return _execute != null ? _execute() : new IResult[] { };
-		}
+        public MenuItem(MenuDefinitionBase menuDefinition)
+        {
+            _menuDefinition = menuDefinition;
+        }
 	}
 }

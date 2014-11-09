@@ -7,7 +7,7 @@ namespace Gemini.Modules.MainMenu
 	public interface IMenu : IObservableCollection<MenuItemBase>
 	{
 		IEnumerable<MenuItemBase> All { get; }
-	    MenuItemBase Find(string name);
-	    bool Remove(string name);
+        //MenuItemBase Find(string name);
+        //bool Remove(string name);
 	}
 }

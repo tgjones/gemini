@@ -12,9 +12,9 @@ namespace Gemini.Modules.Toolbox
     {
         public override void Initialize()
         {
-            var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
-            if (viewMenuItem != null)
-                viewMenuItem.Add(new MenuItem("Toolbox", OpenToolbox));
+            //var viewMenuItem = MainMenu.Find(KnownMenuItemNames.View);
+            //if (viewMenuItem != null)
+            //    viewMenuItem.Add(new MenuItem("Toolbox", OpenToolbox));
         }
 
         private static IEnumerable<IResult> OpenToolbox()

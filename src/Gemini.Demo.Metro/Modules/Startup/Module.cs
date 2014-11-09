@@ -39,8 +39,8 @@ namespace Gemini.Demo.Metro.Modules.Startup
 		    {
 		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly),
                 ToolBarItemBase.Separator,
-                new UndoToolBarItem(),
-                new RedoToolBarItem()
+                //new UndoToolBarItem(),
+                //new RedoToolBarItem()
 		    });
 
             Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));

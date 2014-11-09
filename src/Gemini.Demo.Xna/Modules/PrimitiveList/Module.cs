@@ -14,7 +14,7 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList
 	{
 		public override void Initialize()
 		{
-            MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Primitive List", OpenModelList));
+            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Primitive List", OpenModelList));
 			Shell.ShowTool(IoC.Get<PrimitiveListViewModel>());
 		}
 
