@@ -124,6 +124,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\SceneViewer\Commands\ViewSceneViewerCommandDefinition.cs" />
+    <Compile Include="Modules\SceneViewer\Commands\ViewSceneViewerCommandHandler.cs" />
+    <Compile Include="Modules\SceneViewer\MenuDefinitions.cs" />
     <Compile Include="Modules\SceneViewer\Module.cs" />
     <Compile Include="Modules\SceneViewer\ViewModels\SceneViewModel.cs" />
     <Compile Include="Modules\SceneViewer\Views\SceneView.xaml.cs">

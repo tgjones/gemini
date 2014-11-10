@@ -125,6 +125,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Home\Commands\ViewHelixCommandDefinition.cs" />
+    <Compile Include="Modules\Home\Commands\ViewHelixCommandHandler.cs" />
     <Compile Include="Modules\Home\Module.cs" />
     <Compile Include="Modules\Home\ViewModels\HelixViewModel.cs" />
     <Compile Include="Modules\Home\ViewModels\HomeViewModel.cs" />
@@ -136,6 +138,8 @@
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Home\Views\IHelixView.cs" />
+    <Compile Include="Modules\Home\Commands\ViewHomeCommandDefinition.cs" />
+    <Compile Include="Modules\Home\Commands\ViewHomeCommandHandler.cs" />
     <Compile Include="Modules\Shell\ViewModels\DemoApplicationSettingsViewModel.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Shell\Views\DemoApplicationSettingsView.xaml.cs">

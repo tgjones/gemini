@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;

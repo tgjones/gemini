@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
-using Gemini.Framework.Commands;
 using Gemini.Framework.Results;
 using Gemini.Framework.Services;
 using Gemini.Modules.Inspector;
-using Gemini.Modules.MainMenu.Models;
 using Gemini.Modules.Output;
 using Gemini.Modules.ToolBars.Models;
-using Gemini.Modules.UndoRedo;
 using Microsoft.Win32;
 
 namespace Gemini.Demo.Modules.Startup
@@ -60,8 +56,6 @@ namespace Gemini.Demo.Modules.Startup
 
 			_output.AppendLine("Started up");
 
-            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("History", OpenHistory));
-
 		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
 		    RefreshInspector();
 		}
@@ -81,11 +75,6 @@ namespace Gemini.Demo.Modules.Startup
             var dialog = new OpenFileDialog();
             yield return Show.CommonDialog(dialog);
             yield return Show.Document(dialog.FileName);
-        }
-
-        private static IEnumerable<IResult> OpenHistory()
-        {
-            yield return Show.Tool<IHistoryTool>();
         }
 	}
 }

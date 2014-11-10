@@ -114,32 +114,17 @@ namespace Gemini.Framework.Menus
 
         public override string Text
         {
-            get
-            {
-                if (CommandDefinition != null)
-                    return CommandDefinition.Text;
-                return null;
-            }
+            get { return _commandDefinition.Text; }
         }
 
         public override Uri IconSource
         {
-            get
-            {
-                if (CommandDefinition != null)
-                    return CommandDefinition.IconSource;
-                return null;
-            }
+            get { return _commandDefinition.IconSource; }
         }
 
         public override KeyGesture KeyGesture
         {
-            get
-            {
-                if (CommandDefinition != null)
-                    return CommandDefinition.KeyGesture;
-                return null;
-            }
+            get { return _commandDefinition.KeyGesture; }
         }
 
         public override CommandDefinition CommandDefinition

@@ -25,7 +25,6 @@ namespace Gemini.Modules.MainMenu.Behaviors
         {
             var menuItem = (MenuItem) d;
             menuItem.SubmenuOpened += OnSubmenuOpened;
-            menuItem.Unloaded += (sender, e2) => menuItem.SubmenuOpened -= OnSubmenuOpened;
             if (menuItem.IsSubmenuOpen)
                 OnSubmenuOpened(menuItem, new RoutedEventArgs());
         }

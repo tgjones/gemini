@@ -102,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomBootstrapper.cs" />
+    <Compile Include="Modules\Home\Commands\ViewHomeCommandDefinition.cs" />
+    <Compile Include="Modules\Home\Commands\ViewHomeCommandHandler.cs" />
     <Compile Include="Modules\Home\Module.cs" />
     <Compile Include="Modules\Home\ViewModels\HomeViewModel.cs" />
     <Compile Include="Modules\Home\Views\HomeView.xaml.cs">

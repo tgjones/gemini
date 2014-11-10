@@ -31,5 +31,11 @@ namespace Gemini.Modules.MainMenu
 
         [Export]
         public static MenuItemGroupDefinition ViewPropertiesMenuGroup = new MenuItemGroupDefinition(ViewMenu, 100);
+
+        [Export]
+        public static MenuDefinition ToolsMenu = new MenuDefinition(MainMenuBar, 10, "_Tools");
+
+        [Export]
+        public static MenuItemGroupDefinition ToolsOptionsMenuGroup = new MenuItemGroupDefinition(ToolsMenu, 100);
     }
 }

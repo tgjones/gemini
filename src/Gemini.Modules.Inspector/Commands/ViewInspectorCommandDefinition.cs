@@ -15,7 +15,7 @@ namespace Gemini.Modules.Inspector.Commands
 
         public override string Text
         {
-            get { return "Inspector"; }
+            get { return "I_nspector"; }
         }
 
         public override string ToolTip

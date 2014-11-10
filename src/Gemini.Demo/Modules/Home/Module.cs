@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Caliburn.Micro;
+using Gemini.Demo.Modules.Home.Commands;
 using Gemini.Demo.Modules.Home.ViewModels;
 using Gemini.Framework;
-using Gemini.Framework.Results;
-using Gemini.Modules.MainMenu.Models;
+using Gemini.Framework.Menus;
 using Gemini.Modules.PropertyGrid;
 
 namespace Gemini.Demo.Modules.Home
@@ -13,7 +12,19 @@ namespace Gemini.Demo.Modules.Home
 	[Export(typeof(IModule))]
 	public class Module : ModuleBase
 	{
-		[Import]
+        [Export]
+        public static MenuItemGroupDefinition ViewDemoMenuGroup = new MenuItemGroupDefinition(
+            Gemini.Modules.MainMenu.MenuDefinitions.ViewMenu, 10);
+
+        [Export]
+	    public static MenuItemDefinition ViewHomeMenuItem = new CommandMenuItemDefinition<ViewHomeCommandDefinition>(
+            ViewDemoMenuGroup, 0);
+
+        [Export]
+        public static MenuItemDefinition ViewHelixMenuItem = new CommandMenuItemDefinition<ViewHelixCommandDefinition>(
+            ViewDemoMenuGroup, 1);
+
+        [Import]
 		private IPropertyGrid _propertyGrid;
 
 	    public override IEnumerable<IDocument> DefaultDocuments
@@ -25,26 +36,10 @@ namespace Gemini.Demo.Modules.Home
 	        }
 	    }
 
-	    public override void Initialize()
-		{
-            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Home", OpenHome));
-            //MainMenu.Find(KnownMenuItemNames.View).Add(new MenuItem("Helix", OpenHelix));
-		}
-
         public override void PostInitialize()
         {
             _propertyGrid.SelectedObject = IoC.Get<HomeViewModel>();
             Shell.OpenDocument(IoC.Get<HomeViewModel>());
-        }
-
-		private IEnumerable<IResult> OpenHome()
-		{
-			yield return Show.Document<HomeViewModel>();
-		}
-
-        private IEnumerable<IResult> OpenHelix()
-        {
-            yield return Show.Document<HelixViewModel>();
         }
 	}
 }
