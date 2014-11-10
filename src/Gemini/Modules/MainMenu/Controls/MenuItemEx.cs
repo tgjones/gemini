@@ -28,8 +28,10 @@ namespace Gemini.Modules.MainMenu.Controls
 			const string styleKey = "MenuItem";
 
 		    var result = new MenuItemEx();
-            result.SetResourceReference(DynamicStyle.BaseStyleProperty, typeof(System.Windows.Controls.MenuItem));
+
+            result.SetResourceReference(DynamicStyle.BaseStyleProperty, typeof(MenuItem));
 		    result.SetResourceReference(DynamicStyle.DerivedStyleProperty, styleKey);
+
 		    return result;
 		}
 	}

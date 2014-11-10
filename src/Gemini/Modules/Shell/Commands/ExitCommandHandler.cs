@@ -12,7 +12,7 @@ namespace Gemini.Modules.Shell.Commands
         [Import]
         private IShell _shell;
 
-        public override Task Run()
+        public override Task Run(Command command)
         {
             _shell.Close();
             return TaskUtility.Completed;

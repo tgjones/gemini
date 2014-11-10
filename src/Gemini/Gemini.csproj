@@ -89,7 +89,9 @@
     <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
     <Compile Include="Framework\Commands\CommandRouter.cs" />
     <Compile Include="Framework\Commands\CommandService.cs" />
+    <Compile Include="Framework\Commands\ICommandHandlerMetadata.cs" />
     <Compile Include="Framework\Commands\ICommandService.cs" />
+    <Compile Include="Framework\Commands\ICommandUiItem.cs" />
     <Compile Include="Framework\Commands\TargetableCommand.cs" />
     <Compile Include="Framework\Commands\ICommandRouter.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Framework\Controls\DynamicStyle.cs" />
+    <Compile Include="Modules\MainMenu\Behaviors\MenuBehavior.cs" />
     <Compile Include="Modules\MainMenu\IMenuBuilder.cs" />
     <Compile Include="Modules\MainMenu\MenuBuilder.cs" />
     <Compile Include="Modules\MainMenu\Models\KnownItemNames.cs" />
@@ -120,6 +123,8 @@
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\NewFileCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\NewFileCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandHandler.cs" />
     <Compile Include="Modules\Shell\Controls\LayoutInitializer.cs" />
@@ -210,6 +215,7 @@
     <Compile Include="Modules\UndoRedo\Commands\UndoCommandHandler.cs" />
     <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
+    <Compile Include="Modules\UndoRedo\MenuDefinitions.cs" />
     <Compile Include="Modules\UndoRedo\Module.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IUndoableAction.cs" />

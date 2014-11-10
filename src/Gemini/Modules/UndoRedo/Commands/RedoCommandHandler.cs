@@ -18,7 +18,7 @@ namespace Gemini.Modules.UndoRedo.Commands
             command.Enabled = (_shell.ActiveItem != null && _shell.ActiveItem.UndoRedoManager.RedoStack.Any());
         }
 
-        public override Task Run()
+        public override Task Run(Command command)
         {
             _shell.ActiveItem.UndoRedoManager.Redo(1);
             return TaskUtility.Completed;

@@ -34,9 +34,5 @@ namespace Gemini.Modules.Shell.Commands
         {
             get { return new KeyGesture(Key.O, ModifierKeys.Control); }
         }
-
-        internal OpenFileCommandDefinition()
-        {
-        }
     }
 }

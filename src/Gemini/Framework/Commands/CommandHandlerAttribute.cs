@@ -8,16 +8,11 @@ namespace Gemini.Framework.Commands
     public class CommandHandlerAttribute : ExportAttribute, ICommandHandlerMetadata
     {
         public CommandHandlerAttribute(Type commandDefinitionType)
-            : base(typeof (CommandHandler))
+            : base(typeof(CommandHandler))
         {
             CommandDefinitionType = commandDefinitionType;
         }
 
         public Type CommandDefinitionType { get; set; }
-    }
-
-    public interface ICommandHandlerMetadata
-    {
-        Type CommandDefinitionType { get; }
     }
 }

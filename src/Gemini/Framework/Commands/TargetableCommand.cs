@@ -32,7 +32,7 @@ namespace Gemini.Framework.Commands
             if (commandHandler == null)
                 return;
 
-            await commandHandler.Run();
+            await commandHandler.Run(_command);
         }
 
         public event EventHandler CanExecuteChanged

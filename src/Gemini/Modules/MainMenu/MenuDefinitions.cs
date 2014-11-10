@@ -16,5 +16,11 @@ namespace Gemini.Modules.MainMenu
 
         [Export]
         public static MenuItemGroupDefinition FileExitOpenMenuGroup = new MenuItemGroupDefinition(FileMenu, 10);
+
+        [Export]
+        public static MenuDefinition EditMenu = new MenuDefinition(MainMenuBar, 1, "_Edit");
+
+        [Export]
+        public static MenuItemGroupDefinition EditUndoRedoMenuGroup = new MenuItemGroupDefinition(EditMenu, 0);
     }
 }

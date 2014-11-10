@@ -1,23 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Gemini.Modules.MainMenu.Controls"
-                    xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters">
+                    xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters"
+                    xmlns:b="clr-namespace:Gemini.Modules.MainMenu.Behaviors">
     <converters:NullableValueConverter x:Key="NullableValueConverter" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <Image x:Key="MenuItemIcon" x:Shared="false" Source="{Binding IconSource, Converter={StaticResource NullableValueConverter}}" />
 
     <Style x:Key="MenuItem" TargetType="{x:Type controls:MenuItemEx}">
+        <Setter Property="Visibility" Value="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <Setter Property="InputGestureText" Value="{Binding InputGestureText}" />
+        <Setter Property="Icon" Value="{StaticResource MenuItemIcon}" />
         <Setter Property="IsCheckable" Value="{Binding IsChecked, Mode=OneWay}" />
         <Setter Property="IsChecked" Value="{Binding IsChecked, Mode=OneWay}" />
         <Setter Property="Command" Value="{Binding Command}" />
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding HasIcon}" Value="True">
-                <Setter Property="Icon">
-                    <Setter.Value>
-                        <Image Source="{Binding IconSource, Converter={StaticResource NullableValueConverter}}" />
-                    </Setter.Value>
-                </Setter>
-            </DataTrigger>
-        </Style.Triggers>
+        <Setter Property="b:MenuBehavior.UpdateCommandUiItems" Value="True" />
     </Style>
 
 	<HierarchicalDataTemplate x:Key="menuTemplate" ItemsSource="{Binding Children}">

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.UndoRedo.Commands
 {
+    [Export(typeof(CommandDefinition))]
     public class RedoCommandDefinition : CommandDefinition
     {
         public const string CommandName = "Edit.Redo";
@@ -31,10 +33,6 @@ namespace Gemini.Modules.UndoRedo.Commands
         public override KeyGesture KeyGesture
         {
             get { return new KeyGesture(Key.Y, ModifierKeys.Control); }
-        }
-
-        internal RedoCommandDefinition()
-        {
         }
     }
 }

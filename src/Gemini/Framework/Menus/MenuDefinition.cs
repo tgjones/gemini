@@ -65,12 +65,12 @@ namespace Gemini.Framework.Menus
 
     public class MenuItemGroupDefinition
     {
-        private readonly MenuDefinition _menu;
+        private readonly MenuDefinitionBase _parent;
         private readonly int _sortOrder;
 
-        public MenuDefinition Menu
+        public MenuDefinitionBase Parent
         {
-            get { return _menu; }
+            get { return _parent; }
         }
 
         public int SortOrder
@@ -78,9 +78,9 @@ namespace Gemini.Framework.Menus
             get { return _sortOrder; }
         }
 
-        public MenuItemGroupDefinition(MenuDefinition menu, int sortOrder)
+        public MenuItemGroupDefinition(MenuDefinitionBase parent, int sortOrder)
         {
-            _menu = menu;
+            _parent = parent;
             _sortOrder = sortOrder;
         }
     }

@@ -74,6 +74,8 @@ namespace Gemini.Framework.Commands
             get { return _keyGesture; }
         }
 
+        public object Tag { get; set; }
+
         public Command(CommandDefinition commandDefinition)
         {
             _commandDefinition = commandDefinition;

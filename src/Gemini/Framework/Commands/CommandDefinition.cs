@@ -18,5 +18,28 @@ namespace Gemini.Framework.Commands
         {
             get { return null; }
         }
+
+        public virtual bool IsList
+        {
+            get { return false; }
+        }
+    }
+
+    public abstract class CommandListDefinition : CommandDefinition
+    {
+        public override string Text
+        {
+            get { return "[NotUsed]"; }
+        }
+
+        public override string ToolTip
+        {
+            get { return "[NotUsed]"; }
+        }
+
+        public override bool IsList
+        {
+            get { return true; }
+        }
     }
 }

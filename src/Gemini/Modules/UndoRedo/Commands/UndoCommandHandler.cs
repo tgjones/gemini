@@ -7,21 +7,21 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.UndoRedo.Commands
 {
-    [CommandHandler(typeof(UndoCommandDefinition))]
-    public class UndoCommandHandler : CommandHandler
+[CommandHandler(typeof(UndoCommandDefinition))]
+public class UndoCommandHandler : CommandHandler
+{
+    [Import]
+    private IShell _shell;
+
+    public override void Update(Command command)
     {
-        [Import]
-        private IShell _shell;
-
-        public override void Update(Command command)
-        {
-            command.Enabled = (_shell.ActiveItem != null && _shell.ActiveItem.UndoRedoManager.UndoStack.Any());
-        }
-
-        public override Task Run()
-        {
-            _shell.ActiveItem.UndoRedoManager.Undo(1);
-            return TaskUtility.Completed;
-        }
+        command.Enabled = (_shell.ActiveItem != null && _shell.ActiveItem.UndoRedoManager.UndoStack.Any());
     }
+
+    public override Task Run(Command command)
+    {
+        _shell.ActiveItem.UndoRedoManager.Undo(1);
+        return TaskUtility.Completed;
+    }
+}
 }

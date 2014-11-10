@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Gemini.Framework.Menus;
 using Gemini.Modules.Shell.Commands;
 
@@ -11,19 +10,13 @@ namespace Gemini.Modules.Shell
         public static MenuItemDefinition FileNewMenuItem = new TextMenuItemDefinition(
             MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 0, "_New");
 
-        //[Export(typeof (MenuItemGroupDefinition))]
-        //public class FileNewCascadeGroup : MenuItemGroupDefinition
-        //{
-        //    public override Type Parent
-        //    {
-        //        get { return typeof (FileNewMenuItem); }
-        //    }
+        [Export]
+        public static MenuItemGroupDefinition FileNewCascadeGroup = new MenuItemGroupDefinition(
+            FileNewMenuItem, 0);
 
-        //    public override int SortOrder
-        //    {
-        //        get { return 0; }
-        //    }
-        //}
+        [Export]
+        public static MenuItemDefinition FileNewMenuItemList = new CommandMenuItemDefinition<NewFileCommandListDefinition>(
+            FileNewCascadeGroup, 0);
 
         [Export]
         public static MenuItemDefinition FileOpenMenuItem = new CommandMenuItemDefinition<OpenFileCommandDefinition>(
