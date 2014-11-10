@@ -67,12 +67,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ViewErrorListCommandDefinition.cs" />
+    <Compile Include="Commands\ViewErrorListCommandHandler.cs" />
     <Compile Include="Converters\ErrorListItemTypeToImageConverter.cs" />
     <Compile Include="Converters\PluralizingValueConverter.cs" />
     <Compile Include="Design\DesignTimeErrorListViewModel.cs" />
     <Compile Include="ErrorListItemType.cs" />
     <Compile Include="IErrorList.cs" />
-    <Compile Include="Module.cs" />
+    <Compile Include="MenuDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

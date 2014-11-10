@@ -22,5 +22,14 @@ namespace Gemini.Modules.MainMenu
 
         [Export]
         public static MenuItemGroupDefinition EditUndoRedoMenuGroup = new MenuItemGroupDefinition(EditMenu, 0);
+
+        [Export]
+        public static MenuDefinition ViewMenu = new MenuDefinition(MainMenuBar, 2, "_View");
+
+        [Export]
+        public static MenuItemGroupDefinition ViewToolsMenuGroup = new MenuItemGroupDefinition(ViewMenu, 0);
+
+        [Export]
+        public static MenuItemGroupDefinition ViewPropertiesMenuGroup = new MenuItemGroupDefinition(ViewMenu, 100);
     }
 }
