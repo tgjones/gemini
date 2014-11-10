@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Input;
+using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Menus;
 
@@ -45,7 +46,7 @@ namespace Gemini.Modules.MainMenu.Models
 
         public override ICommand Command
 	    {
-            get { return new TargetableCommand(_command); }
+            get { return IoC.Get<ICommandService>().GetTargetableCommand(_command); }
 	    }
 
         public override bool IsChecked

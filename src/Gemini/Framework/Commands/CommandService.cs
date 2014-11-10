@@ -10,6 +10,7 @@ namespace Gemini.Framework.Commands
     {
         private readonly Dictionary<Type, CommandDefinition> _commandDefinitionsLookup;
         private readonly Dictionary<CommandDefinition, Command> _commands;
+        private readonly Dictionary<Command, TargetableCommand> _targetableCommands;
             
         [ImportMany]
         private CommandDefinition[] _commandDefinitions;
@@ -18,6 +19,7 @@ namespace Gemini.Framework.Commands
         {
             _commandDefinitionsLookup = new Dictionary<Type, CommandDefinition>();
             _commands = new Dictionary<CommandDefinition, Command>();
+            _targetableCommands = new Dictionary<Command, TargetableCommand>();
         }
 
         public CommandDefinition GetCommandDefinition(Type commandDefinitionType)
@@ -35,6 +37,14 @@ namespace Gemini.Framework.Commands
             if (!_commands.TryGetValue(commandDefinition, out command))
                 command = _commands[commandDefinition] = new Command(commandDefinition);
             return command;
+        }
+
+        public TargetableCommand GetTargetableCommand(Command command)
+        {
+            TargetableCommand targetableCommand;
+            if (!_targetableCommands.TryGetValue(command, out targetableCommand))
+                targetableCommand = _targetableCommands[command] = new TargetableCommand(command);
+            return targetableCommand;
         }
     }
 }

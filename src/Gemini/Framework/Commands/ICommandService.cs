@@ -6,5 +6,6 @@ namespace Gemini.Framework.Commands
     {
         CommandDefinition GetCommandDefinition(Type commandDefinitionType);
         Command GetCommand(CommandDefinition commandDefinition);
+        TargetableCommand GetTargetableCommand(Command command);
     }
 }
