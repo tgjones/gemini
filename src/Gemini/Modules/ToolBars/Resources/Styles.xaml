@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:cal="http://www.caliburnproject.org">
-	<Image x:Key="ToolBarButtonImage" x:Shared="false" Source="{Binding Icon}">
+	<Image x:Key="ToolBarButtonImage" x:Shared="false" Source="{Binding IconSource}">
 		<Image.Style>
 			<Style TargetType="Image">
 				<Setter Property="Width" Value="16" />
@@ -29,9 +29,8 @@
 	<Style x:Key="ToolBarButton" TargetType="{x:Type Button}" 
 		   BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
 		<Setter Property="Content" Value="{StaticResource ToolBarButtonImage}" />
-        <Setter Property="ToolTip" Value="{Binding FullToolTip}" />
+        <Setter Property="ToolTip" Value="{Binding ToolTip}" />
         <Setter Property="ToolTipService.IsEnabled" Value="{Binding HasToolTip}" />
-		<Setter Property="cal:Action.Target" Value="{Binding}" />
-		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
-	</Style>
+        <Setter Property="Command" Value="{Binding Command}" />
+    </Style>
 </ResourceDictionary>

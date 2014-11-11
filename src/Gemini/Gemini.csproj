@@ -100,12 +100,22 @@
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
+    <Compile Include="Framework\Menus\CommandMenuItemDefinition.cs" />
+    <Compile Include="Framework\Menus\MenuBarDefinition.cs" />
     <Compile Include="Framework\Menus\MenuDefinition.cs" />
+    <Compile Include="Framework\Menus\MenuDefinitionBase.cs" />
+    <Compile Include="Framework\Menus\MenuItemDefinition.cs" />
+    <Compile Include="Framework\Menus\MenuItemGroupDefinition.cs" />
+    <Compile Include="Framework\Menus\TextMenuItemDefinition.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
     <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\Threading\TaskUtility.cs" />
+    <Compile Include="Framework\ToolBars\CommandToolBarItemDefinition.cs" />
+    <Compile Include="Framework\ToolBars\ToolBarDefinition.cs" />
+    <Compile Include="Framework\ToolBars\ToolBarItemDefinition.cs" />
+    <Compile Include="Framework\ToolBars\ToolBarItemGroupDefinition.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Framework\Controls\DynamicStyle.cs" />
@@ -113,6 +123,8 @@
     <Compile Include="Modules\MainMenu\IMenuBuilder.cs" />
     <Compile Include="Modules\MainMenu\MenuBuilder.cs" />
     <Compile Include="Modules\MainMenu\MenuDefinitions.cs" />
+    <Compile Include="Modules\MainMenu\Models\CommandMenuItem.cs" />
+    <Compile Include="Modules\MainMenu\Models\StandardMenuItem.cs" />
     <Compile Include="Modules\MainMenu\ViewModels\MainMenuSettingsViewModel.cs" />
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
@@ -140,6 +152,7 @@
     <Compile Include="Modules\Shell\Controls\PanesStyleSelector.cs" />
     <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
     <Compile Include="Modules\Shell\MenuDefinitions.cs" />
+    <Compile Include="Modules\Shell\ToolBarDefinitions.cs" />
     <Compile Include="Modules\Shell\Views\IShellView.cs" />
     <Compile Include="Modules\Shell\Views\LayoutUtility.cs" />
     <Compile Include="Modules\ToolBars\Controls\ToolBarEx.cs" />
@@ -154,7 +167,7 @@
     <Compile Include="Modules\MainMenu\IMenu.cs" />
     <Compile Include="Modules\MainMenu\Models\MenuModel.cs" />
     <Compile Include="Modules\MainMenu\Models\MenuItemSeparator.cs" />
-    <Compile Include="Modules\MainMenu\Models\MenuItem.cs" />
+    <Compile Include="Modules\MainMenu\Models\TextMenuItem.cs" />
     <Compile Include="Framework\ModuleBase.cs" />
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\Results\IOpenResult.cs" />
@@ -180,11 +193,12 @@
     <Compile Include="Framework\Services\ResourceManager.cs" />
     <Compile Include="Framework\Services\ServiceProvider.cs" />
     <Compile Include="Framework\Tool.cs" />
+    <Compile Include="Modules\ToolBars\IToolBarBuilder.cs" />
     <Compile Include="Modules\ToolBars\IToolBars.cs" />
-    <Compile Include="Modules\ToolBars\Models\ToolBarItem.cs" />
-    <Compile Include="Modules\ToolBars\Models\ToggleToolBarItem.cs" />
+    <Compile Include="Modules\ToolBars\ToolBarBuilder.cs" />
+    <Compile Include="Modules\ToolBars\ToolBarDefinitions.cs" />
     <Compile Include="Modules\ToolBars\IToolBar.cs" />
-    <Compile Include="Modules\ToolBars\Models\StandardToolBarItem.cs" />
+    <Compile Include="Modules\ToolBars\Models\CommandToolBarItem.cs" />
     <Compile Include="Modules\ToolBars\Models\ToolBarModel.cs" />
     <Compile Include="Modules\ToolBars\Models\ToolBarItemBase.cs" />
     <Compile Include="Modules\ToolBars\Models\ToolBarItemSeparator.cs" />
@@ -227,6 +241,7 @@
     <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\MenuDefinitions.cs" />
+    <Compile Include="Modules\UndoRedo\ToolBarDefinitions.cs" />
     <Compile Include="Modules\UndoRedo\ViewModels\HistoryItemViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IUndoableAction.cs" />
     <Compile Include="Modules\UndoRedo\IUndoRedoManager.cs" />
@@ -344,6 +359,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

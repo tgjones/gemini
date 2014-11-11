@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Menus;
 using Gemini.Modules.MainMenu.Models;

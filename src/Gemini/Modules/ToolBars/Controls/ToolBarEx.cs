@@ -26,9 +26,6 @@ namespace Gemini.Modules.ToolBars.Controls
             if (_currentItem is ToolBarItemSeparator)
                 return new Separator();
 
-            if (_currentItem is ToggleToolBarItem)
-                return CreateButton<ToggleButton>(ToggleButtonStyleKey, "ToolBarToggleButton");
-
             return CreateButton<Button>(ButtonStyleKey, "ToolBarButton");
         }
 

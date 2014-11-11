@@ -4,21 +4,10 @@ using Gemini.Framework.Commands;
 
 namespace Gemini.Framework.Menus
 {
-    public class MenuDefinition : MenuDefinitionBase
+    public class TextMenuItemDefinition : MenuItemDefinition
     {
-        private readonly MenuBarDefinition _menuBar;
-        private readonly int _sortOrder;
         private readonly string _text;
-
-        public MenuBarDefinition MenuBar
-        {
-            get { return _menuBar; }
-        }
-
-        public override int SortOrder
-        {
-            get { return _sortOrder; }
-        }
+        private readonly Uri _iconSource;
 
         public override string Text
         {
@@ -27,7 +16,7 @@ namespace Gemini.Framework.Menus
 
         public override Uri IconSource
         {
-            get { return null; }
+            get { return _iconSource; }
         }
 
         public override KeyGesture KeyGesture
@@ -40,11 +29,11 @@ namespace Gemini.Framework.Menus
             get { return null; }
         }
 
-        public MenuDefinition(MenuBarDefinition menuBar, int sortOrder, string text)
+        public TextMenuItemDefinition(MenuItemGroupDefinition group, int sortOrder, string text, Uri iconSource = null)
+            : base(group, sortOrder)
         {
-            _menuBar = menuBar;
-            _sortOrder = sortOrder;
             _text = text;
+            _iconSource = iconSource;
         }
     }
 }

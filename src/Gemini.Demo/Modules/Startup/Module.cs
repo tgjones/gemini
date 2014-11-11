@@ -5,12 +5,9 @@ using System.Reflection;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
-using Gemini.Framework.Results;
 using Gemini.Framework.Services;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
-using Gemini.Modules.ToolBars.Models;
-using Microsoft.Win32;
 
 namespace Gemini.Demo.Modules.Startup
 {
@@ -34,15 +31,7 @@ namespace Gemini.Demo.Modules.Startup
 		public override void Initialize()
 		{
 		    Shell.ShowFloatingWindowsInTaskbar = true;
-
             Shell.ToolBars.Visible = true;
-		    Shell.ToolBars.Items.Add(new ToolBarModel
-		    {
-		        new ToolBarItem("Open", OpenFile).WithIcon(typeof(ModuleBase).Assembly).WithToolTip("Open"),
-                ToolBarItemBase.Separator,
-                //new UndoToolBarItem(),
-                //new RedoToolBarItem()
-		    });
 
             //MainWindow.WindowState = WindowState.Maximized;
             MainWindow.Title = "Gemini Demo";
@@ -68,13 +57,6 @@ namespace Gemini.Demo.Modules.Startup
                     .ToInspectableObject();
             else
                 _inspectorTool.SelectedObject = null;
-        }
-
-        private IEnumerable<IResult> OpenFile()
-        {
-            var dialog = new OpenFileDialog();
-            yield return Show.CommonDialog(dialog);
-            yield return Show.Document(dialog.FileName);
         }
 	}
 }
