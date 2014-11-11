@@ -88,6 +88,7 @@
     <Compile Include="Framework\Commands\CommandHandler.cs" />
     <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
     <Compile Include="Framework\Commands\CommandKeyGestureService.cs" />
+    <Compile Include="Framework\Commands\CommandListDefinition.cs" />
     <Compile Include="Framework\Commands\CommandRouter.cs" />
     <Compile Include="Framework\Commands\CommandService.cs" />
     <Compile Include="Framework\Commands\ICommandHandlerMetadata.cs" />
@@ -125,7 +126,9 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\NewFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\NewFileCommandHandler.cs" />

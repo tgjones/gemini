@@ -37,5 +37,14 @@ namespace Gemini.Modules.MainMenu
 
         [Export]
         public static MenuItemGroupDefinition ToolsOptionsMenuGroup = new MenuItemGroupDefinition(ToolsMenu, 100);
+
+        [Export]
+        public static MenuDefinition WindowMenu = new MenuDefinition(MainMenuBar, 20, "_Window");
+
+        [Export]
+        public static MenuItemGroupDefinition WindowDocumentListMenuGroup = new MenuItemGroupDefinition(WindowMenu, 10);
+
+        [Export]
+        public static MenuDefinition HelpMenu = new MenuDefinition(MainMenuBar, 30, "_Help");
     }
 }

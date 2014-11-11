@@ -35,7 +35,8 @@ namespace Gemini.Modules.MainMenu
             {
                 var menuModel = new TextMenuItem(menu);
                 AddGroupsRecursive(menu, menuModel);
-                result.Add(menuModel);
+                if (menuModel.Children.Any())
+                    result.Add(menuModel);
             }
         }
 
@@ -62,7 +63,7 @@ namespace Gemini.Modules.MainMenu
                     menuModel.Add(menuItemModel);
                 }
 
-                if (i < groups.Count - 1)
+                if (i < groups.Count - 1 && menuItems.Any())
                     menuModel.Add(new MenuItemSeparator());
             }
         }

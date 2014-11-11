@@ -22,11 +22,11 @@ namespace Gemini.Modules.Shell.Commands
         [ImportMany]
         private IEditorProvider[] _editorProviders;
 
-        public override void Update(List<Command> commands)
+        public override void Update(Command command, List<Command> commands)
         {
             foreach (var editorProvider in _editorProviders)
                 foreach (var editorFileType in editorProvider.FileTypes)
-                    commands.Add(new Command(_commandService.GetCommandDefinition(typeof(NewFileCommandListDefinition)))
+                    commands.Add(new Command(command.CommandDefinition)
                     {
                         Text = editorFileType.Name,
                         Tag = new NewFileTag

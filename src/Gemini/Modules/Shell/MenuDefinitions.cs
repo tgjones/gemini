@@ -25,5 +25,9 @@ namespace Gemini.Modules.Shell
         [Export]
         public static MenuItemDefinition FileExitMenuItem = new CommandMenuItemDefinition<ExitCommandDefinition>(
             MainMenu.MenuDefinitions.FileExitOpenMenuGroup, 0);
+
+        [Export]
+        public static MenuItemDefinition WindowDocumentList = new CommandMenuItemDefinition<SwitchToDocumentCommandDefinition>(
+            MainMenu.MenuDefinitions.WindowDocumentListMenuGroup, 0);
     }
 }

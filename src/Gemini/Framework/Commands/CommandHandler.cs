@@ -17,8 +17,7 @@ namespace Gemini.Framework.Commands
         /// Only override for "list"-type commands
         /// (commands that expand into a list of commands)
         /// </summary>
-        /// <param name="commands"></param>
-        public virtual void Update(List<Command> commands)
+        public virtual void Update(Command command, List<Command> commands)
         {
             throw new NotSupportedException();
         }

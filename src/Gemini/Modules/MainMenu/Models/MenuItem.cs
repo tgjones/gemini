@@ -84,7 +84,7 @@ namespace Gemini.Modules.MainMenu.Models
                 _listItems.Clear();
 
 	            var listCommands = new List<Command>();
-                commandHandler.Update(listCommands);
+                commandHandler.Update(_command, listCommands);
 
                 _command.Visible = false;
 
