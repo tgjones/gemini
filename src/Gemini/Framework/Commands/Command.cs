@@ -9,6 +9,7 @@ namespace Gemini.Framework.Commands
         private readonly CommandDefinition _commandDefinition;
         private bool _visible = true;
         private bool _enabled = true;
+        private bool _checked;
         private string _text;
         private string _toolTip;
         private Uri _iconSource;
@@ -36,6 +37,16 @@ namespace Gemini.Framework.Commands
             {
                 _enabled = value;
                 NotifyOfPropertyChange(() => Enabled);
+            }
+        }
+
+        public bool Checked
+        {
+            get { return _checked; }
+            set
+            {
+                _checked = value;
+                NotifyOfPropertyChange(() => Checked);
             }
         }
 

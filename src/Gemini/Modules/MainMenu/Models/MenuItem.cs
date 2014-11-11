@@ -51,7 +51,7 @@ namespace Gemini.Modules.MainMenu.Models
 
         public override bool IsChecked
         {
-            get { return false; } // TODO
+            get { return _command.Checked; }
         }
 
         public override bool IsVisible
