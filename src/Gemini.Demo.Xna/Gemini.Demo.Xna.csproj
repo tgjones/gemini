@@ -103,12 +103,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\PrimitiveList\Commands\ViewPrimitiveListCommandDefinition.cs" />
+    <Compile Include="Modules\PrimitiveList\Commands\ViewPrimitiveListCommandHandler.cs" />
     <Compile Include="Modules\PrimitiveList\Controls\RotatableCubeControl.cs" />
-    <Compile Include="Modules\PrimitiveList\Module.cs" />
+    <Compile Include="Modules\PrimitiveList\MenuDefinitions.cs" />
     <Compile Include="Modules\PrimitiveList\ViewModels\PrimitiveListViewModel.cs" />
     <Compile Include="Modules\PrimitiveList\Views\PrimitiveListView.xaml.cs">
       <DependentUpon>PrimitiveListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\SceneViewer\Commands\ViewSceneViewerCommandDefinition.cs" />
+    <Compile Include="Modules\SceneViewer\Commands\ViewSceneViewerCommandHandler.cs" />
+    <Compile Include="Modules\SceneViewer\MenuDefinitions.cs" />
     <Compile Include="Modules\SceneViewer\Module.cs" />
     <Compile Include="Primitives\CubePrimitive.cs" />
     <Compile Include="Primitives\GeometricPrimitive.cs" />

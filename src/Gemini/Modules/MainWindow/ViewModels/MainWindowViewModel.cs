@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
+using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 
 namespace Gemini.Modules.MainWindow.ViewModels
@@ -72,9 +72,18 @@ namespace Gemini.Modules.MainWindow.ViewModels
             get { return _shell; }
         }
 
+        [Import]
+        private ICommandKeyGestureService _commandKeyGestureService;
+
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {
             ActivateItem(_shell);
+        }
+
+        protected override void OnViewLoaded(object view)
+        {
+            _commandKeyGestureService.BindKeyGestures((UIElement) view);
+            base.OnViewLoaded(view);
         }
     }
 }

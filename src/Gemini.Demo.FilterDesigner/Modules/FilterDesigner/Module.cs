@@ -3,9 +3,7 @@ using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Demo.FilterDesigner.Modules.FilterDesigner.ViewModels;
 using Gemini.Framework;
-using Gemini.Framework.Results;
 using Gemini.Modules.Inspector;
-using Gemini.Modules.MainMenu.Models;
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner
 {
@@ -15,16 +13,6 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner
         public override IEnumerable<IDocument> DefaultDocuments
         {
             get { yield return new GraphViewModel(IoC.Get<IInspectorTool>()); }
-        }
-
-        public override void Initialize()
-        {
-            MainMenu.Find(KnownMenuItemNames.File).Children.Insert(1, new MenuItem("Open Graph", OpenGraph));
-        }
-
-        private static IEnumerable<IResult> OpenGraph()
-        {
-            yield return Show.Document(new GraphViewModel(IoC.Get<IInspectorTool>()));
         }
     }
 }

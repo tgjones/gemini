@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Caliburn.Micro;
 
 namespace Gemini.Modules.MainMenu.Models
@@ -20,16 +19,13 @@ namespace Gemini.Modules.MainMenu.Models
 
 		public IObservableCollection<MenuItemBase> Children { get; private set; }
 
-	    public virtual string Name { get; private set; }
-
 	    #endregion
 
 		#region Constructors
 
-		protected MenuItemBase(string name = null)
+		protected MenuItemBase()
 		{
 			Children = new BindableCollection<MenuItemBase>();
-            Name = name ?? "-";
 		}
 
 		#endregion
@@ -47,16 +43,6 @@ namespace Gemini.Modules.MainMenu.Models
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
-		}
-
-		public MenuItemBase Find(string name)
-		{
-		    return Children.FirstOrDefault(x => x.Name == name);
-		}
-
-		public bool Remove(string name)
-		{
-			return Children.Remove(Find(name));
 		}
 	}
 }

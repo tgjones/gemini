@@ -27,6 +27,7 @@ namespace Gemini.Framework.Services
 		IObservableCollection<IDocument> Documents { get; }
 		IObservableCollection<ITool> Tools { get; }
 
+        void ShowTool<TTool>() where TTool : ITool;
 		void ShowTool(ITool model);
 
 		void OpenDocument(IDocument model);

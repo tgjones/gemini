@@ -189,6 +189,12 @@ namespace Gemini.Modules.Shell.ViewModels
 	        base.OnViewLoaded(view);
 	    }
 
+	    public void ShowTool<TTool>()
+            where TTool : ITool
+	    {
+	        ShowTool(IoC.Get<TTool>());
+	    }
+
 	    public void ShowTool(ITool model)
 		{
 		    if (Tools.Contains(model))

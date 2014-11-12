@@ -107,8 +107,11 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandDefinition.cs" />
+    <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandHandler.cs" />
     <Compile Include="Modules\FilterDesigner\Design\DesignTimeGraphViewModel.cs" />
     <Compile Include="Modules\FilterDesigner\Design\DesignTimeImages.cs" />
+    <Compile Include="Modules\FilterDesigner\MenuDefinitions.cs" />
     <Compile Include="Modules\FilterDesigner\Module.cs" />
     <Compile Include="Modules\FilterDesigner\ShaderEffects\AddEffect.cs" />
     <Compile Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.cs" />

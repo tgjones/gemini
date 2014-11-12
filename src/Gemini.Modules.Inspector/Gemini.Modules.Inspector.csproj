@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoundPropertyDescriptor.cs" />
+    <Compile Include="Commands\ViewInspectorCommandDefinition.cs" />
+    <Compile Include="Commands\ViewInspectorCommandHandler.cs" />
     <Compile Include="Controls\LabelledControl.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\ScreenColorPicker.cs" />
@@ -139,7 +141,7 @@
       <DependentUpon>RangeEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inspectors\RangeEditorViewModel.cs" />
-    <Compile Include="Module.cs" />
+    <Compile Include="MenuDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ExpressionUtility.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
