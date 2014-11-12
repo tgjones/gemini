@@ -48,6 +48,24 @@ namespace Gemini.Modules.GraphEditor.Controls
             set { SetValue(ElementItemTemplateProperty, value); }
         }
 
+        public static readonly DependencyProperty ElementItemDataTemplateSelectorProperty = DependencyProperty.Register(
+            "ElementItemDataTemplateSelector", typeof(DataTemplateSelector), typeof(GraphControl), new PropertyMetadata(null));
+
+        public DataTemplateSelector ElementItemDataTemplateSelector
+        {
+            get { return (DataTemplateSelector) GetValue(ElementItemDataTemplateSelectorProperty); }
+            set { SetValue(ElementItemDataTemplateSelectorProperty, value); }
+        }
+
+        public static readonly DependencyProperty ConnectionItemDataTemplateSelectorProperty = DependencyProperty.Register(
+            "ConnectionItemDataTemplateSelector", typeof(DataTemplateSelector), typeof(GraphControl), new PropertyMetadata(null));
+
+        public DataTemplateSelector ConnectionItemDataTemplateSelector
+        {
+            get { return (DataTemplateSelector) GetValue(ConnectionItemDataTemplateSelectorProperty); }
+            set { SetValue(ConnectionItemDataTemplateSelectorProperty, value); }
+        }
+
         public static readonly DependencyProperty ConnectionsSourceProperty = DependencyProperty.Register(
             "ConnectionsSource", typeof(IEnumerable), typeof(GraphControl));
 

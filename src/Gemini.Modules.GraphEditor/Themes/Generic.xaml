@@ -41,7 +41,8 @@
 							<Grid>
 								<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
 											  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
-											  ItemTemplate="{TemplateBinding ConnectionItemTemplate}">
+											  ItemTemplate="{TemplateBinding ConnectionItemTemplate}"
+                                              ItemTemplateSelector="{TemplateBinding ConnectionItemDataTemplateSelector}">
 									<ItemsControl.ItemsPanel>
 										<ItemsPanelTemplate>
 											<Canvas />
@@ -52,7 +53,8 @@
 								<local:ElementItemsControl x:Name="PART_ElementItemsControl"
 														   ItemsSource="{TemplateBinding ElementsSource}"
 														   ItemContainerStyle="{TemplateBinding ElementItemContainerStyle}"
-														   ItemTemplate="{TemplateBinding ElementItemTemplate}">
+														   ItemTemplate="{TemplateBinding ElementItemTemplate}"
+                                                           ItemTemplateSelector="{TemplateBinding ElementItemDataTemplateSelector}">
 									<ListBox.Template>
 										<ControlTemplate TargetType="ListBox">
 											<Canvas IsItemsHost="True" />
