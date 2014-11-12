@@ -19,5 +19,7 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             SelectionMode = SelectionMode.Extended;
         }
+
+    
     }
 }
