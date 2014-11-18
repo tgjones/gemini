@@ -1,0 +1,301 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit">
+    
+    <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
+
+    <Style x:Key="MetroButtonChrome" TargetType="{x:Type xctk:ButtonChrome}">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="{DynamicResource WindowTitleColorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowTitleColorBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xctk:ButtonChrome}">
+                    <Grid>
+
+                        <Border x:Name="OuterBorder" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <Border x:Name="InnerBorder" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding InnerCornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonNormalInnerBorderKey}}" />
+                        </Border>
+
+                        <Border x:Name="MouseOverVisual" Opacity="0" Visibility="Collapsed" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonMouseOverOuterBorderKey}}" Background="{DynamicResource SeparatorColorBrush}">
+                            <Border x:Name="MouseOverInnerVisual" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding InnerCornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonMouseOverInnerBorderKey}}" />
+                        </Border>
+                        <Border x:Name="PressedVisual" Opacity="0" Visibility="Collapsed" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonPressedOuterBorderKey}}" Background="{DynamicResource AccentColorBrush}">
+                            <Border x:Name="PressedInnerVisual" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding InnerCornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonPressedInnerBorderKey}}" />
+                        </Border>
+
+                        <Border x:Name="FocusVisual" Opacity="0" Visibility="Collapsed" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonFocusedOuterBorderKey}}" Background="{DynamicResource AccentColorBrush}">
+                            <Border x:Name="FocusInnerVisual" BorderThickness="1" CornerRadius="{TemplateBinding InnerCornerRadius}" BorderBrush="{DynamicResource {x:Static themes:ResourceKeys.ButtonFocusedInnerBorderKey}}" />
+                        </Border>
+
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+										      IsEnabled="{TemplateBinding IsEnabled}"
+										      Content="{TemplateBinding Content}"
+										      ContentStringFormat="{TemplateBinding ContentStringFormat}"
+										      ContentTemplate="{TemplateBinding ContentTemplate}"
+										      ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+
+                        <!-- If button is disabled, not checked, and is rendered normal -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="RenderEnabled" Value="False" />
+                                <Condition Property="RenderChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource {x:Static themes:ResourceKeys.ButtonDisabledOuterBorderKey}}" />
+                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{DynamicResource {x:Static themes:ResourceKeys.ButtonInnerBorderDisabledKey}}" />
+                            <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource {x:Static themes:ResourceKeys.ControlDisabledBackgroundKey}}" />
+                        </MultiTrigger>
+
+                        <!-- if button is enabled and pressed -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="RenderEnabled" Value="True" />
+                                <Condition Property="RenderPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PressedVisual" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PressedVisual" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:00.050" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PressedVisual" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00.115">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PressedVisual" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:00.115" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+
+                        <!-- if button is enabled, is not checked, the mouse is over, and not pressed -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="RenderEnabled" Value="True" />
+                                <Condition Property="RenderChecked" Value="False" />
+                                <Condition Property="RenderMouseOver" Value="True" />
+                                <Condition Property="RenderPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MouseOverVisual" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MouseOverVisual" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:00.115" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MouseOverVisual" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00.150">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MouseOverVisual" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:00.150" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+
+                        <!-- if button is enabled, checked, he mouse is not over, and it is not pressed -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="RenderEnabled" Value="True" />
+                                <Condition Property="RenderChecked" Value="True" />
+                                <Condition Property="RenderMouseOver" Value="False" />
+                                <Condition Property="RenderPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource {x:Static themes:ResourceKeys.ButtonPressedOuterBorderKey}}" />
+                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{DynamicResource {x:Static themes:ResourceKeys.ButtonPressedInnerBorderKey}}" />
+                            <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource AccentColorBrush}" />
+                        </MultiTrigger>
+
+                        <!-- if button is focused, is enabled, not pressed, and the mouse is not over -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="RenderFocused" Value="True" />
+                                <Condition Property="RenderEnabled" Value="True" />
+                                <Condition Property="RenderPressed" Value="False" />
+                                <Condition Property="RenderMouseOver" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:00.25" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00.115">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="FocusVisual" Storyboard.TargetProperty="Opacity">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:00.115" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+
+                        <!-- if not rendered normally -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="RenderNormal" Value="False" />
+                                <Condition Property="RenderChecked" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="Transparent" />
+                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{x:Null}" />
+                            <Setter TargetName="OuterBorder" Property="Background" Value="Transparent" />
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style TargetType="{x:Type xctk:SplitButton}">
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static themes:ResourceKeys.ButtonNormalBackgroundKey}}" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xctk:SplitButton}">
+                    <Grid x:Name="MainGrid" SnapsToDevicePixels="True">
+                        <xctk:ButtonChrome x:Name="ControlChrome" Background="{TemplateBinding Background}" RenderEnabled="{TemplateBinding IsEnabled}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="PART_ActionButton" Margin="0" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Padding="{TemplateBinding Padding}" >
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                    <Grid>
+                                        <xctk:ButtonChrome x:Name="ActionButtonChrome"
+                                                             BorderThickness="0"
+                                                             RenderChecked="{TemplateBinding IsOpen}"
+                                                             RenderEnabled="{TemplateBinding IsEnabled}"
+											                 RenderMouseOver="{Binding IsMouseOver, ElementName=ControlChrome}"
+											                 RenderPressed="{Binding IsPressed, ElementName=PART_ActionButton}"
+                                                             Style="{StaticResource MetroButtonChrome}">
+                                            <ContentPresenter Name="ActionButtonContent" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="true" />
+                                        </xctk:ButtonChrome>
+                                    </Grid>
+                                </Button>
+                                <ToggleButton x:Name="PART_ToggleButton"
+                                      Grid.Column="1"
+                                      IsTabStop="False"
+                                      IsChecked="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                      IsHitTestVisible="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource InverseBoolConverter}}">
+                                    <ToggleButton.Template>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </ToggleButton.Template>
+                                    <Grid>
+                                        <xctk:ButtonChrome x:Name="ToggleButtonChrome"
+                                                             BorderThickness="0"
+                                                             Padding="1,0,1,0"
+                                                             RenderChecked="{TemplateBinding IsOpen}"
+                                                             RenderEnabled="{TemplateBinding IsEnabled}"
+											                 RenderMouseOver="{Binding IsMouseOver, ElementName=ControlChrome}"
+											                 RenderPressed="{Binding IsPressed, ElementName=PART_ToggleButton}"
+                                                             Style="{StaticResource MetroButtonChrome}">
+                                            <Grid x:Name="arrowGlyph" IsHitTestVisible="False" Margin="4,3,4,3">
+                                                <Path x:Name="Arrow" Width="7" Height="4" Data="M 0,1 C0,1 0,0 0,0 0,0 3,0 3,0 3,0 3,1 3,1 3,1 4,1 4,1 4,1 4,0 4,0 4,0 7,0 7,0 7,0 7,1 7,1 7,1 6,1 6,1 6,1 6,2 6,2 6,2 5,2 5,2 5,2 5,3 5,3 5,3 4,3 4,3 4,3 4,4 4,4 4,4 3,4 3,4 3,4 3,3 3,3 3,3 2,3 2,3 2,3 2,2 2,2 2,2 1,2 1,2 1,2 1,1 1,1 1,1 0,1 0,1 z" Fill="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                                            </Grid>
+                                        </xctk:ButtonChrome>
+                                    </Grid>
+                                </ToggleButton>
+                            </Grid>
+                        </xctk:ButtonChrome>
+
+                        <Popup x:Name="PART_Popup" 
+                         HorizontalOffset="1"
+                         VerticalOffset="1"
+                         AllowsTransparency="True"
+                         StaysOpen="False"
+                         Placement="Bottom"
+                         Focusable="False"
+                         IsOpen="{Binding IsChecked, ElementName=PART_ToggleButton}">
+                            <!-- TODO: Create Popup Styles that can be reused on all popups in the toolkit-->
+                            <Border BorderThickness="1" Background="{DynamicResource ControlOpenColorBrush}" BorderBrush="{DynamicResource SeparatorColorBrush}"
+                                    Margin="0 0 8 8" Effect="{DynamicResource StandardDropShadow}">
+                                <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding DropDownContent}" />
+                            </Border>
+                        </Popup>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter TargetName="ActionButtonChrome" Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

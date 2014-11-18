@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo", "Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
 EndProject
@@ -44,10 +44,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.GraphEditor", "Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj", "{F8204886-1F61-4247-B7B2-EA5E518162F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.FilterDesigner", "Gemini.Demo.FilterDesigner\Gemini.Demo.FilterDesigner.csproj", "{742E5923-C633-40E0-BFD4-8C2CF2D9675B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Metro", "Gemini.Modules.Metro\Gemini.Modules.Metro.csproj", "{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.Metro", "Gemini.Demo.Metro\Gemini.Demo.Metro.csproj", "{771D29EE-65DA-4B04-A168-46CB325DA448}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.SharpDX", "Gemini.Modules.SharpDX\Gemini.Modules.SharpDX.csproj", "{F91E6435-097E-4B7F-BC89-FDA2135E1B22}"
 EndProject
@@ -211,26 +207,6 @@ Global
 		{742E5923-C633-40E0-BFD4-8C2CF2D9675B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{742E5923-C633-40E0-BFD4-8C2CF2D9675B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{742E5923-C633-40E0-BFD4-8C2CF2D9675B}.Release|x86.ActiveCfg = Release|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6CE1E3C9-8431-45CF-9E0A-3AC3445EB9A4}.Release|x86.ActiveCfg = Release|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Release|Any CPU.Build.0 = Release|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{771D29EE-65DA-4B04-A168-46CB325DA448}.Release|x86.ActiveCfg = Release|Any CPU
 		{F91E6435-097E-4B7F-BC89-FDA2135E1B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F91E6435-097E-4B7F-BC89-FDA2135E1B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91E6435-097E-4B7F-BC89-FDA2135E1B22}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -289,7 +265,6 @@ Global
 		{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{9F269618-D57F-42A1-9C8E-71291BB10588} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{742E5923-C633-40E0-BFD4-8C2CF2D9675B} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
-		{771D29EE-65DA-4B04-A168-46CB325DA448} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{6C67C98D-1E3F-4362-8D18-F66BC19B0A1E} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{C723324B-E0FA-4F77-A616-F2B96F4C4198} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 	EndGlobalSection

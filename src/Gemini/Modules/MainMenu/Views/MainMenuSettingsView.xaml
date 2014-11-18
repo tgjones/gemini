@@ -6,7 +6,18 @@
              xmlns:viewModels="clr-namespace:Gemini.Modules.MainMenu.ViewModels"
     x:Class="Gemini.Modules.MainMenu.Views.MainMenuSettingsView" mc:Ignorable="d" d:DesignHeight="300"
     d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModels:MainMenuSettingsViewModel}">
-    <Grid>
-        <CheckBox IsChecked="{Binding AutoHideMainMenu}">Auto hide main menu</CheckBox>
-    </Grid>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Width="100">Color Theme:</Label>
+            <ComboBox ItemsSource="{Binding Themes}" 
+                      SelectedItem="{Binding SelectedTheme}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <CheckBox IsChecked="{Binding AutoHideMainMenu}" Margin="0 5 0 0">Auto hide main menu</CheckBox>
+    </StackPanel>
 </UserControl>

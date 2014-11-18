@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
+
+    <Style x:Key="MainWindowStyle" TargetType="controls:MetroWindow" BasedOn="{StaticResource {x:Type controls:MetroWindow}}">
+        <Setter Property="WindowTitleBrush" Value="{DynamicResource MainWindowCaptionActiveBackground}" />
+        <Setter Property="TitleForeground" Value="{DynamicResource MainWindowCaptionActiveText}" />
+        <Setter Property="NonActiveWindowTitleBrush" Value="{DynamicResource MainWindowCaptionInactiveBackground}" />
+        <Setter Property="TitleCaps" Value="False" />
+        
+        <Style.Triggers>
+            <Trigger Property="IsActive" Value="False">
+                <Setter Property="TitleForeground" Value="{DynamicResource MainWindowCaptionInactiveText}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- We don't use it, but it's referenced by the base style. -->
+    <SolidColorBrush x:Key="WindowTitleColorBrush" Color="Red" />
+
+    <system:Double x:Key="WindowTitleFontSize">16</system:Double>
+    <FontFamily x:Key="HeaderFontFamily">
+        Segoe UI, Segoe UI Light, Lucida Sans Unicode, Verdana
+    </FontFamily>
+
+</ResourceDictionary>

@@ -27,7 +27,6 @@
         <xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
 							 AnchorablesSource="{Binding Tools}"
 							 ActiveContent="{Binding CurrentActiveItem, Mode=TwoWay}"
-							 Theme="{DynamicResource AvalonDockTheme}"
                              LayoutUpdated="OnManagerLayoutUpdated">
             <xcad:DockingManager.LayoutItemTemplate>
 				<DataTemplate>

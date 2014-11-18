@@ -7,6 +7,7 @@ using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
+using Gemini.Framework.Themes;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.Shell.Views;
 using Gemini.Modules.StatusBar;
@@ -19,35 +20,15 @@ namespace Gemini.Modules.Shell.ViewModels
 	{
         public event EventHandler ActiveDocumentChanging;
         public event EventHandler ActiveDocumentChanged;
-        public event EventHandler CurrentThemeChanged;
 
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
 
+        [Import]
+	    private IThemeManager _themeManager;
+
 	    private IShellView _shellView;
 	    private bool _closing;
-
-        private ResourceDictionary _currentTheme;
-        public ResourceDictionary CurrentTheme
-        {
-            get { return _currentTheme; }
-            set
-            {
-                if (_currentTheme == value)
-                    return;
-
-                if (_currentTheme != null)
-                    Application.Current.Resources.MergedDictionaries.Remove(_currentTheme);
-
-                _currentTheme = value;
-
-                if (_currentTheme != null)
-                    Application.Current.Resources.MergedDictionaries.Add(_currentTheme);
-
-                if (CurrentThemeChanged != null)
-                    CurrentThemeChanged(this, EventArgs.Empty);
-            }
-        }
 
 		[Import]
 		private IMenu _mainMenu;
@@ -164,11 +145,8 @@ namespace Gemini.Modules.Shell.ViewModels
 	            module.Initialize();
 
 	        // If after initialization no theme was loaded, load the default one
-	        if (_currentTheme == null)
-	            CurrentTheme = new ResourceDictionary
-	            {
-	                Source = new Uri("/Gemini;component/Themes/VS2010/Theme.xaml", UriKind.Relative)
-	            };
+	        if (_themeManager.CurrentTheme == null)
+	            _themeManager.SetCurrentTheme("Light");
 
             _shellView = (IShellView) view;
 	        if (!HasPersistedState)

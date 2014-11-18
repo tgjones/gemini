@@ -20,9 +20,6 @@ namespace Gemini.Demo.Modules.Startup
         [Import]
         private IInspectorTool _inspectorTool;
 
-		[Import]
-		private IResourceManager _resourceManager;
-
         public override IEnumerable<Type> DefaultTools
         {
             get { yield return typeof(IInspectorTool); }
@@ -39,9 +36,6 @@ namespace Gemini.Demo.Modules.Startup
             Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
             Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
             Shell.StatusBar.AddItem("Col 79", new GridLength(100));
-
-            MainWindow.Icon = _resourceManager.GetBitmap("Resources/Icon.png", 
-				Assembly.GetExecutingAssembly().GetAssemblyName());
 
 			_output.AppendLine("Started up");
 

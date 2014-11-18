@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using Caliburn.Micro;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.StatusBar;
@@ -11,10 +10,6 @@ namespace Gemini.Framework.Services
 	{
         event EventHandler ActiveDocumentChanging;
         event EventHandler ActiveDocumentChanged;
-
-	    event EventHandler CurrentThemeChanged;
-
-        ResourceDictionary CurrentTheme { get; set; }
 
         bool ShowFloatingWindowsInTaskbar { get; set; }
         

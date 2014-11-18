@@ -1,0 +1,176 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Controls/Window.xaml" />
+        <ResourceDictionary Source="Controls/WindowCommands.xaml" />
+        <ResourceDictionary Source="Controls/Menu.xaml" />
+        <ResourceDictionary Source="Controls/Toolbar.xaml" />
+        <ResourceDictionary Source="Controls/Tooltip.xaml" />
+        <ResourceDictionary Source="Controls/SplitButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Menu -->
+    <SolidColorBrush x:Key="MenuDefaultBackground" Color="#D6DBE9" />
+    <SolidColorBrush x:Key="MenuDefaultText" Color="#1B293E" />
+
+    <!-- Menu → Popup -->
+    <SolidColorBrush x:Key="MenuPopupDefaultArrow" Color="#000000" />
+    <SolidColorBrush x:Key="MenuPopupDefaultBackgroundBottom" Color="#EAF0FF" />
+    <SolidColorBrush x:Key="MenuPopupDefaultBackgroundTop" Color="#EAF0FF" />
+    <SolidColorBrush x:Key="MenuPopupDefaultBorder" Color="#9BA7B7" />
+    <SolidColorBrush x:Key="MenuPopupDefaultCheckmark" Color="#000000" />
+    <SolidColorBrush x:Key="MenuPopupDefaultCheckmarkBackground" Color="#E9ECEE" />
+    <SolidColorBrush x:Key="MenuPopupDefaultIconBackground" Color="#EAF0FF" />
+    <SolidColorBrush x:Key="MenuPopupDefaultSeparator" Color="#BEC3CB" />
+    <SolidColorBrush x:Key="MenuPopupDefaultText" Color="#1B293E" />
+    <SolidColorBrush x:Key="MenuPopupDisabledCheckmark" Color="#A2A4A5" />
+    <SolidColorBrush x:Key="MenuPopupDisabledCheckmarkBackground" Color="#E9ECEE" />
+    <SolidColorBrush x:Key="MenuPopupDisabledText" Color="#808080" />
+    <SolidColorBrush x:Key="MenuPopupHoveredArrow" Color="#000000" />
+    <SolidColorBrush x:Key="MenuPopupHoveredCheckmark" Color="#000000" />
+    <SolidColorBrush x:Key="MenuPopupHoveredCheckmarkBackground" Color="#FFFCF4" />
+    <SolidColorBrush x:Key="MenuPopupHoveredItemBackground" Color="#FDF4BF" />
+    <SolidColorBrush x:Key="MenuPopupHoveredText" Color="#1E1E1E" />
+
+    <!-- Menu → Top Level Header -->
+    <SolidColorBrush x:Key="MenuTopLevelHeaderDefaultText" Color="#1B293E" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderHoveredBackground" Color="#FDF4BF" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderHoveredBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderHoveredText" Color="#000000" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderPressedBackground" Color="#EAF0FF" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderPressedBorder" Color="#9BA7B7" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderPressedText" Color="#1B293E" />
+
+    <!-- Toolbar -->
+    <SolidColorBrush x:Key="ToolbarDefaultBackground" Color="#CFD6E5" />
+    <SolidColorBrush x:Key="ToolbarDefaultBorder" Color="#DCE0EC" />
+    <SolidColorBrush x:Key="ToolbarDefaultGrip" Color="#60728C" />
+    <SolidColorBrush x:Key="ToolbarDefaultOverflowButtonBackground" Color="#DCE0EC" />
+    <SolidColorBrush x:Key="ToolbarDefaultOverflowButtonGlyph" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarDefaultSeparator" Color="#8591A2" />
+    <SolidColorBrush x:Key="ToolbarDefaultSeparatorAccent" Color="#D6DBE9" />
+    <SolidColorBrush x:Key="ToolbarDefaultTray" Color="#D6DBE9" />
+
+    <!-- Toolbar → Button -->
+    <SolidColorBrush x:Key="ToolbarButtonCheckedBackground" Color="#FDF4BF" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedText" Color="#000000" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedHoveredBackground" Color="#FFFCF4" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedHoveredBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedHoveredText" Color="#000000" />
+    <SolidColorBrush x:Key="ToolbarButtonDefaultArrow" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarButtonDefaultText" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarButtonDisabledArrow" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarButtonDisabledText" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredArrow" Color="#000000" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredBackground" Color="#FDF4BF" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredSeparator" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredText" Color="#000000" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedArrow" Color="#000000" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedBackground" Color="#FFF29D" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedText" Color="#000000" />
+
+    <!-- Toolbar → Overflow Button -->
+    <SolidColorBrush x:Key="ToolbarOverflowButtonDefaultBackground" Color="#DCE0EC" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonDefaultGlyph" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredBackground" Color="#FFF29D" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredGlyph" Color="#1B293E" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonPressedBackground" Color="#FDF4BF" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonPressedGlyph" Color="#1B293E" />
+
+    <!-- Main Window -->
+    <SolidColorBrush x:Key="MainWindowActiveBorder" Color="#0D202D" />
+    <SolidColorBrush x:Key="MainWindowInactiveBorder" Color="#525252" />
+
+    <!-- Main Window → Caption -->
+    <SolidColorBrush x:Key="MainWindowCaptionActiveBackground" Color="#D6DBE9" />
+    <SolidColorBrush x:Key="MainWindowCaptionActiveText" Color="#000000" />
+    <SolidColorBrush x:Key="MainWindowCaptionInactiveBackground" Color="#D6DBE9" />
+    <SolidColorBrush x:Key="MainWindowCaptionInactiveText" Color="#99000000" />
+
+    <!-- Main Window → Caption → Button -->
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveGlyph" Color="#000000" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveHoveredBackground" Color="#FFFCF4" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveHoveredBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveHoveredGlyph" Color="#000000" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveGlyph" Color="#000000" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveHoveredBackground" Color="#FFFCF4" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveHoveredBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveHoveredGlyph" Color="#000000" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonPressedBackground" Color="#FFE8A6" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonPressedBorder" Color="#E5C365" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonPressedGlyph" Color="#000000" />
+
+    <!--Colors-->
+    <Color x:Key="AccentColor">#007ACC</Color>
+    <Color x:Key="AccentHighlightColor">#1C97EA</Color>
+    <Color x:Key="AccentDoubleHighlightColor">#52B0EF</Color>
+    <Color x:Key="AccentTripleHighlightColor">#1C97EA</Color>
+    <Color x:Key="GlowColor">#007ACC</Color>
+    <Color x:Key="ControlHighlightedColor">#FEFEFE</Color>
+    <Color x:Key="ControlOpenColor">#E7E8EC</Color>
+    <Color x:Key="SeparatorColor">#CCCEDB</Color>
+    <Color x:Key="SplitterColor">#D0D1D7</Color>
+
+    <Color x:Key="DragUnselected">#FF999999</Color>
+    <Color x:Key="DragSelected">#FF59A8DE</Color>
+
+
+    <!--Brush-->
+    <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentColor}" />
+    <SolidColorBrush x:Key="AccentHighlightColorBrush" Color="{DynamicResource AccentHighlightColor}" />
+    <SolidColorBrush x:Key="AccentDoubleHighlightColorBrush" Color="{DynamicResource AccentDoubleHighlightColor}" />
+    <SolidColorBrush x:Key="AccentTripleHighlightColorBrush" Color="{DynamicResource AccentTripleHighlightColor}" />
+    <SolidColorBrush x:Key="BlackBrush" Color="Black" />
+    <SolidColorBrush x:Key="WhiteBrush" Color="White" />
+    <SolidColorBrush x:Key="TabBrush" Color="Black" />
+    
+    <SolidColorBrush x:Key="ControlHighlightedColorBrush" Color="{DynamicResource ControlHighlightedColor}" />
+    <SolidColorBrush x:Key="GrayBrush5" Color="{DynamicResource ControlHighlightedColor}" />
+    <SolidColorBrush x:Key="ControlOpenColorBrush" Color="{DynamicResource ControlOpenColor}" />
+    <SolidColorBrush x:Key="SeparatorColorBrush" Color="{DynamicResource SeparatorColor}" />
+    <SolidColorBrush x:Key="SplitterColorBrush" Color="{DynamicResource SplitterColor}" />
+
+    <SolidColorBrush x:Key="DragUnselectedBrush" Color="{DynamicResource DragUnselected}" />
+    <SolidColorBrush x:Key="DragSelectedBrush" Color="{DynamicResource DragSelected}" />
+
+    <!--Shadow-->
+    <DropShadowEffect x:Key="StandardDropShadow" ShadowDepth="3" Opacity="0.6" Direction="305" />
+
+    <!--Pattern-->
+    <DrawingBrush x:Key="DragSelectedPattern" ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,4,5"
+                  Viewbox="0,0,4,5" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="{DynamicResource DragSelectedBrush}">
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <GeometryGroup.Children>
+                            <RectangleGeometry Rect="0,0,1,1" />
+                            <RectangleGeometry Rect="0,4,1,1" />
+                            <RectangleGeometry Rect="2,2,1,1" />
+                        </GeometryGroup.Children>
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="DragUnselectedPattern" ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,4,5"
+                  Viewbox="0,0,4,5" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="{DynamicResource DragUnselectedBrush}">
+                <GeometryDrawing.Geometry>
+                    <GeometryGroup>
+                        <GeometryGroup.Children>
+                            <RectangleGeometry Rect="0,0,1,1" />
+                            <RectangleGeometry Rect="0,4,1,1" />
+                            <RectangleGeometry Rect="2,2,1,1" />
+                        </GeometryGroup.Children>
+                    </GeometryGroup>
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+</ResourceDictionary>

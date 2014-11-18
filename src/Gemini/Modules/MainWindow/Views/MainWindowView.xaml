@@ -1,12 +1,33 @@
-﻿<Window x:Class="Gemini.Modules.MainWindow.Views.MainWindowView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cal="http://www.caliburnproject.org"
-        Title="{Binding Title}" Icon="{Binding Icon}" 
-		Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}" 
-		WindowStartupLocation="CenterScreen"
-        WindowState="{Binding WindowState}">
-	<Grid>
+﻿<mahapps:MetroWindow x:Class="Gemini.Modules.MainWindow.Views.MainWindowView"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                     xmlns:cal="http://www.caliburnproject.org"
+                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                     xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+                     WindowTransitionsEnabled="False" 
+                     Title="{Binding Title}" 
+                     Icon="{Binding Icon}" 
+                     Width="{Binding Width, Mode=TwoWay}" 
+                     Height="{Binding Height, Mode=TwoWay}" 
+                     WindowStartupLocation="CenterScreen"
+                     WindowState="{Binding WindowState}"
+                     GlowBrush="#FF007ACC"
+                     ResizeMode="CanResizeWithGrip"
+                     UseLayoutRounding="True"
+                     Style="{DynamicResource MainWindowStyle}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="ThemeDictionary" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <i:Interaction.Behaviors>
+        <behaviours:BorderlessWindowBehavior />
+        <behaviours:GlowWindowBehavior />
+    </i:Interaction.Behaviors>
+    <Grid>
 		<ContentControl cal:View.Model="{Binding Shell}" />
 	</Grid>
-</Window>
+</mahapps:MetroWindow>

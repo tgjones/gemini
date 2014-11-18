@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
@@ -73,10 +74,15 @@ namespace Gemini.Modules.MainWindow.ViewModels
         }
 
         [Import]
+        private IResourceManager _resourceManager;
+
+        [Import]
         private ICommandKeyGestureService _commandKeyGestureService;
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {
+            if (_icon == null)
+                _icon = _resourceManager.GetBitmap("Resources/Icons/Gemini-32.png");
             ActivateItem(_shell);
         }
 

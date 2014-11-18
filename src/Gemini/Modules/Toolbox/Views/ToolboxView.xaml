@@ -11,7 +11,8 @@
     <Grid>
 		<ListBox x:Name="ListBox" ItemsSource="{Binding Items}" 
 				 PreviewMouseLeftButtonDown="OnListBoxPreviewMouseLeftButtonDown"
-				 MouseMove="OnListBoxMouseMove">
+				 MouseMove="OnListBoxMouseMove"
+                 Background="Transparent">
 			<ListBox.GroupStyle>
 				<GroupStyle>
 					<GroupStyle.ContainerStyle>
