@@ -5,6 +5,7 @@
                      xmlns:cal="http://www.caliburnproject.org"
                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                      xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
+                     xmlns:behaviors="clr-namespace:Gemini.Framework.Behaviors"
                      WindowTransitionsEnabled="False" 
                      Title="{Binding Title}" 
                      Icon="{Binding Icon}" 
@@ -12,7 +13,6 @@
                      Height="{Binding Height, Mode=TwoWay}" 
                      WindowStartupLocation="CenterScreen"
                      WindowState="{Binding WindowState}"
-                     GlowBrush="#FF007ACC"
                      ResizeMode="CanResizeWithGrip"
                      UseLayoutRounding="True"
                      Style="{DynamicResource MainWindowStyle}">
@@ -25,7 +25,7 @@
     </Window.Resources>
     <i:Interaction.Behaviors>
         <behaviours:BorderlessWindowBehavior />
-        <behaviours:GlowWindowBehavior />
+        <behaviors:CustomGlowWindowBehavior />
     </i:Interaction.Behaviors>
     <Grid>
 		<ContentControl cal:View.Model="{Binding Shell}" />

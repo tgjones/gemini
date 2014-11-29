@@ -15,12 +15,11 @@
 
     <!-- Menu → Popup -->
     <SolidColorBrush x:Key="MenuPopupDefaultArrow" Color="#000000" />
-    <SolidColorBrush x:Key="MenuPopupDefaultBackgroundBottom" Color="#EAF0FF" />
-    <SolidColorBrush x:Key="MenuPopupDefaultBackgroundTop" Color="#EAF0FF" />
+    <SolidColorBrush x:Key="MenuPopupDefaultBackground" Color="#EAF0FF" />
     <SolidColorBrush x:Key="MenuPopupDefaultBorder" Color="#9BA7B7" />
     <SolidColorBrush x:Key="MenuPopupDefaultCheckmark" Color="#000000" />
     <SolidColorBrush x:Key="MenuPopupDefaultCheckmarkBackground" Color="#E9ECEE" />
-    <SolidColorBrush x:Key="MenuPopupDefaultIconBackground" Color="#EAF0FF" />
+    <SolidColorBrush x:Key="MenuPopupDefaultIconBackground" Color="#F2F4FE" />
     <SolidColorBrush x:Key="MenuPopupDefaultSeparator" Color="#BEC3CB" />
     <SolidColorBrush x:Key="MenuPopupDefaultText" Color="#1B293E" />
     <SolidColorBrush x:Key="MenuPopupDisabledCheckmark" Color="#A2A4A5" />

@@ -43,7 +43,8 @@
     <Reference Include="Caliburn.Micro.Platform">
       <HintPath>..\packages\Caliburn.Micro.2.0.1\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro">
+    <Reference Include="MahApps.Metro, Version=0.14.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MahApps.Metro.0.14.0.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -89,6 +90,7 @@
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Behaviors\BindableTreeViewSelectedItemBehavior.cs" />
+    <Compile Include="Framework\Behaviors\CustomGlowWindowBehavior.cs" />
     <Compile Include="Framework\Commands\Command.cs" />
     <Compile Include="Framework\Commands\CommandDefinition.cs" />
     <Compile Include="Framework\Commands\CommandHandler.cs" />

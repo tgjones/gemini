@@ -3,12 +3,16 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
-    <Style x:Key="MainWindowStyle" TargetType="controls:MetroWindow" BasedOn="{StaticResource {x:Type controls:MetroWindow}}">
+    <Style x:Key="MainWindowStyle" 
+           TargetType="controls:MetroWindow"
+           BasedOn="{StaticResource {x:Type controls:MetroWindow}}">
         <Setter Property="WindowTitleBrush" Value="{DynamicResource MainWindowCaptionActiveBackground}" />
         <Setter Property="TitleForeground" Value="{DynamicResource MainWindowCaptionActiveText}" />
         <Setter Property="NonActiveWindowTitleBrush" Value="{DynamicResource MainWindowCaptionInactiveBackground}" />
         <Setter Property="TitleCaps" Value="False" />
-        
+        <Setter Property="GlowBrush" Value="{DynamicResource MainWindowActiveBorder}" />
+        <Setter Property="NonActiveGlowBrush" Value="{DynamicResource MainWindowInactiveBorder}" />
+
         <Style.Triggers>
             <Trigger Property="IsActive" Value="False">
                 <Setter Property="TitleForeground" Value="{DynamicResource MainWindowCaptionInactiveText}" />
