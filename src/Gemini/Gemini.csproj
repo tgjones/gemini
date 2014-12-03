@@ -120,6 +120,9 @@
     <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
+    <Compile Include="Framework\ShaderEffects\GrayscaleEffect.cs" />
+    <Compile Include="Framework\ShaderEffects\ShaderEffectBase.cs" />
+    <Compile Include="Framework\ShaderEffects\ShaderEffectUtility.cs" />
     <Compile Include="Framework\Themes\ITheme.cs" />
     <Compile Include="Framework\Themes\IThemeManager.cs" />
     <Compile Include="Framework\Themes\ThemeManager.cs" />
@@ -205,6 +208,7 @@
     <Compile Include="Framework\Services\ResourceManager.cs" />
     <Compile Include="Framework\Services\ServiceProvider.cs" />
     <Compile Include="Framework\Tool.cs" />
+    <Compile Include="Modules\ToolBars\Controls\ToolBarTrayContainer.cs" />
     <Compile Include="Modules\ToolBars\IToolBarBuilder.cs" />
     <Compile Include="Modules\ToolBars\IToolBars.cs" />
     <Compile Include="Modules\ToolBars\ToolBarBuilder.cs" />
@@ -366,6 +370,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Resource Include="Framework\ShaderEffects\GrayscaleEffect.ps" />
     <None Include="Gemini.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

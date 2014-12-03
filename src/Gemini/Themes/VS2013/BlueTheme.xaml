@@ -44,8 +44,6 @@
     <SolidColorBrush x:Key="ToolbarDefaultBackground" Color="#CFD6E5" />
     <SolidColorBrush x:Key="ToolbarDefaultBorder" Color="#DCE0EC" />
     <SolidColorBrush x:Key="ToolbarDefaultGrip" Color="#60728C" />
-    <SolidColorBrush x:Key="ToolbarDefaultOverflowButtonBackground" Color="#DCE0EC" />
-    <SolidColorBrush x:Key="ToolbarDefaultOverflowButtonGlyph" Color="#1B293E" />
     <SolidColorBrush x:Key="ToolbarDefaultSeparator" Color="#8591A2" />
     <SolidColorBrush x:Key="ToolbarDefaultSeparatorAccent" Color="#D6DBE9" />
     <SolidColorBrush x:Key="ToolbarDefaultTray" Color="#D6DBE9" />
@@ -74,9 +72,9 @@
     <!-- Toolbar → Overflow Button -->
     <SolidColorBrush x:Key="ToolbarOverflowButtonDefaultBackground" Color="#DCE0EC" />
     <SolidColorBrush x:Key="ToolbarOverflowButtonDefaultGlyph" Color="#1B293E" />
-    <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredBackground" Color="#FFF29D" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredBackground" Color="#FDF4BF" />
     <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredGlyph" Color="#1B293E" />
-    <SolidColorBrush x:Key="ToolbarOverflowButtonPressedBackground" Color="#FDF4BF" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonPressedBackground" Color="#FFF29D" />
     <SolidColorBrush x:Key="ToolbarOverflowButtonPressedGlyph" Color="#1B293E" />
 
     <!-- Main Window -->

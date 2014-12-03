@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Gemini.Framework.Controls">
-	<LinearGradientBrush x:Key="ToolBarHorizontalBackground" EndPoint="0,1" StartPoint="0,0">
+	<!--<LinearGradientBrush x:Key="ToolBarHorizontalBackground" EndPoint="0,1" StartPoint="0,0">
 		<GradientStop Color="#FFFFFF" Offset="0"/>
 		<GradientStop Color="#FFFBFF" Offset="0.5"/>
 		<GradientStop Color="#F7F7F7" Offset="1"/>
@@ -48,9 +48,11 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
-	</Style>
+	</Style>-->
 
-	<SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+    <!--<Style TargetType="{x:Type controls:ToolPaneToolBar}" BasedOn="{DynamicResource {x:Type ToolBar}}" />-->
+
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
 	<SolidColorBrush x:Key="GlyphBrush" Color="#444" />
 
 	<ControlTemplate x:Key="ExpanderToggleButton" TargetType="ToggleButton">

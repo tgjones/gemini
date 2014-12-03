@@ -48,7 +48,8 @@
 		</gemini:ToolPaneToolBar>
 		<DataGrid Grid.Row="1" ItemsSource="{Binding FilteredItems}" AutoGenerateColumns="False" IsReadOnly="True"
 				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke"
-				  MouseDoubleClick="OnDataGridMouseDoubleClick">
+				  MouseDoubleClick="OnDataGridMouseDoubleClick" BorderThickness="0"
+                  Background="White">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Width="SizeToCells">
 					<DataGridTemplateColumn.CellTemplate>

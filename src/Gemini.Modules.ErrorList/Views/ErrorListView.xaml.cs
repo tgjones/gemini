@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
-using Gemini.Modules.ErrorList.ViewModels;
 
 namespace Gemini.Modules.ErrorList.Views
 {

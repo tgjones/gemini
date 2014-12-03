@@ -4,11 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xcad="clr-namespace:Xceed.Wpf.AvalonDock.Converters;assembly=Xceed.Wpf.AvalonDock"
+             xmlns:controls="clr-namespace:Gemini.Modules.ToolBars.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="300">
-	<UserControl.Resources>
+    <UserControl.Resources>
         <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-	</UserControl.Resources>
-	<ToolBarTray x:Name="ToolBarTray" 
-				 Visibility="{Binding Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
+    </UserControl.Resources>
+    <controls:ToolBarTrayContainer>
+        <ToolBarTray x:Name="ToolBarTray"
+				     Visibility="{Binding Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
+    </controls:ToolBarTrayContainer>
 </UserControl>

@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using Gemini.Framework.Controls;
 using Gemini.Modules.ToolBars.Models;
 
@@ -12,6 +11,7 @@ namespace Gemini.Modules.ToolBars.Controls
 
         public ToolBarEx()
         {
+            SetOverflowMode(this, OverflowMode.Always);
             SetResourceReference(StyleProperty, typeof(ToolBar));
         }
 

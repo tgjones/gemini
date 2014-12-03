@@ -13,7 +13,7 @@ namespace Gemini.Framework.Controls
 
         public ToolPaneToolBar()
         {
-            SetOverflowMode(this, OverflowMode.Never);
+            SetOverflowMode(this, OverflowMode.AsNeeded);
             ToolBarTray.SetIsLocked(this, true);
         }
     }
