@@ -9,20 +9,26 @@ namespace Gemini.Modules.MainMenu
     [Export(typeof(IMenuBuilder))]
     public class MenuBuilder : IMenuBuilder
     {
-        [Import]
-        private ICommandService _commandService;
+        private readonly ICommandService _commandService;
+        private readonly MenuBarDefinition[] _menuBars;
+        private readonly MenuDefinition[] _menus;
+        private readonly MenuItemGroupDefinition[] _menuItemGroups;
+        private readonly MenuItemDefinition[] _menuItems;
 
-        [ImportMany]
-        private MenuBarDefinition[] _menuBars;
-
-        [ImportMany]
-        private MenuDefinition[] _menus;
-
-        [ImportMany]
-        private MenuItemGroupDefinition[] _menuItemGroups;
-
-        [ImportMany]
-        private MenuItemDefinition[] _menuItems;
+        [ImportingConstructor]
+        public MenuBuilder(
+            ICommandService commandService,
+            [ImportMany] MenuBarDefinition[] menuBars,
+            [ImportMany] MenuDefinition[] menus,
+            [ImportMany] MenuItemGroupDefinition[] menuItemGroups,
+            [ImportMany] MenuItemDefinition[] menuItems)
+        {
+            _commandService = commandService;
+            _menuBars = menuBars;
+            _menus = menus;
+            _menuItemGroups = menuItemGroups;
+            _menuItems = menuItems;
+        }
 
         public void BuildMenuBar(MenuBarDefinition menuBarDefinition, MenuModel result)
         {

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Reflection;
 using System.Windows;
-using Caliburn.Micro;
 using Gemini.Framework;
-using Gemini.Framework.Services;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
 
@@ -14,18 +11,22 @@ namespace Gemini.Demo.Modules.Startup
 	[Export(typeof(IModule))]
 	public class Module : ModuleBase
 	{
-		[Import]
-		private IOutput _output;
-
-        [Import]
-        private IInspectorTool _inspectorTool;
+		private readonly IOutput _output;
+        private readonly IInspectorTool _inspectorTool;
 
         public override IEnumerable<Type> DefaultTools
         {
             get { yield return typeof(IInspectorTool); }
         }
 
-		public override void Initialize()
+        [ImportingConstructor]
+	    public Module(IOutput output, IInspectorTool inspectorTool)
+        {
+            _output = output;
+            _inspectorTool = inspectorTool;
+        }
+
+	    public override void Initialize()
 		{
 		    Shell.ShowFloatingWindowsInTaskbar = true;
             Shell.ToolBars.Visible = true;

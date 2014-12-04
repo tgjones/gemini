@@ -12,8 +12,13 @@ namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Commands
     [CommandHandler(typeof(OpenGraphCommandDefinition))]
     public class OpenGraphCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public OpenGraphCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

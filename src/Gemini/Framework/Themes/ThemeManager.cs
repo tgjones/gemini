@@ -34,23 +34,19 @@ namespace Gemini.Framework.Themes
 
         private ResourceDictionary _applicationResourceDictionary;
 
-        [ImportMany]
-        private ITheme[] _themes;
-
-        private ITheme _currentTheme;
+        private readonly ITheme[] _themes;
 
         public IEnumerable<ITheme> Themes
         {
             get { return _themes; }
         }
 
-        public ITheme CurrentTheme
-        {
-            get { return _currentTheme; }
-        }
+        public ITheme CurrentTheme { get; private set; }
 
-        public ThemeManager()
+        [ImportingConstructor]
+        public ThemeManager([ImportMany] ITheme[] themes)
         {
+            _themes = themes;
             _settingsEventManager.AddListener(s => s.ThemeName, value => SetCurrentTheme(value));
         }
 
@@ -60,7 +56,7 @@ namespace Gemini.Framework.Themes
             if (theme == null)
                 return false;
 
-            _currentTheme = theme;
+            CurrentTheme = theme;
 
             if (_applicationResourceDictionary == null)
             {

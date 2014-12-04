@@ -14,8 +14,7 @@ namespace Gemini.Modules.ToolBars.ViewModels
             get { return _items; }
         }
 
-        [Import]
-        private IToolBarBuilder _toolBarBuilder;
+        private readonly IToolBarBuilder _toolBarBuilder;
 
         private bool _visible;
         public bool Visible
@@ -28,8 +27,10 @@ namespace Gemini.Modules.ToolBars.ViewModels
             }
         }
 
-        public ToolBarsViewModel()
+        [ImportingConstructor]
+        public ToolBarsViewModel(IToolBarBuilder toolBarBuilder)
         {
+            _toolBarBuilder = toolBarBuilder;
             _items = new BindableCollection<IToolBar>();
         }
 

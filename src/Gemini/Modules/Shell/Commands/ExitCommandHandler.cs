@@ -9,8 +9,13 @@ namespace Gemini.Modules.Shell.Commands
     [CommandHandler(typeof(ExitCommandDefinition))]
     public class ExitCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ExitCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

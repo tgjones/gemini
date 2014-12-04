@@ -10,8 +10,13 @@ namespace Gemini.Demo.Xna.Modules.PrimitiveList.Commands
     [CommandHandler(typeof(ViewPrimitiveListCommandDefinition))]
     public class ViewPrimitiveListCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewPrimitiveListCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

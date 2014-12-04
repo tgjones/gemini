@@ -8,17 +8,18 @@ namespace Gemini.Modules.MainMenu.ViewModels
 	[Export(typeof(IMenu))]
     public class MainMenuViewModel : MenuModel, IPartImportsSatisfiedNotification
 	{
-        [Import]
-        private IMenuBuilder _menuBuilder;
+        private readonly IMenuBuilder _menuBuilder;
 
 	    private bool _autoHide;
 
 	    private readonly SettingsPropertyChangedEventManager<Properties.Settings> _settingsEventManager =
 	        new SettingsPropertyChangedEventManager<Properties.Settings>(Properties.Settings.Default);
 
-	    public MainMenuViewModel()
+        [ImportingConstructor]
+	    public MainMenuViewModel(IMenuBuilder menuBuilder)
 	    {
-	        _autoHide = Properties.Settings.Default.AutoHideMainMenu;
+            _menuBuilder = menuBuilder;
+            _autoHide = Properties.Settings.Default.AutoHideMainMenu;
             _settingsEventManager.AddListener(s => s.AutoHideMainMenu, value => { AutoHide = value; });
 		}
 

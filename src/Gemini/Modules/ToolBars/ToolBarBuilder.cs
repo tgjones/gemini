@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Gemini.Framework.Commands;
 using Gemini.Framework.ToolBars;
@@ -9,17 +10,23 @@ namespace Gemini.Modules.ToolBars
     [Export(typeof(IToolBarBuilder))]
     public class ToolBarBuilder : IToolBarBuilder
     {
-        [Import]
-        private ICommandService _commandService;
+        private readonly ICommandService _commandService;
+        private readonly ToolBarDefinition[] _toolBars;
+        private readonly ToolBarItemGroupDefinition[] _toolBarItemGroups;
+        private readonly ToolBarItemDefinition[] _toolBarItems;
 
-        [ImportMany]
-        private ToolBarDefinition[] _toolBars;
-
-        [ImportMany]
-        private ToolBarItemGroupDefinition[] _toolBarItemGroups;
-
-        [ImportMany]
-        private ToolBarItemDefinition[] _toolBarItems;
+        [ImportingConstructor]
+        public ToolBarBuilder(
+            ICommandService commandService,
+            [ImportMany] ToolBarDefinition[] toolBars,
+            [ImportMany] ToolBarItemGroupDefinition[] toolBarItemGroups,
+            [ImportMany] ToolBarItemDefinition[] toolBarItems)
+        {
+            _commandService = commandService;
+            _toolBars = toolBars;
+            _toolBarItemGroups = toolBarItemGroups;
+            _toolBarItems = toolBarItems;
+        }
 
         public void BuildToolBars(IToolBars result)
         {

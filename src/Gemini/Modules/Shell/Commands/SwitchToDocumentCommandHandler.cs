@@ -11,8 +11,13 @@ namespace Gemini.Modules.Shell.Commands
     [CommandHandler(typeof(SwitchToDocumentCommandDefinition))]
     public class SwitchToDocumentCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public SwitchToDocumentCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override void Update(Command command, List<Command> commands)
         {

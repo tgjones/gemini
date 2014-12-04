@@ -12,10 +12,12 @@ namespace Gemini.Framework.Results
 		private readonly Type _editorType;
 		private readonly string _path;
 
-		[Import]
+#pragma warning disable 649
+        [Import]
 		private IShell _shell;
+#pragma warning restore 649
 
-		public OpenDocumentResult(IDocument editor)
+        public OpenDocumentResult(IDocument editor)
 		{
 			_editor = editor;
 		}

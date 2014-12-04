@@ -10,8 +10,13 @@ namespace Gemini.Demo.Xna.Modules.SceneViewer.Commands
     [CommandHandler(typeof(ViewSceneViewerCommandDefinition))]
     public class ViewSceneViewerCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewSceneViewerCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

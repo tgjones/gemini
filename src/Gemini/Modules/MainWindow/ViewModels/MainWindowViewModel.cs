@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.Composition;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
@@ -11,6 +10,17 @@ namespace Gemini.Modules.MainWindow.ViewModels
     [Export(typeof(IMainWindow))]
     public class MainWindowViewModel : Conductor<IShell>, IMainWindow, IPartImportsSatisfiedNotification
     {
+#pragma warning disable 649
+        [Import]
+        private IShell _shell;
+
+        [Import]
+        private IResourceManager _resourceManager;
+
+        [Import]
+        private ICommandKeyGestureService _commandKeyGestureService;
+#pragma warning restore 649
+
         private WindowState _windowState = WindowState.Normal;
         public WindowState WindowState
         {
@@ -66,18 +76,10 @@ namespace Gemini.Modules.MainWindow.ViewModels
             }
         }
 
-        [Import]
-        private IShell _shell;
         public IShell Shell
         {
             get { return _shell; }
         }
-
-        [Import]
-        private IResourceManager _resourceManager;
-
-        [Import]
-        private ICommandKeyGestureService _commandKeyGestureService;
 
         void IPartImportsSatisfiedNotification.OnImportsSatisfied()
         {

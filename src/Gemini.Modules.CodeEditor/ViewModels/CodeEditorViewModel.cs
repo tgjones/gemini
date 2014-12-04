@@ -7,7 +7,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 {
     [Export(typeof(CodeEditorViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
+#pragma warning disable 659
     public class CodeEditorViewModel : Document
+#pragma warning restore 659
     {
         private readonly LanguageDefinitionManager _languageDefinitionManager;
         private string _originalText;

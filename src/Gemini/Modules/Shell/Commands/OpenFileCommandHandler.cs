@@ -13,8 +13,13 @@ namespace Gemini.Modules.Shell.Commands
     [CommandHandler(typeof(OpenFileCommandDefinition))]
     public class OpenFileCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public OpenFileCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

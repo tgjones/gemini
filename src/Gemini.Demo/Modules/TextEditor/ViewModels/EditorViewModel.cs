@@ -4,8 +4,10 @@ using Gemini.Framework;
 
 namespace Gemini.Demo.Modules.TextEditor.ViewModels
 {
-	public class EditorViewModel : Document
-	{
+#pragma warning disable 659
+    public class EditorViewModel : Document
+#pragma warning restore 659
+    {
 		private string _originalText;
 		private string _path;
 		private string _fileName;
@@ -64,10 +66,10 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 			};
 		}
 
-		public override bool Equals(object obj)
+        public override bool Equals(object obj)
 		{
 			var other = obj as EditorViewModel;
 			return other != null && string.Compare(_path, other._path) == 0;
-		}
-	}
+        }
+    }
 }

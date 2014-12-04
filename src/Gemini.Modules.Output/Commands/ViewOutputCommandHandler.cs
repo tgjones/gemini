@@ -9,8 +9,13 @@ namespace Gemini.Modules.Output.Commands
     [CommandHandler(typeof(ViewOutputCommandDefinition))]
     public class ViewOutputCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewOutputCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

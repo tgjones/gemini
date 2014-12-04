@@ -9,8 +9,13 @@ namespace Gemini.Modules.Inspector.Commands
     [CommandHandler(typeof(ViewInspectorCommandDefinition))]
     public class ViewInspectorCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewInspectorCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

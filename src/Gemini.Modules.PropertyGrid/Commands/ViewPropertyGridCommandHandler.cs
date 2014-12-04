@@ -9,8 +9,13 @@ namespace Gemini.Modules.PropertyGrid.Commands
     [CommandHandler(typeof(ViewPropertyGridCommandDefinition))]
     public class ViewPropertyGridCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewPropertyGridCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

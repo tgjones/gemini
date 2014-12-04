@@ -10,8 +10,13 @@ namespace Gemini.Modules.Settings.Commands
     [CommandHandler(typeof(OpenSettingsCommandDefinition))]
     public class OpenSettingsCommandHandler : CommandHandler
     {
-        [Import]
-        private IWindowManager _windowManager;
+        private readonly IWindowManager _windowManager;
+
+        [ImportingConstructor]
+        public OpenSettingsCommandHandler(IWindowManager windowManager)
+        {
+            _windowManager = windowManager;
+        }
 
         public override Task Run(Command command)
         {

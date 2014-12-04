@@ -8,8 +8,15 @@ namespace Gemini.Framework.Commands
     [Export(typeof(ICommandRouter))]
     public class CommandRouter : ICommandRouter
     {
-        [ImportMany(typeof(CommandHandler))]
-        private Lazy<CommandHandler, ICommandHandlerMetadata>[] _commandHandlers;
+        private readonly Lazy<CommandHandler, ICommandHandlerMetadata>[] _commandHandlers;
+
+        [ImportingConstructor]
+        public CommandRouter(
+            [ImportMany(typeof(CommandHandler))] 
+            Lazy<CommandHandler, ICommandHandlerMetadata>[] commandHandlers)
+        {
+            _commandHandlers = commandHandlers;
+        }
 
         public CommandHandler GetCommandHandler(CommandDefinition commandDefinition, IInputElement target)
         {

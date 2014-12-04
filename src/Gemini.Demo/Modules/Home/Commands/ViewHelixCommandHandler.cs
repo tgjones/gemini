@@ -12,8 +12,13 @@ namespace Gemini.Demo.Modules.Home.Commands
     [CommandHandler(typeof(ViewHelixCommandDefinition))]
     public class ViewHelixCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewHelixCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

@@ -1,19 +1,23 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interactivity;
-using Gemini.Framework.Services;
 
 namespace Gemini.Framework.Commands
 {
     [Export(typeof(ICommandKeyGestureService))]
     public class CommandKeyGestureService : ICommandKeyGestureService
     {
-        [ImportMany]
-        private CommandDefinition[] _commandDefinitions;
+        private readonly CommandDefinition[] _commandDefinitions;
+        private readonly ICommandService _commandService;
 
-        [Import]
-        private ICommandService _commandService;
+        [ImportingConstructor]
+        public CommandKeyGestureService(
+            [ImportMany] CommandDefinition[] commandDefinitions,
+            ICommandService commandService)
+        {
+            _commandDefinitions = commandDefinitions;
+            _commandService = commandService;
+        }
 
         public void BindKeyGestures(UIElement uiElement)
         {

@@ -12,8 +12,13 @@ namespace Gemini.Demo.Modules.Home.Commands
     [CommandHandler(typeof(ViewHomeCommandDefinition))]
     public class ViewHomeCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewHomeCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

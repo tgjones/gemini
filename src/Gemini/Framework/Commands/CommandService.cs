@@ -12,11 +12,12 @@ namespace Gemini.Framework.Commands
         private readonly Dictionary<CommandDefinition, Command> _commands;
         private readonly Dictionary<Command, TargetableCommand> _targetableCommands;
             
-        [ImportMany]
-        private CommandDefinition[] _commandDefinitions;
+        private readonly CommandDefinition[] _commandDefinitions;
 
-        public CommandService()
+        [ImportingConstructor]
+        public CommandService([ImportMany] CommandDefinition[] commandDefinitions)
         {
+            _commandDefinitions = commandDefinitions;
             _commandDefinitionsLookup = new Dictionary<Type, CommandDefinition>();
             _commands = new Dictionary<CommandDefinition, Command>();
             _targetableCommands = new Dictionary<Command, TargetableCommand>();

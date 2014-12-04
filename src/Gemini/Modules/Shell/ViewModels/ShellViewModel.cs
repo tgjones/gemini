@@ -21,31 +21,36 @@ namespace Gemini.Modules.Shell.ViewModels
         public event EventHandler ActiveDocumentChanging;
         public event EventHandler ActiveDocumentChanged;
 
+#pragma warning disable 649
 		[ImportMany(typeof(IModule))]
 		private IEnumerable<IModule> _modules;
 
         [Import]
 	    private IThemeManager _themeManager;
 
-	    private IShellView _shellView;
+        [Import]
+        private IMenu _mainMenu;
+
+        [Import]
+        private IToolBars _toolBars;
+
+        [Import]
+        private IStatusBar _statusBar;
+#pragma warning restore 649
+
+        private IShellView _shellView;
 	    private bool _closing;
 
-		[Import]
-		private IMenu _mainMenu;
 		public IMenu MainMenu
 		{
 			get { return _mainMenu; }
 		}
 
-        [Import]
-        private IToolBars _toolBars;
         public IToolBars ToolBars
         {
             get { return _toolBars; }
         }
 
-		[Import]
-		private IStatusBar _statusBar;
 		public IStatusBar StatusBar
 		{
 			get { return _statusBar; }

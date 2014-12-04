@@ -4,14 +4,11 @@ using System.IO;
 using System.Windows;
 using Gemini.Framework;
 using Gemini.Modules.Shell.ViewModels;
-using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Gemini.Modules.Shell.Views
 {
 	public partial class ShellView : IShellView
 	{
-	    private LayoutRoot _layout;
-
 	    public ShellView()
 		{
 			InitializeComponent();

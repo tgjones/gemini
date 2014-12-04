@@ -24,9 +24,6 @@ namespace Gemini.Demo.Modules.Home
         public static MenuItemDefinition ViewHelixMenuItem = new CommandMenuItemDefinition<ViewHelixCommandDefinition>(
             ViewDemoMenuGroup, 1);
 
-        [Import]
-		private IPropertyGrid _propertyGrid;
-
 	    public override IEnumerable<IDocument> DefaultDocuments
 	    {
 	        get
@@ -38,7 +35,7 @@ namespace Gemini.Demo.Modules.Home
 
         public override void PostInitialize()
         {
-            _propertyGrid.SelectedObject = IoC.Get<HomeViewModel>();
+            IoC.Get<IPropertyGrid>().SelectedObject = IoC.Get<HomeViewModel>();
             Shell.OpenDocument(IoC.Get<HomeViewModel>());
         }
 	}

@@ -10,8 +10,13 @@ namespace Gemini.Modules.UndoRedo.Commands
     [CommandHandler(typeof(RedoCommandDefinition))]
     public class RedoCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public RedoCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override void Update(Command command)
         {

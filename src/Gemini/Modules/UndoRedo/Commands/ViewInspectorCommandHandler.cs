@@ -9,8 +9,13 @@ namespace Gemini.Modules.UndoRedo.Commands
     [CommandHandler(typeof(ViewHistoryCommandDefinition))]
     public class ViewHistoryCommandHandler : CommandHandler
     {
-        [Import]
-        private IShell _shell;
+        private readonly IShell _shell;
+
+        [ImportingConstructor]
+        public ViewHistoryCommandHandler(IShell shell)
+        {
+            _shell = shell;
+        }
 
         public override Task Run(Command command)
         {

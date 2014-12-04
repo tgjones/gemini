@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
@@ -13,14 +12,20 @@ namespace Gemini.Modules.Shell.Commands
     {
         private int _newFileCounter = 1;
 
-        [Import]
-        private ICommandService _commandService;
+        private readonly ICommandService _commandService;
+        private readonly IShell _shell;
+        private readonly IEditorProvider[] _editorProviders;
 
-        [Import]
-        private IShell _shell;
-
-        [ImportMany]
-        private IEditorProvider[] _editorProviders;
+        [ImportingConstructor]
+        public NewFileCommandHandler(
+            ICommandService commandService,
+            IShell shell,
+            [ImportMany] IEditorProvider[] editorProviders)
+        {
+            _commandService = commandService;
+            _shell = shell;
+            _editorProviders = editorProviders;
+        }
 
         public override void Update(Command command, List<Command> commands)
         {
