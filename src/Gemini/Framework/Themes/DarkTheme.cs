@@ -34,22 +34,13 @@ namespace Gemini.Framework.Themes
             get
             {
                 yield return new Uri("pack://application:,,,/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml");
-                yield return new Uri("pack://application:,,,/Gemini;component/Themes/VS2013/Menu.xaml");
+                yield return new Uri("pack://application:,,,/Gemini;component/Themes/VS2013/DarkTheme.xaml");
             }
         }
 
         public IEnumerable<Uri> MainWindowResources
         {
-            get
-            {
-                yield return new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml");
-                yield return new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml");
-                yield return new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml");
-                yield return new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml");
-                yield return new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml");
-                yield return new Uri("pack://application:,,,/Gemini;component/Themes/VS2013/DarkColors.xaml");
-                yield return new Uri("pack://application:,,,/Gemini;component/Themes/VS2013/DarkTheme.xaml");
-            }
+            get { yield break; }
         }
     }
 }

@@ -22,6 +22,9 @@
         M 0,0 L 4,3.5 L 0,7 Z
     </Geometry>
 
+    <!--Shadow-->
+    <DropShadowEffect x:Key="StandardDropShadow" ShadowDepth="3" Opacity="0.6" Direction="305" />
+
     <SolidColorBrush x:Key="DisabledMenuItemBrush" Color="#FF9A9A9A" />
 
     <!-- Original style from http://www.jeff.wilcox.name/2010/05/zunelike-contextmenu-style/ -->
@@ -67,7 +70,7 @@
                                 Effect="{DynamicResource StandardDropShadow}">
                             <StackPanel>
                                 <!--The illusion-->
-                                <Line Stroke="#FFEAF0FF" StrokeThickness="2"
+                                <Line Stroke="{DynamicResource MenuPopupDefaultBackground}" StrokeThickness="2"
                                       X1="0" X2="{Binding ActualWidth, ElementName=InnerBorder}"
                                       Y1="-1" Y2="-1" />
                                 <Grid>

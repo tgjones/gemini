@@ -1,0 +1,106 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Controls/Window.xaml" />
+        <ResourceDictionary Source="Controls/WindowCommands.xaml" />
+        <ResourceDictionary Source="Controls/Menu.xaml" />
+        <ResourceDictionary Source="Controls/Toolbar.xaml" />
+        <ResourceDictionary Source="Controls/Tooltip.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Menu -->
+    <SolidColorBrush x:Key="MenuDefaultBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="MenuDefaultText" Color="#1E1E1E" />
+
+    <!-- Menu → Popup -->
+    <SolidColorBrush x:Key="MenuPopupDefaultArrow" Color="#717171" />
+    <SolidColorBrush x:Key="MenuPopupDefaultBackground" Color="#F6F6F6" />
+    <SolidColorBrush x:Key="MenuPopupDefaultBorder" Color="#CCCEDB" />
+    <SolidColorBrush x:Key="MenuPopupDefaultCheckmark" Color="#717171" />
+    <SolidColorBrush x:Key="MenuPopupDefaultCheckmarkBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="MenuPopupDefaultIconBackground" Color="#F6F6F6" />
+    <SolidColorBrush x:Key="MenuPopupDefaultSeparator" Color="#E0E3E6" />
+    <SolidColorBrush x:Key="MenuPopupDefaultText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MenuPopupDisabledCheckmark" Color="#A2A4A5" />
+    <SolidColorBrush x:Key="MenuPopupDisabledCheckmarkBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="MenuPopupDisabledText" Color="#A2A4A5" />
+    <SolidColorBrush x:Key="MenuPopupHoveredArrow" Color="#007ACC" />
+    <SolidColorBrush x:Key="MenuPopupHoveredCheckmark" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MenuPopupHoveredCheckmarkBackground" Color="#C9DEF5" />
+    <SolidColorBrush x:Key="MenuPopupHoveredItemBackground" Color="#C9DEF5" />
+    <SolidColorBrush x:Key="MenuPopupHoveredText" Color="#1E1E1E" />
+
+    <!-- Menu → Top Level Header -->
+    <SolidColorBrush x:Key="MenuTopLevelHeaderDefaultText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderHoveredBackground" Color="#C9DEF5" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderHoveredBorder" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderHoveredText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderPressedBackground" Color="#F6F6F6" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderPressedBorder" Color="#CCCEDB" />
+    <SolidColorBrush x:Key="MenuTopLevelHeaderPressedText" Color="#1E1E1E" />
+
+    <!-- Toolbar -->
+    <SolidColorBrush x:Key="ToolbarDefaultBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarDefaultBorder" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarDefaultGrip" Color="#999999" />
+    <SolidColorBrush x:Key="ToolbarDefaultSeparator" Color="#CCCEDB" />
+    <SolidColorBrush x:Key="ToolbarDefaultSeparatorAccent" Color="#F5F5F5" />
+    <SolidColorBrush x:Key="ToolbarDefaultTray" Color="#EEEEF2" />
+
+    <!-- Toolbar → Button -->
+    <SolidColorBrush x:Key="ToolbarButtonCheckedBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedBorder" Color="#3399FF" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedHoveredBackground" Color="#C9DEF5" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedHoveredBorder" Color="#3399FF" />
+    <SolidColorBrush x:Key="ToolbarButtonCheckedHoveredText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="ToolbarButtonDefaultArrow" Color="#717171" />
+    <SolidColorBrush x:Key="ToolbarButtonDefaultText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="ToolbarButtonDisabledArrow" Color="#A2A4A5" />
+    <SolidColorBrush x:Key="ToolbarButtonDisabledText" Color="#A2A4A5" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredArrow" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredBackground" Color="#C9DEF5" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredBorder" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredSeparator" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarButtonHoveredText" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedArrow" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedBackground" Color="#007ACC" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedBorder" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarButtonPressedText" Color="#FFFFFF" />
+
+    <!-- Toolbar → Overflow Button -->
+    <SolidColorBrush x:Key="ToolbarOverflowButtonDefaultBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonDefaultGlyph" Color="#717171" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredBackground" Color="#C9DEF5" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonHoveredGlyph" Color="#007ACC" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonPressedBackground" Color="#007ACC" />
+    <SolidColorBrush x:Key="ToolbarOverflowButtonPressedGlyph" Color="#FFFFFF" />
+
+    <!-- Main Window -->
+    <SolidColorBrush x:Key="MainWindowActiveBorder" Color="#9B9FB9" />
+    <SolidColorBrush x:Key="MainWindowInactiveBorder" Color="#CCCEDB" />
+
+    <!-- Main Window → Caption -->
+    <SolidColorBrush x:Key="MainWindowCaptionActiveBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="MainWindowCaptionActiveText" Color="#525252" />
+    <SolidColorBrush x:Key="MainWindowCaptionInactiveBackground" Color="#EEEEF2" />
+    <SolidColorBrush x:Key="MainWindowCaptionInactiveText" Color="#99525252" />
+
+    <!-- Main Window → Caption → Button -->
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveGlyph" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveHoveredBackground" Color="#D8FFFFFF" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveHoveredBorder" Color="#D8FFFFFF" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonActiveHoveredGlyph" Color="#007ACC" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveGlyph" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveHoveredBackground" Color="#D8FFFFFF" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveHoveredBorder" Color="#D8FFFFFF" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonInactiveHoveredGlyph" Color="#007ACC" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonPressedBackground" Color="#007ACC" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonPressedBorder" Color="#007ACC" />
+    <SolidColorBrush x:Key="MainWindowCaptionButtonPressedGlyph" Color="#FFFFFF" />
+
+    <!-- ToolTip -->
+    <SolidColorBrush x:Key="EnvironmentToolTipBackground" Color="#F6F6F6" />
+    <SolidColorBrush x:Key="EnvironmentToolTipBorder" Color="#CCCEDB" />
+    <SolidColorBrush x:Key="EnvironmentToolTipText" Color="#1E1E1E" />
+</ResourceDictionary>

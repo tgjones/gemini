@@ -6,7 +6,6 @@
         <ResourceDictionary Source="Controls/Menu.xaml" />
         <ResourceDictionary Source="Controls/Toolbar.xaml" />
         <ResourceDictionary Source="Controls/Tooltip.xaml" />
-        <ResourceDictionary Source="Controls/SplitButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Menu -->
@@ -100,74 +99,8 @@
     <SolidColorBrush x:Key="MainWindowCaptionButtonPressedBorder" Color="#E5C365" />
     <SolidColorBrush x:Key="MainWindowCaptionButtonPressedGlyph" Color="#000000" />
 
-    <!--Colors-->
-    <Color x:Key="AccentColor">#007ACC</Color>
-    <Color x:Key="AccentHighlightColor">#1C97EA</Color>
-    <Color x:Key="AccentDoubleHighlightColor">#52B0EF</Color>
-    <Color x:Key="AccentTripleHighlightColor">#1C97EA</Color>
-    <Color x:Key="GlowColor">#007ACC</Color>
-    <Color x:Key="ControlHighlightedColor">#FEFEFE</Color>
-    <Color x:Key="ControlOpenColor">#E7E8EC</Color>
-    <Color x:Key="SeparatorColor">#CCCEDB</Color>
-    <Color x:Key="SplitterColor">#D0D1D7</Color>
-
-    <Color x:Key="DragUnselected">#FF999999</Color>
-    <Color x:Key="DragSelected">#FF59A8DE</Color>
-
-
-    <!--Brush-->
-    <SolidColorBrush x:Key="AccentColorBrush" Color="{DynamicResource AccentColor}" />
-    <SolidColorBrush x:Key="AccentHighlightColorBrush" Color="{DynamicResource AccentHighlightColor}" />
-    <SolidColorBrush x:Key="AccentDoubleHighlightColorBrush" Color="{DynamicResource AccentDoubleHighlightColor}" />
-    <SolidColorBrush x:Key="AccentTripleHighlightColorBrush" Color="{DynamicResource AccentTripleHighlightColor}" />
-    <SolidColorBrush x:Key="BlackBrush" Color="Black" />
-    <SolidColorBrush x:Key="WhiteBrush" Color="White" />
-    <SolidColorBrush x:Key="TabBrush" Color="Black" />
-    
-    <SolidColorBrush x:Key="ControlHighlightedColorBrush" Color="{DynamicResource ControlHighlightedColor}" />
-    <SolidColorBrush x:Key="GrayBrush5" Color="{DynamicResource ControlHighlightedColor}" />
-    <SolidColorBrush x:Key="ControlOpenColorBrush" Color="{DynamicResource ControlOpenColor}" />
-    <SolidColorBrush x:Key="SeparatorColorBrush" Color="{DynamicResource SeparatorColor}" />
-    <SolidColorBrush x:Key="SplitterColorBrush" Color="{DynamicResource SplitterColor}" />
-
-    <SolidColorBrush x:Key="DragUnselectedBrush" Color="{DynamicResource DragUnselected}" />
-    <SolidColorBrush x:Key="DragSelectedBrush" Color="{DynamicResource DragSelected}" />
-
-    <!--Shadow-->
-    <DropShadowEffect x:Key="StandardDropShadow" ShadowDepth="3" Opacity="0.6" Direction="305" />
-
-    <!--Pattern-->
-    <DrawingBrush x:Key="DragSelectedPattern" ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,4,5"
-                  Viewbox="0,0,4,5" TileMode="Tile">
-        <DrawingBrush.Drawing>
-            <GeometryDrawing Brush="{DynamicResource DragSelectedBrush}">
-                <GeometryDrawing.Geometry>
-                    <GeometryGroup>
-                        <GeometryGroup.Children>
-                            <RectangleGeometry Rect="0,0,1,1" />
-                            <RectangleGeometry Rect="0,4,1,1" />
-                            <RectangleGeometry Rect="2,2,1,1" />
-                        </GeometryGroup.Children>
-                    </GeometryGroup>
-                </GeometryDrawing.Geometry>
-            </GeometryDrawing>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
-    <DrawingBrush x:Key="DragUnselectedPattern" ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,4,5"
-                  Viewbox="0,0,4,5" TileMode="Tile">
-        <DrawingBrush.Drawing>
-            <GeometryDrawing Brush="{DynamicResource DragUnselectedBrush}">
-                <GeometryDrawing.Geometry>
-                    <GeometryGroup>
-                        <GeometryGroup.Children>
-                            <RectangleGeometry Rect="0,0,1,1" />
-                            <RectangleGeometry Rect="0,4,1,1" />
-                            <RectangleGeometry Rect="2,2,1,1" />
-                        </GeometryGroup.Children>
-                    </GeometryGroup>
-                </GeometryDrawing.Geometry>
-            </GeometryDrawing>
-        </DrawingBrush.Drawing>
-    </DrawingBrush>
-
+    <!-- ToolTip -->
+    <SolidColorBrush x:Key="EnvironmentToolTipBackground" Color="#E7E8EC" />
+    <SolidColorBrush x:Key="EnvironmentToolTipBorder" Color="#CCCEDB" />
+    <SolidColorBrush x:Key="EnvironmentToolTipText" Color="#1E1E1E" />
 </ResourceDictionary>

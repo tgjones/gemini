@@ -12,7 +12,7 @@
 		<ListBox x:Name="ListBox" ItemsSource="{Binding Items}" 
 				 PreviewMouseLeftButtonDown="OnListBoxPreviewMouseLeftButtonDown"
 				 MouseMove="OnListBoxMouseMove"
-                 Background="Transparent">
+                 Background="Transparent" BorderThickness="0">
 			<ListBox.GroupStyle>
 				<GroupStyle>
 					<GroupStyle.ContainerStyle>

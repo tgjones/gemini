@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
 			 mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
-	<xctk:PropertyGrid x:Name="_propertyGrid" SelectedObject="{Binding SelectedObject}"
-					   ShowSortOptions="False" IsCategorized="False"/>
+    <xctk:PropertyGrid x:Name="_propertyGrid" SelectedObject="{Binding SelectedObject}"
+					   ShowSortOptions="False" IsCategorized="False"
+                       BorderThickness="0" 
+                       Background="#EEEEF2" />
 </UserControl>

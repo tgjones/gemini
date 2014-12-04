@@ -60,6 +60,7 @@
     <Style x:Key="ToolBarButtonStyleBase" TargetType="{x:Type ButtonBase}">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Foreground" Value="{DynamicResource ToolbarButtonDefaultText}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -70,6 +71,7 @@
                                           RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
+                        <!-- Hovered -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="False" />
@@ -77,21 +79,28 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToolbarButtonHoveredBackground}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToolbarButtonHoveredBorder}" />
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonHoveredText}" />
                         </MultiTrigger>
+
+                        <!-- Pressed -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="True" />
-                                <Condition Property="IsMouseOver" Value="False" />
+                                <Condition Property="IsMouseOver" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToolbarButtonPressedBackground}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToolbarButtonPressedBorder}" />
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonPressedText}" />
                         </MultiTrigger>
+
+                        <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Content" Property="Effect">
                                 <Setter.Value>
                                     <shaderEffects:GrayscaleEffect />
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonDisabledText}" />
                             <Setter TargetName="Content" Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -103,6 +112,7 @@
     <Style x:Key="ToolBarToggleButtonStyleBase" TargetType="{x:Type ToggleButton}">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Foreground" Value="{DynamicResource ToolbarButtonDefaultText}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -113,6 +123,7 @@
                                           RecognizesAccessKey="True" />
                     </Border>
                     <ControlTemplate.Triggers>
+                        <!-- Hovered -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="False" />
@@ -120,7 +131,10 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToolbarButtonHoveredBackground}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToolbarButtonHoveredBorder}" />
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonHoveredText}" />
                         </MultiTrigger>
+                        
+                        <!-- Pressed -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsPressed" Value="True" />
@@ -128,7 +142,10 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToolbarButtonPressedBackground}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToolbarButtonPressedBorder}" />
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonPressedText}" />
                         </MultiTrigger>
+
+                        <!-- Checked -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True" />
@@ -136,7 +153,10 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToolbarButtonCheckedBackground}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToolbarButtonCheckedBorder}" />
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonCheckedText}" />
                         </MultiTrigger>
+
+                        <!-- Checked Hovered -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsChecked" Value="True" />
@@ -144,13 +164,17 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ToolbarButtonCheckedHoveredBackground}" />
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource ToolbarButtonCheckedHoveredBorder}" />
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonCheckedHoveredText}" />
                         </MultiTrigger>
+                        
+                        <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Content" Property="Effect">
                                 <Setter.Value>
                                     <shaderEffects:GrayscaleEffect />
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonDisabledText}" />
                             <Setter TargetName="Content" Property="Opacity" Value="0.5" />
                         </Trigger>
                     </ControlTemplate.Triggers>

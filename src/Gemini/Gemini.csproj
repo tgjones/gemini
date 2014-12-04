@@ -125,6 +125,7 @@
     <Compile Include="Framework\ShaderEffects\ShaderEffectUtility.cs" />
     <Compile Include="Framework\Themes\ITheme.cs" />
     <Compile Include="Framework\Themes\IThemeManager.cs" />
+    <Compile Include="Framework\Themes\BlueTheme.cs" />
     <Compile Include="Framework\Themes\ThemeManager.cs" />
     <Compile Include="Framework\Threading\TaskUtility.cs" />
     <Compile Include="Framework\ToolBars\CommandToolBarItemDefinition.cs" />
@@ -339,6 +340,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\VS2013\LightTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\DarkTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\VS2013\Controls\Window.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -348,10 +357,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\VS2013\Controls\Menu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\VS2013\Controls\SplitButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

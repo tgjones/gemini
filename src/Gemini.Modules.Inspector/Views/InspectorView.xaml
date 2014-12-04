@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance vm:InspectorViewModel}">
-	<Grid>
-		<ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}">
+    <Grid>
+        <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
 					<ContentControl cal:View.Model="{Binding}" />

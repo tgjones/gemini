@@ -46,10 +46,11 @@
 				</StackPanel>
 			</ToggleButton>
 		</gemini:ToolPaneToolBar>
-		<DataGrid Grid.Row="1" ItemsSource="{Binding FilteredItems}" AutoGenerateColumns="False" IsReadOnly="True"
+		<DataGrid Grid.Row="1" ItemsSource="{Binding FilteredItems}" 
+                  AutoGenerateColumns="False" IsReadOnly="True"
 				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke"
 				  MouseDoubleClick="OnDataGridMouseDoubleClick" BorderThickness="0"
-                  Background="White">
+                  Background="Transparent">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Width="SizeToCells">
 					<DataGridTemplateColumn.CellTemplate>
