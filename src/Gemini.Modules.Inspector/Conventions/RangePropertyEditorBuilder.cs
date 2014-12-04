@@ -26,7 +26,16 @@ namespace Gemini.Modules.Inspector.Conventions
                 .Cast<Attribute>().OfType<RangeAttribute>()
                 .First();
 
-            return new RangeEditorViewModel<object>(rangeAttribute.Minimum, rangeAttribute.Maximum);
+            if (propertyDescriptor.PropertyType == typeof(int))
+               return new RangeEditorViewModel<int>((int) rangeAttribute.Minimum, (int) rangeAttribute.Maximum);
+
+            if (propertyDescriptor.PropertyType == typeof(double))
+               return new RangeEditorViewModel<double>((double) rangeAttribute.Minimum, (double) rangeAttribute.Maximum);
+
+            if (propertyDescriptor.PropertyType == typeof(float))
+               return new RangeEditorViewModel<float>((float) rangeAttribute.Minimum, (float) rangeAttribute.Maximum);
+
+            throw new InvalidOperationException();
         }
     }
 }
