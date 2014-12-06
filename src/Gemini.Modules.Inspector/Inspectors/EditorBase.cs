@@ -35,6 +35,11 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
+        public bool IsReadOnly
+        {
+            get { return BoundPropertyDescriptor.PropertyDescriptor.IsReadOnly; }
+        }
+
         private void OnValueChanged(object sender, EventArgs e)
         {
             NotifyOfPropertyChange(() => Value);

@@ -82,7 +82,7 @@ namespace Gemini.Modules.Inspector
             var properties = TypeDescriptor.GetProperties(instance);
             foreach (PropertyDescriptor property in properties)
             {
-                if (property.IsReadOnly || !property.IsBrowsable || !propertyFilter(property))
+                if (!property.IsBrowsable || !propertyFilter(property))
                     continue;
 
                 var editor = DefaultPropertyInspectors.CreateEditor(property);

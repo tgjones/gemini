@@ -60,7 +60,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
         }
 
         private double _rotationAngle;
-        [DisplayName("Rotation Angle")]
+        [DisplayName("Rotation Angle"), ReadOnly(true)]
         public double RotationAngle
         {
             get { return _rotationAngle; }
