@@ -5,14 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:Gemini.Modules.Inspector.ViewModels"
              xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance vm:InspectorViewModel}">
+    <UserControl.Resources>
+        <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </UserControl.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<ContentControl cal:View.Model="{Binding}" />
+					<ContentControl cal:View.Model="{Binding}"
+                                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBoolConverter}}" />
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
