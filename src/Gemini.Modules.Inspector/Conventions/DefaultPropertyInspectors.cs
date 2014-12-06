@@ -26,6 +26,7 @@ namespace Gemini.Modules.Inspector.Conventions
                 new StandardPropertyEditorBuilder<bool, CheckBoxEditorViewModel>(),
                 new StandardPropertyEditorBuilder<Color, ColorEditorViewModel>(),
                 new StandardPropertyEditorBuilder<double, TextBoxEditorViewModel<double>>(),
+                new StandardPropertyEditorBuilder<double?, TextBoxEditorViewModel<double?>>(),
                 new StandardPropertyEditorBuilder<float, TextBoxEditorViewModel<float>>(),
                 new StandardPropertyEditorBuilder<int, TextBoxEditorViewModel<int>>(),
                 new StandardPropertyEditorBuilder<Point3D, Point3DEditorViewModel>(),
