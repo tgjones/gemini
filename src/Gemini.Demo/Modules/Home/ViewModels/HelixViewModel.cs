@@ -71,6 +71,19 @@ namespace Gemini.Demo.Modules.Home.ViewModels
             }
         }
 
+        private double? _nullableDoubleValue;
+        [DisplayName(@"Nullable Double Value")]
+        public double? NullableDoubleValue
+        {
+            get { return NullableDoubleValue; }
+            set
+            {
+                if (value == _nullableDoubleValue) return;
+                _nullableDoubleValue = value;
+                NotifyOfPropertyChange(() => NullableDoubleValue);
+            }
+        }
+
         [ImportingConstructor]
         public HelixViewModel(ICodeCompiler codeCompiler)
         {
