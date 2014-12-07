@@ -1,6 +1,6 @@
 # Gemini
 
-[![Build status](https://ci.appveyor.com/api/projects/status/f5089id2gbl273ik/branch/master)](https://ci.appveyor.com/project/tgjones/gemini/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/jwagos6igfdgx819/branch/master)](https://ci.appveyor.com/project/tgjones/gemini/branch/master)
 
 ## What is this?
 
@@ -70,7 +70,7 @@ and also to generate pre-release NuGet packages so you can try out new features 
 To access the pre-release NuGet packages, you'll need to add a custom package source in Visual Studio,
 pointing to this URL:
 
-https://ci.appveyor.com/nuget/gemini-g66c82jjbsu1
+https://ci.appveyor.com/nuget/gemini-g84phgw340sm
 
 Make sure you select "Include Prerelease" when searching for NuGet packages.
 
