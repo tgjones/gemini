@@ -14,5 +14,6 @@
 	</metadata>
 	<files>
 		<file src="..\..\LICENCE.txt" target="." />
+        <file src="bin\$configuration$\Xceed.Wpf.AvalonDock.Themes.VS2013.dll" target="lib\net45\" />
 	</files>
 </package>

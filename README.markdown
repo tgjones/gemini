@@ -72,7 +72,7 @@ pointing to this URL:
 
 https://ci.appveyor.com/nuget/gemini-g66c82jjbsu1
 
-Make sure you select "Include Prelease" when searching for NuGet packages.
+Make sure you select "Include Prerelease" when searching for NuGet packages.
 
 ## What does it do?
 
