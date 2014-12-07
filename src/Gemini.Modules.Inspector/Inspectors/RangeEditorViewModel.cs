@@ -1,6 +1,6 @@
 ﻿namespace Gemini.Modules.Inspector.Inspectors
 {
-    public class RangeEditorViewModel<T> : EditorBase<T>
+    public class RangeEditorViewModel<T> : EditorBase<T>, ILabelledInspector
     {
         private readonly T _minimum;
         private readonly T _maximum;

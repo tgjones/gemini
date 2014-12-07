@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Gemini.Modules.Inspector.Xna.Inspectors
 {
-	public class Vector3EditorViewModel : EditorBase<Vector3>
+	public class Vector3EditorViewModel : EditorBase<Vector3>, ILabelledInspector
     {
         public float X
         {

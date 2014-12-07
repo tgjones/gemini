@@ -5,22 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
              mc:Ignorable="d" d:DesignWidth="300">
-	<local:LabelledControl Label="{Binding Name}" ToolTip="{Binding Description}">
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="1*" MinWidth="20" />
-				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="1*" MinWidth="20" />
-				<ColumnDefinition Width="20" />
-				<ColumnDefinition Width="1*" MinWidth="20" />
-			</Grid.ColumnDefinitions>
-			<Label Grid.Column="0" Content="X" />
-			<local:NumericTextBox Grid.Column="1" Value="{Binding X}" VerticalAlignment="Center" />
-			<Label Grid.Column="2" Content="Y" />
-			<local:NumericTextBox Grid.Column="3" Value="{Binding Y}" VerticalAlignment="Center" />
-			<Label Grid.Column="4" Content="Z" />
-			<local:NumericTextBox Grid.Column="5" Value="{Binding Z}" VerticalAlignment="Center" />
-		</Grid>
-	</local:LabelledControl>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="1*" MinWidth="20" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="1*" MinWidth="20" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="1*" MinWidth="20" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="X" />
+        <local:NumericTextBox Grid.Column="1" Value="{Binding X}" VerticalAlignment="Center" />
+        <Label Grid.Column="2" Content="Y" />
+        <local:NumericTextBox Grid.Column="3" Value="{Binding Y}" VerticalAlignment="Center" />
+        <Label Grid.Column="4" Content="Z" />
+        <local:NumericTextBox Grid.Column="5" Value="{Binding Z}" VerticalAlignment="Center" />
+    </Grid>
 </UserControl>

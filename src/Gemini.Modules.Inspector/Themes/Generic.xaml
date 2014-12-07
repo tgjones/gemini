@@ -1,28 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls">
-	<Style TargetType="local:LabelledControl">
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="local:LabelledControl">
-					<Border BorderThickness="0 0 0 1" BorderBrush="DarkGray" Padding="3">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="100" />
-								<ColumnDefinition Width="*" />
-							</Grid.ColumnDefinitions>
-							<Label Grid.Column="0" Content="{TemplateBinding Label}"
-								   ToolTip="{TemplateBinding ToolTip}"
-								   ContentStringFormat="{}{0}:"
-								   HorizontalContentAlignment="Right" />
-							<ContentControl Grid.Column="1" 
-											Content="{TemplateBinding Content}" />
-						</Grid>
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+    <Style TargetType="local:SimpleGridSplitter">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:SimpleGridSplitter">
+                    <Grid Background="Transparent" Width="{TemplateBinding Width}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 	<Style TargetType="local:NumericTextBox">
 		<Setter Property="Template">

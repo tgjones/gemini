@@ -6,7 +6,7 @@ using Microsoft.Win32;
 
 namespace Gemini.Modules.Inspector.Inspectors
 {
-    public class BitmapSourceEditorViewModel : EditorBase<BitmapSource>
+    public class BitmapSourceEditorViewModel : EditorBase<BitmapSource>, ILabelledInspector
     {
         public IEnumerable<IResult> Choose()
         {

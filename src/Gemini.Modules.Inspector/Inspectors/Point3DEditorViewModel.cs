@@ -2,7 +2,7 @@
 
 namespace Gemini.Modules.Inspector.Inspectors
 {
-    public class Point3DEditorViewModel : EditorBase<Point3D>
+    public class Point3DEditorViewModel : EditorBase<Point3D>, ILabelledInspector
     {
         public double X
         {

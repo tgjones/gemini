@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Gemini.Modules.Inspector.MonoGame.Inspectors
 {
-    public class XnaColorEditorViewModel : EditorBase<Color>
+    public class XnaColorEditorViewModel : EditorBase<Color>, ILabelledInspector
     {
         
     }

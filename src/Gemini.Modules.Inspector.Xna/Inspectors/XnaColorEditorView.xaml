@@ -10,14 +10,12 @@
 	<UserControl.Resources>
 		<converters:XnaColorToColorConverter x:Key="XnaColorToColorConverter" />
 	</UserControl.Resources>
-	<gemini:LabelledControl Label="{Binding Name}" ToolTip="{Binding Description}">
-		<StackPanel Orientation="Horizontal">
-			<xctk:ColorPicker SelectedColor="{Binding Value, Converter={StaticResource XnaColorToColorConverter}}"
-							  HorizontalAlignment="Left"
-							  Height="23" Width="70" />
-			<gemini:ScreenColorPicker x:Name="ScreenColorPicker" Margin="3 0 0 0"
-									 ColorHovered="OnScreenColorPickerColorHovered"
-									 ColorPicked="OnScreenColorPickerColorPicked" />
-		</StackPanel>
-	</gemini:LabelledControl>
+    <StackPanel Orientation="Horizontal">
+        <xctk:ColorPicker SelectedColor="{Binding Value, Converter={StaticResource XnaColorToColorConverter}}"
+						  HorizontalAlignment="Left"
+						  Height="23" Width="70" />
+        <gemini:ScreenColorPicker x:Name="ScreenColorPicker" Margin="3 0 0 0"
+								  ColorHovered="OnScreenColorPickerColorHovered"
+								  ColorPicked="OnScreenColorPickerColorPicked" />
+    </StackPanel>
 </UserControl>
