@@ -17,6 +17,9 @@ Bin
 Thumbs.db
 *.dotCover
 
+# Downstream
+Gemini-Downstream.sln
+
 # NuGet Packages Directory
 packages
  
