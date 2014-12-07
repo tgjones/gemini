@@ -187,6 +187,7 @@ and the source code for the built-in modules.
 
 Gemini itself is built out of six core modules:
 
+* MainWindow
 * Shell
 * MainMenu
 * StatusBar
@@ -210,13 +211,50 @@ Several more modules ship with Gemini, and are available as
 For more information about these modules, see below. In general, each module adds some combination
 of menu items, tool window, document types and services.
 
+### MainWindow module
+
+The main window module:
+
+* manages the overall window
+
+#### Provides
+
+* `IMainWindow` interface
+
+#### NuGet package
+
+* [Gemini](http://nuget.org/packages/GeminiWpf/)
+
+#### Dependencies
+
+* None
+
+#### Usage
+
+The `IMainWindow` interface exposes a number of useful properties to control
+aspects of the main application window.
+
+```csharp
+public interface IMainWindow
+{
+    WindowState WindowState { get; set; }
+    double Width { get; set; }
+    double Height { get; set; }
+
+    string Title { get; set; }
+    ImageSource Icon { get; set; } 
+
+    IShell Shell { get; }
+}
+```
+
 ### Shell module
 
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-shell.png)
 
 The shell module:
 
-* manages the overall window and placement of the document and tool windows
+* manages placement of the document and tool windows
 * persists and loads the size and position of tool windows
 * manages the links between AvalonDock and Caliburn.Micro
 
@@ -243,10 +281,8 @@ public interface IShell
     event EventHandler ActiveDocumentChanging;
     event EventHandler ActiveDocumentChanged;
 
-	WindowState WindowState { get; set; }
-	string Title { get; set; }
-	ImageSource Icon { get; set; }
-
+    bool ShowFloatingWindowsInTaskbar { get; set; }
+        
 	IMenu MainMenu { get; }
     IToolBars ToolBars { get; }
 	IStatusBar StatusBar { get; }
@@ -256,11 +292,11 @@ public interface IShell
 	IObservableCollection<IDocument> Documents { get; }
 	IObservableCollection<ITool> Tools { get; }
 
+    void ShowTool<TTool>() where TTool : ITool;
 	void ShowTool(ITool model);
 
 	void OpenDocument(IDocument model);
 	void CloseDocument(IDocument document);
-	void ActivateDocument(IDocument document);
 
 	void Close();
 }
