@@ -75,7 +75,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
         [DisplayName(@"Nullable Double Value")]
         public double? NullableDoubleValue
         {
-            get { return NullableDoubleValue; }
+            get { return _nullableDoubleValue; }
             set
             {
                 if (value == _nullableDoubleValue) return;
