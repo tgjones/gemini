@@ -90,6 +90,7 @@
     <Compile Include="BoundPropertyDescriptor.cs" />
     <Compile Include="Commands\ViewInspectorCommandDefinition.cs" />
     <Compile Include="Commands\ViewInspectorCommandHandler.cs" />
+    <Compile Include="Controls\InspectorGrid.cs" />
     <Compile Include="Controls\InspectorItemTemplateSelector.cs" />
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\ScreenColorPicker.cs" />
@@ -194,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inspectors\TextBoxEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
