@@ -116,6 +116,7 @@
     <Compile Include="Framework\Menus\MenuItemDefinition.cs" />
     <Compile Include="Framework\Menus\MenuItemGroupDefinition.cs" />
     <Compile Include="Framework\Menus\TextMenuItemDefinition.cs" />
+    <Compile Include="Framework\PropertyChangedBase.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
     <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
