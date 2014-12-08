@@ -303,8 +303,6 @@ namespace Gemini.Modules.Inspector.Controls
 
         public SimpleGridSplitter()
         {
-            this.Focusable = true;
-            this.IsTabStop = true;
             //FocusManager.SetIsFocusScope(this, true);
             this.DetermineResizeCursor();
         }

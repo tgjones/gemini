@@ -23,7 +23,7 @@
                     </Label>
                     <controls:SimpleGridSplitter Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" />
                     <Border Grid.Column="2" Padding="0 2 5 2" VerticalAlignment="Center">
-                        <ContentControl cal:View.Model="{Binding}" />
+                        <ContentControl cal:View.Model="{Binding}" IsTabStop="False" />
                     </Border>
                 </Grid>
             </DataTemplate>
