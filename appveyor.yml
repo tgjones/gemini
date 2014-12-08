@@ -1,15 +1,15 @@
-version: 0.6.5-ci{build}
+version: 0.6.0-ci{build}
 
 branches:
   only:
-    - working
+    - master
 
 assembly_info:
   patch: true
   file: AssemblyInfo.*
-  assembly_version: "0.6.5"
-  assembly_file_version: "0.6.5"
-  assembly_informational_version: "0.6.5-ci{build}"
+  assembly_version: "0.6.0"
+  assembly_file_version: "0.6.0"
+  assembly_informational_version: "0.6.0-ci{build}"
 
 build:
   project: src/Gemini.sln
