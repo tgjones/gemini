@@ -10,9 +10,9 @@
 			<SolidColorBrush Color="{Binding Background, FallbackValue=White}" />
 		</Grid.Background>
 		<TextBlock Grid.Column="0" TextAlignment="{Binding TextAlignment, FallbackValue=Center}"
-				VerticalAlignment="Center"
-				FontSize="24"
-				Text="Welcome to the Gemini Demo!">
+				   VerticalAlignment="Center"
+				   FontSize="24"
+				   Text="{Binding Text}">
 			<TextBlock.Foreground>
 				<SolidColorBrush Color="{Binding Foreground, FallbackValue=Black}" />
 			</TextBlock.Foreground>

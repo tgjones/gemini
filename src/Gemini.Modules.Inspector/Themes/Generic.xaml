@@ -5,7 +5,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:SimpleGridSplitter">
-                    <Grid Background="Transparent" Width="{TemplateBinding Width}" />
+                    <Grid Background="Transparent" Width="{TemplateBinding Width}"  />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
