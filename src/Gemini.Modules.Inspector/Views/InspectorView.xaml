@@ -4,54 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:Gemini.Modules.Inspector.ViewModels"
-             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro.Platform"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:controls="clr-namespace:Gemini.Modules.Inspector.Controls"
-             xmlns:views="clr-namespace:Gemini.Modules.Inspector.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance vm:InspectorViewModel}">
     <UserControl.Resources>
-        <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <ResourceDictionary Source="../Resources/Resources.xaml" />
     </UserControl.Resources>
     <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" Name="InspectorColumn1" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="1.5*" Name="InspectorColumn2" />
-        </Grid.ColumnDefinitions>
-        <ItemsControl Grid.ColumnSpan="3" ItemsSource="{Binding SelectedObject.Inspectors}">
-            <ItemsControl.ItemTemplateSelector>
-                <controls:InspectorItemTemplateSelector>
-                    <controls:InspectorItemTemplateSelector.LabelledTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{Binding Width, ElementName=InspectorColumn1, Mode=TwoWay}" MinWidth="50" />
-                                    <ColumnDefinition Width="5" />
-                                    <ColumnDefinition Width="{Binding Width, ElementName=InspectorColumn2, Mode=TwoWay}" MinWidth="50" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" 
-                                       ToolTip="{Binding Description}"
-                                       HorizontalContentAlignment="Left"
-                                       VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
-                                </Label>
-                                <controls:SimpleGridSplitter Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" />
-                                <Border Grid.Column="2" Padding="0 2 5 2" VerticalAlignment="Center">
-                                    <ContentControl cal:View.Model="{Binding}" />
-                                </Border>
-                            </Grid>
-                        </DataTemplate>
-                    </controls:InspectorItemTemplateSelector.LabelledTemplate>
-                    <controls:InspectorItemTemplateSelector.DefaultTemplate>
-                        <DataTemplate>
-                            <ContentControl cal:View.Model="{Binding}"
-                                            IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBoolConverter}}" />
-                        </DataTemplate>
-                    </controls:InspectorItemTemplateSelector.DefaultTemplate>
-                </controls:InspectorItemTemplateSelector>
-            </ItemsControl.ItemTemplateSelector>
-		</ItemsControl>
+        <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}"
+                      ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" />
 	</Grid>
 </UserControl>

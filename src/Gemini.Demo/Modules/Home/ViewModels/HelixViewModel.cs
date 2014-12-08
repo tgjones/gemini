@@ -24,7 +24,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
         private IHelixView _helixView;
 
         private Point3D _cameraPosition;
-        [DisplayName("Camera Position"), Description("Position of the camera in 3D space")]
+        [DisplayName("Camera Position"), Description("Position of the camera in 3D space"), Category("Camera")]
         public Point3D CameraPosition
         {
             get { return _cameraPosition; }
@@ -36,7 +36,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
         }
 
         private double _cameraFieldOfView;
-        [DisplayName("Field of View"), Range(1.0, 180.0)]
+        [DisplayName("Field of View"), Range(1.0, 180.0), Category("Camera")]
         public double CameraFieldOfView
         {
             get { return _cameraFieldOfView; }

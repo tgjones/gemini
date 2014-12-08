@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
@@ -79,21 +80,44 @@ namespace Gemini.Modules.Inspector
 
         public TBuilder WithObjectProperties(object instance, Func<PropertyDescriptor, bool> propertyFilter)
         {
-            var properties = TypeDescriptor.GetProperties(instance);
-            foreach (PropertyDescriptor property in properties)
-            {
-                if (!property.IsBrowsable || !propertyFilter(property))
-                    continue;
+            var properties = TypeDescriptor.GetProperties(instance)
+                .Cast<PropertyDescriptor>()
+                .Where(x => x.IsBrowsable && propertyFilter(x))
+                .ToList();
 
+            // If any properties are not in the default group, show all properties in collapsible groups.
+            if (properties.Any(x => !string.IsNullOrEmpty(x.Category) && x.Category != CategoryAttribute.Default.Category))
+            {
+                foreach (var category in properties.GroupBy(x => x.Category))
+                {
+                    var actualCategory = (string.IsNullOrEmpty(category.Key) || category.Key == CategoryAttribute.Default.Category)
+                        ? "Miscellaneous"
+                        : category.Key;
+
+                    var collapsibleGroupBuilder = new CollapsibleGroupBuilder();
+                    AddProperties(instance, category, collapsibleGroupBuilder.Inspectors);
+                    _inspectors.Add(collapsibleGroupBuilder.ToCollapsibleGroup(actualCategory));
+                }
+            }
+            else // Otherwise, show properties in flat list.
+            {
+                AddProperties(instance, properties, _inspectors);
+            }
+
+            return (TBuilder) this;
+        }
+
+        private static void AddProperties(object instance, IEnumerable<PropertyDescriptor> properties, List<IInspector> inspectors)
+        {
+            foreach (var property in properties)
+            {
                 var editor = DefaultPropertyInspectors.CreateEditor(property);
                 if (editor != null)
                 {
                     editor.BoundPropertyDescriptor = new BoundPropertyDescriptor(instance, property);
-                    _inspectors.Add(editor);
+                    inspectors.Add(editor);
                 }
             }
-
-            return (TBuilder) this;
         }
     }
 }
