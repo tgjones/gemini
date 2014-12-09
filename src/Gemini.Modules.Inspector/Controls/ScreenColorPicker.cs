@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
 using Gemini.Modules.Inspector.Win32;
 using Color = System.Windows.Media.Color;
 
@@ -16,10 +19,48 @@ namespace Gemini.Modules.Inspector.Controls
                 new FrameworkPropertyMetadata(typeof(ScreenColorPicker)));
         }
 
+        public event EventHandler PickingStarted;
+        public event EventHandler PickingCancelled;
         public event EventHandler<ColorEventArgs> ColorHovered;
         public event EventHandler<ColorEventArgs> ColorPicked;
 
+        private readonly DispatcherTimer _timer;
         private Bitmap _bitmap;
+        private bool _endingCapture;
+
+        public ScreenColorPicker()
+        {
+            _timer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 50)
+            };
+            _timer.Tick += OnTimerTick;
+        }
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            if (IsMouseCaptured)
+                RaiseColorHovered(GetEventArgs());
+        }
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                ReleaseMouseCapture();
+            base.OnPreviewKeyDown(e);
+        }
+
+        protected override void OnLostMouseCapture(MouseEventArgs e)
+        {
+            _timer.Stop();
+            _bitmap.Dispose();
+            _bitmap = null;
+
+            if (!_endingCapture)
+                RaisePickingCancelled(EventArgs.Empty);
+
+            base.OnLostMouseCapture(e);
+        }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
@@ -29,31 +70,45 @@ namespace Gemini.Modules.Inspector.Controls
                     _bitmap.Dispose();
                 _bitmap = NativeMethods.GetDesktop();
 
+                RaisePickingStarted(EventArgs.Empty);
+
+                Focus(); // So that we get the Escape key.
                 CaptureMouse();
+                _timer.Start();
             }
             else
             {
                 RaiseColorPicked(GetEventArgs());
-                _bitmap.Dispose();
+
+                _endingCapture = true;
                 ReleaseMouseCapture();
+                _endingCapture = false;
             }
 
             base.OnMouseDown(e);
         }
 
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            if (IsMouseCaptured)
-                RaiseColorHovered(GetEventArgs());
-
-            base.OnMouseMove(e);
-        }
-
         private ColorEventArgs GetEventArgs()
         {
-            var cursorPosition = System.Windows.Forms.Cursor.Position;
-            var pixel = _bitmap.GetPixel(cursorPosition.X, cursorPosition.Y);
-            return new ColorEventArgs(Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B));
+            NativeMethods.NativePoint cursorPosition;
+            if (NativeMethods.GetCursorPos(out cursorPosition))
+            {
+                var pixel = _bitmap.GetPixel(cursorPosition.X, cursorPosition.Y);
+                return new ColorEventArgs(Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B));
+            }
+            return new ColorEventArgs(Colors.Black);
+        }
+
+        private void RaisePickingStarted(EventArgs e)
+        {
+            var handler = PickingStarted;
+            if (handler != null) handler(this, e);
+        }
+
+        private void RaisePickingCancelled(EventArgs e)
+        {
+            var handler = PickingCancelled;
+            if (handler != null) handler(this, e);
         }
 
         private void RaiseColorHovered(ColorEventArgs e)

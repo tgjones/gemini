@@ -62,14 +62,15 @@ namespace Gemini.Modules.Inspector.Controls
         {
             _textBlock = (TextBlock) Template.FindName("TextBlock", this);
 
-            var originalPosition = new System.Drawing.Point();
+            var originalPosition = new Point();
+            double originalValue = 0;
             var mouseMoved = false;
 
             _textBlock.MouseDown += (sender, e) =>
             {
-                originalPosition = System.Windows.Forms.Cursor.Position;
+                originalPosition = e.GetPosition(_textBlock);
+                originalValue = Value;
                 _textBlock.CaptureMouse();
-                Mouse.OverrideCursor = Cursors.None;
                 mouseMoved = false;
             };
 
@@ -80,16 +81,14 @@ namespace Gemini.Modules.Inspector.Controls
 
                 mouseMoved = true;
 
-                var newPosition = System.Windows.Forms.Cursor.Position;
-                Value = CoerceValue(Value + (newPosition.X - originalPosition.X) / 50.0);
-
-                System.Windows.Forms.Cursor.Position = originalPosition;
+                var newPosition = e.GetPosition(_textBlock);
+                Value = CoerceValue(originalValue + (newPosition.X - originalPosition.X)/50.0);
             };
 
             _textBlock.MouseUp += (sender, e) =>
             {
-                Mouse.OverrideCursor = null;
-                _textBlock.ReleaseMouseCapture();
+                if (_textBlock.IsMouseCaptured)
+                    _textBlock.ReleaseMouseCapture();
 
                 if (!mouseMoved)
                 {

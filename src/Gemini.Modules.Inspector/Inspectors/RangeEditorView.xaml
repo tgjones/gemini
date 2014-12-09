@@ -12,6 +12,6 @@
         <Slider Grid.Column="0" Value="{Binding Value}"
 				Minimum="{Binding Minimum}"
 				Maximum="{Binding Maximum}" />
-        <TextBox Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:F1}'}" />
+        <TextBox Grid.Column="1" Text="{Binding Value, StringFormat='{}{0:G7}'}" />
     </Grid>
 </UserControl>

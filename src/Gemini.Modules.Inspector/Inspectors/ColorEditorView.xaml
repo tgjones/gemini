@@ -11,6 +11,8 @@
 						  HorizontalAlignment="Left"
 						  Height="23" Width="70" />
         <local:ScreenColorPicker x:Name="ScreenColorPicker" Margin="3 0 0 0"
+                                 PickingStarted="OnScreenColorPickerPickingStarted"
+                                 PickingCancelled="OnScreenColorPickerPickingCancelled"
 								 ColorHovered="OnScreenColorPickerColorHovered"
 								 ColorPicked="OnScreenColorPickerColorPicked" />
     </StackPanel>

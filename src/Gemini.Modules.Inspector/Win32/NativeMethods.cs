@@ -4,8 +4,18 @@ using System.Runtime.InteropServices;
 
 namespace Gemini.Modules.Inspector.Win32
 {
-    public class NativeMethods
+    internal static class NativeMethods
     {
+        [StructLayout(LayoutKind.Sequential)]
+        public struct NativePoint
+        {
+            public int X;
+            public int Y;
+        }
+
+        [DllImport("user32.dll", EntryPoint = "GetCursorPos")]
+        public static extern bool GetCursorPos(out NativePoint point);
+
         [DllImport("gdi32.dll", EntryPoint = "DeleteDC")]
         public static extern IntPtr DeleteDC(IntPtr hdc);
 
