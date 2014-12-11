@@ -8,7 +8,6 @@
 				<ResourceDictionary>
 					<gemini:AppBootstrapper x:Key="bootstrapper" />
 				</ResourceDictionary>
-                <ResourceDictionary Source="pack://application:,,,/Gemini;component/Themes/VS2010/Brushes.xaml" />
 				<ResourceDictionary Source="Modules/FilterDesigner/Resources/Styles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
