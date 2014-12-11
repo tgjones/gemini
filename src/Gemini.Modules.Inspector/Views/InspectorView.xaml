@@ -10,8 +10,10 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Resources/Resources.xaml" />
     </UserControl.Resources>
-    <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
-        <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}"
-                      ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" />
-	</Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+        <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
+            <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}"
+                          ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" />
+        </Grid>
+    </ScrollViewer>
 </UserControl>
