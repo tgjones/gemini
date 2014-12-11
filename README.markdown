@@ -1,6 +1,6 @@
 # Gemini
 
-[![Build status](https://ci.appveyor.com/api/projects/status/jwagos6igfdgx819/branch/master)](https://ci.appveyor.com/project/tgjones/gemini/branch/master)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/tgjones/gemini) [![Build status](https://ci.appveyor.com/api/projects/status/jwagos6igfdgx819/branch/master)](https://ci.appveyor.com/project/tgjones/gemini/branch/master)
 
 ## What is this?
 
