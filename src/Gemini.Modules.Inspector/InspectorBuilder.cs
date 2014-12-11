@@ -96,7 +96,8 @@ namespace Gemini.Modules.Inspector
 
                     var collapsibleGroupBuilder = new CollapsibleGroupBuilder();
                     AddProperties(instance, category, collapsibleGroupBuilder.Inspectors);
-                    _inspectors.Add(collapsibleGroupBuilder.ToCollapsibleGroup(actualCategory));
+                    if (collapsibleGroupBuilder.Inspectors.Any())
+                        _inspectors.Add(collapsibleGroupBuilder.ToCollapsibleGroup(actualCategory));
                 }
             }
             else // Otherwise, show properties in flat list.
