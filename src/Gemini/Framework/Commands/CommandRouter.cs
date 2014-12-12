@@ -18,7 +18,7 @@ namespace Gemini.Framework.Commands
             _commandHandlers = commandHandlers;
         }
 
-        public CommandHandler GetCommandHandler(CommandDefinition commandDefinition, IInputElement target)
+        public CommandHandler GetCommandHandler(CommandDefinitionBase commandDefinition, IInputElement target)
         {
             // TODO: We could look at the currently focused element, and iterate up through
             // the tree, giving each DataContext a chance to handle for the command.

@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class OpenGraphCommandDefinition : CommandDefinition
     {
         public const string CommandName = "File.OpenGraph";

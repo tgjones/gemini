@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.Settings.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class OpenSettingsCommandDefinition : CommandDefinition
     {
         public const string CommandName = "Tools.Options";

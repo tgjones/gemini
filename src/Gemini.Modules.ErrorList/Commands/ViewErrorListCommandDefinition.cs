@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.ErrorList.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class ViewErrorListCommandDefinition : CommandDefinition
     {
         public const string CommandName = "View.ErrorList";

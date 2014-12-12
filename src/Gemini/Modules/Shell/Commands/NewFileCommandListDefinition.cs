@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class NewFileCommandListDefinition : CommandListDefinition
     {
         public const string CommandName = "File.NewFile";

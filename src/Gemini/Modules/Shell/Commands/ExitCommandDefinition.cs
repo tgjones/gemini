@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class ExitCommandDefinition : CommandDefinition
     {
         public const string CommandName = "File.Exit";

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Gemini.Framework.Commands
 {
-    public abstract class CommandListDefinition : CommandDefinition
+    public abstract class CommandListDefinition : CommandDefinitionBase
     {
         public override sealed string Text
         {

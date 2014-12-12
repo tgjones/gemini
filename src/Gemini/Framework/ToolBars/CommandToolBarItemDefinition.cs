@@ -6,9 +6,9 @@ using Gemini.Framework.Commands;
 namespace Gemini.Framework.ToolBars
 {
     public class CommandToolBarItemDefinition<TCommandDefinition> : ToolBarItemDefinition
-        where TCommandDefinition : CommandDefinition
+        where TCommandDefinition : CommandDefinitionBase
     {
-        private readonly CommandDefinition _commandDefinition;
+        private readonly CommandDefinitionBase _commandDefinition;
 
         public override string Text
         {
@@ -25,7 +25,7 @@ namespace Gemini.Framework.ToolBars
             get { return _commandDefinition.KeyGesture; }
         }
 
-        public override CommandDefinition CommandDefinition
+        public override CommandDefinitionBase CommandDefinition
         {
             get { return _commandDefinition; }
         }

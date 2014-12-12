@@ -27,7 +27,7 @@ namespace Gemini.Modules.Shell
             MainMenu.MenuDefinitions.FileExitOpenMenuGroup, 0);
 
         [Export]
-        public static MenuItemDefinition WindowDocumentList = new CommandMenuItemDefinition<SwitchToDocumentCommandDefinition>(
+        public static MenuItemDefinition WindowDocumentList = new CommandMenuItemDefinition<SwitchToDocumentCommandListDefinition>(
             MainMenu.MenuDefinitions.WindowDocumentListMenuGroup, 0);
     }
 }

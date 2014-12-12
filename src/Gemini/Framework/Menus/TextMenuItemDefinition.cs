@@ -24,7 +24,7 @@ namespace Gemini.Framework.Menus
             get { return null; }
         }
 
-        public override CommandDefinition CommandDefinition
+        public override CommandDefinitionBase CommandDefinition
         {
             get { return null; }
         }

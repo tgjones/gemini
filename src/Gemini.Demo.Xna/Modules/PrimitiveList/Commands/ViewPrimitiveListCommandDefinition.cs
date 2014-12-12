@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Demo.Xna.Modules.PrimitiveList.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class ViewPrimitiveListCommandDefinition : CommandDefinition
     {
         public const string CommandName = "Demos.PrimitiveList";

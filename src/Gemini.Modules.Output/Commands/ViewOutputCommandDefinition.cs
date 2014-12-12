@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.Output.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class ViewOutputCommandDefinition : CommandDefinition
     {
         public const string CommandName = "View.Output";

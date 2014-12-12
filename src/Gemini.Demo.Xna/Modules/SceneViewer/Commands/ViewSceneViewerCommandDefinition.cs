@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Demo.Xna.Modules.SceneViewer.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class ViewSceneViewerCommandDefinition : CommandDefinition
     {
         public const string CommandName = "Demos.SceneViewer";

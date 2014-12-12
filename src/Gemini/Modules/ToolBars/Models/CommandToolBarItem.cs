@@ -49,7 +49,7 @@ namespace Gemini.Modules.ToolBars.Models
 		    _parent = parent;
 		}
 
-	    CommandDefinition ICommandUiItem.CommandDefinition
+	    CommandDefinitionBase ICommandUiItem.CommandDefinition
 	    {
 	        get { return _command.CommandDefinition; }
 	    }

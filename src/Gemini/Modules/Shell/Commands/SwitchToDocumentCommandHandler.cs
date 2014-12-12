@@ -8,7 +8,7 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [CommandHandler(typeof(SwitchToDocumentCommandDefinition))]
+    [CommandHandler(typeof(SwitchToDocumentCommandListDefinition))]
     public class SwitchToDocumentCommandHandler : CommandHandler
     {
         private readonly IShell _shell;

@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Demo.Modules.Home.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class ViewHelixCommandDefinition : CommandDefinition
     {
         public const string CommandName = "View.Helix";

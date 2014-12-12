@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.Windows.Input;
 using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [Export(typeof(CommandDefinition))]
+    [CommandDefinition]
     public class OpenFileCommandDefinition : CommandDefinition
     {
         public const string CommandName = "File.OpenFile";

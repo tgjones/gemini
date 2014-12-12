@@ -93,6 +93,8 @@
     <Compile Include="Framework\Behaviors\CustomGlowWindowBehavior.cs" />
     <Compile Include="Framework\Commands\Command.cs" />
     <Compile Include="Framework\Commands\CommandDefinition.cs" />
+    <Compile Include="Framework\Commands\CommandDefinitionAttribute.cs" />
+    <Compile Include="Framework\Commands\CommandDefinitionBase.cs" />
     <Compile Include="Framework\Commands\CommandHandler.cs" />
     <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
     <Compile Include="Framework\Commands\CommandKeyGestureService.cs" />
@@ -154,11 +156,11 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandHandler.cs" />
-    <Compile Include="Modules\Shell\Commands\NewFileCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\NewFileCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\NewFileCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandHandler.cs" />

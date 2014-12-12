@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Commands;
+﻿using Gemini.Framework.Commands;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [Export(typeof(CommandDefinition))]
-    public class SwitchToDocumentCommandDefinition : CommandListDefinition
+    [CommandDefinition]
+    public class SwitchToDocumentCommandListDefinition : CommandListDefinition
     {
         public const string CommandName = "Window.SwitchToDocument";
 

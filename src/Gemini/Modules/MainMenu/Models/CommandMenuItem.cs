@@ -58,7 +58,7 @@ namespace Gemini.Modules.MainMenu.Models
             _listItems = new List<StandardMenuItem>();
         }
 
-        CommandDefinition ICommandUiItem.CommandDefinition
+        CommandDefinitionBase ICommandUiItem.CommandDefinition
         {
             get { return _command.CommandDefinition; }
         }

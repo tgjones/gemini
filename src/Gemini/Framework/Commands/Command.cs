@@ -6,7 +6,7 @@ namespace Gemini.Framework.Commands
 {
     public class Command : PropertyChangedBase
     {
-        private readonly CommandDefinition _commandDefinition;
+        private readonly CommandDefinitionBase _commandDefinition;
         private bool _visible = true;
         private bool _enabled = true;
         private bool _checked;
@@ -15,7 +15,7 @@ namespace Gemini.Framework.Commands
         private Uri _iconSource;
         private readonly KeyGesture _keyGesture;
 
-        public CommandDefinition CommandDefinition
+        public CommandDefinitionBase CommandDefinition
         {
             get { return _commandDefinition; }       
         }
@@ -87,7 +87,7 @@ namespace Gemini.Framework.Commands
 
         public object Tag { get; set; }
 
-        public Command(CommandDefinition commandDefinition)
+        public Command(CommandDefinitionBase commandDefinition)
         {
             _commandDefinition = commandDefinition;
             Text = commandDefinition.Text;

@@ -8,31 +8,31 @@ namespace Gemini.Framework.Commands
     [Export(typeof(ICommandService))]
     public class CommandService : ICommandService
     {
-        private readonly Dictionary<Type, CommandDefinition> _commandDefinitionsLookup;
-        private readonly Dictionary<CommandDefinition, Command> _commands;
+        private readonly Dictionary<Type, CommandDefinitionBase> _commandDefinitionsLookup;
+        private readonly Dictionary<CommandDefinitionBase, Command> _commands;
         private readonly Dictionary<Command, TargetableCommand> _targetableCommands;
             
-        private readonly CommandDefinition[] _commandDefinitions;
+        private readonly CommandDefinitionBase[] _commandDefinitions;
 
         [ImportingConstructor]
-        public CommandService([ImportMany] CommandDefinition[] commandDefinitions)
+        public CommandService([ImportMany] CommandDefinitionBase[] commandDefinitions)
         {
             _commandDefinitions = commandDefinitions;
-            _commandDefinitionsLookup = new Dictionary<Type, CommandDefinition>();
-            _commands = new Dictionary<CommandDefinition, Command>();
+            _commandDefinitionsLookup = new Dictionary<Type, CommandDefinitionBase>();
+            _commands = new Dictionary<CommandDefinitionBase, Command>();
             _targetableCommands = new Dictionary<Command, TargetableCommand>();
         }
 
-        public CommandDefinition GetCommandDefinition(Type commandDefinitionType)
+        public CommandDefinitionBase GetCommandDefinition(Type commandDefinitionType)
         {
-            CommandDefinition commandDefinition;
+            CommandDefinitionBase commandDefinition;
             if (!_commandDefinitionsLookup.TryGetValue(commandDefinitionType, out commandDefinition))
                 commandDefinition = _commandDefinitionsLookup[commandDefinitionType] =
                     _commandDefinitions.First(x => x.GetType() == commandDefinitionType);
             return commandDefinition;
         }
 
-        public Command GetCommand(CommandDefinition commandDefinition)
+        public Command GetCommand(CommandDefinitionBase commandDefinition)
         {
             Command command;
             if (!_commands.TryGetValue(commandDefinition, out command))

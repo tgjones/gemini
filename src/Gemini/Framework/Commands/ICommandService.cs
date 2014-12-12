@@ -4,8 +4,8 @@ namespace Gemini.Framework.Commands
 {
     public interface ICommandService
     {
-        CommandDefinition GetCommandDefinition(Type commandDefinitionType);
-        Command GetCommand(CommandDefinition commandDefinition);
+        CommandDefinitionBase GetCommandDefinition(Type commandDefinitionType);
+        Command GetCommand(CommandDefinitionBase commandDefinition);
         TargetableCommand GetTargetableCommand(Command command);
     }
 }
