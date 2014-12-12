@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 using System.Windows.Media;
@@ -12,7 +13,7 @@ namespace Gemini.Framework.Behaviors
 
         public object SelectedItem
         {
-            get { return (object) GetValue(SelectedItemProperty); }
+            get { return GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
 
@@ -22,17 +23,37 @@ namespace Gemini.Framework.Behaviors
 
         private static void OnSelectedItemChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
+            Action<TreeViewItem> selectTreeViewItem = tvi2 =>
+            {
+                if (tvi2 != null)
+                {
+                    tvi2.IsSelected = true;
+                    tvi2.Focus();
+                }
+            };
+
             var tvi = e.NewValue as TreeViewItem;
+
             if (tvi == null)
             {
                 var tree = ((BindableTreeViewSelectedItemBehavior) sender).AssociatedObject;
+                if (!tree.IsLoaded)
+                {
+                    RoutedEventHandler handler = null;
+                    handler = (sender2, e2) =>
+                    {
+                        tvi = GetTreeViewItem(tree, e.NewValue);
+                        selectTreeViewItem(tvi);
+                        tree.Loaded -= handler;
+                    };
+                    tree.Loaded += handler;
+                    
+                    return;
+                }
                 tvi = GetTreeViewItem(tree, e.NewValue);
             }
-            if (tvi != null)
-            {
-                tvi.IsSelected = true;
-                tvi.Focus();
-            }
+
+            selectTreeViewItem(tvi);
         }
 
         #endregion
