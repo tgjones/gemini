@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Resources/Resources.xaml" />
     </UserControl.Resources>
-    <ScrollViewer HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
             <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}"
                           ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" />
