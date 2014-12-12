@@ -151,7 +151,7 @@ namespace Gemini.Modules.Shell.ViewModels
 
 	        // If after initialization no theme was loaded, load the default one
 	        if (_themeManager.CurrentTheme == null)
-	            _themeManager.SetCurrentTheme("Light");
+	            _themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName);
 
             _shellView = (IShellView) view;
 	        if (!HasPersistedState)
