@@ -35,7 +35,7 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
-        public bool IsReadOnly
+        public override bool IsReadOnly
         {
             get { return BoundPropertyDescriptor.PropertyDescriptor.IsReadOnly; }
         }

@@ -12,6 +12,11 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return _name; }
         }
 
+        public override bool IsReadOnly
+        {
+            get { return false; }
+        }
+
         public IEnumerable<IInspector> Children
         {
             get { return _children; }
