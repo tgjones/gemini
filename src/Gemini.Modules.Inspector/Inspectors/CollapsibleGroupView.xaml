@@ -10,7 +10,8 @@
         <ResourceDictionary Source="../Resources/Resources.xaml" />
     </UserControl.Resources>
     <Grid>
-		<gemini:ExpanderEx Header="{Binding Name, FallbackValue='Test'}" IsExpanded="True">
+		<gemini:ExpanderEx Header="{Binding Name, FallbackValue='Test'}" 
+                           IsExpanded="{Binding IsExpanded}">
             <ItemsControl ItemsSource="{Binding Children}" 
                           ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" />
         </gemini:ExpanderEx>
