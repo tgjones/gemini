@@ -7,12 +7,12 @@ namespace Gemini.Framework.Commands
     [Export(typeof(ICommandKeyGestureService))]
     public class CommandKeyGestureService : ICommandKeyGestureService
     {
-        private readonly CommandDefinition[] _commandDefinitions;
+        private readonly CommandDefinitionBase[] _commandDefinitions;
         private readonly ICommandService _commandService;
 
         [ImportingConstructor]
         public CommandKeyGestureService(
-            [ImportMany] CommandDefinition[] commandDefinitions,
+            [ImportMany] CommandDefinitionBase[] commandDefinitions,
             ICommandService commandService)
         {
             _commandDefinitions = commandDefinitions;
