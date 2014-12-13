@@ -62,10 +62,15 @@ namespace Gemini.Modules.Shell.ViewModels
 	        get { return _currentActiveItem; }
 	        set
 	        {
+	            if (ReferenceEquals(_currentActiveItem, value))
+	                return;
+
 	            _currentActiveItem = value;
-                if (value is IDocument)
-                    ActivateItem((IDocument) value);
-                NotifyOfPropertyChange(() => CurrentActiveItem);
+
+	            if (value is IDocument)
+	                ActivateItem((IDocument) value);
+
+	            NotifyOfPropertyChange(() => CurrentActiveItem);
 	        }
 	    }
 
@@ -203,26 +208,48 @@ namespace Gemini.Modules.Shell.ViewModels
             if (_closing)
                 return;
 
+            RaiseActiveDocumentChanging();
+
+            var currentActiveItem = ActiveItem;
+
+            base.ActivateItem(item);
+
+            if (!ReferenceEquals(item, currentActiveItem))
+                RaiseActiveDocumentChanged();
+        }
+
+	    private void RaiseActiveDocumentChanging()
+	    {
             var handler = ActiveDocumentChanging;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+	    }
 
-            base.ActivateItem(item);
-        }
-
-        protected override void OnActivationProcessed(IDocument item, bool success)
-        {
+	    private void RaiseActiveDocumentChanged()
+	    {
             var handler = ActiveDocumentChanged;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+	    }
 
+        protected override void OnActivationProcessed(IDocument item, bool success)
+        {
             if (!ReferenceEquals(CurrentActiveItem, item))
                 CurrentActiveItem = item;
 
             base.OnActivationProcessed(item, success);
         }
 
-        protected override void OnDeactivate(bool close)
+	    public override void DeactivateItem(IDocument item, bool close)
+	    {
+	        RaiseActiveDocumentChanging();
+
+	        base.DeactivateItem(item, close);
+
+            RaiseActiveDocumentChanged();
+	    }
+
+	    protected override void OnDeactivate(bool close)
         {
             // Workaround for a complex bug that occurs when
             // (a) the window has multiple documents open, and
