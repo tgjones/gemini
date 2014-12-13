@@ -91,6 +91,7 @@
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Behaviors\BindableTreeViewSelectedItemBehavior.cs" />
     <Compile Include="Framework\Behaviors\CustomGlowWindowBehavior.cs" />
+    <Compile Include="Framework\Behaviors\WindowOptionsBehavior.cs" />
     <Compile Include="Framework\Commands\Command.cs" />
     <Compile Include="Framework\Commands\CommandDefinition.cs" />
     <Compile Include="Framework\Commands\CommandDefinitionAttribute.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Framework\ToolBars\ToolBarItemDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemGroupDefinition.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
+    <Compile Include="Framework\Win32\NativeMethods.cs" />
     <Compile Include="Framework\WindowBase.cs" />
     <Compile Include="Framework\Controls\DynamicStyle.cs" />
     <Compile Include="Modules\MainMenu\Behaviors\MenuBehavior.cs" />

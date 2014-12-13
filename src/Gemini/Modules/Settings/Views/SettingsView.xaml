@@ -11,8 +11,13 @@
     d:DataContext="{d:DesignData Source=../SampleData/SettingsViewModelSampleData.xaml}"
     Background="{x:Static SystemColors.ControlBrush}"
     Width="760" Height="500" MinWidth="512" MinHeight="300" 
-    ResizeMode="CanResizeWithGrip" WindowStyle="ToolWindow" WindowStartupLocation="CenterOwner"
+    WindowStartupLocation="CenterOwner"
     ShowInTaskbar="False">
+    <i:Interaction.Behaviors>
+        <behaviors:WindowOptionsBehavior ShowIcon="False"
+                                         ShowMinimizeBox="False"
+                                         ShowMaximizeBox="False" />
+    </i:Interaction.Behaviors>
     <Grid Margin="12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
