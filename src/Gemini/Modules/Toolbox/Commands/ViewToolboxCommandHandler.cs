@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Toolbox.Commands
 {
-    [CommandHandler(typeof(ViewToolboxCommandDefinition))]
-    public class ViewToolboxCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewToolboxCommandHandler : CommandHandlerBase<ViewToolboxCommandDefinition>
     {
         private readonly IShell _shell;
 

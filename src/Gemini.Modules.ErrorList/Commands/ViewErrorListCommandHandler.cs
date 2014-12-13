@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.ErrorList.Commands
 {
-    [CommandHandler(typeof(ViewErrorListCommandDefinition))]
-    public class ViewErrorListCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewErrorListCommandHandler : CommandHandlerBase<ViewErrorListCommandDefinition>
     {
         private readonly IShell _shell;
 

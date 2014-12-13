@@ -9,8 +9,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Demo.Modules.Home.Commands
 {
-    [CommandHandler(typeof(ViewHomeCommandDefinition))]
-    public class ViewHomeCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewHomeCommandHandler : CommandHandlerBase<ViewHomeCommandDefinition>
     {
         private readonly IShell _shell;
 

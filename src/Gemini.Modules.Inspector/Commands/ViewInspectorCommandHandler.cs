@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Inspector.Commands
 {
-    [CommandHandler(typeof(ViewInspectorCommandDefinition))]
-    public class ViewInspectorCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewInspectorCommandHandler : CommandHandlerBase<ViewInspectorCommandDefinition>
     {
         private readonly IShell _shell;
 

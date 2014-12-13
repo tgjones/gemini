@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Output.Commands
 {
-    [CommandHandler(typeof(ViewOutputCommandDefinition))]
-    public class ViewOutputCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewOutputCommandHandler : CommandHandlerBase<ViewOutputCommandDefinition>
     {
         private readonly IShell _shell;
 

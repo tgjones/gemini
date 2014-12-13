@@ -96,13 +96,13 @@
     <Compile Include="Framework\Commands\CommandDefinition.cs" />
     <Compile Include="Framework\Commands\CommandDefinitionAttribute.cs" />
     <Compile Include="Framework\Commands\CommandDefinitionBase.cs" />
-    <Compile Include="Framework\Commands\CommandHandler.cs" />
+    <Compile Include="Framework\Commands\CommandHandlerWrapper.cs" />
+    <Compile Include="Framework\Commands\ICommandHandler.cs" />
     <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
     <Compile Include="Framework\Commands\CommandKeyGestureService.cs" />
     <Compile Include="Framework\Commands\CommandListDefinition.cs" />
     <Compile Include="Framework\Commands\CommandRouter.cs" />
     <Compile Include="Framework\Commands\CommandService.cs" />
-    <Compile Include="Framework\Commands\ICommandHandlerMetadata.cs" />
     <Compile Include="Framework\Commands\ICommandKeyGestureService.cs" />
     <Compile Include="Framework\Commands\ICommandService.cs" />
     <Compile Include="Framework\Commands\ICommandUiItem.cs" />
@@ -160,7 +160,7 @@
     </Compile>
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
-    <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SwitchToDocumentListCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\OpenFileCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\NewFileCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\NewFileCommandHandler.cs" />

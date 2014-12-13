@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.PropertyGrid.Commands
 {
-    [CommandHandler(typeof(ViewPropertyGridCommandDefinition))]
-    public class ViewPropertyGridCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewPropertyGridCommandHandler : CommandHandlerBase<ViewPropertyGridCommandDefinition>
     {
         private readonly IShell _shell;
 

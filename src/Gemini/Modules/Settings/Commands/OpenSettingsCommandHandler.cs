@@ -7,8 +7,8 @@ using Gemini.Modules.Settings.ViewModels;
 
 namespace Gemini.Modules.Settings.Commands
 {
-    [CommandHandler(typeof(OpenSettingsCommandDefinition))]
-    public class OpenSettingsCommandHandler : CommandHandler
+    [CommandHandler]
+    public class OpenSettingsCommandHandler : CommandHandlerBase<OpenSettingsCommandDefinition>
     {
         private readonly IWindowManager _windowManager;
 

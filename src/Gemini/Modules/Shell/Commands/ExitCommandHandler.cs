@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [CommandHandler(typeof(ExitCommandDefinition))]
-    public class ExitCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ExitCommandHandler : CommandHandlerBase<ExitCommandDefinition>
     {
         private readonly IShell _shell;
 

@@ -7,8 +7,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.UndoRedo.Commands
 {
-    [CommandHandler(typeof (UndoCommandDefinition))]
-    public class UndoCommandHandler : CommandHandler
+    [CommandHandler]
+    public class UndoCommandHandler : CommandHandlerBase<UndoCommandDefinition>
     {
         private readonly IShell _shell;
 

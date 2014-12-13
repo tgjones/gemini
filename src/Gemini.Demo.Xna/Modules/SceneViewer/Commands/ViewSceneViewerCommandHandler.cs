@@ -7,8 +7,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Demo.Xna.Modules.SceneViewer.Commands
 {
-    [CommandHandler(typeof(ViewSceneViewerCommandDefinition))]
-    public class ViewSceneViewerCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewSceneViewerCommandHandler : CommandHandlerBase<ViewSceneViewerCommandDefinition>
     {
         private readonly IShell _shell;
 

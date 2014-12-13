@@ -6,8 +6,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.UndoRedo.Commands
 {
-    [CommandHandler(typeof(ViewHistoryCommandDefinition))]
-    public class ViewHistoryCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewHistoryCommandHandler : CommandHandlerBase<ViewHistoryCommandDefinition>
     {
         private readonly IShell _shell;
 

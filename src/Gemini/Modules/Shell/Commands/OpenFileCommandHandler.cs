@@ -10,8 +10,8 @@ using Microsoft.Win32;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [CommandHandler(typeof(OpenFileCommandDefinition))]
-    public class OpenFileCommandHandler : CommandHandler
+    [CommandHandler]
+    public class OpenFileCommandHandler : CommandHandlerBase<OpenFileCommandDefinition>
     {
         private readonly IShell _shell;
 

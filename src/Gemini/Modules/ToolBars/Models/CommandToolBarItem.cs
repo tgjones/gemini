@@ -54,7 +54,7 @@ namespace Gemini.Modules.ToolBars.Models
 	        get { return _command.CommandDefinition; }
 	    }
 
-	    void ICommandUiItem.Update(CommandHandler commandHandler)
+        void ICommandUiItem.Update(CommandHandlerWrapper commandHandler)
 	    {
 	        // TODO
 	    }

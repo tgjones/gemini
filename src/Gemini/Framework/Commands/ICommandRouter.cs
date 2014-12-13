@@ -4,6 +4,6 @@ namespace Gemini.Framework.Commands
 {
     public interface ICommandRouter
     {
-        CommandHandler GetCommandHandler(CommandDefinitionBase commandDefinition, IInputElement target);
+        CommandHandlerWrapper GetCommandHandler(CommandDefinitionBase commandDefinition, IInputElement target);
     }
 }

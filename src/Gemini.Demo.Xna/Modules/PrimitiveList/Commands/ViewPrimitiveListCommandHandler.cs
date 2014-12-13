@@ -7,8 +7,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Demo.Xna.Modules.PrimitiveList.Commands
 {
-    [CommandHandler(typeof(ViewPrimitiveListCommandDefinition))]
-    public class ViewPrimitiveListCommandHandler : CommandHandler
+    [CommandHandler]
+    public class ViewPrimitiveListCommandHandler : CommandHandlerBase<ViewPrimitiveListCommandDefinition>
     {
         private readonly IShell _shell;
 

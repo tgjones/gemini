@@ -8,18 +8,18 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [CommandHandler(typeof(SwitchToDocumentCommandListDefinition))]
-    public class SwitchToDocumentCommandHandler : CommandHandler
+    [CommandHandler]
+    public class SwitchToDocumentListCommandHandler : ICommandListHandler<SwitchToDocumentCommandListDefinition>
     {
         private readonly IShell _shell;
 
         [ImportingConstructor]
-        public SwitchToDocumentCommandHandler(IShell shell)
+        public SwitchToDocumentListCommandHandler(IShell shell)
         {
             _shell = shell;
         }
 
-        public override void Update(Command command, List<Command> commands)
+        public void Populate(Command command, List<Command> commands)
         {
             for (var i = 0; i < _shell.Documents.Count; i++)
             {
@@ -33,7 +33,7 @@ namespace Gemini.Modules.Shell.Commands
             }
         }
 
-        public override Task Run(Command command)
+        public Task Run(Command command)
         {
             _shell.OpenDocument((IDocument) command.Tag);
             return TaskUtility.Completed;

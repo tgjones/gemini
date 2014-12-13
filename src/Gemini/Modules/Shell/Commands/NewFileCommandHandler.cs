@@ -7,8 +7,8 @@ using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
-    [CommandHandler(typeof(NewFileCommandListDefinition))]
-    public class NewFileCommandHandler : CommandHandler
+    [CommandHandler]
+    public class NewFileCommandHandler : ICommandListHandler<NewFileCommandListDefinition>
     {
         private int _newFileCounter = 1;
 
@@ -27,7 +27,7 @@ namespace Gemini.Modules.Shell.Commands
             _editorProviders = editorProviders;
         }
 
-        public override void Update(Command command, List<Command> commands)
+        public void Populate(Command command, List<Command> commands)
         {
             foreach (var editorProvider in _editorProviders)
                 foreach (var editorFileType in editorProvider.FileTypes)
@@ -42,7 +42,7 @@ namespace Gemini.Modules.Shell.Commands
                     });
         }
 
-        public override Task Run(Command command)
+        public Task Run(Command command)
         {
             var tag = (NewFileTag) command.Tag;
             var newDocument = tag.EditorProvider.CreateNew("Untitled " + (_newFileCounter++) + tag.FileType.FileExtension);

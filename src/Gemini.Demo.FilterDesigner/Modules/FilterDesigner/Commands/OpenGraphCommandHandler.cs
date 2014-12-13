@@ -9,8 +9,8 @@ using Gemini.Modules.Inspector;
 
 namespace Gemini.Demo.FilterDesigner.Modules.FilterDesigner.Commands
 {
-    [CommandHandler(typeof(OpenGraphCommandDefinition))]
-    public class OpenGraphCommandHandler : CommandHandler
+    [CommandHandler]
+    public class OpenGraphCommandHandler : CommandHandlerBase<OpenGraphCommandDefinition>
     {
         private readonly IShell _shell;
 

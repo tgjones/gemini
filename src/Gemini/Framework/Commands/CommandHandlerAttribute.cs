@@ -4,15 +4,13 @@ using System.ComponentModel.Composition;
 namespace Gemini.Framework.Commands
 {
     [MetadataAttribute]
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class CommandHandlerAttribute : ExportAttribute, ICommandHandlerMetadata
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CommandHandlerAttribute : ExportAttribute
     {
-        public CommandHandlerAttribute(Type commandDefinitionType)
-            : base(typeof(CommandHandler))
+        public CommandHandlerAttribute()
+            : base(typeof(ICommandHandler))
         {
-            CommandDefinitionType = commandDefinitionType;
+            
         }
-
-        public Type CommandDefinitionType { get; set; }
     }
 }
