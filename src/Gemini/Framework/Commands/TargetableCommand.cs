@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
 
@@ -17,7 +18,7 @@ namespace Gemini.Framework.Commands
 
         public bool CanExecute(object parameter)
         {
-            var commandHandler = _commandRouter.GetCommandHandler(_command.CommandDefinition, Keyboard.FocusedElement);
+            var commandHandler = _commandRouter.GetCommandHandler(_command.CommandDefinition);
             if (commandHandler == null)
                 return false;
 
@@ -28,7 +29,7 @@ namespace Gemini.Framework.Commands
 
         public async void Execute(object parameter)
         {
-            var commandHandler = _commandRouter.GetCommandHandler(_command.CommandDefinition, Keyboard.FocusedElement);
+            var commandHandler = _commandRouter.GetCommandHandler(_command.CommandDefinition);
             if (commandHandler == null)
                 return;
 

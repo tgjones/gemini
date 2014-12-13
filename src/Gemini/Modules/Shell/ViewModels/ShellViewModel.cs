@@ -216,7 +216,7 @@ namespace Gemini.Modules.Shell.ViewModels
             if (handler != null)
                 handler(this, EventArgs.Empty);
 
-            if (CurrentActiveItem != item)
+            if (!ReferenceEquals(CurrentActiveItem, item))
                 CurrentActiveItem = item;
 
             base.OnActivationProcessed(item, success);
