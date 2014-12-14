@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Caliburn.Micro;
+using Gemini.Framework.Services;
 
 namespace Gemini.Framework.Commands
 {
@@ -19,8 +21,7 @@ namespace Gemini.Framework.Commands
             
         [ImportingConstructor]
         public CommandRouter(
-            [ImportMany(typeof(ICommandHandler))] 
-            ICommandHandler[] globalCommandHandlers)
+            [ImportMany(typeof(ICommandHandler))] ICommandHandler[] globalCommandHandlers)
         {
             _commandHandlerTypeToCommandDefinitionTypesLookup = new Dictionary<Type, HashSet<Type>>();
             _globalCommandHandlerWrappers = BuildCommandHandlerWrappers(globalCommandHandlers);
@@ -49,16 +50,21 @@ namespace Gemini.Framework.Commands
         {
             CommandHandlerWrapper commandHandler;
 
-            if (Keyboard.FocusedElement != null)
+            var activeItemViewModel = IoC.Get<IShell>().ActiveLayoutItem;
+            if (activeItemViewModel != null)
             {
-                var window = Window.GetWindow((DependencyObject) Keyboard.FocusedElement);
-                var startElement = FocusManager.GetFocusedElement(window);
+                var activeItemView = ViewLocator.LocateForModel(activeItemViewModel, null, null);
+                var activeItemWindow = Window.GetWindow(activeItemView);
+                if (activeItemWindow != null)
+                {
+                    var startElement = FocusManager.GetFocusedElement(activeItemWindow);
 
-                // First, we look at the currently focused element, and iterate up through
-                // the tree, giving each DataContext a chance to handle the command.
-                commandHandler = FindCommandHandlerInVisualTree(commandDefinition, startElement);
-                if (commandHandler != null)
-                    return commandHandler;
+                    // First, we look at the currently focused element, and iterate up through
+                    // the tree, giving each DataContext a chance to handle the command.
+                    commandHandler = FindCommandHandlerInVisualTree(commandDefinition, startElement);
+                    if (commandHandler != null)
+                        return commandHandler;
+                }
             }
 
             // If none of the objects in the DataContext hierarchy handle the command,

@@ -56,21 +56,21 @@ namespace Gemini.Modules.Shell.ViewModels
 			get { return _statusBar; }
 		}
 
-	    private ILayoutItem _currentActiveItem;
-	    public ILayoutItem CurrentActiveItem
+	    private ILayoutItem _activeLayoutItem;
+	    public ILayoutItem ActiveLayoutItem
 	    {
-	        get { return _currentActiveItem; }
+	        get { return _activeLayoutItem; }
 	        set
 	        {
-	            if (ReferenceEquals(_currentActiveItem, value))
+	            if (ReferenceEquals(_activeLayoutItem, value))
 	                return;
 
-	            _currentActiveItem = value;
+	            _activeLayoutItem = value;
 
 	            if (value is IDocument)
 	                ActivateItem((IDocument) value);
 
-	            NotifyOfPropertyChange(() => CurrentActiveItem);
+	            NotifyOfPropertyChange(() => ActiveLayoutItem);
 	        }
 	    }
 
@@ -190,7 +190,7 @@ namespace Gemini.Modules.Shell.ViewModels
 		    else
 		        Tools.Add(model);
 		    model.IsSelected = true;
-	        CurrentActiveItem = model;
+	        ActiveLayoutItem = model;
 		}
 
 		public void OpenDocument(IDocument model)
@@ -234,8 +234,8 @@ namespace Gemini.Modules.Shell.ViewModels
 
         protected override void OnActivationProcessed(IDocument item, bool success)
         {
-            if (!ReferenceEquals(CurrentActiveItem, item))
-                CurrentActiveItem = item;
+            if (!ReferenceEquals(ActiveLayoutItem, item))
+                ActiveLayoutItem = item;
 
             base.OnActivationProcessed(item, success);
         }
