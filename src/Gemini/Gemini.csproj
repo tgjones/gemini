@@ -105,6 +105,7 @@
     <Compile Include="Framework\Commands\CommandRouter.cs" />
     <Compile Include="Framework\Commands\CommandService.cs" />
     <Compile Include="Framework\Commands\ICommandKeyGestureService.cs" />
+    <Compile Include="Framework\Commands\ICommandRerouter.cs" />
     <Compile Include="Framework\Commands\ICommandService.cs" />
     <Compile Include="Framework\Commands\ICommandUiItem.cs" />
     <Compile Include="Framework\Commands\TargetableCommand.cs" />

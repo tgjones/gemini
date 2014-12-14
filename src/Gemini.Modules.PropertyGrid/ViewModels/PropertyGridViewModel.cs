@@ -1,13 +1,18 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using Gemini.Framework;
+using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
+using Gemini.Modules.UndoRedo.Commands;
 
 namespace Gemini.Modules.PropertyGrid.ViewModels
 {
 	[Export(typeof(IPropertyGrid))]
-	public class PropertyGridViewModel : Tool, IPropertyGrid
+	public class PropertyGridViewModel : Tool, IPropertyGrid, ICommandRerouter
 	{
+	    private readonly IShell _shell;
+	    private readonly IShell c;
+
 		public override PaneLocation PreferredLocation
 		{
 			get { return PaneLocation.Right; }
@@ -29,9 +34,22 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
 			}
 		}
 
-        public PropertyGridViewModel()
+        [ImportingConstructor]
+        public PropertyGridViewModel(IShell shell)
         {
+            _shell = shell;
             DisplayName = "Properties";
         }
+
+	    object ICommandRerouter.GetHandler(CommandDefinitionBase commandDefinition)
+	    {
+	        if (commandDefinition is UndoCommandDefinition ||
+	            commandDefinition is RedoCommandDefinition)
+	        {
+	            return _shell.ActiveItem;
+	        }
+
+	        return null;
+	    }
 	}
 }

@@ -90,6 +90,18 @@ namespace Gemini.Framework.Commands
                     var dataContext = frameworkElement.DataContext;
                     if (dataContext != null && !ReferenceEquals(dataContext, previousDataContext))
                     {
+                        if (dataContext is ICommandRerouter)
+                        {
+                            var commandRerouter = (ICommandRerouter) dataContext;
+                            var commandTarget = commandRerouter.GetHandler(commandDefinition);
+                            if (commandTarget != null)
+                            {
+                                if (IsCommandHandlerForCommandDefinitionType(commandTarget, commandDefinition.GetType()))
+                                    return CreateCommandHandlerWrapper(commandDefinition.GetType(), commandTarget);
+                                throw new InvalidOperationException("This object does not handle the specified command definition.");
+                            }
+                        }
+
                         if (IsCommandHandlerForCommandDefinitionType(dataContext, commandDefinition.GetType()))
                             return CreateCommandHandlerWrapper(commandDefinition.GetType(), dataContext);
 
