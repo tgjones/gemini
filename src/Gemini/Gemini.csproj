@@ -172,6 +172,7 @@
     <Compile Include="Modules\MainMenu\Controls\MenuItemEx.cs" />
     <Compile Include="Modules\MainMenu\Controls\MenuEx.cs" />
     <Compile Include="Modules\Shell\Controls\PanesStyleSelector.cs" />
+    <Compile Include="Modules\Shell\Converters\NullableDateTimeValueConverter.cs" />
     <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
     <Compile Include="Modules\Shell\MenuDefinitions.cs" />
     <Compile Include="Modules\Shell\ToolBarDefinitions.cs" />

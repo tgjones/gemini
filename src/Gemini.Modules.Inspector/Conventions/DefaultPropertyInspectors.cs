@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -34,7 +35,11 @@ namespace Gemini.Modules.Inspector.Conventions
                 new StandardPropertyEditorBuilder<Point3D, Point3DEditorViewModel>(),
                 new StandardPropertyEditorBuilder<string, TextBoxEditorViewModel<string>>(),
 
-                new StandardPropertyEditorBuilder<BitmapSource, BitmapSourceEditorViewModel>()
+                new StandardPropertyEditorBuilder<BitmapSource, BitmapSourceEditorViewModel>(),
+
+                //TODO: anticipating will work on DateTime editor...
+                new StandardPropertyEditorBuilder<TimeSpan?, TimeSpanEditorViewModel>(),
+                //new StandardPropertyEditorBuilder<DateTime?, DateTimeEditorViewModel>(),
             };
         }
 

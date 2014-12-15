@@ -143,6 +143,10 @@
       <DependentUpon>RangeEditorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inspectors\RangeEditorViewModel.cs" />
+    <Compile Include="Inspectors\TimeSpanEditorView.xaml.cs">
+      <DependentUpon>TimeSpanEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors\TimeSpanEditorViewModel.cs" />
     <Compile Include="MenuDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ExpressionUtility.cs" />
@@ -194,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Inspectors\TextBoxEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inspectors\TimeSpanEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
