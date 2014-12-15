@@ -63,6 +63,11 @@ namespace Gemini.Modules.Inspector
             return WithEditor(instance, propertyExpression, new RangeEditorViewModel<double>(minimum, maximum));
         }
 
+        public TBuilder WithTimeSpanEditor<T>(T instance, Expression<Func<T, TimeSpan?>> propertyExpression)
+        {
+            return WithEditor<T, TimeSpan?, TimeSpanEditorViewModel>(instance, propertyExpression);
+        }
+
         public TBuilder WithEditor<T, TProperty, TEditor>(T instance, Expression<Func<T, TProperty>> propertyExpression)
             where TEditor : IEditor, new()
         {

@@ -128,7 +128,20 @@ namespace Gemini.Demo.Modules.Home.ViewModels
             }
         }
 
-		public HomeViewModel()
+        private TimeSpan? _timeOfDay;
+        [DisplayName(@"Time Of Day")]
+        public TimeSpan? TimeOfDay
+        {
+            get { return _timeOfDay; }
+            set
+            {
+                if (value == _timeOfDay) return;
+                _timeOfDay = value;
+                NotifyOfPropertyChange(() => TimeOfDay);
+            }
+        }
+
+        public HomeViewModel()
 		{
 		    DisplayName = "Home";
 			Background = Colors.CornflowerBlue;
@@ -141,6 +154,7 @@ namespace Gemini.Demo.Modules.Home.ViewModels
 		    NullableFloatValue = null;
 		    DoubleValue = Math.PI;
 		    NullableDoubleValue = 4.5;
+            TimeOfDay = DateTime.UtcNow.TimeOfDay;
 		}
 	}
 }
