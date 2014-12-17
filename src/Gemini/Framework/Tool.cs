@@ -1,5 +1,9 @@
 using System.Windows.Input;
+using Caliburn.Micro;
 using Gemini.Framework.Services;
+using Gemini.Framework.ToolBars;
+using Gemini.Modules.ToolBars;
+using Gemini.Modules.ToolBars.Models;
 
 namespace Gemini.Framework
 {
@@ -33,6 +37,32 @@ namespace Gemini.Framework
 				NotifyOfPropertyChange(() => IsVisible);
 			}
 		}
+
+        private ToolBarDefinition _toolBarDefinition;
+        public ToolBarDefinition ToolBarDefinition
+        {
+            get { return _toolBarDefinition; }
+            protected set
+            {
+                _toolBarDefinition = value;
+                NotifyOfPropertyChange(() => ToolBar);
+                NotifyOfPropertyChange();
+            }
+        }
+
+        public IToolBar ToolBar
+        {
+            get
+            {
+                if (ToolBarDefinition == null)
+                    return null;
+
+                var toolBarBuilder = IoC.Get<IToolBarBuilder>();
+                IToolBar toolBar = new ToolBarModel();
+                toolBarBuilder.BuildToolBar(ToolBarDefinition, toolBar);
+                return toolBar;
+            }
+        }
 
         public override bool ShouldReopenOnStart
         {

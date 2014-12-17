@@ -73,24 +73,11 @@ namespace Gemini.Modules.ErrorList.ViewModels
             }
         }
 
-        public int ErrorItemCount
-        {
-            get { return _items.Count(x => x.ItemType == ErrorListItemType.Error); }
-        }
-
-        public int WarningItemCount
-        {
-            get { return _items.Count(x => x.ItemType == ErrorListItemType.Warning); }
-        }
-
-        public int MessageItemCount
-        {
-            get { return _items.Count(x => x.ItemType == ErrorListItemType.Message); }
-        }
-
         public ErrorListViewModel()
         {
             DisplayName = "Error List";
+
+            ToolBarDefinition = ToolBarDefinitions.ErrorListToolBar;
 
             _items = new BindableCollection<ErrorListItem>();
             _items.CollectionChanged += (sender, e) =>

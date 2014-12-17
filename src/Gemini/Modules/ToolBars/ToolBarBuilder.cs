@@ -56,7 +56,7 @@ namespace Gemini.Modules.ToolBars
                     .OrderBy(x => x.SortOrder);
 
                 foreach (var toolBarItem in toolBarItems)
-                    result.Add(new CommandToolBarItem(_commandService.GetCommand(toolBarItem.CommandDefinition), result));
+                    result.Add(new CommandToolBarItem(toolBarItem, _commandService.GetCommand(toolBarItem.CommandDefinition), result));
 
                 if (i < groups.Count - 1 && toolBarItems.Any())
                     result.Add(new ToolBarItemSeparator());

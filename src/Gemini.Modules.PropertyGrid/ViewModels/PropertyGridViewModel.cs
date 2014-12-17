@@ -11,7 +11,6 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
 	public class PropertyGridViewModel : Tool, IPropertyGrid, ICommandRerouter
 	{
 	    private readonly IShell _shell;
-	    private readonly IShell c;
 
 		public override PaneLocation PreferredLocation
 		{

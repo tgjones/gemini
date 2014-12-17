@@ -4,49 +4,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dd="clr-namespace:Gemini.Modules.ErrorList.Design"
              xmlns:converters="clr-namespace:Gemini.Modules.ErrorList.Converters"
-             xmlns:gemini="clr-namespace:Gemini.Framework.Controls;assembly=Gemini"
              x:Class="Gemini.Modules.ErrorList.Views.ErrorListView"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800"
 			 d:DataContext="{d:DesignInstance {x:Type dd:DesignTimeErrorListViewModel}, IsDesignTimeCreatable=True}">
 	<UserControl.Resources>
-		<converters:PluralizingValueConverter x:Key="PluralizingValueConverter" />
 		<converters:ErrorListItemTypeToImageConverter x:Key="ErrorListItemTypeToImageConverter"
-													  ErrorImageSource="../Resources/ErrorColor.png"
-													  MessageImageSource="../Resources/MessageColor.png"
-													  WarningImageSource="../Resources/WarningColor.png" />
+													  ErrorImageSource="../Resources/Error.png"
+													  MessageImageSource="../Resources/Message.png"
+													  WarningImageSource="../Resources/Warning.png" />
 	</UserControl.Resources>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<gemini:ToolPaneToolBar Grid.Row="0">
-			<ToggleButton IsChecked="{Binding ShowErrors}">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="../Resources/ErrorColor.png" />
-					<TextBlock Text="{Binding ErrorItemCount, StringFormat=' {0} '}" />
-					<TextBlock Text="{Binding ErrorItemCount, Converter={StaticResource PluralizingValueConverter}, ConverterParameter='Error'}" />
-				</StackPanel>
-			</ToggleButton>
-			<Separator />
-			<ToggleButton IsChecked="{Binding ShowWarnings}">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="../Resources/WarningColor.png" />
-					<TextBlock Text="{Binding WarningItemCount, StringFormat=' {0} '}" />
-					<TextBlock Text="{Binding WarningItemCount, Converter={StaticResource PluralizingValueConverter}, ConverterParameter='Warning'}" />
-				</StackPanel>
-			</ToggleButton>
-			<Separator />
-			<ToggleButton IsChecked="{Binding ShowMessages}">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="../Resources/MessageColor.png" />
-					<TextBlock Text="{Binding MessageItemCount, StringFormat=' {0} '}" />
-					<TextBlock Text="{Binding MessageItemCount, Converter={StaticResource PluralizingValueConverter}, ConverterParameter='Message'}" />
-				</StackPanel>
-			</ToggleButton>
-		</gemini:ToolPaneToolBar>
-		<DataGrid Grid.Row="1" ItemsSource="{Binding FilteredItems}" 
+    <Grid>
+        <DataGrid ItemsSource="{Binding FilteredItems}" 
                   AutoGenerateColumns="False" IsReadOnly="True"
 				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke"
 				  MouseDoubleClick="OnDataGridMouseDoubleClick" BorderThickness="0"

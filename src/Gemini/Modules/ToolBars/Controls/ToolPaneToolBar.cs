@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Gemini.Framework.Controls
+namespace Gemini.Modules.ToolBars.Controls
 {
-    public class ToolPaneToolBar : ToolBar
+    public class ToolPaneToolBar : ToolBarBase
     {
         static ToolPaneToolBar()
         {

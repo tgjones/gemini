@@ -331,7 +331,7 @@
     </Style>
 
     <!--Style the tool pane toolbar-->
-    <Style x:Key="{x:Type controls:ToolPaneToolBar}" TargetType="{x:Type controls:ToolPaneToolBar}" BasedOn="{StaticResource {x:Type ToolBar}}">
+    <Style x:Key="{x:Type c:ToolPaneToolBar}" TargetType="{x:Type c:ToolPaneToolBar}" BasedOn="{StaticResource {x:Type ToolBar}}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="4 2" />
     </Style>

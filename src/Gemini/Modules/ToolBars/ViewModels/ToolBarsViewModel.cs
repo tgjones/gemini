@@ -43,7 +43,7 @@ namespace Gemini.Modules.ToolBars.ViewModels
             // to workaround this. But for now, toolbars need to be
             // created prior to the following code being run.
             foreach (var toolBar in Items)
-                ((IToolBarsView) view).ToolBarTray.ToolBars.Add(new ToolBarEx
+                ((IToolBarsView) view).ToolBarTray.ToolBars.Add(new MainToolBar
                 {
                     ItemsSource = toolBar
                 });

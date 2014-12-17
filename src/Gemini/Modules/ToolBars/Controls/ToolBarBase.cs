@@ -5,15 +5,9 @@ using Gemini.Modules.ToolBars.Models;
 
 namespace Gemini.Modules.ToolBars.Controls
 {
-    public class ToolBarEx : System.Windows.Controls.ToolBar
+    public class ToolBarBase : ToolBar
     {
         private object _currentItem;
-
-        public ToolBarEx()
-        {
-            SetOverflowMode(this, OverflowMode.Always);
-            SetResourceReference(StyleProperty, typeof(ToolBar));
-        }
 
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
@@ -26,7 +20,10 @@ namespace Gemini.Modules.ToolBars.Controls
             if (_currentItem is ToolBarItemSeparator)
                 return new Separator();
 
-            return CreateButton<Button>(ButtonStyleKey, "ToolBarButton");
+            if (_currentItem is CommandToolBarItem)
+                return CreateButton<CustomToggleButton>(ToggleButtonStyleKey, "ToolBarButton");
+
+            return base.GetContainerForItemOverride();
         }
 
         private static T CreateButton<T>(object baseStyleKey, string styleKey)

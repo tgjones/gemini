@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:cal="http://www.caliburnproject.org">
+					xmlns:toolbars="clr-namespace:Gemini.Framework.ToolBars">
 	<Image x:Key="ToolBarButtonImage" x:Shared="false" Source="{Binding IconSource}">
 		<Image.Style>
 			<Style TargetType="Image">
@@ -16,21 +16,24 @@
 		</Image.Style>
 	</Image>
 
-	<Style x:Key="ToolBarToggleButton" TargetType="{x:Type ToggleButton}" 
-		   BasedOn="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}">
-		<Setter Property="Content" Value="{StaticResource ToolBarButtonImage}" />
-		<Setter Property="ToolTip" Value="{Binding FullToolTip}" />
-        <Setter Property="ToolTipService.IsEnabled" Value="{Binding HasToolTip}" />
-		<Setter Property="IsChecked" Value="{Binding IsChecked}" />
-		<Setter Property="cal:Action.Target" Value="{Binding}" />
-		<Setter Property="cal:Message.Attach" Value="{Binding ActionText}" />
-	</Style>
+    <StackPanel x:Key="IconAndTextTemplate" x:Shared="False" Orientation="Horizontal">
+        <ContentControl Content="{StaticResource ToolBarButtonImage}" />
+        <TextBlock Text="{Binding Text}" Margin="5 0 0 0" />
+    </StackPanel>
 
-	<Style x:Key="ToolBarButton" TargetType="{x:Type Button}" 
-		   BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+    <Style x:Key="ToolBarButton" TargetType="{x:Type ToggleButton}" 
+		   BasedOn="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}">
 		<Setter Property="Content" Value="{StaticResource ToolBarButtonImage}" />
         <Setter Property="ToolTip" Value="{Binding ToolTip}" />
         <Setter Property="ToolTipService.IsEnabled" Value="{Binding HasToolTip}" />
+		<Setter Property="IsChecked" Value="{Binding IsChecked, Mode=OneWay}" />
         <Setter Property="Command" Value="{Binding Command}" />
+        <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Display}" Value="{x:Static toolbars:ToolBarItemDisplay.IconAndText}">
+                <Setter Property="Content" Value="{StaticResource IconAndTextTemplate}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

@@ -67,10 +67,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ToggleErrorsCommandDefinition.cs" />
+    <Compile Include="Commands\ToggleMessagesCommandDefinition.cs" />
+    <Compile Include="Commands\ToggleWarningsCommandDefinition.cs" />
     <Compile Include="Commands\ViewErrorListCommandDefinition.cs" />
+    <Compile Include="Commands\ToggleErrorsWarningsMessagesCommandHandler.cs" />
     <Compile Include="Commands\ViewErrorListCommandHandler.cs" />
     <Compile Include="Converters\ErrorListItemTypeToImageConverter.cs" />
-    <Compile Include="Converters\PluralizingValueConverter.cs" />
     <Compile Include="Design\DesignTimeErrorListViewModel.cs" />
     <Compile Include="ErrorListItemType.cs" />
     <Compile Include="IErrorList.cs" />
@@ -89,6 +92,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ErrorListItem.cs" />
+    <Compile Include="ToolBarDefinitions.cs" />
     <Compile Include="ViewModels\ErrorListViewModel.cs" />
     <Compile Include="Views\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
@@ -115,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Warning.png" />
-    <Resource Include="Resources\WarningColor.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ErrorListView.xaml">
@@ -125,11 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Message.png" />
-    <Resource Include="Resources\MessageColor.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Error.png" />
-    <Resource Include="Resources\ErrorColor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

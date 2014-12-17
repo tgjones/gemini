@@ -30,8 +30,8 @@ namespace Gemini.Framework.ToolBars
             get { return _commandDefinition; }
         }
 
-        public CommandToolBarItemDefinition(ToolBarItemGroupDefinition group, int sortOrder)
-            : base(group, sortOrder)
+        public CommandToolBarItemDefinition(ToolBarItemGroupDefinition group, int sortOrder, ToolBarItemDisplay display = ToolBarItemDisplay.IconOnly)
+            : base(group, sortOrder, display)
         {
             _commandDefinition = IoC.Get<ICommandService>().GetCommandDefinition(typeof(TCommandDefinition));
         }
