@@ -2,7 +2,7 @@
 using Gemini.Framework;
 using SharpDX;
 
-namespace Gemini.Demo.SharpDX.Modules.SceneViewer.ViewModels
+namespace Gemini.Demo.Modules.SharpDXSceneViewer.ViewModels
 {
     [Export(typeof(SceneViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]

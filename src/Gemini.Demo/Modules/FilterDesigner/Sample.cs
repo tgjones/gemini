@@ -4,6 +4,7 @@ using Gemini.Demo.Modules.FilterDesigner.ViewModels;
 using Gemini.Demo.Modules.SampleBrowser;
 using Gemini.Framework.Services;
 using Gemini.Modules.Inspector;
+using Gemini.Modules.Toolbox;
 
 namespace Gemini.Demo.Modules.FilterDesigner
 {
@@ -19,6 +20,7 @@ namespace Gemini.Demo.Modules.FilterDesigner
         {
             shell.OpenDocument(IoC.Get<GraphViewModel>());
             shell.ShowTool<IInspectorTool>();
+            shell.ShowTool<IToolbox>();
         }
     }
 }

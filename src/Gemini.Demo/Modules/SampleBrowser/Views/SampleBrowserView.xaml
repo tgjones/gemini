@@ -6,28 +6,37 @@
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel Orientation="Vertical" Margin="20">
-        <TextBlock Text="Sample Browser" FontSize="35" />
-        <ItemsControl ItemsSource="{Binding Samples}" Margin="0 20 0 0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border Width="250" Height="100" 
-                            BorderBrush="LightBlue" BorderThickness="2" Background="AliceBlue"
-                            Padding="10">
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock FontSize="20" Text="{Binding Name}" />
-                            <Button Margin="0 5 0 0" Content="Load" Width="50"
-                                    HorizontalAlignment="Left"
-                                    cal:Message.Attach="Activate($dataContext)" />
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+    <Border Padding="20">
+        <Border.Background>
+            <RadialGradientBrush GradientOrigin="0,0" RadiusX="1" RadiusY="1">
+                <GradientStop Offset="0.3" Color="Purple" />
+                <GradientStop Offset="0.6" Color="DeepPink" />
+            </RadialGradientBrush>
+        </Border.Background>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Sample Browser" FontSize="35" Foreground="LightBlue" />
+            <ItemsControl ItemsSource="{Binding Samples}" Margin="0 20 0 0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="170" 
+                                Background="White"
+                                BorderThickness="1" BorderBrush="Black"
+                                Padding="10" Margin="0 0 10 10">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock FontSize="20" Text="{Binding Name}" />
+                                <Button Margin="0 5 0 0" Content="Load" Width="50"
+                                        HorizontalAlignment="Left"
+                                        cal:Message.Attach="Activate($dataContext)" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Border>
 </UserControl>

@@ -19,6 +19,7 @@
     <WarningLevel>4</WarningLevel>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>fa4beb92</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -71,10 +72,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Roslyn.Compilers.CSharp.1.2.20906.2\lib\net45\Roslyn.Compilers.CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Graphics">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>..\packages\Caliburn.Micro.2.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -172,6 +190,11 @@
     <Compile Include="Modules\Home\Views\IHelixView.cs" />
     <Compile Include="Modules\Home\Commands\ViewHomeCommandDefinition.cs" />
     <Compile Include="Modules\Home\Commands\ViewHomeCommandHandler.cs" />
+    <Compile Include="Modules\SharpDXSceneViewer\Sample.cs" />
+    <Compile Include="Modules\SharpDXSceneViewer\ViewModels\SceneViewModel.cs" />
+    <Compile Include="Modules\SharpDXSceneViewer\Views\SceneView.xaml.cs">
+      <DependentUpon>SceneView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Shell\ViewModels\DemoApplicationSettingsViewModel.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Shell\Views\DemoApplicationSettingsView.xaml.cs">
@@ -243,6 +266,10 @@
       <Project>{8080cb9a-9389-4b4d-9adf-bef7fefcac55}</Project>
       <Name>Gemini.Modules.PropertyGrid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gemini.Modules.SharpDX\Gemini.Modules.SharpDX.csproj">
+      <Project>{f91e6435-097e-4b7f-bc89-fda2135e1b22}</Project>
+      <Name>Gemini.Modules.SharpDX</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gemini\Gemini.csproj">
       <Project>{13DBFC87-C152-4A86-94B0-D9944BEEF647}</Project>
       <Name>Gemini</Name>
@@ -264,6 +291,10 @@
     <Page Include="Modules\Home\Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\SharpDXSceneViewer\Views\SceneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Modules\Shell\Views\DemoApplicationSettingsView.xaml">
       <SubType>Designer</SubType>
@@ -299,6 +330,11 @@
   <ItemGroup>
     <Effect Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.fx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Modules\SharpDXSceneViewer\Resources\tile_aqua.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">
@@ -310,6 +346,15 @@
     <!-- Add effect compilation to the PrepareResourcesDependsOn so that the effect fx  get compiled before resources are collected -->
     <PrepareResourcesDependsOn>EffectCompile;$(PrepareResourcesDependsOn)</PrepareResourcesDependsOn>
   </PropertyGroup>
+  <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.2.6.3\build\SharpDX.targets'))" />
+    <Error Condition="!Exists('..\packages\SharpDX.Toolkit.2.6.3\build\SharpDX.Toolkit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.Toolkit.2.6.3\build\SharpDX.Toolkit.targets'))" />
+  </Target>
+  <Import Project="..\packages\SharpDX.Toolkit.2.6.3\build\SharpDX.Toolkit.targets" Condition="Exists('..\packages\SharpDX.Toolkit.2.6.3\build\SharpDX.Toolkit.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
