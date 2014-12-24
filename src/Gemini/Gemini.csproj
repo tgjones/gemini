@@ -110,7 +110,12 @@
     <Compile Include="Framework\Commands\ICommandUiItem.cs" />
     <Compile Include="Framework\Commands\TargetableCommand.cs" />
     <Compile Include="Framework\Commands\ICommandRouter.cs" />
+    <Compile Include="Framework\Controls\ClippingHwndHost.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
+    <Compile Include="Framework\Controls\HwndWrapper.cs" />
+    <Compile Include="Framework\Controls\HwndMouse.cs" />
+    <Compile Include="Framework\Controls\HwndMouseEventArgs.cs" />
+    <Compile Include="Framework\Controls\HwndMouseState.cs" />
     <Compile Include="Framework\Converters.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />

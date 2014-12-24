@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Gemini.Modules.Xna.Util;
+using Gemini.Framework.Win32;
 
-namespace Gemini.Modules.Xna.Controls
+namespace Gemini.Framework.Controls
 {
     public static class HwndMouse
     {

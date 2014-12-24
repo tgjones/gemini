@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
-using Gemini.Modules.Xna.Util;
+using Gemini.Framework.Win32;
 
-namespace Gemini.Modules.Xna.Controls
+namespace Gemini.Framework.Controls
 {
     public class ClippingHwndHost : HwndHost
     {

@@ -7,14 +7,11 @@
 #endregion
 
 using System;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Input;
 
-namespace Gemini.Modules.Xna.Controls
+namespace Gemini.Framework.Controls
 {
-    /// <summary>
-    /// Event arguments used for mouse events in the GraphicsDeviceControl.
-    /// </summary>
     public class HwndMouseEventArgs : EventArgs
     {
         /// <summary>

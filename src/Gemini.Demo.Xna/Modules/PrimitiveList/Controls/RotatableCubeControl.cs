@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Gemini.Demo.Xna.Primitives;
+using Gemini.Framework.Controls;
 using Gemini.Modules.Xna.Controls;
 using Microsoft.Xna.Framework;
 

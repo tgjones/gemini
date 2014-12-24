@@ -9,12 +9,8 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Gemini.Modules.Xna.Controls
+namespace Gemini.Framework.Controls
 {
-    /// <summary>
-    /// Represents the state of a mouse. Used by the GraphicsDeviceControl to track mouse state
-    /// and for constructing the HwndMouseEventArgs.
-    /// </summary>
     public class HwndMouseState
     {
         /// <summary>

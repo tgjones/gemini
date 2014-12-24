@@ -1,4 +1,5 @@
-﻿using Gemini.Modules.Xna.Controls;
+﻿using Gemini.Framework.Controls;
+using Gemini.Modules.Xna.Controls;
 using Microsoft.Xna.Framework.Input;
 
 namespace Gemini.Modules.Xna.Services
