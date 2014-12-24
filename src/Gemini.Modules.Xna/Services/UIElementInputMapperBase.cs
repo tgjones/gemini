@@ -44,7 +44,8 @@ namespace Gemini.Modules.Xna.Services
 
         public override KeyboardState GetKeyboardState()
         {
-            return new KeyboardState(_pressedKeys.Select(MapKey).ToArray());
+            lock (_pressedKeys)
+                return new KeyboardState(_pressedKeys.Select(MapKey).ToArray());
         }
 
         public void Dispose()

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask AssemblyFile="..\..\lib\ShaderBuildTask.dll" TaskName="ShaderBuildTask.PixelShaderCompile" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -29,6 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -127,6 +129,34 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandDefinition.cs" />
+    <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandHandler.cs" />
+    <Compile Include="Modules\FilterDesigner\Design\DesignTimeGraphViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\Design\DesignTimeImages.cs" />
+    <Compile Include="Modules\FilterDesigner\MenuDefinitions.cs" />
+    <Compile Include="Modules\FilterDesigner\Sample.cs" />
+    <Compile Include="Modules\FilterDesigner\ShaderEffects\AddEffect.cs" />
+    <Compile Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.cs" />
+    <Compile Include="Modules\FilterDesigner\ShaderEffects\ShaderEffectBase.cs" />
+    <Compile Include="Modules\FilterDesigner\Util\BitmapUtility.cs" />
+    <Compile Include="Modules\FilterDesigner\Util\FastBitmap.cs" />
+    <Compile Include="Modules\FilterDesigner\Util\ShaderEffectUtility.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectorDirection.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\Add.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ColorInput.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\DynamicElement.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ImageSource.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\Multiply.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ShaderEffectElement.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\ElementViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\GraphViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\InputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\OutputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\Views\GraphView.xaml.cs">
+      <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Home\Commands\ViewHelixCommandDefinition.cs" />
     <Compile Include="Modules\Home\Commands\ViewHelixCommandHandler.cs" />
     <Compile Include="Modules\Home\Module.cs" />
@@ -146,6 +176,12 @@
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
     <Compile Include="Modules\Shell\Views\DemoApplicationSettingsView.xaml.cs">
       <DependentUpon>DemoApplicationSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\SampleBrowser\ISample.cs" />
+    <Compile Include="Modules\SampleBrowser\Module.cs" />
+    <Compile Include="Modules\SampleBrowser\ViewModels\SampleBrowserViewModel.cs" />
+    <Compile Include="Modules\SampleBrowser\Views\SampleBrowserView.xaml.cs">
+      <DependentUpon>SampleBrowserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Startup\Module.cs" />
     <Compile Include="Modules\TextEditor\EditorProvider.cs" />
@@ -191,6 +227,10 @@
       <Project>{9f436232-52c4-4c2c-a83f-adfe5b829484}</Project>
       <Name>Gemini.Modules.ErrorList</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj">
+      <Project>{f8204886-1f61-4247-b7b2-ea5e518162f3}</Project>
+      <Name>Gemini.Modules.GraphEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj">
       <Project>{0f8463bd-c1b0-4f2b-855d-49b6963b3337}</Project>
       <Name>Gemini.Modules.Inspector</Name>
@@ -209,6 +249,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Modules\FilterDesigner\Resources\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\FilterDesigner\Views\GraphView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\Home\Views\HelixView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,6 +269,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\SampleBrowser\Views\SampleBrowserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\TextEditor\Views\EditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,8 +281,35 @@
   <ItemGroup>
     <SplashScreen Include="Resources\Splash.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Modules\FilterDesigner\Resources\action_add_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Modules\FilterDesigner\Resources\active_x_16xLG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Modules\FilterDesigner\Resources\color_swatch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Modules\FilterDesigner\Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Effect Include="Modules\FilterDesigner\ShaderEffects\AddEffect.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Effect Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.fx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">
+    <PixelShaderCompile Sources="@(Effect)">
+      <Output TaskParameter="Outputs" ItemName="Resource" />
+    </PixelShaderCompile>
+  </Target>
+  <PropertyGroup>
+    <!-- Add effect compilation to the PrepareResourcesDependsOn so that the effect fx  get compiled before resources are collected -->
+    <PrepareResourcesDependsOn>EffectCompile;$(PrepareResourcesDependsOn)</PrepareResourcesDependsOn>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
