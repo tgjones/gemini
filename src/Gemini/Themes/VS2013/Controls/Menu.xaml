@@ -60,10 +60,11 @@
             <Border Name="InnerBorder" BorderThickness="0,0,0,1" BorderBrush="Transparent">
                 <Grid>
                     <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
-                    <Popup Name="Popup" Placement="Bottom" HorizontalOffset="-1"
-                           IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade"
+                    <Popup Name="Popup" Placement="Bottom" HorizontalOffset="-1.1"
+                           IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True"
+                           Focusable="False" PopupAnimation="Fade"
                            Margin="-10,-10,-10,-10">
-                        <Border Name="SubmenuBorder" SnapsToDevicePixels="True"
+                        <Border Name="SubmenuBorder"
                                 Background="{DynamicResource MenuPopupDefaultBackground}"
                                 BorderBrush="{DynamicResource MenuPopupDefaultBorder}"
                                 BorderThickness="1" Margin="0 0 8 8" 
@@ -77,7 +78,7 @@
                                     <Border Background="{DynamicResource MenuPopupDefaultIconBackground}"
                                             Width="27" HorizontalAlignment="Left" />
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"
-                                                Grid.IsSharedSizeScope="True" Margin="2"/>
+                                                Grid.IsSharedSizeScope="True" Margin="2" />
                                 </Grid>
                             </StackPanel>
                         </Border>
@@ -89,12 +90,16 @@
             <Trigger Property="IsSuspendingPopupAnimation" Value="true">
                 <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
             </Trigger>
-            <Trigger Property="IsHighlighted" Value="true">
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsHighlighted" Value="True" />
+                    <Condition Property="IsSubmenuOpen" Value="False" />
+                </MultiTrigger.Conditions>
                 <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource MenuTopLevelHeaderHoveredBackground}" />
                 <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource MenuTopLevelHeaderHoveredBorder}" />
                 <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{DynamicResource MenuTopLevelHeaderHoveredBorder}" />
                 <Setter TargetName="OuterBorder" Property="TextElement.Foreground" Value="{DynamicResource MenuTopLevelHeaderHoveredText}" />
-            </Trigger>
+            </MultiTrigger>
             <Trigger Property="IsSubmenuOpen" Value="True">
                 <Setter TargetName="OuterBorder" Property="Background" Value="{DynamicResource MenuTopLevelHeaderPressedBackground}" />
                 <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource MenuTopLevelHeaderPressedBorder}" />
