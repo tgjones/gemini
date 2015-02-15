@@ -49,7 +49,7 @@ namespace Gemini.Modules.ErrorList.Commands
         void ICommandHandler<ToggleMessagesCommandDefinition>.Update(Command command)
         {
             command.Enabled = MessageItemCount > 0;
-            command.Checked = command.Checked && _errorList.ShowMessages;
+            command.Checked = command.Enabled && _errorList.ShowMessages;
             command.Text = command.ToolTip = Pluralize("Message", MessageItemCount);
         }
 
