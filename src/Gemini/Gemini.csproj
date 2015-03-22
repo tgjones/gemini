@@ -120,6 +120,9 @@
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\Menus\CommandMenuItemDefinition.cs" />
+    <Compile Include="Framework\Menus\ExcludeMenuDefinition.cs" />
+    <Compile Include="Framework\Menus\ExcludeMenuItemDefinition.cs" />
+    <Compile Include="Framework\Menus\ExcludeMenuItemGroupDefinition.cs" />
     <Compile Include="Framework\Menus\MenuBarDefinition.cs" />
     <Compile Include="Framework\Menus\MenuDefinition.cs" />
     <Compile Include="Framework\Menus\MenuDefinitionBase.cs" />

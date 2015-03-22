@@ -14,6 +14,9 @@ namespace Gemini.Modules.MainMenu
         private readonly MenuDefinition[] _menus;
         private readonly MenuItemGroupDefinition[] _menuItemGroups;
         private readonly MenuItemDefinition[] _menuItems;
+        private readonly MenuDefinition[] _excludeMenus;
+        private readonly MenuItemGroupDefinition[] _excludeMenuItemGroups;
+        private readonly MenuItemDefinition[] _excludeMenuItems;
 
         [ImportingConstructor]
         public MenuBuilder(
@@ -21,19 +24,26 @@ namespace Gemini.Modules.MainMenu
             [ImportMany] MenuBarDefinition[] menuBars,
             [ImportMany] MenuDefinition[] menus,
             [ImportMany] MenuItemGroupDefinition[] menuItemGroups,
-            [ImportMany] MenuItemDefinition[] menuItems)
+            [ImportMany] MenuItemDefinition[] menuItems,
+            [ImportMany] ExcludeMenuDefinition[] excludeMenus,
+            [ImportMany] ExcludeMenuItemGroupDefinition[] excludeMenuItemGroups,
+            [ImportMany] ExcludeMenuItemDefinition[] excludeMenuItems)
         {
             _commandService = commandService;
             _menuBars = menuBars;
             _menus = menus;
             _menuItemGroups = menuItemGroups;
             _menuItems = menuItems;
+            _excludeMenus = excludeMenus.Select(x => x.MenuDefinitionToExclude).ToArray();
+            _excludeMenuItemGroups = excludeMenuItemGroups.Select(x => x.MenuItemGroupDefinitionToExclude).ToArray();
+            _excludeMenuItems = excludeMenuItems.Select(x => x.MenuItemDefinitionToExclude).ToArray();
         }
 
         public void BuildMenuBar(MenuBarDefinition menuBarDefinition, MenuModel result)
         {
             var menus = _menus
                 .Where(x => x.MenuBar == menuBarDefinition)
+                .Where(x => !_excludeMenus.Contains(x))
                 .OrderBy(x => x.SortOrder);
 
             foreach (var menu in menus)
@@ -49,6 +59,7 @@ namespace Gemini.Modules.MainMenu
         {
             var groups = _menuItemGroups
                 .Where(x => x.Parent == menu)
+                .Where(x => !_excludeMenuItemGroups.Contains(x))
                 .OrderBy(x => x.SortOrder)
                 .ToList();
 
@@ -57,13 +68,14 @@ namespace Gemini.Modules.MainMenu
                 var group = groups[i];
                 var menuItems = _menuItems
                     .Where(x => x.Group == group)
+                    .Where(x => !_excludeMenuItems.Contains(x))
                     .OrderBy(x => x.SortOrder);
 
                 foreach (var menuItem in menuItems)
                 {
                     var menuItemModel = (menuItem.CommandDefinition != null)
                         ? new CommandMenuItem(_commandService.GetCommand(menuItem.CommandDefinition), menuModel)
-                        : (StandardMenuItem) new TextMenuItem(menuItem);
+                        : (StandardMenuItem)new TextMenuItem(menuItem);
                     AddGroupsRecursive(menuItem, menuItemModel);
                     menuModel.Add(menuItemModel);
                 }
