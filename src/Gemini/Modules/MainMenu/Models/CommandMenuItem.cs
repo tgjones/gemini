@@ -56,6 +56,18 @@ namespace Gemini.Modules.MainMenu.Models
             _parent = parent;
 
             _listItems = new List<StandardMenuItem>();
+
+            _command.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "Visible" || e.PropertyName == "Checked")
+                {
+                    NotifyOfPropertyChange("Is" + e.PropertyName);
+                }
+                else if (e.PropertyName == "Text" || e.PropertyName == "IconSource")
+                {
+                    NotifyOfPropertyChange(e.PropertyName);
+                }
+            };
         }
 
         CommandDefinitionBase ICommandUiItem.CommandDefinition
