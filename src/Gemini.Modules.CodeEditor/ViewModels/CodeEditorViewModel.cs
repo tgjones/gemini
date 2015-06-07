@@ -105,7 +105,10 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         public override bool Equals(object obj)
         {
             var other = obj as CodeEditorViewModel;
-            return other != null && string.Compare(_path, other._path) == 0;
+            // Compare filename if path is null (and other._path is also null)
+            return other != null && string.Compare(_path, other._path) == 0 &&
+                (_path != null || (other._path == null && string.Compare(_fileName, other._fileName)==0) ); 
+                
         }
 
         public void Save()
