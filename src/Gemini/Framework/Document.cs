@@ -17,7 +17,8 @@ namespace Gemini.Framework
 	public abstract class Document : LayoutItemBase, IDocument, 
         ICommandHandler<UndoCommandDefinition>,
         ICommandHandler<RedoCommandDefinition>,
-        ICommandHandler<SaveFileCommandDefinition>
+        ICommandHandler<SaveFileCommandDefinition>,
+        ICommandHandler<SaveFileAsCommandDefinition>
 	{
 	    private IUndoRedoManager _undoRedoManager;
 	    public IUndoRedoManager UndoRedoManager
@@ -65,34 +66,55 @@ namespace Gemini.Framework
 	            return;
 
 	        // If file has never been saved, show Save As dialog.
-	        string filePath;
 	        if (persistedDocument.IsNew)
 	        {
-	            var dialog = new SaveFileDialog();
-	            dialog.FileName = persistedDocument.FileName;
-	            var filter = string.Empty;
-
-	            var fileExtension = Path.GetExtension(persistedDocument.FileName);
-	            var fileType = IoC.GetAll<IEditorProvider>()
-	                .SelectMany(x => x.FileTypes)
-                    .SingleOrDefault(x => x.FileExtension == fileExtension);
-	            if (fileType != null)
-                    filter = fileType.Name + "|*" + fileType.FileExtension + "|";
-
-                filter += "All Files|*.*";
-	            dialog.Filter = filter;
-
-	            if (dialog.ShowDialog() != true)
-	                return;
-	            filePath = dialog.FileName;
-	        }
-	        else
-	        {
-	            filePath = persistedDocument.FilePath;
+	            await DoSaveAs(persistedDocument);
+	            return;
 	        }
 
 	        // Save file.
-	        await persistedDocument.Save(filePath);
+            var filePath = persistedDocument.FilePath;
+            await persistedDocument.Save(filePath);
+	    }
+
+        void ICommandHandler<SaveFileAsCommandDefinition>.Update(Command command)
+        {
+            command.Enabled = this is IPersistedDocument;
+        }
+
+	    async Task ICommandHandler<SaveFileAsCommandDefinition>.Run(Command command)
+	    {
+            var persistedDocument = this as IPersistedDocument;
+            if (persistedDocument == null)
+                return;
+
+            await DoSaveAs(persistedDocument);
+	    }
+
+	    private static async Task DoSaveAs(IPersistedDocument persistedDocument)
+	    {
+            // Show user dialog to choose filename.
+            var dialog = new SaveFileDialog();
+            dialog.FileName = persistedDocument.FileName;
+            var filter = string.Empty;
+
+            var fileExtension = Path.GetExtension(persistedDocument.FileName);
+            var fileType = IoC.GetAll<IEditorProvider>()
+                .SelectMany(x => x.FileTypes)
+                .SingleOrDefault(x => x.FileExtension == fileExtension);
+            if (fileType != null)
+                filter = fileType.Name + "|*" + fileType.FileExtension + "|";
+
+            filter += "All Files|*.*";
+            dialog.Filter = filter;
+
+            if (dialog.ShowDialog() != true)
+                return;
+
+            var filePath = dialog.FileName;
+
+            // Save file.
+            await persistedDocument.Save(filePath);
 	    }
 	}
 }
