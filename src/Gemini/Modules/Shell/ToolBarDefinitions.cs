@@ -13,5 +13,9 @@ namespace Gemini.Modules.Shell
         [Export]
         public static ToolBarItemDefinition OpenFileToolBarItem = new CommandToolBarItemDefinition<OpenFileCommandDefinition>(
             StandardOpenSaveToolBarGroup, 0);
+
+        [Export]
+        public static ToolBarItemDefinition SaveFileToolBarItem = new CommandToolBarItemDefinition<SaveFileCommandDefinition>(
+            StandardOpenSaveToolBarGroup, 2);
     }
 }

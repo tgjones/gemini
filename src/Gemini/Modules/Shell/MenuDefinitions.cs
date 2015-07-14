@@ -23,6 +23,18 @@ namespace Gemini.Modules.Shell
             MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 1);
 
         [Export]
+        public static MenuItemDefinition FileCloseMenuItem = new CommandMenuItemDefinition<CloseFileCommandDefinition>(
+            MainMenu.MenuDefinitions.FileCloseMenuGroup, 0);
+
+        [Export]
+        public static MenuItemDefinition FileSaveMenuItem = new CommandMenuItemDefinition<SaveFileCommandDefinition>(
+            MainMenu.MenuDefinitions.FileSaveMenuGroup, 0);
+
+        [Export]
+        public static MenuItemDefinition FileSaveAsMenuItem = new CommandMenuItemDefinition<SaveFileAsCommandDefinition>(
+            MainMenu.MenuDefinitions.FileSaveMenuGroup, 1);
+
+        [Export]
         public static MenuItemDefinition FileExitMenuItem = new CommandMenuItemDefinition<ExitCommandDefinition>(
             MainMenu.MenuDefinitions.FileExitOpenMenuGroup, 0);
 

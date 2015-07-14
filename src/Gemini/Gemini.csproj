@@ -168,6 +168,10 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\ExitCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentListCommandHandler.cs" />
@@ -414,6 +418,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Gemini-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
