@@ -21,22 +21,20 @@ namespace Gemini.Modules.Shell.Commands
             _shell = shell;
         }
 
-        public override Task Run(Command command)
+        public override async Task Run(Command command)
         {
             var dialog = new OpenFileDialog();
 
             if (dialog.ShowDialog() == true)
-                _shell.OpenDocument(GetEditor(dialog.FileName));
-
-            return TaskUtility.Completed;
+                _shell.OpenDocument(await GetEditor(dialog.FileName));
         }
 
-        private static IDocument GetEditor(string path)
+        private static async Task<IDocument> GetEditor(string path)
         {
-            return IoC.GetAllInstances(typeof(IEditorProvider))
+            return await IoC.GetAllInstances(typeof(IEditorProvider))
                 .Cast<IEditorProvider>()
                 .Where(provider => provider.Handles(path))
-                .Select(provider => provider.Open(path))
+                .Select(async provider => await provider.Open(path))
                 .FirstOrDefault();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
+using System.Threading.Tasks;
 using Gemini.Demo.Modules.TextEditor.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -27,17 +28,17 @@ namespace Gemini.Demo.Modules.TextEditor
 			return _extensions.Contains(extension);
 		}
 
-        public IDocument CreateNew(string name)
+        public async Task<IDocument> CreateNew(string name)
         {
             var editor = new EditorViewModel();
-            editor.New(name);
+            await editor.New(name);
             return editor;
         }
 
-		public IDocument Open(string path)
+        public async Task<IDocument> Open(string path)
 		{
 			var editor = new EditorViewModel();
-			editor.Open(path);
+			await editor.Load(path);
 			return editor;
 		}
 	}

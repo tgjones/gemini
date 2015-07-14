@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gemini.Framework.Services
 {
@@ -6,7 +7,7 @@ namespace Gemini.Framework.Services
 	{
         IEnumerable<EditorFileType> FileTypes { get; }
 		bool Handles(string path);
-        IDocument CreateNew(string name);
-		IDocument Open(string path);
+        Task<IDocument> CreateNew(string name);
+		Task<IDocument> Open(string path);
 	}
 }

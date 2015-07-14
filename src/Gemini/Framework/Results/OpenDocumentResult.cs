@@ -37,7 +37,7 @@ namespace Gemini.Framework.Results
 			var editor = _editor ??
 				(string.IsNullOrEmpty(_path)
 					? (IDocument)IoC.GetInstance(_editorType, null)
-					: GetEditor(_path));
+					:  GetEditor(_path));
 
 			if (editor == null)
 			{
@@ -70,8 +70,9 @@ namespace Gemini.Framework.Results
 			return IoC.GetAllInstances(typeof(IEditorProvider))
 				.Cast<IEditorProvider>()
 				.Where(provider => provider.Handles(path))
-				.Select(provider => provider.Open(path))
-				.FirstOrDefault();
+				.Select(async provider => await provider.Open(path))
+				.FirstOrDefault()
+                .Result;
 		}
 	}
 }

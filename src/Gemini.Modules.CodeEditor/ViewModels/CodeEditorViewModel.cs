@@ -1,6 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.IO;
+using System.Threading.Tasks;
 using Gemini.Framework;
+using Gemini.Framework.Threading;
 using Gemini.Modules.CodeEditor.Views;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
@@ -8,14 +11,11 @@ namespace Gemini.Modules.CodeEditor.ViewModels
     [Export(typeof(CodeEditorViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
 #pragma warning disable 659
-    public class CodeEditorViewModel : Document
+    public class CodeEditorViewModel : PersistedDocument
 #pragma warning restore 659
     {
         private readonly LanguageDefinitionManager _languageDefinitionManager;
         private string _originalText;
-        private string _path;
-        private string _fileName;
-        private bool _isDirty;
         private ICodeEditorView _view;
 
         [ImportingConstructor]
@@ -24,69 +24,23 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             _languageDefinitionManager = languageDefinitionManager;
         }
 
-        public string Path
-        {
-            get { return _path; }
-        }
-
-        public bool IsDirty
-        {
-            get { return _isDirty; }
-            set
-            {
-                if (value == _isDirty)
-                    return;
-
-                _isDirty = value;
-                NotifyOfPropertyChange(() => IsDirty);
-                UpdateDisplayName();
-            }
-        }
-
         public override bool ShouldReopenOnStart
         {
             get { return true; }
         }
 
-        public override void CanClose(System.Action<bool> callback)
-        {
-            callback(!IsDirty);
-        }
-
-        public void New(string name)
-        {
-            _fileName = name;
-            UpdateDisplayName();
-        }
-
-        public void Open(string path)
-        {
-            _path = path;
-            _fileName = System.IO.Path.GetFileName(_path);
-            UpdateDisplayName();
-        }
-
         public override void SaveState(BinaryWriter writer)
         {
-            writer.Write(_path);
+            writer.Write(FilePath);
         }
 
         public override void LoadState(BinaryReader reader)
         {
-            Open(reader.ReadString());
-        }
-
-        private void UpdateDisplayName()
-        {
-            DisplayName = (IsDirty) ? _fileName + "*" : _fileName;
+            Load(reader.ReadString());
         }
 
         protected override void OnViewLoaded(object view)
         {
-            if (_path != null)
-                using (var stream = File.OpenText(_path))
-                    _originalText = stream.ReadToEnd();
-
             _view = (ICodeEditorView) view;
             _view.TextEditor.Text = _originalText;
 
@@ -95,7 +49,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
                 IsDirty = string.Compare(_originalText, _view.TextEditor.Text) != 0;
             };
 
-            var fileExtension = System.IO.Path.GetExtension(_fileName).ToLower();
+            var fileExtension = Path.GetExtension(FileName).ToLower();
 
             ILanguageDefinition languageDefinition = _languageDefinitionManager.GetDefinitionByExtension(fileExtension);
 
@@ -105,28 +59,36 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         public override bool Equals(object obj)
         {
             var other = obj as CodeEditorViewModel;
-            return other != null && string.Compare(_path, other._path) == 0;
+            return other != null
+                && string.Equals(FilePath, other.FilePath, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(FileName, other.FileName, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        public void Save()
+        protected override Task DoNew()
+        {
+            _originalText = string.Empty;
+            return TaskUtility.Completed;
+        }
+
+        protected override Task DoLoad(string filePath)
+        {
+            _originalText = File.ReadAllText(filePath);
+            return TaskUtility.Completed;
+        }
+
+        protected override Task DoSave(string filePath)
         {
             var newText = _view.TextEditor.Text;
-            File.WriteAllText(_path, newText);
+            File.WriteAllText(filePath, newText);
             _originalText = newText;
-
-            IsDirty = false;
+            return TaskUtility.Completed;
         }
 
         private void SetLanguage(ILanguageDefinition languageDefinition)
         {
-            if (languageDefinition == null)
-            {
-                _view.TextEditor.SyntaxHighlighting = null;
-            }
-            else
-            {
-                _view.TextEditor.SyntaxHighlighting = languageDefinition.SyntaxHighlighting;
-            }
+            _view.TextEditor.SyntaxHighlighting = (languageDefinition != null)
+                ? languageDefinition.SyntaxHighlighting
+                : null;
         }
     }
 }

@@ -12,17 +12,14 @@ namespace Gemini.Modules.Shell.Commands
     {
         private int _newFileCounter = 1;
 
-        private readonly ICommandService _commandService;
         private readonly IShell _shell;
         private readonly IEditorProvider[] _editorProviders;
 
         [ImportingConstructor]
         public NewFileCommandHandler(
-            ICommandService commandService,
             IShell shell,
             [ImportMany] IEditorProvider[] editorProviders)
         {
-            _commandService = commandService;
             _shell = shell;
             _editorProviders = editorProviders;
         }
@@ -42,13 +39,11 @@ namespace Gemini.Modules.Shell.Commands
                     });
         }
 
-        public Task Run(Command command)
+        public async Task Run(Command command)
         {
             var tag = (NewFileTag) command.Tag;
-            var newDocument = tag.EditorProvider.CreateNew("Untitled " + (_newFileCounter++) + tag.FileType.FileExtension);
+            var newDocument = await tag.EditorProvider.CreateNew("Untitled " + (_newFileCounter++) + tag.FileType.FileExtension);
             _shell.OpenDocument(newDocument);
-
-            return TaskUtility.Completed;
         }
 
         private class NewFileTag

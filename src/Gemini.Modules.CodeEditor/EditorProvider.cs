@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -33,10 +34,10 @@ namespace Gemini.Modules.CodeEditor
 	        }
 	    }
 
-	    public IDocument CreateNew(string name)
+	    public async Task<IDocument> CreateNew(string name)
 	    {
             var editor = IoC.Get<CodeEditorViewModel>();
-            editor.New(name);
+            await editor.New(name);
             return editor;
 	    }
 
@@ -46,10 +47,10 @@ namespace Gemini.Modules.CodeEditor
             return extension != null && _languageDefinitionManager.GetDefinitionByExtension(extension) != null;
 		}
 
-		public IDocument Open(string path)
+        public async Task<IDocument> Open(string path)
 		{
             var editor = IoC.Get<CodeEditorViewModel>();
-			editor.Open(path);
+			await editor.Load(path);
 			return editor;
 		}
 	}
