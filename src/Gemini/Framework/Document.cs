@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Caliburn.Micro;
 using Gemini.Framework.Commands;
+using Gemini.Framework.Services;
 using Gemini.Framework.Threading;
 using Gemini.Modules.Shell.Commands;
 using Gemini.Modules.UndoRedo;
@@ -67,6 +70,18 @@ namespace Gemini.Framework
 	        {
 	            var dialog = new SaveFileDialog();
 	            dialog.FileName = persistedDocument.FileName;
+	            var filter = string.Empty;
+
+	            var fileExtension = Path.GetExtension(persistedDocument.FileName);
+	            var fileType = IoC.GetAll<IEditorProvider>()
+	                .SelectMany(x => x.FileTypes)
+                    .SingleOrDefault(x => x.FileExtension == fileExtension);
+	            if (fileType != null)
+                    filter = fileType.Name + "|*" + fileType.FileExtension + "|";
+
+                filter += "All Files|*.*";
+	            dialog.Filter = filter;
+
 	            if (dialog.ShowDialog() != true)
 	                return;
 	            filePath = dialog.FileName;
