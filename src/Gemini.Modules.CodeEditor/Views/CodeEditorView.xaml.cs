@@ -1,11 +1,9 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 
 namespace Gemini.Modules.CodeEditor.Views
 {
-    /// <summary>
-    /// Interaction logic for CodeEditorView.xaml
-    /// </summary>
     public partial class CodeEditorView : UserControl, ICodeEditorView
     {
         public TextEditor TextEditor
@@ -16,6 +14,7 @@ namespace Gemini.Modules.CodeEditor.Views
         public CodeEditorView()
         {
             InitializeComponent();
+            Loaded += (sender, e) => MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 }
