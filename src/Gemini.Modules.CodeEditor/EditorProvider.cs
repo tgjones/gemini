@@ -34,24 +34,25 @@ namespace Gemini.Modules.CodeEditor
 	        }
 	    }
 
-	    public async Task<IDocument> CreateNew(string name)
+	    public bool Handles(string path)
 	    {
-            var editor = IoC.Get<CodeEditorViewModel>();
-            await editor.New(name);
-            return editor;
+	        var extension = Path.GetExtension(path);
+	        return extension != null && _languageDefinitionManager.GetDefinitionByExtension(extension) != null;
 	    }
 
-	    public bool Handles(string path)
-		{
-			var extension = Path.GetExtension(path);
-            return extension != null && _languageDefinitionManager.GetDefinitionByExtension(extension) != null;
-		}
+	    public IDocument Create()
+        {
+            return IoC.Get<CodeEditorViewModel>();
+        }
 
-        public async Task<IDocument> Open(string path)
-		{
-            var editor = IoC.Get<CodeEditorViewModel>();
-			await editor.Load(path);
-			return editor;
-		}
+	    public async Task New(IDocument document, string name)
+        {
+            await ((CodeEditorViewModel) document).New(name);
+        }
+
+	    public async Task Open(IDocument document, string path)
+        {
+            await ((CodeEditorViewModel) document).Load(path);
+        }
 	}
 }

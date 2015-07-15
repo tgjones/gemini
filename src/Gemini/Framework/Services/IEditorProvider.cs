@@ -6,8 +6,12 @@ namespace Gemini.Framework.Services
     public interface IEditorProvider
 	{
         IEnumerable<EditorFileType> FileTypes { get; }
+
 		bool Handles(string path);
-        Task<IDocument> CreateNew(string name);
-		Task<IDocument> Open(string path);
+
+        IDocument Create();
+
+        Task New(IDocument document, string name);
+        Task Open(IDocument document, string path);
 	}
 }

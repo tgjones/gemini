@@ -42,8 +42,9 @@ namespace Gemini.Modules.Shell.Commands
         public async Task Run(Command command)
         {
             var tag = (NewFileTag) command.Tag;
-            var newDocument = await tag.EditorProvider.CreateNew("Untitled " + (_newFileCounter++) + tag.FileType.FileExtension);
-            _shell.OpenDocument(newDocument);
+            var editor = tag.EditorProvider.Create();
+            await tag.EditorProvider.New(editor, "Untitled " + (_newFileCounter++) + tag.FileType.FileExtension);
+            _shell.OpenDocument(editor);
         }
 
         private class NewFileTag

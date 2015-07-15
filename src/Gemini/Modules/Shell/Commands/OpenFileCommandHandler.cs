@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
 using Microsoft.Win32;
 
 namespace Gemini.Modules.Shell.Commands
@@ -38,13 +38,24 @@ namespace Gemini.Modules.Shell.Commands
                 _shell.OpenDocument(await GetEditor(dialog.FileName));
         }
 
-        private static async Task<IDocument> GetEditor(string path)
+        internal static Task<IDocument> GetEditor(string path)
         {
-            return await IoC.GetAllInstances(typeof(IEditorProvider))
+            var provider = IoC.GetAllInstances(typeof(IEditorProvider))
                 .Cast<IEditorProvider>()
-                .Where(provider => provider.Handles(path))
-                .Select(async provider => await provider.Open(path))
-                .FirstOrDefault();
+                .FirstOrDefault(p => p.Handles(path));
+            if (provider == null)
+                return null;
+
+            var editor = provider.Create();
+
+            var viewAware = (IViewAware) editor;
+            viewAware.ViewAttached += (sender, e) =>
+            {
+                var frameworkElement = (FrameworkElement) e.View;
+                frameworkElement.Loaded += async (sender2, e2) => await provider.Open(editor, path);
+            };
+
+            return Task.FromResult(editor);
         }
     }
 }

@@ -28,18 +28,19 @@ namespace Gemini.Demo.Modules.TextEditor
 			return _extensions.Contains(extension);
 		}
 
-        public async Task<IDocument> CreateNew(string name)
+        public IDocument Create()
         {
-            var editor = new EditorViewModel();
-            await editor.New(name);
-            return editor;
+            return new EditorViewModel();
         }
 
-        public async Task<IDocument> Open(string path)
+        public async Task New(IDocument document, string name)
+        {
+            await ((EditorViewModel) document).New(name);
+        }
+
+        public async Task Open(IDocument document, string path)
 		{
-			var editor = new EditorViewModel();
-			await editor.Load(path);
-			return editor;
+			await ((EditorViewModel) document).Load(path);
 		}
 	}
 }

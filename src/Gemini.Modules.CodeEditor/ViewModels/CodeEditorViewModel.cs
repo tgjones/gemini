@@ -42,18 +42,6 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         protected override void OnViewLoaded(object view)
         {
             _view = (ICodeEditorView) view;
-            _view.TextEditor.Text = _originalText;
-
-            _view.TextEditor.TextChanged += delegate
-            {
-                IsDirty = string.Compare(_originalText, _view.TextEditor.Text) != 0;
-            };
-
-            var fileExtension = Path.GetExtension(FileName).ToLower();
-
-            ILanguageDefinition languageDefinition = _languageDefinitionManager.GetDefinitionByExtension(fileExtension);
-
-            SetLanguage(languageDefinition);
         }
 
         public override bool Equals(object obj)
@@ -67,12 +55,14 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         protected override Task DoNew()
         {
             _originalText = string.Empty;
+            ApplyOriginalText();
             return TaskUtility.Completed;
         }
 
         protected override Task DoLoad(string filePath)
         {
             _originalText = File.ReadAllText(filePath);
+            ApplyOriginalText();
             return TaskUtility.Completed;
         }
 
@@ -82,6 +72,22 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             File.WriteAllText(filePath, newText);
             _originalText = newText;
             return TaskUtility.Completed;
+        }
+
+        private void ApplyOriginalText()
+        {
+            _view.TextEditor.Text = _originalText;
+
+            _view.TextEditor.TextChanged += delegate
+            {
+                IsDirty = string.Compare(_originalText, _view.TextEditor.Text) != 0;
+            };
+
+            var fileExtension = Path.GetExtension(FileName).ToLower();
+
+            ILanguageDefinition languageDefinition = _languageDefinitionManager.GetDefinitionByExtension(fileExtension);
+
+            SetLanguage(languageDefinition);
         }
 
         private void SetLanguage(ILanguageDefinition languageDefinition)

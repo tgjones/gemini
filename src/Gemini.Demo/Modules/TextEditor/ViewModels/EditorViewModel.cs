@@ -17,12 +17,14 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
         protected override Task DoNew()
         {
             _originalText = string.Empty;
+            ApplyOriginalText();
             return TaskUtility.Completed;
         }
 
         protected override Task DoLoad(string filePath)
         {
             _originalText = File.ReadAllText(filePath);
+            ApplyOriginalText();
             return TaskUtility.Completed;
         }
 
@@ -34,16 +36,19 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
             return TaskUtility.Completed;
         }
 
-		protected override void OnViewLoaded(object view)
-		{
-            _view = (EditorView) view;
-
+        private void ApplyOriginalText()
+        {
             _view.textBox.Text = _originalText;
 
             _view.textBox.TextChanged += delegate
-			{
+            {
                 IsDirty = string.Compare(_originalText, _view.textBox.Text) != 0;
-			};
+            };
+        }
+
+		protected override void OnViewLoaded(object view)
+		{
+            _view = (EditorView) view;
 		}
 
         public override bool Equals(object obj)
