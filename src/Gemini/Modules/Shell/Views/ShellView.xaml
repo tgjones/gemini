@@ -33,8 +33,15 @@
                 <controls:PanesTemplateSelector>
                     <controls:PanesTemplateSelector.DocumentTemplate>
                         <DataTemplate>
-                            <ContentControl cal:View.Model="{Binding}"
-                                            IsTabStop="False" />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <toolbarcontrols:ToolPaneToolBar ItemsSource="{Binding ToolBar}" />
+                                <ContentControl Grid.Row="1" cal:View.Model="{Binding}"
+                                                IsTabStop="False" />
+                            </Grid>
                         </DataTemplate>
                     </controls:PanesTemplateSelector.DocumentTemplate>
                     <controls:PanesTemplateSelector.ToolTemplate>

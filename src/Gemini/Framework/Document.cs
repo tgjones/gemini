@@ -6,7 +6,10 @@ using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Gemini.Framework.Threading;
+using Gemini.Framework.ToolBars;
 using Gemini.Modules.Shell.Commands;
+using Gemini.Modules.ToolBars;
+using Gemini.Modules.ToolBars.Models;
 using Gemini.Modules.UndoRedo;
 using Gemini.Modules.UndoRedo.Commands;
 using Gemini.Modules.UndoRedo.Services;
@@ -31,6 +34,36 @@ namespace Gemini.Framework
 		{
 		    get { return _closeCommand ?? (_closeCommand = new RelayCommand(p => TryClose(null), p => true)); }
 		}
+
+        private ToolBarDefinition _toolBarDefinition;
+        public ToolBarDefinition ToolBarDefinition
+        {
+            get { return _toolBarDefinition; }
+            protected set
+            {
+                _toolBarDefinition = value;
+                NotifyOfPropertyChange(() => ToolBar);
+                NotifyOfPropertyChange();
+            }
+        }
+
+        private IToolBar _toolBar;
+        public IToolBar ToolBar
+        {
+            get
+            {
+                if (_toolBar != null)
+                    return _toolBar;
+
+                if (ToolBarDefinition == null)
+                    return null;
+
+                var toolBarBuilder = IoC.Get<IToolBarBuilder>();
+                _toolBar = new ToolBarModel();
+                toolBarBuilder.BuildToolBar(ToolBarDefinition, _toolBar);
+                return _toolBar;
+            }
+        }
 
 	    void ICommandHandler<UndoCommandDefinition>.Update(Command command)
 	    {

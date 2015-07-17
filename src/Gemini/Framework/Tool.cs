@@ -50,17 +50,21 @@ namespace Gemini.Framework
             }
         }
 
+	    private IToolBar _toolBar;
         public IToolBar ToolBar
         {
             get
             {
+                if (_toolBar != null)
+                    return _toolBar;
+
                 if (ToolBarDefinition == null)
                     return null;
 
                 var toolBarBuilder = IoC.Get<IToolBarBuilder>();
-                IToolBar toolBar = new ToolBarModel();
-                toolBarBuilder.BuildToolBar(ToolBarDefinition, toolBar);
-                return toolBar;
+                _toolBar = new ToolBarModel();
+                toolBarBuilder.BuildToolBar(ToolBarDefinition, _toolBar);
+                return _toolBar;
             }
         }
 
