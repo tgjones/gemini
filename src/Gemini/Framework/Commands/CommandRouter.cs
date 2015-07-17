@@ -50,21 +50,22 @@ namespace Gemini.Framework.Commands
         {
             CommandHandlerWrapper commandHandler;
 
-            var activeItemViewModel = IoC.Get<IShell>().ActiveLayoutItem;
+            var shell = IoC.Get<IShell>();
+
+            var activeItemViewModel = shell.ActiveLayoutItem;
             if (activeItemViewModel != null)
             {
-                var activeItemView = ViewLocator.LocateForModel(activeItemViewModel, null, null);
-                var activeItemWindow = Window.GetWindow(activeItemView);
-                if (activeItemWindow != null)
-                {
-                    var startElement = FocusManager.GetFocusedElement(activeItemWindow);
+                commandHandler = GetCommandHandlerForLayoutItem(commandDefinition, activeItemViewModel);
+                if (commandHandler != null)
+                    return commandHandler;
+            }
 
-                    // First, we look at the currently focused element, and iterate up through
-                    // the tree, giving each DataContext a chance to handle the command.
-                    commandHandler = FindCommandHandlerInVisualTree(commandDefinition, startElement);
-                    if (commandHandler != null)
-                        return commandHandler;
-                }
+            var activeDocumentViewModel = shell.ActiveItem;
+            if (activeDocumentViewModel != null && !Equals(activeDocumentViewModel, activeItemViewModel))
+            {
+                commandHandler = GetCommandHandlerForLayoutItem(commandDefinition, activeDocumentViewModel);
+                if (commandHandler != null)
+                    return commandHandler;
             }
 
             // If none of the objects in the DataContext hierarchy handle the command,
@@ -73,6 +74,20 @@ namespace Gemini.Framework.Commands
                 return null;
 
             return commandHandler;
+        }
+
+        private CommandHandlerWrapper GetCommandHandlerForLayoutItem(CommandDefinitionBase commandDefinition, object activeItemViewModel)
+        {
+            var activeItemView = ViewLocator.LocateForModel(activeItemViewModel, null, null);
+            var activeItemWindow = Window.GetWindow(activeItemView);
+            if (activeItemWindow == null)
+                return null;
+
+            var startElement = FocusManager.GetFocusedElement(activeItemView) ?? activeItemView;
+
+            // First, we look at the currently focused element, and iterate up through
+            // the tree, giving each DataContext a chance to handle the command.
+            return FindCommandHandlerInVisualTree(commandDefinition, startElement);
         }
 
         private CommandHandlerWrapper FindCommandHandlerInVisualTree(CommandDefinitionBase commandDefinition, IInputElement target)
