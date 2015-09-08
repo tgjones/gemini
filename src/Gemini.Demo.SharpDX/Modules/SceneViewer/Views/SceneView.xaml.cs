@@ -2,13 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Gemini.Demo.Modules.SharpDXSceneViewer.ViewModels;
+using Gemini.Demo.SharpDX.Modules.SceneViewer.ViewModels;
 using Gemini.Modules.SharpDX.Controls;
 using SharpDX;
 using SharpDX.Toolkit.Graphics;
 using Texture2D = SharpDX.Toolkit.Graphics.Texture2D;
 
-namespace Gemini.Demo.Modules.SharpDXSceneViewer.Views
+namespace Gemini.Demo.SharpDX.Modules.SceneViewer.Views
 {
     public partial class SceneView : UserControl
     {
@@ -51,7 +51,7 @@ namespace Gemini.Demo.Modules.SharpDXSceneViewer.Views
             };
             _primitiveIndex = 0;
 
-	        _texture = Texture2D.Load(e.GraphicsDevice, "Modules/SharpDXSceneViewer/Resources/tile_aqua.png");
+	        _texture = Texture2D.Load(e.GraphicsDevice, "Modules/SceneViewer/Resources/tile_aqua.png");
 	        _basicEffect.Texture = _texture;
 	        _basicEffect.TextureEnabled = true;
 

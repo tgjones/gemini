@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo", "Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
 EndProject
@@ -52,6 +52,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.MonoGame", "Gemini.Demo.MonoGame\Gemini.Demo.MonoGame.csproj", "{C723324B-E0FA-4F77-A616-F2B96F4C4198}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.MonoGame", "Gemini.Modules.Inspector.MonoGame\Gemini.Modules.Inspector.MonoGame.csproj", "{4775F2B0-F284-40D8-9738-BCD9B56F7273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.SharpDX", "Gemini.Demo.SharpDX\Gemini.Demo.SharpDX.csproj", "{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -233,6 +235,16 @@ Global
 		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4775F2B0-F284-40D8-9738-BCD9B56F7273}.Release|x86.ActiveCfg = Release|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -241,5 +253,6 @@ Global
 		{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{9F269618-D57F-42A1-9C8E-71291BB10588} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{C723324B-E0FA-4F77-A616-F2B96F4C4198} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
+		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 	EndGlobalSection
 EndGlobal
