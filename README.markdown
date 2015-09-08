@@ -325,7 +325,7 @@ To find out how to bind commands to menus or toolbars, see the "MainMenu" and "T
 
 ## What modules are built-in?
 
-Gemini itself is built out of six core modules:
+Gemini itself is built out of seven core modules:
 
 * MainWindow
 * Shell
@@ -889,6 +889,37 @@ inspectorTool.SelectedObject = new InspectableObjectBuilder()
 
 Adds editors for XNA types (`Vector3`, `Color`, etc.) to the Inspector module.
 
+### MonoGame module
+
+Provides a number of utilities and controls for working with MonoGame content in WPF.
+
+#### Provides
+
+* `GraphicsDeviceService` service that implements MonoGame's `IGraphicsDeviceService`
+* `DrawingSurface` control that uses `D3DImage` as described
+  [here](http://blog.bozalina.com/2010/11/xna-40-and-wpf.html).
+
+#### NuGet package
+
+* [Gemini.Modules.MonoGame](http://nuget.org/packages/Gemini.Modules.MonoGame/)
+
+#### Dependencies
+
+* [MonoGame](http://www.monogame.net)
+
+#### Usage
+
+```csharp
+public class MyDrawingSurface : DrawingSurface
+{
+    protected override RaiseDraw(DrawEventArgs args)
+    {
+        args.GraphicsDevice.Clear(Color.LightGreen);
+        base.RaiseDraw(args);
+    }
+}
+```
+
 ### Output module
 
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-module-output.png)
@@ -1006,17 +1037,25 @@ Gemini includes three sample applications:
 Showcases many of the available modules. The screenshot below shows the interactive script editor in action -
 as you type, the code will be compiled in real-time into a dynamic assembly and then executed in the same AppDomain.
 
+It also includes a very basic example of a filter designer, built on the GraphEditor module.
+
 * [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo)
 
 ![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo.png)
 
-### Gemini.Demo.FilterDesigner
+### Gemini.Demo.MonoGame
 
-Showcases the GraphEditor, Inspector and Toolbox modules.
+Showcases the MonoGame module.
 
-* [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo.FilterDesigner)
+* [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo.MonoGame)
+  
+### Gemini.Demo.SharpDX
 
-![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo-filter-designer.png)
+Showcases the SharpDX module.
+
+* [Source code](https://raw.github.com/tgjones/gemini/master/src/Gemini.Demo.SharpDX)
+  
+![Screenshot](https://raw.github.com/tgjones/gemini/master/doc/gemini-demo-sharpdx.png)
 
 ### Gemini.Demo.Xna
 
