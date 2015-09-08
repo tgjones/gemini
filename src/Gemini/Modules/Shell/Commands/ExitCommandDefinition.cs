@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -15,12 +16,12 @@ namespace Gemini.Modules.Shell.Commands
 
         public override string Text
         {
-            get { return "E_xit"; }
+            get { return Resources.FileExitCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Exit"; }
+            get { return Resources.FileExitCommandToolTip; }
         }
 
         public override KeyGesture KeyGesture

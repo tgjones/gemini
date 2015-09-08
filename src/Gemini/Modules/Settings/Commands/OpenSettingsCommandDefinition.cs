@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Settings.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.Settings.Commands
 
         public override string Text
         {
-            get { return "_Options"; }
+            get { return Resources.ToolsOptionsCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Options"; }
+            get { return Resources.ToolsOptionsCommandToolTip; }
         }
     }
 }

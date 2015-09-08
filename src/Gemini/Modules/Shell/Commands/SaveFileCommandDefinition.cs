@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -16,12 +17,12 @@ namespace Gemini.Modules.Shell.Commands
 
         public override string Text
         {
-            get { return "_Save"; }
+            get { return Resources.FileSaveCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Save"; }
+            get { return Resources.FileSaveCommandToolTip; }
         }
 
         public override Uri IconSource

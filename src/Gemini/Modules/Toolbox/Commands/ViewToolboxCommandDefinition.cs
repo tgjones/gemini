@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Toolbox.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.Toolbox.Commands
 
         public override string Text
         {
-            get { return "Toolbo_x"; }
+            get { return Resources.ViewToolboxCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Toolbox"; }
+            get { return Resources.ViewToolboxCommandToolTip; }
         }
     }
 }

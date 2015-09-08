@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Modules.Inspector.Properties;
 
 namespace Gemini.Modules.Inspector.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.Inspector.Commands
 
         public override string Text
         {
-            get { return "I_nspector"; }
+            get { return Resources.ViewInspectorCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Inspector"; }
+            get { return Resources.ViewInspectorCommandToolTip; }
         }
     }
 }

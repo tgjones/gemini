@@ -277,7 +277,7 @@
     <Compile Include="Modules\UndoRedo\Commands\RedoCommandDefinition.cs" />
     <Compile Include="Modules\UndoRedo\Commands\UndoCommandDefinition.cs" />
     <Compile Include="Modules\UndoRedo\Commands\ViewHistoryCommandDefinition.cs" />
-    <Compile Include="Modules\UndoRedo\Commands\ViewInspectorCommandHandler.cs" />
+    <Compile Include="Modules\UndoRedo\Commands\ViewHistoryCommandHandler.cs" />
     <Compile Include="Modules\UndoRedo\Design\DesignTimeHistoryViewModel.cs" />
     <Compile Include="Modules\UndoRedo\IHistoryTool.cs" />
     <Compile Include="Modules\UndoRedo\MenuDefinitions.cs" />

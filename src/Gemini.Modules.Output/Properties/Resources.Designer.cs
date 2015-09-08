@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Gemini.Modules.ErrorList.Properties {
+namespace Gemini.Modules.Output.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Gemini.Modules.ErrorList.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gemini.Modules.ErrorList.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gemini.Modules.Output.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,20 @@ namespace Gemini.Modules.ErrorList.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Errors.
+        ///   Looks up a localized string similar to _Output.
         /// </summary>
-        internal static string ErrorTextPlural {
+        internal static string ViewOutputCommandText {
             get {
-                return ResourceManager.GetString("ErrorTextPlural", resourceCulture);
+                return ResourceManager.GetString("ViewOutputCommandText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Error.
+        ///   Looks up a localized string similar to Output.
         /// </summary>
-        internal static string ErrorTextSingular {
+        internal static string ViewOutputCommandToolTip {
             get {
-                return ResourceManager.GetString("ErrorTextSingular", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} Messages.
-        /// </summary>
-        internal static string MessageTextPlural {
-            get {
-                return ResourceManager.GetString("MessageTextPlural", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} Message.
-        /// </summary>
-        internal static string MessageTextSingular {
-            get {
-                return ResourceManager.GetString("MessageTextSingular", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error L_ist.
-        /// </summary>
-        internal static string ViewErrorListCommandText {
-            get {
-                return ResourceManager.GetString("ViewErrorListCommandText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error List.
-        /// </summary>
-        internal static string ViewErrorListCommandToolTip {
-            get {
-                return ResourceManager.GetString("ViewErrorListCommandToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} Warnings.
-        /// </summary>
-        internal static string WarningTextPlural {
-            get {
-                return ResourceManager.GetString("WarningTextPlural", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} Warning.
-        /// </summary>
-        internal static string WarningTextSingular {
-            get {
-                return ResourceManager.GetString("WarningTextSingular", resourceCulture);
+                return ResourceManager.GetString("ViewOutputCommandToolTip", resourceCulture);
             }
         }
     }

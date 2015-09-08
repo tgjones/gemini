@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Modules.ErrorList.Properties;
 
 namespace Gemini.Modules.ErrorList.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.ErrorList.Commands
 
         public override string Text
         {
-            get { return "Error L_ist"; }
+            get { return Resources.ViewErrorListCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Error List"; }
+            get { return Resources.ViewErrorListCommandToolTip; }
         }
     }
 }

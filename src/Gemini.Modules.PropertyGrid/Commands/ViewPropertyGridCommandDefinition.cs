@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Modules.PropertyGrid.Properties;
 
 namespace Gemini.Modules.PropertyGrid.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.PropertyGrid.Commands
 
         public override string Text
         {
-            get { return "Properties _Window"; }
+            get { return Resources.ViewPropertyGridCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Properties Window"; }
+            get { return Resources.ViewPropertyGridCommandToolTip; }
         }
     }
 }

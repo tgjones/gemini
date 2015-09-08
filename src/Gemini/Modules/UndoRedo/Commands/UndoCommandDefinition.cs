@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.UndoRedo.Commands
 {
@@ -16,12 +17,12 @@ namespace Gemini.Modules.UndoRedo.Commands
 
         public override string Text
         {
-            get { return "_Undo"; }
+            get { return Resources.EditUndoCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Undo"; }
+            get { return Resources.EditUndoCommandToolTip; }
         }
 
         public override Uri IconSource

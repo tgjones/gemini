@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.UndoRedo.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.UndoRedo.Commands
 
         public override string Text
         {
-            get { return "_History"; }
+            get { return Resources.ViewHistoryCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "History"; }
+            get { return Resources.ViewHistoryCommandToolTip; }
         }
     }
 }

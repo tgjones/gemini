@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Threading;
+using Gemini.Modules.ErrorList.Properties;
 
 namespace Gemini.Modules.ErrorList.Commands
 {
@@ -24,7 +25,7 @@ namespace Gemini.Modules.ErrorList.Commands
         {
             command.Enabled = ErrorItemCount > 0;
             command.Checked = command.Enabled && _errorList.ShowErrors;
-            command.Text = command.ToolTip = Pluralize("Error", ErrorItemCount);
+            command.Text = command.ToolTip = Pluralize(Resources.ErrorTextSingular, Resources.ErrorTextPlural, ErrorItemCount);
         }
 
         Task ICommandHandler<ToggleErrorsCommandDefinition>.Run(Command command)
@@ -37,7 +38,7 @@ namespace Gemini.Modules.ErrorList.Commands
         {
             command.Enabled = WarningItemCount > 0;
             command.Checked = command.Enabled && _errorList.ShowWarnings;
-            command.Text = command.ToolTip = Pluralize("Warning", WarningItemCount);
+            command.Text = command.ToolTip = Pluralize(Resources.WarningTextSingular, Resources.WarningTextPlural, WarningItemCount);
         }
 
         Task ICommandHandler<ToggleWarningsCommandDefinition>.Run(Command command)
@@ -50,7 +51,7 @@ namespace Gemini.Modules.ErrorList.Commands
         {
             command.Enabled = MessageItemCount > 0;
             command.Checked = command.Enabled && _errorList.ShowMessages;
-            command.Text = command.ToolTip = Pluralize("Message", MessageItemCount);
+            command.Text = command.ToolTip = Pluralize(Resources.MessageTextSingular, Resources.MessageTextPlural, MessageItemCount);
         }
 
         Task ICommandHandler<ToggleMessagesCommandDefinition>.Run(Command command)
@@ -59,12 +60,12 @@ namespace Gemini.Modules.ErrorList.Commands
             return TaskUtility.Completed;
         }
 
-        private static string Pluralize(string text, int number)
+        private static string Pluralize(string singular, string plural, int number)
         {
             if (number == 1)
-                return number + " " + text;
+                return string.Format(singular, number);
 
-            return number + " " + text + "s";
+            return string.Format(plural, number);
         }
 
         private int ErrorItemCount

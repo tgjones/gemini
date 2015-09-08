@@ -1,4 +1,5 @@
 ﻿using Gemini.Framework.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -14,12 +15,12 @@ namespace Gemini.Modules.Shell.Commands
 
         public override string Text
         {
-            get { return "_Close"; }
+            get { return Resources.FileCloseCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return "Close"; }
+            get { return Resources.FileCloseCommandToolTip; }
         }
     }
 }

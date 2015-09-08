@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -43,7 +43,7 @@ namespace Gemini.Modules.Shell.Commands
         {
             var tag = (NewFileTag) command.Tag;
             var editor = tag.EditorProvider.Create();
-            await tag.EditorProvider.New(editor, "Untitled " + (_newFileCounter++) + tag.FileType.FileExtension);
+            await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
             _shell.OpenDocument(editor);
         }
 
