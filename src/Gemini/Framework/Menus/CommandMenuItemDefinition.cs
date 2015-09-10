@@ -9,6 +9,7 @@ namespace Gemini.Framework.Menus
         where TCommandDefinition : CommandDefinitionBase
     {
         private readonly CommandDefinitionBase _commandDefinition;
+        private readonly KeyGesture _keyGesture;
 
         public override string Text
         {
@@ -22,7 +23,7 @@ namespace Gemini.Framework.Menus
 
         public override KeyGesture KeyGesture
         {
-            get { return _commandDefinition.KeyGesture; }
+            get { return _keyGesture; }
         }
 
         public override CommandDefinitionBase CommandDefinition
@@ -34,6 +35,7 @@ namespace Gemini.Framework.Menus
             : base(group, sortOrder)
         {
             _commandDefinition = IoC.Get<ICommandService>().GetCommandDefinition(typeof(TCommandDefinition));
+            _keyGesture = IoC.Get<ICommandKeyGestureService>().GetPrimaryKeyGesture(_commandDefinition);
         }
     }
 }

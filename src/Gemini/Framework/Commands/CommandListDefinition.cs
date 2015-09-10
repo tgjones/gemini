@@ -1,5 +1,4 @@
 using System;
-using System.Windows.Input;
 
 namespace Gemini.Framework.Commands
 {
@@ -16,11 +15,6 @@ namespace Gemini.Framework.Commands
         }
 
         public override sealed Uri IconSource
-        {
-            get { return null; }
-        }
-
-        public override sealed KeyGesture KeyGesture
         {
             get { return null; }
         }

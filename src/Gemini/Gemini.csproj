@@ -98,6 +98,8 @@
     <Compile Include="Framework\Commands\CommandDefinitionAttribute.cs" />
     <Compile Include="Framework\Commands\CommandDefinitionBase.cs" />
     <Compile Include="Framework\Commands\CommandHandlerWrapper.cs" />
+    <Compile Include="Framework\Commands\CommandKeyboardShortcut.cs" />
+    <Compile Include="Framework\Commands\ExcludeCommandKeyboardShortcut.cs" />
     <Compile Include="Framework\Commands\ICommandHandler.cs" />
     <Compile Include="Framework\Commands\CommandHandlerAttribute.cs" />
     <Compile Include="Framework\Commands\CommandKeyGestureService.cs" />

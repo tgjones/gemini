@@ -10,6 +10,7 @@ namespace Gemini.Modules.MainMenu.Models
     public class CommandMenuItem : StandardMenuItem, ICommandUiItem
     {
         private readonly Command _command;
+        private readonly KeyGesture _keyGesture;
         private readonly StandardMenuItem _parent;
         private readonly List<StandardMenuItem> _listItems;
 
@@ -27,9 +28,9 @@ namespace Gemini.Modules.MainMenu.Models
         {
             get
             {
-                return _command.KeyGesture == null
+                return _keyGesture == null
                     ? string.Empty
-                    : _command.KeyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
+                    : _keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
             }
         }
 
@@ -53,6 +54,7 @@ namespace Gemini.Modules.MainMenu.Models
         public CommandMenuItem(Command command, StandardMenuItem parent)
         {
             _command = command;
+            _keyGesture = IoC.Get<ICommandKeyGestureService>().GetPrimaryKeyGesture(_command.CommandDefinition);
             _parent = parent;
 
             _listItems = new List<StandardMenuItem>();

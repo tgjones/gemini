@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
 using Caliburn.Micro;
 
 namespace Gemini.Framework.Commands
@@ -13,7 +12,6 @@ namespace Gemini.Framework.Commands
         private string _text;
         private string _toolTip;
         private Uri _iconSource;
-        private readonly KeyGesture _keyGesture;
 
         public CommandDefinitionBase CommandDefinition
         {
@@ -80,11 +78,6 @@ namespace Gemini.Framework.Commands
             }
         }
 
-        public KeyGesture KeyGesture
-        {
-            get { return _keyGesture; }
-        }
-
         public object Tag { get; set; }
 
         public Command(CommandDefinitionBase commandDefinition)
@@ -93,7 +86,6 @@ namespace Gemini.Framework.Commands
             Text = commandDefinition.Text;
             ToolTip = commandDefinition.ToolTip;
             IconSource = commandDefinition.IconSource;
-            _keyGesture = commandDefinition.KeyGesture;
         }
     }
 }

@@ -302,9 +302,7 @@
   <ItemGroup>
     <Effect Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.fx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\CommandsDemo\Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">

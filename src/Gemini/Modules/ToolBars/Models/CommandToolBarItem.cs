@@ -12,6 +12,7 @@ namespace Gemini.Modules.ToolBars.Models
     {
 	    private readonly ToolBarItemDefinition _toolBarItem;
 	    private readonly Command _command;
+        private readonly KeyGesture _keyGesture;
         private readonly IToolBar _parent;
 
 		public string Text
@@ -33,8 +34,8 @@ namespace Gemini.Modules.ToolBars.Models
 	    {
 	        get
 	        {
-                var inputGestureText = (_command.KeyGesture != null)
-                    ? string.Format(" ({0})", _command.KeyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture))
+                var inputGestureText = (_keyGesture != null)
+                    ? string.Format(" ({0})", _keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture))
                     : string.Empty;
 
                 return string.Format("{0}{1}", _command.ToolTip, inputGestureText).Trim();
@@ -60,7 +61,8 @@ namespace Gemini.Modules.ToolBars.Models
 		{
 		    _toolBarItem = toolBarItem;
 		    _command = command;
-		    _parent = parent;
+            _keyGesture = IoC.Get<ICommandKeyGestureService>().GetPrimaryKeyGesture(_command.CommandDefinition);
+            _parent = parent;
 
             command.PropertyChanged += OnCommandPropertyChanged;
 		}
