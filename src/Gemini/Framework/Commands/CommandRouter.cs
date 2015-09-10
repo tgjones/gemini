@@ -29,12 +29,14 @@ namespace Gemini.Framework.Commands
 
         private Dictionary<Type, CommandHandlerWrapper> BuildCommandHandlerWrappers(ICommandHandler[] commandHandlers)
         {
+            var commandHandlersList = SortCommandHandlers(commandHandlers);
+
             // Command handlers are either ICommandHandler<T> or ICommandListHandler<T>.
             // We need to extract T, and use it as the key in our dictionary.
 
             var result = new Dictionary<Type, CommandHandlerWrapper>();
 
-            foreach (var commandHandler in commandHandlers)
+            foreach (var commandHandler in commandHandlersList)
             {
                 var commandHandlerType = commandHandler.GetType();
                 EnsureCommandHandlerTypeToCommandDefinitionTypesPopulated(commandHandlerType);
@@ -44,6 +46,18 @@ namespace Gemini.Framework.Commands
             }
 
             return result;
+        }
+
+        private static List<ICommandHandler> SortCommandHandlers(ICommandHandler[] commandHandlers)
+        {
+            // Put command handlers defined in priority assemblies, last. This allows applications
+            // to override built-in command handlers.
+
+            var bootstrapper = IoC.Get<AppBootstrapper>();
+
+            return commandHandlers
+                .OrderBy(h => bootstrapper.PriorityAssemblies.Contains(h.GetType().Assembly) ? 1 : 0)
+                .ToList();
         }
 
         public CommandHandlerWrapper GetCommandHandler(CommandDefinitionBase commandDefinition)
