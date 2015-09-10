@@ -146,6 +146,9 @@
     <Compile Include="Framework\Themes\ThemeManager.cs" />
     <Compile Include="Framework\Threading\TaskUtility.cs" />
     <Compile Include="Framework\ToolBars\CommandToolBarItemDefinition.cs" />
+    <Compile Include="Framework\ToolBars\ExcludeToolBarDefinition.cs" />
+    <Compile Include="Framework\ToolBars\ExcludeToolBarItemDefinition.cs" />
+    <Compile Include="Framework\ToolBars\ExcludeToolBarItemGroupDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemGroupDefinition.cs" />

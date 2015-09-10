@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.Composition;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Gemini.Framework.Commands;
 using Gemini.Framework.ToolBars;
@@ -20,12 +19,21 @@ namespace Gemini.Modules.ToolBars
             ICommandService commandService,
             [ImportMany] ToolBarDefinition[] toolBars,
             [ImportMany] ToolBarItemGroupDefinition[] toolBarItemGroups,
-            [ImportMany] ToolBarItemDefinition[] toolBarItems)
+            [ImportMany] ToolBarItemDefinition[] toolBarItems,
+            [ImportMany] ExcludeToolBarDefinition[] excludeToolBars,
+            [ImportMany] ExcludeToolBarItemGroupDefinition[] excludeToolBarItemGroups,
+            [ImportMany] ExcludeToolBarItemDefinition[] excludeToolBarItems)
         {
             _commandService = commandService;
-            _toolBars = toolBars;
-            _toolBarItemGroups = toolBarItemGroups;
-            _toolBarItems = toolBarItems;
+            _toolBars = toolBars
+                .Where(x => !excludeToolBars.Select(y => y.ToolBarDefinitionToExclude).Contains(x))
+                .ToArray();
+            _toolBarItemGroups = toolBarItemGroups
+                .Where(x => !excludeToolBarItemGroups.Select(y => y.ToolBarItemGroupDefinitionToExclude).Contains(x))
+                .ToArray();
+            _toolBarItems = toolBarItems
+                .Where(x => !excludeToolBarItems.Select(y => y.ToolBarItemDefinitionToExclude).Contains(x))
+                .ToArray();
         }
 
         public void BuildToolBars(IToolBars result)
