@@ -244,7 +244,7 @@ by letting you define command handlers in a single place, regardless of whether 
 is invoked through a menu item, toolbar item, or other trigger.
 Gemini's commands are conceptually similar to WPF commands, but they are more powerful.
 
-First, define a command definition. This is the actual command used in Gemini for opening files:
+First, create a command definition. Here's Gemini [command definition for opening files](https://github.com/tgjones/gemini/blob/master/src/Gemini/Modules/Shell/Commands/OpenFileCommandDefinition.cs):
 
 ``` csharp
 [CommandDefinition]
@@ -271,11 +271,9 @@ public class OpenFileCommandDefinition : CommandDefinition
 	{
 		get { return new Uri("pack://application:,,,/Gemini;component/Resources/Icons/Open.png"); }
 	}
-
-	public override KeyGesture KeyGesture
-	{
-		get { return new KeyGesture(Key.O, ModifierKeys.Control); }
-	}
+	
+	[Export]
+    public static CommandKeyboardShortcut KeyGesture = new CommandKeyboardShortcut<OpenFileCommandDefinition>(new KeyGesture(Key.O, ModifierKeys.Control));
 }
 ```
 
@@ -319,6 +317,13 @@ public class MyDocument : Document, ICommandHandler<ClearTextCommandDefinition>
 		return TaskUtility.Completed;
 	}
 }
+```
+
+To remove built-in keyboard shortcuts, you can exclude them declaratively:
+
+``` csharp
+[Export]
+public static ExcludeCommandKeyboardShortcut ExcludeFileOpenShortcut = new ExcludeCommandKeyboardShortcut(OpenFileCommandDefinition.KeyGesture);
 ```
 
 To find out how to bind commands to menus or toolbars, see the "MainMenu" and "ToolBars" modules below.
@@ -481,6 +486,19 @@ public static class MenuDefinitions
 ```
 
 You can either use an existing menu or menu item group as a parent for your menu items, or create your own.
+
+To remove an existing menu item (such as a built-in menu item that you don't want), you can exclude it declaratively:
+
+``` csharp
+[Export]
+public static ExcludeMenuItemDefinition ExcludeOpenMenuItem = new ExcludeMenuItemDefinition(Gemini.Modules.Shell.MenuDefinitions.FileOpenMenuItem);
+
+[Export]
+public static ExcludeMenuItemGroupDefinition ExcludeWindowMenuItemGroup = new ExcludeMenuItemGroupDefinition(Gemini.Modules.MainMenu.MenuDefinitions.ViewToolsMenuGroup);
+
+[Export]
+public static ExcludeMenuDefinition ExcludeWindowMenuDefinition = new ExcludeMenuDefinition(Gemini.Modules.MainMenu.MenuDefinitions.WindowMenu);
+```
 
 ### StatusBar module
 

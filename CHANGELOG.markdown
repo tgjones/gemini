@@ -1,5 +1,28 @@
 # Overview
 
+## 0.6.0 - [Not yet released]
+
+### Major Changes
+
+* \#79 Added command system, and rewrote menu and toolbar modules. Commands are now defined
+  by deriving from `CommandDefinition`, and command handlers implement `ICommandHandler`.
+  Menu items and toolbar items no longer define their own handlers; instead, they reference
+  the command definition. New command routing logic chooses the appropriate command handler,
+  depending on context. This system is built on top of WPF's command system, but extends 
+  it in useful ways.
+
+* Reworked themes. There are now 3 built-in themes: Light, Dark, and Blue. You can use
+  `IThemeManager` to programmatically change theme, or use the combobox in Tools / Options.
+
+### New Features
+
+* \#58 Upgraded to Caliburn Micro 2 (Kris Janssen)
+* \#52 Add DataTemplateSelectors to GraphControl (KingKnecht)
+
+### Resolved Issues
+
+* \#54 Overhaulted saving document state (Tristyn Stimpson)
+
 ## 0.5.0 - 2014-05-12
 
 ### New Features
