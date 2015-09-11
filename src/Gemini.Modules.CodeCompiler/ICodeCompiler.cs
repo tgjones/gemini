@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 using System.Reflection;
-using Roslyn.Compilers;
-using Roslyn.Compilers.CSharp;
 
 namespace Gemini.Modules.CodeCompiler
 {
