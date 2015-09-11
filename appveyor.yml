@@ -41,15 +41,39 @@ build:
   verbosity: minimal
   
 artifacts:
-- path: 'src/**/bin/$(configuration)'
-  name: Gemini
+- path: 'src/Gemini/bin/$(configuration)'
+  name: 'Gemini Binaries'
+- path: 'src/Gemini.Modules.CodeCompiler/bin/$(configuration)'
+  name: 'Gemini.Modules.CodeCompiler Binaries'
+- path: 'src/Gemini.Modules.CodeEditor/bin/$(configuration)'
+  name: 'Gemini.Modules.CodeEditor Binaries'
+- path: 'src/Gemini.Modules.ErrorList/bin/$(configuration)'
+  name: 'Gemini.Modules.ErrorList Binaries'
+- path: 'src/Gemini.Modules.GraphEditor/bin/$(configuration)'
+  name: 'Gemini.Modules.GraphEditor Binaries'
+- path: 'src/Gemini.Modules.Inspector/bin/$(configuration)'
+  name: 'Gemini.Modules.Inspector Binaries'
+- path: 'src/Gemini.Modules.Inspector.MonoGame/bin/$(configuration)'
+  name: 'Gemini.Modules.Inspector.MonoGame Binaries'
+- path: 'src/Gemini.Modules.Inspector.Xna/bin/$(configuration)'
+  name: 'Gemini.Modules.Inspector.Xna Binaries'
+- path: 'src/Gemini.Modules.MonoGame/bin/$(configuration)'
+  name: 'Gemini.Modules.MonoGame Binaries'
+- path: 'src/Gemini.Modules.Output/bin/$(configuration)'
+  name: 'Gemini.Modules.Output Binaries'
+- path: 'src/Gemini.Modules.PropertyGrid/bin/$(configuration)'
+  name: 'Gemini.Modules.PropertyGrid Binaries'
+- path: 'src/Gemini.Modules.SharpDX/bin/$(configuration)'
+  name: 'Gemini.Modules.SharpDX Binaries'
+- path: 'src/Gemini.Modules.Xna/bin/$(configuration)'
+  name: 'Gemini.Modules.Xna Binaries'
 
 deploy:
 - provider: GitHub
   release: $(APPVEYOR_REPO_TAG_NAME)
   auth_token:
     secure: gd108UlSNyLViffYS7AKRgbTQXmzI6N/WgtNXFwkOsO9qGrWrAaJ853qAyv+FXp6
-  artifact:  /.*\.zip/
+  artifact:  /Gemini.*\.zip/
   description: $(APPVEYOR_REPO_TAG_NAME)
   draft: false
   prerelease: false
