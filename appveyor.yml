@@ -1,21 +1,65 @@
-version: 0.6.0-ci{build}
+version: 1.0.{build}
+skip_tags: false
+configuration: Release
 
-branches:
-  only:
-    - master
-
+init:
+- ps: >-
+    $parsedReleaseBuildVersion = $env:APPVEYOR_REPO_TAG_NAME -Match "(\d+.\d+.\d+(.\d+)?)"
+    
+    If($env:appveyor_repo_tag -AND $parsedReleaseBuildVersion) {
+      $env:BuildVersion = $matches[0]
+      $env:IsGithubRelease = $TRUE
+    }
+    else {
+      $env:BuildVersion = $env:appveyor_build_version
+      $env:IsGithubRelease = ""
+    }
+    
+    Write-Host "Build Version: " $env:BuildVersion
+    Write-Host "Tag name:  " $env:appveyor_repo_tag
+    Write-Host "Commit: " $env:APPVEYOR_REPO_COMMIT_MESSAGE 
+    Write-Host "Commit extended:" $env:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED 
+    
+    Write-Host "appveyor_build_version Variable: " $env:appveyor_build_version
+  
 assembly_info:
   patch: true
-  file: AssemblyInfo.*
-  assembly_version: "0.6.0"
-  assembly_file_version: "0.6.0"
-  assembly_informational_version: "0.6.0-ci{build}"
+  file: '**\AssemblyInfo.*'
+  assembly_version: $(BuildVersion)
+  assembly_file_version: $(BuildVersion)
+  assembly_informational_version: $(BuildVersion)
 
+before_build:
+- cmd: cd src
+- cmd: nuget restore
+- cmd: cd ..
+  
 build:
   project: src/Gemini.sln
   publish_nuget: true
+  publish_nuget_symbols: true
+  verbosity: minimal
+  
+artifacts:
+- path: 'src/*/bin/$(configuration)'
+  name: Gemini
 
-before_build:
-  - cmd: cd src
-  - cmd: nuget restore
-  - cmd: cd ..
+deploy:
+- provider: GitHub
+  release: $(APPVEYOR_REPO_TAG_NAME)
+  auth_token:
+    secure: gd108UlSNyLViffYS7AKRgbTQXmzI6N/WgtNXFwkOsO9qGrWrAaJ853qAyv+FXp6
+  artifact:  /.*\.zip/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    IsGithubRelease: true
+- provider: NuGet
+  api_key:
+    secure: LrIeQprS+E5FzLkdKGYIYHXy/86Kt8YVhTa4J/VhLzGUO+yXnqI+GxDR+K5Wj/VL
+  artifact: /.*\.nupkg/
+  skip_symbols: false
+  on:
+    branch: master
+    IsGithubRelease: true
