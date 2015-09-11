@@ -41,7 +41,7 @@ build:
   verbosity: minimal
   
 artifacts:
-- path: 'src/*/bin/$(configuration)'
+- path: 'src/**/bin/$(configuration)'
   name: Gemini
 
 deploy:
