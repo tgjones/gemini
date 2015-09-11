@@ -50,6 +50,7 @@ deploy:
   auth_token:
     secure: gd108UlSNyLViffYS7AKRgbTQXmzI6N/WgtNXFwkOsO9qGrWrAaJ853qAyv+FXp6
   artifact:  /.*\.zip/
+  description: $(APPVEYOR_REPO_TAG_NAME)
   draft: false
   prerelease: false
   on:
