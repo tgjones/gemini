@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
+using System.Windows;
+using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
+using Gemini.Framework.Threading;
 using Gemini.Properties;
 
 namespace Gemini.Modules.Shell.Commands
@@ -39,12 +42,21 @@ namespace Gemini.Modules.Shell.Commands
                     });
         }
 
-        public async Task Run(Command command)
+        public Task Run(Command command)
         {
             var tag = (NewFileTag) command.Tag;
             var editor = tag.EditorProvider.Create();
-            await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
+
+            var viewAware = (IViewAware)editor;
+            viewAware.ViewAttached += (sender, e) =>
+            {
+                var frameworkElement = (FrameworkElement)e.View;
+                frameworkElement.Loaded += async (sender2, e2) => await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
+            };
+
             _shell.OpenDocument(editor);
+
+            return TaskUtility.Completed;
         }
 
         private class NewFileTag
