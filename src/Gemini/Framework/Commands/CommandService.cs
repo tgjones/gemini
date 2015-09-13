@@ -11,9 +11,11 @@ namespace Gemini.Framework.Commands
         private readonly Dictionary<Type, CommandDefinitionBase> _commandDefinitionsLookup;
         private readonly Dictionary<CommandDefinitionBase, Command> _commands;
         private readonly Dictionary<Command, TargetableCommand> _targetableCommands;
-            
+
+#pragma warning disable 649
         [ImportMany]
         private CommandDefinitionBase[] _commandDefinitions;
+#pragma warning restore 649
 
         public CommandService()
         {
