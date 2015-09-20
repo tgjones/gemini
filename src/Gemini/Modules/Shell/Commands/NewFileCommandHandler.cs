@@ -51,7 +51,14 @@ namespace Gemini.Modules.Shell.Commands
             viewAware.ViewAttached += (sender, e) =>
             {
                 var frameworkElement = (FrameworkElement)e.View;
-                frameworkElement.Loaded += async (sender2, e2) => await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
+
+                RoutedEventHandler loadedHandler = null;
+                loadedHandler = async (sender2, e2) =>
+                {
+                    frameworkElement.Loaded -= loadedHandler;
+                    await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
+                };
+                frameworkElement.Loaded += loadedHandler;
             };
 
             _shell.OpenDocument(editor);

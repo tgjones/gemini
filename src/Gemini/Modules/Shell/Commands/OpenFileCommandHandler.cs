@@ -52,7 +52,14 @@ namespace Gemini.Modules.Shell.Commands
             viewAware.ViewAttached += (sender, e) =>
             {
                 var frameworkElement = (FrameworkElement) e.View;
-                frameworkElement.Loaded += async (sender2, e2) => await provider.Open(editor, path);
+
+                RoutedEventHandler loadedHandler = null;
+                loadedHandler = async (sender2, e2) =>
+                {
+                    frameworkElement.Loaded -= loadedHandler;
+                    await provider.Open(editor, path);
+                };
+                frameworkElement.Loaded += loadedHandler;
             };
 
             return Task.FromResult(editor);
