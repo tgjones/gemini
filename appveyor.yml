@@ -37,7 +37,7 @@ before_build:
 build:
   project: src/Gemini.sln
   publish_nuget: true
-  publish_nuget_symbols: true
+  publish_nuget_symbols: false
   verbosity: minimal
   
 artifacts:
