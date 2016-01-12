@@ -75,6 +75,7 @@
     <Compile Include="Util\NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Gemini.Modules.Xna.nuspec">
       <SubType>Designer</SubType>
     </None>

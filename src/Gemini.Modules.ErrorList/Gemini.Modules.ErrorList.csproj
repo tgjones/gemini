@@ -97,6 +97,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Gemini.Modules.ErrorList.nuspec">
       <SubType>Designer</SubType>
     </None>
