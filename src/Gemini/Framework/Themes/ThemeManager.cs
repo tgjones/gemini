@@ -56,6 +56,10 @@ namespace Gemini.Framework.Themes
             if (theme == null)
                 return false;
 
+            var mainWindow = Application.Current.MainWindow;
+            if (mainWindow == null)
+                return false;
+
             CurrentTheme = theme;
 
             if (_applicationResourceDictionary == null)
@@ -66,7 +70,7 @@ namespace Gemini.Framework.Themes
             _applicationResourceDictionary.BeginInit();
             _applicationResourceDictionary.MergedDictionaries.Clear();
 
-            var windowResourceDictionary = Application.Current.MainWindow.Resources.MergedDictionaries[0];
+            var windowResourceDictionary = mainWindow.Resources.MergedDictionaries[0];
             windowResourceDictionary.BeginInit();
             windowResourceDictionary.MergedDictionaries.Clear();
 
