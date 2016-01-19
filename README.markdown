@@ -7,7 +7,7 @@
 Gemini is a WPF framework designed specifically for building IDE-like applications. It builds on some excellent libraries:
 
 * [AvalonDock](http://avalondock.codeplex.com)
-* [Caliburn Micro](http://caliburnmicro.codeplex.com/)
+* [Caliburn Micro](https://github.com/Caliburn-Micro/Caliburn.Micro)
 * [MEF](http://msdn.microsoft.com/en-us/library/dd460648.aspx)
 
 Gemini ships with two themes: a Light theme and a Blue theme. There is also an in-development Dark theme.
