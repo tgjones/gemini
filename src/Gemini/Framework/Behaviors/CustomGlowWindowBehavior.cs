@@ -33,6 +33,7 @@ namespace Gemini.Framework.Behaviors
             this.Update();
 
 						metroWindow.LocationChanged += (s, e) => this.Update();
+						metroWindow.SizeChanged += (s, e) => this.Update();
 
             if (metroWindow == null || !metroWindow.WindowTransitionsEnabled)
             {
