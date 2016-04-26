@@ -30,6 +30,10 @@ namespace Gemini.Framework.Behaviors
             this.bottom = new GlowWindow(this.AssociatedObject, GlowDirection.Bottom);
             this.Show();
             this.Update();
+
+            metroWindow.LocationChanged += (s, e) => this.Update();
+            metroWindow.SizeChanged += (s, e) => this.Update();
+
             if (metroWindow == null || !metroWindow.WindowTransitionsEnabled)
             {
                 this.SetOpacityTo(1.0);
