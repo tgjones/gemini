@@ -5,7 +5,7 @@ namespace Gemini.Modules.Shell.Services
 {
     public interface ILayoutItemStatePersister
     {
-        void SaveState(IShell shell, IShellView shellView, string fileName);
-        void LoadState(IShell shell, IShellView shellView, string fileName);
+        bool SaveState(IShell shell, IShellView shellView, string fileName);
+        bool LoadState(IShell shell, IShellView shellView, string fileName);
     }
 }
