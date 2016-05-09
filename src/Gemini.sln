@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.SharpDX", "Gemini.Demo.SharpDX\Gemini.Demo.SharpDX.csproj", "{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}"
 EndProject
+Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "Gemini.nupkg", "Gemini.nupkg\Gemini.nupkg.nuproj", "{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -238,6 +240,16 @@ Global
 		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}.Release|x86.ActiveCfg = Release|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AABD0D7C-218D-4EF1-8B08-D397E0EF3A5C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
