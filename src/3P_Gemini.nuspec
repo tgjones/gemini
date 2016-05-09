@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>3P_Gemini</id>
+        <version>1.0.0</version>
+        <title>Gemini.nupkg</title>
+        <authors>3P Services</authors>
+        <owners>3P Services</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Gemini.nupkg</description>
+        <summary>Gemini.nupkg</summary>
+        <copyright>Copyright © 3P Services</copyright>
+        <tags>Gemini.nupkg</tags>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5.1">
+                <dependency id="AvalonEdit" version="5.0.2" />
+                <dependency id="Caliburn.Micro" version="2.0.2" />
+                <dependency id="Caliburn.Micro.Core" version="2.0.2" />
+                <dependency id="Extended.Wpf.Toolkit" version="2.7" />
+                <dependency id="MahApps.Metro" version="1.2.4.0" />
+            </group>
+        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.ComponentModel.Composition" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="Gemini\bin\Release\Gemini.dll" target="lib\net451\Gemini.dll" />
+        <file src="Gemini.Modules.CodeEditor\bin\Release\Gemini.Modules.CodeEditor.dll" target="lib\net451\Gemini.Modules.CodeEditor.dll" />
+        <file src="Gemini.Modules.CodeEditor\bin\Release\Gemini.Modules.CodeEditor.pdb" target="lib\net451\Gemini.Modules.CodeEditor.pdb" />
+        <file src="Gemini.Modules.CodeEditor\bin\Release\Gemini.Modules.CodeEditor.XML" target="lib\net451\Gemini.Modules.CodeEditor.XML" />
+        <file src="Gemini.Modules.Inspector\bin\Release\Gemini.Modules.Inspector.dll" target="lib\net451\Gemini.Modules.Inspector.dll" />
+        <file src="Gemini.Modules.Inspector\bin\Release\Gemini.Modules.Inspector.pdb" target="lib\net451\Gemini.Modules.Inspector.pdb" />
+        <file src="Gemini.Modules.Inspector\bin\Release\Gemini.Modules.Inspector.XML" target="lib\net451\Gemini.Modules.Inspector.XML" />
+        <file src="Gemini.Modules.Output\bin\Release\Gemini.Modules.Output.dll" target="lib\net451\Gemini.Modules.Output.dll" />
+        <file src="Gemini.Modules.Output\bin\Release\Gemini.Modules.Output.pdb" target="lib\net451\Gemini.Modules.Output.pdb" />
+        <file src="Gemini.Modules.Output\bin\Release\Gemini.Modules.Output.XML" target="lib\net451\Gemini.Modules.Output.XML" />
+        <file src="Gemini.Modules.PropertyGrid\bin\Release\Gemini.Modules.PropertyGrid.dll" target="lib\net451\Gemini.Modules.PropertyGrid.dll" />
+        <file src="Gemini.Modules.PropertyGrid\bin\Release\Gemini.Modules.PropertyGrid.pdb" target="lib\net451\Gemini.Modules.PropertyGrid.pdb" />
+        <file src="Gemini.Modules.PropertyGrid\bin\Release\Gemini.Modules.PropertyGrid.XML" target="lib\net451\Gemini.Modules.PropertyGrid.XML" />
+        <file src="Gemini\bin\Release\Gemini.pdb" target="lib\net451\Gemini.pdb" />
+        <file src="Gemini\bin\Release\Gemini.XML" target="lib\net451\Gemini.xml" />
+        <file src="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\de\System.Windows.Interactivity.resources.dll" target="lib\net451\System.Windows.Interactivity.resources.dll" />
+        <file src="..\lib\Xceed.Wpf.AvalonDock.Themes.VS2013.dll" target="lib\net451\Xceed.Wpf.AvalonDock.Themes.VS2013.dll" />
+    </files>
+</package>

@@ -15,7 +15,11 @@
                      WindowState="{Binding WindowState}"
                      ResizeMode="CanResizeWithGrip"
                      UseLayoutRounding="True"
-                     Style="{DynamicResource MainWindowStyle}">
+                     Style="{DynamicResource MainWindowStyle}"
+										 WindowCloseButtonStyle="{DynamicResource MetroWindowButtonStyle}"
+										 WindowMinButtonStyle="{DynamicResource MetroWindowButtonStyle}"
+										 WindowMaxButtonStyle="{DynamicResource MetroWindowButtonStyle}"
+										 >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

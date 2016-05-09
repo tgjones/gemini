@@ -24,12 +24,17 @@ namespace Gemini.Framework.Behaviors
             MetroWindow metroWindow = this.AssociatedObject as MetroWindow;
             if (metroWindow != null && (metroWindow.UseNoneWindowStyle/* || metroWindow.GlowBrush == null*/))
                 return;
+											
             this.left = new GlowWindow(this.AssociatedObject, GlowDirection.Left);
             this.right = new GlowWindow(this.AssociatedObject, GlowDirection.Right);
             this.top = new GlowWindow(this.AssociatedObject, GlowDirection.Top);
             this.bottom = new GlowWindow(this.AssociatedObject, GlowDirection.Bottom);
             this.Show();
             this.Update();
+
+						metroWindow.LocationChanged += (s, e) => this.Update();
+						metroWindow.SizeChanged += (s, e) => this.Update();
+
             if (metroWindow == null || !metroWindow.WindowTransitionsEnabled)
             {
                 this.SetOpacityTo(1.0);
