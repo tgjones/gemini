@@ -13,7 +13,11 @@
 		<gemini:ExpanderEx Header="{Binding Name, FallbackValue='Test'}" 
                            IsExpanded="{Binding IsExpanded}">
             <ItemsControl ItemsSource="{Binding Children}" 
-                          ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" />
+                          ItemTemplateSelector="{StaticResource InspectorItemTemplateSelector}" Margin="10,0,0,0" BorderThickness="1,0,0,0" >
+                <ItemsControl.BorderBrush>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+                </ItemsControl.BorderBrush>
+            </ItemsControl>
         </gemini:ExpanderEx>
     </Grid>
 </UserControl>
