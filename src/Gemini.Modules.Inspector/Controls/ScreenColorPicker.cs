@@ -70,11 +70,14 @@ namespace Gemini.Modules.Inspector.Controls
                     _bitmap.Dispose();
                 _bitmap = NativeMethods.GetDesktop();
 
-                RaisePickingStarted(EventArgs.Empty);
-
-                Focus(); // So that we get the Escape key.
-                CaptureMouse();
-                _timer.Start();
+                if (Focus()) // So that we get the Escape key.
+                {
+                    if (CaptureMouse())
+                    {
+                        RaisePickingStarted(EventArgs.Empty);
+                        _timer.Start();
+                    }
+                }
             }
             else
             {
