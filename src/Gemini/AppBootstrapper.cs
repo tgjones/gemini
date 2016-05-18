@@ -25,7 +25,12 @@ namespace Gemini
 
         public AppBootstrapper()
         {
+            this.PreInitialize();
             this.Initialize();
+        }
+
+        protected virtual void PreInitialize()
+        {
         }
 
 		/// <summary>
