@@ -135,16 +135,12 @@ namespace Gemini.Modules.Shell.ViewModels
 	            _themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName);
 
             _shellView = (IShellView)view;
-            if (!HasPersistedState)
+            if (!_layoutItemStatePersister.LoadState(this, _shellView, StateFile))
             {
                 foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
                     OpenDocument(defaultDocument);
                 foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
                     ShowTool((ITool)IoC.GetInstance(defaultTool, null));
-            }
-            else
-            {
-                _layoutItemStatePersister.LoadState(this, _shellView, StateFile);
             }
 
             foreach (var module in _modules)

@@ -13,7 +13,7 @@ namespace Gemini.Modules.Shell.Services
     [Export(typeof(ILayoutItemStatePersister))]
     public class LayoutItemStatePersister : ILayoutItemStatePersister
     {
-        public void SaveState(IShell shell, IShellView shellView, string fileName)
+        public bool SaveState(IShell shell, IShellView shellView, string fileName)
         {
             FileStream stream = null;
 
@@ -119,11 +119,17 @@ namespace Gemini.Modules.Shell.Services
             }
             catch
             {
+                return false;
+            }
+            finally
+            {
                 if (stream != null)
                 {
                     stream.Dispose();
                 }
             }
+
+            return true;
         }
 
         Type GetTypeFromContractNameAsILayoutItem(ExportAttribute attribute)
@@ -141,13 +147,13 @@ namespace Gemini.Modules.Shell.Services
             return type;
         }
 
-        public void LoadState(IShell shell, IShellView shellView, string fileName)
+        public bool LoadState(IShell shell, IShellView shellView, string fileName)
         {
             var layoutItems = new Dictionary<string, ILayoutItem>();
 
             if (!File.Exists(fileName))
             {
-                return;
+                return false;
             }
 
             FileStream stream = null;
@@ -204,11 +210,16 @@ namespace Gemini.Modules.Shell.Services
             }
             catch
             {
-                if (stream != null)
-                {
+                return false;
+            }
+            finally
+            {
+                if (stream != null) {
                     stream.Close();
                 }
             }
+
+            return true;
         }
     }
 }
