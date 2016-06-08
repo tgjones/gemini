@@ -85,7 +85,7 @@ namespace Gemini.Modules.Inspector.Inspectors
                 NotifyOfPropertyChange(() => Value);
         }
 
-        public TValue Value
+        public virtual TValue Value
         {
             get { return (TValue) BoundPropertyDescriptor.Value; }
             set
