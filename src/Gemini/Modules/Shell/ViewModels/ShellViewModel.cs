@@ -180,14 +180,16 @@ namespace Gemini.Modules.Shell.ViewModels
             if (_closing)
                 return;
 
+            if (ReferenceEquals(item, ActiveItem))
+                return;
+
             RaiseActiveDocumentChanging();
 
             var currentActiveItem = ActiveItem;
 
             base.ActivateItem(item);
 
-            if (!ReferenceEquals(item, currentActiveItem))
-                RaiseActiveDocumentChanged();
+            RaiseActiveDocumentChanged();
         }
 
 	    private void RaiseActiveDocumentChanging()
