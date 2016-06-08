@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
@@ -23,15 +24,31 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
+        private void CleanupPropertyChanged()
+        {
+            if (_boundPropertyDescriptor != null) {
+                if (_boundPropertyDescriptor.PropertyDescriptor.SupportsChangeEvents) {
+                    _boundPropertyDescriptor.ValueChanged -= OnValueChanged;
+                } else if (typeof(INotifyPropertyChanged).IsAssignableFrom(_boundPropertyDescriptor.PropertyOwner.GetType())) {
+                    ((INotifyPropertyChanged)_boundPropertyDescriptor.PropertyOwner).PropertyChanged -= OnPropertyChanged;
+                }
+            }
+        }
+
         public BoundPropertyDescriptor BoundPropertyDescriptor
         {
             get { return _boundPropertyDescriptor; }
             set
             {
-                if (_boundPropertyDescriptor != null)
-                    _boundPropertyDescriptor.ValueChanged -= OnValueChanged;
+                CleanupPropertyChanged();
+
                 _boundPropertyDescriptor = value;
-                value.ValueChanged += OnValueChanged;
+
+                if (value.PropertyDescriptor.SupportsChangeEvents) {
+                    value.ValueChanged += OnValueChanged;
+                } else if (typeof(INotifyPropertyChanged).IsAssignableFrom(value.PropertyOwner.GetType())) {
+                    ((INotifyPropertyChanged)value.PropertyOwner).PropertyChanged += OnPropertyChanged;
+                }
             }
         }
 
@@ -43,6 +60,12 @@ namespace Gemini.Modules.Inspector.Inspectors
         private void OnValueChanged(object sender, EventArgs e)
         {
             NotifyOfPropertyChange(() => Value);
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals(BoundPropertyDescriptor.PropertyDescriptor.Name))
+                NotifyOfPropertyChange(() => Value);
         }
 
         public TValue Value
@@ -58,8 +81,7 @@ namespace Gemini.Modules.Inspector.Inspectors
 
         public void Dispose()
         {
-            if (_boundPropertyDescriptor != null)
-                _boundPropertyDescriptor.ValueChanged -= OnValueChanged;
+            CleanupPropertyChanged();
         }
     }
 }
