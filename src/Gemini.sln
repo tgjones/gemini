@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\appveyor.yml = ..\appveyor.yml
 		..\CHANGELOG.markdown = ..\CHANGELOG.markdown
 		..\README.markdown = ..\README.markdown
+		Rebracer.xml = Rebracer.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Xna", "Gemini.Modules.Xna\Gemini.Modules.Xna.csproj", "{DCE32AFD-5E68-45CF-B540-5294930E249E}"
