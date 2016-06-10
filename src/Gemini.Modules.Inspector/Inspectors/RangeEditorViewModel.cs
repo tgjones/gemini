@@ -1,6 +1,6 @@
 ﻿namespace Gemini.Modules.Inspector.Inspectors
 {
-    public class RangeEditorViewModel<T> : EditorBase<T>, ILabelledInspector
+    public class RangeEditorViewModel<T> : SelectiveUndoEditorBase<T>, ILabelledInspector
     {
         private readonly T _minimum;
         private readonly T _maximum;
@@ -19,6 +19,16 @@
         {
             _minimum = minimum;
             _maximum = maximum;
+        }
+
+        public void DragStarted()
+        {
+            OnBeginEdit();
+        }
+
+        public void DragCompleted()
+        {
+            OnEndEdit();
         }
     }
 }
