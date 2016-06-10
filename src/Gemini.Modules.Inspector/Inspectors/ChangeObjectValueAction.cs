@@ -19,10 +19,14 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
-        public ChangeObjectValueAction(BoundPropertyDescriptor boundPropertyDescriptor, object newValue)
+        public ChangeObjectValueAction(BoundPropertyDescriptor boundPropertyDescriptor, object newValue) :
+            this(boundPropertyDescriptor, boundPropertyDescriptor.Value, newValue)
+        { }
+
+        public ChangeObjectValueAction(BoundPropertyDescriptor boundPropertyDescriptor, object originalValue, object newValue)
         {
             _boundPropertyDescriptor = boundPropertyDescriptor;
-            _originalValue = boundPropertyDescriptor.Value;
+            _originalValue = originalValue;
             _newValue = newValue;
         }
 

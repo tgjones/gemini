@@ -56,7 +56,7 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (_boundPropertyDescriptor != null)
                 _boundPropertyDescriptor.ValueChanged -= OnValueChanged;
