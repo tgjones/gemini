@@ -73,6 +73,9 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return (TValue) BoundPropertyDescriptor.Value; }
             set
             {
+                if (Equals(Value, value))
+                    return;
+
                 IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
                     new ChangeObjectValueAction(BoundPropertyDescriptor, value));
                 NotifyOfPropertyChange(() => Value);
