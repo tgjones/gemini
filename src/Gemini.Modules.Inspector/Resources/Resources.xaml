@@ -2,10 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Gemini.Modules.Inspector.Controls"
                     xmlns:cal="http://www.caliburnproject.org"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
-    
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock">
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
-    
+    <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
     <controls:InspectorItemTemplateSelector x:Key="InspectorItemTemplateSelector">
         <controls:InspectorItemTemplateSelector.LabelledTemplate>
             <DataTemplate>
@@ -14,6 +15,7 @@
                         <ColumnDefinition Width="{Binding Path=(controls:InspectorGrid.PropertyNameColumnWidth), Mode=TwoWay}" MinWidth="50" />
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="{Binding Path=(controls:InspectorGrid.PropertyValueColumnWidth), Mode=TwoWay}" MinWidth="50" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" 
                            ToolTip="{Binding Description}"
@@ -25,6 +27,11 @@
                     <Border Grid.Column="2" Padding="0 2 5 2" VerticalAlignment="Center">
                         <ContentControl cal:View.Model="{Binding}" IsTabStop="False" />
                     </Border>
+                    <Button Grid.Column="3" Margin="5,0,0,0" Content="⟲" ToolTip="Reset"
+                            Foreground="{DynamicResource EnvironmentToolWindowText}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            Visibility="{Binding CanReset, Converter={StaticResource BoolToVisibilityConverter}}"
+                            cal:Message.Attach="Reset"/>
                 </Grid>
             </DataTemplate>
         </controls:InspectorItemTemplateSelector.LabelledTemplate>

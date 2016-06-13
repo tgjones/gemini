@@ -9,6 +9,23 @@ namespace Gemini.Modules.Inspector.Inspectors
     {
         private BoundPropertyDescriptor _boundPropertyDescriptor;
 
+        public bool CanReset
+        {
+            get
+            {
+                return BoundPropertyDescriptor.PropertyDescriptor.CanResetValue(BoundPropertyDescriptor.PropertyOwner);
+            }
+        }
+
+        public void Reset()
+        {
+            var descriptor = BoundPropertyDescriptor.PropertyDescriptor;
+            var owner = BoundPropertyDescriptor.PropertyOwner;
+
+            if (descriptor.CanResetValue(owner))
+                descriptor.ResetValue(owner);
+        }
+
         public override string Name
         {
             get { return BoundPropertyDescriptor.PropertyDescriptor.DisplayName; }
