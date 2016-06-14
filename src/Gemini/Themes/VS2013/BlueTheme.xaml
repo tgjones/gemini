@@ -109,6 +109,10 @@
     <SolidColorBrush x:Key="EnvironmentToolWindowText" Color="#FF000000" />
     <SolidColorBrush x:Key="EnvironmentToolWindowDisabledText" Color="#FFA2A4A5" />
 
+    <!-- History -->
+    <SolidColorBrush x:Key="HistorySeparator" Color="LightGray" />
+    <SolidColorBrush x:Key="HistoryActiveBackground" Color="LightGray" />
+
     <!-- ExpanderEx -->
     <SolidColorBrush x:Key="ExpanderExBackground" Color="#E3E3E3" />
     <SolidColorBrush x:Key="ExpanderExDisabledForeground" Color="#888" />
