@@ -310,6 +310,7 @@
 
     <Style TargetType="{x:Type ContextMenu}" x:Key="MetroContextMenu">
         <Setter Property="Background" Value="{DynamicResource MenuPopupDefaultBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource EnvironmentWindowText}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource MenuPopupDefaultBorder}" />
         <Setter Property="Padding" Value="0,2,0,2" />
