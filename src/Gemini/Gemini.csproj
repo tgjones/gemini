@@ -116,6 +116,7 @@
     <Compile Include="Framework\Controls\HwndMouse.cs" />
     <Compile Include="Framework\Controls\HwndMouseEventArgs.cs" />
     <Compile Include="Framework\Controls\HwndMouseState.cs" />
+    <Compile Include="Framework\Controls\SliderEx.cs" />
     <Compile Include="Framework\Converters.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />

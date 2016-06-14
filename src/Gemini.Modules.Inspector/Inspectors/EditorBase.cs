@@ -79,7 +79,7 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             CleanupPropertyChanged();
         }
