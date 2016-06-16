@@ -21,6 +21,9 @@ namespace Gemini.Modules.Inspector.Inspectors
         {
             get { return (TValue)BoundPropertyDescriptor.Value; }
             set {
+                if (Equals(Value, value))
+                    return;
+
                 if (_undoEnabled)
                 {
                     IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
