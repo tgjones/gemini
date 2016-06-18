@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Data;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
@@ -52,6 +54,12 @@ namespace Gemini.Modules.Inspector.Inspectors
             }
         }
 
+        public IValueConverter Converter
+        {
+            get;
+            set;
+        }
+
         private void CleanupPropertyChanged()
         {
             if (_boundPropertyDescriptor != null) {
@@ -98,20 +106,41 @@ namespace Gemini.Modules.Inspector.Inspectors
 
         public TValue Value
         {
-            get { return (TValue) BoundPropertyDescriptor.Value; }
+            get
+            {
+                if (!typeof(TValue).IsAssignableFrom(BoundPropertyDescriptor.PropertyDescriptor.PropertyType))
+                {
+                    if (Converter == null)
+                        throw new InvalidCastException("editor property value does not match editor type and no converter specified");
+
+                    return (TValue) Converter.Convert(BoundPropertyDescriptor.Value, typeof(TValue), null, CultureInfo.CurrentCulture);
+                }
+
+                return (TValue) BoundPropertyDescriptor.Value;
+            }
+
             set
             {
                 if (Equals(Value, value))
                     return;
 
+                object newValue = value;
+                if (!typeof(TValue).IsAssignableFrom(BoundPropertyDescriptor.PropertyDescriptor.PropertyType))
+                {
+                    if (Converter == null)
+                        throw new InvalidCastException("editor property value does not match editor type and no converter specified");
+
+                    newValue = Converter.ConvertBack(value, BoundPropertyDescriptor.PropertyDescriptor.PropertyType, null, CultureInfo.CurrentCulture);
+                }
+
                 if (IsUndoEnabled)
                 {
                     IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
-                        new ChangeObjectValueAction(BoundPropertyDescriptor, value));
+                        new ChangeObjectValueAction(BoundPropertyDescriptor, newValue));
                 }
                 else
                 {
-                    BoundPropertyDescriptor.Value = value;
+                    BoundPropertyDescriptor.Value = newValue;
                 }
 
                 NotifyOfPropertyChange(() => Value);
