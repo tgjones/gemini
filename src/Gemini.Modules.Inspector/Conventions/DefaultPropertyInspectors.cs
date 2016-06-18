@@ -20,14 +20,12 @@ namespace Gemini.Modules.Inspector.Conventions
         {
             _inspectorBuilders = new List<PropertyEditorBuilder>
             {
-                new RangePropertyEditorBuilder(),
+                new AdvancedSliderPropertyEditorBuilder(),
+                new AdvancedSliderRangePropertyEditorBuilder(),
                 new EnumPropertyEditorBuilder(),
 
                 new StandardPropertyEditorBuilder<bool, CheckBoxEditorViewModel>(),
                 new StandardPropertyEditorBuilder<Color, ColorEditorViewModel>(),
-                new StandardPropertyEditorBuilder<double, TextBoxEditorViewModel<double>>(),
-                new StandardPropertyEditorBuilder<float, TextBoxEditorViewModel<float>>(),
-                new StandardPropertyEditorBuilder<int, TextBoxEditorViewModel<int>>(),
                 new StandardPropertyEditorBuilder<double?, TextBoxEditorViewModel<double?>>(),
                 new StandardPropertyEditorBuilder<float?, TextBoxEditorViewModel<float?>>(),
                 new StandardPropertyEditorBuilder<int?, TextBoxEditorViewModel<int?>>(),
