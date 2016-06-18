@@ -9,6 +9,17 @@ namespace Gemini.Modules.Inspector.Inspectors
     {
         private BoundPropertyDescriptor _boundPropertyDescriptor;
 
+        public EditorBase()
+        {
+            IsUndoEnabled = true;
+        }
+
+        public bool IsUndoEnabled
+        {
+            get;
+            set;
+        }
+
         public bool CanReset
         {
             get
@@ -93,8 +104,16 @@ namespace Gemini.Modules.Inspector.Inspectors
                 if (Equals(Value, value))
                     return;
 
-                IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
-                    new ChangeObjectValueAction(BoundPropertyDescriptor, value));
+                if (IsUndoEnabled)
+                {
+                    IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
+                        new ChangeObjectValueAction(BoundPropertyDescriptor, value));
+                }
+                else
+                {
+                    BoundPropertyDescriptor.Value = value;
+                }
+
                 NotifyOfPropertyChange(() => Value);
             }
         }

@@ -15,34 +15,11 @@ namespace Gemini.Modules.Inspector.Inspectors
     /// <typeparam name="TValue">Type of the value</typeparam>
     public abstract class SelectiveUndoEditorBase<TValue> : EditorBase<TValue>, IDisposable
     {
-        private bool _undoEnabled = true;
-
-        public override TValue Value
-        {
-            get { return (TValue)BoundPropertyDescriptor.Value; }
-            set {
-                if (Equals(Value, value))
-                    return;
-
-                if (_undoEnabled)
-                {
-                    IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
-                        new ChangeObjectValueAction(BoundPropertyDescriptor, value));
-                }
-                else
-                {
-                    BoundPropertyDescriptor.Value = value;
-                }
-
-                NotifyOfPropertyChange(() => Value);
-            }
-        }
-
         private object _originalValue = null;
 
         protected void OnBeginEdit()
         {
-            _undoEnabled = false;
+            IsUndoEnabled = false;
             _originalValue = Value;
         }
 
@@ -61,7 +38,7 @@ namespace Gemini.Modules.Inspector.Inspectors
             finally
             {
                 _originalValue = null;
-                _undoEnabled = true;
+                IsUndoEnabled = true;
             }
         }
 
