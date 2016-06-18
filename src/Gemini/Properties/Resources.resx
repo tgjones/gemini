@@ -285,4 +285,7 @@
   <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
     <value>Full Screen</value>
   </data>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>Failed to set value: {0}</value>
+  </data>
 </root>

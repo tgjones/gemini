@@ -119,6 +119,13 @@
     <SolidColorBrush x:Key="StatusBarBackground" Color="#007ACC" />
     <SolidColorBrush x:Key="StatusBarForeground" Color="White" />
 
+    <!-- Advanced slider -->
+    <SolidColorBrush x:Key="AdvancedSlider.Bar" Color="#C6C8CE"/>
+    <SolidColorBrush x:Key="AdvancedSlider.Static.Background" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AdvancedSlider.Static.Border" Color="#ABAdB3"/>
+    <SolidColorBrush x:Key="AdvancedSlider.MouseOver.Border" Color="#569DE5"/>
+    <SolidColorBrush x:Key="AdvancedSlider.Focus.Border" Color="#569DE5"/>
+
     <!-- Tree view -->
     <SolidColorBrush x:Key="TreeView.Static.Background" Color="#F5F5F5" />
     <SolidColorBrush x:Key="TreeView.Static.Border" Color="#CCCEDB" />

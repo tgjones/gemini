@@ -98,14 +98,20 @@
     <Compile Include="Controls\NumericTextBox.cs" />
     <Compile Include="Controls\ScreenColorPicker.cs" />
     <Compile Include="Controls\SimpleGridSplitter.cs" />
+    <Compile Include="Conventions\AdvancedSliderPropertyEditorBuilder.cs" />
     <Compile Include="Conventions\DefaultPropertyInspectors.cs" />
     <Compile Include="Conventions\EnumPropertyEditorBuilder.cs" />
     <Compile Include="Conventions\PropertyEditorBuilder.cs" />
+    <Compile Include="Conventions\AdvancedSliderRangePropertyEditorBuilder.cs" />
     <Compile Include="Conventions\RangePropertyEditorBuilder.cs" />
     <Compile Include="Conventions\StandardPropertyEditorBuilder.cs" />
     <Compile Include="InspectableObject.cs" />
     <Compile Include="InspectableObjectBuilder.cs" />
     <Compile Include="InspectorBuilder.cs" />
+    <Compile Include="Inspectors\AdvancedSliderEditorView.xaml.cs">
+      <DependentUpon>AdvancedSliderEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inspectors\AdvancedSliderEditorViewModel.cs" />
     <Compile Include="Inspectors\BitmapSourceEditorView.xaml.cs">
       <DependentUpon>BitmapSourceEditorView.xaml</DependentUpon>
     </Compile>
@@ -183,6 +189,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Inspectors\AdvancedSliderEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Inspectors\BitmapSourceEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
