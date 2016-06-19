@@ -103,6 +103,10 @@
                             <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource Button.MouseOver.Border}" />
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource Button.MouseOver.Background}" />
                         </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource Button.MouseOver.Border}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Button.MouseOver.Background}" />
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Fill" TargetName="Arrow" Value="{DynamicResource ColorPicker.Disabled.Glyph}" />
                         </Trigger>
@@ -114,12 +118,14 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Button.MouseOver.Background}" />
             </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Button.MouseOver.Background}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style x:Key="ColorDisplayStyle" TargetType="ContentControl">
-        <Setter Property="Focusable"
-              Value="False" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -158,7 +164,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ColorPicker.Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ButtonStyle" Value="{StaticResource ColorPickerToggleButtonStyle}" />
-        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -166,8 +172,10 @@
                 <ControlTemplate TargetType="{x:Type xctk:ColorPicker}">
                     <Grid>
                         <ToggleButton x:Name="PART_ColorPickerToggleButton"
-                                      IsTabStop="True"
+                                      IsTabStop="False"
+                                      Focusable="False"
                                       MinHeight="22"
+                                      FocusVisualStyle="{x:Null}"
                                       Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       BorderThickness="{TemplateBinding BorderThickness}"
@@ -178,11 +186,11 @@
                                       IsHitTestVisible="{Binding IsOpen, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource InverseBoolConverter}}"
                                       Style="{TemplateBinding ButtonStyle}">
                             <Grid Margin="2">
-                                <ContentControl x:Name="ColorOnly" Style="{StaticResource ColorDisplayStyle}" />
+                                <ContentControl x:Name="ColorOnly" IsTabStop="False" Style="{StaticResource ColorDisplayStyle}" />
 
                                 <Border x:Name="ColorAndName" Background="{DynamicResource ColorPicker.Background}" Visibility="Hidden">
                                     <StackPanel Orientation="Horizontal">
-                                        <ContentControl HorizontalAlignment="Left" Width="20" Margin="2,1,4,1" Style="{StaticResource ColorDisplayStyle}" BorderThickness="1" BorderBrush="{DynamicResource ColorPicker.Border}" />
+                                        <ContentControl IsTabStop="False" HorizontalAlignment="Left" Width="20" Margin="2,1,4,1" Style="{StaticResource ColorDisplayStyle}" BorderThickness="1" BorderBrush="{DynamicResource ColorPicker.Border}" />
                                         <TextBlock Text="{Binding SelectedColorText, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{DynamicResource EnvironmentToolWindowText}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Border>

@@ -6,6 +6,7 @@
         <ResourceDictionary Source="ColorCanvas.xaml" />
         <ResourceDictionary Source="ColorPicker.xaml" />
         <ResourceDictionary Source="ComboBox.xaml" />
+        <ResourceDictionary Source="Focus.xaml" />
         <ResourceDictionary Source="Label.xaml" />
         <ResourceDictionary Source="Menu.xaml" />
         <ResourceDictionary Source="ScrollBar.xaml" />
