@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using Gemini.Framework;
 using Gemini.Framework.Services;
+using Gemini.Modules.Inspector.Properties;
 
 namespace Gemini.Modules.Inspector.ViewModels
 {
@@ -35,7 +36,7 @@ namespace Gemini.Modules.Inspector.ViewModels
 
         public InspectorViewModel()
         {
-            DisplayName = "Inspector";
+            DisplayName = Resources.InspectorDisplayName;
         }
 
         private void RaiseSelectedObjectChanged()

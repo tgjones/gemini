@@ -3,14 +3,17 @@
                     xmlns:controls="clr-namespace:Gemini.Modules.Inspector.Controls"
                     xmlns:cal="http://www.caliburnproject.org"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock">
+                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+                    xmlns:p="clr-namespace:Gemini.Modules.Inspector.Properties"
+                    xmlns:l="http://gu.se/Localization">
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
     <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
     <controls:InspectorItemTemplateSelector x:Key="InspectorItemTemplateSelector">
         <controls:InspectorItemTemplateSelector.LabelledTemplate>
             <DataTemplate>
-                <Grid IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBoolConverter}}">
+                <Grid IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBoolConverter}}"
+                      l:ErrorHandling.Mode="ReturnErrorInfoPreserveNeutral">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{Binding Path=(controls:InspectorGrid.PropertyNameColumnWidth), Mode=TwoWay}" MinWidth="50" />
                         <ColumnDefinition Width="5" />
@@ -27,7 +30,7 @@
                     <Border Grid.Column="2" Padding="0 2 5 2" VerticalAlignment="Center">
                         <ContentControl cal:View.Model="{Binding}" IsTabStop="False" />
                     </Border>
-                    <Button Grid.Column="3" Margin="5,0,0,0" Content="⟲" ToolTip="Reset"
+                    <Button Grid.Column="3" Margin="5,0,0,0" Content="⟲" ToolTip="{l:Static p:Resources.LabelledTemplateResetToolTip}"
                             Foreground="{DynamicResource EnvironmentToolWindowText}"
                             Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                             Visibility="{Binding CanReset, Converter={StaticResource BoolToVisibilityConverter}}"

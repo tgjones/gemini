@@ -26,7 +26,7 @@ namespace Gemini.Framework.Themes
     {
         public virtual string Name
         {
-            get { return "Light"; }
+            get { return Properties.Resources.ThemeLightName; }
         }
 
         public virtual IEnumerable<Uri> ApplicationResources

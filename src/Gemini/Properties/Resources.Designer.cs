@@ -151,6 +151,15 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _New.
+        /// </summary>
+        internal static string FileNewCommandText {
+            get {
+                return ResourceManager.GetString("FileNewCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untitled {0}.
         /// </summary>
         internal static string FileNewUntitled {
@@ -223,11 +232,155 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        internal static string HistoryDisplayName {
+            get {
+                return ResourceManager.GetString("HistoryDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initial State.
+        /// </summary>
+        internal static string HistoryInitialState {
+            get {
+                return ResourceManager.GetString("HistoryInitialState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System.
+        /// </summary>
+        internal static string LanguageSystem {
+            get {
+                return ResourceManager.GetString("LanguageSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto hide main menu.
+        /// </summary>
+        internal static string MainMenuSettingsAutoHideMainMenu {
+            get {
+                return ResourceManager.GetString("MainMenuSettingsAutoHideMainMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color Theme:.
+        /// </summary>
+        internal static string MainMenuSettingsColorTheme {
+            get {
+                return ResourceManager.GetString("MainMenuSettingsColorTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language:.
+        /// </summary>
+        internal static string MainMenuSettingsLanguage {
+            get {
+                return ResourceManager.GetString("MainMenuSettingsLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires restart.
+        /// </summary>
+        internal static string MainMenuSettingsLanguageRestart {
+            get {
+                return ResourceManager.GetString("MainMenuSettingsLanguageRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Default Title].
+        /// </summary>
+        internal static string MainWindowDefaultTitle {
+            get {
+                return ResourceManager.GetString("MainWindowDefaultTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        internal static string SettingsDisplayName {
+            get {
+                return ResourceManager.GetString("SettingsDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         internal static string SettingsPageGeneral {
             get {
                 return ResourceManager.GetString("SettingsPageGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environment.
+        /// </summary>
+        internal static string SettingsPathEnvironment {
+            get {
+                return ResourceManager.GetString("SettingsPathEnvironment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue.
+        /// </summary>
+        internal static string ThemeBlueName {
+            get {
+                return ResourceManager.GetString("ThemeBlueName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        internal static string ThemeDarkName {
+            get {
+                return ResourceManager.GetString("ThemeDarkName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        internal static string ThemeLightName {
+            get {
+                return ResourceManager.GetString("ThemeLightName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard.
+        /// </summary>
+        internal static string ToolBarStandard {
+            get {
+                return ResourceManager.GetString("ToolBarStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        internal static string ToolboxCategory {
+            get {
+                return ResourceManager.GetString("ToolboxCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toolbox.
+        /// </summary>
+        internal static string ToolboxDisplayName {
+            get {
+                return ResourceManager.GetString("ToolboxDisplayName", resourceCulture);
             }
         }
         

@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.Output.Views;
+using Gemini.Modules.Output.Properties;
 
 namespace Gemini.Modules.Output.ViewModels
 {
@@ -28,7 +29,7 @@ namespace Gemini.Modules.Output.ViewModels
 
 		public OutputViewModel()
 		{
-		    DisplayName = "Output";
+		    DisplayName = Resources.OutputDisplayName;
 			_stringBuilder = new StringBuilder();
 			_writer = new OutputWriter(this);
 		}

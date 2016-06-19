@@ -8,6 +8,7 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.Toolbox.Services;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Toolbox.ViewModels
 {
@@ -30,12 +31,12 @@ namespace Gemini.Modules.Toolbox.ViewModels
         [ImportingConstructor]
         public ToolboxViewModel(IShell shell, IToolboxService toolboxService)
         {
-            DisplayName = "Toolbox";
+            DisplayName = Resources.ToolboxDisplayName;
 
             _items = new BindableCollection<ToolboxItemViewModel>();
-            
+
             var groupedItems = CollectionViewSource.GetDefaultView(_items);
-            groupedItems.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+            groupedItems.GroupDescriptions.Add(new PropertyGroupDescription(Resources.ToolboxCategory));
 
             _toolboxService = toolboxService;
 

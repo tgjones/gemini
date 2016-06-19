@@ -91,7 +91,7 @@ namespace Gemini.Modules.Inspector
                 foreach (var category in properties.GroupBy(x => x.Category))
                 {
                     var actualCategory = (string.IsNullOrEmpty(category.Key) || category.Key == CategoryAttribute.Default.Category)
-                        ? "Miscellaneous"
+                        ? Properties.Resources.InspectorBuilderMiscellaneous
                         : category.Key;
 
                     var collapsibleGroupBuilder = new CollapsibleGroupBuilder();

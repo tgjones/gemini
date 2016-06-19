@@ -61,6 +61,42 @@ namespace Gemini.Modules.Inspector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change {0} from {1} to {2}.
+        /// </summary>
+        internal static string ChangeObjectValueActionFormat {
+            get {
+                return ResourceManager.GetString("ChangeObjectValueActionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miscellaneous.
+        /// </summary>
+        internal static string InspectorBuilderMiscellaneous {
+            get {
+                return ResourceManager.GetString("InspectorBuilderMiscellaneous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inspector.
+        /// </summary>
+        internal static string InspectorDisplayName {
+            get {
+                return ResourceManager.GetString("InspectorDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string LabelledTemplateResetToolTip {
+            get {
+                return ResourceManager.GetString("LabelledTemplateResetToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I_nspector.
         /// </summary>
         internal static string ViewInspectorCommandText {

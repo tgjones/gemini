@@ -117,139 +117,139 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FileExitCommandText" xml:space="preserve">
+    <value>退出 (_X)</value>
+  </data>
   <data name="EditMenuText" xml:space="preserve">
-    <value>_Edit</value>
+    <value>编辑 (_E)</value>
   </data>
   <data name="EditRedoCommandText" xml:space="preserve">
-    <value>_Redo</value>
+    <value>重做 (_R)</value>
   </data>
   <data name="EditRedoCommandToolTip" xml:space="preserve">
-    <value>Redo</value>
+    <value>重做</value>
   </data>
   <data name="EditUndoCommandText" xml:space="preserve">
-    <value>_Undo</value>
+    <value>回退 (_U)</value>
   </data>
   <data name="EditUndoCommandToolTip" xml:space="preserve">
-    <value>Undo</value>
+    <value>回退</value>
   </data>
   <data name="FileCloseCommandText" xml:space="preserve">
-    <value>_Close</value>
+    <value>关闭 (_C)</value>
   </data>
   <data name="FileCloseCommandToolTip" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="FileExitCommandText" xml:space="preserve">
-    <value>E_xit</value>
+    <value>关闭</value>
   </data>
   <data name="FileExitCommandToolTip" xml:space="preserve">
-    <value>Exit</value>
+    <value>退出</value>
   </data>
   <data name="FileMenuText" xml:space="preserve">
-    <value>_File</value>
+    <value>文件 (_F)</value>
   </data>
   <data name="FileNewCommandText" xml:space="preserve">
-    <value>_New</value>
+    <value>新建 (_N)</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
-    <value>Untitled {0}</value>
+    <value>未命名 {0}</value>
   </data>
   <data name="FileOpenCommandText" xml:space="preserve">
-    <value>_Open</value>
+    <value>打开 (_O)</value>
   </data>
   <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>Open</value>
+    <value>打开</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
-    <value>Save _As...</value>
+    <value>另存为 (_A)</value>
   </data>
   <data name="FileSaveAsCommandToolTip" xml:space="preserve">
-    <value>Save As</value>
+    <value>另存为</value>
   </data>
   <data name="FileSaveCommandText" xml:space="preserve">
-    <value>_Save</value>
+    <value>保存 (_S)</value>
   </data>
   <data name="FileSaveCommandToolTip" xml:space="preserve">
-    <value>Save</value>
+    <value>保存</value>
   </data>
   <data name="HelpMenuText" xml:space="preserve">
-    <value>_Help</value>
+    <value>帮助 (_H)</value>
   </data>
   <data name="HistoryDisplayName" xml:space="preserve">
-    <value>History</value>
+    <value>历史</value>
   </data>
   <data name="HistoryInitialState" xml:space="preserve">
-    <value>Initial State</value>
+    <value>初始 状态</value>
   </data>
   <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
-    <value>Auto hide main menu</value>
+    <value>自动隐藏主菜单</value>
   </data>
   <data name="MainMenuSettingsColorTheme" xml:space="preserve">
-    <value>Color Theme:</value>
+    <value>色彩主题：</value>
   </data>
   <data name="MainWindowDefaultTitle" xml:space="preserve">
-    <value>[Default Title]</value>
+    <value>【默认标题】</value>
   </data>
   <data name="SettingsDisplayName" xml:space="preserve">
-    <value>Options</value>
+    <value>选项</value>
   </data>
   <data name="SettingsPageGeneral" xml:space="preserve">
-    <value>General</value>
+    <value>通用</value>
   </data>
   <data name="SettingsPathEnvironment" xml:space="preserve">
-    <value>Environment</value>
+    <value>环境</value>
   </data>
   <data name="ToolBarStandard" xml:space="preserve">
-    <value>Standard</value>
+    <value>标准</value>
   </data>
   <data name="ToolboxCategory" xml:space="preserve">
-    <value>Category</value>
+    <value>种类</value>
   </data>
   <data name="ToolboxDisplayName" xml:space="preserve">
-    <value>Toolbox</value>
+    <value>工具箱</value>
   </data>
   <data name="ToolsMenuText" xml:space="preserve">
-    <value>_Tools</value>
+    <value>工具 (_T)</value>
   </data>
   <data name="ToolsOptionsCommandText" xml:space="preserve">
-    <value>_Options</value>
+    <value>选项 (_O)</value>
   </data>
   <data name="ToolsOptionsCommandToolTip" xml:space="preserve">
-    <value>Options</value>
+    <value>选项</value>
   </data>
   <data name="ViewHistoryCommandText" xml:space="preserve">
-    <value>_History</value>
+    <value>历史 (_H)</value>
   </data>
   <data name="ViewHistoryCommandToolTip" xml:space="preserve">
-    <value>History</value>
+    <value>历史</value>
   </data>
   <data name="ViewMenuText" xml:space="preserve">
-    <value>_View</value>
+    <value>查看 (_V)</value>
   </data>
   <data name="ViewToolboxCommandText" xml:space="preserve">
-    <value>Toolbo_x</value>
+    <value>工具箱 (_X)</value>
   </data>
   <data name="ViewToolboxCommandToolTip" xml:space="preserve">
-    <value>Toolbox</value>
+    <value>工具箱</value>
   </data>
   <data name="WindowMenuText" xml:space="preserve">
-    <value>_Window</value>
+    <value>窗口 (_W)</value>
   </data>
   <data name="MainMenuSettingsLanguage" xml:space="preserve">
-    <value>Language:</value>
+    <value>语言：</value>
   </data>
   <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
-    <value>Requires restart</value>
+    <value>需要从新启动</value>
   </data>
   <data name="LanguageSystem" xml:space="preserve">
-    <value>System</value>
+    <value>系统</value>
   </data>
   <data name="ThemeBlueName" xml:space="preserve">
-    <value>Blue</value>
+    <value>蓝色</value>
   </data>
   <data name="ThemeLightName" xml:space="preserve">
-    <value>Light</value>
+    <value>明亮</value>
   </data>
   <data name="ThemeDarkName" xml:space="preserve">
-    <value>Dark</value>
+    <value>暗色</value>
   </data>
 </root>

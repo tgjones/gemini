@@ -4,12 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:Gemini.Modules.MainMenu.ViewModels"
+    xmlns:p="clr-namespace:Gemini.Properties"
+    xmlns:l="http://gu.se/Localization"
+    xmlns:converters="clr-namespace:Gemini.Modules.MainMenu.Converters"
+    l:ErrorHandling.Mode="ReturnErrorInfoPreserveNeutral"
     x:Class="Gemini.Modules.MainMenu.Views.MainMenuSettingsView" mc:Ignorable="d" d:DesignHeight="300"
     d:DesignWidth="300" d:DataContext="{d:DesignInstance viewModels:MainMenuSettingsViewModel}">
+    <UserControl.Resources>
+        <converters:CultureInfoNameConverter x:Key="CultureInfoNameConverter" />
+    </UserControl.Resources>
     <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Width="100">Color Theme:</Label>
-            <ComboBox ItemsSource="{Binding Themes}" 
+        <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+            <Label Width="100" Content="{l:Static p:Resources.MainMenuSettingsColorTheme}" />
+            <ComboBox ItemsSource="{Binding Themes}"
                       SelectedItem="{Binding SelectedTheme}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -18,6 +25,20 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
-        <CheckBox IsChecked="{Binding AutoHideMainMenu}" Margin="0 5 0 0">Auto hide main menu</CheckBox>
+        <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+            <Label Width="100" Content="{l:Static p:Resources.MainMenuSettingsLanguage}" />
+            <ComboBox ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Converter={StaticResource CultureInfoNameConverter}, Mode=OneWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label Content="{l:Static p:Resources.MainMenuSettingsLanguageRestart}" />
+        </StackPanel>
+        <CheckBox IsChecked="{Binding AutoHideMainMenu}" Margin="0 5 0 0" Content="{l:Static p:Resources.MainMenuSettingsAutoHideMainMenu}" />
     </StackPanel>
 </UserControl>
