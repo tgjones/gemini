@@ -18,11 +18,11 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="{l:Static p:Resources.ResetAll}"
-                    ToolTip="{l:Static p:Resources.ResetToolTip}"
-                    Foreground="{DynamicResource EnvironmentToolWindowText}"
-                    Style="{StaticResource ResetButton}"
-                    cal:Message.Attach="ResetAll"
-                    />
+                        ToolTip="{l:Static p:Resources.ResetToolTip}"
+                        Foreground="{DynamicResource EnvironmentToolWindowText}"
+                        BorderBrush="Transparent"
+                        cal:Message.Attach="ResetAll"
+                        />
             </StackPanel>
             <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <ItemsControl ItemsSource="{Binding SelectedObject.Inspectors}"

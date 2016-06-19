@@ -9,7 +9,8 @@
     x:Class="Gemini.Modules.Settings.Views.SettingsView" 
     mc:Ignorable="d" 
     d:DataContext="{d:DesignData Source=../SampleData/SettingsViewModelSampleData.xaml}"
-    Background="{x:Static SystemColors.ControlBrush}"
+    Background="{DynamicResource EnvironmentWindowBackground}"
+    Foreground="{DynamicResource EnvironmentWindowText}"
     Width="760" Height="500" MinWidth="512" MinHeight="300" 
     WindowStartupLocation="CenterOwner"
     ShowInTaskbar="False">
@@ -30,8 +31,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors" 
-                  Background="Transparent">
+        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors">
             <i:Interaction.Behaviors>
                 <behaviors:BindableTreeViewSelectedItemBehavior SelectedItem="{Binding SelectedPage, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
