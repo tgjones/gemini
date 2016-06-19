@@ -239,4 +239,7 @@
     <!-- Label -->
     <SolidColorBrush x:Key="Label.Static.Text" Color="#000000" />
     <SolidColorBrush x:Key="Label.Disabled.Text" Color="#A4ADBA" />
+
+    <!-- Focus style -->
+    <SolidColorBrush x:Key="FocusStyle.Brush" Color="#000000" />
 </ResourceDictionary>
