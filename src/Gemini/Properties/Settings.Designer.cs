@@ -37,7 +37,7 @@ namespace Gemini.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Light")]
+        [global::System.Configuration.DefaultSettingValueAttribute("LightTheme")]
         public string ThemeName {
             get {
                 return ((string)(this["ThemeName"]));

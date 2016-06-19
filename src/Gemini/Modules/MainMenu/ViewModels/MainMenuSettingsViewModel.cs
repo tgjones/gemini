@@ -62,7 +62,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
 
         public void ApplyChanges()
         {
-            Properties.Settings.Default.ThemeName = SelectedTheme.Name;
+            Properties.Settings.Default.ThemeName = SelectedTheme.GetType().Name;
             Properties.Settings.Default.AutoHideMainMenu = AutoHideMainMenu;
             Properties.Settings.Default.Save();
         }
