@@ -27,17 +27,17 @@ namespace Gemini.Modules.Inspector.Inspectors
         {
             get
             {
+                if (IsReadOnly)
+                    return false;
+
                 return BoundPropertyDescriptor.PropertyDescriptor.CanResetValue(BoundPropertyDescriptor.PropertyOwner);
             }
         }
 
         public void Reset()
         {
-            var descriptor = BoundPropertyDescriptor.PropertyDescriptor;
-            var owner = BoundPropertyDescriptor.PropertyOwner;
-
-            if (descriptor.CanResetValue(owner))
-                descriptor.ResetValue(owner);
+            if (CanReset)
+                BoundPropertyDescriptor.PropertyDescriptor.ResetValue(BoundPropertyDescriptor.PropertyOwner);
         }
 
         public override string Name
