@@ -38,7 +38,9 @@
                     <Border Grid.Column="2" Padding="0 2 5 2" VerticalAlignment="Center">
                         <ContentControl cal:View.Model="{Binding}" IsTabStop="False" />
                     </Border>
-                    <Button Grid.Column="3" Margin="5,0,0,0" Content="⟲" ToolTip="{l:Static p:Resources.LabelledTemplateResetToolTip}"
+                    <Button Grid.Column="3" Margin="5,0,0,0"
+                            Content="{l:Static p:Resources.ResetSymbol}"
+                            ToolTip="{l:Static p:Resources.ResetToolTip}"
                             Foreground="{DynamicResource EnvironmentToolWindowText}"
                             Style="{StaticResource ResetButton}"
                             IsEnabled="{Binding IsDirty}"

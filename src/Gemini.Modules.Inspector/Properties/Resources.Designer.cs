@@ -88,11 +88,29 @@ namespace Gemini.Modules.Inspector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset all ⟲.
+        /// </summary>
+        internal static string ResetAll {
+            get {
+                return ResourceManager.GetString("ResetAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⟲.
+        /// </summary>
+        internal static string ResetSymbol {
+            get {
+                return ResourceManager.GetString("ResetSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
-        internal static string LabelledTemplateResetToolTip {
+        internal static string ResetToolTip {
             get {
-                return ResourceManager.GetString("LabelledTemplateResetToolTip", resourceCulture);
+                return ResourceManager.GetString("ResetToolTip", resourceCulture);
             }
         }
         
