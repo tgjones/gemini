@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Data;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
@@ -93,9 +94,23 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return BoundPropertyDescriptor.PropertyDescriptor.IsReadOnly; }
         }
 
+        public bool IsDirty
+        {
+            get
+            {
+                DefaultValueAttribute defaultAttribute = BoundPropertyDescriptor.PropertyDescriptor.Attributes.OfType<DefaultValueAttribute>().FirstOrDefault();
+                if (defaultAttribute == null)
+                    /* Maybe not dirty, but we have no way to know if we don't have a default value */
+                    return true;
+
+                return !Equals(defaultAttribute.Value, Value);
+            }
+        }
+
         private void OnValueChanged()
         {
             NotifyOfPropertyChange(() => Value);
+            NotifyOfPropertyChange(() => IsDirty);
         }
 
         private void OnValueChanged(object sender, EventArgs e)

@@ -7,6 +7,14 @@
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
     <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
+    <Style x:Key="ResetButton" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <controls:InspectorItemTemplateSelector x:Key="InspectorItemTemplateSelector">
         <controls:InspectorItemTemplateSelector.LabelledTemplate>
             <DataTemplate>
@@ -29,7 +37,8 @@
                     </Border>
                     <Button Grid.Column="3" Margin="5,0,0,0" Content="⟲" ToolTip="Reset"
                             Foreground="{DynamicResource EnvironmentToolWindowText}"
-                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            Style="{StaticResource ResetButton}"
+                            IsEnabled="{Binding IsDirty}"
                             Visibility="{Binding CanReset, Converter={StaticResource BoolToVisibilityConverter}}"
                             cal:Message.Attach="Reset"/>
                 </Grid>
