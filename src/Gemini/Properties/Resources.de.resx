@@ -118,138 +118,138 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditMenuText" xml:space="preserve">
-    <value>_Edit</value>
+    <value>_Bearbeiten</value>
   </data>
   <data name="EditRedoCommandText" xml:space="preserve">
-    <value>_Redo</value>
+    <value>_Wiederherstellen</value>
   </data>
   <data name="EditRedoCommandToolTip" xml:space="preserve">
-    <value>Redo</value>
+    <value>Wiederherstellen</value>
   </data>
   <data name="EditUndoCommandText" xml:space="preserve">
-    <value>_Undo</value>
+    <value>_Rückgängig</value>
   </data>
   <data name="EditUndoCommandToolTip" xml:space="preserve">
-    <value>Undo</value>
+    <value>Rückgängig</value>
   </data>
   <data name="FileCloseCommandText" xml:space="preserve">
-    <value>_Close</value>
+    <value>_Schliessen</value>
   </data>
   <data name="FileCloseCommandToolTip" xml:space="preserve">
-    <value>Close</value>
+    <value>Schliessen</value>
   </data>
   <data name="FileExitCommandText" xml:space="preserve">
-    <value>E_xit</value>
+    <value>_Beenden</value>
   </data>
   <data name="FileExitCommandToolTip" xml:space="preserve">
-    <value>Exit</value>
+    <value>Beenden</value>
   </data>
   <data name="FileMenuText" xml:space="preserve">
-    <value>_File</value>
+    <value>_Datei</value>
   </data>
   <data name="FileNewCommandText" xml:space="preserve">
-    <value>_New</value>
+    <value>_Neu</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
-    <value>Untitled {0}</value>
+    <value>Ohne Name {0}</value>
   </data>
   <data name="FileOpenCommandText" xml:space="preserve">
-    <value>_Open</value>
+    <value>_Öffnen</value>
   </data>
   <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>Open</value>
+    <value>Öffnen</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
-    <value>Save _As...</value>
+    <value>Speichern _unter...</value>
   </data>
   <data name="FileSaveAsCommandToolTip" xml:space="preserve">
-    <value>Save As</value>
+    <value>Speichern unter</value>
   </data>
   <data name="FileSaveCommandText" xml:space="preserve">
-    <value>_Save</value>
+    <value>_Speichern</value>
   </data>
   <data name="FileSaveCommandToolTip" xml:space="preserve">
-    <value>Save</value>
+    <value>Speichern</value>
   </data>
   <data name="HelpMenuText" xml:space="preserve">
-    <value>_Help</value>
+    <value>_Hilfe</value>
   </data>
   <data name="HistoryDisplayName" xml:space="preserve">
-    <value>History</value>
+    <value>Verlauf</value>
   </data>
   <data name="HistoryInitialState" xml:space="preserve">
-    <value>Initial State</value>
+    <value>Anfangszustand</value>
   </data>
   <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
-    <value>Auto hide main menu</value>
+    <value>Hauptmenü automatisch verstecken</value>
   </data>
   <data name="MainMenuSettingsColorTheme" xml:space="preserve">
-    <value>Color Theme:</value>
+    <value>Farbschema:</value>
   </data>
   <data name="MainWindowDefaultTitle" xml:space="preserve">
-    <value>[Default Title]</value>
+    <value>[Standard Titel]</value>
   </data>
   <data name="SettingsDisplayName" xml:space="preserve">
-    <value>Options</value>
+    <value>Einstellungen</value>
   </data>
   <data name="SettingsPageGeneral" xml:space="preserve">
-    <value>General</value>
+    <value>Allgemein</value>
   </data>
   <data name="SettingsPathEnvironment" xml:space="preserve">
-    <value>Environment</value>
+    <value>Umgebung</value>
+  </data>
+  <data name="ToolsMenuText" xml:space="preserve">
+    <value>_Werkzeuge</value>
+  </data>
+  <data name="ToolsOptionsCommandText" xml:space="preserve">
+    <value>_Einstellungen</value>
+  </data>
+  <data name="ToolsOptionsCommandToolTip" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="ViewHistoryCommandText" xml:space="preserve">
+    <value>_Verlauf</value>
+  </data>
+  <data name="ViewHistoryCommandToolTip" xml:space="preserve">
+    <value>Verlauf</value>
+  </data>
+  <data name="ViewMenuText" xml:space="preserve">
+    <value>_Ansicht</value>
+  </data>
+  <data name="ViewToolboxCommandText" xml:space="preserve">
+    <value>_Werkzeuge</value>
+  </data>
+  <data name="ViewToolboxCommandToolTip" xml:space="preserve">
+    <value>Werkzeuge</value>
+  </data>
+  <data name="WindowMenuText" xml:space="preserve">
+    <value>_Fenster</value>
   </data>
   <data name="ToolBarStandard" xml:space="preserve">
     <value>Standard</value>
   </data>
   <data name="ToolboxCategory" xml:space="preserve">
-    <value>Category</value>
+    <value>Kategorie</value>
   </data>
   <data name="ToolboxDisplayName" xml:space="preserve">
-    <value>Toolbox</value>
-  </data>
-  <data name="ToolsMenuText" xml:space="preserve">
-    <value>_Tools</value>
-  </data>
-  <data name="ToolsOptionsCommandText" xml:space="preserve">
-    <value>_Options</value>
-  </data>
-  <data name="ToolsOptionsCommandToolTip" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="ViewHistoryCommandText" xml:space="preserve">
-    <value>_History</value>
-  </data>
-  <data name="ViewHistoryCommandToolTip" xml:space="preserve">
-    <value>History</value>
-  </data>
-  <data name="ViewMenuText" xml:space="preserve">
-    <value>_View</value>
-  </data>
-  <data name="ViewToolboxCommandText" xml:space="preserve">
-    <value>Toolbo_x</value>
-  </data>
-  <data name="ViewToolboxCommandToolTip" xml:space="preserve">
-    <value>Toolbox</value>
-  </data>
-  <data name="WindowMenuText" xml:space="preserve">
-    <value>_Window</value>
+    <value>Werkzeuge</value>
   </data>
   <data name="MainMenuSettingsLanguage" xml:space="preserve">
-    <value>Language:</value>
+    <value>Sprache:</value>
   </data>
   <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
-    <value>Requires restart</value>
+    <value>Erfordert Neustart</value>
   </data>
   <data name="LanguageSystem" xml:space="preserve">
     <value>System</value>
   </data>
   <data name="ThemeBlueName" xml:space="preserve">
-    <value>Blue</value>
+    <value>Blau</value>
   </data>
   <data name="ThemeLightName" xml:space="preserve">
-    <value>Light</value>
+    <value>Hell</value>
   </data>
   <data name="ThemeDarkName" xml:space="preserve">
-    <value>Dark</value>
+    <value>Dunkel</value>
   </data>
 </root>

@@ -7,6 +7,7 @@ using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Modules.CodeEditor.ViewModels;
+using Gemini.Modules.CodeEditor.Properties;
 
 namespace Gemini.Modules.CodeEditor
 {
@@ -28,7 +29,7 @@ namespace Gemini.Modules.CodeEditor
 	            return _languageDefinitionManager.LanguageDefinitions
 	                .Select(languageDefinition => new EditorFileType
 	                {
-	                    Name = languageDefinition.Name + " File",
+	                    Name = languageDefinition.Name + Resources.EditorProviderFileSuffix,
 	                    FileExtension = languageDefinition.FileExtensions.First()
 	                });
 	        }

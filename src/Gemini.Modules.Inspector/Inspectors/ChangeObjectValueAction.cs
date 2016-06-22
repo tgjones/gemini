@@ -1,4 +1,5 @@
-﻿using Gemini.Modules.UndoRedo;
+﻿using Gemini.Modules.Inspector.Properties;
+using Gemini.Modules.UndoRedo;
 
 namespace Gemini.Modules.Inspector.Inspectors
 {
@@ -12,7 +13,7 @@ namespace Gemini.Modules.Inspector.Inspectors
         {
             get
             {
-                return string.Format("Change {0} from {1} to {2}",
+                return string.Format(Resources.ChangeObjectValueActionFormat,
                     _boundPropertyDescriptor.PropertyDescriptor.DisplayName,
                     _originalValue,
                     _newValue);

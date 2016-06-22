@@ -50,7 +50,7 @@ namespace Gemini.Framework.Themes
 
         public bool SetCurrentTheme(string name)
         {
-            var theme = Themes.FirstOrDefault(x => x.Name == name);
+            var theme = Themes.FirstOrDefault(x => x.GetType().Name == name);
             if (theme == null)
                 return false;
 

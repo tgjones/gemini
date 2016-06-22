@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Gemini.Framework.Menus;
 using Gemini.Modules.Shell.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Shell
 {
@@ -8,7 +9,7 @@ namespace Gemini.Modules.Shell
     {
         [Export]
         public static MenuItemDefinition FileNewMenuItem = new TextMenuItemDefinition(
-            MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 0, "_New");
+            MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 0, Resources.FileNewCommandText);
 
         [Export]
         public static MenuItemGroupDefinition FileNewCascadeGroup = new MenuItemGroupDefinition(
