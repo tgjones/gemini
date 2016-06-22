@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Data;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
@@ -93,15 +94,34 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return BoundPropertyDescriptor.PropertyDescriptor.IsReadOnly; }
         }
 
-        private void OnValueChanged(object sender, EventArgs e)
+        public bool IsDirty
+        {
+            get
+            {
+                DefaultValueAttribute defaultAttribute = BoundPropertyDescriptor.PropertyDescriptor.Attributes.OfType<DefaultValueAttribute>().FirstOrDefault();
+                if (defaultAttribute == null)
+                    /* Maybe not dirty, but we have no way to know if we don't have a default value */
+                    return true;
+
+                return !Equals(defaultAttribute.Value, Value);
+            }
+        }
+
+        private void OnValueChanged()
         {
             NotifyOfPropertyChange(() => Value);
+            NotifyOfPropertyChange(() => IsDirty);
+        }
+
+        private void OnValueChanged(object sender, EventArgs e)
+        {
+            OnValueChanged();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals(BoundPropertyDescriptor.PropertyDescriptor.Name))
-                NotifyOfPropertyChange(() => Value);
+                OnValueChanged();
         }
 
         public TValue Value
@@ -133,17 +153,27 @@ namespace Gemini.Modules.Inspector.Inspectors
                     newValue = Converter.ConvertBack(value, BoundPropertyDescriptor.PropertyDescriptor.PropertyType, null, CultureInfo.CurrentCulture);
                 }
 
-                if (IsUndoEnabled)
+                /* Only notify of property change once */
+                IsNotifying = false;
+
+                try
                 {
-                    IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
-                        new ChangeObjectValueAction(BoundPropertyDescriptor, newValue));
+                    if (IsUndoEnabled)
+                    {
+                        IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
+                            new ChangeObjectValueAction(BoundPropertyDescriptor, newValue));
+                    }
+                    else
+                    {
+                        BoundPropertyDescriptor.Value = newValue;
+                    }
                 }
-                else
+                finally
                 {
-                    BoundPropertyDescriptor.Value = newValue;
+                    IsNotifying = true;
                 }
 
-                NotifyOfPropertyChange(() => Value);
+                OnValueChanged();
             }
         }
 
