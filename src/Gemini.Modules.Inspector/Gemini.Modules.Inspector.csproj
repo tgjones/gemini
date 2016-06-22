@@ -148,6 +148,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Util\ExpressionUtility.cs" />
+    <Compile Include="Util\ScreenShotUtility.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="Views\InspectorView.xaml.cs">
       <DependentUpon>InspectorView.xaml</DependentUpon>
