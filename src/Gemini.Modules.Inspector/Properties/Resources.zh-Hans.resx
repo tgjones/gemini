@@ -123,7 +123,7 @@
   <data name="InspectorDisplayName" xml:space="preserve">
     <value>检查器</value>
   </data>
-  <data name="LabelledTemplateResetToolTip" xml:space="preserve">
+  <data name="ResetToolTip" xml:space="preserve">
     <value>复位</value>
   </data>
   <data name="ViewInspectorCommandText" xml:space="preserve">
@@ -134,5 +134,11 @@
   </data>
   <data name="ChangeObjectValueActionFormat" xml:space="preserve">
     <value>改变{0}从{1}到{2}</value>
+  </data>
+  <data name="ResetAll" xml:space="preserve">
+    <value>复位全部 ⟲</value>
+  </data>
+  <data name="ResetSymbol" xml:space="preserve">
+    <value>⟲</value>
   </data>
 </root>
