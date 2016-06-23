@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo.Services
 {
@@ -6,6 +7,9 @@ namespace Gemini.Modules.UndoRedo.Services
     {
         private readonly BindableCollection<IUndoableAction> _undoStack;
         private readonly BindableCollection<IUndoableAction> _redoStack;
+
+        public event EventHandler BatchBegin;
+        public event EventHandler BatchEnd;
 
         public IObservableCollection<IUndoableAction> UndoStack
         {
@@ -32,23 +36,41 @@ namespace Gemini.Modules.UndoRedo.Services
 
         public void Undo(int actionCount)
         {
-            for (int i = 0; i < actionCount; i++)
+            OnBegin();
+
+            try
             {
-                var action = Pop(_undoStack);
-                action.Undo();
-                Push(_redoStack, action);
+                for (int i = 0; i < actionCount; i++)
+                {
+                    var action = Pop(_undoStack);
+                    action.Undo();
+                    Push(_redoStack, action);
+                }
+            }
+            finally
+            {
+                OnEnd();
             }
         }
 
         public void UndoTo(IUndoableAction action)
         {
-            while (true)
+            OnBegin();
+
+            try
             {
-                if (Peek(_undoStack) == action)
-                    return;
-                var thisAction = Pop(_undoStack);
-                thisAction.Undo();
-                Push(_redoStack, thisAction);
+                while (true)
+                {
+                    if (Peek(_undoStack) == action)
+                        return;
+                    var thisAction = Pop(_undoStack);
+                    thisAction.Undo();
+                    Push(_redoStack, thisAction);
+                }
+            }
+            finally
+            {
+                OnEnd();
             }
         }
 
@@ -59,24 +81,56 @@ namespace Gemini.Modules.UndoRedo.Services
 
         public void Redo(int actionCount)
         {
-            for (int i = 0; i < actionCount; i++)
+            OnBegin();
+
+            try
             {
-                var action = Pop(_redoStack);
-                action.Execute();
-                Push(_undoStack, action);
+                for (int i = 0; i < actionCount; i++)
+                {
+                    var action = Pop(_redoStack);
+                    action.Execute();
+                    Push(_undoStack, action);
+                }
+            }
+            finally
+            {
+                OnEnd();
             }
         }
 
         public void RedoTo(IUndoableAction action)
         {
-            while (true)
+            OnBegin();
+
+            try
             {
-                var thisAction = Pop(_redoStack);
-                thisAction.Execute();
-                Push(_undoStack, thisAction);
-                if (thisAction == action)
-                    return;
+                while (true)
+                {
+                    var thisAction = Pop(_redoStack);
+                    thisAction.Execute();
+                    Push(_undoStack, thisAction);
+                    if (thisAction == action)
+                        return;
+                }
             }
+            finally
+            {
+                OnEnd();
+            }
+        }
+
+        private void OnBegin()
+        {
+            var handler = BatchBegin;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        private void OnEnd()
+        {
+            var handler = BatchEnd;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         private static IUndoableAction Peek(BindableCollection<IUndoableAction> stack)
