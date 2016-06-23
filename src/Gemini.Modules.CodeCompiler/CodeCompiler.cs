@@ -30,7 +30,7 @@ namespace Gemini.Modules.CodeCompiler
             _errorList = errorList;
         }
 
-        public Assembly Compile(IEnumerable<SyntaxTree> syntaxTrees, IEnumerable<MetadataReference> references, string outputName, bool exportDll = false, string exportPath = null)
+        public Assembly Compile(IEnumerable<SyntaxTree> syntaxTrees, IEnumerable<MetadataReference> references, string outputName, bool exportDll = false, string exportDir = null)
         {
             _output.AppendLine("------ Compile started");
 
