@@ -6,5 +6,6 @@ namespace Gemini.Modules.ToolBars
     {
         IObservableCollection<IToolBar> Items {get;}
         bool Visible { get; set; }
+        bool Locked { get; set; }
     }
 }
