@@ -234,7 +234,7 @@ public class PropertyGridViewModel : Tool, IPropertyGrid
 ```
 
 For more details on creating documents and tools, look at the 
-[demo program](https://github.com/tgjones/gemini/master/src/Gemini.Demo)
+[demo program](https://github.com/tgjones/gemini/tree/master/src/Gemini.Demo)
 and the source code for the built-in modules.
 
 ### Commands
