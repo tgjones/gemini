@@ -1,4 +1,4 @@
-﻿using Caliburn.Micro;
+using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo.ViewModels
 {
@@ -17,22 +17,28 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             get { return _name ?? _action.Name; }
         }
 
-        private readonly HistoryItemType _itemType;
+        private HistoryItemType _itemType;
         public HistoryItemType ItemType
         {
             get { return _itemType; }
+            set {
+                if (_itemType == value)
+                    return;
+
+                _itemType = value;
+
+                NotifyOfPropertyChange(() => ItemType);
+            }
         }
 
-        public HistoryItemViewModel(IUndoableAction action, HistoryItemType itemType)
+        public HistoryItemViewModel(IUndoableAction action)
         {
             _action = action;
-            _itemType = itemType;
         }
 
-        public HistoryItemViewModel(string name, HistoryItemType itemType)
+        public HistoryItemViewModel(string name)
         {
             _name = name;
-            _itemType = itemType;
         }
     }
 }

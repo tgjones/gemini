@@ -1,31 +1,44 @@
-﻿using System;
+using System;
 using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo.Services
 {
-    public class UndoRedoManager : IUndoRedoManager
+    public class UndoRedoManager : PropertyChangedBase, IUndoRedoManager
     {
-        private readonly BindableCollection<IUndoableAction> _undoStack;
-        private readonly BindableCollection<IUndoableAction> _redoStack;
+        public IObservableCollection<IUndoableAction> ActionStack { get; } = new BindableCollection<IUndoableAction>();
+
+        public IUndoableAction CurrentAction => UndoActionCount > 0 ? ActionStack[UndoActionCount - 1] : null;
 
         public event EventHandler BatchBegin;
         public event EventHandler BatchEnd;
 
-        public IObservableCollection<IUndoableAction> UndoStack
-        {
-            get { return _undoStack; }
-        }
+        private int _undoActionCount;
 
-        public IObservableCollection<IUndoableAction> RedoStack
+        public int UndoActionCount
         {
-            get { return _redoStack; }
+            get => _undoActionCount;
+
+            private set
+            {
+                if (_undoActionCount == value)
+                    return;
+
+                _undoActionCount = value;
+
+                NotifyOfPropertyChange(() => UndoActionCount);
+                NotifyOfPropertyChange(() => RedoActionCount);
+                NotifyOfPropertyChange(() => CanUndo);
+                NotifyOfPropertyChange(() => CanRedo);
+            }
         }
 
         private int? _undoCountLimit = null;
 
+        public int RedoActionCount => ActionStack.Count - UndoActionCount;
+
         public int? UndoCountLimit
         {
-            get { return _undoCountLimit; }
+            get => _undoCountLimit;
 
             set
             {
@@ -36,39 +49,52 @@ namespace Gemini.Modules.UndoRedo.Services
 
         private void EnforceLimit()
         {
-            if (!_undoCountLimit.HasValue)
+            if (!UndoCountLimit.HasValue)
                 return;
 
-            while (_undoStack.Count > UndoCountLimit.Value)
-                PopFront(_undoStack);
-        }
+            var removeCount = ActionStack.Count - UndoCountLimit.Value;
+            if (removeCount <= 0)
+                return;
 
-        public UndoRedoManager()
-        {
-            _undoStack = new BindableCollection<IUndoableAction>();
-            _redoStack = new BindableCollection<IUndoableAction>();
+            for (var i = 0; i < removeCount; i++)
+                ActionStack.RemoveAt(0);
+            UndoActionCount -= removeCount;
         }
 
         public void ExecuteAction(IUndoableAction action)
         {
+            if (UndoActionCount < ActionStack.Count)
+            {
+                // We currently have items that can be redone, remove those
+                for (var i = ActionStack.Count - 1; i >= UndoActionCount; i--)
+                    ActionStack.RemoveAt(i);
+
+                NotifyOfPropertyChange(() => RedoActionCount);
+                NotifyOfPropertyChange(() => CanRedo);
+            }
+
             action.Execute();
-            Push(_undoStack, action);
-            _redoStack.Clear();
+            ActionStack.Add(action);
+            UndoActionCount++;
+
             EnforceLimit();
         }
 
+        public bool CanUndo => UndoActionCount > 0;
+
         public void Undo(int actionCount)
         {
+            if (actionCount <= 0 || actionCount > UndoActionCount)
+                throw new ArgumentOutOfRangeException(nameof(actionCount));
+
             OnBegin();
 
             try
             {
-                for (int i = 0; i < actionCount; i++)
-                {
-                    var action = Pop(_undoStack);
-                    action.Undo();
-                    Push(_redoStack, action);
-                }
+                for (var i = 1; i <= actionCount; i++)
+                    ActionStack[UndoActionCount - i].Undo();
+
+                UndoActionCount -= actionCount;
             }
             finally
             {
@@ -78,44 +104,53 @@ namespace Gemini.Modules.UndoRedo.Services
 
         public void UndoTo(IUndoableAction action)
         {
-            OnBegin();
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
 
-            try
+            if (UndoActionCount < 1)
+                throw new InvalidOperationException();
+
+            // Find the action first to prevent endless loops and to only update UndoActions once
+            // Do the loop in reverse from the end of the undo actions to skip searching any redo actions
+            var i = UndoActionCount - 1;
+            for (; i >= 0; i--)
             {
-                while (true)
-                {
-                    if (Peek(_undoStack) == action)
-                        return;
-                    var thisAction = Pop(_undoStack);
-                    thisAction.Undo();
-                    Push(_redoStack, thisAction);
-                }
+                if (ActionStack[i] == action)
+                    break;
             }
-            finally
-            {
-                OnEnd();
-            }
+
+            if (i < 0)
+                throw new InvalidOperationException();
+
+            Undo(UndoActionCount - i - 1);
         }
 
         public void UndoAll()
         {
-            Undo(_undoStack.Count);
+            if (UndoActionCount <= 0)
+                return;
+
+            for (var i = UndoActionCount - 1; i >= 0; i--)
+                ActionStack[i].Undo();
+
+            UndoActionCount = 0;
         }
+
+        public bool CanRedo => RedoActionCount > 0;
 
         public void Redo(int actionCount)
         {
+            if (actionCount <= 0 || actionCount > RedoActionCount)
+                throw new ArgumentOutOfRangeException(nameof(actionCount));
+
             OnBegin();
 
             try
             {
-                for (int i = 0; i < actionCount; i++)
-                {
-                    var action = Pop(_redoStack);
-                    action.Execute();
-                    Push(_undoStack, action);
-                }
+                for (var i = 0; i < actionCount; i++)
+                    ActionStack[UndoActionCount + i].Execute();
 
-                EnforceLimit();
+                UndoActionCount += actionCount;
             }
             finally
             {
@@ -125,63 +160,35 @@ namespace Gemini.Modules.UndoRedo.Services
 
         public void RedoTo(IUndoableAction action)
         {
-            OnBegin();
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
 
-            try
-            {
-                while (true)
-                {
-                    var thisAction = Pop(_redoStack);
-                    thisAction.Execute();
-                    Push(_undoStack, thisAction);
-                    if (thisAction == action)
-                        break;
-                }
+            if (RedoActionCount < 1)
+                throw new InvalidOperationException();
 
-                EnforceLimit();
-            }
-            finally
+            // Find the action first to prevent endless loops and to only update UndoActions once
+            // Do the loop from the end of the undo actions to skip searching any undo actions
+            var i = UndoActionCount;
+            for (; i < ActionStack.Count; i++)
             {
-                OnEnd();
+                if (ActionStack[i] == action)
+                    break;
             }
+
+            if (i >= ActionStack.Count)
+                throw new InvalidOperationException();
+
+            Redo(1 + i - UndoActionCount);
         }
 
         private void OnBegin()
         {
-            var handler = BatchBegin;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            BatchBegin?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnEnd()
         {
-            var handler = BatchEnd;
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        private static IUndoableAction Peek(BindableCollection<IUndoableAction> stack)
-        {
-            return stack[stack.Count - 1];
-        }
-
-        private static void Push(BindableCollection<IUndoableAction> stack, IUndoableAction action)
-        {
-            stack.Add(action);
-        }
-
-        private static IUndoableAction Pop(BindableCollection<IUndoableAction> stack)
-        {
-            var item = stack[stack.Count - 1];
-            stack.RemoveAt(stack.Count - 1);
-            return item;
-        }
-
-        private static IUndoableAction PopFront(BindableCollection<IUndoableAction> stack)
-        {
-            var item = stack[0];
-            stack.RemoveAt(0);
-            return item;
+            BatchEnd?.Invoke(this, EventArgs.Empty);
         }
     }
 }
