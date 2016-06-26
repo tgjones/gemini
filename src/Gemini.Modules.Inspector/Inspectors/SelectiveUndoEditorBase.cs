@@ -33,7 +33,7 @@ namespace Gemini.Modules.Inspector.Inspectors
                 var value = Value;
                 if (!_originalValue.Equals(value))
                     IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
-                        new ChangeObjectValueAction(BoundPropertyDescriptor, _originalValue, value));
+                        new ChangeObjectValueAction(BoundPropertyDescriptor, _originalValue, value, StringConverter));
             }
             finally
             {

@@ -63,6 +63,12 @@ namespace Gemini.Modules.Inspector.Inspectors
             set;
         }
 
+        public IValueConverter StringConverter
+        {
+            get;
+            set;
+        }
+
         private void CleanupPropertyChanged()
         {
             if (_boundPropertyDescriptor != null) {
@@ -164,7 +170,7 @@ namespace Gemini.Modules.Inspector.Inspectors
                     if (IsUndoEnabled && item != null)
                     {
                         item.UndoRedoManager.ExecuteAction(
-                            new ChangeObjectValueAction(BoundPropertyDescriptor, newValue));
+                            new ChangeObjectValueAction(BoundPropertyDescriptor, newValue, StringConverter));
                     }
                     else
                     {
