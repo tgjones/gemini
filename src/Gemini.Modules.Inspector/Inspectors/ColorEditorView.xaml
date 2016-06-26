@@ -8,6 +8,7 @@
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal">
         <xctk:ColorPicker SelectedColor="{Binding Value}"
+                          UsingAlphaChannel="{Binding UsingAlphaChannel}"
 						  HorizontalAlignment="Left"
 						  Height="23" Width="70" />
         <local:ScreenColorPicker x:Name="ScreenColorPicker" Margin="3 0 0 0"
