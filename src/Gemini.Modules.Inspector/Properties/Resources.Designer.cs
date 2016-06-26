@@ -70,6 +70,51 @@ namespace Gemini.Modules.Inspector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        internal static string ColorEditorAdvanced {
+            get {
+                return ResourceManager.GetString("ColorEditorAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Colors.
+        /// </summary>
+        internal static string ColorEditorAvailableColors {
+            get {
+                return ResourceManager.GetString("ColorEditorAvailableColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Colors.
+        /// </summary>
+        internal static string ColorEditorRecentColors {
+            get {
+                return ResourceManager.GetString("ColorEditorRecentColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard.
+        /// </summary>
+        internal static string ColorEditorStandard {
+            get {
+                return ResourceManager.GetString("ColorEditorStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Colors.
+        /// </summary>
+        internal static string ColorEditorStandardColors {
+            get {
+                return ResourceManager.GetString("ColorEditorStandardColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Miscellaneous.
         /// </summary>
         internal static string InspectorBuilderMiscellaneous {

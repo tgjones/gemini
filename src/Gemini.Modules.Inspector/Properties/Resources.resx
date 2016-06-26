@@ -141,4 +141,19 @@
   <data name="ResetSymbol" xml:space="preserve">
     <value>⟲</value>
   </data>
+  <data name="ColorEditorStandardColors" xml:space="preserve">
+    <value>Standard Colors</value>
+  </data>
+  <data name="ColorEditorStandard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="ColorEditorRecentColors" xml:space="preserve">
+    <value>Recent Colors</value>
+  </data>
+  <data name="ColorEditorAvailableColors" xml:space="preserve">
+    <value>Available Colors</value>
+  </data>
+  <data name="ColorEditorAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
 </root>
