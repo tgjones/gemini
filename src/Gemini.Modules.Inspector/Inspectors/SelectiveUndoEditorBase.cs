@@ -20,7 +20,7 @@ namespace Gemini.Modules.Inspector.Inspectors
         protected void OnBeginEdit()
         {
             IsUndoEnabled = false;
-            _originalValue = Value;
+            _originalValue = RawValue;
         }
 
         protected void OnEndEdit()
@@ -30,7 +30,7 @@ namespace Gemini.Modules.Inspector.Inspectors
 
             try
             {
-                var value = Value;
+                var value = RawValue;
                 if (!_originalValue.Equals(value))
                     IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
                         new ChangeObjectValueAction(BoundPropertyDescriptor, _originalValue, value));
