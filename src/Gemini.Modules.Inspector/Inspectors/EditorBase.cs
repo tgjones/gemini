@@ -11,9 +11,11 @@ namespace Gemini.Modules.Inspector.Inspectors
     public abstract class EditorBase<TValue> : InspectorBase, IEditor, IDisposable
     {
         private BoundPropertyDescriptor _boundPropertyDescriptor;
+        private IShell _shell;
 
         public EditorBase()
         {
+            _shell = IoC.Get<IShell>();
             IsUndoEnabled = true;
         }
 
@@ -158,9 +160,10 @@ namespace Gemini.Modules.Inspector.Inspectors
 
                 try
                 {
-                    if (IsUndoEnabled)
+                    var item = _shell.ActiveItem;
+                    if (IsUndoEnabled && item != null)
                     {
-                        IoC.Get<IShell>().ActiveItem.UndoRedoManager.ExecuteAction(
+                        item.UndoRedoManager.ExecuteAction(
                             new ChangeObjectValueAction(BoundPropertyDescriptor, newValue));
                     }
                     else
