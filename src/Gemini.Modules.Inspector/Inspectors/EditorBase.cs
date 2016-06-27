@@ -135,10 +135,10 @@ namespace Gemini.Modules.Inspector.Inspectors
                     if (Converter == null)
                         throw new InvalidCastException("editor property value does not match editor type and no converter specified");
 
-                    return (TValue) Converter.Convert(BoundPropertyDescriptor.Value, typeof(TValue), null, CultureInfo.CurrentCulture);
+                    return (TValue) Converter.Convert(RawValue, typeof(TValue), null, CultureInfo.CurrentCulture);
                 }
 
-                return (TValue) BoundPropertyDescriptor.Value;
+                return (TValue) RawValue;
             }
 
             set
@@ -168,7 +168,7 @@ namespace Gemini.Modules.Inspector.Inspectors
                     }
                     else
                     {
-                        BoundPropertyDescriptor.Value = newValue;
+                        RawValue = newValue;
                     }
                 }
                 finally
@@ -178,6 +178,12 @@ namespace Gemini.Modules.Inspector.Inspectors
 
                 OnValueChanged();
             }
+        }
+
+        protected object RawValue
+        {
+            get { return BoundPropertyDescriptor.Value; }
+            set { BoundPropertyDescriptor.Value = value; }
         }
 
         public virtual void Dispose()
