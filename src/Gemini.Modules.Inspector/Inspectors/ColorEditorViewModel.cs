@@ -2,7 +2,7 @@
 
 namespace Gemini.Modules.Inspector.Inspectors
 {
-    public class ColorEditorViewModel : EditorBase<Color>, ILabelledInspector
+    public class ColorEditorViewModel : SelectiveUndoEditorBase<Color>, ILabelledInspector
     {
         private bool _usingAlphaChannel = true;
 
@@ -19,6 +19,16 @@ namespace Gemini.Modules.Inspector.Inspectors
 
                 NotifyOfPropertyChange(() => UsingAlphaChannel);
             }
+        }
+
+        public void Opened()
+        {
+            OnBeginEdit();
+        }
+
+        public void Closed()
+        {
+            OnEndEdit();
         }
     }
 }
