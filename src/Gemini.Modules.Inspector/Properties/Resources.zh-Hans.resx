@@ -141,4 +141,19 @@
   <data name="ResetSymbol" xml:space="preserve">
     <value>⟲</value>
   </data>
+  <data name="ColorEditorStandardColors" xml:space="preserve">
+    <value>默认色彩</value>
+  </data>
+  <data name="ColorEditorStandard" xml:space="preserve">
+    <value>标准</value>
+  </data>
+  <data name="ColorEditorRecentColors" xml:space="preserve">
+    <value>最近的颜色</value>
+  </data>
+  <data name="ColorEditorAvailableColors" xml:space="preserve">
+    <value>可选颜色</value>
+  </data>
+  <data name="ColorEditorAdvanced" xml:space="preserve">
+    <value>高级</value>
+  </data>
 </root>
