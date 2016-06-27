@@ -8,6 +8,9 @@ namespace Gemini.Modules.MainMenu.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return null;
+
             if (string.Empty.Equals(value))
             {
                 if (Properties.Resources.LanguageSystem.Equals("System"))
