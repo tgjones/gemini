@@ -70,6 +70,24 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Files.
+        /// </summary>
+        internal static string AllFiles {
+            get {
+                return ResourceManager.GetString("AllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Supported Files.
+        /// </summary>
+        internal static string AllSupportedFiles {
+            get {
+                return ResourceManager.GetString("AllSupportedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Edit.
         /// </summary>
         internal static string EditMenuText {

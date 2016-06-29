@@ -27,7 +27,7 @@ namespace Gemini.Modules.Shell.Commands
         {
             var dialog = new OpenFileDialog();
 
-            dialog.Filter = "All Supported Files|" + string.Join(";", _editorProviders
+            dialog.Filter = Properties.Resources.AllSupportedFiles + "|" + string.Join(";", _editorProviders
                 .SelectMany(x => x.FileTypes).Select(x => "*" + x.FileExtension));
 
             dialog.Filter += "|" + string.Join("|", _editorProviders

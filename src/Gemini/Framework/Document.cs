@@ -138,7 +138,7 @@ namespace Gemini.Framework
             if (fileType != null)
                 filter = fileType.Name + "|*" + fileType.FileExtension + "|";
 
-            filter += "All Files|*.*";
+            filter += Properties.Resources.AllFiles + "|*.*";
             dialog.Filter = filter;
 
             if (dialog.ShowDialog() != true)
