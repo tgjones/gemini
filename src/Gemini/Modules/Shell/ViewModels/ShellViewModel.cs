@@ -185,21 +185,32 @@ namespace Gemini.Modules.Shell.ViewModels
 			DeactivateItem(document, true);
 		}
 
+        private bool _activateItemGuard = false;
+
         public override void ActivateItem(IDocument item)
         {
-            if (_closing)
+            if (_closing || _activateItemGuard)
                 return;
 
-            if (ReferenceEquals(item, ActiveItem))
-                return;
+            _activateItemGuard = true;
 
-            RaiseActiveDocumentChanging();
+            try
+            {
+                if (ReferenceEquals(item, ActiveItem))
+                    return;
 
-            var currentActiveItem = ActiveItem;
+                RaiseActiveDocumentChanging();
 
-            base.ActivateItem(item);
+                var currentActiveItem = ActiveItem;
 
-            RaiseActiveDocumentChanged();
+                base.ActivateItem(item);
+
+                RaiseActiveDocumentChanged();
+            }
+            finally
+            {
+                _activateItemGuard = false;
+            }
         }
 
 	    private void RaiseActiveDocumentChanging()
