@@ -102,7 +102,7 @@ namespace Gemini.Modules.Inspector.Inspectors
             get { return BoundPropertyDescriptor.PropertyDescriptor.IsReadOnly; }
         }
 
-        public bool IsDirty
+        public virtual bool IsDirty
         {
             get
             {
