@@ -156,4 +156,7 @@
   <data name="ColorEditorRecentColors" xml:space="preserve">
     <value>Letzte Farben</value>
   </data>
+  <data name="ResetObjectValueActionFormat" xml:space="preserve">
+    <value>{0} von {1} zu {2} rücksetzen</value>
+  </data>
 </root>
