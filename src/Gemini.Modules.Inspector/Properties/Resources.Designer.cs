@@ -142,6 +142,15 @@ namespace Gemini.Modules.Inspector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset {0} from {1} to {2}.
+        /// </summary>
+        internal static string ResetObjectValueActionFormat {
+            get {
+                return ResourceManager.GetString("ResetObjectValueActionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ⟲.
         /// </summary>
         internal static string ResetSymbol {

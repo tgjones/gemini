@@ -109,6 +109,7 @@
     <Compile Include="Inspectors\BitmapSourceEditorView.xaml.cs">
       <DependentUpon>BitmapSourceEditorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Inspectors\ResetObjectValueAction.cs" />
     <Compile Include="Inspectors\ChangeObjectValueAction.cs" />
     <Compile Include="Inspectors\CheckBoxEditorView.xaml.cs">
       <DependentUpon>CheckBoxEditorView.xaml</DependentUpon>

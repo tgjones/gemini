@@ -39,7 +39,18 @@ namespace Gemini.Modules.Inspector.Inspectors
         public void Reset()
         {
             if (CanReset)
-                BoundPropertyDescriptor.PropertyDescriptor.ResetValue(BoundPropertyDescriptor.PropertyOwner);
+            {
+                var item = _shell.ActiveItem;
+                if (IsUndoEnabled && item != null)
+                {
+                    item.UndoRedoManager.ExecuteAction(
+                        new ResetObjectValueAction(BoundPropertyDescriptor, StringConverter));
+                }
+                else
+                {
+                    BoundPropertyDescriptor.PropertyDescriptor.ResetValue(BoundPropertyDescriptor.PropertyOwner);
+                }
+            }
         }
 
         public override string Name
