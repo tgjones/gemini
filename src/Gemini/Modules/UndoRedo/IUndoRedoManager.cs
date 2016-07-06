@@ -11,6 +11,8 @@ namespace Gemini.Modules.UndoRedo
         event EventHandler BatchBegin;
         event EventHandler BatchEnd;
 
+        int? UndoCountLimit { get; set; }
+
         void ExecuteAction(IUndoableAction action);
 
         void Undo(int actionCount);
