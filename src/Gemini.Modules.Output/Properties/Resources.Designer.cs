@@ -61,6 +61,15 @@ namespace Gemini.Modules.Output.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output.
+        /// </summary>
+        internal static string OutputDisplayName {
+            get {
+                return ResourceManager.GetString("OutputDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Output.
         /// </summary>
         internal static string ViewOutputCommandText {

@@ -2,11 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Gemini.Framework.Controls">
 	
-    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
-	<SolidColorBrush x:Key="GlyphBrush" Color="#444" />
-
 	<ControlTemplate x:Key="ExpanderToggleButton" TargetType="ToggleButton">
-        <Border Background="{StaticResource {x:Static SystemColors.ControlLightBrushKey}}">
+        <Border Background="{DynamicResource ExpanderExBackground}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20" />
@@ -14,7 +11,7 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" CornerRadius="2,0,0,0">
                     <Path Name="Arrow"
-					      Fill="{StaticResource GlyphBrush}"
+					      Fill="{DynamicResource ExpanderExGlyph}"
 					      HorizontalAlignment="Center"
 					      VerticalAlignment="Center"
 					      Data="M 0 0 L 0 8 L 4 4 Z"/>
@@ -32,9 +29,9 @@
 			</Trigger>
 			<Trigger Property="IsEnabled" Value="False">
 				<Setter Property="Foreground"
-							Value="{StaticResource DisabledForegroundBrush}"/>
+							Value="{DynamicResource ExpanderExDisabledForeground}"/>
 				<Setter TargetName="Arrow" Property="Fill"
-							Value="{StaticResource DisabledForegroundBrush}" />
+							Value="{DynamicResource ExpanderExDisabledForeground}" />
 			</Trigger>
 		</ControlTemplate.Triggers>
 	</ControlTemplate>
@@ -53,7 +50,9 @@
                                       IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                       OverridesDefaultStyle="True" 
                                       Template="{StaticResource ExpanderToggleButton}"
-                                      Content="{TemplateBinding Header}" />
+                                      Content="{TemplateBinding Header}"
+                                      Foreground="{DynamicResource EnvironmentToolWindowText}"
+                                      />
                         
 						<Border Name="Content" Grid.Row="1">
 							<ContentPresenter />
@@ -66,7 +65,7 @@
 						</Trigger>
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Foreground"
-                                    Value="{StaticResource DisabledForegroundBrush}"/>
+                                    Value="{DynamicResource ExpanderExDisabledForeground}"/>
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

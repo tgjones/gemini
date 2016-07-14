@@ -19,13 +19,13 @@
 			<ItemsControl ItemsSource="{Binding HistoryItems}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<Border Padding="5 2 5 2" BorderBrush="LightGray" BorderThickness="0 0 0 1"
+						<Border Padding="5 2 5 2" BorderBrush="{DynamicResource HistorySeparator}" BorderThickness="0 0 0 1"
 							MouseLeftButtonUp="HistoryItemMouseLeftButtonUp">
 							<Border.Style>
 								<Style TargetType="Border">
 									<Style.Triggers>
 										<DataTrigger Binding="{Binding ItemType}" Value="Current">
-											<Setter Property="Background" Value="LightGray" />
+											<Setter Property="Background" Value="{DynamicResource HistoryActiveBackground}" />
 										</DataTrigger>
 									</Style.Triggers>
 								</Style>
@@ -33,9 +33,10 @@
 							<TextBlock Text="{Binding Name}">
 								<TextBlock.Style>
 									<Style TargetType="TextBlock">
+										<Setter Property="Foreground" Value="{DynamicResource EnvironmentToolWindowDisabledText}" />
 										<Style.Triggers>
 											<DataTrigger Binding="{Binding ItemType}" Value="Redo">
-												<Setter Property="Foreground" Value="DarkGray" />
+												<Setter Property="Foreground" Value="{DynamicResource EnvironmentToolWindowText}" />
 												<Setter Property="FontStyle" Value="Italic" />
 											</DataTrigger>
 										</Style.Triggers>

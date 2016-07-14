@@ -9,8 +9,11 @@ using Gemini.Framework.Services;
 
 namespace Gemini
 {
-    using System.Windows;
+    using System.Globalization;
     using System.Reflection;
+    using System.Threading;
+    using System.Windows;
+    using Gu.Localization;
 
     public class AppBootstrapper : BootstrapperBase
     {
@@ -25,7 +28,21 @@ namespace Gemini
 
         public AppBootstrapper()
         {
+            this.PreInitialize();
             this.Initialize();
+        }
+
+        protected virtual void PreInitialize()
+        {
+            var code = Properties.Settings.Default.LanguageCode;
+
+            if (!string.IsNullOrWhiteSpace(code))
+            {
+                var culture = CultureInfo.GetCultureInfo(code);
+                Translator.CurrentCulture = culture;
+                Thread.CurrentThread.CurrentUICulture = culture;
+                Thread.CurrentThread.CurrentCulture = culture;
+            }
         }
 
 		/// <summary>

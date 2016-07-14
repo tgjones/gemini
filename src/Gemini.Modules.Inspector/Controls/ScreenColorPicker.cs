@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Gemini.Modules.Inspector.Util;
 using Gemini.Modules.Inspector.Win32;
 using Color = System.Windows.Media.Color;
 
@@ -68,13 +69,16 @@ namespace Gemini.Modules.Inspector.Controls
             {
                 if (_bitmap != null)
                     _bitmap.Dispose();
-                _bitmap = NativeMethods.GetDesktop();
+                _bitmap = ScreenShotUtility.Take();
 
-                RaisePickingStarted(EventArgs.Empty);
-
-                Focus(); // So that we get the Escape key.
-                CaptureMouse();
-                _timer.Start();
+                if (Focus()) // So that we get the Escape key.
+                {
+                    if (CaptureMouse())
+                    {
+                        RaisePickingStarted(EventArgs.Empty);
+                        _timer.Start();
+                    }
+                }
             }
             else
             {
@@ -93,8 +97,15 @@ namespace Gemini.Modules.Inspector.Controls
             NativeMethods.NativePoint cursorPosition;
             if (NativeMethods.GetCursorPos(out cursorPosition))
             {
-                var pixel = _bitmap.GetPixel(cursorPosition.X, cursorPosition.Y);
-                return new ColorEventArgs(Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B));
+                cursorPosition.X -= (int) SystemParameters.VirtualScreenLeft;
+                cursorPosition.Y -= (int) SystemParameters.VirtualScreenTop;
+
+                if (cursorPosition.X > 0 && cursorPosition.X < _bitmap.Width &&
+                    cursorPosition.Y > 0 && cursorPosition.Y < _bitmap.Height)
+                {
+                    var pixel = _bitmap.GetPixel(cursorPosition.X, cursorPosition.Y);
+                    return new ColorEventArgs(Color.FromArgb(pixel.A, pixel.R, pixel.G, pixel.B));
+                }
             }
             return new ColorEventArgs(Colors.Black);
         }

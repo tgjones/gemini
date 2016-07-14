@@ -61,6 +61,114 @@ namespace Gemini.Modules.Inspector.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change {0} from {1} to {2}.
+        /// </summary>
+        internal static string ChangeObjectValueActionFormat {
+            get {
+                return ResourceManager.GetString("ChangeObjectValueActionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        internal static string ColorEditorAdvanced {
+            get {
+                return ResourceManager.GetString("ColorEditorAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Colors.
+        /// </summary>
+        internal static string ColorEditorAvailableColors {
+            get {
+                return ResourceManager.GetString("ColorEditorAvailableColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Colors.
+        /// </summary>
+        internal static string ColorEditorRecentColors {
+            get {
+                return ResourceManager.GetString("ColorEditorRecentColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard.
+        /// </summary>
+        internal static string ColorEditorStandard {
+            get {
+                return ResourceManager.GetString("ColorEditorStandard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standard Colors.
+        /// </summary>
+        internal static string ColorEditorStandardColors {
+            get {
+                return ResourceManager.GetString("ColorEditorStandardColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miscellaneous.
+        /// </summary>
+        internal static string InspectorBuilderMiscellaneous {
+            get {
+                return ResourceManager.GetString("InspectorBuilderMiscellaneous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inspector.
+        /// </summary>
+        internal static string InspectorDisplayName {
+            get {
+                return ResourceManager.GetString("InspectorDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset all ⟲.
+        /// </summary>
+        internal static string ResetAll {
+            get {
+                return ResourceManager.GetString("ResetAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset {0} from {1} to {2}.
+        /// </summary>
+        internal static string ResetObjectValueActionFormat {
+            get {
+                return ResourceManager.GetString("ResetObjectValueActionFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⟲.
+        /// </summary>
+        internal static string ResetSymbol {
+            get {
+                return ResourceManager.GetString("ResetSymbol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        internal static string ResetToolTip {
+            get {
+                return ResourceManager.GetString("ResetToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I_nspector.
         /// </summary>
         internal static string ViewInspectorCommandText {

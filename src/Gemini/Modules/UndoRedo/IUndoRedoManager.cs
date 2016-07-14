@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo
 {
@@ -6,6 +7,9 @@ namespace Gemini.Modules.UndoRedo
     {
         IObservableCollection<IUndoableAction> UndoStack { get; }
         IObservableCollection<IUndoableAction> RedoStack { get; }
+
+        event EventHandler BatchBegin;
+        event EventHandler BatchEnd;
 
         void ExecuteAction(IUndoableAction action);
 

@@ -91,7 +91,7 @@ namespace Gemini.Modules.Inspector
                 foreach (var category in properties.GroupBy(x => x.Category))
                 {
                     var actualCategory = (string.IsNullOrEmpty(category.Key) || category.Key == CategoryAttribute.Default.Category)
-                        ? "Miscellaneous"
+                        ? Properties.Resources.InspectorBuilderMiscellaneous
                         : category.Key;
 
                     var collapsibleGroupBuilder = new CollapsibleGroupBuilder();
@@ -106,6 +106,17 @@ namespace Gemini.Modules.Inspector
             }
 
             return (TBuilder) this;
+        }
+
+        public TBuilder WithObjectProperty(object instance, PropertyDescriptor property)
+        {
+            var editor = DefaultPropertyInspectors.CreateEditor(property);
+            if (editor != null) {
+                editor.BoundPropertyDescriptor = new BoundPropertyDescriptor(instance, property);
+                _inspectors.Add(editor);
+            }
+
+            return (TBuilder)this;
         }
 
         private static void AddProperties(object instance, IEnumerable<PropertyDescriptor> properties, List<IInspector> inspectors)
