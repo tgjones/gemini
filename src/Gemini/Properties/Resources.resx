@@ -147,6 +147,9 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>_File</value>
   </data>
+  <data name="FileNewCommandText" xml:space="preserve">
+    <value>_New</value>
+  </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>Untitled {0}</value>
   </data>
@@ -171,8 +174,38 @@
   <data name="HelpMenuText" xml:space="preserve">
     <value>_Help</value>
   </data>
+  <data name="HistoryDisplayName" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="HistoryInitialState" xml:space="preserve">
+    <value>Initial State</value>
+  </data>
+  <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
+    <value>Auto hide main menu</value>
+  </data>
+  <data name="MainMenuSettingsColorTheme" xml:space="preserve">
+    <value>Color Theme:</value>
+  </data>
+  <data name="MainWindowDefaultTitle" xml:space="preserve">
+    <value>[Default Title]</value>
+  </data>
+  <data name="SettingsDisplayName" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="SettingsPageGeneral" xml:space="preserve">
     <value>General</value>
+  </data>
+  <data name="SettingsPathEnvironment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="ToolBarStandard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="ToolboxCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ToolboxDisplayName" xml:space="preserve">
+    <value>Toolbox</value>
   </data>
   <data name="ToolsMenuText" xml:space="preserve">
     <value>_Tools</value>
@@ -200,5 +233,23 @@
   </data>
   <data name="WindowMenuText" xml:space="preserve">
     <value>_Window</value>
+  </data>
+  <data name="MainMenuSettingsLanguage" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
+    <value>Requires restart</value>
+  </data>
+  <data name="LanguageSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="ThemeBlueName" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="ThemeLightName" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="ThemeDarkName" xml:space="preserve">
+    <value>Dark</value>
   </data>
 </root>

@@ -2,29 +2,50 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Gemini.Modules.Inspector.Controls"
                     xmlns:cal="http://www.caliburnproject.org"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
-    
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+                    xmlns:p="clr-namespace:Gemini.Modules.Inspector.Properties"
+                    xmlns:l="http://gu.se/Localization">
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
-    
+    <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+    <Style x:Key="ResetButton" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <controls:InspectorItemTemplateSelector x:Key="InspectorItemTemplateSelector">
         <controls:InspectorItemTemplateSelector.LabelledTemplate>
             <DataTemplate>
-                <Grid IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBoolConverter}}">
+                <Grid IsEnabled="{Binding IsReadOnly, Converter={StaticResource InverseBoolConverter}}"
+                      l:ErrorHandling.Mode="ReturnErrorInfoPreserveNeutral">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{Binding Path=(controls:InspectorGrid.PropertyNameColumnWidth), Mode=TwoWay}" MinWidth="50" />
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="{Binding Path=(controls:InspectorGrid.PropertyValueColumnWidth), Mode=TwoWay}" MinWidth="50" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" 
                            ToolTip="{Binding Description}"
                            HorizontalContentAlignment="Left"
                            VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource EnvironmentToolWindowText}" />
                     </Label>
                     <controls:SimpleGridSplitter Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" />
                     <Border Grid.Column="2" Padding="0 2 5 2" VerticalAlignment="Center">
                         <ContentControl cal:View.Model="{Binding}" IsTabStop="False" />
                     </Border>
+                    <Button Grid.Column="3" Margin="5,0,0,0"
+                            Content="{l:Static p:Resources.ResetSymbol}"
+                            ToolTip="{l:Static p:Resources.ResetToolTip}"
+                            Foreground="{DynamicResource EnvironmentToolWindowText}"
+                            Style="{StaticResource ResetButton}"
+                            IsEnabled="{Binding IsDirty}"
+                            Visibility="{Binding CanReset, Converter={StaticResource BoolToVisibilityConverter}}"
+                            cal:Message.Attach="Reset"/>
                 </Grid>
             </DataTemplate>
         </controls:InspectorItemTemplateSelector.LabelledTemplate>

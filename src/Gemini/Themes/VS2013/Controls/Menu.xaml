@@ -172,6 +172,7 @@
                 </Border>
                 <TextBlock x:Name="InputGestureText" Grid.Column="2" 
                            Padding="0 2 2 2"
+                           Margin="6 0 0 0"
                            VerticalAlignment="Center"
                            Text="{TemplateBinding InputGestureText}" 
                            DockPanel.Dock="Right" />
@@ -226,6 +227,7 @@
                                       RecognizesAccessKey="True" />
                 </Border>
                 <TextBlock x:Name="InputGestureText" Grid.Column="2" 
+                           Margin="6 0 0 0"
                            Padding="0 2 2 2"
                            VerticalAlignment="Center"
                            Text="{TemplateBinding InputGestureText}" 
@@ -310,6 +312,7 @@
 
     <Style TargetType="{x:Type ContextMenu}" x:Key="MetroContextMenu">
         <Setter Property="Background" Value="{DynamicResource MenuPopupDefaultBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource EnvironmentWindowText}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="{DynamicResource MenuPopupDefaultBorder}" />
         <Setter Property="Padding" Value="0,2,0,2" />

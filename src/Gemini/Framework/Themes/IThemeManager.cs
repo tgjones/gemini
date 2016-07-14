@@ -24,7 +24,7 @@ namespace Gemini.Framework.Themes
     {
         event EventHandler CurrentThemeChanged;
 
-        IEnumerable<ITheme> Themes { get; }
+        List<ITheme> Themes { get; }
         ITheme CurrentTheme { get; }
 
         bool SetCurrentTheme(string name);

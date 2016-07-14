@@ -4,6 +4,7 @@ using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
+using Gemini.Properties;
 
 namespace Gemini.Modules.MainWindow.ViewModels
 {
@@ -54,7 +55,7 @@ namespace Gemini.Modules.MainWindow.ViewModels
             }
         }
 
-        private string _title = "[Default Title]";
+        private string _title = Resources.MainWindowDefaultTitle;
         public string Title
         {
             get { return _title; }

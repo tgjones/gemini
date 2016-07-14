@@ -29,12 +29,12 @@ namespace Gemini.Demo.Modules.Shell.ViewModels
 
         public string SettingsPageName
         {
-            get { return "General"; }
+            get { return Resources.SettingsPageGeneral; }
         }
 
         public string SettingsPagePath
         {
-            get { return "Environment"; }
+            get { return Resources.SettingsPathEnvironment; }
         }
 
         public void ApplyChanges()

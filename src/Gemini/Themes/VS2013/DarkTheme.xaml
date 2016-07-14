@@ -1,11 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Controls/Window.xaml" />
-        <ResourceDictionary Source="Controls/WindowCommands.xaml" />
-        <ResourceDictionary Source="Controls/Menu.xaml" />
-        <ResourceDictionary Source="Controls/Toolbar.xaml" />
-        <ResourceDictionary Source="Controls/Tooltip.xaml" />
+        <ResourceDictionary Source="Controls/Merged.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Menu -->
@@ -108,4 +104,13 @@
     <SolidColorBrush x:Key="EnvironmentWindowText" Color="#FFF1F1F1" />
     <SolidColorBrush x:Key="EnvironmentToolWindowText" Color="#FFF1F1F1" />
     <SolidColorBrush x:Key="EnvironmentToolWindowDisabledText" Color="#FF656565" />
+
+    <!-- History -->
+    <SolidColorBrush x:Key="HistorySeparator" Color="#434346" />
+    <SolidColorBrush x:Key="HistoryActiveBackground" Color="#2D2D30" />
+
+    <!-- ExpanderEx -->
+    <SolidColorBrush x:Key="ExpanderExBackground" Color="#1B1B1C" />
+    <SolidColorBrush x:Key="ExpanderExDisabledForeground" Color="#656565" />
+    <SolidColorBrush x:Key="ExpanderExGlyph" Color="#F1F1F1" />
 </ResourceDictionary>

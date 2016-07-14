@@ -24,12 +24,12 @@ namespace Gemini.Framework.Themes
     [Export(typeof(ITheme))]
     public class LightTheme : ITheme
     {
-        public string Name
+        public virtual string Name
         {
-            get { return "Light"; }
+            get { return Properties.Resources.ThemeLightName; }
         }
 
-        public IEnumerable<Uri> ApplicationResources
+        public virtual IEnumerable<Uri> ApplicationResources
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Gemini.Framework.Themes
             }
         }
 
-        public IEnumerable<Uri> MainWindowResources
+        public virtual IEnumerable<Uri> MainWindowResources
         {
             get { yield break; }
         }

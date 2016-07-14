@@ -37,6 +37,9 @@ namespace Gemini.Framework.Behaviors
             if (tvi == null)
             {
                 var tree = ((BindableTreeViewSelectedItemBehavior) sender).AssociatedObject;
+                if (tree == null)
+                    return;
+
                 if (!tree.IsLoaded)
                 {
                     RoutedEventHandler handler = null;

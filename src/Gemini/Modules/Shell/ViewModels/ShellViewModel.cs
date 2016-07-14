@@ -130,21 +130,27 @@ namespace Gemini.Modules.Shell.ViewModels
 	        foreach (var module in _modules)
 	            module.Initialize();
 
-	        // If after initialization no theme was loaded, load the default one
-	        if (_themeManager.CurrentTheme == null)
-	            _themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName);
+            // If after initialization no theme was loaded, load the default one
+            if (_themeManager.CurrentTheme == null)
+            {
+                if (!_themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName))
+                {
+                    Properties.Settings.Default.ThemeName = (string)Properties.Settings.Default.Properties["ThemeName"].DefaultValue;
+                    Properties.Settings.Default.Save();
+                    if (!_themeManager.SetCurrentTheme(Properties.Settings.Default.ThemeName))
+                    {
+                        throw new InvalidOperationException("unable to load application theme");
+                    }
+                }
+            }
 
             _shellView = (IShellView)view;
-            if (!HasPersistedState)
+            if (!_layoutItemStatePersister.LoadState(this, _shellView, StateFile))
             {
                 foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
                     OpenDocument(defaultDocument);
                 foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
                     ShowTool((ITool)IoC.GetInstance(defaultTool, null));
-            }
-            else
-            {
-                _layoutItemStatePersister.LoadState(this, _shellView, StateFile);
             }
 
             foreach (var module in _modules)
@@ -184,14 +190,16 @@ namespace Gemini.Modules.Shell.ViewModels
             if (_closing)
                 return;
 
+            if (ReferenceEquals(item, ActiveItem))
+                return;
+
             RaiseActiveDocumentChanging();
 
             var currentActiveItem = ActiveItem;
 
             base.ActivateItem(item);
 
-            if (!ReferenceEquals(item, currentActiveItem))
-                RaiseActiveDocumentChanged();
+            RaiseActiveDocumentChanged();
         }
 
 	    private void RaiseActiveDocumentChanging()

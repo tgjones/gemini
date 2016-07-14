@@ -5,6 +5,7 @@ using System.Linq;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
+using Gemini.Properties;
 
 namespace Gemini.Modules.UndoRedo.ViewModels
 {
@@ -61,7 +62,7 @@ namespace Gemini.Modules.UndoRedo.ViewModels
         [ImportingConstructor]
         public HistoryViewModel(IShell shell)
         {
-            DisplayName = "History";
+            DisplayName = Resources.HistoryDisplayName;
 
             _historyItems = new BindableCollection<HistoryItemViewModel>();
 
@@ -86,7 +87,7 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             _historyItems.Clear();
             if (_undoRedoManager != null)
             {
-                _historyItems.Add(new HistoryItemViewModel("Initial State",
+                _historyItems.Add(new HistoryItemViewModel(Resources.HistoryInitialState,
                     (_undoRedoManager.UndoStack.Any() ? HistoryItemType.InitialState : HistoryItemType.Current)));
                 for (int i = 0; i < _undoRedoManager.UndoStack.Count; i++)
                     _historyItems.Add(new HistoryItemViewModel(_undoRedoManager.UndoStack[i],

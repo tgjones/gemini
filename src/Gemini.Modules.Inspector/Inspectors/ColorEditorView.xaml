@@ -4,12 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:p="clr-namespace:Gemini.Modules.Inspector.Properties"
+             xmlns:l="http://gu.se/Localization"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:Gemini.Modules.Inspector.Controls"
+             l:ErrorHandling.Mode="ReturnErrorInfoPreserveNeutral"
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal">
         <xctk:ColorPicker SelectedColor="{Binding Value}"
+                          UsingAlphaChannel="{Binding UsingAlphaChannel}"
 						  HorizontalAlignment="Left"
-						  Height="23" Width="70" />
+						  Height="23" Width="70"
+                          StandardColorsHeader="{l:Static p:Resources.ColorEditorStandardColors}"
+                          StandardButtonHeader="{l:Static p:Resources.ColorEditorStandard}"
+                          RecentColorsHeader="{l:Static p:Resources.ColorEditorRecentColors}"
+                          AvailableColorsHeader="{l:Static p:Resources.ColorEditorAvailableColors}"
+                          AdvancedButtonHeader="{l:Static p:Resources.ColorEditorAdvanced}"
+                          cal:Message.Attach="[Event Closed] = [Action Closed]; [Event Opened] = [Action Opened]"
+                          />
         <local:ScreenColorPicker x:Name="ScreenColorPicker" Margin="3 0 0 0"
                                  PickingStarted="OnScreenColorPickerPickingStarted"
                                  PickingCancelled="OnScreenColorPickerPickingCancelled"

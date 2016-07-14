@@ -40,7 +40,7 @@
 				<DataTemplate>
 					<StackPanel Orientation="Horizontal" Margin="18 0 0 0">
 						<Image Source="{Binding IconSource}" Margin="0 0 5 0" Width="16" />
-						<TextBlock Text="{Binding Name}" Padding="2" />
+						<TextBlock Text="{Binding Name}" Foreground="{DynamicResource EnvironmentToolWindowText}" Padding="2" />
 					</StackPanel>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

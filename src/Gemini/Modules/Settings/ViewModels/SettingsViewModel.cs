@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Properties;
 
 namespace Gemini.Modules.Settings.ViewModels
 {
@@ -19,7 +20,7 @@ namespace Gemini.Modules.Settings.ViewModels
             CancelCommand = new RelayCommand(o => TryClose(false));
             OkCommand = new RelayCommand(SaveChanges);
 
-            DisplayName = "Options";
+            DisplayName = Resources.SettingsDisplayName;
         }
 
         public List<SettingsPageViewModel> Pages { get; private set; }

@@ -12,7 +12,15 @@ namespace Gemini.Modules.MainMenu.ViewModels
     {
         private readonly IThemeManager _themeManager;
 
+        private readonly static List<string> _availableLanguages = new List<string> {
+            string.Empty,
+            "en",
+            "de",
+            "zh-Hans",
+        };
+
         private ITheme _selectedTheme;
+        private string _selectedLanguage;
         private bool _autoHideMainMenu;
 
         [ImportingConstructor]
@@ -21,6 +29,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
             _themeManager = themeManager;
             SelectedTheme = themeManager.CurrentTheme;
             AutoHideMainMenu = Properties.Settings.Default.AutoHideMainMenu;
+            SelectedLanguage = Properties.Settings.Default.LanguageCode;
         }
 
         public IEnumerable<ITheme> Themes
@@ -36,6 +45,23 @@ namespace Gemini.Modules.MainMenu.ViewModels
                 if (value.Equals(_selectedTheme)) return;
                 _selectedTheme = value;
                 NotifyOfPropertyChange(() => SelectedTheme);
+            }
+        }
+
+        public IEnumerable<string> Languages
+        {
+            get { return _availableLanguages; }
+        }
+
+        public string SelectedLanguage
+        {
+            get { return _selectedLanguage; }
+            set
+            {
+                if (value.Equals(_selectedLanguage))
+                    return;
+                _selectedLanguage = value;
+                NotifyOfPropertyChange(() => SelectedLanguage);
             }
         }
 
@@ -57,13 +83,14 @@ namespace Gemini.Modules.MainMenu.ViewModels
 
         public string SettingsPagePath
         {
-            get { return "Environment"; }
+            get { return Properties.Resources.SettingsPathEnvironment; }
         }
 
         public void ApplyChanges()
         {
-            Properties.Settings.Default.ThemeName = SelectedTheme.Name;
+            Properties.Settings.Default.ThemeName = SelectedTheme.GetType().Name;
             Properties.Settings.Default.AutoHideMainMenu = AutoHideMainMenu;
+            Properties.Settings.Default.LanguageCode = SelectedLanguage;
             Properties.Settings.Default.Save();
         }
     }
