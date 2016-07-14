@@ -164,6 +164,8 @@
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\RecentFiles\IRecentViewItem.cs" />
+    <Compile Include="Modules\RecentFiles\IRecentViewSettings.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandDefinition.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandHandler.cs" />
     <Compile Include="Modules\Settings\ISettingsEditor.cs" />
@@ -175,6 +177,8 @@
     </Compile>
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenRecentCommandListDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenRecentCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
@@ -426,6 +430,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\RecentFiles\ViewModels\" />
+    <Folder Include="Modules\RecentFiles\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

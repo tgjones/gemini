@@ -151,6 +151,24 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to _New.
+        /// </summary>
+        internal static string FileNewCommandText {
+            get {
+                return ResourceManager.GetString("FileNewCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string FileNewCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileNewCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untitled {0}.
         /// </summary>
         internal static string FileNewUntitled {
@@ -174,6 +192,24 @@ namespace Gemini.Properties {
         internal static string FileOpenCommandToolTip {
             get {
                 return ResourceManager.GetString("FileOpenCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string FileOpenRecentCommandText {
+            get {
+                return ResourceManager.GetString("FileOpenRecentCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string FileOpenRecentCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileOpenRecentCommandToolTip", resourceCulture);
             }
         }
         

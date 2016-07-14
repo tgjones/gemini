@@ -147,6 +147,12 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>_File</value>
   </data>
+  <data name="FileNewCommandText" xml:space="preserve">
+    <value>_New</value>
+  </data>
+  <data name="FileNewCommandToolTip" xml:space="preserve">
+    <value>New</value>
+  </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>Untitled {0}</value>
   </data>
@@ -155,6 +161,12 @@
   </data>
   <data name="FileOpenCommandToolTip" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="FileOpenRecentCommandText" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
+  <data name="FileOpenRecentCommandToolTip" xml:space="preserve">
+    <value>Recent Files</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>Save _As...</value>
