@@ -198,18 +198,18 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Recent Files.
         /// </summary>
-        internal static string FileOpenRecentCommandText {
+        internal static string FileRecentFilesCommandText {
             get {
-                return ResourceManager.GetString("FileOpenRecentCommandText", resourceCulture);
+                return ResourceManager.GetString("FileRecentFilesCommandText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Recent Files.
         /// </summary>
-        internal static string FileOpenRecentCommandToolTip {
+        internal static string FileRecentFilesCommandToolTip {
             get {
-                return ResourceManager.GetString("FileOpenRecentCommandToolTip", resourceCulture);
+                return ResourceManager.GetString("FileRecentFilesCommandToolTip", resourceCulture);
             }
         }
         

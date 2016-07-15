@@ -15,12 +15,12 @@ namespace Gemini.Modules.Shell.Commands
 
         public override string Text
         {
-            get { return Resources.FileOpenRecentCommandText; }
+            get { return Resources.FileRecentFilesCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return Resources.FileOpenRecentCommandToolTip; }
+            get { return Resources.FileRecentFilesCommandToolTip; }
         }
     }
 }

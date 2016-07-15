@@ -162,10 +162,10 @@
   <data name="FileOpenCommandToolTip" xml:space="preserve">
     <value>Open</value>
   </data>
-  <data name="FileOpenRecentCommandText" xml:space="preserve">
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
     <value>Recent Files</value>
   </data>
-  <data name="FileOpenRecentCommandToolTip" xml:space="preserve">
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
     <value>Recent Files</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
