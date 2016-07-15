@@ -17,39 +17,61 @@ namespace Gemini.Modules.Shell.Commands
     [CommandHandler]
     public class OpenRecentFileCommandHandler : ICommandListHandler<OpenRecentCommandListDefinition>
     {
-        private int _newFileCounter = 1;
-
         private readonly IShell _shell;
-        private readonly IEditorProvider[] _editorProviders;
 
         [ImportingConstructor]
-        public OpenRecentFileCommandHandler(
-            IShell shell,
-            [ImportMany] IEditorProvider[] editorProviders)
+        public OpenRecentFileCommandHandler(IShell shell)
         {
             _shell = shell;
-            _editorProviders = editorProviders;
         }
 
         public void Populate(Command command, List<Command> commands)
         {
-            foreach (var editorProvider in _editorProviders)
-                foreach (var editorFileType in editorProvider.FileTypes)
-                    commands.Add(new Command(command.CommandDefinition)
+            for (var i = 0; i < _shell.RecentFiles.Items.Count; i++)
+            {
+                var item = _shell.RecentFiles.Items[i];
+                commands.Add(new Command(command.CommandDefinition)
                     {
-                        Text = editorFileType.Name,
-                        Tag = new NewFileTag
-                        {
-                            EditorProvider = editorProvider,
-                            FileType = editorFileType
-                        }
+                        Text = string.Format("_{0} {1}", i + 1, item.DisplayName),
+                        ToolTip = item.FilePath,
+                        Tag = item.FilePath
                     });
+            }
         }
 
-        public Task Run(Command command)
+        public async Task Run(Command command)
         {
-            var tag = (NewFileTag)command.Tag;
-            var editor = tag.EditorProvider.Create();
+            var newPath = (string)command.Tag;
+
+            // Check if the document is already open
+            foreach (IDocument document in _shell.Documents)
+            {
+                if (document is PersistedDocument)
+                {
+                    var docPath = Path.GetFullPath(((PersistedDocument)document).FilePath);
+                    if (string.Equals(newPath, docPath, System.StringComparison.OrdinalIgnoreCase))
+                    {
+                        _shell.OpenDocument(document);
+                        return;
+                    }
+                }
+            }
+
+            _shell.OpenDocument(await GetEditor(newPath));
+
+            // Add the file to the recent documents list
+            _shell.RecentFiles.Update(newPath);
+        }
+
+        internal static Task<IDocument> GetEditor(string path)
+        {
+            var provider = IoC.GetAllInstances(typeof(IEditorProvider))
+                .Cast<IEditorProvider>()
+                .FirstOrDefault(p => p.Handles(path));
+            if (provider == null)
+                return null;
+
+            var editor = provider.Create();
 
             var viewAware = (IViewAware)editor;
             viewAware.ViewAttached += (sender, e) =>
@@ -60,20 +82,12 @@ namespace Gemini.Modules.Shell.Commands
                 loadedHandler = async (sender2, e2) =>
                 {
                     frameworkElement.Loaded -= loadedHandler;
-                    await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
+                    await provider.Open(editor, path);
                 };
                 frameworkElement.Loaded += loadedHandler;
             };
 
-            _shell.OpenDocument(editor);
-
-            return TaskUtility.Completed;
-        }
-
-        private class NewFileTag
-        {
-            public IEditorProvider EditorProvider;
-            public EditorFileType FileType;
+            return Task.FromResult(editor);
         }
     }
 }

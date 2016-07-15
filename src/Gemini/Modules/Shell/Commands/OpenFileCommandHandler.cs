@@ -8,6 +8,7 @@ using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Microsoft.Win32;
 using System.IO;
+using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -54,7 +55,8 @@ namespace Gemini.Modules.Shell.Commands
 
                 _shell.OpenDocument(await GetEditor(newPath));
 
-                // TODO: Add the file to the recent documents list
+                // Add the file to the recent documents list
+                _shell.RecentFiles.Update(newPath);
             }
         }
 

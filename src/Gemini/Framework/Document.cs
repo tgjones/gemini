@@ -148,6 +148,10 @@ namespace Gemini.Framework
 
             // Save file.
             await persistedDocument.Save(filePath);
+
+            // Add to recent files
+            IShell _shell = IoC.Get<IShell>();
+            _shell.RecentFiles.Update(filePath);
 	    }
 	}
 }
