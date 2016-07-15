@@ -36,16 +36,20 @@ namespace Gemini.Modules.Shell
             MainMenu.MenuDefinitions.FileSaveMenuGroup, 1);
 
         [Export]
-        public static MenuItemDefinition FileOpenRecentMenuItem = new TextMenuItemDefinition(
-            MainMenu.MenuDefinitions.FileOpenRecentMenuGroup, 0, Resources.FileOpenRecentCommandText);
+        public static MenuItemDefinition FileSaveAllMenuItem = new CommandMenuItemDefinition<SaveAllFilesCommandDefinition>(
+            MainMenu.MenuDefinitions.FileSaveMenuGroup, 2);
 
         [Export]
-        public static MenuItemGroupDefinition FileOpenRecentCascadeGroup = new MenuItemGroupDefinition(
-            FileOpenRecentMenuItem, 0);
+        public static MenuItemDefinition FileRecentFilesMenuItem = new CommandMenuItemDefinition<RecentFilesCommandDefinition>(
+            MainMenu.MenuDefinitions.FileOpenRecentMenuGroup, 0);
 
         [Export]
-        public static MenuItemDefinition FileOpenRecentMenuItemList = new CommandMenuItemDefinition<OpenRecentCommandListDefinition>(
-            FileOpenRecentCascadeGroup, 0);
+        public static MenuItemGroupDefinition FileRecentFilesCascadeGroup = new MenuItemGroupDefinition(
+            FileRecentFilesMenuItem, 0);
+
+        [Export]
+        public static MenuItemDefinition FileOpenRecentMenuItemList = new CommandMenuItemDefinition<OpenRecentFileCommandListDefinition>(
+            FileRecentFilesCascadeGroup, 0);
 
         [Export]
         public static MenuItemDefinition FileExitMenuItem = new CommandMenuItemDefinition<ExitCommandDefinition>(

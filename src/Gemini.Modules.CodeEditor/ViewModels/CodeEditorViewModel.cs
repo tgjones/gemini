@@ -123,7 +123,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         {
             int lineNumber = _view.TextEditor.Document.GetLineByOffset(_view.TextEditor.CaretOffset).LineNumber;
             int colPosition = _view.TextEditor.TextArea.Caret.VisualColumn + 1;
-            int charPosition = _view.TextEditor.CaretOffset;
+
+            // TODO: Now I don't know about Ch#
+            //int charPosition = _view.TextEditor.CaretOffset;
 
             if (_statusBar != null && _statusBar.Items.Count >= 3)
             {

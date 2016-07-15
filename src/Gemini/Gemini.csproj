@@ -188,8 +188,12 @@
     </Compile>
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
-    <Compile Include="Modules\Shell\Commands\OpenRecentCommandListDefinition.cs" />
-    <Compile Include="Modules\Shell\Commands\OpenRecentCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenRecentFileCommandListDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenRecentFileCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\RecentFilesCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\RecentFilesCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
@@ -457,7 +461,9 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Save.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Saveall.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,7 +15,7 @@ using System.Windows;
 namespace Gemini.Modules.Shell.Commands
 {
     [CommandHandler]
-    public class OpenRecentFileCommandHandler : ICommandListHandler<OpenRecentCommandListDefinition>
+    public class OpenRecentFileCommandHandler : ICommandListHandler<OpenRecentFileCommandListDefinition>
     {
         private readonly IShell _shell;
 
@@ -26,7 +26,7 @@ namespace Gemini.Modules.Shell.Commands
         }
 
         public void Populate(Command command, List<Command> commands)
-        {
+        {   
             for (var i = 0; i < _shell.RecentFiles.Items.Count; i++)
             {
                 var item = _shell.RecentFiles.Items[i];

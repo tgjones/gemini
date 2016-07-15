@@ -98,7 +98,7 @@ namespace Gemini.Modules.RecentFiles.ViewModels
             {
                 Properties.Settings.Default.RecentDocuments = new StringCollection();
             }
-
+            
             foreach (string filePath in Properties.Settings.Default.RecentDocuments)
             {
                 _items.Add(new RecentFileItemViewModel(filePath));
