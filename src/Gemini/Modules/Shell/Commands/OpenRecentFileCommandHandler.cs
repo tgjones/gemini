@@ -2,9 +2,6 @@
 using Gemini.Framework;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
-using Gemini.Properties;
-using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;

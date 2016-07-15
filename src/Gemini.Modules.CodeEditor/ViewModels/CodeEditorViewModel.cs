@@ -1,13 +1,13 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Threading.Tasks;
+﻿using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Threading;
 using Gemini.Modules.CodeEditor.Views;
 using Gemini.Modules.StatusBar;
-using Caliburn.Micro;
+using System;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
@@ -40,9 +40,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             writer.Write(FilePath);
         }
 
-        public override void LoadState(BinaryReader reader)
+        public override async void LoadState(BinaryReader reader)
         {
-            Load(reader.ReadString());
+            await Load(reader.ReadString());
         }
 
         protected override void OnViewLoaded(object view)
@@ -89,6 +89,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         private void ApplyOriginalText()
         {
+            // At StartUp, _view is null, so notYetLoaded flag is added
             if (_view == null)
             {
                 notYetLoaded = true;
@@ -104,6 +105,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
             UpdateStatusBar();
 
+            // To update status bar items, Caret PositionChanged event is added
             _view.TextEditor.TextArea.Caret.PositionChanged += delegate
             {
                 UpdateStatusBar();
