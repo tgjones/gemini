@@ -1,6 +1,8 @@
 ﻿using Gemini.Framework.Commands;
 using Gemini.Properties;
 using System;
+using System.ComponentModel.Composition;
+using System.Windows.Input;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -29,9 +31,7 @@ namespace Gemini.Modules.Shell.Commands
             get { return new Uri("pack://application:,,,/Gemini;component/Resources/Icons/Saveall.png"); }
         }
 
-
-        // TODO: there is a bug in case of multiple modifiers
-        //[Export]
-        //public static CommandKeyboardShortcut KeyGesture = new CommandKeyboardShortcut<SaveFileCommandDefinition>(new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift));
+        [Export]
+        public static CommandKeyboardShortcut KeyGesture = new CommandKeyboardShortcut<SaveAllFilesCommandDefinition>(new KeyGesture(Key.S, ModifierKeys.Control | ModifierKeys.Shift));
     }
 }
