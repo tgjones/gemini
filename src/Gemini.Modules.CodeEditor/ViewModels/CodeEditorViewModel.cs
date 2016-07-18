@@ -17,6 +17,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         private readonly LanguageDefinitionManager _languageDefinitionManager;
         private string _originalText;
         private ICodeEditorView _view;
+        private bool notYetLoaded = false;
 
         [ImportingConstructor]
         public CodeEditorViewModel(LanguageDefinitionManager languageDefinitionManager)
@@ -42,6 +43,12 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         protected override void OnViewLoaded(object view)
         {
             _view = (ICodeEditorView) view;
+
+            if (notYetLoaded)
+            {
+                ApplyOriginalText();
+                notYetLoaded = false;
+            }
         }
 
         public override bool Equals(object obj)
@@ -76,6 +83,12 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         private void ApplyOriginalText()
         {
+            // At StartUp, _view is null, so notYetLoaded flag is added
+            if (_view == null)
+            {
+                notYetLoaded = true;
+                return;
+            }
             _view.TextEditor.Text = _originalText;
 
             _view.TextEditor.TextChanged += delegate
