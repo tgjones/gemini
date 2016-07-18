@@ -1,6 +1,7 @@
 ﻿using Gemini.Framework;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
+using Gemini.Framework.Threading;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -19,7 +20,7 @@ namespace Gemini.Modules.Shell.Commands
             _shell = shell;
         }
 
-        public override async Task Run(Command command)
+        public override Task Run(Command command)
         {
             var tasks = new List<Task<Tuple<IPersistedDocument, bool>>>();
             
@@ -36,6 +37,8 @@ namespace Gemini.Modules.Shell.Commands
             }
 
             // TODO: display "Item(s) saved" in statusbar
+
+            return TaskUtility.Completed;            
         }
 
         // http://stackoverflow.com/questions/19431494/how-to-use-await-in-a-loop
