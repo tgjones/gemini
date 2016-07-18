@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Gemini.Framework;
 using Gemini.Framework.Threading;
 using Gemini.Modules.CodeEditor.Views;
+using System.ComponentModel;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
+    [DisplayName("Code Editor")]
     [Export(typeof(CodeEditorViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
 #pragma warning disable 659
