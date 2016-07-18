@@ -40,9 +40,9 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             writer.Write(FilePath);
         }
 
-        public override void LoadState(BinaryReader reader)
+        public override async void LoadState(BinaryReader reader)
         {
-            Load(reader.ReadString());
+            await Load(reader.ReadString());
         }
 
         protected override void OnViewLoaded(object view)
