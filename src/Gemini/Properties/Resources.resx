@@ -252,4 +252,10 @@
   <data name="ThemeDarkName" xml:space="preserve">
     <value>Dark</value>
   </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Save All</value>
+  </data>
 </root>
