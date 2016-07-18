@@ -5,7 +5,9 @@ using System.Windows;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using Gemini.Modules.PropertyGrid;
 using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 
 namespace Gemini.Demo.Modules.Startup
 {
@@ -42,9 +44,23 @@ namespace Gemini.Demo.Modules.Startup
 
 			_output.AppendLine("Started up");
 
-		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
+            Shell.ActiveDocumentChanged += delegate
+                {
+                    RefreshPropertyGrid();
+                    RefreshInspector();
+                };
+            RefreshPropertyGrid();
 		    RefreshInspector();
 		}
+
+        private void RefreshPropertyGrid()
+        {
+            var propertyGrid = IoC.Get<IPropertyGrid>();
+            if (Shell.ActiveItem != null)
+                propertyGrid.SelectedObject = Shell.ActiveItem;
+            else
+                propertyGrid.SelectedObject = null;
+        }
 
         private void RefreshInspector()
         {
