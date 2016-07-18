@@ -175,6 +175,24 @@ namespace Gemini.Modules.Shell.ViewModels
 	        ActiveLayoutItem = model;
 		}
 
+        public bool TryActivateDocumentByPath(string path)
+        {
+            foreach (var document in Documents.OfType<PersistedDocument>().Where(d => !d.IsNew))
+            {
+                if (string.IsNullOrEmpty(document.FilePath))
+                    continue;
+
+                var docPath = Path.GetFullPath(document.FilePath);
+                if (string.Equals(path, docPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    OpenDocument(document);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 		public void OpenDocument(IDocument model)
 		{
 			ActivateItem(model);

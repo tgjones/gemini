@@ -29,6 +29,7 @@ namespace Gemini.Framework.Services
         void ShowTool<TTool>() where TTool : ITool;
 		void ShowTool(ITool model);
 
+        bool TryActivateDocumentByPath(string path);
 		void OpenDocument(IDocument model);
 		void CloseDocument(IDocument document);
 
