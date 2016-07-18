@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Gemini.Framework.Commands;
 using Gemini.Properties;
+using System;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -23,6 +24,11 @@ namespace Gemini.Modules.Shell.Commands
         public override string ToolTip
         {
             get { return Resources.FileExitCommandToolTip; }
+        }
+
+        public override Uri IconSource
+        {
+            get { return new Uri("pack://application:,,,/Gemini;component/Resources/Icons/Exit.png"); }
         }
 
         [Export]
