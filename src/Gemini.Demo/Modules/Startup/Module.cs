@@ -5,6 +5,7 @@ using System.Windows;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using System.Windows.Media.Imaging;
 
 namespace Gemini.Demo.Modules.Startup
 {
@@ -33,6 +34,7 @@ namespace Gemini.Demo.Modules.Startup
 
             //MainWindow.WindowState = WindowState.Maximized;
             MainWindow.Title = "Gemini Demo";
+            MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,/Resources/icon.png"));
 
             Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
             Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
