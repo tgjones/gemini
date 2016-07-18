@@ -5,6 +5,8 @@ using System.Windows;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using Gemini.Modules.PropertyGrid;
+using System.Windows.Media.Imaging;
 
 namespace Gemini.Demo.Modules.Startup
 {
@@ -13,6 +15,7 @@ namespace Gemini.Demo.Modules.Startup
 	{
 		private readonly IOutput _output;
         private readonly IInspectorTool _inspectorTool;
+        private readonly IPropertyGrid _propertyGrid;
 
         public override IEnumerable<Type> DefaultTools
         {
@@ -20,10 +23,11 @@ namespace Gemini.Demo.Modules.Startup
         }
 
         [ImportingConstructor]
-	    public Module(IOutput output, IInspectorTool inspectorTool)
+	    public Module(IOutput output, IInspectorTool inspectorTool, IPropertyGrid propertyGrid)
         {
             _output = output;
             _inspectorTool = inspectorTool;
+            _propertyGrid = propertyGrid;
         }
 
 	    public override void Initialize()
@@ -33,16 +37,30 @@ namespace Gemini.Demo.Modules.Startup
 
             //MainWindow.WindowState = WindowState.Maximized;
             MainWindow.Title = "Gemini Demo";
+            MainWindow.Icon = new BitmapImage(new Uri("pack://application:,,/Resources/icon.png"));
 
-            Shell.StatusBar.AddItem("Hello world!", new GridLength(1, GridUnitType.Star));
-            Shell.StatusBar.AddItem("Ln 44", new GridLength(100));
-            Shell.StatusBar.AddItem("Col 79", new GridLength(100));
+            Shell.StatusBar.AddItem("Ready", new GridLength(1, GridUnitType.Star));
+            Shell.StatusBar.AddItem("Ln 1", new GridLength(100));
+            Shell.StatusBar.AddItem("Col 1", new GridLength(100));
 
 			_output.AppendLine("Started up");
 
-		    Shell.ActiveDocumentChanged += (sender, e) => RefreshInspector();
+            Shell.ActiveDocumentChanged += delegate 
+                {
+                    RefreshPropertyGrid();
+                    RefreshInspector();
+                };
+            RefreshPropertyGrid();
 		    RefreshInspector();
 		}
+
+        private void RefreshPropertyGrid()
+        {
+            if (Shell.ActiveItem != null)
+                _propertyGrid.SelectedObject = Shell.ActiveItem;
+            else
+                _propertyGrid.SelectedObject = null;
+        }
 
         private void RefreshInspector()
         {

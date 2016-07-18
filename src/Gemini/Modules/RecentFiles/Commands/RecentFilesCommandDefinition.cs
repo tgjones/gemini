@@ -1,13 +1,12 @@
 ﻿using Gemini.Framework.Commands;
 using Gemini.Properties;
-using System;
 
-namespace Gemini.Modules.Shell.Commands
+namespace Gemini.Modules.RecentFiles.Commands
 {
     [CommandDefinition]
-    public class CloseFileCommandDefinition : CommandDefinition
+    public class RecentFilesCommandDefinition : CommandDefinition
     {
-        public const string CommandName = "File.CloseFile";
+        public const string CommandName = "File.RecentFiles";
 
         public override string Name
         {
@@ -16,12 +15,12 @@ namespace Gemini.Modules.Shell.Commands
 
         public override string Text
         {
-            get { return Resources.FileCloseCommandText; }
+            get { return Resources.FileRecentFilesCommandText; }
         }
 
         public override string ToolTip
         {
-            get { return Resources.FileCloseCommandToolTip; }
+            get { return Resources.FileRecentFilesCommandToolTip; }
         }
     }
 }

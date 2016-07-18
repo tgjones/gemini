@@ -7,6 +7,8 @@ using Gemini.Framework;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Microsoft.Win32;
+using System.IO;
+using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -35,7 +37,27 @@ namespace Gemini.Modules.Shell.Commands
                 .Select(x => x.Name + "|*" + x.FileExtension));
 
             if (dialog.ShowDialog() == true)
-                _shell.OpenDocument(await GetEditor(dialog.FileName));
+            {
+                // Check if the document is already open
+                var newPath = Path.GetFullPath(dialog.FileName);
+                foreach (IDocument document in _shell.Documents)
+                {
+                    if (document is PersistedDocument)
+                    {
+                        var docPath = Path.GetFullPath(((PersistedDocument)document).FilePath);                        
+                        if (string.Equals(newPath, docPath, System.StringComparison.OrdinalIgnoreCase))
+                        {
+                            _shell.OpenDocument(document);
+                            return;
+                        }
+                    }
+                }
+
+                _shell.OpenDocument(await GetEditor(newPath));
+
+                // Add the file to the recent documents list
+                _shell.RecentFiles.Update(newPath);
+            }
         }
 
         internal static Task<IDocument> GetEditor(string path)

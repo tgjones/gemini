@@ -150,6 +150,9 @@
   <data name="FileNewCommandText" xml:space="preserve">
     <value>_New</value>
   </data>
+  <data name="FileNewCommandToolTip" xml:space="preserve">
+    <value>New</value>
+  </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>Untitled {0}</value>
   </data>
@@ -158,6 +161,12 @@
   </data>
   <data name="FileOpenCommandToolTip" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>Recent Files</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>Save _As...</value>
@@ -251,5 +260,11 @@
   </data>
   <data name="ThemeDarkName" xml:space="preserve">
     <value>Dark</value>
+  </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Save All</value>
   </data>
 </root>
