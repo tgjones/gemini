@@ -258,4 +258,10 @@
   <data name="FileSaveAllCommandToolTip" xml:space="preserve">
     <value>保存全部</value>
   </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>最近打开的文件</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>最近打开的文件</value>
+  </data>
 </root>

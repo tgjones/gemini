@@ -41,6 +41,9 @@ namespace Gemini.Modules.Shell.Commands
 
                 if (!_shell.TryActivateDocumentByPath(fullPath))
                     _shell.OpenDocument(await GetEditor(fullPath));
+
+                // Add the file to the recent documents list
+                _shell.RecentFiles.Update(fullPath);
             }
         }
 

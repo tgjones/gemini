@@ -13,6 +13,7 @@ using Gemini.Modules.Shell.Services;
 using Gemini.Modules.Shell.Views;
 using Gemini.Modules.StatusBar;
 using Gemini.Modules.ToolBars;
+using Gemini.Modules.RecentFiles;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
@@ -39,6 +40,9 @@ namespace Gemini.Modules.Shell.ViewModels
         private IStatusBar _statusBar;
 
         [Import]
+        private IRecentFiles _recentFiles;
+
+        [Import]
         private ILayoutItemStatePersister _layoutItemStatePersister;
 #pragma warning restore 649
 
@@ -59,6 +63,11 @@ namespace Gemini.Modules.Shell.ViewModels
 		{
 			get { return _statusBar; }
 		}
+
+        public IRecentFiles RecentFiles
+        {
+            get { return _recentFiles; }
+        }
 
 	    private ILayoutItem _activeLayoutItem;
 	    public ILayoutItem ActiveLayoutItem
