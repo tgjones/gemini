@@ -175,6 +175,7 @@
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\RecentFiles\IRecentFiles.cs" />
+    <Compile Include="Modules\RecentFiles\MenuDefinitions.cs" />
     <Compile Include="Modules\RecentFiles\ViewModels\RecentFileItemViewModel.cs" />
     <Compile Include="Modules\RecentFiles\ViewModels\RecentFileViewModel.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandDefinition.cs" />
@@ -188,10 +189,10 @@
     </Compile>
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
-    <Compile Include="Modules\Shell\Commands\OpenRecentFileCommandListDefinition.cs" />
-    <Compile Include="Modules\Shell\Commands\OpenRecentFileCommandHandler.cs" />
-    <Compile Include="Modules\Shell\Commands\RecentFilesCommandDefinition.cs" />
-    <Compile Include="Modules\Shell\Commands\RecentFilesCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandListDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
@@ -448,6 +449,7 @@
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ko-KR.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -467,6 +469,7 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Close.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

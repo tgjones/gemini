@@ -1,7 +1,7 @@
 ﻿using Gemini.Framework.Commands;
 using Gemini.Properties;
 
-namespace Gemini.Modules.Shell.Commands
+namespace Gemini.Modules.RecentFiles.Commands
 {
     [CommandDefinition]
     public class RecentFilesCommandDefinition : CommandDefinition

@@ -3,7 +3,7 @@ using Gemini.Framework.Services;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
-namespace Gemini.Modules.Shell.Commands
+namespace Gemini.Modules.RecentFiles.Commands
 {
     [CommandHandler]
     public class RecentFilesCommandHandler : CommandHandlerBase<RecentFilesCommandDefinition>

@@ -1,6 +1,6 @@
 ﻿using Gemini.Framework.Commands;
 
-namespace Gemini.Modules.Shell.Commands
+namespace Gemini.Modules.RecentFiles.Commands
 {
     [CommandDefinition]
     public class OpenRecentFileCommandListDefinition : CommandListDefinition

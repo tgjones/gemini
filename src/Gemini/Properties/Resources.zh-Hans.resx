@@ -264,4 +264,7 @@
   <data name="FileSaveAllCommandToolTip" xml:space="preserve">
     <value>保存全部</value>
   </data>
+  <data name="FileNewCommandToolTip" xml:space="preserve">
+    <value>新建</value>
+  </data>
 </root>

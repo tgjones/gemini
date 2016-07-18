@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Gemini.Modules.Shell.Commands
+namespace Gemini.Modules.RecentFiles.Commands
 {
     [CommandHandler]
     public class OpenRecentFileCommandHandler : ICommandListHandler<OpenRecentFileCommandListDefinition>

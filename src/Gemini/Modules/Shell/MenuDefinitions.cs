@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.Composition;
-using Gemini.Framework.Menus;
+﻿using Gemini.Framework.Menus;
 using Gemini.Modules.Shell.Commands;
 using Gemini.Properties;
+using System.ComponentModel.Composition;
 
 namespace Gemini.Modules.Shell
 {
@@ -38,18 +38,6 @@ namespace Gemini.Modules.Shell
         [Export]
         public static MenuItemDefinition FileSaveAllMenuItem = new CommandMenuItemDefinition<SaveAllFilesCommandDefinition>(
             MainMenu.MenuDefinitions.FileSaveMenuGroup, 2);
-
-        [Export]
-        public static MenuItemDefinition FileRecentFilesMenuItem = new CommandMenuItemDefinition<RecentFilesCommandDefinition>(
-            MainMenu.MenuDefinitions.FileOpenRecentMenuGroup, 0);
-
-        [Export]
-        public static MenuItemGroupDefinition FileRecentFilesCascadeGroup = new MenuItemGroupDefinition(
-            FileRecentFilesMenuItem, 0);
-
-        [Export]
-        public static MenuItemDefinition FileOpenRecentMenuItemList = new CommandMenuItemDefinition<OpenRecentFileCommandListDefinition>(
-            FileRecentFilesCascadeGroup, 0);
 
         [Export]
         public static MenuItemDefinition FileExitMenuItem = new CommandMenuItemDefinition<ExitCommandDefinition>(
