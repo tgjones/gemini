@@ -205,10 +205,10 @@
     <value>Категория</value>
   </data>
   <data name="ToolboxDisplayName" xml:space="preserve">
-    <value>Инструменты</value>
+    <value>Панель Инструментов</value>
   </data>
   <data name="ToolsMenuText" xml:space="preserve">
-    <value>Инс_трументы</value>
+    <value>Се_рвис</value>
   </data>
   <data name="ToolsOptionsCommandText" xml:space="preserve">
     <value>_Настройки</value>
@@ -229,7 +229,7 @@
     <value>Панель Инструментов</value>
   </data>
   <data name="ViewToolboxCommandToolTip" xml:space="preserve">
-    <value>Инструменты</value>
+    <value>Панель Инструментов</value>
   </data>
   <data name="WindowMenuText" xml:space="preserve">
     <value>_Окно</value>
