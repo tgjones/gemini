@@ -105,6 +105,7 @@
     <Compile Include="Conventions\AdvancedSliderRangePropertyEditorBuilder.cs" />
     <Compile Include="Conventions\RangePropertyEditorBuilder.cs" />
     <Compile Include="Conventions\StandardPropertyEditorBuilder.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="InspectableObject.cs" />
     <Compile Include="InspectableObjectBuilder.cs" />
     <Compile Include="InspectorBuilder.cs" />
