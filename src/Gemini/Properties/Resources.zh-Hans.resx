@@ -252,4 +252,7 @@
   <data name="ThemeDarkName" xml:space="preserve">
     <value>暗色</value>
   </data>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>设置的数值失败：{0}</value>
+  </data>
 </root>

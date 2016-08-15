@@ -61,6 +61,15 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to set value: {0}.
+        /// </summary>
+        internal static string AdvancedSliderCommitErrorFormat {
+            get {
+                return ResourceManager.GetString("AdvancedSliderCommitErrorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Edit.
         /// </summary>
         internal static string EditMenuText {

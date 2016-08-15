@@ -252,4 +252,7 @@
   <data name="ThemeDarkName" xml:space="preserve">
     <value>Dark</value>
   </data>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>Failed to set value: {0}</value>
+  </data>
 </root>
