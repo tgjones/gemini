@@ -255,4 +255,10 @@
   <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
     <value>Failed to set value: {0}</value>
   </data>
+  <data name="AllSupportedFiles" xml:space="preserve">
+    <value>All Supported Files</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>All Files</value>
+  </data>
 </root>

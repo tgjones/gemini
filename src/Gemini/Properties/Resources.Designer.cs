@@ -22,7 +22,7 @@ namespace Gemini.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Gemini.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gemini.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Gemini.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,34 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Failed to set value: {0}.
         /// </summary>
-        internal static string AdvancedSliderCommitErrorFormat {
+        public static string AdvancedSliderCommitErrorFormat {
             get {
                 return ResourceManager.GetString("AdvancedSliderCommitErrorFormat", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Files.
+        /// </summary>
+        public static string AllFiles {
+            get {
+                return ResourceManager.GetString("AllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Supported Files.
+        /// </summary>
+        public static string AllSupportedFiles {
+            get {
+                return ResourceManager.GetString("AllSupportedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Edit.
         /// </summary>
-        internal static string EditMenuText {
+        public static string EditMenuText {
             get {
                 return ResourceManager.GetString("EditMenuText", resourceCulture);
             }
@@ -81,7 +99,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Redo.
         /// </summary>
-        internal static string EditRedoCommandText {
+        public static string EditRedoCommandText {
             get {
                 return ResourceManager.GetString("EditRedoCommandText", resourceCulture);
             }
@@ -90,7 +108,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Redo.
         /// </summary>
-        internal static string EditRedoCommandToolTip {
+        public static string EditRedoCommandToolTip {
             get {
                 return ResourceManager.GetString("EditRedoCommandToolTip", resourceCulture);
             }
@@ -99,7 +117,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Undo.
         /// </summary>
-        internal static string EditUndoCommandText {
+        public static string EditUndoCommandText {
             get {
                 return ResourceManager.GetString("EditUndoCommandText", resourceCulture);
             }
@@ -108,7 +126,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Undo.
         /// </summary>
-        internal static string EditUndoCommandToolTip {
+        public static string EditUndoCommandToolTip {
             get {
                 return ResourceManager.GetString("EditUndoCommandToolTip", resourceCulture);
             }
@@ -117,7 +135,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Close.
         /// </summary>
-        internal static string FileCloseCommandText {
+        public static string FileCloseCommandText {
             get {
                 return ResourceManager.GetString("FileCloseCommandText", resourceCulture);
             }
@@ -126,7 +144,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
-        internal static string FileCloseCommandToolTip {
+        public static string FileCloseCommandToolTip {
             get {
                 return ResourceManager.GetString("FileCloseCommandToolTip", resourceCulture);
             }
@@ -135,7 +153,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to E_xit.
         /// </summary>
-        internal static string FileExitCommandText {
+        public static string FileExitCommandText {
             get {
                 return ResourceManager.GetString("FileExitCommandText", resourceCulture);
             }
@@ -144,7 +162,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
-        internal static string FileExitCommandToolTip {
+        public static string FileExitCommandToolTip {
             get {
                 return ResourceManager.GetString("FileExitCommandToolTip", resourceCulture);
             }
@@ -153,7 +171,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _File.
         /// </summary>
-        internal static string FileMenuText {
+        public static string FileMenuText {
             get {
                 return ResourceManager.GetString("FileMenuText", resourceCulture);
             }
@@ -162,7 +180,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _New.
         /// </summary>
-        internal static string FileNewCommandText {
+        public static string FileNewCommandText {
             get {
                 return ResourceManager.GetString("FileNewCommandText", resourceCulture);
             }
@@ -171,7 +189,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Untitled {0}.
         /// </summary>
-        internal static string FileNewUntitled {
+        public static string FileNewUntitled {
             get {
                 return ResourceManager.GetString("FileNewUntitled", resourceCulture);
             }
@@ -180,7 +198,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Open.
         /// </summary>
-        internal static string FileOpenCommandText {
+        public static string FileOpenCommandText {
             get {
                 return ResourceManager.GetString("FileOpenCommandText", resourceCulture);
             }
@@ -189,7 +207,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string FileOpenCommandToolTip {
+        public static string FileOpenCommandToolTip {
             get {
                 return ResourceManager.GetString("FileOpenCommandToolTip", resourceCulture);
             }
@@ -198,7 +216,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save _As....
         /// </summary>
-        internal static string FileSaveAsCommandText {
+        public static string FileSaveAsCommandText {
             get {
                 return ResourceManager.GetString("FileSaveAsCommandText", resourceCulture);
             }
@@ -207,7 +225,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save As.
         /// </summary>
-        internal static string FileSaveAsCommandToolTip {
+        public static string FileSaveAsCommandToolTip {
             get {
                 return ResourceManager.GetString("FileSaveAsCommandToolTip", resourceCulture);
             }
@@ -216,7 +234,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Save.
         /// </summary>
-        internal static string FileSaveCommandText {
+        public static string FileSaveCommandText {
             get {
                 return ResourceManager.GetString("FileSaveCommandText", resourceCulture);
             }
@@ -225,7 +243,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string FileSaveCommandToolTip {
+        public static string FileSaveCommandToolTip {
             get {
                 return ResourceManager.GetString("FileSaveCommandToolTip", resourceCulture);
             }
@@ -234,7 +252,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Help.
         /// </summary>
-        internal static string HelpMenuText {
+        public static string HelpMenuText {
             get {
                 return ResourceManager.GetString("HelpMenuText", resourceCulture);
             }
@@ -243,7 +261,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
-        internal static string HistoryDisplayName {
+        public static string HistoryDisplayName {
             get {
                 return ResourceManager.GetString("HistoryDisplayName", resourceCulture);
             }
@@ -252,7 +270,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Initial State.
         /// </summary>
-        internal static string HistoryInitialState {
+        public static string HistoryInitialState {
             get {
                 return ResourceManager.GetString("HistoryInitialState", resourceCulture);
             }
@@ -261,7 +279,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to System.
         /// </summary>
-        internal static string LanguageSystem {
+        public static string LanguageSystem {
             get {
                 return ResourceManager.GetString("LanguageSystem", resourceCulture);
             }
@@ -270,7 +288,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Auto hide main menu.
         /// </summary>
-        internal static string MainMenuSettingsAutoHideMainMenu {
+        public static string MainMenuSettingsAutoHideMainMenu {
             get {
                 return ResourceManager.GetString("MainMenuSettingsAutoHideMainMenu", resourceCulture);
             }
@@ -279,7 +297,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Color Theme:.
         /// </summary>
-        internal static string MainMenuSettingsColorTheme {
+        public static string MainMenuSettingsColorTheme {
             get {
                 return ResourceManager.GetString("MainMenuSettingsColorTheme", resourceCulture);
             }
@@ -288,7 +306,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Language:.
         /// </summary>
-        internal static string MainMenuSettingsLanguage {
+        public static string MainMenuSettingsLanguage {
             get {
                 return ResourceManager.GetString("MainMenuSettingsLanguage", resourceCulture);
             }
@@ -297,7 +315,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Requires restart.
         /// </summary>
-        internal static string MainMenuSettingsLanguageRestart {
+        public static string MainMenuSettingsLanguageRestart {
             get {
                 return ResourceManager.GetString("MainMenuSettingsLanguageRestart", resourceCulture);
             }
@@ -306,7 +324,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [Default Title].
         /// </summary>
-        internal static string MainWindowDefaultTitle {
+        public static string MainWindowDefaultTitle {
             get {
                 return ResourceManager.GetString("MainWindowDefaultTitle", resourceCulture);
             }
@@ -315,7 +333,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
-        internal static string SettingsDisplayName {
+        public static string SettingsDisplayName {
             get {
                 return ResourceManager.GetString("SettingsDisplayName", resourceCulture);
             }
@@ -324,7 +342,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
-        internal static string SettingsPageGeneral {
+        public static string SettingsPageGeneral {
             get {
                 return ResourceManager.GetString("SettingsPageGeneral", resourceCulture);
             }
@@ -333,7 +351,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Environment.
         /// </summary>
-        internal static string SettingsPathEnvironment {
+        public static string SettingsPathEnvironment {
             get {
                 return ResourceManager.GetString("SettingsPathEnvironment", resourceCulture);
             }
@@ -342,7 +360,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Blue.
         /// </summary>
-        internal static string ThemeBlueName {
+        public static string ThemeBlueName {
             get {
                 return ResourceManager.GetString("ThemeBlueName", resourceCulture);
             }
@@ -351,7 +369,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Dark.
         /// </summary>
-        internal static string ThemeDarkName {
+        public static string ThemeDarkName {
             get {
                 return ResourceManager.GetString("ThemeDarkName", resourceCulture);
             }
@@ -360,7 +378,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Light.
         /// </summary>
-        internal static string ThemeLightName {
+        public static string ThemeLightName {
             get {
                 return ResourceManager.GetString("ThemeLightName", resourceCulture);
             }
@@ -369,7 +387,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Standard.
         /// </summary>
-        internal static string ToolBarStandard {
+        public static string ToolBarStandard {
             get {
                 return ResourceManager.GetString("ToolBarStandard", resourceCulture);
             }
@@ -378,7 +396,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
-        internal static string ToolboxCategory {
+        public static string ToolboxCategory {
             get {
                 return ResourceManager.GetString("ToolboxCategory", resourceCulture);
             }
@@ -387,7 +405,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Toolbox.
         /// </summary>
-        internal static string ToolboxDisplayName {
+        public static string ToolboxDisplayName {
             get {
                 return ResourceManager.GetString("ToolboxDisplayName", resourceCulture);
             }
@@ -396,7 +414,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Tools.
         /// </summary>
-        internal static string ToolsMenuText {
+        public static string ToolsMenuText {
             get {
                 return ResourceManager.GetString("ToolsMenuText", resourceCulture);
             }
@@ -405,7 +423,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Options.
         /// </summary>
-        internal static string ToolsOptionsCommandText {
+        public static string ToolsOptionsCommandText {
             get {
                 return ResourceManager.GetString("ToolsOptionsCommandText", resourceCulture);
             }
@@ -414,7 +432,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
-        internal static string ToolsOptionsCommandToolTip {
+        public static string ToolsOptionsCommandToolTip {
             get {
                 return ResourceManager.GetString("ToolsOptionsCommandToolTip", resourceCulture);
             }
@@ -423,7 +441,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _History.
         /// </summary>
-        internal static string ViewHistoryCommandText {
+        public static string ViewHistoryCommandText {
             get {
                 return ResourceManager.GetString("ViewHistoryCommandText", resourceCulture);
             }
@@ -432,7 +450,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
-        internal static string ViewHistoryCommandToolTip {
+        public static string ViewHistoryCommandToolTip {
             get {
                 return ResourceManager.GetString("ViewHistoryCommandToolTip", resourceCulture);
             }
@@ -441,7 +459,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _View.
         /// </summary>
-        internal static string ViewMenuText {
+        public static string ViewMenuText {
             get {
                 return ResourceManager.GetString("ViewMenuText", resourceCulture);
             }
@@ -450,7 +468,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Toolbo_x.
         /// </summary>
-        internal static string ViewToolboxCommandText {
+        public static string ViewToolboxCommandText {
             get {
                 return ResourceManager.GetString("ViewToolboxCommandText", resourceCulture);
             }
@@ -459,7 +477,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Toolbox.
         /// </summary>
-        internal static string ViewToolboxCommandToolTip {
+        public static string ViewToolboxCommandToolTip {
             get {
                 return ResourceManager.GetString("ViewToolboxCommandToolTip", resourceCulture);
             }
@@ -468,7 +486,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Looks up a localized string similar to _Window.
         /// </summary>
-        internal static string WindowMenuText {
+        public static string WindowMenuText {
             get {
                 return ResourceManager.GetString("WindowMenuText", resourceCulture);
             }
