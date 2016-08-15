@@ -3,6 +3,7 @@ using Caliburn.Micro;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.StatusBar;
 using Gemini.Modules.ToolBars;
+using Gemini.Modules.RecentFiles;
 
 namespace Gemini.Framework.Services
 {
@@ -16,6 +17,7 @@ namespace Gemini.Framework.Services
 		IMenu MainMenu { get; }
         IToolBars ToolBars { get; }
 		IStatusBar StatusBar { get; }
+        IRecentFiles RecentFiles { get; }
 
         // TODO: Rename this to ActiveItem.
         ILayoutItem ActiveLayoutItem { get; set; }
@@ -29,6 +31,7 @@ namespace Gemini.Framework.Services
         void ShowTool<TTool>() where TTool : ITool;
 		void ShowTool(ITool model);
 
+        bool TryActivateDocumentByPath(string path);
 		void OpenDocument(IDocument model);
 		void CloseDocument(IDocument document);
 

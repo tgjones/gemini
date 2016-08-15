@@ -184,6 +184,10 @@
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\RecentFiles\IRecentFiles.cs" />
+    <Compile Include="Modules\RecentFiles\MenuDefinitions.cs" />
+    <Compile Include="Modules\RecentFiles\ViewModels\RecentFileItemViewModel.cs" />
+    <Compile Include="Modules\RecentFiles\ViewModels\RecentFileViewModel.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandDefinition.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandHandler.cs" />
     <Compile Include="Modules\Settings\ISettingsEditor.cs" />
@@ -195,6 +199,12 @@
     </Compile>
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandListDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
@@ -495,6 +505,7 @@
     <EmbeddedResource Include="Properties\Resources.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ko.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -508,6 +519,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\SaveAll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

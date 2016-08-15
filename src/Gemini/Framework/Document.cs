@@ -89,7 +89,8 @@ namespace Gemini.Framework
 
         void ICommandHandler<SaveFileCommandDefinition>.Update(Command command)
         {
-            command.Enabled = this is IPersistedDocument;
+            var persistedDocument = this as IPersistedDocument;
+            command.Enabled = (persistedDocument != null && persistedDocument.IsDirty);
         }
 
 	    async Task ICommandHandler<SaveFileCommandDefinition>.Run(Command command)
@@ -148,6 +149,10 @@ namespace Gemini.Framework
 
             // Save file.
             await persistedDocument.Save(filePath);
+
+            // Add to recent files
+            IShell _shell = IoC.Get<IShell>();
+            _shell.RecentFiles.Update(filePath);
 	    }
 	}
 }

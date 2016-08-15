@@ -214,6 +214,42 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string FileRecentFilesCommandText {
+            get {
+                return ResourceManager.GetString("FileRecentFilesCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string FileRecentFilesCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileRecentFilesCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save All.
+        /// </summary>
+        internal static string FileSaveAllCommandText {
+            get {
+                return ResourceManager.GetString("FileSaveAllCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save All.
+        /// </summary>
+        internal static string FileSaveAllCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileSaveAllCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save _As....
         /// </summary>
         public static string FileSaveAsCommandText {
