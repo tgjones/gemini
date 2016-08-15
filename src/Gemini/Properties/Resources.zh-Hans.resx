@@ -235,7 +235,7 @@
     <value>窗口 (_W)</value>
   </data>
   <data name="MainMenuSettingsLanguage" xml:space="preserve">
-    <value>语言：</value>
+    <value>语言 (Language)：</value>
   </data>
   <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
     <value>需要从新启动</value>
