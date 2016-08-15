@@ -117,46 +117,139 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangeObjectValueActionFormat" xml:space="preserve">
-    <value>Change {0} from {1} to {2}</value>
+  <data name="EditMenuText" xml:space="preserve">
+    <value>_Правка</value>
   </data>
-  <data name="InspectorBuilderMiscellaneous" xml:space="preserve">
-    <value>Miscellaneous</value>
+  <data name="EditRedoCommandText" xml:space="preserve">
+    <value>_Вернуть</value>
   </data>
-  <data name="InspectorDisplayName" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="EditRedoCommandToolTip" xml:space="preserve">
+    <value>Вернуть</value>
   </data>
-  <data name="ResetToolTip" xml:space="preserve">
-    <value>Reset</value>
+  <data name="EditUndoCommandText" xml:space="preserve">
+    <value>_Отменить</value>
   </data>
-  <data name="ViewInspectorCommandText" xml:space="preserve">
-    <value>I_nspector</value>
+  <data name="EditUndoCommandToolTip" xml:space="preserve">
+    <value>Отменить</value>
   </data>
-  <data name="ViewInspectorCommandToolTip" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="FileCloseCommandText" xml:space="preserve">
+    <value>_Закрыть</value>
   </data>
-  <data name="ResetAll" xml:space="preserve">
-    <value>Reset all ⟲</value>
+  <data name="FileCloseCommandToolTip" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
-  <data name="ResetSymbol" xml:space="preserve">
-    <value>⟲</value>
-  <comment>@Invariant</comment></data>
-  <data name="ColorEditorStandardColors" xml:space="preserve">
-    <value>Standard Colors</value>
+  <data name="FileExitCommandText" xml:space="preserve">
+    <value>Вы_ход</value>
   </data>
-  <data name="ColorEditorStandard" xml:space="preserve">
-    <value>Standard</value>
+  <data name="FileExitCommandToolTip" xml:space="preserve">
+    <value>Выход</value>
   </data>
-  <data name="ColorEditorRecentColors" xml:space="preserve">
-    <value>Recent Colors</value>
+  <data name="FileMenuText" xml:space="preserve">
+    <value>_Файл</value>
   </data>
-  <data name="ColorEditorAvailableColors" xml:space="preserve">
-    <value>Available Colors</value>
+  <data name="FileNewCommandText" xml:space="preserve">
+    <value>_Новый</value>
   </data>
-  <data name="ColorEditorAdvanced" xml:space="preserve">
-    <value>Advanced</value>
+  <data name="FileNewUntitled" xml:space="preserve">
+    <value>Без названия {0}</value>
   </data>
-  <data name="ResetObjectValueActionFormat" xml:space="preserve">
-    <value>Reset {0} from {1} to {2}</value>
+  <data name="FileOpenCommandText" xml:space="preserve">
+    <value>_Открыть</value>
+  </data>
+  <data name="FileOpenCommandToolTip" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="FileSaveAsCommandText" xml:space="preserve">
+    <value>Сохранить _Как...</value>
+  </data>
+  <data name="FileSaveAsCommandToolTip" xml:space="preserve">
+    <value>Сохранить Как</value>
+  </data>
+  <data name="FileSaveCommandText" xml:space="preserve">
+    <value>_Сохранить</value>
+  </data>
+  <data name="FileSaveCommandToolTip" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="HelpMenuText" xml:space="preserve">
+    <value>С_правка</value>
+  </data>
+  <data name="HistoryDisplayName" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="HistoryInitialState" xml:space="preserve">
+    <value>Исходное Состояние</value>
+  </data>
+  <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
+    <value>Автоматически скрывать главное меню</value>
+  </data>
+  <data name="MainMenuSettingsColorTheme" xml:space="preserve">
+    <value>Цветовая Тема:</value>
+  </data>
+  <data name="MainWindowDefaultTitle" xml:space="preserve">
+    <value>[Заголовок по умолчанию]</value>
+  </data>
+  <data name="SettingsDisplayName" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="SettingsPathEnvironment" xml:space="preserve">
+    <value>Окружение</value>
+  </data>
+  <data name="ToolBarStandard" xml:space="preserve">
+    <value>Стандарт</value>
+  </data>
+  <data name="ToolboxCategory" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="ToolboxDisplayName" xml:space="preserve">
+    <value>Панель Инструментов</value>
+  </data>
+  <data name="ToolsMenuText" xml:space="preserve">
+    <value>Се_рвис</value>
+  </data>
+  <data name="ToolsOptionsCommandText" xml:space="preserve">
+    <value>_Настройки</value>
+  </data>
+  <data name="ToolsOptionsCommandToolTip" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="ViewHistoryCommandText" xml:space="preserve">
+    <value>_История</value>
+  </data>
+  <data name="ViewHistoryCommandToolTip" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="ViewMenuText" xml:space="preserve">
+    <value>_Вид</value>
+  </data>
+  <data name="ViewToolboxCommandText" xml:space="preserve">
+    <value>Панель Инструментов</value>
+  </data>
+  <data name="ViewToolboxCommandToolTip" xml:space="preserve">
+    <value>Панель Инструментов</value>
+  </data>
+  <data name="WindowMenuText" xml:space="preserve">
+    <value>_Окно</value>
+  </data>
+  <data name="MainMenuSettingsLanguage" xml:space="preserve">
+    <value>Язык (Language):</value>
+  </data>
+  <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
+    <value>Требуется перезагрузка</value>
+  </data>
+  <data name="LanguageSystem" xml:space="preserve">
+    <value>Системный</value>
+  </data>
+  <data name="ThemeBlueName" xml:space="preserve">
+    <value>Синяя</value>
+  </data>
+  <data name="ThemeLightName" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="ThemeDarkName" xml:space="preserve">
+    <value>Тёмная</value>
   </data>
 </root>
