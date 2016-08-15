@@ -37,7 +37,7 @@ namespace Gemini.Modules.PropertyGrid.ViewModels
         public PropertyGridViewModel(IShell shell)
         {
             _shell = shell;
-            DisplayName = "Properties";
+            DisplayName = Properties.Resources.PropertyGridViewModel_PropertyGridViewModel_Properties;
         }
 
 	    object ICommandRerouter.GetHandler(CommandDefinitionBase commandDefinition)
