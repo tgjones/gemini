@@ -39,4 +39,5 @@
     </Style>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource GeminiButtonStyle}" />
+    <Style TargetType="{x:Type controls:RepeatingButton}" BasedOn="{StaticResource GeminiButtonStyle}" />
 </ResourceDictionary>

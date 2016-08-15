@@ -122,12 +122,17 @@
     <Compile Include="Framework\Commands\ICommandUiItem.cs" />
     <Compile Include="Framework\Commands\TargetableCommand.cs" />
     <Compile Include="Framework\Commands\ICommandRouter.cs" />
+    <Compile Include="Framework\Controls\AdvancedSlider.cs" />
+    <Compile Include="Framework\Controls\AdvancedSliderBase.xaml.cs">
+      <DependentUpon>AdvancedSliderBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Controls\ClippingHwndHost.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\Controls\HwndWrapper.cs" />
     <Compile Include="Framework\Controls\HwndMouse.cs" />
     <Compile Include="Framework\Controls\HwndMouseEventArgs.cs" />
     <Compile Include="Framework\Controls\HwndMouseState.cs" />
+    <Compile Include="Framework\Controls\RepeatingButton.cs" />
     <Compile Include="Framework\Controls\SliderEx.cs" />
     <Compile Include="Framework\Converters.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
@@ -163,6 +168,7 @@
     <Compile Include="Framework\ToolBars\ToolBarDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemGroupDefinition.cs" />
+    <Compile Include="Framework\Util\SpeedMultiplier.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\Win32\NativeMethods.cs" />
     <Compile Include="Framework\WindowBase.cs" />
@@ -334,6 +340,10 @@
     <Compile Include="Themes\VS2013\Controls\Converters\TreeViewIndentConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Framework\Controls\AdvancedSliderBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\MainMenu\Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -407,6 +417,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\VS2013\Controls\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\AdvancedSlider.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
