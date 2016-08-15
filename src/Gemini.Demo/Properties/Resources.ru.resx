@@ -117,46 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangeObjectValueActionFormat" xml:space="preserve">
-    <value>Change {0} from {1} to {2}</value>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>Общие</value>
   </data>
-  <data name="InspectorBuilderMiscellaneous" xml:space="preserve">
-    <value>Miscellaneous</value>
-  </data>
-  <data name="InspectorDisplayName" xml:space="preserve">
-    <value>Inspector</value>
-  </data>
-  <data name="ResetToolTip" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="ViewInspectorCommandText" xml:space="preserve">
-    <value>I_nspector</value>
-  </data>
-  <data name="ViewInspectorCommandToolTip" xml:space="preserve">
-    <value>Inspector</value>
-  </data>
-  <data name="ResetAll" xml:space="preserve">
-    <value>Reset all ⟲</value>
-  </data>
-  <data name="ResetSymbol" xml:space="preserve">
-    <value>⟲</value>
-  <comment>@Invariant</comment></data>
-  <data name="ColorEditorStandardColors" xml:space="preserve">
-    <value>Standard Colors</value>
-  </data>
-  <data name="ColorEditorStandard" xml:space="preserve">
-    <value>Standard</value>
-  </data>
-  <data name="ColorEditorRecentColors" xml:space="preserve">
-    <value>Recent Colors</value>
-  </data>
-  <data name="ColorEditorAvailableColors" xml:space="preserve">
-    <value>Available Colors</value>
-  </data>
-  <data name="ColorEditorAdvanced" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="ResetObjectValueActionFormat" xml:space="preserve">
-    <value>Reset {0} from {1} to {2}</value>
+  <data name="SettingsPathEnvironment" xml:space="preserve">
+    <value>Окружение</value>
   </data>
 </root>
