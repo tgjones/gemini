@@ -9,7 +9,8 @@
     x:Class="Gemini.Modules.Settings.Views.SettingsView" 
     mc:Ignorable="d" 
     d:DataContext="{d:DesignData Source=../SampleData/SettingsViewModelSampleData.xaml}"
-    Background="{x:Static SystemColors.ControlBrush}"
+    Background="{DynamicResource EnvironmentWindowBackground}"
+    Foreground="{DynamicResource EnvironmentWindowText}"
     Width="760" Height="500" MinWidth="512" MinHeight="300" 
     WindowStartupLocation="CenterOwner"
     ShowInTaskbar="False">
@@ -30,8 +31,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors" 
-                  Background="Transparent">
+        <TreeView x:Name="TreeView" ItemsSource="{Binding Pages}" SelectedValuePath="Editors">
             <i:Interaction.Behaviors>
                 <behaviors:BindableTreeViewSelectedItemBehavior SelectedItem="{Binding SelectedPage, Mode=TwoWay}" />
             </i:Interaction.Behaviors>
@@ -47,15 +47,15 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="10" />
             </Grid.RowDefinitions>
-            
-            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl HorizontalContentAlignment="Stretch"
+
+            <ScrollViewer IsTabStop="False" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl IsTabStop="False" HorizontalContentAlignment="Stretch"
                       ItemsSource="{Binding ElementName=TreeView, Path=SelectedValue}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
                       BorderBrush="{x:Null}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ContentControl cal:View.Model="{Binding}" />
+                            <ContentControl IsTabStop="False" cal:View.Model="{Binding}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

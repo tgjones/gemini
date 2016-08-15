@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="clr-namespace:Gemini.Demo.Modules.Shell.ViewModels"
     x:Class="Gemini.Demo.Modules.Shell.Views.DemoApplicationSettingsView" mc:Ignorable="d" d:DesignHeight="300"
-    d:DesignWidth="300" d:DataContext="{d:DesignInstance dd:DemoApplicationSettingsViewModel}">
+    d:DesignWidth="300" d:DataContext="{d:DesignInstance dd:DemoApplicationSettingsViewModel}"
+    IsTabStop="False">
     <Grid>
         <CheckBox IsChecked="{Binding ConfirmExit}">Confirm application exit</CheckBox>
     </Grid>

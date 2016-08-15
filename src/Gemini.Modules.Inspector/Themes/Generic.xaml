@@ -39,7 +39,8 @@
 	</Style>
 
 	<Style TargetType="local:ScreenColorPicker">
-		<Setter Property="Template">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource GeminiFocusVisualStyle}" />
+        <Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="local:ScreenColorPicker">
 					<Image Source="/Gemini.Modules.Inspector;component/Resources/eyedropper_16xLG.png" />
