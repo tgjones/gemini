@@ -58,5 +58,16 @@ namespace Gemini.Properties {
                 this["LanguageCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RecentDocuments {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RecentDocuments"]));
+            }
+            set {
+                this["RecentDocuments"] = value;
+            }
+        }
     }
 }

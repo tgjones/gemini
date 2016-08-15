@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 using Gemini.Framework;
 using Gemini.Framework.Threading;
 using Gemini.Modules.CodeEditor.Views;
+using System.ComponentModel;
+using Gemini.Modules.StatusBar;
+using Caliburn.Micro;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
+    [DisplayName("Code Editor")]
     [Export(typeof(CodeEditorViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
 #pragma warning disable 659
@@ -17,6 +21,8 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         private readonly LanguageDefinitionManager _languageDefinitionManager;
         private string _originalText;
         private ICodeEditorView _view;
+        private IStatusBar _statusBar;
+        private bool notYetLoaded = false;
 
         [ImportingConstructor]
         public CodeEditorViewModel(LanguageDefinitionManager languageDefinitionManager)
@@ -34,14 +40,21 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             writer.Write(FilePath);
         }
 
-        public override void LoadState(BinaryReader reader)
+        public override async void LoadState(BinaryReader reader)
         {
-            Load(reader.ReadString());
+            await Load(reader.ReadString());
         }
 
         protected override void OnViewLoaded(object view)
         {
             _view = (ICodeEditorView) view;
+            _statusBar = IoC.Get<IStatusBar>();
+
+            if (notYetLoaded)
+            {
+                ApplyOriginalText();
+                notYetLoaded = false;
+            }
         }
 
         public override bool Equals(object obj)
@@ -76,6 +89,12 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         private void ApplyOriginalText()
         {
+            // At StartUp, _view is null, so notYetLoaded flag is added
+            if (_view == null)
+            {
+                notYetLoaded = true;
+                return;
+            }
             _view.TextEditor.Text = _originalText;
 
             _view.TextEditor.TextChanged += delegate
@@ -83,11 +102,36 @@ namespace Gemini.Modules.CodeEditor.ViewModels
                 IsDirty = string.Compare(_originalText, _view.TextEditor.Text) != 0;
             };
 
+            UpdateStatusBar();
+
+            // To update status bar items, Caret PositionChanged event is added
+            _view.TextEditor.TextArea.Caret.PositionChanged += delegate
+            {
+                UpdateStatusBar();
+            };
             var fileExtension = Path.GetExtension(FileName).ToLower();
 
             ILanguageDefinition languageDefinition = _languageDefinitionManager.GetDefinitionByExtension(fileExtension);
 
             SetLanguage(languageDefinition);
+        }
+
+        /// <summary>
+        /// Update Column and Line position properties when caret position is changed
+        /// </summary>
+        private void UpdateStatusBar()
+        {
+            int lineNumber = _view.TextEditor.Document.GetLineByOffset(_view.TextEditor.CaretOffset).LineNumber;
+            int colPosition = _view.TextEditor.TextArea.Caret.VisualColumn + 1;
+
+            // TODO: Now I don't know about Ch#
+            //int charPosition = _view.TextEditor.CaretOffset;
+
+            if (_statusBar != null && _statusBar.Items.Count >= 3)
+            {
+                _statusBar.Items[1].Message = string.Format("Ln {0}", lineNumber);
+                _statusBar.Items[2].Message = string.Format("Col {0}", colPosition);
+            }
         }
 
         private void SetLanguage(ILanguageDefinition languageDefinition)

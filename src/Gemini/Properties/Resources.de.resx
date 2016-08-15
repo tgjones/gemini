@@ -261,4 +261,16 @@
   <data name="AllFiles" xml:space="preserve">
     <value>Alle Dateien</value>
   </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Alle speichern</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Alle speichern</value>
+  </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>Zuletzt geöffnete Dateien</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>Zuletzt geöffnete Dateien</value>
+  </data>
 </root>
