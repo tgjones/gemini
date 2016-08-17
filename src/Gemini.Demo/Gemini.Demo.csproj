@@ -80,6 +80,9 @@
       <HintPath>..\packages\Microsoft.CodeAnalysis.CSharp.1.1.1\lib\net45\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
@@ -205,6 +208,20 @@
     <Compile Include="Modules\TextEditor\Views\EditorView.xaml.cs">
       <DependentUpon>EditorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\WebPage\Commands\ViewWebPageCommandDefinition.cs" />
+    <Compile Include="Modules\WebPage\Commands\ViewWebPageCommandHandler.cs" />
+    <Compile Include="Modules\WebPage\Controls\InternetExplorer.xaml.cs">
+      <DependentUpon>InternetExplorer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\WebPage\Converters\BoundedPercentageConverter.cs" />
+    <Compile Include="Modules\WebPage\Converters\IsLoadingToHeightConverter.cs" />
+    <Compile Include="Modules\WebPage\EditorProvider.cs" />
+    <Compile Include="Modules\WebPage\IWebPageDocument.cs" />
+    <Compile Include="Modules\WebPage\ViewModels\WebPageViewModel.cs" />
+    <Compile Include="Modules\WebPage\Views\WebPageView.xaml.cs">
+      <DependentUpon>WebPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\WebPage\WebPageDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -303,6 +320,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\WebPage\Controls\InternetExplorer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\WebPage\Views\WebPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <SplashScreen Include="Resources\Splash.png" />
@@ -328,6 +353,24 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\arrow-left.png" />
+    <Resource Include="Resources\arrow-right.png" />
+    <Resource Include="Resources\refresh.png" />
+    <Resource Include="Resources\WebBrowser.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">

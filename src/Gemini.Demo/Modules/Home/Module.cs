@@ -6,6 +6,7 @@ using Gemini.Demo.Modules.Home.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Menus;
 using Gemini.Modules.PropertyGrid;
+using Gemini.Demo.Modules.WebPage.Commands;
 
 namespace Gemini.Demo.Modules.Home
 {
@@ -23,6 +24,10 @@ namespace Gemini.Demo.Modules.Home
         [Export]
         public static MenuItemDefinition ViewHelixMenuItem = new CommandMenuItemDefinition<ViewHelixCommandDefinition>(
             ViewDemoMenuGroup, 1);
+
+        [Export]
+        public static MenuItemDefinition ViewWebBrowserMenuItem = new CommandMenuItemDefinition<ViewWebPageCommandDefinition>(
+            ViewDemoMenuGroup, 2);
 
 	    public override IEnumerable<IDocument> DefaultDocuments
 	    {
