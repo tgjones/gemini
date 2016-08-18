@@ -1,21 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:Gemini.Modules.Inspector.Controls"
+                    xmlns:converters="clr-namespace:Gemini.Modules.Inspector.Converters"
                     xmlns:cal="http://www.caliburnproject.org"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
                     xmlns:p="clr-namespace:Gemini.Modules.Inspector.Properties"
                     xmlns:l="http://gu.se/Localization">
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
-    <xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-
-    <Style x:Key="ResetButton" TargetType="Button" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-        <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.5" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
+    <converters:BoolToVisibilityConverter FalseValue="Hidden" x:Key="BoolToVisibilityConverter"/>
 
     <controls:InspectorItemTemplateSelector x:Key="InspectorItemTemplateSelector">
         <controls:InspectorItemTemplateSelector.LabelledTemplate>
@@ -42,7 +34,7 @@
                             Content="{l:Static p:Resources.ResetSymbol}"
                             ToolTip="{l:Static p:Resources.ResetToolTip}"
                             Foreground="{DynamicResource EnvironmentToolWindowText}"
-                            Style="{StaticResource ResetButton}"
+                            BorderBrush="Transparent"
                             IsEnabled="{Binding IsDirty}"
                             Visibility="{Binding CanReset, Converter={StaticResource BoolToVisibilityConverter}}"
                             cal:Message.Attach="Reset"/>

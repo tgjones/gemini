@@ -11,5 +11,5 @@
              FontFamily="Consolas"
              FontSize="14"
              ScrollViewer.VerticalScrollBarVisibility="Visible"
-             ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
+             ScrollViewer.HorizontalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True"/>
 </UserControl>

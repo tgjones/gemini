@@ -163,11 +163,14 @@ namespace Gemini.Framework.Win32
         [DllImport("user32.dll")]
         public static extern bool GetCursorPos(ref NativePoint point);
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetCursorPos(int x, int y);
 
         [DllImport("user32.dll")]
         public static extern int ShowCursor(bool bShow);
+
+        [DllImport("user32.dll")]
+        public static extern uint GetDoubleClickTime();
 
         #endregion
 
@@ -196,6 +199,11 @@ namespace Gemini.Framework.Win32
         public static int HighWord(int input)
         {
             return (short) (input >> 16);
+        }
+
+        public static bool SetCursorPos(System.Windows.Point pos)
+        {
+            return SetCursorPos((int) pos.X, (int) pos.Y);
         }
 
         #endregion

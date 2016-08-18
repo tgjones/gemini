@@ -1,0 +1,40 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:Gemini.Modules.Inspector.Inspectors"
+             xmlns:Controls="clr-namespace:Gemini.Framework.Controls;assembly=Gemini"
+             x:Class="Gemini.Modules.Inspector.Inspectors.AdvancedSliderEditorView"
+             mc:Ignorable="d" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Controls:AdvancedSlider x:Name="slider" Grid.Column="0" Grid.RowSpan="2"
+                                 BorderThickness="1"
+                                 Value="{Binding Path=Value, Mode=TwoWay}"
+                                 Type="{Binding Path=Type}"
+                                 ValueType="{Binding Path=ValueType}"
+                                 ValueMax="{Binding Path=Maximum}"
+                                 ValueMin="{Binding Path=Minimum}"
+                                 Speed="{Binding Path=Speed}"
+                                 ValueFormat="{Binding Path=ValueFormat}"
+                                 MouseCaptured="{Binding Path=MouseCaptured, Mode=OneWayToSource}"
+                                 />
+
+        <Controls:RepeatingButton Grid.Column="1" Grid.Row="0" cal:Message.Attach="Up" BorderBrush="Transparent" Padding="0">
+            <Path Fill="{DynamicResource EnvironmentToolWindowText}" Data="M 0 6 L 12 6 L 6 0 Z"/>
+        </Controls:RepeatingButton>
+        <Controls:RepeatingButton Grid.Column="1" Grid.Row="1" cal:Message.Attach="Down" BorderBrush="Transparent" Padding="0">
+            <Path Fill="{DynamicResource EnvironmentToolWindowText}" Data="M 0 0 L 6 6 L 12 0 Z"/>
+        </Controls:RepeatingButton>
+    </Grid>
+</UserControl>
