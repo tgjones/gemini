@@ -21,6 +21,28 @@ namespace Gemini.Modules.UndoRedo.Services
             get { return _redoStack; }
         }
 
+        private int? _undoCountLimit = null;
+
+        public int? UndoCountLimit
+        {
+            get { return _undoCountLimit; }
+
+            set
+            {
+                _undoCountLimit = value;
+                EnforceLimit();
+            }
+        }
+
+        private void EnforceLimit()
+        {
+            if (!_undoCountLimit.HasValue)
+                return;
+
+            while (_undoStack.Count > UndoCountLimit.Value)
+                PopFront(_undoStack);
+        }
+
         public UndoRedoManager()
         {
             _undoStack = new BindableCollection<IUndoableAction>();
@@ -32,6 +54,7 @@ namespace Gemini.Modules.UndoRedo.Services
             action.Execute();
             Push(_undoStack, action);
             _redoStack.Clear();
+            EnforceLimit();
         }
 
         public void Undo(int actionCount)
@@ -91,6 +114,8 @@ namespace Gemini.Modules.UndoRedo.Services
                     action.Execute();
                     Push(_undoStack, action);
                 }
+
+                EnforceLimit();
             }
             finally
             {
@@ -110,8 +135,10 @@ namespace Gemini.Modules.UndoRedo.Services
                     thisAction.Execute();
                     Push(_undoStack, thisAction);
                     if (thisAction == action)
-                        return;
+                        break;
                 }
+
+                EnforceLimit();
             }
             finally
             {
@@ -147,6 +174,13 @@ namespace Gemini.Modules.UndoRedo.Services
         {
             var item = stack[stack.Count - 1];
             stack.RemoveAt(stack.Count - 1);
+            return item;
+        }
+
+        private static IUndoableAction PopFront(BindableCollection<IUndoableAction> stack)
+        {
+            var item = stack[0];
+            stack.RemoveAt(0);
             return item;
         }
     }
