@@ -140,7 +140,7 @@
   </data>
   <data name="ResetSymbol" xml:space="preserve">
     <value>⟲</value>
-  </data>
+  <comment>@Invariant</comment></data>
   <data name="ColorEditorStandardColors" xml:space="preserve">
     <value>Standard Colors</value>
   </data>

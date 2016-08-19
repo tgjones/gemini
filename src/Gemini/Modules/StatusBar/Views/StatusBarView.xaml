@@ -15,7 +15,8 @@
     <StatusBar x:Name="StatusBar" ItemsSource="{Binding Items}"
                controls:DynamicStyle.ItemContainerBaseStyle="{DynamicResource {x:Type StatusBarItem}}"
                controls:DynamicStyle.ItemContainerDerivedStyle="{StaticResource StatusBarItemStyle}"
-               Background="#FF007ACC" Foreground="White">
+               Background="{DynamicResource StatusBarBackground}"
+               Foreground="{DynamicResource StatusBarForeground}">
         <StatusBar.ItemsPanel>
             <ItemsPanelTemplate>
                 <Grid x:Name="StatusBarGrid" Loaded="OnStatusBarGridLoaded" />

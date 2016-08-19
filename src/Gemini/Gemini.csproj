@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -121,12 +122,17 @@
     <Compile Include="Framework\Commands\ICommandUiItem.cs" />
     <Compile Include="Framework\Commands\TargetableCommand.cs" />
     <Compile Include="Framework\Commands\ICommandRouter.cs" />
+    <Compile Include="Framework\Controls\AdvancedSlider.cs" />
+    <Compile Include="Framework\Controls\AdvancedSliderBase.xaml.cs">
+      <DependentUpon>AdvancedSliderBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Framework\Controls\ClippingHwndHost.cs" />
     <Compile Include="Framework\Controls\ExpanderEx.cs" />
     <Compile Include="Framework\Controls\HwndWrapper.cs" />
     <Compile Include="Framework\Controls\HwndMouse.cs" />
     <Compile Include="Framework\Controls\HwndMouseEventArgs.cs" />
     <Compile Include="Framework\Controls\HwndMouseState.cs" />
+    <Compile Include="Framework\Controls\RepeatingButton.cs" />
     <Compile Include="Framework\Controls\SliderEx.cs" />
     <Compile Include="Framework\Converters.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
@@ -162,6 +168,7 @@
     <Compile Include="Framework\ToolBars\ToolBarDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemDefinition.cs" />
     <Compile Include="Framework\ToolBars\ToolBarItemGroupDefinition.cs" />
+    <Compile Include="Framework\Util\SpeedMultiplier.cs" />
     <Compile Include="Framework\VisualTreeUtility.cs" />
     <Compile Include="Framework\Win32\NativeMethods.cs" />
     <Compile Include="Framework\WindowBase.cs" />
@@ -177,6 +184,10 @@
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\RecentFiles\IRecentFiles.cs" />
+    <Compile Include="Modules\RecentFiles\MenuDefinitions.cs" />
+    <Compile Include="Modules\RecentFiles\ViewModels\RecentFileItemViewModel.cs" />
+    <Compile Include="Modules\RecentFiles\ViewModels\RecentFileViewModel.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandDefinition.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandHandler.cs" />
     <Compile Include="Modules\Settings\ISettingsEditor.cs" />
@@ -188,6 +199,12 @@
     </Compile>
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandListDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
@@ -313,11 +330,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
-    <Compile Include="Properties\Resources.de.Designer.cs">
-      <DependentUpon>Resources.de.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -330,8 +342,13 @@
     </Compile>
     <Compile Include="Framework\Themes\DarkTheme.cs" />
     <Compile Include="Framework\Themes\LightTheme.cs" />
+    <Compile Include="Themes\VS2013\Controls\Converters\TreeViewIndentConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Framework\Controls\AdvancedSliderBase.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Modules\MainMenu\Resources\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -384,7 +401,55 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\VS2013\Controls\Focus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\ColorCanvas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\AdvancedSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\VS2013\Controls\Merged.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\Slider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013\Controls\TreeView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -422,10 +487,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <Resource Include="Framework\ShaderEffects\GrayscaleEffect.ps" />
     <None Include="Gemini.nuspec" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -438,15 +507,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.de.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ko.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
   </ItemGroup>
   <ItemGroup>
@@ -454,6 +523,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\SaveAll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

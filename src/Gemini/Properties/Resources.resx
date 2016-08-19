@@ -159,6 +159,12 @@
   <data name="FileOpenCommandToolTip" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>Save _As...</value>
   </data>
@@ -251,5 +257,20 @@
   </data>
   <data name="ThemeDarkName" xml:space="preserve">
     <value>Dark</value>
+  </data>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>Failed to set value: {0}</value>
+  </data>
+  <data name="AllSupportedFiles" xml:space="preserve">
+    <value>All Supported Files</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>All Files</value>
+  </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Save All</value>
   </data>
 </root>

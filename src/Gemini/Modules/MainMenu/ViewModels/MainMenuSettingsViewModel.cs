@@ -16,7 +16,9 @@ namespace Gemini.Modules.MainMenu.ViewModels
             string.Empty,
             "en",
             "de",
+            "ru",
             "zh-Hans",
+            "ko",
         };
 
         private ITheme _selectedTheme;
