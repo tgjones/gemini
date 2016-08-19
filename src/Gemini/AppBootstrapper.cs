@@ -39,7 +39,7 @@ namespace Gemini
             if (!string.IsNullOrWhiteSpace(code))
             {
                 var culture = CultureInfo.GetCultureInfo(code);
-                Translator.CurrentCulture = culture;
+                Translator.Culture = culture;
                 Thread.CurrentThread.CurrentUICulture = culture;
                 Thread.CurrentThread.CurrentCulture = culture;
             }
