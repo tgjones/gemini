@@ -235,7 +235,7 @@
     <value>Werkzeuge</value>
   </data>
   <data name="MainMenuSettingsLanguage" xml:space="preserve">
-    <value>Sprache:</value>
+    <value>Sprache (Language):</value>
   </data>
   <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
     <value>Erfordert Neustart</value>
