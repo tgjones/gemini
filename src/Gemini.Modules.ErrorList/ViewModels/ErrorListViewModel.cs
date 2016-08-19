@@ -4,6 +4,7 @@ using System.Linq;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
+using Gemini.Modules.ErrorList.Properties;
 
 namespace Gemini.Modules.ErrorList.ViewModels
 {
@@ -75,7 +76,7 @@ namespace Gemini.Modules.ErrorList.ViewModels
 
         public ErrorListViewModel()
         {
-            DisplayName = "Error List";
+            DisplayName = Resources.ViewErrorListCommandToolTip;
 
             ToolBarDefinition = ToolBarDefinitions.ErrorListToolBar;
 

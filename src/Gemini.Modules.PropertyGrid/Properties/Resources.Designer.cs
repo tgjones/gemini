@@ -61,6 +61,15 @@ namespace Gemini.Modules.PropertyGrid.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Properties.
+        /// </summary>
+        internal static string PropertyGridViewModel_PropertyGridViewModel_Properties {
+            get {
+                return ResourceManager.GetString("PropertyGridViewModel_PropertyGridViewModel_Properties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Properties _Window.
         /// </summary>
         internal static string ViewPropertyGridCommandText {
