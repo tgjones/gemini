@@ -6,6 +6,7 @@
 			 xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
 			 xmlns:converters="clr-namespace:Gemini.Modules.Shell.Converters"
              xmlns:toolbarcontrols="clr-namespace:Gemini.Modules.ToolBars.Controls"
+             xmlns:b="clr-namespace:Gemini.Modules.Shell.Behaviors"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d" 
@@ -28,7 +29,9 @@
         <xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
 							 AnchorablesSource="{Binding Tools}"
 							 ActiveContent="{Binding ActiveLayoutItem, Mode=TwoWay}"
-                             LayoutUpdated="OnManagerLayoutUpdated">
+                             LayoutUpdated="OnManagerLayoutUpdated"
+                             b:DropFilesBehavior.AllowOpen="True"
+                             AllowDrop="True">
             <xcad:DockingManager.LayoutItemTemplateSelector>
                 <controls:PanesTemplateSelector>
                     <controls:PanesTemplateSelector.DocumentTemplate>
