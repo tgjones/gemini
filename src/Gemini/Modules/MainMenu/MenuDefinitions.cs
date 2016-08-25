@@ -22,6 +22,9 @@ namespace Gemini.Modules.MainMenu
         public static MenuItemGroupDefinition FileSaveMenuGroup = new MenuItemGroupDefinition(FileMenu, 6);
 
         [Export]
+        public static MenuItemGroupDefinition FileOpenRecentMenuGroup = new MenuItemGroupDefinition(FileMenu, 9);
+
+        [Export]
         public static MenuItemGroupDefinition FileExitOpenMenuGroup = new MenuItemGroupDefinition(FileMenu, 10);
 
         [Export]

@@ -5,6 +5,7 @@ namespace Gemini.Framework
     public interface IPersistedDocument : IDocument
     {
         bool IsNew { get; }
+        bool IsDirty { get; }
         string FileName { get; }
         string FilePath { get; }
 

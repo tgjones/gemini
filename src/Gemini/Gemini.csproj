@@ -179,6 +179,14 @@
     <Compile Include="Modules\MainMenu\Views\MainMenuSettingsView.xaml.cs">
       <DependentUpon>MainMenuSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\OpenRecentFileCommandListDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandDefinition.cs" />
+    <Compile Include="Modules\RecentFiles\Commands\RecentFilesCommandHandler.cs" />
+    <Compile Include="Modules\RecentFiles\IRecentFiles.cs" />
+    <Compile Include="Modules\RecentFiles\MenuDefinitions.cs" />
+    <Compile Include="Modules\RecentFiles\ViewModels\RecentFileItemViewModel.cs" />
+    <Compile Include="Modules\RecentFiles\ViewModels\RecentFileViewModel.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandDefinition.cs" />
     <Compile Include="Modules\Settings\Commands\OpenSettingsCommandHandler.cs" />
     <Compile Include="Modules\Settings\ISettingsEditor.cs" />
