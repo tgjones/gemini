@@ -61,6 +61,33 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to set value: {0}.
+        /// </summary>
+        internal static string AdvancedSliderCommitErrorFormat {
+            get {
+                return ResourceManager.GetString("AdvancedSliderCommitErrorFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Files.
+        /// </summary>
+        internal static string AllFiles {
+            get {
+                return ResourceManager.GetString("AllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Supported Files.
+        /// </summary>
+        internal static string AllSupportedFiles {
+            get {
+                return ResourceManager.GetString("AllSupportedFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to _Edit.
         /// </summary>
         internal static string EditMenuText {
@@ -160,6 +187,15 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string FileNewCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileNewCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untitled {0}.
         /// </summary>
         internal static string FileNewUntitled {
@@ -183,6 +219,42 @@ namespace Gemini.Properties {
         internal static string FileOpenCommandToolTip {
             get {
                 return ResourceManager.GetString("FileOpenCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string FileRecentFilesCommandText {
+            get {
+                return ResourceManager.GetString("FileRecentFilesCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Files.
+        /// </summary>
+        internal static string FileRecentFilesCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileRecentFilesCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save All.
+        /// </summary>
+        internal static string FileSaveAllCommandText {
+            get {
+                return ResourceManager.GetString("FileSaveAllCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save All.
+        /// </summary>
+        internal static string FileSaveAllCommandToolTip {
+            get {
+                return ResourceManager.GetString("FileSaveAllCommandToolTip", resourceCulture);
             }
         }
         
@@ -300,6 +372,15 @@ namespace Gemini.Properties {
         internal static string MainWindowDefaultTitle {
             get {
                 return ResourceManager.GetString("MainWindowDefaultTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes to the {0} &quot;{1}&quot; before closing?.
+        /// </summary>
+        internal static string SaveChangesBeforeClosingMessage {
+            get {
+                return ResourceManager.GetString("SaveChangesBeforeClosingMessage", resourceCulture);
             }
         }
         

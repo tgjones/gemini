@@ -123,4 +123,7 @@
   <data name="SettingsPathEnvironment" xml:space="preserve">
     <value>Umgebung</value>
   </data>
+  <data name="EditorProviderTextFile" xml:space="preserve">
+    <value>Textdatei</value>
+  </data>
 </root>

@@ -61,6 +61,15 @@ namespace Gemini.Demo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Text File.
+        /// </summary>
+        internal static string EditorProviderTextFile {
+            get {
+                return ResourceManager.GetString("EditorProviderTextFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         internal static string SettingsPageGeneral {
