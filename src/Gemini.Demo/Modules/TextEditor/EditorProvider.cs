@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Gemini.Demo.Modules.TextEditor.ViewModels;
 using Gemini.Framework;
 using Gemini.Framework.Services;
+using Gemini.Demo.Properties;
 
 namespace Gemini.Demo.Modules.TextEditor
 {
@@ -19,7 +20,7 @@ namespace Gemini.Demo.Modules.TextEditor
 
         public IEnumerable<EditorFileType> FileTypes
         {
-            get { yield return new EditorFileType("Text File", ".txt"); }
+            get { yield return new EditorFileType(Resources.EditorProviderTextFile, ".txt"); }
         }
 
 		public bool Handles(string path)
