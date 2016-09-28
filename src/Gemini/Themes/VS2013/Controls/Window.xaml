@@ -1,8 +1,12 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:shaderEffects="clr-namespace:Gemini.Framework.ShaderEffects"
+                    xmlns:converters="clr-namespace:Gemini.Framework.ShaderEffects.Converters"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
-
+    <converters:BindingProxy x:Key="DefaultBackground" Data="{DynamicResource MainWindowCaptionActiveBackground}"/>
+    <converters:SolidColorBrushToColorConverter x:Key="SolidColorBrushToColorConverter"/>
+    
     <Style x:Key="MainWindowStyle" 
            TargetType="controls:MetroWindow"
            BasedOn="{StaticResource {x:Type controls:MetroWindow}}">
@@ -17,6 +21,24 @@
             <Trigger Property="IsActive" Value="False">
                 <Setter Property="TitleForeground" Value="{DynamicResource MainWindowCaptionInactiveText}" />
             </Trigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Icon, Mode=OneWay, Converter={x:Static converters:IsNullConverter.Instance}}" Value="False">
+                <Setter Property="IconTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <controls:MultiFrameImage Width="{TemplateBinding Width}"
+                                              Height="{TemplateBinding Height}"
+                                              RenderOptions.BitmapScalingMode="{Binding IconBitmapScalingMode, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
+                                              RenderOptions.EdgeMode="{Binding IconEdgeMode, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
+                                              Source="{TemplateBinding Content}" >
+                                <controls:MultiFrameImage.Effect>
+                                    <shaderEffects:ThemedImageEffect Background="{Binding Converter={StaticResource SolidColorBrushToColorConverter}, Mode=OneWay,
+                                                                                          Source={StaticResource DefaultBackground}, Path=Data}"/>
+                                </controls:MultiFrameImage.Effect>
+                            </controls:MultiFrameImage>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 
