@@ -267,4 +267,10 @@
   <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
     <value>设置的数值失败：{0}</value>
   </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>全屏</value>
+  </data>
 </root>

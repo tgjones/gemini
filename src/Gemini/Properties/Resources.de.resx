@@ -276,4 +276,10 @@
   <data name="FileNewCommandToolTip" xml:space="preserve">
     <value>Neu</value>
   </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>Vollbild</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>Vollbild</value>
+  </data>
 </root>
