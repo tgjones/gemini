@@ -130,10 +130,10 @@
     <value>{0} Сообщение</value>
   </data>
   <data name="ViewErrorListCommandText" xml:space="preserve">
-    <value>Список О_шибок</value>
+    <value>Список о_шибок</value>
   </data>
   <data name="ViewErrorListCommandToolTip" xml:space="preserve">
-    <value>Список Ошибок</value>
+    <value>Список ошибок</value>
   </data>
   <data name="WarningTextPlural" xml:space="preserve">
     <value>{0} Предупреждений</value>

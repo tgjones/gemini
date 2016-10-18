@@ -160,10 +160,10 @@
     <value>Открыть</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
-    <value>Сохранить _Как...</value>
+    <value>Сохранить _как...</value>
   </data>
   <data name="FileSaveAsCommandToolTip" xml:space="preserve">
-    <value>Сохранить Как</value>
+    <value>Сохранить как</value>
   </data>
   <data name="FileSaveCommandText" xml:space="preserve">
     <value>_Сохранить</value>
@@ -178,13 +178,13 @@
     <value>История</value>
   </data>
   <data name="HistoryInitialState" xml:space="preserve">
-    <value>Исходное Состояние</value>
+    <value>Исходное состояние</value>
   </data>
   <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
     <value>Автоматически скрывать главное меню</value>
   </data>
   <data name="MainMenuSettingsColorTheme" xml:space="preserve">
-    <value>Цветовая Тема:</value>
+    <value>Цветовая тема:</value>
   </data>
   <data name="MainWindowDefaultTitle" xml:space="preserve">
     <value>[Заголовок по умолчанию]</value>
@@ -205,7 +205,7 @@
     <value>Категория</value>
   </data>
   <data name="ToolboxDisplayName" xml:space="preserve">
-    <value>Панель Инструментов</value>
+    <value>Панель инструментов</value>
   </data>
   <data name="ToolsMenuText" xml:space="preserve">
     <value>Се_рвис</value>
@@ -226,10 +226,10 @@
     <value>_Вид</value>
   </data>
   <data name="ViewToolboxCommandText" xml:space="preserve">
-    <value>Панель Инструментов</value>
+    <value>Панель инструментов</value>
   </data>
   <data name="ViewToolboxCommandToolTip" xml:space="preserve">
-    <value>Панель Инструментов</value>
+    <value>Панель инструментов</value>
   </data>
   <data name="WindowMenuText" xml:space="preserve">
     <value>_Окно</value>
@@ -257,5 +257,32 @@
   </data>
   <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
     <value>Во весь экран</value>
+  </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>Последние файлы</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>Последние файлы</value>
+  </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Сохранить все</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Сохранить все</value>
+  </data>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>Не удалось задать значение: {0}</value>
+  </data>
+  <data name="AllSupportedFiles" xml:space="preserve">
+    <value>Все поддерживаемые файлы</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Все файлы</value>
+  </data>
+  <data name="SaveChangesBeforeClosingMessage" xml:space="preserve">
+    <value>Сохранить изменения в {0} "{1}" перед закрытием?</value>
+  </data>
+  <data name="FileNewCommandToolTip" xml:space="preserve">
+    <value>Новый</value>
   </data>
 </root>
