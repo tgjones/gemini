@@ -279,4 +279,10 @@
   <data name="SaveChangesBeforeClosingMessage" xml:space="preserve">
     <value>Save changes to the {0} "{1}" before closing?</value>
   </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
 </root>

@@ -252,4 +252,10 @@
   <data name="ThemeDarkName" xml:space="preserve">
     <value>Тёмная</value>
   </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>Во весь экран</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>Во весь экран</value>
+  </data>
 </root>
