@@ -4,6 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dd="clr-namespace:Gemini.Modules.ErrorList.Design"
              xmlns:converters="clr-namespace:Gemini.Modules.ErrorList.Converters"
+             xmlns:p="clr-namespace:Gemini.Modules.ErrorList.Properties"
+             xmlns:l="http://gu.se/Localization"
              x:Class="Gemini.Modules.ErrorList.Views.ErrorListView"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800"
@@ -29,10 +31,10 @@
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridTextColumn Width="SizeToCells" Binding="{Binding Number}" />
-				<DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}" />
-				<DataGridTextColumn Width="SizeToCells" MinWidth="150" Header="File" Binding="{Binding File}" />
-				<DataGridTextColumn Width="80" Header="Line" Binding="{Binding Line}" />
-				<DataGridTextColumn Width="80" Header="Column" Binding="{Binding Column}" />
+                <DataGridTextColumn Width="*" Header="{l:Static p:Resources.ErrorListHeaderDescription}" Binding="{Binding Description}" />
+                <DataGridTextColumn Width="SizeToCells" MinWidth="150" Header="{l:Static p:Resources.ErrorListHeaderFile}" Binding="{Binding File}" />
+                <DataGridTextColumn Width="80" Header="{l:Static p:Resources.ErrorListHeaderLine}" Binding="{Binding Line}" />
+                <DataGridTextColumn Width="80" Header="{l:Static p:Resources.ErrorListHeaderColumn}" Binding="{Binding Column}" />
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>

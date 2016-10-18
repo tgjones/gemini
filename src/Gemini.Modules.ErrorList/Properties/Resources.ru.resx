@@ -141,4 +141,16 @@
   <data name="WarningTextSingular" xml:space="preserve">
     <value>{0} Предупреждение</value>
   </data>
+  <data name="ErrorListHeaderLine" xml:space="preserve">
+    <value>Строка</value>
+  </data>
+  <data name="ErrorListHeaderColumn" xml:space="preserve">
+    <value>Столбец</value>
+  </data>
+  <data name="ErrorListHeaderFile" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="ErrorListHeaderDescription" xml:space="preserve">
+    <value>Описание</value>
+  </data>
 </root>
