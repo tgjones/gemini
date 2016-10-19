@@ -42,7 +42,7 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 
             _view.textBox.TextChanged += delegate
             {
-                IsDirty = string.Equals(_originalText, _view.textBox.Text, StringComparison.Ordinal);
+                IsDirty = !string.Equals(_originalText, _view.textBox.Text, StringComparison.Ordinal);
             };
         }
 
