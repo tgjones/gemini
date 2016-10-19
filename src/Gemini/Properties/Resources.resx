@@ -147,17 +147,17 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>_File</value>
   </data>
-  <data name="FileNewCommandText" xml:space="preserve">
+  <data name="ItemNewCommandText" xml:space="preserve">
     <value>_New</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>Untitled {0}</value>
   </data>
-  <data name="FileOpenCommandText" xml:space="preserve">
+  <data name="ItemOpenCommandText" xml:space="preserve">
     <value>_Open</value>
   </data>
   <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>Open</value>
+    <value>File</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>Save _As...</value>
@@ -284,5 +284,14 @@
   </data>
   <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
     <value>Full Screen</value>
+  </data>
+  <data name="FolderOpenCommandText" xml:space="preserve">
+    <value>_Folder...</value>
+  </data>
+  <data name="FolderOpenCommandToolTip" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="FileOpenCommandText" xml:space="preserve">
+    <value>_File...</value>
   </data>
 </root>

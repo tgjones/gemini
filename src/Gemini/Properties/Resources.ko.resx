@@ -147,17 +147,14 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>파일(_F)</value>
   </data>
-  <data name="FileNewCommandText" xml:space="preserve">
+  <data name="ItemNewCommandText" xml:space="preserve">
     <value>새로 만들기(_N)</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>문서 {0}</value>
   </data>
-  <data name="FileOpenCommandText" xml:space="preserve">
+  <data name="ItemOpenCommandText" xml:space="preserve">
     <value>열기(_O)</value>
-  </data>
-  <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>열기</value>
   </data>
   <data name="FileRecentFilesCommandText" xml:space="preserve">
     <value>최근에 사용한 파일</value>

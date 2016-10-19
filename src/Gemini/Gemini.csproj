@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -144,7 +145,7 @@
     <Compile Include="Framework\Menus\TextMenuItemDefinition.cs" />
     <Compile Include="Framework\PersistedDocument.cs" />
     <Compile Include="Framework\Results\ShowDialogResult.cs" />
-    <Compile Include="Framework\Services\EditorFileType.cs" />
+    <Compile Include="Framework\Services\EditorItemType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
     <Compile Include="Framework\ShaderEffects\GrayscaleEffect.cs" />
@@ -186,6 +187,9 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Framework\OpenDocumentHelper.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenFolderCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\OpenFolderCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\ViewFullscreenCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />

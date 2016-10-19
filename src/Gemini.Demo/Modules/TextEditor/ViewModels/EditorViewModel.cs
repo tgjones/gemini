@@ -42,7 +42,7 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 
             _view.textBox.TextChanged += delegate
             {
-                IsDirty = string.Compare(_originalText, _view.textBox.Text) != 0;
+                IsDirty = string.Equals(_originalText, _view.textBox.Text, StringComparison.Ordinal);
             };
         }
 
@@ -55,8 +55,8 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 		{
 			var other = obj as EditorViewModel;
             return other != null
-                && string.Equals(FilePath, other.FilePath, StringComparison.InvariantCultureIgnoreCase)
-                && string.Equals(FileName, other.FileName, StringComparison.InvariantCultureIgnoreCase);
+                && string.Equals(DocumentPath, other.DocumentPath, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(DocumentName, other.DocumentName, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

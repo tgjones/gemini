@@ -13,15 +13,13 @@ namespace Gemini.Modules.Shell.Commands
     [CommandHandler]
     public class NewFileCommandHandler : ICommandListHandler<NewFileCommandListDefinition>
     {
-        private int _newFileCounter = 1;
-
-        private readonly IShell _shell;
         private readonly IEditorProvider[] _editorProviders;
 
+        private readonly IShell _shell;
+        private int _newItemCounter = 1;
+
         [ImportingConstructor]
-        public NewFileCommandHandler(
-            IShell shell,
-            [ImportMany] IEditorProvider[] editorProviders)
+        public NewFileCommandHandler(IShell shell, [ImportMany] IEditorProvider[] editorProviders)
         {
             _shell = shell;
             _editorProviders = editorProviders;
@@ -30,46 +28,45 @@ namespace Gemini.Modules.Shell.Commands
         public void Populate(Command command, List<Command> commands)
         {
             foreach (var editorProvider in _editorProviders)
-                foreach (var editorFileType in editorProvider.FileTypes)
+                foreach (var editorFileType in editorProvider.ItemTypes)
                     commands.Add(new Command(command.CommandDefinition)
                     {
                         Text = editorFileType.Name,
-                        Tag = new NewFileTag
+                        Tag = new NewItemTag
                         {
                             EditorProvider = editorProvider,
-                            FileType = editorFileType
+                            ItemType = editorFileType
                         }
                     });
         }
 
         public Task Run(Command command)
         {
-            var tag = (NewFileTag) command.Tag;
+            var tag = (NewItemTag) command.Tag;
             var editor = tag.EditorProvider.Create();
-
-            var viewAware = (IViewAware)editor;
+            var viewAware = (IViewAware) editor;
             viewAware.ViewAttached += (sender, e) =>
             {
-                var frameworkElement = (FrameworkElement)e.View;
-
+                var frameworkElement = (FrameworkElement) e.View;
                 RoutedEventHandler loadedHandler = null;
                 loadedHandler = async (sender2, e2) =>
                 {
                     frameworkElement.Loaded -= loadedHandler;
-                    await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
+                    var itemName = tag.ItemType is EditorFileType
+                        ? _newItemCounter++.ToString() + ((EditorFileType) tag.ItemType).FileExtension
+                        : _newItemCounter++.ToString();
+                    await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, itemName));
                 };
                 frameworkElement.Loaded += loadedHandler;
             };
-
             _shell.OpenDocument(editor);
-
             return TaskUtility.Completed;
         }
 
-        private class NewFileTag
+        private class NewItemTag
         {
             public IEditorProvider EditorProvider;
-            public EditorFileType FileType;
+            public EditorItemType ItemType;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Gemini.Demo.Modules.TextEditor
             ".cmd"
         };
 
-        public IEnumerable<EditorFileType> FileTypes
+        public IEnumerable<EditorItemType> ItemTypes
         {
             get { yield return new EditorFileType(Resources.EditorProviderTextFile, ".txt"); }
         }

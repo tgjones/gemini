@@ -178,18 +178,9 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на _New.
-        /// </summary>
-        internal static string FileNewCommandText {
-            get {
-                return ResourceManager.GetString("FileNewCommandText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на New.
         /// </summary>
-        internal static string FileNewCommandToolTip {
+        public static string FileNewCommandToolTip {
             get {
                 return ResourceManager.GetString("FileNewCommandToolTip", resourceCulture);
             }
@@ -205,7 +196,7 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на _Open.
+        ///   Ищет локализованную строку, похожую на _File....
         /// </summary>
         internal static string FileOpenCommandText {
             get {
@@ -214,7 +205,7 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Open.
+        ///   Ищет локализованную строку, похожую на File.
         /// </summary>
         internal static string FileOpenCommandToolTip {
             get {
@@ -225,7 +216,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Recent Files.
         /// </summary>
-        internal static string FileRecentFilesCommandText {
+        public static string FileRecentFilesCommandText {
             get {
                 return ResourceManager.GetString("FileRecentFilesCommandText", resourceCulture);
             }
@@ -234,7 +225,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Recent Files.
         /// </summary>
-        internal static string FileRecentFilesCommandToolTip {
+        public static string FileRecentFilesCommandToolTip {
             get {
                 return ResourceManager.GetString("FileRecentFilesCommandToolTip", resourceCulture);
             }
@@ -243,7 +234,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Save All.
         /// </summary>
-        internal static string FileSaveAllCommandText {
+        public static string FileSaveAllCommandText {
             get {
                 return ResourceManager.GetString("FileSaveAllCommandText", resourceCulture);
             }
@@ -252,7 +243,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Save All.
         /// </summary>
-        internal static string FileSaveAllCommandToolTip {
+        public static string FileSaveAllCommandToolTip {
             get {
                 return ResourceManager.GetString("FileSaveAllCommandToolTip", resourceCulture);
             }
@@ -295,6 +286,24 @@ namespace Gemini.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на _Folder....
+        /// </summary>
+        public static string FolderOpenCommandText {
+            get {
+                return ResourceManager.GetString("FolderOpenCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Folder.
+        /// </summary>
+        public static string FolderOpenCommandToolTip {
+            get {
+                return ResourceManager.GetString("FolderOpenCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на _Help.
         /// </summary>
         internal static string HelpMenuText {
@@ -318,6 +327,24 @@ namespace Gemini.Properties {
         internal static string HistoryInitialState {
             get {
                 return ResourceManager.GetString("HistoryInitialState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на _New.
+        /// </summary>
+        public static string ItemNewCommandText {
+            get {
+                return ResourceManager.GetString("ItemNewCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на _Open.
+        /// </summary>
+        public static string ItemOpenCommandText {
+            get {
+                return ResourceManager.GetString("ItemOpenCommandText", resourceCulture);
             }
         }
         
@@ -378,7 +405,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Save changes to the {0} &quot;{1}&quot; before closing?.
         /// </summary>
-        internal static string SaveChangesBeforeClosingMessage {
+        public static string SaveChangesBeforeClosingMessage {
             get {
                 return ResourceManager.GetString("SaveChangesBeforeClosingMessage", resourceCulture);
             }
@@ -495,7 +522,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Full Screen.
         /// </summary>
-        internal static string ViewFullScreenCommandText {
+        public static string ViewFullScreenCommandText {
             get {
                 return ResourceManager.GetString("ViewFullScreenCommandText", resourceCulture);
             }
@@ -504,7 +531,7 @@ namespace Gemini.Properties {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Full Screen.
         /// </summary>
-        internal static string ViewFullScreenCommandToolTip {
+        public static string ViewFullScreenCommandToolTip {
             get {
                 return ResourceManager.GetString("ViewFullScreenCommandToolTip", resourceCulture);
             }

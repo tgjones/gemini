@@ -106,7 +106,7 @@ namespace Gemini.Framework
 	        }
 
 	        // Save file.
-            var filePath = persistedDocument.FilePath;
+            var filePath = persistedDocument.DocumentPath;
             await persistedDocument.Save(filePath);
 	    }
 
@@ -128,12 +128,12 @@ namespace Gemini.Framework
 	    {
             // Show user dialog to choose filename.
             var dialog = new SaveFileDialog();
-            dialog.FileName = persistedDocument.FileName;
+            dialog.FileName = persistedDocument.DocumentName;
             var filter = string.Empty;
 
-            var fileExtension = Path.GetExtension(persistedDocument.FileName);
+            var fileExtension = Path.GetExtension(persistedDocument.DocumentName);
             var fileType = IoC.GetAll<IEditorProvider>()
-                .SelectMany(x => x.FileTypes)
+                .SelectMany(x => x.ItemTypes).OfType<EditorFileType>()
                 .SingleOrDefault(x => x.FileExtension == fileExtension);
             if (fileType != null)
                 filter = fileType.Name + "|*" + fileType.FileExtension + "|";

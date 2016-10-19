@@ -9,11 +9,19 @@ namespace Gemini.Modules.Shell
     {
         [Export]
         public static MenuItemDefinition FileNewMenuItem = new TextMenuItemDefinition(
-            MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 0, Resources.FileNewCommandText);
+            MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 0, Resources.ItemNewCommandText);
+
+        [Export]
+        public static MenuItemDefinition ItemOpenMenuItem = new TextMenuItemDefinition(
+            MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 0, Resources.ItemOpenCommandText);
 
         [Export]
         public static MenuItemGroupDefinition FileNewCascadeGroup = new MenuItemGroupDefinition(
             FileNewMenuItem, 0);
+
+        [Export]
+        public static MenuItemGroupDefinition FileOpenCascadeGroup = new MenuItemGroupDefinition(
+            ItemOpenMenuItem, 0);
 
         [Export]
         public static MenuItemDefinition FileNewMenuItemList = new CommandMenuItemDefinition<NewFileCommandListDefinition>(
@@ -21,7 +29,11 @@ namespace Gemini.Modules.Shell
 
         [Export]
         public static MenuItemDefinition FileOpenMenuItem = new CommandMenuItemDefinition<OpenFileCommandDefinition>(
-            MainMenu.MenuDefinitions.FileNewOpenMenuGroup, 1);
+            FileOpenCascadeGroup, 1);
+
+        [Export]
+        public static MenuItemDefinition FolderOpenMenuItem = new CommandMenuItemDefinition<OpenFolderCommandDefinition>(
+            FileOpenCascadeGroup, 2);
 
         [Export]
         public static MenuItemDefinition FileCloseMenuItem = new CommandMenuItemDefinition<CloseFileCommandDefinition>(

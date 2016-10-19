@@ -147,17 +147,14 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>_Datei</value>
   </data>
-  <data name="FileNewCommandText" xml:space="preserve">
+  <data name="ItemNewCommandText" xml:space="preserve">
     <value>_Neu</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>Ohne Name {0}</value>
   </data>
-  <data name="FileOpenCommandText" xml:space="preserve">
+  <data name="ItemOpenCommandText" xml:space="preserve">
     <value>_Öffnen</value>
-  </data>
-  <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>Öffnen</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>Speichern _unter...</value>

@@ -22,19 +22,16 @@ namespace Gemini.Modules.CodeEditor
 	        _languageDefinitionManager = languageDefinitionManager;
 	    }
 
-	    public IEnumerable<EditorFileType> FileTypes
-	    {
+	    public IEnumerable<EditorItemType> ItemTypes
+        {
 	        get
 	        {
 	            return _languageDefinitionManager.LanguageDefinitions
-	                .Select(languageDefinition => new EditorFileType
-	                {
-	                    Name = languageDefinition.Name + Resources.EditorProviderFileSuffix,
-	                    FileExtension = languageDefinition.FileExtensions.First()
-	                });
+	                .Select(languageDefinition =>
+                        new EditorFileType(languageDefinition.Name + Resources.EditorProviderFileSuffix, languageDefinition.FileExtensions.First()));
 	        }
 	    }
-
+        
 	    public bool Handles(string path)
 	    {
 	        var extension = Path.GetExtension(path);
