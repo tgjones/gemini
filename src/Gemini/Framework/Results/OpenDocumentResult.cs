@@ -67,7 +67,7 @@ namespace Gemini.Framework.Results
 
 		private static IDocument GetEditor(string path)
 		{
-		    return OpenFileCommandHandler.GetEditor(path).Result;
+		    return OpenDocumentHelper.GetEditor(path).Result;
 		}
 	}
 }

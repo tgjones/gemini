@@ -5,8 +5,9 @@ namespace Gemini.Framework
     public interface IPersistedDocument : IDocument
     {
         bool IsNew { get; }
-        string FileName { get; }
-        string FilePath { get; }
+        string DocumentName { get; }
+        string DocumentPath { get; }
+        DocumentType DocumentType { get; }
 
         Task New(string fileName);
         Task Load(string filePath);

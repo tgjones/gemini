@@ -147,17 +147,17 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>_Файл</value>
   </data>
-  <data name="FileNewCommandText" xml:space="preserve">
+  <data name="ItemNewCommandText" xml:space="preserve">
     <value>_Новый</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>Без названия {0}</value>
   </data>
-  <data name="FileOpenCommandText" xml:space="preserve">
+  <data name="ItemOpenCommandText" xml:space="preserve">
     <value>_Открыть</value>
   </data>
   <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>Открыть</value>
+    <value>Файл</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>Сохранить _Как...</value>
@@ -257,5 +257,14 @@
   </data>
   <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
     <value>Во весь экран</value>
+  </data>
+  <data name="FolderOpenCommandText" xml:space="preserve">
+    <value>_Папку...</value>
+  </data>
+  <data name="FolderOpenCommandToolTip" xml:space="preserve">
+    <value>Папку</value>
+  </data>
+  <data name="FileOpenCommandText" xml:space="preserve">
+    <value>_Файл...</value>
   </data>
 </root>

@@ -31,7 +31,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
 
         public override void SaveState(BinaryWriter writer)
         {
-            writer.Write(FilePath);
+            writer.Write(DocumentPath);
         }
 
         public override void LoadState(BinaryReader reader)
@@ -48,9 +48,11 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         {
             var other = obj as CodeEditorViewModel;
             return other != null
-                && string.Equals(FilePath, other.FilePath, StringComparison.InvariantCultureIgnoreCase)
-                && string.Equals(FileName, other.FileName, StringComparison.InvariantCultureIgnoreCase);
+                && string.Equals(DocumentPath, other.DocumentPath, StringComparison.InvariantCultureIgnoreCase)
+                && string.Equals(DocumentName, other.DocumentName, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        public override DocumentType DocumentType { get; } = DocumentType.File;
 
         protected override Task DoNew()
         {
@@ -83,7 +85,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
                 IsDirty = string.Compare(_originalText, _view.TextEditor.Text) != 0;
             };
 
-            var fileExtension = Path.GetExtension(FileName).ToLower();
+            var fileExtension = Path.GetExtension(DocumentName).ToLower();
 
             ILanguageDefinition languageDefinition = _languageDefinitionManager.GetDefinitionByExtension(fileExtension);
 

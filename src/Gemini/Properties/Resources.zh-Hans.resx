@@ -147,17 +147,14 @@
   <data name="FileMenuText" xml:space="preserve">
     <value>文件 (_F)</value>
   </data>
-  <data name="FileNewCommandText" xml:space="preserve">
+  <data name="ItemNewCommandText" xml:space="preserve">
     <value>新建 (_N)</value>
   </data>
   <data name="FileNewUntitled" xml:space="preserve">
     <value>未命名 {0}</value>
   </data>
-  <data name="FileOpenCommandText" xml:space="preserve">
+  <data name="ItemOpenCommandText" xml:space="preserve">
     <value>打开 (_O)</value>
-  </data>
-  <data name="FileOpenCommandToolTip" xml:space="preserve">
-    <value>打开</value>
   </data>
   <data name="FileSaveAsCommandText" xml:space="preserve">
     <value>另存为 (_A)</value>

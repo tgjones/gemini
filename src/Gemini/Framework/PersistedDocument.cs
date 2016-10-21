@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -6,10 +7,28 @@ namespace Gemini.Framework
     public abstract class PersistedDocument : Document, IPersistedDocument
     {
         private bool _isDirty;
+        private string _documentName;
 
         public bool IsNew { get; private set; }
-        public string FileName { get; private set; }
-        public string FilePath { get; private set; }
+
+        public string DocumentName
+        {
+            get
+            {
+                return _documentName;
+            }
+            private set
+            {
+                if (value == _documentName)
+                    return;
+                _documentName = value;
+                NotifyOfPropertyChange(() => DocumentName);
+                NotifyOfPropertyChange(() => DisplayName);
+            }
+        }
+
+        public string DocumentPath { get; private set; }
+        public abstract DocumentType DocumentType { get; }
 
         public bool IsDirty
         {
@@ -18,63 +37,69 @@ namespace Gemini.Framework
             {
                 if (value == _isDirty)
                     return;
-
                 _isDirty = value;
                 NotifyOfPropertyChange(() => IsDirty);
-                UpdateDisplayName();
+                NotifyOfPropertyChange(() => DisplayName);
             }
         }
 
-        public override void CanClose(System.Action<bool> callback)
+        public override string DisplayName
+        {
+            get
+            {
+                return IsDirty ? DocumentName + "*" : DocumentName;
+            }
+        }
+        
+        public override void CanClose(Action<bool> callback)
         {
             // TODO: Show save prompt.
             callback(!IsDirty);
         }
-
-        private void UpdateDisplayName()
+        
+        public async Task New(string documentName)
         {
-            DisplayName = (IsDirty) ? FileName + "*" : FileName;
-        }
-
-        public async Task New(string fileName)
-        {
-            FileName = fileName;
-            UpdateDisplayName();
-
+            DocumentName = documentName;
             IsNew = true;
             IsDirty = false;
-
             await DoNew();
         }
 
         protected abstract Task DoNew();
 
-        public async Task Load(string filePath)
+        public async Task Load(string documentPath)
         {
-            FilePath = filePath;
-            FileName = Path.GetFileName(filePath);
-            UpdateDisplayName();
-
+            DocumentPath = documentPath;
+            DocumentName = GetName(documentPath);
             IsNew = false;
             IsDirty = false;
-
-            await DoLoad(filePath);
+            await DoLoad(documentPath);
         }
 
-        protected abstract Task DoLoad(string filePath);
+        protected abstract Task DoLoad(string documentPath);
 
-        public async Task Save(string filePath)
+        public async Task Save(string documentPath)
         {
-            FilePath = filePath;
-            FileName = Path.GetFileName(filePath);
-            UpdateDisplayName();
-
-            await DoSave(filePath);
-
+            DocumentPath = documentPath;
+            DocumentName = GetName(documentPath);
+            await DoSave(documentPath);
             IsDirty = false;
             IsNew = false;
         }
 
-        protected abstract Task DoSave(string filePath);
+        protected abstract Task DoSave(string documentPath);
+
+        public string GetName(string path)
+        {
+            switch (DocumentType)
+            {
+                case DocumentType.Folder:
+                    return Path.GetFileName(Path.GetDirectoryName(path));
+                case DocumentType.File:
+                    return Path.GetFileName(path);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }

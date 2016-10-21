@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Commands;
@@ -13,7 +14,7 @@ using Gemini.Modules.ToolBars.Models;
 using Gemini.Modules.UndoRedo;
 using Gemini.Modules.UndoRedo.Commands;
 using Gemini.Modules.UndoRedo.Services;
-using Microsoft.Win32;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace Gemini.Framework
 {
@@ -23,7 +24,7 @@ namespace Gemini.Framework
         ICommandHandler<SaveFileCommandDefinition>,
         ICommandHandler<SaveFileAsCommandDefinition>
 	{
-	    private IUndoRedoManager _undoRedoManager;
+        private IUndoRedoManager _undoRedoManager;
 	    public IUndoRedoManager UndoRedoManager
 	    {
             get { return _undoRedoManager ?? (_undoRedoManager = new UndoRedoManager()); }
@@ -106,7 +107,7 @@ namespace Gemini.Framework
 	        }
 
 	        // Save file.
-            var filePath = persistedDocument.FilePath;
+            var filePath = persistedDocument.DocumentPath;
             await persistedDocument.Save(filePath);
 	    }
 
@@ -126,28 +127,35 @@ namespace Gemini.Framework
 
 	    private static async Task DoSaveAs(IPersistedDocument persistedDocument)
 	    {
-            // Show user dialog to choose filename.
-            var dialog = new SaveFileDialog();
-            dialog.FileName = persistedDocument.FileName;
-            var filter = string.Empty;
+	        if (persistedDocument.DocumentType == DocumentType.File)
+	        {
+	            // Show user dialog to choose filename.
+	            var dialog = new SaveFileDialog();
+	            dialog.FileName = persistedDocument.DocumentName;
+	            var filter = string.Empty;
 
-            var fileExtension = Path.GetExtension(persistedDocument.FileName);
-            var fileType = IoC.GetAll<IEditorProvider>()
-                .SelectMany(x => x.FileTypes)
-                .SingleOrDefault(x => x.FileExtension == fileExtension);
-            if (fileType != null)
-                filter = fileType.Name + "|*" + fileType.FileExtension + "|";
+	            var fileExtension = Path.GetExtension(persistedDocument.DocumentName);
+	            var fileType = IoC.GetAll<IEditorProvider>().SelectMany(x => x.ItemTypes).OfType<EditorFileType>().SingleOrDefault(x => x.FileExtension == fileExtension);
+	            if (fileType != null)
+	                filter = fileType.Name + "|*" + fileType.FileExtension + "|";
 
-            filter += "All Files|*.*";
-            dialog.Filter = filter;
+	            filter += "All Files|*.*";
+	            dialog.Filter = filter;
 
-            if (dialog.ShowDialog() != true)
-                return;
-
-            var filePath = dialog.FileName;
-
-            // Save file.
-            await persistedDocument.Save(filePath);
+	            if (dialog.ShowDialog() != true)
+	                return;
+                
+	            // Save file.
+	            await persistedDocument.Save(dialog.FileName);
+	        } else
+            if (persistedDocument.DocumentType == DocumentType.Folder)
+            {
+                using (var dialog = new FolderBrowserDialog())
+                {
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                        await persistedDocument.Save(dialog.SelectedPath);
+                }
+            }
 	    }
 	}
 }
