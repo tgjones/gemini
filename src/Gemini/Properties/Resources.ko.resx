@@ -276,4 +276,10 @@
   <data name="AllSupportedFiles" xml:space="preserve">
     <value>지원되는 모든 파일</value>
   </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>전체화면</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>전체화면</value>
+  </data>
 </root>
