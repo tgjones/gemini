@@ -130,6 +130,7 @@
     <Compile Include="Framework\Controls\HwndMouseState.cs" />
     <Compile Include="Framework\Controls\SliderEx.cs" />
     <Compile Include="Framework\Converters.cs" />
+    <Compile Include="Framework\DocumentType.cs" />
     <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\IPersistedDocument.cs" />

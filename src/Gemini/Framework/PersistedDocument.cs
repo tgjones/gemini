@@ -28,6 +28,7 @@ namespace Gemini.Framework
         }
 
         public string DocumentPath { get; private set; }
+        public abstract DocumentType DocumentType { get; }
 
         public bool IsDirty
         {
@@ -49,7 +50,7 @@ namespace Gemini.Framework
                 return IsDirty ? DocumentName + "*" : DocumentName;
             }
         }
-
+        
         public override void CanClose(Action<bool> callback)
         {
             // TODO: Show save prompt.
@@ -90,9 +91,15 @@ namespace Gemini.Framework
 
         public string GetName(string path)
         {
-            if (Directory.Exists(path)) return new DirectoryInfo(path).Name;
-            if (File.Exists(path)) return new FileInfo(path).Name;
-            return string.Empty;
+            switch (DocumentType)
+            {
+                case DocumentType.Folder:
+                    return Path.GetFileName(Path.GetDirectoryName(path));
+                case DocumentType.File:
+                    return Path.GetFileName(path);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Gemini.Framework
         bool IsNew { get; }
         string DocumentName { get; }
         string DocumentPath { get; }
+        DocumentType DocumentType { get; }
 
         Task New(string fileName);
         Task Load(string filePath);

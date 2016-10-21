@@ -52,6 +52,8 @@ namespace Gemini.Modules.CodeEditor.ViewModels
                 && string.Equals(DocumentName, other.DocumentName, StringComparison.InvariantCultureIgnoreCase);
         }
 
+        public override DocumentType DocumentType { get; } = DocumentType.File;
+
         protected override Task DoNew()
         {
             _originalText = string.Empty;

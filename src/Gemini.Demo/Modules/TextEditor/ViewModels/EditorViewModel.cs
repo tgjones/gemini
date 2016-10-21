@@ -14,6 +14,8 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
         private EditorView _view;
 		private string _originalText;
 
+        public override DocumentType DocumentType { get; } = DocumentType.File;
+
         protected override Task DoNew()
         {
             _originalText = string.Empty;
