@@ -24,7 +24,7 @@ namespace Gemini.Modules.Toolbox.Services
                         DocumentType = attribute.DocumentType,
                         Name = attribute.Name,
                         Category = attribute.Category,
-                        IconSource = (attribute.IconSource != null) ? new Uri(attribute.IconSource) : null,
+                        IconSource = (attribute.IconSource != null) ? new Uri(attribute.IconSource, UriKind.RelativeOrAbsolute) : null,
                         ItemType = x,
                     };
                 })
