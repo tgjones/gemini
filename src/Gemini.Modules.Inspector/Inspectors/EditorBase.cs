@@ -143,7 +143,7 @@ namespace Gemini.Modules.Inspector.Inspectors
                 OnValueChanged();
         }
 
-        public TValue Value
+        public virtual TValue Value
         {
             get
             {

@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Inspectors\BitmapSourceEditorViewModel.cs" />
     <Compile Include="Inspectors\SelectiveUndoEditorBase.cs" />
+    <Compile Include="Inspectors\NoUndoEditorBase.cs" />
     <Compile Include="Inspectors\ILabelledInspector.cs" />
     <Compile Include="Inspectors\TextBoxEditorView.xaml.cs">
       <DependentUpon>TextBoxEditorView.xaml</DependentUpon>
