@@ -15,16 +15,10 @@ namespace Gemini.Modules.Shell.Services
     {
         public bool SaveState(IShell shell, IShellView shellView, string fileName)
         {
-            FileStream stream = null;
-
             try
             {
-                stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-
-                using (var writer = new BinaryWriter(stream))
+                using (var writer = new BinaryWriter(new FileStream(fileName, FileMode.Create, FileAccess.Write)))
                 {
-                    stream = null;
-
                     IEnumerable<ILayoutItem> itemStates = shell.Documents.Concat(shell.Tools.Cast<ILayoutItem>());
 
                     int itemCount = 0;
@@ -121,13 +115,6 @@ namespace Gemini.Modules.Shell.Services
             {
                 return false;
             }
-            finally
-            {
-                if (stream != null)
-                {
-                    stream.Dispose();
-                }
-            }
 
             return true;
         }
@@ -156,16 +143,10 @@ namespace Gemini.Modules.Shell.Services
                 return false;
             }
 
-            FileStream stream = null;
-
             try
             {
-                stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-
-                using (var reader = new BinaryReader(stream))
+                using (var reader = new BinaryReader(new FileStream(fileName, FileMode.Open, FileAccess.Read)))
                 {
-                    stream = null;
-
                     int count = reader.ReadInt32();
 
                     for (int i = 0; i < count; i++)
@@ -211,12 +192,6 @@ namespace Gemini.Modules.Shell.Services
             catch
             {
                 return false;
-            }
-            finally
-            {
-                if (stream != null) {
-                    stream.Close();
-                }
             }
 
             return true;
