@@ -13,6 +13,8 @@ namespace Gemini.Modules.Shell.Services
     [Export(typeof(ILayoutItemStatePersister))]
     public class LayoutItemStatePersister : ILayoutItemStatePersister
     {
+        private static readonly Type LayoutBaseType = typeof(ILayoutItem);
+
         public bool SaveState(IShell shell, IShellView shellView, string fileName)
         {
             try
@@ -35,21 +37,31 @@ namespace Gemini.Modules.Shell.Services
                                 .GetCustomAttributes(typeof(ExportAttribute), false)
                                 .Cast<ExportAttribute>().ToList();
 
-                        var layoutType = typeof(ILayoutItem);
                         // get exports with explicit types or names that inherit from ILayoutItem
-                        var exportTypes = (from att in exportAttributes
-                                           // select the contract type if it is of type ILayoutitem. else null
-                                           let typeFromContract = att.ContractType != null
-                                               && layoutType.IsAssignableFrom(att.ContractType) ? att.ContractType : null
-                                           // select the contract name if it is of type ILayoutItem. else null
-                                           let typeFromQualifiedName = GetTypeFromContractNameAsILayoutItem(att)
-                                           // select the viewmodel tpye if it is of type ILayoutItem. else null
-                                           let typeFromViewModel = layoutType.IsAssignableFrom(itemType) ? itemType : null
-                                           // att.ContractType overrides att.ContractName if both are set.
-                                           // fall back to the ViewModel type of neither are defined.
-                                           let type = typeFromContract ?? typeFromQualifiedName ?? typeFromViewModel
-                                           where type != null
-                                           select type).ToList();
+                        var exportTypes = new List<Type>();
+                        var foundExportContract = false;
+                        foreach (var att in exportAttributes)
+                        {
+                            // select the contract type if it is of type ILayoutitem.
+                            var type = att.ContractType;
+                            if (LayoutBaseType.IsAssignableFrom(type))
+                            {
+                                exportTypes.Add(type);
+                                foundExportContract = true;
+                                continue;
+                            }
+
+                            // select the contract name if it is of type ILayoutItem.
+                            type = GetTypeFromContractNameAsILayoutItem(att);
+                            if (LayoutBaseType.IsAssignableFrom(type))
+                            {
+                                exportTypes.Add(type);
+                                foundExportContract = true;
+                            }
+                        }
+                        // select the viewmodel type if it is of type ILayoutItem.
+                        if (!foundExportContract && LayoutBaseType.IsAssignableFrom(itemType))
+                            exportTypes.Add(itemType);
 
                         // throw exceptions here, instead of failing silently. These are design time errors.
                         var firstExport = exportTypes.FirstOrDefault();
@@ -119,19 +131,14 @@ namespace Gemini.Modules.Shell.Services
             return true;
         }
 
-        Type GetTypeFromContractNameAsILayoutItem(ExportAttribute attribute)
+        private static Type GetTypeFromContractNameAsILayoutItem(ExportAttribute attribute)
         {
-            if (attribute == null)
-                return null;
-
             string typeName;
             if ((typeName = attribute.ContractName) == null)
                 return null;
 
             var type = Type.GetType(typeName);
-            if (type == null || !typeof(ILayoutItem).IsAssignableFrom(type))
-                return null;
-            return type;
+            return typeof(ILayoutItem).IsAssignableFrom(type) ? type : null;
         }
 
         public bool LoadState(IShell shell, IShellView shellView, string fileName)
