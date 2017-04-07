@@ -123,4 +123,7 @@
   <data name="SettingsPathEnvironment" xml:space="preserve">
     <value>Окружение</value>
   </data>
+  <data name="EditorProviderTextFile" xml:space="preserve">
+    <value>Текстовый файл</value>
+  </data>
 </root>

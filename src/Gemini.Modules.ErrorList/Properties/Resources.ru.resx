@@ -130,15 +130,27 @@
     <value>{0} Сообщение</value>
   </data>
   <data name="ViewErrorListCommandText" xml:space="preserve">
-    <value>Список О_шибок</value>
+    <value>Список о_шибок</value>
   </data>
   <data name="ViewErrorListCommandToolTip" xml:space="preserve">
-    <value>Список Ошибок</value>
+    <value>Список ошибок</value>
   </data>
   <data name="WarningTextPlural" xml:space="preserve">
     <value>{0} Предупреждений</value>
   </data>
   <data name="WarningTextSingular" xml:space="preserve">
     <value>{0} Предупреждение</value>
+  </data>
+  <data name="ErrorListHeaderLine" xml:space="preserve">
+    <value>Строка</value>
+  </data>
+  <data name="ErrorListHeaderColumn" xml:space="preserve">
+    <value>Столбец</value>
+  </data>
+  <data name="ErrorListHeaderFile" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="ErrorListHeaderDescription" xml:space="preserve">
+    <value>Описание</value>
   </data>
 </root>

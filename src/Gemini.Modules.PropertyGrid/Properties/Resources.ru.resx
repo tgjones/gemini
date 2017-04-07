@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ViewPropertyGridCommandText" xml:space="preserve">
-    <value>Окно С_войств</value>
+    <value>Окно с_войств</value>
   </data>
   <data name="ViewPropertyGridCommandToolTip" xml:space="preserve">
-    <value>Окно Свойств</value>
+    <value>Окно свойств</value>
   </data>
   <data name="PropertyGridViewModel_PropertyGridViewModel_Properties" xml:space="preserve">
     <value>Свойства</value>

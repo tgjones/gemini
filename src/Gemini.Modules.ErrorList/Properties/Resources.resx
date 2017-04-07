@@ -141,4 +141,16 @@
   <data name="WarningTextSingular" xml:space="preserve">
     <value>{0} Warning</value>
   </data>
+  <data name="ErrorListHeaderLine" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="ErrorListHeaderColumn" xml:space="preserve">
+    <value>Column</value>
+  </data>
+  <data name="ErrorListHeaderFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="ErrorListHeaderDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>
