@@ -113,4 +113,8 @@
     <SolidColorBrush x:Key="ExpanderExBackground" Color="#E3E3E3" />
     <SolidColorBrush x:Key="ExpanderExDisabledForeground" Color="#888" />
     <SolidColorBrush x:Key="ExpanderExGlyph" Color="#444" />
+
+    <!-- Status bar -->
+    <SolidColorBrush x:Key="StatusBarBackground" Color="#007ACC" />
+    <SolidColorBrush x:Key="StatusBarForeground" Color="White" />
 </ResourceDictionary>
