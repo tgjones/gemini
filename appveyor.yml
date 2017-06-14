@@ -6,7 +6,7 @@ init:
 - ps: >-
     $parsedReleaseBuildVersion = $env:APPVEYOR_REPO_TAG_NAME -Match "(\d+.\d+.\d+(.\d+)?)"
     
-    If($env:appveyor_repo_tag -AND $parsedReleaseBuildVersion) {
+    if ($env:appveyor_repo_tag -AND $parsedReleaseBuildVersion) {
       $env:BuildVersion = $matches[0]
       $env:IsGithubRelease = $TRUE
     }
@@ -15,19 +15,33 @@ init:
       $env:IsGithubRelease = ""
     }
     
-    Write-Host "Build Version: " $env:BuildVersion
-    Write-Host "Tag name:  " $env:appveyor_repo_tag
-    Write-Host "Commit: " $env:APPVEYOR_REPO_COMMIT_MESSAGE 
-    Write-Host "Commit extended:" $env:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED 
+    write-host -NoNewline "Build Version: ";
+    write-host $env:BuildVersion -foregroundcolor "Yellow";
     
-    Write-Host "appveyor_build_version Variable: " $env:appveyor_build_version
-  
+    write-host -NoNewline "Tag name: ";
+    write-host $env:appveyor_repo_tag -foregroundcolor "Yellow";
+    
+    write-host -NoNewline "Commit: ";
+    write-host $env:APPVEYOR_REPO_COMMIT_MESSAGE -foregroundcolor "Yellow";
+    
+    write-host -NoNewline "Commit extended: ";
+    write-host $env:APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED -foregroundcolor "Yellow";
+    
+    write-host -NoNewline "appveyor_build_version Variable: ";
+    write-host $env:appveyor_build_version -foregroundcolor "Yellow";
+
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
   assembly_version: $(BuildVersion)
   assembly_file_version: $(BuildVersion)
   assembly_informational_version: $(BuildVersion)
+
+install:
+- ps: .\scripts\install-xna.ps1
+
+cache:
+- XNAGS40_setup.exe
 
 before_build:
 - cmd: cd src
