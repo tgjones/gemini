@@ -21,9 +21,11 @@
                   AutoGenerateColumns="False" IsReadOnly="True"
 				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke"
 				  MouseDoubleClick="OnDataGridMouseDoubleClick" BorderThickness="0"
-                  Background="Transparent">
-			<DataGrid.Columns>
-				<DataGridTemplateColumn Width="SizeToCells">
+                  Background="Transparent"
+                  ScrollViewer.CanContentScroll="false"
+                  >
+            <DataGrid.Columns>
+            <DataGridTemplateColumn Width="SizeToCells" >
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding ItemType, Converter={StaticResource ErrorListItemTypeToImageConverter}}" />

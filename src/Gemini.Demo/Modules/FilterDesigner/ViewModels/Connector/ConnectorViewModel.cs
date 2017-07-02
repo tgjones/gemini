@@ -5,14 +5,12 @@ using Caliburn.Micro;
 
 namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 {
-    public enum ConnectorDataType
-    {
-        
-    }
 
     public abstract class ConnectorViewModel : PropertyChangedBase
     {
         public event EventHandler PositionChanged;
+
+        public abstract Type Type { get; set; }
 
         private readonly ElementViewModel _element;
         public ElementViewModel Element
@@ -44,6 +42,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
             }
         }
 
+        public abstract ConnectionViewModel GetNewConnection();
         public abstract ConnectorDirection ConnectorDirection { get; }
 
         protected ConnectorViewModel(ElementViewModel element, string name, Color color)

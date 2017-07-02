@@ -10,6 +10,9 @@ using Gemini.Demo.Modules.FilterDesigner.ViewModels.Elements;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
 using ImageSource = Gemini.Demo.Modules.FilterDesigner.ViewModels.Elements.ImageSource;
+using System.Windows.Media.Imaging;
+using Gemini.Demo.Modules.FilterDesigner.ViewModels.Connection;
+using System;
 
 namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 {
@@ -31,9 +34,9 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
             get { return _connections; }
         }
 
-        public IEnumerable<ElementViewModel> SelectedElements
+        public IEnumerable<IsSelectable> SelectedElements
         {
-            get { return _elements.Where(x => x.IsSelected); }
+            get { return _elements.Where<IsSelectable>(x => x.IsSelected).Concat(_connections.Where(x=>x.IsSelected)); }
         }
           
         [ImportingConstructor]
@@ -46,7 +49,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 
             _inspectorTool = inspectorTool;
 
-            var element1 = AddElement<ImageSource>(100, 50);
+            ImageSource element1 = AddElement<ImageSource>(100, 50);
             element1.Bitmap = BitmapUtility.CreateFromBytes(DesignTimeImages.Desert);
 
             var element2 = AddElement<ColorInput>(100, 300);
@@ -54,13 +57,8 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 
             var element3 = AddElement<Multiply>(400, 250);
 
-            Connections.Add(new ConnectionViewModel(
-                element1.OutputConnector,
-                element3.InputConnectors[0]));
-
-            Connections.Add(new ConnectionViewModel(
-                element2.OutputConnector,
-                element3.InputConnectors[1]));
+            Connections.Add(element1.OutputConnectors[0].Connect(element3.InputConnectors[0]));
+            Connections.Add(element2.OutputConnectors[0].Connect(element3.InputConnectors[1]));
 
             element1.IsSelected = true;
         }
@@ -77,11 +75,11 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
         {
             if (!(sourceConnector is OutputConnectorViewModel))
                 return null;
+            var tt = sourceConnector.Type;
 
-            var connection = new ConnectionViewModel((OutputConnectorViewModel) sourceConnector)
-            {
-                ToPosition = currentDragPoint
-            };
+            var connection = sourceConnector.GetNewConnection();
+            connection.ToPosition = currentDragPoint;
+     
 
             Connections.Add(connection);
 
@@ -91,7 +89,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
         public void OnConnectionDragging(Point currentDragPoint, ConnectionViewModel connection)
         {
             // If current drag point is close to an input connector, show its snapped position.
-            var nearbyConnector = FindNearbyInputConnector(currentDragPoint);
+            var nearbyConnector = FindNearbyInputConnector(currentDragPoint, connection.ConnectionType);
             connection.ToPosition = (nearbyConnector != null)
                 ? nearbyConnector.Position
                 : currentDragPoint;
@@ -99,7 +97,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 
         public void OnConnectionDragCompleted(Point currentDragPoint, ConnectionViewModel newConnection, ConnectorViewModel sourceConnector)
         {
-            var nearbyConnector = FindNearbyInputConnector(currentDragPoint);
+            var nearbyConnector = FindNearbyInputConnector(currentDragPoint, newConnection.ConnectionType);
 
             if (nearbyConnector == null || sourceConnector.Element == nearbyConnector.Element)
             {
@@ -107,17 +105,13 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
                 return;
             }
 
-            var existingConnection = nearbyConnector.Connection;
-            if (existingConnection != null)
-                Connections.Remove(existingConnection);
-
             newConnection.To = nearbyConnector;
         }
 
-        private InputConnectorViewModel FindNearbyInputConnector(Point mousePosition)
+        private InputConnectorViewModel FindNearbyInputConnector(Point mousePosition, Type t)
         {
             return Elements.SelectMany(x => x.InputConnectors)
-                .FirstOrDefault(x => AreClose(x.Position, mousePosition, 10));
+                .FirstOrDefault(x => x.Type == t && AreClose(x.Position, mousePosition, 10));
         }
 
         private static bool AreClose(Point point1, Point point2, double distance)

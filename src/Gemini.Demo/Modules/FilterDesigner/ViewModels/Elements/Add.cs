@@ -2,25 +2,34 @@
 using System.Windows.Media.Effects;
 using Gemini.Demo.Modules.FilterDesigner.ShaderEffects;
 using Gemini.Modules.Toolbox;
+using System.Windows.Media.Imaging;
+using Gemini.Demo.Modules.FilterDesigner.ViewModels.Connector.Input;
+using System.Threading.Tasks.Dataflow;
+using Gridsum.DataflowEx;
+using System;
+using System.Threading.Tasks;
 
 namespace Gemini.Demo.Modules.FilterDesigner.ViewModels.Elements
 {
     [ToolboxItem(typeof(GraphViewModel), "Add", "Maths", "pack://application:,,,/Modules/FilterDesigner/Resources/action_add_16xLG.png")]
     public class Add : ShaderEffectElement
     {
-        protected override Effect GetEffect()
+        public Add() : base()
         {
-            return new AddEffect
-            {
-                Input1 = new ImageBrush(InputConnectors[0].Value),
-                Input2 = new ImageBrush(InputConnectors[1].Value)
-            };
+
         }
 
-        public Add()
+
+        internal override DrawingVisual GetEffect(BitmapSource Input1, BitmapSource Input2)
         {
-            AddInputConnector("Left", Colors.DarkSeaGreen);
-            AddInputConnector("Right", Colors.DarkSeaGreen);
+            return new DrawingVisual()
+            {
+                Effect = new AddEffect
+                {
+                    Input1 = new ImageBrush(Input1),
+                    Input2 = new ImageBrush(Input2)
+                }
+            };
         }
     }
 }

@@ -2,12 +2,12 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
+using System.Threading.Tasks.Dataflow;
 
 namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 {
-    public class OutputConnectorViewModel : ConnectorViewModel
+    public abstract class OutputConnectorViewModel : ConnectorViewModel
     {
-        private readonly Func<BitmapSource> _valueCallback;
 
         public override ConnectorDirection ConnectorDirection
         {
@@ -20,16 +20,17 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
             get { return _connections; }
         }
 
-        public BitmapSource Value
-        {
-            get { return _valueCallback(); }
-        }
-
-        public OutputConnectorViewModel(ElementViewModel element, string name, Color color, Func<BitmapSource> valueCallback)
+        public OutputConnectorViewModel(ElementViewModel element, string name, Color color)
             : base(element, name, color)
         {
             _connections = new BindableCollection<ConnectionViewModel>();
-            _valueCallback = valueCallback;
+        }
+
+        internal ConnectionViewModel Connect(InputConnectorViewModel inputConnectorViewModel)
+        {
+            var x = GetNewConnection();
+                x.To = inputConnectorViewModel;
+            return x;
         }
     }
 }

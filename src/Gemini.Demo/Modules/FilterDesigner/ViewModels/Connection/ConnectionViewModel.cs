@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Windows;
 using Caliburn.Micro;
+using System.Windows.Media;
+using System.ComponentModel;
 
 namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 {
-    public class ConnectionViewModel : PropertyChangedBase
+    public abstract class ConnectionViewModel : PropertyChangedBase, IsSelectable
     {
-        private OutputConnectorViewModel _from;
+        public abstract Type ConnectionType { get; set; }
+
+        internal abstract OutputConnectorViewModel _from { get; set; }
         public OutputConnectorViewModel From
         {
             get { return _from; }
             private set
             {
+                if (value.Type != ConnectionType) throw new Exception();
                 if (_from != null)
                 {
                     _from.PositionChanged -= OnFromPositionChanged;
@@ -31,16 +36,31 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
             }
         }
 
-        private InputConnectorViewModel _to;
+        [Browsable(false)]
+        private bool _isSelected;
+
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                NotifyOfPropertyChange(() => IsSelected);
+            }
+        }
+
+
+        internal abstract InputConnectorViewModel _to { get; set; }
         public InputConnectorViewModel To
         {
             get { return _to; }
             set
             {
+                if (value.Type != ConnectionType) throw new Exception();
                 if (_to != null)
                 {
                     _to.PositionChanged -= OnToPositionChanged;
-                    _to.Connection = null;
+                    _to.Connections.Remove(this);
                 }
 
                 _to = value;
@@ -48,7 +68,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
                 if (_to != null)
                 {
                     _to.PositionChanged += OnToPositionChanged;
-                    _to.Connection = this;
+                    _to.Connections.Add(this);
                     ToPosition = _to.Position;
                 }
 
@@ -66,6 +86,18 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
                 NotifyOfPropertyChange(() => FromPosition);
             }
         }
+
+        internal abstract Brush _color { get; set; }
+        public Brush Color
+        {
+            get { return _color; }
+            set
+            {
+                _color = value;
+                NotifyOfPropertyChange(() => Color);
+            }
+        }
+
 
         private Point _toPosition;
         public Point ToPosition
