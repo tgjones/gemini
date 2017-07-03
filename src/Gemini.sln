@@ -49,8 +49,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.SharpDX", "Gemini.Demo.SharpDX\Gemini.Demo.SharpDX.csproj", "{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gridsum.DataflowEx.Core", "..\..\..\DataflowEx\Gridsum.DataflowEx\Gridsum.DataflowEx.Core.csproj", "{EF3EFEF5-8F5C-4305-8A56-33A25F0051E5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
