@@ -24,8 +24,6 @@ namespace Gemini.Modules.Toolbox.ViewModels
             get { return _searchCommand == null ? _searchCommand = new RelayCommand(a => Search(a as string)) : _searchCommand; }
         }
 
-        private string _searchTerm;
-
         private readonly IToolboxService _toolboxService;
 
         public override PaneLocation PreferredLocation
