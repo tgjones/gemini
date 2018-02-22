@@ -5,14 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dd="clr-namespace:Gemini.Modules.Toolbox.Design"
              xmlns:controls="clr-namespace:Gemini.Framework.Controls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeToolboxViewModel, IsDesignTimeCreatable=True}">
     <Grid>
-		<ListBox x:Name="ListBox" ItemsSource="{Binding Items}" 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="SearchBox">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding Text, ElementName=SearchBox}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <ListBox x:Name="ListBox" ItemsSource="{Binding Items}" 
 				 PreviewMouseLeftButtonDown="OnListBoxPreviewMouseLeftButtonDown"
 				 MouseMove="OnListBoxMouseMove"
-                 Background="Transparent" BorderThickness="0">
+                 Background="Transparent" BorderThickness="0" Grid.Row="1">
 			<ListBox.GroupStyle>
 				<GroupStyle>
 					<GroupStyle.ContainerStyle>
