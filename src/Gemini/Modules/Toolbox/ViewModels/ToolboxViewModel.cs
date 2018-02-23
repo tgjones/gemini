@@ -48,7 +48,7 @@ namespace Gemini.Modules.Toolbox.ViewModels
             _filteredItems = new BindableCollection<ToolboxItemViewModel>();
 
             var groupedItems = CollectionViewSource.GetDefaultView(_items);
-            groupedItems.GroupDescriptions.Add(new PropertyGroupDescription(Resources.ToolboxCategory));
+            groupedItems.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
 
             _toolboxService = toolboxService;
 
