@@ -23,6 +23,11 @@ namespace Gemini.Demo.Modules.TextEditor
             get { yield return new EditorFileType(Resources.EditorProviderTextFile, ".txt"); }
         }
 
+        public bool CanCreateNew
+        {
+            get { return true; }
+        }
+
 		public bool Handles(string path)
 		{
 			var extension = Path.GetExtension(path);
