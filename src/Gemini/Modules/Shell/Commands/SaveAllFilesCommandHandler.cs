@@ -4,6 +4,7 @@ using Gemini.Framework.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gemini.Modules.Shell.Commands
@@ -23,16 +24,9 @@ namespace Gemini.Modules.Shell.Commands
         {
             var tasks = new List<Task<Tuple<IPersistedDocument, bool>>>();
 
-            foreach (var document in _shell.Documents)
+            foreach (var document in _shell.Documents.OfType<IPersistedDocument>().Where(x => !x.IsNew))
             {
-                var persistedDocument = document as IPersistedDocument;
-                if (persistedDocument == null) continue;
-
-                // skip if the file is new
-                if (!persistedDocument.IsNew)
-                {
-                    await persistedDocument.Save(persistedDocument.FilePath);
-                }
+                await document.Save(document.FilePath);
             }
 
             // TODO: display "Item(s) saved" in statusbar
