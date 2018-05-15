@@ -29,7 +29,7 @@
                                               Height="{TemplateBinding Height}"
                                               RenderOptions.BitmapScalingMode="{Binding IconBitmapScalingMode, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
                                               RenderOptions.EdgeMode="{Binding IconEdgeMode, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:MetroWindow}}}"
-                                              Source="{TemplateBinding Content}" >
+                                              Source="{TemplateBinding Content}" Margin="6,0,0,0">
                                 <controls:MultiFrameImage.Effect>
                                     <shaderEffects:ThemedImageEffect Background="{Binding Converter={StaticResource SolidColorBrushToColorConverter}, Mode=OneWay,
                                                                                           Source={StaticResource DefaultBackground}, Path=Data}"/>
