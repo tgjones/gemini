@@ -3,8 +3,8 @@ storage: packages
 framework: net45
 
 //Gemini
-nuget Caliburn.Micro 2.0.2
-nuget Caliburn.Micro.Core 2.0.2
+nuget Caliburn.Micro 3.2.0
+nuget Caliburn.Micro.Core 3.2.0
 nuget Extended.Wpf.Toolkit 2.9
 nuget Gu.Localization 6.4.0
 nuget Gu.Wpf.Localization 6.4.0

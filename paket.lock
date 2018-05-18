@@ -3,9 +3,9 @@ RESTRICTION: == net45
 NUGET
   remote: https://api.nuget.org/v3/index.json
     AvalonEdit (5.0.3)
-    Caliburn.Micro (2.0.2)
-      Caliburn.Micro.Core (2.0.2)
-    Caliburn.Micro.Core (2.0.2)
+    Caliburn.Micro (3.2)
+      Caliburn.Micro.Core (3.2)
+    Caliburn.Micro.Core (3.2)
     Extended.Wpf.Toolkit (2.9)
     Gu.Localization (6.4)
     Gu.Wpf.Localization (6.4)

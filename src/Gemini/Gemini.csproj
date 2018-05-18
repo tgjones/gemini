@@ -428,11 +428,18 @@
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
-        <Reference Include="System.Windows.Interactivity">
-          <Paket>True</Paket>
-        </Reference>
         <Reference Include="Caliburn.Micro.Platform">
           <HintPath>..\..\packages\Caliburn.Micro\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="Caliburn.Micro.Platform.Core">
+          <HintPath>..\..\packages\Caliburn.Micro\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="System.Windows.Interactivity">
+          <HintPath>..\..\packages\Caliburn.Micro\lib\net45\System.Windows.Interactivity.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

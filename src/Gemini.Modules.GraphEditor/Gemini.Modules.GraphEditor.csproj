@@ -127,6 +127,11 @@
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
+        <Reference Include="Caliburn.Micro.Platform.Core">
+          <HintPath>..\..\packages\Caliburn.Micro\lib\net45\Caliburn.Micro.Platform.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
       </ItemGroup>
     </When>
   </Choose>
