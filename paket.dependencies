@@ -1,0 +1,41 @@
+source https://api.nuget.org/v3/index.json
+storage: packages
+framework: net45
+
+//Gemini
+nuget Caliburn.Micro 2.0.2
+nuget Caliburn.Micro.Core 2.0.2
+nuget Extended.Wpf.Toolkit 2.9
+nuget Gu.Localization 6.1.0.0
+nuget Gu.Wpf.Localization 6.1.0.0
+nuget MahApps.Metro 1.2.4.0
+nuget Xceed.Wpf.AvalonDock.Themes.VS2013 2.9.0.1
+
+//Gemini.Modules.CodeEditor
+nuget Microsoft.CodeAnalysis.Analyzers 1.1.0
+nuget Microsoft.CodeAnalysis.Common 1.1.1
+nuget Microsoft.CodeAnalysis.CSharp 1.1.1
+nuget System.Collections.Immutable 1.1.37
+nuget System.Reflection.Metadata 1.1.0
+
+//Gemini.Modules.CodeEditor
+nuget AvalonEdit 5.0.3
+
+//Gemini.Modules.Inspector.MonoGame
+//Gemini.Modules.Inspector.Xna
+nuget MonoGame.Framework.WindowsDX 3.4.0.459
+
+//Gemini.Modules.SharpDX
+nuget SharpDX 2.6.3
+nuget SharpDX.Direct3D11 2.6.3
+nuget SharpDX.Direct3D9 2.6.3
+nuget SharpDX.DXGI 2.6.3
+nuget SharpDX.Toolkit 2.6.3
+nuget SharpDX.Toolkit.Graphics 2.6.3
+
+//Gemini.Tests
+nuget NUnit 3.0.1
+
+//Gemini.Demo
+nuget HelixToolkit.Wpf 2015.1.657
+nuget HelixToolkit 2015.1.657
