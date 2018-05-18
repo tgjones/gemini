@@ -6,8 +6,8 @@ framework: net45
 nuget Caliburn.Micro 2.0.2
 nuget Caliburn.Micro.Core 2.0.2
 nuget Extended.Wpf.Toolkit 2.9
-nuget Gu.Localization 6.1.0.0
-nuget Gu.Wpf.Localization 6.1.0.0
+nuget Gu.Localization 6.4.0
+nuget Gu.Wpf.Localization 6.4.0
 nuget MahApps.Metro 1.2.4.0
 nuget Xceed.Wpf.AvalonDock.Themes.VS2013 2.9.0.1
 
