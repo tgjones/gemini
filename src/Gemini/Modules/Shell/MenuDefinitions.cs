@@ -36,6 +36,10 @@ namespace Gemini.Modules.Shell
             MainMenu.MenuDefinitions.FileSaveMenuGroup, 1);
 
         [Export]
+        public static MenuItemDefinition FileSaveAllMenuItem = new CommandMenuItemDefinition<SaveAllFilesCommandDefinition>(
+            MainMenu.MenuDefinitions.FileSaveMenuGroup, 1);
+
+        [Export]
         public static MenuItemDefinition FileExitMenuItem = new CommandMenuItemDefinition<ExitCommandDefinition>(
             MainMenu.MenuDefinitions.FileExitOpenMenuGroup, 0);
 

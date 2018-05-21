@@ -190,6 +190,8 @@
     <Compile Include="Modules\Shell\Commands\ViewFullscreenCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandDefinition.cs" />
+    <Compile Include="Modules\Shell\Commands\SaveAllFilesCommandHandler.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileAsCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SaveFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\SwitchToDocumentCommandListDefinition.cs" />
@@ -459,6 +461,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\SaveAll.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\FullScreen.png" />
