@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -39,6 +39,10 @@ namespace Gemini
             if (!string.IsNullOrWhiteSpace(code))
             {
                 var culture = CultureInfo.GetCultureInfo(code);
+                // If code == "en", force to use default resource (Resources.resx)
+                // See PO #243
+                if (!Translator.Cultures.Contains(culture))
+                    culture = CultureInfo.InvariantCulture;
                 Translator.Culture = culture;
                 Thread.CurrentThread.CurrentUICulture = culture;
                 Thread.CurrentThread.CurrentCulture = culture;
