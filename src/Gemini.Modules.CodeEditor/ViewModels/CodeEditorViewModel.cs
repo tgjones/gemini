@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Gemini.Framework.Commands;
 using Gemini.Framework.Threading;
 using Gemini.Modules.CodeEditor.Commands;
 using Gemini.Modules.CodeEditor.Views;
+using Gemini.Modules.StatusBar;
 
 namespace Gemini.Modules.CodeEditor.ViewModels
 {
@@ -27,11 +29,49 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         private string _originalText;
         private ICodeEditorView _view;
 
+        private IStatusBar _statusBar;
+
+        private int _lineNumber = 0;
+        [DisplayName("Line Number")]
+        public int LineNumber
+        {
+            get { return _lineNumber; }
+            set
+            {
+                if (_lineNumber != value)
+                {
+                    _lineNumber = value;
+                    NotifyOfPropertyChange(() => LineNumber);
+                    UpdateStatusBar();
+                }
+            }
+        }
+
+        private int _columnPosition = 0;
+        [DisplayName("Column Position")]
+        public int ColumnPosition
+        {
+            get { return _columnPosition; }
+            set
+            {
+                if (_columnPosition != value)
+                {
+                    _columnPosition = value;
+                    NotifyOfPropertyChange(() => ColumnPosition);
+                    UpdateStatusBar();
+                }
+            }
+        }
+
         [ImportingConstructor]
         public CodeEditorViewModel(LanguageDefinitionManager languageDefinitionManager)
         {
             _languageDefinitionManager = languageDefinitionManager;
+
+            _statusBar = IoC.Get<IStatusBar>();
         }
+
+        #region Override methods
 
         public override bool ShouldReopenOnStart
         {
@@ -88,6 +128,8 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             return TaskUtility.Completed;
         }
 
+        #endregion Override methods
+
         private void ApplyOriginalText()
         {
             if (_view == null)
@@ -121,6 +163,19 @@ namespace Gemini.Modules.CodeEditor.ViewModels
         {
             _view?.ApplySettings();
         }
+
+        #region StatusBar
+
+        private void UpdateStatusBar()
+        {
+            if (_statusBar != null && _statusBar.Items.Count >= 3)
+            {
+                _statusBar.Items[1].Message = string.Format("Ln {0}", LineNumber);
+                _statusBar.Items[2].Message = string.Format("Col {0}", ColumnPosition);
+            }
+        }
+
+        #endregion StatusBar
 
         #region CommandHandlers
         void ICommandHandler<WordWrapCommandDefinition>.Update(Command command)
