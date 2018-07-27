@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Caliburn.Micro;
 using Gemini.Modules.MainMenu;
 using Gemini.Modules.StatusBar;
@@ -32,7 +32,9 @@ namespace Gemini.Framework.Services
 		void ShowTool(ITool model);
 
         bool TryActivateDocumentByPath(string path);
-		void OpenDocument(IDocument model);
+        void TryOpenDocumentByPath(string path);
+
+        void OpenDocument(IDocument model);
 		void CloseDocument(IDocument document);
 
 		void Close();

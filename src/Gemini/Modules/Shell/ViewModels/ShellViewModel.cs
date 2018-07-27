@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Linq;
-using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Framework.Themes;
 using Gemini.Modules.MainMenu;
+using Gemini.Modules.RecentFiles;
+using Gemini.Modules.Shell.Commands;
 using Gemini.Modules.Shell.Services;
 using Gemini.Modules.Shell.Views;
 using Gemini.Modules.StatusBar;
 using Gemini.Modules.ToolBars;
-using Gemini.Modules.RecentFiles;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Windows;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
@@ -202,7 +203,24 @@ namespace Gemini.Modules.Shell.ViewModels
             return false;
         }
 
-		public void OpenDocument(IDocument model)
+        public async void TryOpenDocumentByPath(string path)
+        {
+            if (!File.Exists(path))
+                return;
+
+            if (!TryActivateDocumentByPath(path))
+            {
+                var editor = await OpenFileCommandHandler.GetEditor(path);
+                if (editor != null)
+                {
+                    OpenDocument(editor);
+                    // Add the file to the recent documents list
+                    RecentFiles.Update(path);
+                }
+            }            
+        }
+        
+        public void OpenDocument(IDocument model)
 		{
 			ActivateItem(model);
 		}        

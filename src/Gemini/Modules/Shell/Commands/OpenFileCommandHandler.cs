@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,6 +8,7 @@ using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Microsoft.Win32;
 using System.IO;
+using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -24,7 +25,7 @@ namespace Gemini.Modules.Shell.Commands
             _editorProviders = editorProviders;
         }
 
-        public override async Task Run(Command command)
+        public override Task Run(Command command)
         {
             var dialog = new OpenFileDialog();
 
@@ -39,12 +40,10 @@ namespace Gemini.Modules.Shell.Commands
             {
                 var fullPath = Path.GetFullPath(dialog.FileName);
 
-                if (!_shell.TryActivateDocumentByPath(fullPath))
-                    _shell.OpenDocument(await GetEditor(fullPath));
-
-                // Add the file to the recent documents list
-                _shell.RecentFiles.Update(fullPath);
+                _shell.TryOpenDocumentByPath(fullPath);
             }
+
+            return TaskUtility.Completed;
         }
 
         internal static Task<IDocument> GetEditor(string path)
