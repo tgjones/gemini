@@ -37,6 +37,7 @@
                             BorderBrush="Transparent"
                             IsEnabled="{Binding IsDirty}"
                             Visibility="{Binding CanReset, Converter={StaticResource BoolToVisibilityConverter}}"
+                            cal:Action.TargetWithoutContext="{Binding}"
                             cal:Message.Attach="Reset"/>
                 </Grid>
             </DataTemplate>
