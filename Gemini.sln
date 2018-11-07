@@ -1,53 +1,60 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo", "Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo", "src\Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "src\Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Tests", "Gemini.Tests\Gemini.Tests.csproj", "{0BC8F4A4-4210-46CE-86F5-D263D4ED748F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Tests", "src\Gemini.Tests\Gemini.Tests.csproj", "{0BC8F4A4-4210-46CE-86F5-D263D4ED748F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Output", "Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{B78AACC8-5A16-4951-83AD-B78D1C80A258}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Output", "src\Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{B78AACC8-5A16-4951-83AD-B78D1C80A258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.PropertyGrid", "Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj", "{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.PropertyGrid", "src\Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj", "{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{748FD7C1-877B-451D-809A-68E032C39B34}"
 	ProjectSection(SolutionItems) = preProject
-		..\appveyor.yml = ..\appveyor.yml
-		..\CHANGELOG.markdown = ..\CHANGELOG.markdown
-		..\README.markdown = ..\README.markdown
-		Rebracer.xml = Rebracer.xml
+		appveyor.yml = appveyor.yml
+		CHANGELOG.markdown = CHANGELOG.markdown
+		paket.dependencies = paket.dependencies
+		README.markdown = README.markdown
+		src\Rebracer.xml = src\Rebracer.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Xna", "Gemini.Modules.Xna\Gemini.Modules.Xna.csproj", "{DCE32AFD-5E68-45CF-B540-5294930E249E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Xna", "src\Gemini.Modules.Xna\Gemini.Modules.Xna.csproj", "{DCE32AFD-5E68-45CF-B540-5294930E249E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.Xna", "Gemini.Demo.Xna\Gemini.Demo.Xna.csproj", "{9F269618-D57F-42A1-9C8E-71291BB10588}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.Xna", "src\Gemini.Demo.Xna\Gemini.Demo.Xna.csproj", "{9F269618-D57F-42A1-9C8E-71291BB10588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector", "Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj", "{0F8463BD-C1B0-4F2B-855D-49B6963B3337}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector", "src\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj", "{0F8463BD-C1B0-4F2B-855D-49B6963B3337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.Xna", "Gemini.Modules.Inspector.Xna\Gemini.Modules.Inspector.Xna.csproj", "{C3E1B956-50E7-425E-B61A-4673D4B6759F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.Xna", "src\Gemini.Modules.Inspector.Xna\Gemini.Modules.Inspector.Xna.csproj", "{C3E1B956-50E7-425E-B61A-4673D4B6759F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.ErrorList", "Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj", "{9F436232-52C4-4C2C-A83F-ADFE5B829484}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.ErrorList", "src\Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj", "{9F436232-52C4-4C2C-A83F-ADFE5B829484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeEditor", "Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj", "{1B56487B-CD40-4D94-8A62-C15F7E13D2FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeEditor", "src\Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj", "{1B56487B-CD40-4D94-8A62-C15F7E13D2FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeCompiler", "Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj", "{F1CEEDDC-A1DC-4A7A-8A86-FA4C72BFBAE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeCompiler", "src\Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj", "{F1CEEDDC-A1DC-4A7A-8A86-FA4C72BFBAE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.GraphEditor", "Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj", "{F8204886-1F61-4247-B7B2-EA5E518162F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.GraphEditor", "src\Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj", "{F8204886-1F61-4247-B7B2-EA5E518162F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.SharpDX", "Gemini.Modules.SharpDX\Gemini.Modules.SharpDX.csproj", "{F91E6435-097E-4B7F-BC89-FDA2135E1B22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.SharpDX", "src\Gemini.Modules.SharpDX\Gemini.Modules.SharpDX.csproj", "{F91E6435-097E-4B7F-BC89-FDA2135E1B22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{87C5CCCC-7448-4802-B35F-C0BEA3FF880D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.MonoGame", "Gemini.Modules.MonoGame\Gemini.Modules.MonoGame.csproj", "{9472DFF6-74BF-460F-8DFA-037A3479EBE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.MonoGame", "src\Gemini.Modules.MonoGame\Gemini.Modules.MonoGame.csproj", "{9472DFF6-74BF-460F-8DFA-037A3479EBE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.MonoGame", "Gemini.Demo.MonoGame\Gemini.Demo.MonoGame.csproj", "{C723324B-E0FA-4F77-A616-F2B96F4C4198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.MonoGame", "src\Gemini.Demo.MonoGame\Gemini.Demo.MonoGame.csproj", "{C723324B-E0FA-4F77-A616-F2B96F4C4198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.MonoGame", "Gemini.Modules.Inspector.MonoGame\Gemini.Modules.Inspector.MonoGame.csproj", "{4775F2B0-F284-40D8-9738-BCD9B56F7273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector.MonoGame", "src\Gemini.Modules.Inspector.MonoGame\Gemini.Modules.Inspector.MonoGame.csproj", "{4775F2B0-F284-40D8-9738-BCD9B56F7273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.SharpDX", "Gemini.Demo.SharpDX\Gemini.Demo.SharpDX.csproj", "{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo.SharpDX", "src\Gemini.Demo.SharpDX\Gemini.Demo.SharpDX.csproj", "{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{869F1393-270C-49BB-80A1-6CBBFB91085F}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -248,5 +255,8 @@ Global
 		{9F269618-D57F-42A1-9C8E-71291BB10588} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{C723324B-E0FA-4F77-A616-F2B96F4C4198} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
 		{8305C7DD-F954-4E3C-A9A7-AE95C4DE2CD0} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B21E9959-B1D5-4C9A-853F-E445A52C27D5}
 	EndGlobalSection
 EndGlobal

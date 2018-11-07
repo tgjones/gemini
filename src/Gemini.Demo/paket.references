@@ -1,0 +1,14 @@
+AvalonEdit
+Caliburn.Micro
+Caliburn.Micro.Core
+Extended.Wpf.Toolkit
+Gu.Localization
+Gu.Wpf.Localization
+HelixToolkit
+HelixToolkit.Wpf
+Microsoft.CodeAnalysis.Analyzers
+Microsoft.CodeAnalysis.Common
+Microsoft.CodeAnalysis.CSharp
+System.Collections.Immutable
+System.Reflection.Metadata
+Xceed.Wpf.AvalonDock.Themes.VS2013

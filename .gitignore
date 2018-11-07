@@ -163,6 +163,10 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+# FAKE & Paket
+packages
+paket-files
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
