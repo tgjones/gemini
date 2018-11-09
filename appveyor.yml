@@ -1,3 +1,4 @@
+image: Visual Studio 2017
 version: 1.0.{build}
 skip_tags: false
 configuration: Release
