@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Micro;
@@ -12,12 +13,7 @@ namespace Gemini.Modules.UndoRedo.ViewModels
     [Export(typeof(IHistoryTool))]
     public class HistoryViewModel : Tool, IHistoryTool
     {
-        private readonly BindableCollection<HistoryItemViewModel> _historyItems;
- 
-        public override PaneLocation PreferredLocation
-        {
-            get { return PaneLocation.Right; }
-        }
+        public override PaneLocation PreferredLocation => PaneLocation.Right;
 
         private IUndoRedoManager _undoRedoManager;
         public IUndoRedoManager UndoRedoManager
@@ -25,46 +21,48 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             get { return _undoRedoManager; }
             set
             {
+                if (_undoRedoManager == value)
+                    return;
+
                 if (_undoRedoManager != null)
                 {
-                    _undoRedoManager.UndoStack.CollectionChanged -= OnUndoRedoStackChanged;
-                    _undoRedoManager.RedoStack.CollectionChanged -= OnUndoRedoStackChanged;
+                    _undoRedoManager.ActionStack.CollectionChanged -= OnUndoRedoManagerActionStackChanged;
+                    _undoRedoManager.PropertyChanged -= OnUndoRedoManagerPropertyChanged;
                 }
 
                 _undoRedoManager = value;
+
                 if (_undoRedoManager != null)
                 {
-                    _undoRedoManager.UndoStack.CollectionChanged += OnUndoRedoStackChanged;
-                    _undoRedoManager.RedoStack.CollectionChanged += OnUndoRedoStackChanged;
+                    _undoRedoManager.ActionStack.CollectionChanged += OnUndoRedoManagerActionStackChanged;
+                    _undoRedoManager.PropertyChanged += OnUndoRedoManagerPropertyChanged;
+
+                    ResetItems();
                 }
-                RefreshHistory();
             }
         }
 
-        private bool _internallyTriggeredChange;
         private int _selectedIndex;
         public int SelectedIndex
         {
             get { return _selectedIndex; }
             set
             {
+                if (_selectedIndex == value)
+                    return;
+
                 _selectedIndex = value;
                 NotifyOfPropertyChange(() => SelectedIndex);
-                TriggerInternalHistoryChange(() => UndoOrRedoToInternal(HistoryItems[value - 1]));
+                UndoOrRedoTo(HistoryItems[value - 1], false);
             }
         }
 
-        public IObservableCollection<HistoryItemViewModel> HistoryItems
-        {
-            get { return _historyItems; }
-        }
+        public IObservableCollection<HistoryItemViewModel> HistoryItems { get; } = new BindableCollection<HistoryItemViewModel>();
 
         [ImportingConstructor]
         public HistoryViewModel(IShell shell)
         {
             DisplayName = Resources.HistoryDisplayName;
-
-            _historyItems = new BindableCollection<HistoryItemViewModel>();
 
             if (shell == null)
                 return;
@@ -77,51 +75,62 @@ namespace Gemini.Modules.UndoRedo.ViewModels
                 UndoRedoManager = shell.ActiveItem.UndoRedoManager;
         }
 
-        private void OnUndoRedoStackChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ResetItems()
         {
-            RefreshHistory();
+            HistoryItems.Clear();
+            HistoryItems.Add(new HistoryItemViewModel(Resources.HistoryInitialState));
+            HistoryItems.AddRange(_undoRedoManager.ActionStack.Select(a => new HistoryItemViewModel(a)));
+            RefreshItemTypes();
         }
 
-        private void RefreshHistory()
+        private void OnUndoRedoManagerActionStackChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            _historyItems.Clear();
-            if (_undoRedoManager != null)
+            switch (e.Action)
             {
-                _historyItems.Add(new HistoryItemViewModel(Resources.HistoryInitialState,
-                    (_undoRedoManager.UndoStack.Any() ? HistoryItemType.InitialState : HistoryItemType.Current)));
-                for (int i = 0; i < _undoRedoManager.UndoStack.Count; i++)
-                    _historyItems.Add(new HistoryItemViewModel(_undoRedoManager.UndoStack[i],
-                        (i == _undoRedoManager.UndoStack.Count - 1) ? HistoryItemType.Current : HistoryItemType.Undo));
-                for (int i = _undoRedoManager.RedoStack.Count - 1; i >= 0; i--)
-                    _historyItems.Add(new HistoryItemViewModel(
-                        _undoRedoManager.RedoStack[i],
-                        HistoryItemType.Redo));
+                case NotifyCollectionChangedAction.Add:
+                    var newItems = e.NewItems.Cast<IUndoableAction>().ToArray();
+                    for (var i = 0; i < newItems.Length; i++)
+                        HistoryItems.Insert(e.NewStartingIndex + i + 1, new HistoryItemViewModel(newItems[i]));
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    for (var i = 0; i < e.OldItems.Count; i++)
+                        HistoryItems.RemoveAt(e.OldStartingIndex + 1);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    ResetItems();
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
-
-            if (!_internallyTriggeredChange)
-                UpdateSelectedIndexOnly(_historyItems.Count);
         }
 
-        public void UndoOrRedoTo(HistoryItemViewModel item)
+        private void OnUndoRedoManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            TriggerInternalHistoryChange(() => UndoOrRedoToInternal(item));
-            UpdateSelectedIndexOnly(_historyItems.IndexOf(_historyItems.First(x => x.Action == item.Action)) + 1);
+            switch (e.PropertyName)
+            {
+                case nameof(IUndoRedoManager.UndoActionCount):
+                    RefreshItemTypes();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void TriggerInternalHistoryChange(System.Action callback)
+        private void RefreshItemTypes()
         {
-            _internallyTriggeredChange = true;
-            callback();
-            _internallyTriggeredChange = false;
+            HistoryItems[0].ItemType = _undoRedoManager.CanUndo ? HistoryItemType.InitialState : HistoryItemType.Current;
+
+            for (var i = 1; i <= _undoRedoManager.ActionStack.Count; i++)
+            {
+                var delta = _undoRedoManager.UndoActionCount - i;
+                if (delta == 0)
+                    HistoryItems[i].ItemType = HistoryItemType.Current;
+                else
+                    HistoryItems[i].ItemType = delta > 0 ? HistoryItemType.Undo : HistoryItemType.Redo;
+            }
         }
 
-        private void UpdateSelectedIndexOnly(int selectedIndex)
-        {
-            _selectedIndex = selectedIndex;
-            NotifyOfPropertyChange(() => SelectedIndex);
-        }
-
-        private void UndoOrRedoToInternal(HistoryItemViewModel item)
+        public void UndoOrRedoTo(HistoryItemViewModel item, bool setSelectedIndex)
         {
             switch (item.ItemType)
             {
@@ -139,6 +148,9 @@ namespace Gemini.Modules.UndoRedo.ViewModels
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            if (setSelectedIndex)
+                SelectedIndex = HistoryItems.IndexOf(item) + 1;
         }
     }
 }

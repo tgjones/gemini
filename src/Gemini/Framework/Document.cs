@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -67,7 +67,7 @@ namespace Gemini.Framework
 
 	    void ICommandHandler<UndoCommandDefinition>.Update(Command command)
 	    {
-            command.Enabled = UndoRedoManager.UndoStack.Any();
+            command.Enabled = UndoRedoManager.CanUndo;
 	    }
 
 	    Task ICommandHandler<UndoCommandDefinition>.Run(Command command)
@@ -78,7 +78,7 @@ namespace Gemini.Framework
 
         void ICommandHandler<RedoCommandDefinition>.Update(Command command)
         {
-            command.Enabled = UndoRedoManager.RedoStack.Any();
+            command.Enabled = UndoRedoManager.CanRedo;
         }
 
         Task ICommandHandler<RedoCommandDefinition>.Run(Command command)

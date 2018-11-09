@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Gemini.Modules.UndoRedo.ViewModels;
@@ -19,7 +19,7 @@ namespace Gemini.Modules.UndoRedo.Views
         {
             var viewModel = (HistoryViewModel) DataContext;
             var itemViewModel = (HistoryItemViewModel) ((FrameworkElement) sender).DataContext;
-            viewModel.UndoOrRedoTo(itemViewModel);
+            viewModel.UndoOrRedoTo(itemViewModel, true);
         }
     }
 }
