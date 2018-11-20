@@ -1,5 +1,8 @@
-﻿<ViewModels:SettingsViewModel xmlns:ViewModels="clr-namespace:Gemini.Modules.Settings.ViewModels" DisplayName="Tempor adipiscing" IsNotifying="True" IsInitialized="False" IsActive="True">
-	<ViewModels:SettingsViewModel.Pages>
+<ViewModels:SettingsViewModel
+  xmlns:ViewModels="clr-namespace:Gemini.Modules.Settings.ViewModels"
+  DisplayName="Tempor adipiscing"
+  IsNotifying="True">
+  <!--<ViewModels:SettingsViewModel.Pages>
 		<ViewModels:SettingsPageViewModel Name="Nam sed">
 			<ViewModels:SettingsPageViewModel.Children>
 				<ViewModels:SettingsPageViewModel Name="Aliquam aenean"/>
@@ -90,5 +93,5 @@
 				<ViewModels:SettingsPageViewModel Name="Phasellus consequat sem"/>
 			</ViewModels:SettingsPageViewModel.Children>
 		</ViewModels:SettingsPageViewModel>
-	</ViewModels:SettingsViewModel.Pages>
+	</ViewModels:SettingsViewModel.Pages>-->
 </ViewModels:SettingsViewModel>

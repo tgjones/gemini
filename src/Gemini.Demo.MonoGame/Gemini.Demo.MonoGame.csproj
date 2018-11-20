@@ -158,10 +158,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gemini.Modules.Inspector.MonoGame\Gemini.Modules.Inspector.MonoGame.csproj">
-      <Project>{4775F2B0-F284-40D8-9738-BCD9B56F7273}</Project>
-      <Name>Gemini.Modules.Inspector.MonoGame</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj">
       <Project>{0F8463BD-C1B0-4F2B-855D-49B6963B3337}</Project>
       <Name>Gemini.Modules.Inspector</Name>
