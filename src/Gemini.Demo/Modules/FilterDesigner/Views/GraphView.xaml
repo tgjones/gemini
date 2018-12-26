@@ -8,6 +8,7 @@
              xmlns:vm="clr-namespace:Gemini.Demo.Modules.FilterDesigner.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700"
+             xmlns:dd="clr-namespace:Gemini.Demo.Modules.FilterDesigner.Design"
 			 d:DataContext="{d:DesignInstance dd:DesignTimeGraphViewModel, IsDesignTimeCreatable=True}"
 			 Background="WhiteSmoke" Focusable="True">
 	<UserControl.Resources>
@@ -39,14 +40,14 @@
 					</local:GraphControl.ElementItemContainerStyle>
 			
 					<local:GraphControl.ElementItemTemplate>
-						<DataTemplate DataType="vm:ElementViewModel">
+						<DataTemplate DataType="vm:DynamicElement">
 							<DataTemplate.Resources>
 								<Style TargetType="local:ConnectorItem">
 									<Setter Property="Position" Value="{Binding Position, Mode=OneWayToSource}" />
 									<Setter Property="Template">
 										<Setter.Value>
 											<ControlTemplate TargetType="local:ConnectorItem">
-												<Rectangle Width="5" Height="10" Margin="0 0 0 5"
+												<Rectangle Width="25" Height="10" Margin="0 0 0 5"
 															Fill="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
 											</ControlTemplate>
 										</Setter.Value>
@@ -94,12 +95,18 @@
 																<Image Source="{Binding PreviewImage}" Stretch="Fill" />
 															</Border>
 														</Border>
-														<StackPanel Orientation="Horizontal" Height="20" Margin="5 5 0 0"
-																	HorizontalAlignment="Right">
-															<TextBlock Text="{Binding OutputConnector.Name}" FontSize="11" VerticalAlignment="Top"
+                                                        <ItemsControl  Grid.Column="0" ItemsSource="{Binding OutputConnectors}">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate >
+                                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                                                    <TextBlock  Text="{Binding Name}" FontSize="11" 
 																	   Margin="0 0 3 0"/>
-															<local:ConnectorItem DataContext="{Binding OutputConnector}" />
-														</StackPanel>
+                                                                    <local:ConnectorItem HorizontalAlignment="Stretch" DataContext="{Binding }" Width="20" />
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+					
+														</ItemsControl>
 													</StackPanel>
 												</Border>
 											</Grid>
@@ -117,10 +124,12 @@
 			
 					<local:GraphControl.ConnectionItemTemplate>
 						<DataTemplate DataType="vm:ConnectionViewModel">
-							<local:BezierLine Stroke="LightSkyBlue" StrokeThickness="1"
+                            <Grid>
+							<local:BezierLine Stroke="{Binding Color}" StrokeThickness="10" 
 									X1="{Binding FromPosition.X}" Y1="{Binding FromPosition.Y}"
 									X2="{Binding ToPosition.X}" Y2="{Binding ToPosition.Y}" />
-						</DataTemplate>
+                            </Grid>
+                        </DataTemplate>
 					</local:GraphControl.ConnectionItemTemplate>
 				</local:GraphControl>
 			</local:ZoomAndPanControl>

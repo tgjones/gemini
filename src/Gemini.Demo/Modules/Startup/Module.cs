@@ -5,6 +5,9 @@ using System.Windows;
 using Gemini.Framework;
 using Gemini.Modules.Inspector;
 using Gemini.Modules.Output;
+using Common.Logging.Simple;
+using Common.Logging;
+using Gemini.Demo.Modules.FilterDesigner;
 
 namespace Gemini.Demo.Modules.Startup
 {
@@ -20,17 +23,19 @@ namespace Gemini.Demo.Modules.Startup
         }
 
         [ImportingConstructor]
-	    public Module(IOutput output, IInspectorTool inspectorTool)
+	    public Module(IOutput output, IInspectorTool inspectorTool, LoggerFacory logger)
         {
             _output = output;
             _inspectorTool = inspectorTool;
+            LogManager.Adapter = logger;
+
         }
 
-	    public override void Initialize()
+        public override void Initialize()
 		{
-		    Shell.ShowFloatingWindowsInTaskbar = true;
-            Shell.ToolBars.Visible = true;
 
+            Shell.ShowFloatingWindowsInTaskbar = true;
+            Shell.ToolBars.Visible = true;
             //MainWindow.WindowState = WindowState.Maximized;
             MainWindow.Title = "Gemini Demo";
 

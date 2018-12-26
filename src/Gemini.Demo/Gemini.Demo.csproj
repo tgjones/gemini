@@ -44,6 +44,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C5, Version=2.3.5280.26713, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
+      <HintPath>..\packages\C5.2.3.0.1\lib\net40\C5.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro, Version=2.0.2.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.Core.2.0.2\lib\net45\Caliburn.Micro.dll</HintPath>
       <Private>True</Private>
@@ -51,6 +54,15 @@
     <Reference Include="Caliburn.Micro.Platform, Version=2.0.2.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.2.2.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.2.2.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Gridsum.DataflowEx, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Gridsum.DataflowEx.1.1.3\lib\net45\Gridsum.DataflowEx.dll</HintPath>
     </Reference>
     <Reference Include="Gu.Localization, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Gu.Localization.6.1.0.0\lib\net45\Gu.Localization.dll</HintPath>
@@ -81,18 +93,46 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.1.37.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Collections.Immutable.1.1.37\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.1.0\lib\net462\System.Reflection.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reflection.Metadata, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reflection.Metadata.1.1.0\lib\portable-net45+win8\System.Reflection.Metadata.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.7.0\lib\portable-net45+win8+wpa81\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -150,6 +190,8 @@
     <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandHandler.cs" />
     <Compile Include="Modules\FilterDesigner\Design\DesignTimeGraphViewModel.cs" />
     <Compile Include="Modules\FilterDesigner\Design\DesignTimeImages.cs" />
+    <Compile Include="Modules\FilterDesigner\Logger.cs" />
+    <Compile Include="Modules\FilterDesigner\LoggerFacory.cs" />
     <Compile Include="Modules\FilterDesigner\MenuDefinitions.cs" />
     <Compile Include="Modules\FilterDesigner\Sample.cs" />
     <Compile Include="Modules\FilterDesigner\ShaderEffects\AddEffect.cs" />
@@ -158,21 +200,31 @@
     <Compile Include="Modules\FilterDesigner\Util\BitmapUtility.cs" />
     <Compile Include="Modules\FilterDesigner\Util\FastBitmap.cs" />
     <Compile Include="Modules\FilterDesigner\Util\ShaderEffectUtility.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectionViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectorDirection.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connection\BitmapSourceConnection.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connection\ConnectionViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connection\GenericConnectionViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\ConnectorDirection.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\ConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\Input\BitmapSourceInputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\Input\GenericInputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\Output\BitmapSourceOutputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\Output\GenericOutputConnectorViewModel.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\Elements\Add.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ColorInput.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\DynamicElement.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\BitmapSourceElement.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ImageSource.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\Elements\Multiply.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ShaderEffectElement.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\ElementViewModel.cs" />
     <Compile Include="Modules\FilterDesigner\ViewModels\GraphViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\InputConnectorViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\OutputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\Input\InputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\Connector\Output\OutputConnectorViewModel.cs" />
+    <Compile Include="Modules\FilterDesigner\ViewModels\JoinAnyBlock.cs" />
     <Compile Include="Modules\FilterDesigner\Views\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FilterDesigner\Views\ImagePreview.xaml.cs">
+      <DependentUpon>ImagePreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Home\Commands\ViewHelixCommandDefinition.cs" />
     <Compile Include="Modules\Home\Commands\ViewHelixCommandHandler.cs" />
@@ -286,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Modules\FilterDesigner\Views\ImagePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Modules\Home\Views\HelixView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -332,6 +388,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">
     <PixelShaderCompile Sources="@(Effect)">

@@ -8,10 +8,13 @@ using Caliburn.Micro;
 
 namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 {
-    public abstract class ElementViewModel : PropertyChangedBase
+    public interface IsSelectable
     {
-        public event EventHandler OutputChanged;
+        bool IsSelected { get; set; }
+    }
 
+    public abstract class ElementViewModel : PropertyChangedBase, IsSelectable
+    {
         public const double PreviewSize = 100;
 
         private double _x;
@@ -74,54 +77,36 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
             get { return _inputConnectors; }
         }
 
-        private OutputConnectorViewModel _outputConnector;
-        public OutputConnectorViewModel OutputConnector
+        private readonly BindableCollection<OutputConnectorViewModel> _outputConnectors;
+        public IList<OutputConnectorViewModel> OutputConnectors
         {
-            get { return _outputConnector; }
-            set
-            {
-                _outputConnector = value;
-                NotifyOfPropertyChange(() => OutputConnector);
-            }
+            get { return _outputConnectors; }
         }
 
         public IEnumerable<ConnectionViewModel> AttachedConnections
         {
             get
             {
-                return _inputConnectors.Select(x => x.Connection)
-                    .Union(_outputConnector.Connections)
-                    .Where(x => x != null);
+                return _inputConnectors.SelectMany(x => x.Connections).Union(_outputConnectors.SelectMany(x => x.Connections));
             }
         }
 
         protected ElementViewModel()
         {
             _inputConnectors = new BindableCollection<InputConnectorViewModel>();
+            _outputConnectors = new BindableCollection<OutputConnectorViewModel>();
+
             _name = GetType().Name;
         }
 
-        protected void AddInputConnector(string name, Color color)
+        protected void AddInputConnector(InputConnectorViewModel inputConnector)
         {
-            var inputConnector = new InputConnectorViewModel(this, name, color);
-            inputConnector.SourceChanged += (sender, e) => OnInputConnectorConnectionChanged();
             _inputConnectors.Add(inputConnector);
         }
 
-        protected void SetOutputConnector(string name, Color color, Func<BitmapSource> valueCallback)
+        protected void AddOutputConnector(OutputConnectorViewModel outputConnector)
         {
-            OutputConnector = new OutputConnectorViewModel(this, name, color, valueCallback);
-        }
-
-        protected virtual void OnInputConnectorConnectionChanged()
-        {
-            
-        }
-
-        protected virtual void RaiseOutputChanged()
-        {
-            EventHandler handler = OutputChanged;
-            if (handler != null) handler(this, EventArgs.Empty);
+            OutputConnectors.Add(outputConnector);
         }
     }
 }
