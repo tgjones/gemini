@@ -10,6 +10,7 @@ using Gemini.Properties;
 namespace Gemini.Modules.Settings.ViewModels
 {
     [Export(typeof (SettingsViewModel))]
+    [PartCreationPolicy (CreationPolicy.NonShared)]
     public class SettingsViewModel : WindowBase
     {
         private IEnumerable<ISettingsEditor> _settingsEditors;
