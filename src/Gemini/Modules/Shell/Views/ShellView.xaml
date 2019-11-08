@@ -88,6 +88,7 @@
 							<Setter Property="CloseCommand" Value="{Binding Model.CloseCommand}" />
 							<Setter Property="IconSource" Value="{Binding Model.IconSource, Converter={StaticResource NullableValueConverter}}" />
                             <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
+                            <Setter Property="ToolTip" Value="{Binding Model.ToolTip, Mode=OneWay}" />
                         </Style>
 					</controls:PanesStyleSelector.DocumentStyle>
 					<controls:PanesStyleSelector.ToolStyle>
