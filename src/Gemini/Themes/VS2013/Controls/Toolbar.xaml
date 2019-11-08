@@ -2,7 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:c="clr-namespace:Gemini.Modules.ToolBars.Controls"
                     xmlns:shaderEffects="clr-namespace:Gemini.Framework.ShaderEffects"
+                    xmlns:converters="clr-namespace:Gemini.Framework.ShaderEffects.Converters"
                     xmlns:controls="clr-namespace:Gemini.Framework.Controls">
+    <converters:BindingProxy x:Key="DefaultBackground" Data="{DynamicResource ToolbarDefaultBackground}"/>
+    <converters:SolidColorBrushToColorConverter x:Key="SolidColorBrushToColorConverter"/>
+    
     <Style x:Key="ToolBarThumbStyle" TargetType="{x:Type Thumb}">
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Cursor" Value="SizeAll" />
@@ -68,7 +72,13 @@
                         <ContentPresenter x:Name="Content" Margin="2"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
-                                          RecognizesAccessKey="True" />
+                                          RecognizesAccessKey="True">
+                            <ContentPresenter.Effect>
+                                <shaderEffects:ThemedImageEffect Background="{Binding Converter={StaticResource SolidColorBrushToColorConverter}, Mode=OneWay,
+                                                                                      Source={StaticResource DefaultBackground}, Path=Data}"
+                                                                 IsEnabled="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Path=IsEnabled}"/>
+                            </ContentPresenter.Effect>
+                        </ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
                         <!-- Hovered -->
@@ -95,11 +105,11 @@
 
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Content" Property="Effect">
+                            <!--<Setter TargetName="Content" Property="Effect">
                                 <Setter.Value>
                                     <shaderEffects:GrayscaleEffect />
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
                             <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonDisabledText}" />
                             <Setter TargetName="Content" Property="Opacity" Value="0.5" />
                         </Trigger>
@@ -120,7 +130,13 @@
                         <ContentPresenter x:Name="Content" Margin="2"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
-                                          RecognizesAccessKey="True" />
+                                          RecognizesAccessKey="True">
+                            <ContentPresenter.Effect>
+                                <shaderEffects:ThemedImageEffect Background="{Binding Converter={StaticResource SolidColorBrushToColorConverter}, Mode=OneWay,
+                                                                                      Source={StaticResource DefaultBackground}, Path=Data}"
+                                                                 IsEnabled="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Path=IsEnabled}"/>
+                            </ContentPresenter.Effect>
+                        </ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
                         <!-- Hovered -->
@@ -169,11 +185,11 @@
                         
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Content" Property="Effect">
+                            <!--<Setter TargetName="Content" Property="Effect">
                                 <Setter.Value>
                                     <shaderEffects:GrayscaleEffect />
                                 </Setter.Value>
-                            </Setter>
+                            </Setter>-->
                             <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ToolbarButtonDisabledText}" />
                             <Setter TargetName="Content" Property="Opacity" Value="0.5" />
                         </Trigger>

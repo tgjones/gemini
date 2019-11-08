@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -149,9 +149,13 @@
     <Compile Include="Framework\Services\EditorFileType.cs" />
     <Compile Include="Framework\Services\IMainWindow.cs" />
     <Compile Include="Framework\Services\SettingsPropertyChangedEventManager.cs" />
+    <Compile Include="Framework\ShaderEffects\Converters\BindingProxy.cs" />
+    <Compile Include="Framework\ShaderEffects\Converters\IsNullConverter.cs" />
+    <Compile Include="Framework\ShaderEffects\Converters\SolidColorBrushToColorConverter.cs" />
     <Compile Include="Framework\ShaderEffects\GrayscaleEffect.cs" />
     <Compile Include="Framework\ShaderEffects\ShaderEffectBase.cs" />
     <Compile Include="Framework\ShaderEffects\ShaderEffectUtility.cs" />
+    <Compile Include="Framework\ShaderEffects\ThemedImageEffect.cs" />
     <Compile Include="Framework\Themes\ITheme.cs" />
     <Compile Include="Framework\Themes\IThemeManager.cs" />
     <Compile Include="Framework\Themes\BlueTheme.cs" />
@@ -475,6 +479,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <Resource Include="Framework\ShaderEffects\GrayscaleEffect.ps" />
+    <Resource Include="Framework\ShaderEffects\ThemedImageEffect.ps" />
     <None Include="Gemini.nuspec" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -513,6 +518,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\FullScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Framework\ShaderEffects\Scripts\ThemedImage.fx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
