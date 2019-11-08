@@ -17,13 +17,13 @@ namespace Gemini.Modules.Shell.Converters
 
             string result = value.ToString();
             int frontLength = 15;
-            int backLength = 16;
+            int backLength = result.EndsWith("*") ? 17 : 16;
 
             var lengths = parameter as int[];
             if (lengths != null && lengths.Length == 2)
             {
                 frontLength = lengths[0];
-                backLength = lengths[1];
+                backLength = result.EndsWith("*") ? lengths[1] + 1 : lengths[1];
             }
 
             if (result.Length > frontLength + 3 + backLength)
