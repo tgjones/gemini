@@ -89,7 +89,8 @@ namespace Gemini.Framework
 
         void ICommandHandler<SaveFileCommandDefinition>.Update(Command command)
         {
-            command.Enabled = this is IPersistedDocument;
+            var persistedDocument = this as IPersistedDocument;
+            command.Enabled = (persistedDocument != null && persistedDocument.IsDirty);
         }
 
 	    async Task ICommandHandler<SaveFileCommandDefinition>.Run(Command command)
@@ -138,7 +139,7 @@ namespace Gemini.Framework
             if (fileType != null)
                 filter = fileType.Name + "|*" + fileType.FileExtension + "|";
 
-            filter += "All Files|*.*";
+            filter += Properties.Resources.AllFiles + "|*.*";
             dialog.Filter = filter;
 
             if (dialog.ShowDialog() != true)
@@ -148,6 +149,10 @@ namespace Gemini.Framework
 
             // Save file.
             await persistedDocument.Save(filePath);
+
+            // Add to recent files
+            IShell _shell = IoC.Get<IShell>();
+            _shell.RecentFiles.Update(filePath);
 	    }
 	}
 }

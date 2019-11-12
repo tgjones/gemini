@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -7,6 +7,8 @@ using Gemini.Framework;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Microsoft.Win32;
+using System.IO;
+using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.Shell.Commands
 {
@@ -23,11 +25,11 @@ namespace Gemini.Modules.Shell.Commands
             _editorProviders = editorProviders;
         }
 
-        public override async Task Run(Command command)
+        public override Task Run(Command command)
         {
             var dialog = new OpenFileDialog();
 
-            dialog.Filter = "All Supported Files|" + string.Join(";", _editorProviders
+            dialog.Filter = Properties.Resources.AllSupportedFiles + "|" + string.Join(";", _editorProviders
                 .SelectMany(x => x.FileTypes).Select(x => "*" + x.FileExtension));
 
             dialog.Filter += "|" + string.Join("|", _editorProviders
@@ -35,7 +37,13 @@ namespace Gemini.Modules.Shell.Commands
                 .Select(x => x.Name + "|*" + x.FileExtension));
 
             if (dialog.ShowDialog() == true)
-                _shell.OpenDocument(await GetEditor(dialog.FileName));
+            {
+                var fullPath = Path.GetFullPath(dialog.FileName);
+
+                _shell.TryOpenDocumentByPath(fullPath);
+            }
+
+            return TaskUtility.Completed;
         }
 
         internal static Task<IDocument> GetEditor(string path)

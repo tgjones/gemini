@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.IO;
-using System.Linq;
-using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
 using Gemini.Framework.Themes;
 using Gemini.Modules.MainMenu;
+using Gemini.Modules.RecentFiles;
+using Gemini.Modules.Shell.Commands;
 using Gemini.Modules.Shell.Services;
 using Gemini.Modules.Shell.Views;
 using Gemini.Modules.StatusBar;
 using Gemini.Modules.ToolBars;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
+using System.Windows;
 
 namespace Gemini.Modules.Shell.ViewModels
 {
@@ -39,6 +41,9 @@ namespace Gemini.Modules.Shell.ViewModels
         private IStatusBar _statusBar;
 
         [Import]
+        private IRecentFiles _recentFiles;
+
+        [Import]
         private ILayoutItemStatePersister _layoutItemStatePersister;
 #pragma warning restore 649
 
@@ -59,6 +64,11 @@ namespace Gemini.Modules.Shell.ViewModels
 		{
 			get { return _statusBar; }
 		}
+
+        public IRecentFiles RecentFiles
+        {
+            get { return _recentFiles; }
+        }
 
 	    private ILayoutItem _activeLayoutItem;
 	    public ILayoutItem ActiveLayoutItem
@@ -175,10 +185,45 @@ namespace Gemini.Modules.Shell.ViewModels
 	        ActiveLayoutItem = model;
 		}
 
-		public void OpenDocument(IDocument model)
+        public bool TryActivateDocumentByPath(string path)
+        {
+            foreach (var document in Documents.OfType<PersistedDocument>().Where(d => !d.IsNew))
+            {
+                if (string.IsNullOrEmpty(document.FilePath))
+                    continue;
+
+                var docPath = Path.GetFullPath(document.FilePath);
+                if (string.Equals(path, docPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    OpenDocument(document);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public async void TryOpenDocumentByPath(string path)
+        {
+            if (!File.Exists(path))
+                return;
+
+            if (!TryActivateDocumentByPath(path))
+            {
+                var editor = await OpenFileCommandHandler.GetEditor(path);
+                if (editor != null)
+                {
+                    OpenDocument(editor);
+                    // Add the file to the recent documents list
+                    RecentFiles.Update(path);
+                }
+            }            
+        }
+        
+        public void OpenDocument(IDocument model)
 		{
 			ActivateItem(model);
-		}
+		}        
 
 		public void CloseDocument(IDocument document)
 		{
