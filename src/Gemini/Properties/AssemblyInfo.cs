@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Markup;
@@ -29,5 +29,6 @@ using System.Windows.Markup;
 
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: XmlnsDefinition("http://schemas.timjones.tw/gemini", "Gemini")]
-[assembly: XmlnsDefinition("http://schemas.timjones.tw/gemini", "Gemini.Framework.Controls")]
+[assembly: XmlnsDefinition("http://schemas.timjones.io/gemini", "Gemini")]
+[assembly: XmlnsDefinition("http://schemas.timjones.io/gemini", "Gemini.Framework.Controls")]
+[assembly: XmlnsDefinition("http://schemas.timjones.io/gemini", "Gemini.Framework.Markup")]

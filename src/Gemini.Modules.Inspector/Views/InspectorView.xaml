@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Gemini.Modules.Inspector.Views.InspectorView"
+<UserControl x:Class="Gemini.Modules.Inspector.Views.InspectorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,7 @@
              xmlns:vm="clr-namespace:Gemini.Modules.Inspector.ViewModels"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:p="clr-namespace:Gemini.Modules.Inspector.Properties"
-             xmlns:l="http://gu.se/Localization"
-             l:ErrorHandling.Mode="ReturnErrorInfoPreserveNeutral"
+             xmlns:gemini="http://schemas.timjones.io/gemini"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
 			 d:DataContext="{d:DesignInstance vm:InspectorViewModel}">
@@ -17,8 +16,8 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <StackPanel Focusable="False" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="{l:Static p:Resources.ResetAll}"
-                        ToolTip="{l:Static p:Resources.ResetToolTip}"
+                <Button Content="{gemini:Translate p:Resources.ResetAll}"
+                        ToolTip="{gemini:Translate p:Resources.ResetToolTip}"
                         Foreground="{DynamicResource EnvironmentToolWindowText}"
                         BorderBrush="Transparent"
                         cal:Message.Attach="ResetAll"

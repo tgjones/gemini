@@ -19,10 +19,10 @@ namespace Gemini.Modules.Inspector.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Gemini.Modules.Inspector.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Gemini.Modules.Inspector.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Gemini.Modules.Inspector.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Change {0} from {1} to {2}.
         /// </summary>
-        internal static string ChangeObjectValueActionFormat {
+        public static string ChangeObjectValueActionFormat {
             get {
                 return ResourceManager.GetString("ChangeObjectValueActionFormat", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Advanced.
         /// </summary>
-        internal static string ColorEditorAdvanced {
+        public static string ColorEditorAdvanced {
             get {
                 return ResourceManager.GetString("ColorEditorAdvanced", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Available Colors.
         /// </summary>
-        internal static string ColorEditorAvailableColors {
+        public static string ColorEditorAvailableColors {
             get {
                 return ResourceManager.GetString("ColorEditorAvailableColors", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Recent Colors.
         /// </summary>
-        internal static string ColorEditorRecentColors {
+        public static string ColorEditorRecentColors {
             get {
                 return ResourceManager.GetString("ColorEditorRecentColors", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Standard.
         /// </summary>
-        internal static string ColorEditorStandard {
+        public static string ColorEditorStandard {
             get {
                 return ResourceManager.GetString("ColorEditorStandard", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Standard Colors.
         /// </summary>
-        internal static string ColorEditorStandardColors {
+        public static string ColorEditorStandardColors {
             get {
                 return ResourceManager.GetString("ColorEditorStandardColors", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Miscellaneous.
         /// </summary>
-        internal static string InspectorBuilderMiscellaneous {
+        public static string InspectorBuilderMiscellaneous {
             get {
                 return ResourceManager.GetString("InspectorBuilderMiscellaneous", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Inspector.
         /// </summary>
-        internal static string InspectorDisplayName {
+        public static string InspectorDisplayName {
             get {
                 return ResourceManager.GetString("InspectorDisplayName", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Reset all ⟲.
         /// </summary>
-        internal static string ResetAll {
+        public static string ResetAll {
             get {
                 return ResourceManager.GetString("ResetAll", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Reset {0} from {1} to {2}.
         /// </summary>
-        internal static string ResetObjectValueActionFormat {
+        public static string ResetObjectValueActionFormat {
             get {
                 return ResourceManager.GetString("ResetObjectValueActionFormat", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ⟲.
         /// </summary>
-        internal static string ResetSymbol {
+        public static string ResetSymbol {
             get {
                 return ResourceManager.GetString("ResetSymbol", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
-        internal static string ResetToolTip {
+        public static string ResetToolTip {
             get {
                 return ResourceManager.GetString("ResetToolTip", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to I_nspector.
         /// </summary>
-        internal static string ViewInspectorCommandText {
+        public static string ViewInspectorCommandText {
             get {
                 return ResourceManager.GetString("ViewInspectorCommandText", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Gemini.Modules.Inspector.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Inspector.
         /// </summary>
-        internal static string ViewInspectorCommandToolTip {
+        public static string ViewInspectorCommandToolTip {
             get {
                 return ResourceManager.GetString("ViewInspectorCommandToolTip", resourceCulture);
             }

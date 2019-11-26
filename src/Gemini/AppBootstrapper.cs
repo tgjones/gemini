@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.ReflectionModel;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
 
 namespace Gemini
 {
-    using System.Globalization;
-    using System.Reflection;
-    using System.Threading;
-    using System.Windows;
-    using Gu.Localization;
-
     public class AppBootstrapper : BootstrapperBase
     {
         private List<Assembly> _priorityAssemblies;
@@ -39,11 +37,6 @@ namespace Gemini
             if (!string.IsNullOrWhiteSpace(code))
             {
                 var culture = CultureInfo.GetCultureInfo(code);
-                // If code == "en", force to use default resource (Resources.resx)
-                // See PO #243
-                if (!Translator.Cultures.Contains(culture))
-                    culture = CultureInfo.InvariantCulture;
-                Translator.Culture = culture;
                 Thread.CurrentThread.CurrentUICulture = culture;
                 Thread.CurrentThread.CurrentCulture = culture;
             }
