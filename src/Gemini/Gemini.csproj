@@ -137,6 +137,7 @@
     <Compile Include="Modules\Settings\Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Shell\Behaviors\DropFilesBehavior.cs" />
     <Compile Include="Modules\Shell\Commands\ViewFullscreenCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandDefinition.cs" />
     <Compile Include="Modules\Shell\Commands\CloseFileCommandHandler.cs" />
