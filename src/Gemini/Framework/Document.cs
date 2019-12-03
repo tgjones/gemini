@@ -64,8 +64,8 @@ namespace Gemini.Framework
                 return _toolBar;
             }
         }
-
-	    void ICommandHandler<UndoCommandDefinition>.Update(Command command)
+        
+        void ICommandHandler<UndoCommandDefinition>.Update(Command command)
 	    {
             command.Enabled = UndoRedoManager.CanUndo;
 	    }

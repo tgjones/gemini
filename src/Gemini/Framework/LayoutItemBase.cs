@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
@@ -29,6 +29,19 @@ namespace Gemini.Framework
 		{
 			get { return null; }
 		}
+
+        private string _toolTip = string.Empty;
+
+        [Browsable(false)]
+        public string ToolTip
+        {
+            get { return _toolTip; }
+            set
+            {
+                _toolTip = value;
+                NotifyOfPropertyChange(() => ToolTip);
+            }
+        }
 
 		private bool _isSelected;
 

@@ -159,6 +159,7 @@
     <Compile Include="Modules\Shell\Controls\PanesStyleSelector.cs" />
     <Compile Include="Modules\Shell\Controls\PanesTemplateSelector.cs" />
     <Compile Include="Modules\Shell\Converters\NullableValueConverter.cs" />
+    <Compile Include="Modules\Shell\Converters\TruncateMiddleConverter.cs" />
     <Compile Include="Modules\Shell\MenuDefinitions.cs" />
     <Compile Include="Modules\Shell\Services\ILayoutItemStatePersister.cs" />
     <Compile Include="Modules\Shell\Services\LayoutItemStatePersister.cs" />
