@@ -12,6 +12,7 @@
              BorderThickness="0"
              FontFamily="Consolas"
              FontSize="14"
+             TextWrapping="Wrap"
              ScrollViewer.VerticalScrollBarVisibility="Auto"
              ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
 </UserControl>

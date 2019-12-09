@@ -4,15 +4,19 @@ using System.Threading.Tasks;
 using Gemini.Demo.Modules.TextEditor.Views;
 using Gemini.Framework;
 using Gemini.Framework.Threading;
+using System.ComponentModel.Composition;
 
 namespace Gemini.Demo.Modules.TextEditor.ViewModels
 {
+    [Export(typeof(EditorViewModel))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
 #pragma warning disable 659
     public class EditorViewModel : PersistedDocument
 #pragma warning restore 659
     {
         private EditorView _view;
 		private string _originalText;
+        private bool notYetLoaded = false;
 
         protected override Task DoNew()
         {
@@ -38,6 +42,12 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 
         private void ApplyOriginalText()
         {
+            // At StartUp, _view is null, so notYetLoaded flag is added
+            if (_view == null)
+            {
+                notYetLoaded = true;
+                return;
+            }
             _view.textBox.Text = _originalText;
 
             _view.textBox.TextChanged += delegate
@@ -49,6 +59,12 @@ namespace Gemini.Demo.Modules.TextEditor.ViewModels
 		protected override void OnViewLoaded(object view)
 		{
             _view = (EditorView) view;
+
+            if (notYetLoaded)
+            {
+                ApplyOriginalText();
+                notYetLoaded = false;
+            }
 		}
 
         public override bool Equals(object obj)
