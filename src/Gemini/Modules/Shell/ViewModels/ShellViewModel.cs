@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework;
@@ -72,7 +74,7 @@ namespace Gemini.Modules.Shell.ViewModels
 	            _activeLayoutItem = value;
 
 	            if (value is IDocument)
-	                ActivateItem((IDocument) value);
+	                ActivateItemAsync((IDocument) value, CancellationToken.None).Wait();
 
 	            NotifyOfPropertyChange(() => ActiveLayoutItem);
 	        }
@@ -114,7 +116,7 @@ namespace Gemini.Modules.Shell.ViewModels
 
         public ShellViewModel()
         {
-            ((IActivate)this).Activate();
+            ((IActivate)this).ActivateAsync(CancellationToken.None).Wait();
 
             _tools = new BindableCollection<ITool>();
         }
@@ -145,16 +147,20 @@ namespace Gemini.Modules.Shell.ViewModels
             }
 
             _shellView = (IShellView)view;
-            if (!_layoutItemStatePersister.LoadState(this, _shellView, StateFile))
-            {
-                foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
-                    OpenDocument(defaultDocument);
-                foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
-                    ShowTool((ITool)IoC.GetInstance(defaultTool, null));
-            }
 
-            foreach (var module in _modules)
-                module.PostInitialize();
+            Execute.OnUIThreadAsync(async () =>
+            {
+                if (!_layoutItemStatePersister.LoadState(this, _shellView, StateFile))
+                {
+                    foreach (var defaultDocument in _modules.SelectMany(x => x.DefaultDocuments))
+                        await OpenDocumentAsync(defaultDocument);
+                    foreach (var defaultTool in _modules.SelectMany(x => x.DefaultTools))
+                        ShowTool((ITool)IoC.GetInstance(defaultTool, null));
+                }
+
+                foreach (var module in _modules)
+                    await module.PostInitializeAsync();
+            });
 
             base.OnViewLoaded(view);
         }
@@ -175,19 +181,13 @@ namespace Gemini.Modules.Shell.ViewModels
 	        ActiveLayoutItem = model;
 		}
 
-		public void OpenDocument(IDocument model)
-		{
-			ActivateItem(model);
-		}
+        public Task OpenDocumentAsync(IDocument model) => ActivateItemAsync(model, CancellationToken.None);
 
-		public void CloseDocument(IDocument document)
-		{
-			DeactivateItem(document, true);
-		}
+        public Task CloseDocumentAsync(IDocument document) => DeactivateItemAsync(document, true, CancellationToken.None);
 
         private bool _activateItemGuard = false;
 
-        public override void ActivateItem(IDocument item)
+        public override async Task ActivateItemAsync(IDocument item, CancellationToken cancellationToken)
         {
             if (_closing || _activateItemGuard)
                 return;
@@ -203,7 +203,7 @@ namespace Gemini.Modules.Shell.ViewModels
 
                 var currentActiveItem = ActiveItem;
 
-                base.ActivateItem(item);
+                await base.ActivateItemAsync(item, cancellationToken);
 
                 RaiseActiveDocumentChanged();
             }
@@ -235,16 +235,16 @@ namespace Gemini.Modules.Shell.ViewModels
             base.OnActivationProcessed(item, success);
         }
 
-	    public override void DeactivateItem(IDocument item, bool close)
+	    public override async Task DeactivateItemAsync(IDocument item, bool close, CancellationToken cancellationToken)
 	    {
 	        RaiseActiveDocumentChanging();
 
-	        base.DeactivateItem(item, close);
+	        await base.DeactivateItemAsync(item, close, cancellationToken);
 
             RaiseActiveDocumentChanged();
 	    }
 
-	    protected override void OnDeactivate(bool close)
+	    protected override async Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
             // Workaround for a complex bug that occurs when
             // (a) the window has multiple documents open, and
@@ -272,7 +272,7 @@ namespace Gemini.Modules.Shell.ViewModels
 
             _layoutItemStatePersister.SaveState(this, _shellView, StateFile);
 
-            base.OnDeactivate(close);
+            await base.OnDeactivateAsync(close, cancellationToken);
         }
 
         public void Close()

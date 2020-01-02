@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 
@@ -43,7 +43,7 @@ namespace Gemini.Framework.Results
                 OnCompleted(null, false);
             };
 
-            WindowManager.ShowWindow(window);
+            WindowManager.ShowWindowAsync(window);
         }
     }
 }

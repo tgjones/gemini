@@ -15,10 +15,10 @@ namespace Gemini.Modules.Toolbox.Services
         public ToolboxService()
         {
             _toolboxItems = AssemblySource.Instance
-                .SelectMany(x => x.GetTypes().Where(y => y.GetAttributes<ToolboxItemAttribute>(false).Any()))
+                .SelectMany(x => x.GetTypes().Where(y => y.GetCustomAttributes(typeof(ToolboxItemAttribute), false).Any()))
                 .Select(x =>
                 {
-                    var attribute = x.GetAttributes<ToolboxItemAttribute>(false).First();
+                    var attribute = (ToolboxItemAttribute) x.GetCustomAttributes(typeof(ToolboxItemAttribute), false).First();
                     return new ToolboxItem
                     {
                         DocumentType = attribute.DocumentType,

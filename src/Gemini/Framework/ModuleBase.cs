@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using System.Windows;
 using Gemini.Framework.Services;
 using Gemini.Modules.MainMenu;
@@ -63,9 +64,9 @@ namespace Gemini.Framework
 		    
 		}
 
-        public virtual void PostInitialize()
+        public virtual Task PostInitializeAsync()
         {
-
+            return Task.CompletedTask;
         }
 	}
 }

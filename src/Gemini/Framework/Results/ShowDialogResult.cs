@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 
@@ -23,20 +23,22 @@ namespace Gemini.Framework.Results
 
         public override void Execute(CoroutineExecutionContext context)
         {
-            TWindow window = _windowLocator();
+            var window = _windowLocator();
 
-            if (_setData != null)
-                _setData(window);
+            _setData?.Invoke(window);
 
-            if (_onConfigure != null)
-                _onConfigure(window);
+            _onConfigure?.Invoke(window);
 
-            bool result = WindowManager.ShowDialog(window).GetValueOrDefault();
+            WindowManager
+                .ShowDialogAsync(window)
+                .ContinueWith(t =>
+                {
+                    var result = t.Result.GetValueOrDefault();
 
-            if (_onShutDown != null)
-                _onShutDown(window);
+                    _onShutDown?.Invoke(window);
 
-            OnCompleted(null, !result);
+                    OnCompleted(null, !result);
+                });
         }
     }
 }

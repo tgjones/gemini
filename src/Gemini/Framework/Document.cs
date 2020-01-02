@@ -32,7 +32,7 @@ namespace Gemini.Framework
 		private ICommand _closeCommand;
 		public override ICommand CloseCommand
 		{
-		    get { return _closeCommand ?? (_closeCommand = new RelayCommand(p => TryClose(null), p => true)); }
+		    get { return _closeCommand ?? (_closeCommand = new AsyncCommand(() => TryCloseAsync(null))); }
 		}
 
         private ToolBarDefinition _toolBarDefinition;

@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework;
@@ -17,9 +19,6 @@ namespace Gemini.Modules.Settings.ViewModels
 
         public SettingsViewModel()
         {
-            CancelCommand = new RelayCommand(o => TryClose(false));
-            OkCommand = new RelayCommand(SaveChanges);
-
             DisplayName = Resources.SettingsDisplayName;
         }
 
@@ -35,22 +34,18 @@ namespace Gemini.Modules.Settings.ViewModels
             }
         }
 
-        public ICommand CancelCommand { get; private set; }
-        public ICommand OkCommand { get; private set; }
-
-        protected override void OnInitialize()
+        protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
         {
-            base.OnInitialize();
+            await base.OnInitializeAsync(cancellationToken);
 
             var pages = new List<SettingsPageViewModel>();
             _settingsEditors = IoC.GetAll<ISettingsEditor>();
 
-            foreach (ISettingsEditor settingsEditor in _settingsEditors)
+            foreach (var settingsEditor in _settingsEditors)
             {
-                List<SettingsPageViewModel> parentCollection = GetParentCollection(settingsEditor, pages);
+                var parentCollection = GetParentCollection(settingsEditor, pages);
 
-                SettingsPageViewModel page =
-                    parentCollection.FirstOrDefault(m => m.Name == settingsEditor.SettingsPageName);
+                var page = parentCollection.FirstOrDefault(m => m.Name == settingsEditor.SettingsPageName);
 
                 if (page == null)
                 {
@@ -88,11 +83,11 @@ namespace Gemini.Modules.Settings.ViewModels
                 return pages;
             }
 
-            string[] path = settingsEditor.SettingsPagePath.Split(new[] {'\\'}, StringSplitOptions.RemoveEmptyEntries);
+            var path = settingsEditor.SettingsPagePath.Split(new[] {'\\'}, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string pathElement in path)
+            foreach (var pathElement in path)
             {
-                SettingsPageViewModel page = pages.FirstOrDefault(s => s.Name == pathElement);
+                var page = pages.FirstOrDefault(s => s.Name == pathElement);
 
                 if (page == null)
                 {
@@ -106,14 +101,16 @@ namespace Gemini.Modules.Settings.ViewModels
             return pages;
         }
 
-        private void SaveChanges(object obj)
+        public async Task SaveChanges()
         {
-            foreach (ISettingsEditor settingsEditor in _settingsEditors)
+            foreach (var settingsEditor in _settingsEditors)
             {
                 settingsEditor.ApplyChanges();
             }
 
-            TryClose(true);
+            await TryCloseAsync(true);
         }
+
+        public Task Cancel() => TryCloseAsync(false);
     }
 }

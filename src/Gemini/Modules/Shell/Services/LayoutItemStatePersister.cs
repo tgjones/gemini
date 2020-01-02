@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
@@ -193,7 +193,7 @@ namespace Gemini.Modules.Shell.Services
                         }
                     }
 
-                    shellView.LoadLayout(reader.BaseStream, shell.ShowTool, shell.OpenDocument, layoutItems);
+                    shellView.LoadLayout(reader.BaseStream, shell.ShowTool, d => shell.OpenDocumentAsync(d).Wait(), layoutItems);
                 }
             }
             catch

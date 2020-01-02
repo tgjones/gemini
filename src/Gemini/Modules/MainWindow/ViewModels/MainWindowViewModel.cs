@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using Caliburn.Micro;
@@ -86,7 +87,7 @@ namespace Gemini.Modules.MainWindow.ViewModels
         {
             if (_icon == null)
                 _icon = _resourceManager.GetBitmap("Resources/Icons/Gemini-32.png");
-            ActivateItem(_shell);
+            Execute.OnUIThreadAsync(() => ActivateItemAsync(_shell, CancellationToken.None));
         }
 
         protected override void OnViewLoaded(object view)

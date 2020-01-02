@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Gemini.Framework;
@@ -35,8 +35,7 @@ namespace Gemini.Modules.Shell.Commands
 
         public Task Run(Command command)
         {
-            _shell.OpenDocument((IDocument) command.Tag);
-            return TaskUtility.Completed;
+            return _shell.OpenDocumentAsync((IDocument) command.Tag);
         }
     }
 }

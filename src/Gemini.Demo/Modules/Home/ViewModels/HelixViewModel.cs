@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
@@ -14,6 +14,8 @@ using System.IO;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gemini.Demo.Modules.Home.ViewModels
 {
@@ -144,11 +146,11 @@ namespace Gemini.Demo.Modules.Home.ViewModels
                 _scripts.ForEach(x => x.Execute(this));
         }
 
-        protected override void OnDeactivate(bool close)
+        protected override async Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
             if (close)
                 CompositionTarget.Rendering -= OnRendering;
-            base.OnDeactivate(close);
+            await base.OnDeactivateAsync(close, cancellationToken);
         }
     }
 }

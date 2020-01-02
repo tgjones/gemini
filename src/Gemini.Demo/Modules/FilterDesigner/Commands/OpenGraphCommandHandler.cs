@@ -1,10 +1,9 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Gemini.Demo.Modules.FilterDesigner.ViewModels;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
 using Gemini.Modules.Inspector;
 
 namespace Gemini.Demo.Modules.FilterDesigner.Commands
@@ -22,8 +21,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.Commands
 
         public override Task Run(Command command)
         {
-            _shell.OpenDocument(new GraphViewModel(IoC.Get<IInspectorTool>()));
-            return TaskUtility.Completed;
+            return _shell.OpenDocumentAsync(new GraphViewModel(IoC.Get<IInspectorTool>()));
         }
     }
 }

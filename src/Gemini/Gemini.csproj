@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="Framework\AsyncCommand.cs" />
     <Compile Include="Framework\Behaviors\BindableTreeViewSelectedItemBehavior.cs" />
     <Compile Include="Framework\Behaviors\KeyboardFocusBehavior.cs" />
     <Compile Include="Framework\Behaviors\WindowOptionsBehavior.cs" />
@@ -77,8 +78,6 @@
     <Compile Include="Framework\Controls\HwndMouseEventArgs.cs" />
     <Compile Include="Framework\Controls\HwndMouseState.cs" />
     <Compile Include="Framework\Controls\SliderEx.cs" />
-    <Compile Include="Framework\Converters.cs" />
-    <Compile Include="Framework\IExecutableItem.cs" />
     <Compile Include="Framework\ILayoutItem.cs" />
     <Compile Include="Framework\IPersistedDocument.cs" />
     <Compile Include="Framework\Markup\TranslateExtension.cs" />
@@ -463,7 +462,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro">
-      <Version>2.0.2</Version>
+      <Version>4.0.104-alpha</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.0.0-alpha0660</Version>

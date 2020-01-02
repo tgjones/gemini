@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using Gemini.Framework;
 using Xceed.Wpf.AvalonDock;
 using Xceed.Wpf.AvalonDock.Layout;
@@ -40,7 +41,7 @@ namespace Gemini.Modules.Shell.Views
                             tool.IsVisible = anchorable.IsVisible;
 
                             if (anchorable.IsActive)
-                                tool.Activate();
+                                tool.ActivateAsync(CancellationToken.None).Wait();
 
                             tool.IsSelected = e.Model.IsSelected;
 

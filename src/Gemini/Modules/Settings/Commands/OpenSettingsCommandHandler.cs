@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Gemini.Framework.Commands;
@@ -18,10 +18,9 @@ namespace Gemini.Modules.Settings.Commands
             _windowManager = windowManager;
         }
 
-        public override Task Run(Command command)
+        public override async Task Run(Command command)
         {
-            _windowManager.ShowDialog(IoC.Get<SettingsViewModel>());
-            return TaskUtility.Completed;
+            await _windowManager.ShowDialogAsync(IoC.Get<SettingsViewModel>());
         }
     }
 }

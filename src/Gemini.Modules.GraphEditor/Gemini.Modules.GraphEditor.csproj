@@ -102,11 +102,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro">
-      <Version>2.0.2</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Gemini\Gemini.csproj">
       <Project>{13DBFC87-C152-4A86-94B0-D9944BEEF647}</Project>
       <Name>Gemini</Name>

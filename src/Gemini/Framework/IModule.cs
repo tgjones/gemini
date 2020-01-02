@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Gemini.Framework
@@ -12,6 +13,6 @@ namespace Gemini.Framework
 
         void PreInitialize();
 		void Initialize();
-        void PostInitialize();
+        Task PostInitializeAsync();
 	}
 }

@@ -1,8 +1,8 @@
 using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 using Caliburn.Micro;
+using Microsoft.Xaml.Behaviors;
 
 namespace Gemini.Framework.Services
 {

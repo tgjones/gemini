@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Windows;
-using System.Windows.Interactivity;
 using System.Windows.Interop;
 using Gemini.Framework.Win32;
+using Microsoft.Xaml.Behaviors;
 
 namespace Gemini.Framework.Behaviors
 {

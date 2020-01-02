@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
@@ -60,9 +60,12 @@ namespace Gemini.Framework.Results
 					_onShutDown(editor);
 			};
 
-			_shell.OpenDocument(editor);
-
-			OnCompleted(null, false);
+			_shell
+                .OpenDocumentAsync(editor)
+                .ContinueWith(t =>
+                {
+                    OnCompleted(null, false);
+                });
 		}
 
 		private static IDocument GetEditor(string path)

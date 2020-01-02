@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,7 +42,7 @@ namespace Gemini.Modules.Shell.Commands
                     });
         }
 
-        public Task Run(Command command)
+        public async Task Run(Command command)
         {
             var tag = (NewFileTag) command.Tag;
             var editor = tag.EditorProvider.Create();
@@ -61,9 +61,7 @@ namespace Gemini.Modules.Shell.Commands
                 frameworkElement.Loaded += loadedHandler;
             };
 
-            _shell.OpenDocument(editor);
-
-            return TaskUtility.Completed;
+            await _shell.OpenDocumentAsync(editor);
         }
 
         private class NewFileTag
