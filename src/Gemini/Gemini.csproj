@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="Framework\Behaviors\BindableTreeViewSelectedItemBehavior.cs" />
-    <Compile Include="Framework\Behaviors\CustomGlowWindowBehavior.cs" />
     <Compile Include="Framework\Behaviors\KeyboardFocusBehavior.cs" />
     <Compile Include="Framework\Behaviors\WindowOptionsBehavior.cs" />
     <Compile Include="Framework\Commands\Command.cs" />
@@ -467,7 +466,7 @@
       <Version>2.0.2</Version>
     </PackageReference>
     <PackageReference Include="MahApps.Metro">
-      <Version>1.2.4</Version>
+      <Version>2.0.0-alpha0660</Version>
     </PackageReference>
     <PackageReference Include="Xceed.Wpf.AvalonDock.Themes.VS2013">
       <Version>2.9.0.1</Version>

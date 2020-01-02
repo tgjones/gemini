@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
@@ -9,7 +9,7 @@
         <Setter Property="WindowTitleBrush" Value="{DynamicResource MainWindowCaptionActiveBackground}" />
         <Setter Property="TitleForeground" Value="{DynamicResource MainWindowCaptionActiveText}" />
         <Setter Property="NonActiveWindowTitleBrush" Value="{DynamicResource MainWindowCaptionInactiveBackground}" />
-        <Setter Property="TitleCaps" Value="False" />
+        <Setter Property="TitleCharacterCasing" Value="Normal" />
         <Setter Property="GlowBrush" Value="{DynamicResource MainWindowActiveBorder}" />
         <Setter Property="NonActiveGlowBrush" Value="{DynamicResource MainWindowInactiveBorder}" />
 

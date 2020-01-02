@@ -1,11 +1,8 @@
-﻿<mahapps:MetroWindow x:Class="Gemini.Modules.MainWindow.Views.MainWindowView"
+<mahapps:MetroWindow x:Class="Gemini.Modules.MainWindow.Views.MainWindowView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                      xmlns:cal="http://www.caliburnproject.org"
-                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                     xmlns:behaviours="http://metro.mahapps.com/winfx/xaml/shared"
-                     xmlns:behaviors="clr-namespace:Gemini.Framework.Behaviors"
                      WindowTransitionsEnabled="False" 
                      Title="{Binding Title}" 
                      Icon="{Binding Icon}" 
@@ -15,11 +12,7 @@
                      WindowState="{Binding WindowState}"
                      ResizeMode="CanResizeWithGrip"
                      UseLayoutRounding="True"
-                     Style="{DynamicResource MainWindowStyle}"
-										 WindowCloseButtonStyle="{DynamicResource MetroWindowButtonStyle}"
-										 WindowMinButtonStyle="{DynamicResource MetroWindowButtonStyle}"
-										 WindowMaxButtonStyle="{DynamicResource MetroWindowButtonStyle}"
-										 >
+                     Style="{DynamicResource MainWindowStyle}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,11 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <i:Interaction.Behaviors>
-        <behaviours:BorderlessWindowBehavior />
-        <behaviors:CustomGlowWindowBehavior />
-    </i:Interaction.Behaviors>
     <Grid>
-		<ContentControl cal:View.Model="{Binding Shell}" />
-	</Grid>
+        <ContentControl cal:View.Model="{Binding Shell}" />
+    </Grid>
 </mahapps:MetroWindow>
