@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Original source code from the Wide framework:
  * https://github.com/chandramouleswaran/Wide
  * 

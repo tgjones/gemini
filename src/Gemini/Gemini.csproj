@@ -354,10 +354,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\VS2013\Controls\ColorPicker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Themes\VS2013\Controls\ComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -464,11 +460,14 @@
     <PackageReference Include="Caliburn.Micro">
       <Version>4.0.104-alpha</Version>
     </PackageReference>
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013">
+      <Version>3.6.2</Version>
+    </PackageReference>
+    <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit">
+      <Version>4.6.78</Version>
+    </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.0.0-alpha0660</Version>
-    </PackageReference>
-    <PackageReference Include="Xceed.Wpf.AvalonDock.Themes.VS2013">
-      <Version>2.9.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -91,7 +91,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
-    <None Include="app.config" />
     <None Include="Gemini.Modules.ErrorList.nuspec">
       <SubType>Designer</SubType>
     </None>

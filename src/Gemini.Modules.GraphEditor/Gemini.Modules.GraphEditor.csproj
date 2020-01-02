@@ -91,7 +91,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Gemini.Modules.GraphEditor.nuspec">
       <SubType>Designer</SubType>
     </None>
