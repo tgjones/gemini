@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell PropertyGrid</PackageTags>
     <Description>PropertyGrid module for Gemini, utilising the PropertyGrid control from the Extended WPF Toolkit.</Description>
   </PropertyGroup>
 

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell C# syntax highlighting AvalonEdit</PackageTags>
     <Description>CodeEditor module for Gemini, providing a syntax-highlighted code editor using AvalonEdit.</Description>
   </PropertyGroup>
 

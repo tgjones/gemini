@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell Output</PackageTags>
     <Description>Output module for Gemini, providing a buffered output tool pane.</Description>
   </PropertyGroup>
 
@@ -32,10 +33,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gemini\Gemini.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Caliburn.Micro" Version="4.0.104-alpha" />
   </ItemGroup>
 
 </Project>

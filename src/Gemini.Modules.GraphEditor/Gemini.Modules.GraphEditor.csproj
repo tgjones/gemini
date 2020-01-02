@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell graph node connector connection</PackageTags>
     <Description>GraphEditor module for Gemini, providing UI controls to edit a graph of connected nodes.</Description>
   </PropertyGroup>
 

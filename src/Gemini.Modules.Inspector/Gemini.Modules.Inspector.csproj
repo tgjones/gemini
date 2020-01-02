@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell inspector</PackageTags>
     <Description>Inspector module for Gemini, providing a flexible PropertyGrid-esque tool window.</Description>
   </PropertyGroup>
 
