@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Gemini.Framework.Win32
@@ -124,7 +124,7 @@ namespace Gemini.Framework.Win32
             IntPtr hwndParent,
             IntPtr hMenu,
             IntPtr hInstance,
-            [MarshalAs(UnmanagedType.AsAny)] object pvParam);
+            IntPtr lpParam);
 
         [DllImport("user32.dll", EntryPoint = "DestroyWindow", CharSet = CharSet.Auto)]
         public static extern bool DestroyWindow(IntPtr hwnd);

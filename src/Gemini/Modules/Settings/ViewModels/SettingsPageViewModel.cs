@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Gemini.Modules.Settings.ViewModels
 {
@@ -12,6 +12,6 @@ namespace Gemini.Modules.Settings.ViewModels
 
         public string Name { get; set; }
         public List<ISettingsEditor> Editors { get; private set; }
-        public List<SettingsPageViewModel> Children { get; private set; }
+        public List<SettingsPageViewModel> Children { get; internal set; }
     }
 }

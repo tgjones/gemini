@@ -1,284 +1,73 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <UsingTask AssemblyFile="..\..\lib\ShaderBuildTask.dll" TaskName="ShaderBuildTask.PixelShaderCompile" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gemini.Demo</RootNamespace>
-    <AssemblyName>Gemini.Demo</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <NuGetPackageImportStamp>d35a3b0c</NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandDefinition.cs" />
-    <Compile Include="Modules\FilterDesigner\Commands\OpenGraphCommandHandler.cs" />
-    <Compile Include="Modules\FilterDesigner\Design\DesignTimeGraphViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\Design\DesignTimeImages.cs" />
-    <Compile Include="Modules\FilterDesigner\MenuDefinitions.cs" />
-    <Compile Include="Modules\FilterDesigner\Sample.cs" />
-    <Compile Include="Modules\FilterDesigner\ShaderEffects\AddEffect.cs" />
-    <Compile Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.cs" />
-    <Compile Include="Modules\FilterDesigner\ShaderEffects\ShaderEffectBase.cs" />
-    <Compile Include="Modules\FilterDesigner\Util\BitmapUtility.cs" />
-    <Compile Include="Modules\FilterDesigner\Util\FastBitmap.cs" />
-    <Compile Include="Modules\FilterDesigner\Util\ShaderEffectUtility.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectionViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectorDirection.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ConnectorViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\Add.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ColorInput.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\DynamicElement.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ImageSource.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\Multiply.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\Elements\ShaderEffectElement.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\ElementViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\GraphViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\InputConnectorViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\ViewModels\OutputConnectorViewModel.cs" />
-    <Compile Include="Modules\FilterDesigner\Views\GraphView.xaml.cs">
-      <DependentUpon>GraphView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Home\Commands\ViewHelixCommandDefinition.cs" />
-    <Compile Include="Modules\Home\Commands\ViewHelixCommandHandler.cs" />
-    <Compile Include="Modules\Home\Module.cs" />
-    <Compile Include="Modules\Home\ViewModels\HelixViewModel.cs" />
-    <Compile Include="Modules\Home\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Modules\Home\ViewModels\IDemoScript.cs" />
-    <Compile Include="Modules\Home\Views\HelixView.xaml.cs">
-      <DependentUpon>HelixView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Home\Views\HomeView.xaml.cs">
-      <DependentUpon>HomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Home\Views\IHelixView.cs" />
-    <Compile Include="Modules\Home\Commands\ViewHomeCommandDefinition.cs" />
-    <Compile Include="Modules\Home\Commands\ViewHomeCommandHandler.cs" />
-    <Compile Include="Modules\Shell\ViewModels\DemoApplicationSettingsViewModel.cs" />
-    <Compile Include="Modules\Shell\ViewModels\ShellViewModel.cs" />
-    <Compile Include="Modules\Shell\Views\DemoApplicationSettingsView.xaml.cs">
-      <DependentUpon>DemoApplicationSettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\SampleBrowser\ISample.cs" />
-    <Compile Include="Modules\SampleBrowser\Module.cs" />
-    <Compile Include="Modules\SampleBrowser\ViewModels\SampleBrowserViewModel.cs" />
-    <Compile Include="Modules\SampleBrowser\Views\SampleBrowserView.xaml.cs">
-      <DependentUpon>SampleBrowserView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Startup\Module.cs" />
-    <Compile Include="Modules\TextEditor\EditorProvider.cs" />
-    <Compile Include="Modules\TextEditor\ViewModels\EditorViewModel.cs" />
-    <Compile Include="Modules\TextEditor\Views\EditorView.xaml.cs">
-      <DependentUpon>EditorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.de.Designer.cs">
+    <Compile Update="Properties\Resources.de.Designer.cs">
       <DependentUpon>Resources.de.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.de.resx">
+    <EmbeddedResource Update="Properties\Resources.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ko.resx" />
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.ko.resx" />
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ru.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
+    <EmbeddedResource Update="Properties\Resources.ru.resx" />
+    <EmbeddedResource Update="Properties\Resources.zh-Hans.resx" />
+    <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj">
-      <Project>{f1ceeddc-a1dc-4a7a-8a86-fa4c72bfbae1}</Project>
-      <Name>Gemini.Modules.CodeCompiler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj">
-      <Project>{1b56487b-cd40-4d94-8a62-c15f7e13d2fc}</Project>
-      <Name>Gemini.Modules.CodeEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj">
-      <Project>{9f436232-52c4-4c2c-a83f-adfe5b829484}</Project>
-      <Name>Gemini.Modules.ErrorList</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj">
-      <Project>{f8204886-1f61-4247-b7b2-ea5e518162f3}</Project>
-      <Name>Gemini.Modules.GraphEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj">
-      <Project>{0f8463bd-c1b0-4f2b-855d-49b6963b3337}</Project>
-      <Name>Gemini.Modules.Inspector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini.Modules.Output\Gemini.Modules.Output.csproj">
-      <Project>{B78AACC8-5A16-4951-83AD-B78D1C80A258}</Project>
-      <Name>Gemini.Modules.Output</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj">
-      <Project>{8080cb9a-9389-4b4d-9adf-bef7fefcac55}</Project>
-      <Name>Gemini.Modules.PropertyGrid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gemini\Gemini.csproj">
-      <Project>{13DBFC87-C152-4A86-94B0-D9944BEEF647}</Project>
-      <Name>Gemini</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.Output\Gemini.Modules.Output.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj" />
+    <ProjectReference Include="..\Gemini\Gemini.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Page Include="Modules\FilterDesigner\Resources\Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\FilterDesigner\Views\GraphView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Modules\Home\Views\HelixView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Home\Views\HomeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\Shell\Views\DemoApplicationSettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\SampleBrowser\Views\SampleBrowserView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Modules\TextEditor\Views\EditorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Resource Include="Modules\FilterDesigner\Resources\*.png" />
+    <Effect Include="Modules\FilterDesigner\ShaderEffects\*.fx" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="Resources\Splash.png" />
+    <PackageReference Include="AvalonEdit" Version="6.0.0" />
+    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.10.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Modules\FilterDesigner\Resources\action_add_16xLG.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Modules\FilterDesigner\Resources\active_x_16xLG.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Modules\FilterDesigner\Resources\color_swatch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Modules\FilterDesigner\Resources\image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Effect Include="Modules\FilterDesigner\ShaderEffects\AddEffect.fx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Effect Include="Modules\FilterDesigner\ShaderEffects\MultiplyEffect.fx" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="AvalonEdit">
-      <Version>6.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="HelixToolkit.Wpf">
-      <Version>2.10.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp">
-      <Version>3.4.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EffectCompile" Condition="'@(Effect)' != '' ">
+
+  <Target Name="EffectCompile" Condition="'@(Effect)' != '' " BeforeTargets="BeforeBuild">
     <PixelShaderCompile Sources="@(Effect)">
       <Output TaskParameter="Outputs" ItemName="Resource" />
     </PixelShaderCompile>
   </Target>
-  <PropertyGroup>
-    <!-- Add effect compilation to the PrepareResourcesDependsOn so that the effect fx  get compiled before resources are collected -->
-    <PrepareResourcesDependsOn>EffectCompile;$(PrepareResourcesDependsOn)</PrepareResourcesDependsOn>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

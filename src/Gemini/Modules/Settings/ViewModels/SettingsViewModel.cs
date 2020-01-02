@@ -22,7 +22,7 @@ namespace Gemini.Modules.Settings.ViewModels
             DisplayName = Resources.SettingsDisplayName;
         }
 
-        public List<SettingsPageViewModel> Pages { get; private set; }
+        public List<SettingsPageViewModel> Pages { get; internal set; }
 
         public SettingsPageViewModel SelectedPage
         {

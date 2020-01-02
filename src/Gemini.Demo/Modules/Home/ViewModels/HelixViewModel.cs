@@ -123,7 +123,6 @@ namespace Gemini.Demo.Modules.Home.ViewModels
                             MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "mscorlib.dll")),
                             MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.dll")),
                             MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.Core.dll")),
-                            MetadataReference.CreateFromFile(Path.Combine(assemblyPath+ "\\WPF\\", "PresentationCore.dll")),
                             MetadataReference.CreateFromFile(typeof(IResult).Assembly.Location),
                             MetadataReference.CreateFromFile(typeof(AppBootstrapper).Assembly.Location),
                             MetadataReference.CreateFromFile(typeof(object).Assembly.Location),

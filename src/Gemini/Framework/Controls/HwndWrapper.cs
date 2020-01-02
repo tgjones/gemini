@@ -1,4 +1,4 @@
-﻿#region File Description
+#region File Description
 //-----------------------------------------------------------------------------
 // Copyright 2011, Nick Gravelyn.
 // Licensed under the terms of the Ms-PL: 
@@ -324,7 +324,7 @@ namespace Gemini.Framework.Controls
             // Create the window
             return NativeMethods.CreateWindowEx(0, WindowClass, "",
                NativeMethods.WS_CHILD | NativeMethods.WS_VISIBLE,
-               0, 0, (int) Width, (int) Height, hWndParent, IntPtr.Zero, IntPtr.Zero, 0);
+               0, 0, (int) Width, (int) Height, hWndParent, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
         }
 
         /// <summary>
