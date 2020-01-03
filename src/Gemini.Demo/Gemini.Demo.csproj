@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsPackable>false</IsPackable>
@@ -61,8 +61,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.10.0" />
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework) != 'net461'">
+    <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.10.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework) == 'net461'">
+    <PackageReference Include="HelixToolkit.Wpf" Version="2.10.0" />
   </ItemGroup>
 
 </Project>
