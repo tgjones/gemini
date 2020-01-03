@@ -1,4 +1,4 @@
-# Gemini [![Build status](https://ci.appveyor.com/api/projects/status/jwagos6igfdgx819/branch/master?svg=true)](https://ci.appveyor.com/project/tgjones/gemini/branch/master) [![NuGet](https://img.shields.io/nuget/v/GeminiWpf.svg)](https://www.nuget.org/packages/GeminiWpf/) [![Join the chat at https://gitter.im/tgjones/gemini](https://badges.gitter.im/tgjones/gemini.svg)](https://gitter.im/tgjones/gemini?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Gemini [![Build status](https://github.com/tgjones/gemini/workflows/CI/badge.svg)](https://github.com/tgjones/gemini/actions) [![NuGet](https://img.shields.io/nuget/v/GeminiWpf.svg)](https://www.nuget.org/packages/GeminiWpf/) [![Join the chat at https://gitter.im/tgjones/gemini](https://badges.gitter.im/tgjones/gemini.svg)](https://gitter.im/tgjones/gemini?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Gemini is a WPF framework designed specifically for building IDE-like applications. It builds on some excellent libraries:
 
