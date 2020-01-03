@@ -2,6 +2,6 @@
     <PropertyGroup>
         <Authors>Tim Jones</Authors>
         <RepositoryUrl>https://github.com/tgjones/gemini</RepositoryUrl>
-        <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     </PropertyGroup>
 </Project>

@@ -1,12 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
-  <UsingTask AssemblyFile="..\..\lib\ShaderBuildTask.dll" TaskName="ShaderBuildTask.PixelShaderCompile" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -55,17 +54,15 @@
   
   <ItemGroup>
     <Resource Include="Modules\FilterDesigner\Resources\*.png" />
-    <Effect Include="Modules\FilterDesigner\ShaderEffects\*.fx" />
+    <HLSLShader Include="Modules\FilterDesigner\ShaderEffects\*.fx">
+      <ShaderProfile>ps_2_0</ShaderProfile>
+      <ObjectFileOutput>$(OutputPath)$([System.IO.Path]::ChangeExtension(%(HLSLShader.Identity), '.ps'))</ObjectFileOutput>
+    </HLSLShader>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.10.0" />
+    <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
   </ItemGroup>
-
-  <Target Name="EffectCompile" Condition="'@(Effect)' != '' " BeforeTargets="BeforeBuild">
-    <PixelShaderCompile Sources="@(Effect)">
-      <Output TaskParameter="Outputs" ItemName="Resource" />
-    </PixelShaderCompile>
-  </Target>
 
 </Project>
