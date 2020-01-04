@@ -15,6 +15,9 @@ jobs:
       with:
         dotnet-version: 3.1.100
 
+    - name: Version
+      uses: aarnott/nbgv@master
+
     - name: Pack
       run: dotnet pack src --configuration Release --output build/packages
 
@@ -23,8 +26,3 @@ jobs:
       with:
         name: Packages
         path: build/packages
-
-    - name: Publish to NuGet
-      shell: bash
-      if: github.event_name == 'push'
-      run: dotnet nuget push build/packages/**/*.nupkg -s nuget.org -k ${{secrets.NUGET_TOKEN}}
