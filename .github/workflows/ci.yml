@@ -19,7 +19,7 @@ jobs:
       uses: aarnott/nbgv@master
 
     - name: Pack
-      run: dotnet pack src --configuration Release --output build/packages --include-source
+      run: dotnet pack src --configuration Release --output build/packages
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
