@@ -5,16 +5,12 @@
         "semVer": 2
     },
     "publicReleaseRefSpec": [
-        "^refs/heads/master$"
+        "^refs/heads/master$", // we release out of master
+        "^refs/tags/v\\d+\\.\\d+" // we also release tags starting with vN.N
     ],
     "cloudBuild": {
         "buildNumber": {
-            "enabled": true,
-            "includeCommitId": {
-                "when": "nonPublicReleaseOnly",
-                "where": "buildMetadata"
-            }
-        },
-        "setVersionVariables": true
+            "enabled": true
+        }
     }
 }
