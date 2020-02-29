@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.ComponentModel;
 using System.Windows;
 using Caliburn.Micro;
 
@@ -6,7 +7,20 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
 {
     public class ConnectionViewModel : PropertyChangedBase
     {
+        private bool _isSelected;
+        [Browsable(false)]
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                NotifyOfPropertyChange(() => IsSelected);
+            }
+        }
+
         private OutputConnectorViewModel _from;
+        [Browsable(false)]
         public OutputConnectorViewModel From
         {
             get { return _from; }
@@ -32,6 +46,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
         }
 
         private InputConnectorViewModel _to;
+        [Browsable(false)]
         public InputConnectorViewModel To
         {
             get { return _to; }
@@ -57,6 +72,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
         }
 
         private Point _fromPosition;
+        [Browsable(false)]
         public Point FromPosition
         {
             get { return _fromPosition; }
@@ -68,6 +84,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
         }
 
         private Point _toPosition;
+        [Browsable(false)]
         public Point ToPosition
         {
             get { return _toPosition; }

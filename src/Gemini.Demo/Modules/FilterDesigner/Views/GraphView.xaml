@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Gemini.Demo.Modules.FilterDesigner.Views.GraphView"
+<UserControl x:Class="Gemini.Demo.Modules.FilterDesigner.Views.GraphView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -24,6 +24,7 @@
 									PreviewMouseMove="OnGraphControlMouseMove"
 									PreviewMouseWheel="OnGraphControlMouseWheel"
 									SelectionChanged="OnGraphControlSelectionChanged"
+                                    ConnectionSelectionChanged="OnGraphControlSelectionChanged"
 									ConnectionDragStarted="OnGraphControlConnectionDragStarted"
 									ConnectionDragging="OnGraphControlConnectionDragging"
 									ConnectionDragCompleted="OnGraphControlConnectionDragCompleted"
@@ -37,8 +38,13 @@
 							<Setter Property="IsSelected" Value="{Binding IsSelected}" />
 						</Style>
 					</local:GraphControl.ElementItemContainerStyle>
-			
-					<local:GraphControl.ElementItemTemplate>
+                    <local:GraphControl.ConnectionItemContainerStyle>
+                        <Style TargetType="{x:Type local:ConnectionItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                        </Style>
+                    </local:GraphControl.ConnectionItemContainerStyle>
+
+                    <local:GraphControl.ElementItemTemplate>
 						<DataTemplate DataType="vm:ElementViewModel">
 							<DataTemplate.Resources>
 								<Style TargetType="local:ConnectorItem">
@@ -117,10 +123,15 @@
 			
 					<local:GraphControl.ConnectionItemTemplate>
 						<DataTemplate DataType="vm:ConnectionViewModel">
-							<local:BezierLine Stroke="LightSkyBlue" StrokeThickness="1"
-									X1="{Binding FromPosition.X}" Y1="{Binding FromPosition.Y}"
-									X2="{Binding ToPosition.X}" Y2="{Binding ToPosition.Y}" />
-						</DataTemplate>
+							<local:BezierLine x:Name="ConnectionLine" Stroke="LightSkyBlue" StrokeThickness="1"
+                                              X1="{Binding FromPosition.X}" Y1="{Binding FromPosition.Y}"
+                                              X2="{Binding ToPosition.X}" Y2="{Binding ToPosition.Y}" />
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <Setter TargetName="ConnectionLine" Property="Stroke" Value="Yellow" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
 					</local:GraphControl.ConnectionItemTemplate>
 				</local:GraphControl>
 			</local:ZoomAndPanControl>

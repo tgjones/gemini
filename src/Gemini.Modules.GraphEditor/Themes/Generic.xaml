@@ -1,4 +1,4 @@
-﻿<ResourceDictionary
+<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Gemini.Modules.GraphEditor.Controls">
@@ -15,6 +15,15 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+    <Style TargetType="local:ConnectionItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ConnectionItem">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 	<Style TargetType="local:GraphControl">
 		<Setter Property="Template">
@@ -39,16 +48,17 @@
 								</VisualBrush>
 							</Border.Background>
 							<Grid>
-								<ItemsControl ItemsSource="{TemplateBinding ConnectionsSource}"
+                                <local:ConnectionItemsControl x:Name="PART_ConnectionItemsControl"
+                                              ItemsSource="{TemplateBinding ConnectionsSource}"
 											  ItemContainerStyle="{TemplateBinding ConnectionItemContainerStyle}"
 											  ItemTemplate="{TemplateBinding ConnectionItemTemplate}"
                                               ItemTemplateSelector="{TemplateBinding ConnectionItemDataTemplateSelector}">
-									<ItemsControl.ItemsPanel>
-										<ItemsPanelTemplate>
-											<Canvas />
-										</ItemsPanelTemplate>
-									</ItemsControl.ItemsPanel>
-								</ItemsControl>
+                                    <ListBox.Template>
+                                        <ControlTemplate TargetType="ListBox">
+                                            <Canvas IsItemsHost="True" />
+                                        </ControlTemplate>
+                                    </ListBox.Template>
+								</local:ConnectionItemsControl>
 							
 								<local:ElementItemsControl x:Name="PART_ElementItemsControl"
 														   ItemsSource="{TemplateBinding ElementsSource}"
