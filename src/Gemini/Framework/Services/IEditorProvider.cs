@@ -7,6 +7,8 @@ namespace Gemini.Framework.Services
 	{
         IEnumerable<EditorFileType> FileTypes { get; }
 
+        bool CanCreateNew { get; }
+
 		bool Handles(string path);
 
         IDocument Create();

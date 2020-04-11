@@ -35,6 +35,11 @@ namespace Gemini.Modules.CodeEditor
 	        }
 	    }
 
+        public bool CanCreateNew
+        {
+            get { return true; }
+        }
+
 	    public bool Handles(string path)
 	    {
 	        var extension = Path.GetExtension(path);
