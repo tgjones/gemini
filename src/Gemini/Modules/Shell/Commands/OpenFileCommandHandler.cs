@@ -23,16 +23,27 @@ namespace Gemini.Modules.Shell.Commands
             _editorProviders = editorProviders;
         }
 
+        public override void Update(Command command)
+        {
+            base.Update(command);
+
+            command.Enabled = _editorProviders != null && _editorProviders.Length > 0;
+        }
+
         public override async Task Run(Command command)
         {
             var dialog = new OpenFileDialog();
 
-            dialog.Filter = "All Supported Files|" + string.Join(";", _editorProviders
+            string filter = null;
+
+            filter = "All Supported Files|" + string.Join(";", _editorProviders
                 .SelectMany(x => x.FileTypes).Select(x => "*" + x.FileExtension));
 
-            dialog.Filter += "|" + string.Join("|", _editorProviders
+            filter += "|" + string.Join("|", _editorProviders
                 .SelectMany(x => x.FileTypes)
                 .Select(x => x.Name + "|*" + x.FileExtension));
+
+            dialog.Filter = filter;
 
             if (dialog.ShowDialog() == true)
                 await _shell.OpenDocumentAsync(await GetEditor(dialog.FileName));
