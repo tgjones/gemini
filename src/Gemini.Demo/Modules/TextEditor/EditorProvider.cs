@@ -9,10 +9,10 @@ using Gemini.Demo.Properties;
 
 namespace Gemini.Demo.Modules.TextEditor
 {
-	[Export(typeof(IEditorProvider))]
-	public class EditorProvider : IEditorProvider
-	{
-		private readonly List<string> _extensions = new List<string>
+    [Export(typeof(IEditorProvider))]
+    public class EditorProvider : IEditorProvider
+    {
+        private static readonly List<string> _extensions = new List<string>
         {
             ".txt",
             ".cmd"
@@ -23,25 +23,18 @@ namespace Gemini.Demo.Modules.TextEditor
             get { yield return new EditorFileType(Resources.EditorProviderTextFile, ".txt"); }
         }
 
-		public bool Handles(string path)
-		{
-			var extension = Path.GetExtension(path);
-			return _extensions.Contains(extension);
-		}
+        public bool CanCreateNew => true;
 
-        public IDocument Create()
+        public bool Handles(string path)
         {
-            return new EditorViewModel();
+            var extension = Path.GetExtension(path);
+            return _extensions.Contains(extension);
         }
 
-        public async Task New(IDocument document, string name)
-        {
-            await ((EditorViewModel) document).New(name);
-        }
+        public IDocument Create() => new EditorViewModel();
 
-        public async Task Open(IDocument document, string path)
-		{
-			await ((EditorViewModel) document).Load(path);
-		}
-	}
+        public async Task New(IDocument document, string name) => await ((EditorViewModel)document).New(name);
+
+        public async Task Open(IDocument document, string path) => await ((EditorViewModel)document).Load(path);
+    }
 }

@@ -11,49 +11,36 @@ using Gemini.Modules.CodeEditor.Properties;
 
 namespace Gemini.Modules.CodeEditor
 {
-	[Export(typeof(IEditorProvider))]
-	public class EditorProvider : IEditorProvider
-	{
-	    private readonly LanguageDefinitionManager _languageDefinitionManager;
+    [Export(typeof(IEditorProvider))]
+    public class EditorProvider : IEditorProvider
+    {
+        private readonly LanguageDefinitionManager _languageDefinitionManager;
 
         [ImportingConstructor]
-	    public EditorProvider(LanguageDefinitionManager languageDefinitionManager)
-	    {
-	        _languageDefinitionManager = languageDefinitionManager;
-	    }
-
-	    public IEnumerable<EditorFileType> FileTypes
-	    {
-	        get
-	        {
-	            return _languageDefinitionManager.LanguageDefinitions
-	                .Select(languageDefinition => new EditorFileType
-	                {
-	                    Name = languageDefinition.Name + Resources.EditorProviderFileSuffix,
-	                    FileExtension = languageDefinition.FileExtensions.First()
-	                });
-	        }
-	    }
-
-	    public bool Handles(string path)
-	    {
-	        var extension = Path.GetExtension(path);
-	        return extension != null && _languageDefinitionManager.GetDefinitionByExtension(extension) != null;
-	    }
-
-	    public IDocument Create()
+        public EditorProvider(LanguageDefinitionManager languageDefinitionManager)
         {
-            return IoC.Get<CodeEditorViewModel>();
+            _languageDefinitionManager = languageDefinitionManager;
         }
 
-	    public async Task New(IDocument document, string name)
+        public IEnumerable<EditorFileType> FileTypes => _languageDefinitionManager.LanguageDefinitions
+            .Select(languageDefinition => new EditorFileType
+            {
+                Name = languageDefinition.Name + Resources.EditorProviderFileSuffix,
+                FileExtension = languageDefinition.FileExtensions.First()
+            });
+
+        public bool CanCreateNew => true;
+
+        public bool Handles(string path)
         {
-            await ((CodeEditorViewModel) document).New(name);
+            var extension = Path.GetExtension(path);
+            return extension != null && _languageDefinitionManager.GetDefinitionByExtension(extension) != null;
         }
 
-	    public async Task Open(IDocument document, string path)
-        {
-            await ((CodeEditorViewModel) document).Load(path);
-        }
-	}
+        public IDocument Create() => IoC.Get<CodeEditorViewModel>();
+
+        public async Task New(IDocument document, string name) => await ((CodeEditorViewModel)document).New(name);
+
+        public async Task Open(IDocument document, string path) => await ((CodeEditorViewModel)document).Load(path);
+    }
 }
