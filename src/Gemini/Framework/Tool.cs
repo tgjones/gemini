@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
@@ -7,41 +8,32 @@ using Gemini.Modules.ToolBars.Models;
 
 namespace Gemini.Framework
 {
-	public abstract class Tool : LayoutItemBase, ITool
-	{
-		private ICommand _closeCommand;
-		public override ICommand CloseCommand
-		{
-			get { return _closeCommand ?? (_closeCommand = new RelayCommand(p => IsVisible = false, p => true)); }
-		}
+    public abstract class Tool : LayoutItemBase, ITool
+    {
+        private ICommand _closeCommand;
+        public override ICommand CloseCommand => _closeCommand ?? (_closeCommand = new AsyncCommand(() => TryCloseAsync(null)));
 
-	    public abstract PaneLocation PreferredLocation { get; }
+        public abstract PaneLocation PreferredLocation { get; }
 
-	    public virtual double PreferredWidth
-	    {
-            get { return 200; }
-	    }
+        public virtual double PreferredWidth => 200;
 
-        public virtual double PreferredHeight
+        public virtual double PreferredHeight => 200;
+
+        private bool _isVisible;
+        public bool IsVisible
         {
-            get { return 200; }
+            get => _isVisible;
+            set
+            {
+                _isVisible = value;
+                NotifyOfPropertyChange(() => IsVisible);
+            }
         }
-
-		private bool _isVisible;
-		public bool IsVisible
-		{
-			get { return _isVisible; }
-			set
-			{
-				_isVisible = value;
-				NotifyOfPropertyChange(() => IsVisible);
-			}
-		}
 
         private ToolBarDefinition _toolBarDefinition;
         public ToolBarDefinition ToolBarDefinition
         {
-            get { return _toolBarDefinition; }
+            get => _toolBarDefinition;
             protected set
             {
                 _toolBarDefinition = value;
@@ -50,7 +42,7 @@ namespace Gemini.Framework
             }
         }
 
-	    private IToolBar _toolBar;
+        private IToolBar _toolBar;
         public IToolBar ToolBar
         {
             get
@@ -68,15 +60,18 @@ namespace Gemini.Framework
             }
         }
 
-        public override bool ShouldReopenOnStart
+        // Tool windows should always reopen on app start by default.
+        public override bool ShouldReopenOnStart => true;
+
+        protected Tool()
         {
-            // Tool windows should always reopen on app start by default.
-            get { return true; }
+            IsVisible = true;
         }
 
-		protected Tool()
-		{
-			IsVisible = true;
-		}
-	}
+        public override Task TryCloseAsync(bool? dialogResult = null)
+        {
+            IsVisible = false;
+            return base.TryCloseAsync(dialogResult);
+        }
+    };
 }

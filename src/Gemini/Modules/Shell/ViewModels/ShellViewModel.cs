@@ -25,11 +25,11 @@ namespace Gemini.Modules.Shell.ViewModels
         public event EventHandler ActiveDocumentChanged;
 
 #pragma warning disable 649
-		[ImportMany(typeof(IModule))]
-		private IEnumerable<IModule> _modules;
+        [ImportMany(typeof(IModule))]
+        private IEnumerable<IModule> _modules;
 
         [Import]
-	    private IThemeManager _themeManager;
+        private IThemeManager _themeManager;
 
         [Import]
         private IMenu _mainMenu;
@@ -45,56 +45,41 @@ namespace Gemini.Modules.Shell.ViewModels
 #pragma warning restore 649
 
         private IShellView _shellView;
-	    private bool _closing;
+        private bool _closing;
 
-        public IMenu MainMenu
+        public IMenu MainMenu => _mainMenu;
+
+        public IToolBars ToolBars => _toolBars;
+
+        public IStatusBar StatusBar => _statusBar;
+
+        private ILayoutItem _activeLayoutItem;
+        public ILayoutItem ActiveLayoutItem
         {
-            get { return _mainMenu; }
+            get => _activeLayoutItem;
+            set
+            {
+                if (ReferenceEquals(_activeLayoutItem, value))
+                    return;
+
+                _activeLayoutItem = value;
+
+                if (value is IDocument)
+                    ActivateItemAsync((IDocument)value, CancellationToken.None).Wait();
+
+                NotifyOfPropertyChange(() => ActiveLayoutItem);
+            }
         }
-
-        public IToolBars ToolBars
-        {
-            get { return _toolBars; }
-        }
-
-		public IStatusBar StatusBar
-		{
-			get { return _statusBar; }
-		}
-
-	    private ILayoutItem _activeLayoutItem;
-	    public ILayoutItem ActiveLayoutItem
-	    {
-	        get { return _activeLayoutItem; }
-	        set
-	        {
-	            if (ReferenceEquals(_activeLayoutItem, value))
-	                return;
-
-	            _activeLayoutItem = value;
-
-	            if (value is IDocument)
-	                ActivateItemAsync((IDocument) value, CancellationToken.None).Wait();
-
-	            NotifyOfPropertyChange(() => ActiveLayoutItem);
-	        }
-	    }
 
         private readonly BindableCollection<ITool> _tools;
-        public IObservableCollection<ITool> Tools
-        {
-            get { return _tools; }
-        }
+        public IObservableCollection<ITool> Tools => _tools;
 
-        public IObservableCollection<IDocument> Documents
-        {
-            get { return Items; }
-        }
+        public IObservableCollection<IDocument> Documents => Items;
 
         private bool _showFloatingWindowsInTaskbar;
         public bool ShowFloatingWindowsInTaskbar
         {
-            get { return _showFloatingWindowsInTaskbar; }
+            get => _showFloatingWindowsInTaskbar;
             set
             {
                 _showFloatingWindowsInTaskbar = value;
@@ -104,15 +89,9 @@ namespace Gemini.Modules.Shell.ViewModels
             }
         }
 
-	    public virtual string StateFile
-	    {
-	        get { return @".\ApplicationState.bin"; }
-	    }
+        public virtual string StateFile => @".\ApplicationState.bin";
 
-        public bool HasPersistedState
-        {
-            get { return File.Exists(StateFile); }
-        }
+        public bool HasPersistedState => File.Exists(StateFile);
 
         public ShellViewModel()
         {
@@ -121,16 +100,16 @@ namespace Gemini.Modules.Shell.ViewModels
             _tools = new BindableCollection<ITool>();
         }
 
-	    protected override void OnViewLoaded(object view)
-	    {
+        protected override void OnViewLoaded(object view)
+        {
             foreach (var module in _modules)
                 foreach (var globalResourceDictionary in module.GlobalResourceDictionaries)
                     Application.Current.Resources.MergedDictionaries.Add(globalResourceDictionary);
 
-	        foreach (var module in _modules)
-	            module.PreInitialize();
-	        foreach (var module in _modules)
-	            module.Initialize();
+            foreach (var module in _modules)
+                module.PreInitialize();
+            foreach (var module in _modules)
+                module.Initialize();
 
             // If after initialization no theme was loaded, load the default one
             if (_themeManager.CurrentTheme == null)
@@ -165,21 +144,28 @@ namespace Gemini.Modules.Shell.ViewModels
             base.OnViewLoaded(view);
         }
 
-	    public void ShowTool<TTool>()
+        public void ShowTool<TTool>()
             where TTool : ITool
-	    {
-	        ShowTool(IoC.Get<TTool>());
-	    }
+        {
+            ShowTool(IoC.Get<TTool>());
+        }
 
-	    public void ShowTool(ITool model)
-		{
-		    if (Tools.Contains(model))
-		        model.IsVisible = true;
-		    else
-		        Tools.Add(model);
-		    model.IsSelected = true;
-	        ActiveLayoutItem = model;
-		}
+        public void ShowTool(ITool model)
+        {
+            if (Tools.Contains(model))
+            {
+                model.IsVisible = true;
+            }
+            else
+            {
+                Tools.Add(model);
+
+                model.ActivateAsync(CancellationToken.None).Wait();
+            }
+
+            model.IsSelected = true;
+            ActiveLayoutItem = model;
+        }
 
         public Task OpenDocumentAsync(IDocument model) => ActivateItemAsync(model, CancellationToken.None);
 
@@ -213,19 +199,19 @@ namespace Gemini.Modules.Shell.ViewModels
             }
         }
 
-	    private void RaiseActiveDocumentChanging()
-	    {
+        private void RaiseActiveDocumentChanging()
+        {
             var handler = ActiveDocumentChanging;
             if (handler != null)
                 handler(this, EventArgs.Empty);
-	    }
+        }
 
-	    private void RaiseActiveDocumentChanged()
-	    {
+        private void RaiseActiveDocumentChanged()
+        {
             var handler = ActiveDocumentChanged;
             if (handler != null)
                 handler(this, EventArgs.Empty);
-	    }
+        }
 
         protected override void OnActivationProcessed(IDocument item, bool success)
         {
@@ -235,16 +221,16 @@ namespace Gemini.Modules.Shell.ViewModels
             base.OnActivationProcessed(item, success);
         }
 
-	    public override async Task DeactivateItemAsync(IDocument item, bool close, CancellationToken cancellationToken)
-	    {
-	        RaiseActiveDocumentChanging();
+        public override async Task DeactivateItemAsync(IDocument item, bool close, CancellationToken cancellationToken)
+        {
+            RaiseActiveDocumentChanging();
 
-	        await base.DeactivateItemAsync(item, close, cancellationToken);
+            await base.DeactivateItemAsync(item, close, cancellationToken);
 
             RaiseActiveDocumentChanged();
-	    }
+        }
 
-	    protected override async Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+        protected override async Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {
             // Workaround for a complex bug that occurs when
             // (a) the window has multiple documents open, and
@@ -279,5 +265,5 @@ namespace Gemini.Modules.Shell.ViewModels
         {
             Application.Current.MainWindow.Close();
         }
-	}
+    }
 }
