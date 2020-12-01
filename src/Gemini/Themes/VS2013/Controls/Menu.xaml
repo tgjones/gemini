@@ -145,24 +145,15 @@
                 </Grid.RowDefinitions>
                 <Border x:Name="IconContainer" Grid.Column="0" 
                         Background="Transparent"
-                        Padding="5,3,4,3">
-                    <Grid>
+                        Padding="2,0,1,0">
+                    <Border x:Name="IconBorder"
+                            BorderThickness="1">
                         <ContentPresenter x:Name="Icon"
                                           HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"
                                           Height="16" Width="16"
                                           ContentSource="Icon" />
-                        <Border x:Name="Check" 
-                                VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                Width="16" Height="16"
-                                Visibility="Collapsed"
-                                Background="{DynamicResource MenuPopupDefaultCheckmarkBackground}" 
-                                BorderThickness="0" BorderBrush="{DynamicResource MenuPopupDefaultCheckmark}">
-                            <Path x:Name="CheckMark" Width="8" Height="8" SnapsToDevicePixels="False"
-                                  Stroke="{DynamicResource MenuPopupDefaultCheckmark}" StrokeThickness="2" 
-                                  Data="M 0 4 L 3 7 7 0" />
-                        </Border>
-                    </Grid>
+                    </Border>
                 </Border>
                 <Border Grid.Column="1" Padding="6 2 0 2">
                     <ContentPresenter x:Name="HeaderHost" 
@@ -179,12 +170,9 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />
-            </Trigger>
             <Trigger Property="IsChecked" Value="true">
-                <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="Check" Property="Visibility" Value="Visible" />
+                <Setter TargetName="IconBorder" Property="BorderBrush" Value="{DynamicResource ToolbarButtonCheckedBorder}" />
+                <Setter TargetName="IconBorder" Property="Background" Value="{DynamicResource MenuPopupHoveredItemBackground}" />
             </Trigger>
             <Trigger Property="IsHighlighted" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuPopupHoveredItemBackground}" />
