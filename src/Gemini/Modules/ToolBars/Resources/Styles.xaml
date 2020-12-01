@@ -27,6 +27,7 @@
         <Setter Property="ToolTip" Value="{Binding ToolTip}" />
         <Setter Property="ToolTipService.IsEnabled" Value="{Binding HasToolTip}" />
 		<Setter Property="IsChecked" Value="{Binding IsChecked, Mode=OneWay}" />
+        <Setter Property="Visibility" Value="{Binding Visibility, Mode=OneWay}" />
         <Setter Property="Command" Value="{Binding Command}" />
         <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
 

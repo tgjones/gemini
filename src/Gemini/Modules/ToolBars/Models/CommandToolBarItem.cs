@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Commands;
@@ -57,6 +58,11 @@ namespace Gemini.Modules.ToolBars.Models
             get { return _command.Checked; }
         }
 
+        public Visibility Visibility
+        {
+            get { return _command.Visible ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
 		public CommandToolBarItem(ToolBarItemDefinition toolBarItem, Command command, IToolBar parent)
 		{
 		    _toolBarItem = toolBarItem;
@@ -69,11 +75,25 @@ namespace Gemini.Modules.ToolBars.Models
 
         private void OnCommandPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            NotifyOfPropertyChange(() => Text);
-            NotifyOfPropertyChange(() => IconSource);
-            NotifyOfPropertyChange(() => ToolTip);
-            NotifyOfPropertyChange(() => HasToolTip);
-            NotifyOfPropertyChange(() => IsChecked);
+            switch (e.PropertyName)
+            {
+                case nameof(Framework.Commands.Command.Text):
+                    NotifyOfPropertyChange(nameof(Text));
+                    break;
+                case nameof(Framework.Commands.Command.IconSource):
+                    NotifyOfPropertyChange(nameof(IconSource));
+                    break;
+                case nameof(Framework.Commands.Command.ToolTip):
+                    NotifyOfPropertyChange(nameof(ToolTip));
+                    NotifyOfPropertyChange(nameof(HasToolTip));
+                    break;
+                case nameof(Framework.Commands.Command.Checked):
+                    NotifyOfPropertyChange(nameof(IsChecked));
+                    break;
+                case nameof(Framework.Commands.Command.Visible):
+                    NotifyOfPropertyChange(nameof(Visibility));
+                    break;
+            }
         }
 
 	    CommandDefinitionBase ICommandUiItem.CommandDefinition

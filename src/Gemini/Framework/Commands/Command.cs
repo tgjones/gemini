@@ -21,61 +21,37 @@ namespace Gemini.Framework.Commands
         public bool Visible
         {
             get { return _visible; }
-            set
-            {
-                _visible = value;
-                NotifyOfPropertyChange(() => Visible);
-            }
+            set { Set(ref _visible, value); }
         }
 
         public bool Enabled
         {
             get { return _enabled; }
-            set
-            {
-                _enabled = value;
-                NotifyOfPropertyChange(() => Enabled);
-            }
+            set { Set(ref _enabled, value); }
         }
 
         public bool Checked
         {
             get { return _checked; }
-            set
-            {
-                _checked = value;
-                NotifyOfPropertyChange(() => Checked);
-            }
+            set { Set(ref _checked, value); }
         }
 
         public string Text
         {
             get { return _text; }
-            set
-            {
-                _text = value;
-                NotifyOfPropertyChange(() => Text);
-            }
+            set { Set(ref _text, value); }
         }
 
         public string ToolTip
         {
             get { return _toolTip; }
-            set
-            {
-                _toolTip = value;
-                NotifyOfPropertyChange(() => ToolTip);
-            }
+            set { Set(ref _toolTip, value); }
         }
 
         public Uri IconSource
         {
             get { return _iconSource; }
-            set
-            {
-                _iconSource = value;
-                NotifyOfPropertyChange(() => IconSource);
-            }
+            set { Set(ref _iconSource, value); }
         }
 
         public object Tag { get; set; }
