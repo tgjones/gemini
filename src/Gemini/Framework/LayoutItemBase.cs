@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
+using System.Windows.Media;
 using Caliburn.Micro;
 
 namespace Gemini.Framework
@@ -25,7 +26,7 @@ namespace Gemini.Framework
 		}
 
         [Browsable(false)]
-		public virtual Uri IconSource
+		public virtual ImageSource IconSource
 		{
 			get { return null; }
 		}

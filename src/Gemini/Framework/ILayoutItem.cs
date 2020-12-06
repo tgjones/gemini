@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Input;
+using System.Windows.Media;
 using Caliburn.Micro;
 
 namespace Gemini.Framework
@@ -10,7 +11,7 @@ namespace Gemini.Framework
         Guid Id { get; }
         string ContentId { get; }
         ICommand CloseCommand { get; }
-        Uri IconSource { get; }
+        ImageSource IconSource { get; }
         bool IsSelected { get; set; }
         bool ShouldReopenOnStart { get; }
         void LoadState(BinaryReader reader);
