@@ -5,7 +5,6 @@ using System.Windows;
 using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
 using Gemini.Properties;
 
 namespace Gemini.Modules.Shell.Commands
@@ -30,7 +29,12 @@ namespace Gemini.Modules.Shell.Commands
         public void Populate(Command command, List<Command> commands)
         {
             foreach (var editorProvider in _editorProviders)
+            {
+                if (!editorProvider.CanCreateNew)
+                    continue;
+
                 foreach (var editorFileType in editorProvider.FileTypes)
+                {
                     commands.Add(new Command(command.CommandDefinition)
                     {
                         Text = editorFileType.Name,
@@ -40,6 +44,8 @@ namespace Gemini.Modules.Shell.Commands
                             FileType = editorFileType
                         }
                     });
+                }
+            }
         }
 
         public async Task Run(Command command)
@@ -68,6 +74,6 @@ namespace Gemini.Modules.Shell.Commands
         {
             public IEditorProvider EditorProvider;
             public EditorFileType FileType;
-        }
-    }
+        };
+    };
 }

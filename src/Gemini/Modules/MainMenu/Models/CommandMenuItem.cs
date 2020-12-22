@@ -14,40 +14,19 @@ namespace Gemini.Modules.MainMenu.Models
         private readonly StandardMenuItem _parent;
         private readonly List<StandardMenuItem> _listItems;
 
-        public override string Text
-        {
-            get { return _command.Text; }
-        }
+        public override string Text => _command.Text;
 
-        public override Uri IconSource
-        {
-            get { return _command.IconSource; }
-        }
+        public override Uri IconSource => _command.IconSource;
 
-        public override string InputGestureText
-        {
-            get
-            {
-                return _keyGesture == null
-                    ? string.Empty
-                    : _keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
-            }
-        }
+        public override string InputGestureText => _keyGesture == null
+            ? string.Empty
+            : _keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentUICulture);
 
-        public override ICommand Command
-        {
-            get { return IoC.Get<ICommandService>().GetTargetableCommand(_command); }
-        }
+        public override ICommand Command => IoC.Get<ICommandService>().GetTargetableCommand(_command);
 
-        public override bool IsChecked
-        {
-            get { return _command.Checked; }
-        }
+        public override bool IsChecked => _command.Checked;
 
-        public override bool IsVisible
-        {
-            get { return _command.Visible; }
-        }
+        public override bool IsVisible => _command.Visible;
 
         private bool IsListItem { get; set; }
 
@@ -58,12 +37,11 @@ namespace Gemini.Modules.MainMenu.Models
             _parent = parent;
 
             _listItems = new List<StandardMenuItem>();
+
+            _command.PropertyChanged += CommandPropertyChanged;
         }
 
-        CommandDefinitionBase ICommandUiItem.CommandDefinition
-        {
-            get { return _command.CommandDefinition; }
-        }
+        CommandDefinitionBase ICommandUiItem.CommandDefinition => _command.CommandDefinition;
 
         void ICommandUiItem.Update(CommandHandlerWrapper commandHandler)
         {
@@ -92,5 +70,24 @@ namespace Gemini.Modules.MainMenu.Models
                 }
             }
         }
-    }
+
+        private void CommandPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(_command.Visible):
+                    NotifyOfPropertyChange(nameof(IsVisible));
+                    break;
+
+                case nameof(_command.Checked):
+                    NotifyOfPropertyChange(nameof(IsChecked));
+                    break;
+
+                case nameof(_command.Text):
+                case nameof(_command.IconSource):
+                    NotifyOfPropertyChange(e.PropertyName);
+                    break;
+            }
+        }
+    };
 }
