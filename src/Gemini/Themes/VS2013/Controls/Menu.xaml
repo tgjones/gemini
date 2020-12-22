@@ -1,4 +1,4 @@
-﻿<!--
+<!--
   Originally from the Wide framework:
   https://github.com/chandramouleswaran/Wide
   
@@ -362,9 +362,15 @@
 
     <!--Set default styles-->
     <Style TargetType="Separator" BasedOn="{StaticResource MetroSeparator}" />
-    <Style TargetType="MenuItem" BasedOn="{StaticResource MetroMenuItem}" />
+    <Style TargetType="MenuItem" BasedOn="{StaticResource MetroMenuItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
     <Style TargetType="Menu" BasedOn="{StaticResource StandardMenu}" />
     <Style TargetType="ContextMenu" BasedOn="{StaticResource MetroContextMenu}" />
     <Style TargetType="xcad:ContextMenuEx" BasedOn="{StaticResource MetroContextMenu}" />
-    <Style TargetType="xcad:MenuItemEx" BasedOn="{StaticResource MetroMenuItem}" />
+    <Style TargetType="xcad:MenuItemEx" BasedOn="{StaticResource MetroMenuItem}">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>
