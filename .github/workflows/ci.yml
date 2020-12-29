@@ -17,6 +17,8 @@ jobs:
 
     - name: Version
       uses: aarnott/nbgv@v0.4.0
+      with:
+        setAllVars: true
 
     - name: Pack
       run: dotnet pack src --configuration Release --output build/packages
