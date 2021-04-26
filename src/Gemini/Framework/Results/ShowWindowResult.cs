@@ -14,7 +14,6 @@ namespace Gemini.Framework.Results
 
         public ShowWindowResult()
         {
-            
         }
 
         public ShowWindowResult(TWindow window)
@@ -34,13 +33,15 @@ namespace Gemini.Framework.Results
 
             window.Deactivated += (s, e) =>
             {
-                if (!e.WasClosed)
-                    return;
+                if (e.WasClosed)
+                {
+                    if (_onShutDown != null)
+                        _onShutDown(window);
 
-                if (_onShutDown != null)
-                    _onShutDown(window);
+                    OnCompleted(null, false);
+                }
 
-                OnCompleted(null, false);
+                return System.Threading.Tasks.Task.CompletedTask;
             };
 
             WindowManager.ShowWindowAsync(window);

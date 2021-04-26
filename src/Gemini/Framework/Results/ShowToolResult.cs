@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
@@ -12,7 +12,7 @@ namespace Gemini.Framework.Results
 
 #pragma warning disable 649
         [Import]
-		private IShell _shell;
+		private readonly IShell _shell;
 #pragma warning restore 649
 
         public ShowToolResult()
@@ -37,14 +37,16 @@ namespace Gemini.Framework.Results
 
 			tool.Deactivated += (s, e) =>
 			{
-				if (!e.WasClosed)
-					return;
+                if (e.WasClosed)
+                {
+                    if (_onShutDown != null)
+                        _onShutDown(tool);
 
-				if (_onShutDown != null)
-					_onShutDown(tool);
+                    OnCompleted(null, false);
+                }
 
-				OnCompleted(null, false);
-			};
+                return System.Threading.Tasks.Task.CompletedTask;
+            };
 
 			_shell.ShowTool(tool);
 		}
