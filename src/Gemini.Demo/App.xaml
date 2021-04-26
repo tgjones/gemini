@@ -1,14 +1,18 @@
 <Application x:Class="Gemini.Demo.App"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-			 xmlns:gemini="http://schemas.timjones.io/gemini">
-	<Application.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary>
-					<gemini:AppBootstrapper x:Key="bootstrapper" />
-				</ResourceDictionary>
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</Application.Resources>
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gemini="http://schemas.timjones.io/gemini"
+             xmlns:local="clr-namespace:Gemini.Demo"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <gemini:AppBootstrapper x:Key="bootstrapper" />
+                    <!--Use this bootstrapper instead when you are testing the Demo under .NET5+ with PublishSingleFile-->
+                    <!--<local:DemoAppBootstrapper x:Key="bootstrapper" />-->
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
