@@ -14,7 +14,7 @@ namespace Gemini.Framework.Results
 
 #pragma warning disable 649
         [Import]
-		private IShell _shell;
+		private readonly IShell _shell;
 #pragma warning restore 649
 
         public OpenDocumentResult(IDocument editor)
@@ -53,12 +53,14 @@ namespace Gemini.Framework.Results
 
 			editor.Deactivated += (s, e) =>
 			{
-				if (!e.WasClosed)
-					return;
+                if (e.WasClosed)
+                {
+                    if (_onShutDown != null)
+                        _onShutDown(editor);
+                }
 
-				if (_onShutDown != null)
-					_onShutDown(editor);
-			};
+                return System.Threading.Tasks.Task.CompletedTask;
+            };
 
 			_shell
                 .OpenDocumentAsync(editor)

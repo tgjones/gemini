@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Demo", "Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Demo", "Gemini.Demo\Gemini.Demo.csproj", "{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini", "Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Output", "Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{B78AACC8-5A16-4951-83AD-B78D1C80A258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.Output", "Gemini.Modules.Output\Gemini.Modules.Output.csproj", "{B78AACC8-5A16-4951-83AD-B78D1C80A258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.PropertyGrid", "Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj", "{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.PropertyGrid", "Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj", "{8080CB9A-9389-4B4D-9ADF-BEF7FEFCAC55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{748FD7C1-877B-451D-809A-68E032C39B34}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,15 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\version.json = ..\version.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.Inspector", "Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj", "{0F8463BD-C1B0-4F2B-855D-49B6963B3337}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.Inspector", "Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj", "{0F8463BD-C1B0-4F2B-855D-49B6963B3337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.ErrorList", "Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj", "{9F436232-52C4-4C2C-A83F-ADFE5B829484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.ErrorList", "Gemini.Modules.ErrorList\Gemini.Modules.ErrorList.csproj", "{9F436232-52C4-4C2C-A83F-ADFE5B829484}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeEditor", "Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj", "{1B56487B-CD40-4D94-8A62-C15F7E13D2FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.CodeEditor", "Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj", "{1B56487B-CD40-4D94-8A62-C15F7E13D2FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.CodeCompiler", "Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj", "{F1CEEDDC-A1DC-4A7A-8A86-FA4C72BFBAE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.CodeCompiler", "Gemini.Modules.CodeCompiler\Gemini.Modules.CodeCompiler.csproj", "{F1CEEDDC-A1DC-4A7A-8A86-FA4C72BFBAE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini.Modules.GraphEditor", "Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj", "{F8204886-1F61-4247-B7B2-EA5E518162F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.GraphEditor", "Gemini.Modules.GraphEditor\Gemini.Modules.GraphEditor.csproj", "{F8204886-1F61-4247-B7B2-EA5E518162F3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{87C5CCCC-7448-4802-B35F-C0BEA3FF880D}"
 EndProject

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>net5.0-windows;netcoreapp3.1;net461</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell PropertyGrid</PackageTags>
     <Description>PropertyGrid module for Gemini, utilising the PropertyGrid control from the Extended WPF Toolkit.</Description>
