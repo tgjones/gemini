@@ -17,7 +17,7 @@ namespace Gemini.Modules.ToolBars.Models
 
 		public string Text
 		{
-			get { return _command.Text; }
+			get { return TrimMnemonics(_command.Text); }
 		}
 
         public ToolBarItemDisplay Display
@@ -85,5 +85,31 @@ namespace Gemini.Modules.ToolBars.Models
 	    {
 	        // TODO
 	    }
+
+        /// <summary>
+        /// Remove mnemonics underscores used by menu from text.
+        /// Also replace escaped/double underscores by a single underscore.
+        /// </summary>
+        private static string TrimMnemonics(string text)
+        {
+            var resultArray = new char[text.Length];
+
+            int resultLength = 0;
+            bool previousWasUnderscore = false;
+            for (int textIndex = 0; textIndex < text.Length; textIndex++)
+            {
+                char c = text[textIndex];
+                if (c == '_' && !previousWasUnderscore)
+                {
+                    previousWasUnderscore = true;
+                    continue;
+                }
+
+                previousWasUnderscore = false;
+                resultArray[resultLength++] = c;
+            }
+
+            return new string(resultArray, 0, resultLength);
+        }
     }
 }
