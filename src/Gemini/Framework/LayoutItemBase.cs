@@ -26,7 +26,7 @@ namespace Gemini.Framework
 		}
 
         [Browsable(false)]
-		public virtual ImageSource IconSource
+		public virtual Uri IconSource
 		{
 			get { return null; }
 		}
