@@ -16,6 +16,11 @@
         <Setter Property="IsChecked" Value="{Binding IsChecked, Mode=OneWay}" />
         <Setter Property="Command" Value="{Binding Command}" />
         <Setter Property="b:MenuBehavior.UpdateCommandUiItems" Value="True" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IconSource}" Value="{x:Null}">
+                <Setter Property="Icon" Value="{x:Null}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
 	<HierarchicalDataTemplate x:Key="menuTemplate" ItemsSource="{Binding Children}">
