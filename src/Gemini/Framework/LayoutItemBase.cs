@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Input;
-using System.Windows.Media;
 using Caliburn.Micro;
 
 namespace Gemini.Framework
