@@ -14,7 +14,22 @@
 		<ResourceDictionary>
 			<converters:NullableValueConverter x:Key="NullableValueConverter" />
 			<xcad:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-		</ResourceDictionary>
+            <DataTemplate x:Key="IconTitleTemplate" DataType="{x:Type xcad:LayoutContent}">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="Icon" VerticalAlignment="Center" Margin="0,0,4,0" Source="{Binding IconSource}" />
+                    <TextBlock x:Name="Title" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+                </Grid>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IconSource}" Value="{x:Null}">
+                        <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ResourceDictionary>
 	</UserControl.Resources>
 
 	<DockPanel>
@@ -28,7 +43,11 @@
         <xcad:DockingManager x:Name="Manager" DocumentsSource="{Binding Items}"
 							 AnchorablesSource="{Binding Tools}"
 							 ActiveContent="{Binding ActiveLayoutItem, Mode=TwoWay}"
-                             LayoutUpdated="OnManagerLayoutUpdated">
+                             LayoutUpdated="OnManagerLayoutUpdated"
+                             DocumentHeaderTemplate="{StaticResource IconTitleTemplate}"
+                             AnchorableHeaderTemplate="{StaticResource IconTitleTemplate}"
+                             DocumentTitleTemplate="{StaticResource IconTitleTemplate}"
+                             AnchorableTitleTemplate="{StaticResource IconTitleTemplate}">
             <xcad:DockingManager.LayoutItemTemplateSelector>
                 <controls:PanesTemplateSelector>
                     <controls:PanesTemplateSelector.DocumentTemplate>
