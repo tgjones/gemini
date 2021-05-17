@@ -40,7 +40,7 @@ namespace Gemini.Modules.Shell.Views
                             addToolCallback(tool);
                             tool.IsVisible = anchorable.IsVisible;
 
-                            if (anchorable.IsActive)
+                            if (anchorable.IsVisible)
                                 tool.ActivateAsync(CancellationToken.None).Wait();
 
                             tool.IsSelected = e.Model.IsSelected;
