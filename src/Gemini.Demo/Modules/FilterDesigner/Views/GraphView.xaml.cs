@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,7 +35,7 @@ namespace Gemini.Demo.Modules.FilterDesigner.Views
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (e.Key == Key.Delete)
-                ((GraphViewModel) DataContext).DeleteSelectedElements();
+                ((GraphViewModel) DataContext).DeleteSelectedObjects();
             base.OnKeyDown(e);
         }
 

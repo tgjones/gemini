@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
@@ -35,7 +35,12 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
         {
             get { return _elements.Where(x => x.IsSelected); }
         }
-          
+
+        public IEnumerable<ConnectionViewModel> SelectedConnections
+        {
+            get { return _connections.Where(x => x.IsSelected); }
+        }
+
         [ImportingConstructor]
         public GraphViewModel(IInspectorTool inspectorTool)
         {
@@ -131,20 +136,29 @@ namespace Gemini.Demo.Modules.FilterDesigner.ViewModels
             Elements.Remove(element);
         }
 
-        public void DeleteSelectedElements()
+        public void DeleteSelectedObjects()
         {
             Elements.Where(x => x.IsSelected)
                 .ToList()
                 .ForEach(DeleteElement);
+            var selectedConnections = SelectedConnections
+                .Where(x => x.IsSelected)
+                .ToList();
+            Connections.RemoveRange(selectedConnections);
         }
 
         public void OnSelectionChanged()
         {
             var selectedElements = SelectedElements.ToList();
+            var selectedConnections = SelectedConnections.ToList();
 
             if (selectedElements.Count == 1)
                 _inspectorTool.SelectedObject = new InspectableObjectBuilder()
                     .WithObjectProperties(selectedElements[0], x => true)
+                    .ToInspectableObject();
+            else if (selectedConnections.Count == 1)
+                _inspectorTool.SelectedObject = new InspectableObjectBuilder()
+                    .WithObjectProperties(selectedConnections[0], x => true)
                     .ToInspectableObject();
             else
                 _inspectorTool.SelectedObject = null;

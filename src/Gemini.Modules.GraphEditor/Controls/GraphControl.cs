@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +12,7 @@ namespace Gemini.Modules.GraphEditor.Controls
     public class GraphControl : Control
     {
         private ElementItemsControl _elementItemsControl;
+        private ConnectionItemsControl _connectionItemsControl;
 
         static GraphControl()
         {
@@ -130,10 +131,27 @@ namespace Gemini.Modules.GraphEditor.Controls
         #endregion
 
         public event SelectionChangedEventHandler SelectionChanged;
-
+        public event SelectionChangedEventHandler ConnectionSelectionChanged;
         public IList SelectedElements
         {
             get { return _elementItemsControl.SelectedItems; }
+        }
+
+        public IList SelectedConnections
+        {
+            get { return _connectionItemsControl.SelectedItems; }
+        }
+
+        public void SelectAll()
+        {
+            _elementItemsControl.SelectAll();
+            _connectionItemsControl.SelectAll();
+        }
+
+        public void UnselectAll()
+        {
+            _elementItemsControl.UnselectAll();
+            _connectionItemsControl.UnselectAll();
         }
 
         public GraphControl()
@@ -147,7 +165,14 @@ namespace Gemini.Modules.GraphEditor.Controls
         {
             _elementItemsControl = (ElementItemsControl) Template.FindName("PART_ElementItemsControl", this);
             _elementItemsControl.SelectionChanged += OnElementItemsControlSelectChanged;
+            _connectionItemsControl = ((ConnectionItemsControl) Template.FindName("PART_ConnectionItemsControl", this));
+            _connectionItemsControl.SelectionChanged += OnConnectionsControlSelectionChanged;
             base.OnApplyTemplate();
+        }
+
+        private void OnConnectionsControlSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ConnectionSelectionChanged?.Invoke(this, e);
         }
 
         private void OnElementItemsControlSelectChanged(object sender, SelectionChangedEventArgs e)
@@ -160,6 +185,7 @@ namespace Gemini.Modules.GraphEditor.Controls
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             _elementItemsControl.SelectedItems.Clear();
+            _connectionItemsControl.SelectedItems.Clear();
             base.OnMouseLeftButtonDown(e);
         }
 

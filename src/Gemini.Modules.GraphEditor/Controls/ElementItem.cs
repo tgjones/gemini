@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Gemini.Framework;
@@ -85,7 +85,7 @@ namespace Gemini.Modules.GraphEditor.Controls
             if (parentGraphControl == null)
                 return;
 
-            parentGraphControl.SelectedElements.Clear();
+            parentGraphControl.UnselectAll();
             IsSelected = true;
         }
 
