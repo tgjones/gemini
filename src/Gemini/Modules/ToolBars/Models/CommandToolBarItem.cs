@@ -17,7 +17,7 @@ namespace Gemini.Modules.ToolBars.Models
 
 		public string Text
 		{
-			get { return _command.Text; }
+			get { return TrimMnemonics(_command.Text); }
 		}
 
         public ToolBarItemDisplay Display
@@ -85,5 +85,64 @@ namespace Gemini.Modules.ToolBars.Models
 	    {
 	        // TODO
 	    }
+
+        /// <summary>
+        /// Remove mnemonics underscore used by menu from text.
+        /// Also replace escaped/double underscores by a single underscore.
+        /// Displayed text will be the same than with a menu item.
+        /// </summary>
+        private static string TrimMnemonics(string text)
+        {
+            var resultArray = new char[text.Length];
+
+            int resultLength = 0;
+            bool previousWasUnderscore = false;
+            bool mnemonicsFound = false;
+
+            for (int textIndex = 0; textIndex < text.Length; textIndex++)
+            {
+                char c = text[textIndex];
+
+                if (c == '_')
+                {
+                    if (!previousWasUnderscore)
+                    {
+                        // If previous character was not an underscore but the current is one, we set the flag.
+                        previousWasUnderscore = true;
+
+                        // Also, if mnemonics mark was not found yet, we also skip that underscore in result.
+                        if (!mnemonicsFound)
+                            continue;
+                    }
+                    else
+                    {
+                        // If both current and previous character are underscores, it is an escaped underscore.
+                        // We will include that second underscore in result and restore the flag.
+                        previousWasUnderscore = false;
+
+                        // If mnemonics mark was already found, previous underscore was included in result so we can escape this one.
+                        if (mnemonicsFound)
+                            continue;
+                    }
+                }
+                else
+                {
+                    // If previous character was an underscore and the current is not one, we found the mnemonics mark.
+                    // We will stop to search and include all the following characters, except escaped underscores, in result.
+                    if (!mnemonicsFound && previousWasUnderscore)
+                        mnemonicsFound = true;
+
+                    previousWasUnderscore = false;
+                }
+
+                resultArray[resultLength++] = c;
+            }
+
+            // If last character was an underscore and mnemonics mark was not found, it should be included in result.
+            if (previousWasUnderscore && !mnemonicsFound)
+                resultArray[resultLength++] = '_';
+
+            return new string(resultArray, 0, resultLength);
+        }
     }
 }
