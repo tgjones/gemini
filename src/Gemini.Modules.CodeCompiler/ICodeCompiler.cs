@@ -9,6 +9,8 @@ namespace Gemini.Modules.CodeCompiler
         Assembly Compile(
             IEnumerable<SyntaxTree> syntaxTrees,
             IEnumerable<MetadataReference> references,
-            string outputName);
+            string outputName,
+            bool exportDll = false,
+            string exportDir = null);
     }
 }

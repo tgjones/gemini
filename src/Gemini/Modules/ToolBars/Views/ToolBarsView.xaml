@@ -12,6 +12,7 @@
     </UserControl.Resources>
     <controls:ToolBarTrayContainer>
         <ToolBarTray x:Name="ToolBarTray"
-				     Visibility="{Binding Visible, Converter={StaticResource BoolToVisibilityConverter}}" />
+				     Visibility="{Binding Visible, Converter={StaticResource BoolToVisibilityConverter}}"
+				     IsLocked={Binding Locked}/>
     </controls:ToolBarTrayContainer>
 </UserControl>

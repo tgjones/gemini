@@ -30,7 +30,7 @@ namespace Gemini.Modules.CodeCompiler
             _errorList = errorList;
         }
 
-        public Assembly Compile(IEnumerable<SyntaxTree> syntaxTrees, IEnumerable<MetadataReference> references, string outputName)
+        public Assembly Compile(IEnumerable<SyntaxTree> syntaxTrees, IEnumerable<MetadataReference> references, string outputName, bool exportDll = false, string exportDir = null)
         {
             _output.AppendLine("------ Compile started");
 
@@ -52,6 +52,31 @@ namespace Gemini.Modules.CodeCompiler
                 }
                 _output.AppendLine("------ Compile finished");
                 ms.Seek(0, SeekOrigin.Begin);
+                
+                if (exportDll)
+                {
+                    if (exportDir == null)
+                    {
+                        exportDir = typeof(Gemini.AppBootstrapper).Assembly.Location;
+                    }
+                    if (!outputName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase))
+                        outputName += ".dll";
+                    _output.AppendLine("------ Exporting to DLL");
+                    var dllPath = System.IO.Path.Combine(exportDir, outputName);
+                    try
+                    {
+                        if (File.Exists(dllPath))
+                            File.Delete(dllPath);
+                        ms.WriteTo(new FileStream(dllPath, FileMode.Create));
+                        _output.AppendLine("------ Export finished");
+                        _output.AppendLine("-> " + dllPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        _output.AppendLine("------ Export failed");
+                        _output.AppendLine(ex.Message);
+                    }
+                }
                 return Assembly.Load(ms.ToArray());
             }
         }
