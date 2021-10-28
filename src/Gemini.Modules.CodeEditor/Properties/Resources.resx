@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,12 +112,48 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EditorProviderFileSuffix" xml:space="preserve">
     <value> File</value>
+  </data>
+  <data name="SettingsPageCodeEditor" xml:space="preserve">
+    <value>Code Editor</value>
+  </data>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="ShowEndOfLineCommandText" xml:space="preserve">
+    <value>Show End Of Line</value>
+  </data>
+  <data name="ShowEndOfLineCommandToolTip" xml:space="preserve">
+    <value>Toggle the visibility of end-of-line characters.</value>
+  </data>
+  <data name="ShowLineNumbersCommandText" xml:space="preserve">
+    <value>Line Numbers</value>
+  </data>
+  <data name="ShowLineNumbersCommandToolTip" xml:space="preserve">
+    <value>Toggle the visibility of line bumbers.</value>
+  </data>
+  <data name="ShowSpacesCommandText" xml:space="preserve">
+    <value>Show Spaces</value>
+  </data>
+  <data name="ShowSpacesCommandToolTip" xml:space="preserve">
+    <value>Toggle the visibility of space characters.</value>
+  </data>
+  <data name="ShowTabsCommandText" xml:space="preserve">
+    <value>Show Tabs</value>
+  </data>
+  <data name="ShowTabsCommandToolTip" xml:space="preserve">
+    <value>Toggle the visibility of tab characters.</value>
+  </data>
+  <data name="WordWrapCommandText" xml:space="preserve">
+    <value>Word Wrap</value>
+  </data>
+  <data name="WordWrapCommandToolTip" xml:space="preserve">
+    <value>Toggle Word Wrap mode.</value>
   </data>
 </root>

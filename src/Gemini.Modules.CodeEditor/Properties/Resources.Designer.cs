@@ -68,5 +68,113 @@ namespace Gemini.Modules.CodeEditor.Properties {
                 return ResourceManager.GetString("EditorProviderFileSuffix", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code Editor.
+        /// </summary>
+        public static string SettingsPageCodeEditor {
+            get {
+                return ResourceManager.GetString("SettingsPageCodeEditor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string SettingsPageGeneral {
+            get {
+                return ResourceManager.GetString("SettingsPageGeneral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show End Of Line.
+        /// </summary>
+        public static string ShowEndOfLineCommandText {
+            get {
+                return ResourceManager.GetString("ShowEndOfLineCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle the visibility of end-of-line characters..
+        /// </summary>
+        public static string ShowEndOfLineCommandToolTip {
+            get {
+                return ResourceManager.GetString("ShowEndOfLineCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line Numbers.
+        /// </summary>
+        public static string ShowLineNumbersCommandText {
+            get {
+                return ResourceManager.GetString("ShowLineNumbersCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle the visibility of line bumbers..
+        /// </summary>
+        public static string ShowLineNumbersCommandToolTip {
+            get {
+                return ResourceManager.GetString("ShowLineNumbersCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Spaces.
+        /// </summary>
+        public static string ShowSpacesCommandText {
+            get {
+                return ResourceManager.GetString("ShowSpacesCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle the visibility of space characters..
+        /// </summary>
+        public static string ShowSpacesCommandToolTip {
+            get {
+                return ResourceManager.GetString("ShowSpacesCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Tabs.
+        /// </summary>
+        public static string ShowTabsCommandText {
+            get {
+                return ResourceManager.GetString("ShowTabsCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle the visibility of tab characters..
+        /// </summary>
+        public static string ShowTabsCommandToolTip {
+            get {
+                return ResourceManager.GetString("ShowTabsCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Word Wrap.
+        /// </summary>
+        public static string WordWrapCommandText {
+            get {
+                return ResourceManager.GetString("WordWrapCommandText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Word Wrap mode..
+        /// </summary>
+        public static string WordWrapCommandToolTip {
+            get {
+                return ResourceManager.GetString("WordWrapCommandToolTip", resourceCulture);
+            }
+        }
     }
 }

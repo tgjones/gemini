@@ -1,4 +1,4 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 
@@ -15,6 +15,11 @@ namespace Gemini.Modules.CodeEditor.Views
         {
             InitializeComponent();
             Loaded += (sender, e) => MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        }
+
+        public void ApplySettings()
+        {
+            CodeEditor?.ApplySettings();
         }
     }
 }

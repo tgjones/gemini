@@ -1,0 +1,39 @@
+<UserControl x:Class="Gemini.Modules.CodeEditor.Views.CodeEditorSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gemini="http://schemas.timjones.io/gemini"
+             xmlns:viewModels="clr-namespace:Gemini.Modules.CodeEditor.ViewModels"
+             xmlns:p="clr-namespace:Gemini.Modules.CodeEditor.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="400"
+             d:DataContext="{d:DesignInstance viewModels:CodeEditorSettingsViewModel}"
+             IsTabStop="False">
+    <StackPanel>
+        <CheckBox IsChecked="{Binding ShowLineNumbers}"
+                  Margin="0,5,0,0"
+                  Content="{gemini:Translate p:Resources.ShowLineNumbersCommandText}"
+                  ToolTip="{gemini:Translate p:Resources.ShowLineNumbersCommandToolTip}"/>
+
+        <CheckBox IsChecked="{Binding ShowSpaces}"
+                  Margin="0,5,0,0"
+                  Content="{gemini:Translate p:Resources.ShowSpacesCommandText}"
+                  ToolTip="{gemini:Translate p:Resources.ShowSpacesCommandToolTip}"/>
+
+        <CheckBox IsChecked="{Binding ShowTabs}"
+                  Margin="0,5,0,0"
+                  Content="{gemini:Translate p:Resources.ShowTabsCommandText}"
+                  ToolTip="{gemini:Translate p:Resources.ShowTabsCommandToolTip}"/>
+
+        <CheckBox IsChecked="{Binding ShowEndOfLine}"
+                  Margin="0,5,0,0"
+                  Content="{gemini:Translate p:Resources.ShowEndOfLineCommandText}"
+                  ToolTip="{gemini:Translate p:Resources.ShowEndOfLineCommandToolTip}"/>
+
+        <CheckBox IsChecked="{Binding WordWrap}"
+                  Margin="0,5,0,0"
+                  Content="{gemini:Translate p:Resources.WordWrapCommandText}"
+                  ToolTip="{gemini:Translate p:Resources.WordWrapCommandToolTip}"/>
+    </StackPanel>
+</UserControl>
