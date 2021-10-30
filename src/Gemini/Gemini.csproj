@@ -53,7 +53,7 @@
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
-    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="3.6.2" />
+    <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.60.0" />
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="4.6.78" />
     <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="$(TargetFramework) == 'net461'" />

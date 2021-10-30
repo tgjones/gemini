@@ -13,7 +13,7 @@
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock">
+                    xmlns:xcad="https://github.com/Dirkster99/AvalonDock">
 
     <Geometry x:Key="Checkmark">
         M 0,5.1 L 1.7,5.2 L 3.4,7.1 L 8,0.4 L 9.2,0 L 3.3,10.8 Z

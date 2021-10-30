@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Original source code from the Wide framework:
  * https://github.com/chandramouleswaran/Wide
  * 
@@ -33,7 +33,7 @@ namespace Gemini.Framework.Themes
         {
             get
             {
-                yield return new Uri("pack://application:,,,/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml");
+                yield return new Uri("pack://application:,,,/AvalonDock.Themes.VS2013;component/LightTheme.xaml");
                 yield return new Uri("pack://application:,,,/Gemini;component/Themes/VS2013/LightTheme.xaml");
             }
         }
