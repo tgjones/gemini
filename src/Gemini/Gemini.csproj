@@ -31,11 +31,12 @@
     </Compile>
     <DesignData Include="Modules\Settings\SampleData\SettingsViewModelSampleData.xaml" />
     <Resource Include="Framework\ShaderEffects\GrayscaleEffect.ps" />
+    <Resource Include="Framework\ShaderEffects\ThemedImageEffect.ps" />
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resources\Icons\*.png" />
+    <Resource Include="Resources\Icons\*.png" />    
     <EmbeddedResource Update="Properties\Resources.de.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
