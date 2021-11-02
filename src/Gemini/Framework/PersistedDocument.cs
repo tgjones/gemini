@@ -5,6 +5,8 @@ using Microsoft.Win32;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Linq;
+using System.Threading;
 
 namespace Gemini.Framework
 {
@@ -72,11 +74,14 @@ namespace Gemini.Framework
                             filter = fileType.Name + "|*" + fileType.FileExtension + "|";
                         filter += Properties.Resources.AllFiles + "|*.*";
 
-                        var dialog = new SaveFileDialog() { FileName = this.FileName, Filter = filter };
+                        // note that SaveFileDialog may need Administrator right.
+                        var dialog = new SaveFileDialog();
+                        dialog.FileName = this.FileName;
+                        dialog.Filter = filter;
                         if (dialog.ShowDialog() == true)
                         {
                             // Save file.
-                            await Save(dialog.FileName);
+                            Save(dialog.FileName);
 
                             // Add to recent files. Temporally, commented out.
                             //IShell _shell = IoC.Get<IShell>();
@@ -84,24 +89,22 @@ namespace Gemini.Framework
                         }
                         else
                         {
-                            callback(false);
-                            return;
+                            return Task.FromResult(false);
                         }
                     }
                     else
                     {
                         // Save file.
-                        await Save(FilePath);
+                        Save(FilePath);
                     }
                 }
                 else if (result == MessageBoxResult.Cancel)
                 {
-                    callback(false);
-                    return;
+                    return Task.FromResult(false);
                 }
             }
 
-            callback(true);
+            return Task.FromResult(true);
         }
 
         private void UpdateDisplayName()
