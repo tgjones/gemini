@@ -81,8 +81,9 @@ namespace Gemini.Framework
                         if (dialog.ShowDialog() == true)
                         {
                             // Save file.
+#pragma warning disable 4014
                             Save(dialog.FileName);
-
+#pragma warning restore 4014
                             // Add to recent files. Temporally, commented out.
                             //IShell _shell = IoC.Get<IShell>();
                             //_shell.RecentFiles.Update(dialog.FileName);
@@ -95,7 +96,9 @@ namespace Gemini.Framework
                     else
                     {
                         // Save file.
+#pragma warning disable 4014
                         Save(FilePath);
+#pragma warning restore 4014
                     }
                 }
                 else if (result == MessageBoxResult.Cancel)
