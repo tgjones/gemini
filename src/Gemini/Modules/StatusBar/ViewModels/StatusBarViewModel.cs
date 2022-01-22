@@ -1,14 +1,19 @@
-﻿using System.ComponentModel.Composition;
+using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using Caliburn.Micro;
 
 namespace Gemini.Modules.StatusBar.ViewModels
 {
 	[Export(typeof(IStatusBar))]
-	public class StatusBarViewModel : PropertyChangedBase, IStatusBar
-	{
+	public class StatusBarViewModel : PropertyChangedBase, IStatusBar, IViewAware
+    {
         private readonly StatusBarItemCollection _items;
-	    public IObservableCollection<StatusBarItemViewModel> Items
+        private IStatusBarView _statusBarView;
+
+        public event EventHandler<ViewAttachedEventArgs> ViewAttached;
+
+        public IObservableCollection<StatusBarItemViewModel> Items
 	    {
             get { return _items; }
 	    }
@@ -16,14 +21,35 @@ namespace Gemini.Modules.StatusBar.ViewModels
 	    public StatusBarViewModel()
         {
             _items = new StatusBarItemCollection();
+            _items.CollectionChanged += OnItemsCollectionChanged;
         }
 
-	    public void AddItem(string message, GridLength width)
+        private void OnItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            _statusBarView?.RefreshGridColumns();
+        }
+
+        public void AddItem(string message, GridLength width)
 	    {
 	        Items.Add(new StatusBarItemViewModel(message, width));
-	    }
+        }
 
-	    private class StatusBarItemCollection : BindableCollection<StatusBarItemViewModel>
+        public void AttachView(object view, object context = null)
+        {
+            if (view is IStatusBarView statusBarView)
+            {
+                ViewAttached?.Invoke(this, new ViewAttachedEventArgs()
+                {
+                    Context = context,
+                    View = statusBarView
+                });
+                _statusBarView = view as IStatusBarView;
+            }
+        }
+
+        public object GetView(object context = null) => _statusBarView;
+
+        private class StatusBarItemCollection : BindableCollection<StatusBarItemViewModel>
         {
             protected override void InsertItemBase(int index, StatusBarItemViewModel item)
             {

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Gemini.Modules.StatusBar.ViewModels;
@@ -8,7 +8,7 @@ namespace Gemini.Modules.StatusBar.Views
     /// <summary>
     /// Interaction logic for StatusBarView.xaml
     /// </summary>
-    public partial class StatusBarView : UserControl
+    public partial class StatusBarView : UserControl, IStatusBarView
     {
         private Grid _statusBarGrid;
 
@@ -19,11 +19,11 @@ namespace Gemini.Modules.StatusBar.Views
 
         private void OnStatusBarGridLoaded(object sender, RoutedEventArgs e)
         {
-            _statusBarGrid = (Grid) sender;
+            _statusBarGrid = (Grid)sender;
             RefreshGridColumns();
         }
 
-        private void RefreshGridColumns()
+        public void RefreshGridColumns()
         {
             _statusBarGrid.ColumnDefinitions.Clear();
             foreach (var item in StatusBar.Items.Cast<StatusBarItemViewModel>())
