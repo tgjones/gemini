@@ -21,16 +21,17 @@ namespace Gemini.Modules.StatusBar.ViewModels
 	    public StatusBarViewModel()
         {
             _items = new StatusBarItemCollection();
+            _items.CollectionChanged += OnItemsCollectionChanged;
         }
 
-	    public void AddItem(string message, GridLength width)
-	    {
-	        Items.Add(new StatusBarItemViewModel(message, width));
-        }
-
-        public void RefreshGridColumns()
+        private void OnItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             _statusBarView?.RefreshGridColumns();
+        }
+
+        public void AddItem(string message, GridLength width)
+	    {
+	        Items.Add(new StatusBarItemViewModel(message, width));
         }
 
         public void AttachView(object view, object context = null)
