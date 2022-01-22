@@ -9,6 +9,5 @@ namespace Gemini.Modules.StatusBar
         IObservableCollection<StatusBarItemViewModel> Items { get; }
 
         void AddItem(string message, GridLength width);
-        void RefreshGridColumns();
     }
 }
