@@ -13,8 +13,12 @@
 -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:shaderEffects="clr-namespace:Gemini.Framework.ShaderEffects"
+                    xmlns:converters="clr-namespace:Gemini.Framework.ShaderEffects.Converters"
                     xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock">
-
+    <converters:BindingProxy x:Key="DefaultBackground" Data="{DynamicResource MenuDefaultBackground}"/>
+    <converters:SolidColorBrushToColorConverter x:Key="SolidColorBrushToColorConverter"/>
+    
     <Geometry x:Key="Checkmark">
         M 0,5.1 L 1.7,5.2 L 3.4,7.1 L 8,0.4 L 9.2,0 L 3.3,10.8 Z
     </Geometry>
@@ -115,7 +119,7 @@
     <ControlTemplate x:Key="{ComponentResourceKey ResourceId=TopLevelItemTemplateKey}" TargetType="MenuItem">
         <Border Name="Border">
             <Grid>
-                <ContentPresenter Margin="6,3,6,3" ContentSource="Header" RecognizesAccessKey="True" />
+                <ContentPresenter Margin="8,3,8,3" ContentSource="Header" RecognizesAccessKey="True" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -147,8 +151,7 @@
                         Background="Transparent"
                         Padding="2,0,1,0">
                     <Grid>
-                        <Border x:Name="Check"
-                                Margin="3"
+                        <Border x:Name="Check" 
                                 VerticalAlignment="Center" HorizontalAlignment="Center" 
                                 Width="16" Height="16"
                                 Visibility="Collapsed"
@@ -164,7 +167,13 @@
                                               HorizontalAlignment="Center" 
                                               VerticalAlignment="Center"
                                               Height="16" Width="16"
-                                              ContentSource="Icon" />
+                                              ContentSource="Icon">
+                                <ContentPresenter.Effect>
+                                    <shaderEffects:ThemedImageEffect Background="{Binding Converter={StaticResource SolidColorBrushToColorConverter}, Mode=OneWay,
+                                                                                      Source={StaticResource DefaultBackground}, Path=Data}"
+                                                                 IsEnabled="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Path=IsEnabled}"/>
+                                </ContentPresenter.Effect>
+                            </ContentPresenter>
                         </Border>
                     </Grid>
                 </Border>
@@ -222,7 +231,13 @@
                                           HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"
                                           Height="16" Width="16"
-                                          ContentSource="Icon" />
+                                          ContentSource="Icon">
+                            <ContentPresenter.Effect>
+                                <shaderEffects:ThemedImageEffect Background="{Binding Converter={StaticResource SolidColorBrushToColorConverter}, Mode=OneWay,
+                                                                                      Source={StaticResource DefaultBackground}, Path=Data}"
+                                                                 IsEnabled="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}, Path=IsEnabled}"/>
+                            </ContentPresenter.Effect>
+                        </ContentPresenter>
                     </Grid>
                 </Border>
                 <Border Grid.Column="1" Padding="6 2 0 2">
