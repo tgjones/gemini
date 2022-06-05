@@ -193,7 +193,7 @@ namespace Gemini.Modules.Shell.Services
                         }
                     }
 
-                    shellView.LoadLayout(reader.BaseStream, t => AddTool(shell, t), d => shell.OpenDocumentAsync(d).Wait(), layoutItems);
+                    shellView.LoadLayout(reader.BaseStream, t => shell.RegisterTool(t), d => shell.OpenDocumentAsync(d).Wait(), layoutItems);
                 }
             }
             catch
@@ -202,12 +202,6 @@ namespace Gemini.Modules.Shell.Services
             }
 
             return true;
-        }
-
-        private void AddTool(IShell shell, ITool tool)
-        {
-            if (!shell.Tools.Contains(tool))
-                shell.Tools.Add(tool);
         }
     }
 }

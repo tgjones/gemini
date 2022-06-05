@@ -11,7 +11,7 @@ namespace Gemini.Framework
     public abstract class Tool : LayoutItemBase, ITool
     {
         private ICommand _closeCommand;
-        public override ICommand CloseCommand => _closeCommand ?? (_closeCommand = new AsyncCommand(() => TryCloseAsync(null)));
+        public override ICommand CloseCommand => _closeCommand ?? (_closeCommand = new AsyncCommand(() => TryCloseAsync()));
 
         public abstract PaneLocation PreferredLocation { get; }
 
@@ -19,15 +19,11 @@ namespace Gemini.Framework
 
         public virtual double PreferredHeight => 200;
 
-        private bool _isVisible;
+        private bool _isVisible = true;
         public bool IsVisible
         {
             get => _isVisible;
-            set
-            {
-                _isVisible = value;
-                NotifyOfPropertyChange(() => IsVisible);
-            }
+            set => Set(ref _isVisible, value);
         }
 
         private ToolBarDefinition _toolBarDefinition;
@@ -36,37 +32,31 @@ namespace Gemini.Framework
             get => _toolBarDefinition;
             protected set
             {
-                _toolBarDefinition = value;
-                NotifyOfPropertyChange(() => ToolBar);
-                NotifyOfPropertyChange();
+                if (Set(ref _toolBarDefinition, value))
+                {
+                    if (ToolBarDefinition is null)
+                    {
+                        ToolBar = null;
+                        return;
+                    }
+
+                    var toolBarBuilder = IoC.Get<IToolBarBuilder>();
+                    var toolBar = new ToolBarModel();
+                    toolBarBuilder.BuildToolBar(ToolBarDefinition, toolBar);
+                    ToolBar = toolBar;
+                }
             }
         }
 
         private IToolBar _toolBar;
         public IToolBar ToolBar
         {
-            get
-            {
-                if (_toolBar != null)
-                    return _toolBar;
-
-                if (ToolBarDefinition == null)
-                    return null;
-
-                var toolBarBuilder = IoC.Get<IToolBarBuilder>();
-                _toolBar = new ToolBarModel();
-                toolBarBuilder.BuildToolBar(ToolBarDefinition, _toolBar);
-                return _toolBar;
-            }
+            get => _toolBar;
+            private set => Set(ref _toolBar, value);
         }
 
         // Tool windows should always reopen on app start by default.
         public override bool ShouldReopenOnStart => true;
-
-        protected Tool()
-        {
-            IsVisible = true;
-        }
 
         public override Task TryCloseAsync(bool? dialogResult = null)
         {
