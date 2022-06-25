@@ -60,8 +60,14 @@ namespace Gemini.Modules.UndoRedo.Services
                 ActionStack.RemoveAt(0);
             UndoActionCount -= removeCount;
         }
-
+        
         public void ExecuteAction(IUndoableAction action)
+        {
+            action.Execute();
+            PushAction(action);
+        }
+
+        public void PushAction(IUndoableAction action)
         {
             if (UndoActionCount < ActionStack.Count)
             {
@@ -73,7 +79,6 @@ namespace Gemini.Modules.UndoRedo.Services
                 NotifyOfPropertyChange(() => CanRedo);
             }
 
-            action.Execute();
             ActionStack.Add(action);
             UndoActionCount++;
 

@@ -17,6 +17,7 @@ namespace Gemini.Modules.UndoRedo
         int? UndoCountLimit { get; set; }
 
         void ExecuteAction(IUndoableAction action);
+        void PushAction(IUndoableAction action);
 
         bool CanUndo { get; }
         void Undo(int actionCount);
