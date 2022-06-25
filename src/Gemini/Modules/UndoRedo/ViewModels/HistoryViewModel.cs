@@ -45,15 +45,11 @@ namespace Gemini.Modules.UndoRedo.ViewModels
         private int _selectedIndex;
         public int SelectedIndex
         {
-            get { return _selectedIndex; }
+            get => _selectedIndex;
             set
             {
-                if (_selectedIndex == value)
-                    return;
-
-                _selectedIndex = value;
-                NotifyOfPropertyChange(() => SelectedIndex);
-                UndoOrRedoTo(HistoryItems[value - 1], false);
+                if (Set(ref _selectedIndex, value))
+                    UndoOrRedoTo(HistoryItems[value - 1], false);
             }
         }
 
@@ -109,9 +105,8 @@ namespace Gemini.Modules.UndoRedo.ViewModels
             switch (e.PropertyName)
             {
                 case nameof(IUndoRedoManager.UndoActionCount):
+                    Set(ref _selectedIndex, UndoRedoManager.UndoActionCount + 1, nameof(SelectedIndex));
                     RefreshItemTypes();
-                    break;
-                default:
                     break;
             }
         }
