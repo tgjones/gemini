@@ -135,8 +135,12 @@ namespace Gemini.Modules.UndoRedo.Services
             if (UndoActionCount <= 0)
                 return;
 
+            OnBegin();
+
             for (var i = UndoActionCount - 1; i >= 0; i--)
                 ActionStack[i].Undo();
+
+            OnEnd();
 
             UndoActionCount = 0;
         }
