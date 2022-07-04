@@ -1,7 +1,3 @@
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
@@ -14,10 +10,14 @@ using Gemini.Modules.UndoRedo;
 using Gemini.Modules.UndoRedo.Commands;
 using Gemini.Modules.UndoRedo.Services;
 using Microsoft.Win32;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Gemini.Framework
 {
-	public abstract class Document : LayoutItemBase, IDocument, 
+    public abstract class Document : LayoutItemBase, IDocument, 
         ICommandHandler<UndoCommandDefinition>,
         ICommandHandler<RedoCommandDefinition>,
         ICommandHandler<SaveFileCommandDefinition>,
@@ -125,22 +125,21 @@ namespace Gemini.Framework
 	    }
 
 	    private static async Task DoSaveAs(IPersistedDocument persistedDocument)
-	    {
-            // Show user dialog to choose filename.
-            var dialog = new SaveFileDialog();
-            dialog.FileName = persistedDocument.FileName;
+	    {   
             var filter = string.Empty;
-
             var fileExtension = Path.GetExtension(persistedDocument.FileName);
             var fileType = IoC.GetAll<IEditorProvider>()
                 .SelectMany(x => x.FileTypes)
                 .SingleOrDefault(x => x.FileExtension == fileExtension);
             if (fileType != null)
                 filter = fileType.Name + "|*" + fileType.FileExtension + "|";
-
             filter += "All Files|*.*";
-            dialog.Filter = filter;
 
+            // Show user dialog to choose filename.
+            // Note that SaveFileDialog may need Administrator right.
+            var dialog = new SaveFileDialog();
+            dialog.FileName = persistedDocument.FileName;       
+            dialog.Filter = filter;
             if (dialog.ShowDialog() != true)
                 return;
 
