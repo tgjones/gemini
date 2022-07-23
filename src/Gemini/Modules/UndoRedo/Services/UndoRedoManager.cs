@@ -56,8 +56,8 @@ namespace Gemini.Modules.UndoRedo.Services
             if (removeCount <= 0)
                 return;
 
-            for (var i = 0; i < removeCount; i++)
-                ActionStack.RemoveAt(0);
+            for (var i = removeCount - 1; i >= 0; i--)
+                RemoveAction(i);
             UndoActionCount -= removeCount;
         }
         
@@ -73,7 +73,7 @@ namespace Gemini.Modules.UndoRedo.Services
             {
                 // We currently have items that can be redone, remove those
                 for (var i = ActionStack.Count - 1; i >= UndoActionCount; i--)
-                    ActionStack.RemoveAt(i);
+                    RemoveAction(i);
 
                 NotifyOfPropertyChange(() => RedoActionCount);
                 NotifyOfPropertyChange(() => CanRedo);
@@ -190,6 +190,13 @@ namespace Gemini.Modules.UndoRedo.Services
             Redo(1 + i - UndoActionCount);
         }
 
+        private void RemoveAction(int index)
+        {
+            var action = ActionStack[index];
+            ActionStack.RemoveAt(index);
+            (action as IDisposable)?.Dispose();
+        }
+
         private void OnBegin()
         {
             BatchBegin?.Invoke(this, EventArgs.Empty);
@@ -198,6 +205,12 @@ namespace Gemini.Modules.UndoRedo.Services
         private void OnEnd()
         {
             BatchEnd?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Dispose()
+        {
+            for (var i = ActionStack.Count - 1; i >= 0; i--)
+                (ActionStack[i] as IDisposable)?.Dispose();
         }
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -151,5 +153,13 @@ namespace Gemini.Framework
             // Save file.
             await persistedDocument.Save(filePath);
 	    }
-	}
+
+        protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+        {
+            if (close)
+                _undoRedoManager?.Dispose();
+
+            return base.OnDeactivateAsync(close, cancellationToken);
+        }
+    }
 }

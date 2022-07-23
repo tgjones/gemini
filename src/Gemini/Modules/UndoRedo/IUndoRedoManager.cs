@@ -4,7 +4,7 @@ using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo
 {
-    public interface IUndoRedoManager : INotifyPropertyChanged
+    public interface IUndoRedoManager : INotifyPropertyChanged, IDisposable
     {
         IObservableCollection<IUndoableAction> ActionStack { get; }
         IUndoableAction CurrentAction { get; }
