@@ -3,7 +3,7 @@
                     xmlns:controls="clr-namespace:Gemini.Modules.Inspector.Controls"
                     xmlns:cal="http://www.caliburnproject.org"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+                    xmlns:xcad="https://github.com/Dirkster99/AvalonDock"
                     xmlns:p="clr-namespace:Gemini.Modules.Inspector.Properties"
                     xmlns:gemini="http://schemas.timjones.io/gemini">
     <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
