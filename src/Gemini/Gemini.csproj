@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows;netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>net5.0-windows;netcoreapp3.1;net462</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <PackageId>GeminiWpf</PackageId>
     <Title>Gemini</Title>
@@ -9,7 +9,7 @@
     <Description>Gemini is an application shell similar in concept to the Visual Studio Shell. It uses AvalonDock and has an MVVM architecture based on Caliburn Micro.</Description>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(TargetFramework) == 'net461'">
+  <ItemGroup Condition="$(TargetFramework) == 'net462'">
     <Reference Include="PresentationFramework.Aero" />
   </ItemGroup>
 
@@ -52,11 +52,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Caliburn.Micro" Version="4.0.173" />
+    <PackageReference Include="Caliburn.Micro" Version="4.0.210" />
     <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.60.0" />
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="4.6.78" />
-    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
-    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" Condition="$(TargetFramework) == 'net461'" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
   
 </Project>
