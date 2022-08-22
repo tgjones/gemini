@@ -189,10 +189,10 @@ namespace Gemini
         protected override void BuildUp(object instance)
             => Container.SatisfyImportsOnce(instance);
 
-        protected override async void OnStartup(object sender, StartupEventArgs e)
+        protected override void OnStartup(object sender, StartupEventArgs e)
         {
             base.OnStartup(sender, e);
-            await DisplayRootViewForAsync<IMainWindow>();
+            DisplayRootViewForAsync<IMainWindow>();
         }
 
         protected override IEnumerable<Assembly> SelectAssemblies()
