@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Composition;
+using System.ComponentModel.Composition;
 using System.Linq;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Menus;
@@ -10,7 +10,6 @@ namespace Gemini.Modules.MainMenu
     public class MenuBuilder : IMenuBuilder
     {
         private readonly ICommandService _commandService;
-        private readonly MenuBarDefinition[] _menuBars;
         private readonly MenuDefinition[] _menus;
         private readonly MenuItemGroupDefinition[] _menuItemGroups;
         private readonly MenuItemDefinition[] _menuItems;
@@ -21,7 +20,6 @@ namespace Gemini.Modules.MainMenu
         [ImportingConstructor]
         public MenuBuilder(
             ICommandService commandService,
-            [ImportMany] MenuBarDefinition[] menuBars,
             [ImportMany] MenuDefinition[] menus,
             [ImportMany] MenuItemGroupDefinition[] menuItemGroups,
             [ImportMany] MenuItemDefinition[] menuItems,
@@ -30,7 +28,6 @@ namespace Gemini.Modules.MainMenu
             [ImportMany] ExcludeMenuItemDefinition[] excludeMenuItems)
         {
             _commandService = commandService;
-            _menuBars = menuBars;
             _menus = menus;
             _menuItemGroups = menuItemGroups;
             _menuItems = menuItems;
@@ -41,10 +38,12 @@ namespace Gemini.Modules.MainMenu
 
         public void BuildMenuBar(MenuBarDefinition menuBarDefinition, MenuModel result)
         {
-            var menus = _menus
-                .Where(x => x.MenuBar == menuBarDefinition)
-                .Where(x => !_excludeMenus.Contains(x))
-                .OrderBy(x => x.SortOrder);
+            var menus =
+                from menu in _menus
+                where menu.MenuBar == menuBarDefinition
+                where !IsExcluded(menu)
+                orderby menu.SortOrder
+                select menu;
 
             foreach (var menu in menus)
             {
@@ -57,19 +56,24 @@ namespace Gemini.Modules.MainMenu
 
         private void AddGroupsRecursive(MenuDefinitionBase menu, StandardMenuItem menuModel)
         {
-            var groups = _menuItemGroups
-                .Where(x => x.Parent == menu)
-                .Where(x => !_excludeMenuItemGroups.Contains(x))
-                .OrderBy(x => x.SortOrder)
-                .ToList();
+            var groupsExpression =
+                from menuGroup in _menuItemGroups
+                where menuGroup.Parent == menu
+                where !IsExcluded(menuGroup)
+                orderby menuGroup.SortOrder
+                select menuGroup;
+
+            var groups = groupsExpression.ToList();
 
             for (int i = 0; i < groups.Count; i++)
             {
                 var group = groups[i];
-                var menuItems = _menuItems
-                    .Where(x => x.Group == group)
-                    .Where(x => !_excludeMenuItems.Contains(x))
-                    .OrderBy(x => x.SortOrder);
+                var menuItems =
+                    from menuItem in _menuItems
+                    where menuItem.Group == @group
+                    where !IsExcluded(menuItem)
+                    orderby menuItem.SortOrder
+                    select menuItem;
 
                 foreach (var menuItem in menuItems)
                 {
@@ -83,6 +87,54 @@ namespace Gemini.Modules.MainMenu
                 if (i < groups.Count - 1 && menuItems.Any())
                     menuModel.Add(new MenuItemSeparator());
             }
+        }
+
+        private bool IsExcluded(MenuDefinition item)
+        {
+            if (_excludeMenus.Contains(item))
+            {
+                return true;
+            }
+
+            if (item.DynamicExclusionPredicate != null &&
+                item.DynamicExclusionPredicate(item))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsExcluded(MenuItemGroupDefinition item)
+        {
+            if (_excludeMenuItemGroups.Contains(item))
+            {
+                return true;
+            }
+
+            if (item.DynamicExclusionPredicate != null &&
+                item.DynamicExclusionPredicate(item))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsExcluded(MenuItemDefinition item)
+        {
+            if (_excludeMenuItems.Contains(item))
+            {
+                return true;
+            }
+
+            if (item.DynamicExclusionPredicate != null &&
+                item.DynamicExclusionPredicate(item))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using Caliburn.Micro;
 
@@ -6,43 +6,34 @@ namespace Gemini.Modules.MainMenu.Models
 {
 	public class MenuItemBase : PropertyChangedBase, IEnumerable<MenuItemBase>
 	{
-		#region Static stuff
+        #region Static stuff
 
-		public static MenuItemBase Separator
+        public static MenuItemBase Separator => new MenuItemSeparator();
+
+        #endregion
+
+        #region Properties
+
+        public IObservableCollection<MenuItemBase> Children { get; private set; }
+            = new BindableCollection<MenuItemBase>();
+
+        #endregion
+
+        #region Constructors
+
+        protected MenuItemBase()
 		{
-			get { return new MenuItemSeparator(); }
 		}
 
-		#endregion
+        #endregion
 
-		#region Properties
+        public void Add(params MenuItemBase[] menuItems)
+            => menuItems.Apply(Children.Add);
 
-		public IObservableCollection<MenuItemBase> Children { get; private set; }
+        public IEnumerator<MenuItemBase> GetEnumerator()
+            => Children.GetEnumerator();
 
-	    #endregion
-
-		#region Constructors
-
-		protected MenuItemBase()
-		{
-			Children = new BindableCollection<MenuItemBase>();
-		}
-
-		#endregion
-
-		public void Add(params MenuItemBase[] menuItems)
-		{
-			menuItems.Apply(Children.Add);
-		}
-
-		public IEnumerator<MenuItemBase> GetEnumerator()
-		{
-			return Children.GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
-	}
+        IEnumerator IEnumerable.GetEnumerator()
+            => GetEnumerator();
+    }
 }

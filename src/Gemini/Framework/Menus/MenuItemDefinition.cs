@@ -1,24 +1,26 @@
-﻿namespace Gemini.Framework.Menus
+using System;
+
+namespace Gemini.Framework.Menus
 {
     public abstract class MenuItemDefinition : MenuDefinitionBase
     {
-        private readonly MenuItemGroupDefinition _group;
         private readonly int _sortOrder;
 
-        public MenuItemGroupDefinition Group
-        {
-            get { return _group; }
-        }
+        public MenuItemGroupDefinition Group { get; private set; }
 
-        public override int SortOrder
-        {
-            get { return _sortOrder; }
-        }
+        public override int SortOrder => _sortOrder;
 
         protected MenuItemDefinition(MenuItemGroupDefinition group, int sortOrder)
         {
-            _group = group;
+            Group = group;
             _sortOrder = sortOrder;
+        }
+
+        public MenuItemDefinition SetDynamicExclusionPredicate(
+            Predicate<MenuDefinitionBase> predicate)
+        {
+            DynamicExclusionPredicate = predicate;
+            return this;
         }
     }
 }
