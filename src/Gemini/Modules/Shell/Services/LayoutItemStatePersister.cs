@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -193,7 +194,10 @@ namespace Gemini.Modules.Shell.Services
                         }
                     }
 
-                    shellView.LoadLayout(reader.BaseStream, t => AddTool(shell, t), d => shell.OpenDocumentAsync(d).Wait(), layoutItems);
+                    shellView.LoadLayout(reader.BaseStream,
+                        t => AddTool(shell, t),
+                        d => shell.OpenDocumentAsync(d).Wait(),
+                        layoutItems);
                 }
             }
             catch
@@ -204,10 +208,16 @@ namespace Gemini.Modules.Shell.Services
             return true;
         }
 
+        // This needs to keep behavior with Gemini.Modules.Shell.ViewModels.ShellViewModel.ShowTool
+        // which calls ActivateAsync
         private void AddTool(IShell shell, ITool tool)
         {
             if (!shell.Tools.Contains(tool))
+            {
                 shell.Tools.Add(tool);
+
+                tool.ActivateAsync(CancellationToken.None).Wait();
+            }
         }
     }
 }
