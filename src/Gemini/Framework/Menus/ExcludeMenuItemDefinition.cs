@@ -1,16 +1,13 @@
-﻿namespace Gemini.Framework.Menus
+namespace Gemini.Framework.Menus
 {
+    [System.Diagnostics.DebuggerDisplay("Exclude {MenuItemDefinitionToExclude}")]
     public class ExcludeMenuItemDefinition
     {
-        private readonly MenuItemDefinition _menuItemDefinitionToExclude;
-        public MenuItemDefinition MenuItemDefinitionToExclude 
-        { 
-            get { return _menuItemDefinitionToExclude; } 
-        }
+        public MenuItemDefinition MenuItemDefinitionToExclude { get; private set; }
 
         public ExcludeMenuItemDefinition(MenuItemDefinition menuItemDefinition)
         {
-            _menuItemDefinitionToExclude = menuItemDefinition;
+            MenuItemDefinitionToExclude = menuItemDefinition;
         }
     }
 }

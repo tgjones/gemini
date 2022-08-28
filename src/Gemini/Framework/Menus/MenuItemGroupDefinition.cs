@@ -1,24 +1,33 @@
-﻿namespace Gemini.Framework.Menus
+using System;
+
+namespace Gemini.Framework.Menus
 {
     public class MenuItemGroupDefinition
     {
-        private readonly MenuDefinitionBase _parent;
         private readonly int _sortOrder;
 
-        public MenuDefinitionBase Parent
-        {
-            get { return _parent; }
-        }
+        public MenuDefinitionBase Parent { get; private set; }
 
-        public int SortOrder
-        {
-            get { return _sortOrder; }
-        }
+        public int SortOrder => _sortOrder;
 
         public MenuItemGroupDefinition(MenuDefinitionBase parent, int sortOrder)
         {
-            _parent = parent;
+            Parent = parent;
             _sortOrder = sortOrder;
+        }
+
+        /// <summary>
+        /// An optional predicate which is called using this instance,
+        /// which when it returns true, informs that the menu should be
+        /// excluded from view
+        /// </summary>
+        public Predicate<MenuItemGroupDefinition> DynamicExclusionPredicate { get; protected set; }
+
+        public MenuItemGroupDefinition SetDynamicExclusionPredicate(
+            Predicate<MenuItemGroupDefinition> predicate)
+        {
+            DynamicExclusionPredicate = predicate;
+            return this;
         }
     }
 }

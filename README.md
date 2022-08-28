@@ -459,13 +459,13 @@ menus in the same way.
 public static class MenuDefinitions
 {
     [Export]
-    public static MenuDefinition FileMenu = new MenuDefinition(MainMenuBar, 0, Resources.FileMenuText);
+    public static readonly MenuDefinition FileMenu = new MenuDefinition(MainMenuBar, 0, Resources.FileMenuText);
 	
 	[Export]
-    public static MenuItemGroupDefinition FileNewOpenMenuGroup = new MenuItemGroupDefinition(FileMenu, 0);
+    public static readonly MenuItemGroupDefinition FileNewOpenMenuGroup = new MenuItemGroupDefinition(FileMenu, 0);
 	
 	[Export]
-    public static MenuItemDefinition FileNewMenuItem = new TextMenuItemDefinition(
+    public static readonly MenuItemDefinition FileNewMenuItem = new TextMenuItemDefinition(
         MenuDefinitions.FileNewOpenMenuGroup, 0, "_New");
 }
 ```
@@ -476,13 +476,13 @@ To remove an existing menu item (such as a built-in menu item that you don't wan
 
 ``` csharp
 [Export]
-public static ExcludeMenuItemDefinition ExcludeOpenMenuItem = new ExcludeMenuItemDefinition(Gemini.Modules.Shell.MenuDefinitions.FileOpenMenuItem);
+public static readonly ExcludeMenuItemDefinition ExcludeOpenMenuItem = new ExcludeMenuItemDefinition(Gemini.Modules.Shell.MenuDefinitions.FileOpenMenuItem);
 
 [Export]
-public static ExcludeMenuItemGroupDefinition ExcludeWindowMenuItemGroup = new ExcludeMenuItemGroupDefinition(Gemini.Modules.MainMenu.MenuDefinitions.ViewToolsMenuGroup);
+public static readonly ExcludeMenuItemGroupDefinition ExcludeWindowMenuItemGroup = new ExcludeMenuItemGroupDefinition(Gemini.Modules.MainMenu.MenuDefinitions.ViewToolsMenuGroup);
 
 [Export]
-public static ExcludeMenuDefinition ExcludeWindowMenuDefinition = new ExcludeMenuDefinition(Gemini.Modules.MainMenu.MenuDefinitions.WindowMenu);
+public static readonly ExcludeMenuDefinition ExcludeWindowMenuDefinition = new ExcludeMenuDefinition(Gemini.Modules.MainMenu.MenuDefinitions.WindowMenu);
 ```
 
 ### StatusBar module
