@@ -192,7 +192,7 @@ namespace Gemini
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
             base.OnStartup(sender, e);
-            DisplayRootViewFor<IMainWindow>();
+            DisplayRootViewForAsync<IMainWindow>();
         }
 
         protected override IEnumerable<Assembly> SelectAssemblies()

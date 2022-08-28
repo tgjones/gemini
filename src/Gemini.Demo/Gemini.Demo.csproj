@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net5.0-windows;netcoreapp3.1;net461</TargetFrameworks>
+    <TargetFrameworks>net5.0-windows;netcoreapp3.1;net462</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsPackable>false</IsPackable>
@@ -64,12 +64,16 @@
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework) != 'net461'">
+  <ItemGroup Condition="$(TargetFramework) != 'net462'">
     <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.10.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework) == 'net461'">
+  <ItemGroup Condition="$(TargetFramework) == 'net462'">
     <PackageReference Include="HelixToolkit.Wpf" Version="2.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Nerdbank.GitVersioning" Version="3.5.109" />
   </ItemGroup>
 
 </Project>
