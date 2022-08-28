@@ -158,6 +158,8 @@ namespace Gemini.Modules.Shell.ViewModels
             }
             else
             {
+                // This logic is duplicated in Gemini.Modules.Shell.Services.LayoutItemStatePersister.AddTool
+
                 Tools.Add(model);
 
                 model.ActivateAsync(CancellationToken.None).Wait();
