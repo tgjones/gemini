@@ -86,19 +86,7 @@ namespace Gemini
                 AssemblySource.Instance.AddRange(PublishSingleFileBypassAssemblies);
             }
 
-            // If these paths are different, it suggests this is a .netcoreapp3.1 PublishSingleFile,
-            // which extracts files to the Temp directory (AppContext.BaseDirectory).
-            // In .NET5+, the files are NOT extracted, unless IncludeAllContentForSelfExtract is set in the .pubxml.
-            // See https://docs.microsoft.com/en-us/dotnet/core/deploying/single-file#other-considerations
-            string currentWorkingDir = Path.GetDirectoryName(Path.GetFullPath(@"./"));
-            string baseDirectory = Path.GetDirectoryName(Path.GetFullPath(AppContext.BaseDirectory));
-
-            // Add all assemblies to AssemblySource (using a temporary DirectoryCatalog).
-            PopulateAssemblySourceUsingDirectoryCatalog(currentWorkingDir);
-            if (currentWorkingDir != baseDirectory)
-            {
-                PopulateAssemblySourceUsingDirectoryCatalog(baseDirectory);
-            }
+            PopulateAssemblySource();
 
             // Prioritise the executable assembly. This allows the client project to override exports, including IShell.
             // The client project can override SelectAssemblies to choose which assemblies are prioritised.
@@ -123,6 +111,23 @@ namespace Gemini
             batch.AddExportedValue(mainCatalog);
 
             Container.Compose(batch);
+        }
+
+        protected virtual void PopulateAssemblySource()
+        {
+            // If these paths are different, it suggests this is a .netcoreapp3.1 PublishSingleFile,
+            // which extracts files to the Temp directory (AppContext.BaseDirectory).
+            // In .NET5+, the files are NOT extracted, unless IncludeAllContentForSelfExtract is set in the .pubxml.
+            // See https://docs.microsoft.com/en-us/dotnet/core/deploying/single-file#other-considerations
+            string currentWorkingDir = Path.GetDirectoryName(Path.GetFullPath(@"./"));
+            string baseDirectory = Path.GetDirectoryName(Path.GetFullPath(AppContext.BaseDirectory));
+
+            // Add all assemblies to AssemblySource (using a temporary DirectoryCatalog).
+            PopulateAssemblySourceUsingDirectoryCatalog(currentWorkingDir);
+            if (currentWorkingDir != baseDirectory)
+            {
+                PopulateAssemblySourceUsingDirectoryCatalog(baseDirectory);
+            }
         }
 
         protected void PopulateAssemblySourceUsingDirectoryCatalog(string path)
