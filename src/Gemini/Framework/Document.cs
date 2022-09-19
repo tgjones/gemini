@@ -1,5 +1,7 @@
+using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Caliburn.Micro;
@@ -26,10 +28,12 @@ namespace Gemini.Framework
 	    private IUndoRedoManager _undoRedoManager;
 	    public IUndoRedoManager UndoRedoManager
 	    {
-            get { return _undoRedoManager ?? (_undoRedoManager = new UndoRedoManager()); }
+            get { return _undoRedoManager ?? (_undoRedoManager = CreateUndoRedoManager()); }
 	    }
 
-		private ICommand _closeCommand;
+        protected virtual IUndoRedoManager CreateUndoRedoManager() => new UndoRedoManager();
+
+        private ICommand _closeCommand;
 		public override ICommand CloseCommand
 		{
 		    get { return _closeCommand ?? (_closeCommand = new AsyncCommand(() => TryCloseAsync(null))); }
@@ -149,5 +153,13 @@ namespace Gemini.Framework
             // Save file.
             await persistedDocument.Save(filePath);
 	    }
-	}
+
+        protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
+        {
+            if (close)
+                _undoRedoManager?.Dispose();
+
+            return base.OnDeactivateAsync(close, cancellationToken);
+        }
+    }
 }

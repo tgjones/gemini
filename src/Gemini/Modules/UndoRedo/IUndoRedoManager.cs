@@ -4,7 +4,7 @@ using Caliburn.Micro;
 
 namespace Gemini.Modules.UndoRedo
 {
-    public interface IUndoRedoManager : INotifyPropertyChanged
+    public interface IUndoRedoManager : INotifyPropertyChanged, IDisposable
     {
         IObservableCollection<IUndoableAction> ActionStack { get; }
         IUndoableAction CurrentAction { get; }
@@ -17,6 +17,7 @@ namespace Gemini.Modules.UndoRedo
         int? UndoCountLimit { get; set; }
 
         void ExecuteAction(IUndoableAction action);
+        void PushAction(IUndoableAction action);
 
         bool CanUndo { get; }
         void Undo(int actionCount);
