@@ -27,6 +27,7 @@ namespace Gemini.Framework.Services
 		IObservableCollection<IDocument> Documents { get; }
 		IObservableCollection<ITool> Tools { get; }
 
+        bool RegisterTool(ITool tool);
         void ShowTool<TTool>() where TTool : ITool;
 		void ShowTool(ITool model);
 

@@ -144,6 +144,15 @@ namespace Gemini.Modules.Shell.ViewModels
             base.OnViewLoaded(view);
         }
 
+        public bool RegisterTool(ITool tool)
+        {
+            if (Tools.Contains(tool))
+                return false;
+
+            Tools.Add(tool);
+            return true;
+        }
+
         public void ShowTool<TTool>()
             where TTool : ITool
         {
@@ -152,19 +161,12 @@ namespace Gemini.Modules.Shell.ViewModels
 
         public void ShowTool(ITool model)
         {
-            if (Tools.Contains(model))
-            {
-                model.IsVisible = true;
-            }
-            else
-            {
-                // This logic is duplicated in Gemini.Modules.Shell.Services.LayoutItemStatePersister.AddTool
+            RegisterTool(model);
 
-                Tools.Add(model);
-
+            if (!model.IsActive)
                 model.ActivateAsync(CancellationToken.None).Wait();
-            }
 
+            model.IsVisible = true;
             model.IsSelected = true;
             ActiveLayoutItem = model;
         }
