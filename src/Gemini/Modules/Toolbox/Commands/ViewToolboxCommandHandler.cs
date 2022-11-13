@@ -1,26 +1,16 @@
-﻿using System.ComponentModel.Composition;
 using System.Threading.Tasks;
+using Caliburn.Micro;
 using Gemini.Framework.Commands;
-using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
+using Gemini.Framework.Results;
 
 namespace Gemini.Modules.Toolbox.Commands
 {
     [CommandHandler]
     public class ViewToolboxCommandHandler : CommandHandlerBase<ViewToolboxCommandDefinition>
     {
-        private readonly IShell _shell;
-
-        [ImportingConstructor]
-        public ViewToolboxCommandHandler(IShell shell)
+        public override async Task Run(Command command)
         {
-            _shell = shell;
-        }
-
-        public override Task Run(Command command)
-        {
-            _shell.ShowTool<IToolbox>();
-            return TaskUtility.Completed;
+            await Show.Tool<IToolbox>().ExecuteAsync();
         }
     }
 }

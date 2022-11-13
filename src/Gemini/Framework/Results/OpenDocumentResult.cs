@@ -6,53 +6,54 @@ using Gemini.Modules.Shell.Commands;
 
 namespace Gemini.Framework.Results
 {
-	public class OpenDocumentResult : OpenResultBase<IDocument>
-	{
-		private readonly IDocument _editor;
-		private readonly Type _editorType;
-		private readonly string _path;
+    public class OpenDocumentResult : OpenResultBase<IDocument>
+    {
+        private readonly IDocument _editor;
+        private readonly Type _editorType;
+        private readonly string _path;
 
 #pragma warning disable 649
-        [Import]
-		private readonly IShell _shell;
+#pragma warning disable IDE0044 // Add readonly modifier
+        [Import] private IShell _shell;
+#pragma warning restore IDE0044 // Add readonly modifier
 #pragma warning restore 649
 
         public OpenDocumentResult(IDocument editor)
-		{
-			_editor = editor;
-		}
+        {
+            _editor = editor;
+        }
 
-		public OpenDocumentResult(string path)
-		{
-			_path = path;
-		}
+        public OpenDocumentResult(string path)
+        {
+            _path = path;
+        }
 
-		public OpenDocumentResult(Type editorType)
-		{
-			_editorType = editorType;
-		}
+        public OpenDocumentResult(Type editorType)
+        {
+            _editorType = editorType;
+        }
 
-		public override void Execute(CoroutineExecutionContext context)
-		{
-			var editor = _editor ??
-				(string.IsNullOrEmpty(_path)
-					? (IDocument)IoC.GetInstance(_editorType, null)
-					:  GetEditor(_path));
+        public override void Execute(CoroutineExecutionContext context)
+        {
+            var editor = _editor ??
+                (string.IsNullOrEmpty(_path)
+                    ? (IDocument)IoC.GetInstance(_editorType, null)
+                    :  GetEditor(_path));
 
-			if (editor == null)
-			{
-				OnCompleted(null, true);
-				return;
-			}
+            if (editor == null)
+            {
+                OnCompleted(null, true);
+                return;
+            }
 
-			if (_setData != null)
-				_setData(editor);
+            if (_setData != null)
+                _setData(editor);
 
-			if (_onConfigure != null)
-				_onConfigure(editor);
+            if (_onConfigure != null)
+                _onConfigure(editor);
 
-			editor.Deactivated += (s, e) =>
-			{
+            editor.Deactivated += (s, e) =>
+            {
                 if (e.WasClosed)
                 {
                     if (_onShutDown != null)
@@ -62,17 +63,17 @@ namespace Gemini.Framework.Results
                 return System.Threading.Tasks.Task.CompletedTask;
             };
 
-			_shell
+            _shell
                 .OpenDocumentAsync(editor)
                 .ContinueWith(t =>
                 {
                     OnCompleted(null, false);
                 });
-		}
+        }
 
-		private static IDocument GetEditor(string path)
-		{
-		    return OpenFileCommandHandler.GetEditor(path).Result;
-		}
-	}
+        private static IDocument GetEditor(string path)
+        {
+            return OpenFileCommandHandler.GetEditor(path).Result;
+        }
+    }
 }
