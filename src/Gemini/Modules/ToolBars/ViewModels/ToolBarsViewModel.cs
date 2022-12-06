@@ -26,12 +26,24 @@ namespace Gemini.Modules.ToolBars.ViewModels
                 NotifyOfPropertyChange();
             }
         }
+        
+        private bool _locked;
+        public bool Locked
+        {
+            get { return _locked; }
+            set
+            {
+                _locked = value;
+                NotifyOfPropertyChange();
+            }
+        }
 
         [ImportingConstructor]
         public ToolBarsViewModel(IToolBarBuilder toolBarBuilder)
         {
             _toolBarBuilder = toolBarBuilder;
             _items = new BindableCollection<IToolBar>();
+            _locked = false;
         }
 
         protected override void OnViewLoaded(object view)
