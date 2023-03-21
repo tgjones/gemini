@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -17,11 +17,11 @@ namespace Gemini.Modules.Toolbox.ViewModels
     public class ToolboxViewModel : Tool, IToolbox
     {
 
-        private RelayCommand _searchCommand;
+        private RelayCommand<string> _searchCommand;
 
         public ICommand SearchCommand
         {
-            get { return _searchCommand == null ? _searchCommand = new RelayCommand(a => Search(a as string)) : _searchCommand; }
+            get { return _searchCommand == null ? _searchCommand = new RelayCommand<string>(Search) : _searchCommand; }
         }
 
         private readonly IToolboxService _toolboxService;
