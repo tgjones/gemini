@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,46 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangeObjectValueActionFormat" xml:space="preserve">
-    <value>Change {0} from {1} to {2}</value>
+    <value>Changer {0} de {1} vers {2}</value>
   </data>
-  <data name="InspectorBuilderMiscellaneous" xml:space="preserve">
-    <value>Miscellaneous</value>
+  <data name="ColorEditorAdvanced" xml:space="preserve">
+    <value>Avancé</value>
   </data>
-  <data name="InspectorDisplayName" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="ColorEditorAvailableColors" xml:space="preserve">
+    <value>Couleurs disponibles</value>
   </data>
-  <data name="ResetToolTip" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="ViewInspectorCommandText" xml:space="preserve">
-    <value>I_nspector</value>
-  </data>
-  <data name="ViewInspectorCommandToolTip" xml:space="preserve">
-    <value>Inspector</value>
-  </data>
-  <data name="ResetAll" xml:space="preserve">
-    <value>Reset all ⟲</value>
-  </data>
-  <data name="ResetSymbol" xml:space="preserve">
-    <value>⟲</value>
-    <comment>@Invariant</comment>
-  </data>
-  <data name="ColorEditorStandardColors" xml:space="preserve">
-    <value>Standard Colors</value>
+  <data name="ColorEditorRecentColors" xml:space="preserve">
+    <value>Couleurs récentes</value>
   </data>
   <data name="ColorEditorStandard" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="ColorEditorRecentColors" xml:space="preserve">
-    <value>Recent Colors</value>
+  <data name="ColorEditorStandardColors" xml:space="preserve">
+    <value>Couleurs standard</value>
   </data>
-  <data name="ColorEditorAvailableColors" xml:space="preserve">
-    <value>Available Colors</value>
+  <data name="InspectorBuilderMiscellaneous" xml:space="preserve">
+    <value>Divers</value>
   </data>
-  <data name="ColorEditorAdvanced" xml:space="preserve">
-    <value>Advanced</value>
+  <data name="InspectorDisplayName" xml:space="preserve">
+    <value>Inspecteur</value>
+  </data>
+  <data name="ViewInspectorCommandText" xml:space="preserve">
+    <value>I_nspecteur</value>
+  </data>
+  <data name="ViewInspectorCommandToolTip" xml:space="preserve">
+    <value>Inspecteur</value>
+  </data>
+  <data name="ResetAll" xml:space="preserve">
+    <value>Tout réinitialiser ⟲</value>
+  </data>
+  <data name="ResetToolTip" xml:space="preserve">
+    <value>Réinitialiser</value>
   </data>
   <data name="ResetObjectValueActionFormat" xml:space="preserve">
-    <value>Reset {0} from {1} to {2}</value>
+    <value>Réinitialiser {0} de {1} vers {2}</value>
   </data>
 </root>

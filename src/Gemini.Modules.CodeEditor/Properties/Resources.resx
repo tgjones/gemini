@@ -136,7 +136,7 @@
     <value>Line Numbers</value>
   </data>
   <data name="ShowLineNumbersCommandToolTip" xml:space="preserve">
-    <value>Toggle the visibility of line bumbers.</value>
+    <value>Toggle the visibility of line numbers.</value>
   </data>
   <data name="ShowSpacesCommandText" xml:space="preserve">
     <value>Show Spaces</value>

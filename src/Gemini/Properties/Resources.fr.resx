@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,47 +117,172 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangeObjectValueActionFormat" xml:space="preserve">
-    <value>Change {0} from {1} to {2}</value>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Tous les fichiers</value>
   </data>
-  <data name="InspectorBuilderMiscellaneous" xml:space="preserve">
-    <value>Miscellaneous</value>
+  <data name="AllSupportedFiles" xml:space="preserve">
+    <value>Tous les types supportés</value>
   </data>
-  <data name="InspectorDisplayName" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>Echec pour définir la valeur : {0}</value>
   </data>
-  <data name="ResetToolTip" xml:space="preserve">
-    <value>Reset</value>
+  <data name="EditMenuText" xml:space="preserve">
+    <value>_Edition</value>
   </data>
-  <data name="ViewInspectorCommandText" xml:space="preserve">
-    <value>I_nspector</value>
+  <data name="EditRedoCommandText" xml:space="preserve">
+    <value>_Rétablir</value>
   </data>
-  <data name="ViewInspectorCommandToolTip" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="EditRedoCommandToolTip" xml:space="preserve">
+    <value>Rétablir</value>
   </data>
-  <data name="ResetAll" xml:space="preserve">
-    <value>Reset all ⟲</value>
+  <data name="EditUndoCommandText" xml:space="preserve">
+    <value>_Annuler</value>
   </data>
-  <data name="ResetSymbol" xml:space="preserve">
-    <value>⟲</value>
-    <comment>@Invariant</comment>
+  <data name="EditUndoCommandToolTip" xml:space="preserve">
+    <value>Annuler</value>
   </data>
-  <data name="ColorEditorStandardColors" xml:space="preserve">
-    <value>Standard Colors</value>
+  <data name="FileCloseCommandText" xml:space="preserve">
+    <value>_Fermer</value>
   </data>
-  <data name="ColorEditorStandard" xml:space="preserve">
+  <data name="FileCloseCommandToolTip" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="FileExitCommandText" xml:space="preserve">
+    <value>_Quitter</value>
+  </data>
+  <data name="FileExitCommandToolTip" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="FileMenuText" xml:space="preserve">
+    <value>_Fichier</value>
+  </data>
+  <data name="FileNewCommandText" xml:space="preserve">
+    <value>_Nouveau</value>
+  </data>
+  <data name="FileNewCommandToolTip" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="FileNewUntitled" xml:space="preserve">
+    <value>SansTitre {0}</value>
+  </data>
+  <data name="FileOpenCommandText" xml:space="preserve">
+    <value>_Ouvrir</value>
+  </data>
+  <data name="FileOpenCommandToolTip" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>Fichiers récents</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>Fichiers récents</value>
+  </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Enregistrer tout</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Enregistrer tout</value>
+  </data>
+  <data name="FileSaveAsCommandText" xml:space="preserve">
+    <value>Enregistrer _sous...</value>
+  </data>
+  <data name="FileSaveAsCommandToolTip" xml:space="preserve">
+    <value>Enregistrer sous</value>
+  </data>
+  <data name="FileSaveCommandText" xml:space="preserve">
+    <value>_Enregistrer</value>
+  </data>
+  <data name="FileSaveCommandToolTip" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="HelpMenuText" xml:space="preserve">
+    <value>_Aide</value>
+  </data>
+  <data name="HistoryDisplayName" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="HistoryInitialState" xml:space="preserve">
+    <value>Etat inital</value>
+  </data>
+  <data name="LanguageSystem" xml:space="preserve">
+    <value>Système</value>
+  </data>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="SettingsPathEnvironment" xml:space="preserve">
+    <value>Environement</value>
+  </data>
+  <data name="ThemeBlueName" xml:space="preserve">
+    <value>Bleu</value>
+  </data>
+  <data name="ThemeDarkName" xml:space="preserve">
+    <value>Sombre</value>
+  </data>
+  <data name="ThemeLightName" xml:space="preserve">
+    <value>Clair</value>
+  </data>
+  <data name="ToolBarStandard" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="ColorEditorRecentColors" xml:space="preserve">
-    <value>Recent Colors</value>
+  <data name="ToolboxCategory" xml:space="preserve">
+    <value>Catégorie</value>
   </data>
-  <data name="ColorEditorAvailableColors" xml:space="preserve">
-    <value>Available Colors</value>
+  <data name="ToolboxDisplayName" xml:space="preserve">
+    <value>Boite à outils</value>
   </data>
-  <data name="ColorEditorAdvanced" xml:space="preserve">
-    <value>Advanced</value>
+  <data name="ToolsMenuText" xml:space="preserve">
+    <value>Ou_tils</value>
   </data>
-  <data name="ResetObjectValueActionFormat" xml:space="preserve">
-    <value>Reset {0} from {1} to {2}</value>
+  <data name="ToolsOptionsCommandText" xml:space="preserve">
+    <value>_Options</value>
+  </data>
+  <data name="ToolsOptionsCommandToolTip" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>Plein écran</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>Plein écran</value>
+  </data>
+  <data name="ViewHistoryCommandText" xml:space="preserve">
+    <value>_Historique</value>
+  </data>
+  <data name="ViewHistoryCommandToolTip" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="ViewMenuText" xml:space="preserve">
+    <value>_Vue</value>
+  </data>
+  <data name="ViewToolboxCommandText" xml:space="preserve">
+    <value>Boite à _outils</value>
+  </data>
+  <data name="ViewToolboxCommandToolTip" xml:space="preserve">
+    <value>Boite à outils</value>
+  </data>
+  <data name="WindowMenuText" xml:space="preserve">
+    <value>_Fenêtre</value>
+  </data>
+  <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
+    <value>Masque automatiquement le menu principal</value>
+  </data>
+  <data name="MainMenuSettingsColorTheme" xml:space="preserve">
+    <value>Thème :</value>
+  </data>
+  <data name="MainMenuSettingsLanguage" xml:space="preserve">
+    <value>Langue :</value>
+  </data>
+  <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
+    <value>Nécessite le redémarrage</value>
+  </data>
+  <data name="MainWindowDefaultTitle" xml:space="preserve">
+    <value>[Titre par défaut]</value>
+  </data>
+  <data name="SettingsDisplayName" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="SaveChangesBeforeClosingMessage" xml:space="preserve">
+    <value>Enregistrer les modifications de {0} "{1}" avant de fermer ?</value>
   </data>
 </root>
