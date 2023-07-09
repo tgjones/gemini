@@ -133,7 +133,7 @@ namespace Gemini.Modules.ErrorList.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Error List 的本地化字符串。
+        ///   查找类似 Error L_ist 的本地化字符串。
         /// </summary>
         public static string ViewErrorListCommandText {
             get {
