@@ -117,4 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorListHeaderColumn" xml:space="preserve">
+    <value>列</value>
+  </data>
+  <data name="ErrorListHeaderDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="ErrorListHeaderFile" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="ErrorListHeaderLine" xml:space="preserve">
+    <value>行</value>
+  </data>
+  <data name="ErrorTextPlural" xml:space="preserve">
+    <value>错误 {0}</value>
+  </data>
+  <data name="ErrorTextSingular" xml:space="preserve">
+    <value>错误 {0}</value>
+  </data>
+  <data name="MessageTextPlural" xml:space="preserve">
+    <value>消息 {0}</value>
+  </data>
+  <data name="MessageTextSingular" xml:space="preserve">
+    <value>消息 {0}</value>
+  </data>
+  <data name="ViewErrorListCommandText" xml:space="preserve">
+    <value>错误列表</value>
+  </data>
+  <data name="ViewErrorListCommandToolTip" xml:space="preserve">
+    <value>错误列表</value>
+  </data>
+  <data name="WarningTextPlural" xml:space="preserve">
+    <value>警告 {0}</value>
+  </data>
+  <data name="WarningTextSingular" xml:space="preserve">
+    <value>警告 {0}</value>
+  </data>
 </root>

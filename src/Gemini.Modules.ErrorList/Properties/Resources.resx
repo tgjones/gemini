@@ -130,7 +130,7 @@
     <value>{0} Message</value>
   </data>
   <data name="ViewErrorListCommandText" xml:space="preserve">
-    <value>Error L_ist</value>
+    <value>Error List</value>
   </data>
   <data name="ViewErrorListCommandToolTip" xml:space="preserve">
     <value>Error List</value>
