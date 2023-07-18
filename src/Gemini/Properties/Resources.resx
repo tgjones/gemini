@@ -285,4 +285,10 @@
   <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
     <value>Full Screen</value>
   </data>
+  <data name="DocumentDirtyCloseConfirmText" xml:space="preserve">
+    <value>File '{0}' has unsaved changes, do you want to save them?</value>
+  </data>
+  <data name="DocumentDirtyCloseConfirmTitle" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
 </root>
