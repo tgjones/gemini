@@ -285,4 +285,10 @@
   <data name="SaveChangesBeforeClosingMessage" xml:space="preserve">
     <value>Enregistrer les modifications de {0} "{1}" avant de fermer ?</value>
   </data>
+  <data name="DocumentDirtyCloseConfirmText" xml:space="preserve">
+    <value>Le fichier '{0}' a des modifications non enregistrées, voulez vous les sauvegarder?</value>
+  </data>
+    <data name="DocumentDirtyCloseConfirmTitle" xml:space="preserve">
+    <value>Enregistrer les modifications</value>
+  </data>
 </root>
