@@ -1,10 +1,7 @@
-﻿namespace Gemini.Modules.Settings
+namespace Gemini.Modules.Settings
 {
-    public interface ISettingsEditor
+    public interface ISettingsEditor : ISettingsEditorBase
     {
-        string SettingsPageName { get; }
-        string SettingsPagePath { get; }
-
         void ApplyChanges();
     }
 }

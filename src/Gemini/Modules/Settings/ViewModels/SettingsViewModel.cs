@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Properties;
@@ -16,6 +15,7 @@ namespace Gemini.Modules.Settings.ViewModels
     public class SettingsViewModel : WindowBase
     {
         private IEnumerable<ISettingsEditor> _settingsEditors;
+        private IEnumerable<ISettingsEditorAsync> _settingsEditorsAsync;
         private SettingsPageViewModel _selectedPage;
 
         public SettingsViewModel()
@@ -41,8 +41,11 @@ namespace Gemini.Modules.Settings.ViewModels
 
             var pages = new List<SettingsPageViewModel>();
             _settingsEditors = IoC.GetAll<ISettingsEditor>();
+            _settingsEditorsAsync = IoC.GetAll<ISettingsEditorAsync>();
 
-            foreach (var settingsEditor in _settingsEditors)
+            var allSettingsEditor = _settingsEditors.Cast<ISettingsEditorBase>().Concat(_settingsEditorsAsync);
+
+            foreach (var settingsEditor in allSettingsEditor)
             {
                 var parentCollection = GetParentCollection(settingsEditor, pages);
 
@@ -76,7 +79,7 @@ namespace Gemini.Modules.Settings.ViewModels
             return GetFirstLeafPageRecursive(firstPage.Children);
         }
 
-        private List<SettingsPageViewModel> GetParentCollection(ISettingsEditor settingsEditor,
+        private List<SettingsPageViewModel> GetParentCollection(ISettingsEditorBase settingsEditor,
             List<SettingsPageViewModel> pages)
         {
             if (string.IsNullOrEmpty(settingsEditor.SettingsPagePath))
@@ -104,6 +107,11 @@ namespace Gemini.Modules.Settings.ViewModels
 
         public async Task SaveChanges()
         {
+            foreach (var settingsEditor in _settingsEditorsAsync)
+            {
+                await settingsEditor.ApplyChangesAsync();
+            }
+
             foreach (var settingsEditor in _settingsEditors)
             {
                 settingsEditor.ApplyChanges();
