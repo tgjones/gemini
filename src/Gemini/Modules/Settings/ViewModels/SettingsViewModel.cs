@@ -14,8 +14,7 @@ namespace Gemini.Modules.Settings.ViewModels
     [PartCreationPolicy (CreationPolicy.NonShared)]
     public class SettingsViewModel : WindowBase
     {
-        private IEnumerable<ISettingsEditor> _settingsEditors;
-        private IEnumerable<ISettingsEditorAsync> _settingsEditorsAsync;
+        private IEnumerable<ISettingsEditorAsync> _settingsEditors;
         private SettingsPageViewModel _selectedPage;
 
         public SettingsViewModel()
@@ -40,12 +39,10 @@ namespace Gemini.Modules.Settings.ViewModels
             await base.OnInitializeAsync(cancellationToken);
 
             var pages = new List<SettingsPageViewModel>();
-            _settingsEditors = IoC.GetAll<ISettingsEditor>();
-            _settingsEditorsAsync = IoC.GetAll<ISettingsEditorAsync>();
 
-            var allSettingsEditor = _settingsEditors.Cast<ISettingsEditorBase>().Concat(_settingsEditorsAsync);
+            _settingsEditors = IoC.GetAll<ISettingsEditorAsync>().Concat(IoC.GetAll<ISettingsEditor>().Select(e => new SettingsEditorWrapper(e)));
 
-            foreach (var settingsEditor in allSettingsEditor)
+            foreach (var settingsEditor in _settingsEditors)
             {
                 var parentCollection = GetParentCollection(settingsEditor, pages);
 
@@ -53,14 +50,11 @@ namespace Gemini.Modules.Settings.ViewModels
 
                 if (page == null)
                 {
-                    page = new SettingsPageViewModel
-                    {
-                        Name = settingsEditor.SettingsPageName,
-                    };
+                    page = new SettingsPageViewModel { Name = settingsEditor.SettingsPageName };
                     parentCollection.Add(page);
                 }
 
-                page.Editors.Add(settingsEditor);
+                page.Editors.Add(settingsEditor is SettingsEditorWrapper wrapper ? (object)wrapper.ViewModel : (object)settingsEditor);
             }
 
             Pages = pages;
@@ -79,7 +73,7 @@ namespace Gemini.Modules.Settings.ViewModels
             return GetFirstLeafPageRecursive(firstPage.Children);
         }
 
-        private List<SettingsPageViewModel> GetParentCollection(ISettingsEditorBase settingsEditor,
+        private List<SettingsPageViewModel> GetParentCollection(ISettingsEditorAsync settingsEditor,
             List<SettingsPageViewModel> pages)
         {
             if (string.IsNullOrEmpty(settingsEditor.SettingsPagePath))
@@ -95,7 +89,7 @@ namespace Gemini.Modules.Settings.ViewModels
 
                 if (page == null)
                 {
-                    page = new SettingsPageViewModel {Name = pathElement};
+                    page = new SettingsPageViewModel { Name = pathElement };
                     pages.Add(page);
                 }
 
@@ -107,14 +101,9 @@ namespace Gemini.Modules.Settings.ViewModels
 
         public async Task SaveChanges()
         {
-            foreach (var settingsEditor in _settingsEditorsAsync)
-            {
-                await settingsEditor.ApplyChangesAsync();
-            }
-
             foreach (var settingsEditor in _settingsEditors)
             {
-                settingsEditor.ApplyChanges();
+                await settingsEditor.ApplyChangesAsync();
             }
 
             await TryCloseAsync(true);
