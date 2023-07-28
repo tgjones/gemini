@@ -253,7 +253,7 @@
     <value>Historique</value>
   </data>
   <data name="ViewMenuText" xml:space="preserve">
-    <value>_Vue</value>
+    <value>_Affichage</value>
   </data>
   <data name="ViewToolboxCommandText" xml:space="preserve">
     <value>Boite à _outils</value>
@@ -288,7 +288,7 @@
   <data name="DocumentDirtyCloseConfirmText" xml:space="preserve">
     <value>Le fichier '{0}' a des modifications non enregistrées, voulez vous les sauvegarder?</value>
   </data>
-    <data name="DocumentDirtyCloseConfirmTitle" xml:space="preserve">
+  <data name="DocumentDirtyCloseConfirmTitle" xml:space="preserve">
     <value>Enregistrer les modifications</value>
   </data>
 </root>
