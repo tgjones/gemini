@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -272,5 +272,14 @@
   </data>
   <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
     <value>全屏</value>
+  </data>
+  <data name="AllFiles" xml:space="preserve">
+    <value>所有文件</value>
+  </data>
+  <data name="AllSupportedFiles" xml:space="preserve">
+    <value>所有支持的文件</value>
+  </data>
+  <data name="SaveChangesBeforeClosingMessage" xml:space="preserve">
+    <value>在关闭前保存更改到 {0} “{1}” ?</value>
   </data>
 </root>

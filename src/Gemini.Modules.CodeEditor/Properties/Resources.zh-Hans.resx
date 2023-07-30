@@ -120,4 +120,40 @@
   <data name="EditorProviderFileSuffix" xml:space="preserve">
     <value> 文件</value>
   </data>
+  <data name="SettingsPageCodeEditor" xml:space="preserve">
+    <value>代码编辑</value>
+  </data>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="ShowEndOfLineCommandText" xml:space="preserve">
+    <value>查看换行符</value>
+  </data>
+  <data name="ShowEndOfLineCommandToolTip" xml:space="preserve">
+    <value>切换换行符的可见性</value>
+  </data>
+  <data name="ShowLineNumbersCommandText" xml:space="preserve">
+    <value>查看行号</value>
+  </data>
+  <data name="ShowLineNumbersCommandToolTip" xml:space="preserve">
+    <value>切换行号的可见性</value>
+  </data>
+  <data name="ShowSpacesCommandText" xml:space="preserve">
+    <value>查看空格</value>
+  </data>
+  <data name="ShowSpacesCommandToolTip" xml:space="preserve">
+    <value>切换空格的可见性</value>
+  </data>
+  <data name="ShowTabsCommandText" xml:space="preserve">
+    <value>查看制表符</value>
+  </data>
+  <data name="ShowTabsCommandToolTip" xml:space="preserve">
+    <value>切换制表符的可见性</value>
+  </data>
+  <data name="WordWrapCommandText" xml:space="preserve">
+    <value>自动换行</value>
+  </data>
+  <data name="WordWrapCommandToolTip" xml:space="preserve">
+    <value>启用自动换行</value>
+  </data>
 </root>
