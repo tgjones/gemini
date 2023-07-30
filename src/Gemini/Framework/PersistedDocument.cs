@@ -1,6 +1,10 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using Gemini.Framework.Commands;
+using Gemini.Modules.Shell.Commands;
+using Gemini.Properties;
 
 namespace Gemini.Framework
 {
@@ -37,10 +41,22 @@ namespace Gemini.Framework
             }
         }
 
-        public override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
         {
-            // TODO: Show save prompt.
-            return Task.FromResult(!IsDirty);
+            if (IsDirty)
+            {
+                var response = MessageBox.Show(string.Format(Resources.DocumentDirtyCloseConfirmText, FileName), Resources.DocumentDirtyCloseConfirmTitle, MessageBoxButton.YesNoCancel);
+                if (response == MessageBoxResult.Cancel)
+                {
+                    return false;
+                }
+                if (response == MessageBoxResult.Yes)
+                {
+                    await Save();
+                    return !IsNew; // User may discard file picker prompt
+                }
+            }
+            return true;
         }
 
         private void UpdateDisplayName()
@@ -93,5 +109,10 @@ namespace Gemini.Framework
         }
 
         protected abstract Task DoSave(string filePath);
+
+        public Task Save()
+        {
+            return ((ICommandHandler<SaveFileCommandDefinition>)this).Run(null);
+        }
     }
 }
