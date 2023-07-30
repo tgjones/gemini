@@ -1,10 +1,12 @@
+using System.Threading.Tasks;
+
 namespace Gemini.Modules.Settings
 {
-    public interface ISettingsEditor
+    public interface ISettingsEditorAsync
     {
         string SettingsPageName { get; }
         string SettingsPagePath { get; }
 
-        void ApplyChanges();
+        Task ApplyChangesAsync();
     }
 }

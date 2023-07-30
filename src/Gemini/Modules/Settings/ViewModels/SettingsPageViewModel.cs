@@ -7,11 +7,13 @@ namespace Gemini.Modules.Settings.ViewModels
         public SettingsPageViewModel()
         {
             Children = new List<SettingsPageViewModel>();
-            Editors = new List<ISettingsEditor>();
+            Editors = new List<object>();
         }
 
         public string Name { get; set; }
-        public List<ISettingsEditor> Editors { get; private set; }
-        public List<SettingsPageViewModel> Children { get; internal set; }
+
+        public List<object> Editors { get; } // ISettingsEditor or ISettingsEditorAsync
+
+        public List<SettingsPageViewModel> Children { get; }
     }
 }
