@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Original source code from the Wide framework:
  * https://github.com/chandramouleswaran/Wide
  * 
@@ -57,6 +57,11 @@ namespace Gemini.Framework.Themes
             var mainWindow = Application.Current.MainWindow;
             if (mainWindow == null)
                 return false;
+
+            if (CurrentTheme == theme)
+            {
+                return true; // Nothing to do, avoid full repaint of mainwindow
+            }
 
             CurrentTheme = theme;
 
