@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllFiles" xml:space="preserve">
+    <value>Tous les fichiers</value>
+  </data>
+  <data name="AllSupportedFiles" xml:space="preserve">
+    <value>Tous les types supportés</value>
+  </data>
+  <data name="AdvancedSliderCommitErrorFormat" xml:space="preserve">
+    <value>Echec pour définir la valeur : {0}</value>
+  </data>
+  <data name="EditMenuText" xml:space="preserve">
+    <value>_Edition</value>
+  </data>
+  <data name="EditRedoCommandText" xml:space="preserve">
+    <value>_Rétablir</value>
+  </data>
+  <data name="EditRedoCommandToolTip" xml:space="preserve">
+    <value>Rétablir</value>
+  </data>
+  <data name="EditUndoCommandText" xml:space="preserve">
+    <value>_Annuler</value>
+  </data>
+  <data name="EditUndoCommandToolTip" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="FileCloseCommandText" xml:space="preserve">
+    <value>_Fermer</value>
+  </data>
+  <data name="FileCloseCommandToolTip" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="FileExitCommandText" xml:space="preserve">
+    <value>_Quitter</value>
+  </data>
+  <data name="FileExitCommandToolTip" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="FileMenuText" xml:space="preserve">
+    <value>_Fichier</value>
+  </data>
+  <data name="FileNewCommandText" xml:space="preserve">
+    <value>_Nouveau</value>
+  </data>
+  <data name="FileNewCommandToolTip" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="FileNewUntitled" xml:space="preserve">
+    <value>SansTitre {0}</value>
+  </data>
+  <data name="FileOpenCommandText" xml:space="preserve">
+    <value>_Ouvrir</value>
+  </data>
+  <data name="FileOpenCommandToolTip" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="FileRecentFilesCommandText" xml:space="preserve">
+    <value>Fichiers récents</value>
+  </data>
+  <data name="FileRecentFilesCommandToolTip" xml:space="preserve">
+    <value>Fichiers récents</value>
+  </data>
+  <data name="FileSaveAllCommandText" xml:space="preserve">
+    <value>Enregistrer tout</value>
+  </data>
+  <data name="FileSaveAllCommandToolTip" xml:space="preserve">
+    <value>Enregistrer tout</value>
+  </data>
+  <data name="FileSaveAsCommandText" xml:space="preserve">
+    <value>Enregistrer _sous...</value>
+  </data>
+  <data name="FileSaveAsCommandToolTip" xml:space="preserve">
+    <value>Enregistrer sous</value>
+  </data>
+  <data name="FileSaveCommandText" xml:space="preserve">
+    <value>_Enregistrer</value>
+  </data>
+  <data name="FileSaveCommandToolTip" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="HelpMenuText" xml:space="preserve">
+    <value>_Aide</value>
+  </data>
+  <data name="HistoryDisplayName" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="HistoryInitialState" xml:space="preserve">
+    <value>Etat inital</value>
+  </data>
+  <data name="LanguageSystem" xml:space="preserve">
+    <value>Système</value>
+  </data>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="SettingsPathEnvironment" xml:space="preserve">
+    <value>Environement</value>
+  </data>
+  <data name="ThemeBlueName" xml:space="preserve">
+    <value>Bleu</value>
+  </data>
+  <data name="ThemeDarkName" xml:space="preserve">
+    <value>Sombre</value>
+  </data>
+  <data name="ThemeLightName" xml:space="preserve">
+    <value>Clair</value>
+  </data>
+  <data name="ToolBarStandard" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="ToolboxCategory" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
+  <data name="ToolboxDisplayName" xml:space="preserve">
+    <value>Boite à outils</value>
+  </data>
+  <data name="ToolsMenuText" xml:space="preserve">
+    <value>Ou_tils</value>
+  </data>
+  <data name="ToolsOptionsCommandText" xml:space="preserve">
+    <value>_Options</value>
+  </data>
+  <data name="ToolsOptionsCommandToolTip" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ViewFullScreenCommandText" xml:space="preserve">
+    <value>Plein écran</value>
+  </data>
+  <data name="ViewFullScreenCommandToolTip" xml:space="preserve">
+    <value>Plein écran</value>
+  </data>
+  <data name="ViewHistoryCommandText" xml:space="preserve">
+    <value>_Historique</value>
+  </data>
+  <data name="ViewHistoryCommandToolTip" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="ViewMenuText" xml:space="preserve">
+    <value>_Affichage</value>
+  </data>
+  <data name="ViewToolboxCommandText" xml:space="preserve">
+    <value>Boite à _outils</value>
+  </data>
+  <data name="ViewToolboxCommandToolTip" xml:space="preserve">
+    <value>Boite à outils</value>
+  </data>
+  <data name="WindowMenuText" xml:space="preserve">
+    <value>_Fenêtre</value>
+  </data>
+  <data name="MainMenuSettingsAutoHideMainMenu" xml:space="preserve">
+    <value>Masque automatiquement le menu principal</value>
+  </data>
+  <data name="MainMenuSettingsColorTheme" xml:space="preserve">
+    <value>Thème :</value>
+  </data>
+  <data name="MainMenuSettingsLanguage" xml:space="preserve">
+    <value>Langue :</value>
+  </data>
+  <data name="MainMenuSettingsLanguageRestart" xml:space="preserve">
+    <value>Nécessite le redémarrage</value>
+  </data>
+  <data name="MainWindowDefaultTitle" xml:space="preserve">
+    <value>[Titre par défaut]</value>
+  </data>
+  <data name="SettingsDisplayName" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="SaveChangesBeforeClosingMessage" xml:space="preserve">
+    <value>Enregistrer les modifications de {0} "{1}" avant de fermer ?</value>
+  </data>
+  <data name="DocumentDirtyCloseConfirmText" xml:space="preserve">
+    <value>Le fichier '{0}' a des modifications non enregistrées, voulez vous les sauvegarder?</value>
+  </data>
+  <data name="DocumentDirtyCloseConfirmTitle" xml:space="preserve">
+    <value>Enregistrer les modifications</value>
+  </data>
+</root>

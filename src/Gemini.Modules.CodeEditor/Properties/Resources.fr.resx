@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,47 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangeObjectValueActionFormat" xml:space="preserve">
-    <value>Change {0} from {1} to {2}</value>
+  <data name="EditorProviderFileSuffix" xml:space="preserve">
+    <value> Fichier</value>
   </data>
-  <data name="InspectorBuilderMiscellaneous" xml:space="preserve">
-    <value>Miscellaneous</value>
+  <data name="SettingsPageGeneral" xml:space="preserve">
+    <value>Général</value>
   </data>
-  <data name="InspectorDisplayName" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="WordWrapCommandText" xml:space="preserve">
+    <value>Retour à la ligne</value>
   </data>
-  <data name="ResetToolTip" xml:space="preserve">
-    <value>Reset</value>
+  <data name="WordWrapCommandToolTip" xml:space="preserve">
+    <value>Active ou non le retour à la ligne automatique.</value>
   </data>
-  <data name="ViewInspectorCommandText" xml:space="preserve">
-    <value>I_nspector</value>
+  <data name="SettingsPageCodeEditor" xml:space="preserve">
+    <value>Editeur de code</value>
   </data>
-  <data name="ViewInspectorCommandToolTip" xml:space="preserve">
-    <value>Inspector</value>
+  <data name="ShowEndOfLineCommandText" xml:space="preserve">
+    <value>Afficher les fins de ligne</value>
   </data>
-  <data name="ResetAll" xml:space="preserve">
-    <value>Reset all ⟲</value>
+  <data name="ShowEndOfLineCommandToolTip" xml:space="preserve">
+    <value>Affiche ou non les symboles de fin de ligne.</value>
   </data>
-  <data name="ResetSymbol" xml:space="preserve">
-    <value>⟲</value>
-    <comment>@Invariant</comment>
+  <data name="ShowLineNumbersCommandText" xml:space="preserve">
+    <value>Numéros de ligne</value>
   </data>
-  <data name="ColorEditorStandardColors" xml:space="preserve">
-    <value>Standard Colors</value>
+  <data name="ShowLineNumbersCommandToolTip" xml:space="preserve">
+    <value>Affiche ou non les numéros de ligne.</value>
   </data>
-  <data name="ColorEditorStandard" xml:space="preserve">
-    <value>Standard</value>
+  <data name="ShowSpacesCommandText" xml:space="preserve">
+    <value>Afficher les espaces</value>
   </data>
-  <data name="ColorEditorRecentColors" xml:space="preserve">
-    <value>Recent Colors</value>
+  <data name="ShowSpacesCommandToolTip" xml:space="preserve">
+    <value>Affiche ou non les caractères d'espacement.</value>
   </data>
-  <data name="ColorEditorAvailableColors" xml:space="preserve">
-    <value>Available Colors</value>
+  <data name="ShowTabsCommandText" xml:space="preserve">
+    <value>Afficher les tabulations</value>
   </data>
-  <data name="ColorEditorAdvanced" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
-  <data name="ResetObjectValueActionFormat" xml:space="preserve">
-    <value>Reset {0} from {1} to {2}</value>
+  <data name="ShowTabsCommandToolTip" xml:space="preserve">
+    <value>Affiche ou non les caractères de tabulation.</value>
   </data>
 </root>

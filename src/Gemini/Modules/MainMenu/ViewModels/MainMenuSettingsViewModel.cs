@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Caliburn.Micro;
 using Gemini.Framework.Themes;
@@ -19,6 +19,7 @@ namespace Gemini.Modules.MainMenu.ViewModels
             "ru",
             "zh-Hans",
             "ko",
+            "fr"
         };
 
         private ITheme _selectedTheme;
