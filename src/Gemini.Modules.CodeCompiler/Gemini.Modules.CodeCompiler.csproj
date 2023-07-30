@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0-windows;netcoreapp3.1;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net7.0-windows;net462</TargetFrameworks>
     <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell C# compile Roslyn</PackageTags>
     <Description>CodeCompiler module for Gemini, providing C# code compilation using Roslyn.</Description>
   </PropertyGroup>
