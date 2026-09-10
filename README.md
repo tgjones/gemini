@@ -61,15 +61,12 @@ on other modules, but this is taken care of by the NuGet package dependency syst
 
 ## Continuous builds
 
-We use AppVeyor to build Gemini after every commit to the master branch,
-and also to generate pre-release NuGet packages so you can try out new features immediately.
-
-To access the pre-release NuGet packages, you'll need to add a custom package source in Visual Studio,
-pointing to this URL:
-
-https://ci.appveyor.com/nuget/gemini-g84phgw340sm
-
-Make sure you select "Include Prerelease" when searching for NuGet packages.
+GitHub Actions builds every push and pull request for the existing `net462`,
+`net6.0-windows`, and `net7.0-windows` targets. Successful runs provide the
+validated NuGet and symbol packages as a downloadable workflow artifact.
+Publication remains restricted to approved upstream releases. See
+[the CI workflow](.github/workflows/ci.yml) for the exact build and release
+contract.
 
 ## What does it do?
 
