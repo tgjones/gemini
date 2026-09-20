@@ -1,0 +1,101 @@
+{
+  "frameworks": [
+    {
+      "nuspec": ".NETFramework4.6.2",
+      "asset": "net462",
+      "build": "net462"
+    },
+    {
+      "nuspec": "net6.0-windows7.0",
+      "asset": "net6.0-windows7.0",
+      "build": "net6.0-windows"
+    },
+    {
+      "nuspec": "net7.0-windows7.0",
+      "asset": "net7.0-windows7.0",
+      "build": "net7.0-windows"
+    }
+  ],
+  "shaders": [
+    "AddEffect.ps",
+    "MultiplyEffect.ps"
+  ],
+  "packages": [
+    {
+      "id": "GeminiWpf",
+      "assembly": "Gemini",
+      "internalDependencies": [],
+      "externalDependencies": {
+        "Caliburn.Micro": "4.0.210",
+        "Dirkster.AvalonDock.Themes.VS2013": "4.60.0",
+        "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78",
+        "MahApps.Metro": "2.4.9",
+        "System.ComponentModel.Composition": "6.0.0"
+      }
+    },
+    {
+      "id": "Gemini.Modules.CodeCompiler",
+      "assembly": "Gemini.Modules.CodeCompiler",
+      "internalDependencies": [
+        "Gemini.Modules.ErrorList",
+        "Gemini.Modules.Output",
+        "GeminiWpf"
+      ],
+      "externalDependencies": {
+        "Microsoft.CodeAnalysis.CSharp": "3.4.0"
+      }
+    },
+    {
+      "id": "Gemini.Modules.CodeEditor",
+      "assembly": "Gemini.Modules.CodeEditor",
+      "internalDependencies": [
+        "GeminiWpf"
+      ],
+      "externalDependencies": {
+        "AvalonEdit": "6.0.0"
+      }
+    },
+    {
+      "id": "Gemini.Modules.ErrorList",
+      "assembly": "Gemini.Modules.ErrorList",
+      "internalDependencies": [
+        "GeminiWpf"
+      ],
+      "externalDependencies": {}
+    },
+    {
+      "id": "Gemini.Modules.GraphEditor",
+      "assembly": "Gemini.Modules.GraphEditor",
+      "internalDependencies": [
+        "GeminiWpf"
+      ],
+      "externalDependencies": {}
+    },
+    {
+      "id": "Gemini.Modules.Inspector",
+      "assembly": "Gemini.Modules.Inspector",
+      "internalDependencies": [
+        "GeminiWpf"
+      ],
+      "externalDependencies": {
+        "System.Drawing.Common": "6.0.0"
+      }
+    },
+    {
+      "id": "Gemini.Modules.Output",
+      "assembly": "Gemini.Modules.Output",
+      "internalDependencies": [
+        "GeminiWpf"
+      ],
+      "externalDependencies": {}
+    },
+    {
+      "id": "Gemini.Modules.PropertyGrid",
+      "assembly": "Gemini.Modules.PropertyGrid",
+      "internalDependencies": [
+        "GeminiWpf"
+      ],
+      "externalDependencies": {}
+    }
+  ]
+}

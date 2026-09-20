@@ -1,35 +1,104 @@
+# CI contract:
+# - All actions use reviewed immutable commits so a moved release tag cannot change
+#   the code executed by an existing revision. The trailing comments record the
+#   corresponding release for human reviewers and future updates.
+# - global.json is the single SDK-version source. The build job resolves it and
+#   passes that version to publication, which does not check out repository files.
+#   The pinned SDK is supported and builds every retained target framework
+#   without changing the projects' runtime or API contracts.
+# - Nerdbank.GitVersioning runs through the repository's pinned MSBuild package;
+#   a separate CLI action would introduce a second versioning-tool version.
+# - No test command is present because this repository has no test projects.
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: windows-latest
+    name: Build and validate packages
+    runs-on: windows-2025
+    timeout-minutes: 30
+    outputs:
+      dotnet-version: ${{ steps.setup-dotnet.outputs.dotnet-version }}
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # NBGV needs complete history to calculate the package version.
+          persist-credentials: false # Build jobs never push back to the repository.
 
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 7.0.x
+      - name: Set up .NET
+        id: setup-dotnet
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
 
-    - name: Version
-      uses: aarnott/nbgv@v0.4.0
-      with:
-        setAllVars: true
+      - name: Report toolchain
+        run: dotnet --info
 
-    - name: Pack
-      run: dotnet pack src --configuration Release --output build/packages
+      - name: Restore
+        run: dotnet restore src\Gemini.sln --configfile src\NuGet.config
 
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: Packages
-        path: build/packages
+      - name: Build solution
+        run: dotnet build src\Gemini.sln --configuration Release --no-restore
 
-    - name: Publish to NuGet
-      shell: bash
-      if: github.event_name == 'push'
-      run: dotnet nuget push build/packages/**/*.nupkg -s nuget.org -k ${{secrets.NUGET_TOKEN}}
+      - name: Pack libraries
+        run: dotnet pack src\Gemini.sln --configuration Release --no-build --no-restore --output build\packages
+
+      - name: Validate build and packages
+        shell: pwsh
+        run: ./eng/validate-artifacts.ps1
+
+      - name: Upload packages
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: nuget-packages
+          path: |
+            build/packages/*.nupkg
+            build/packages/*.snupkg
+          if-no-files-found: error
+          retention-days: 14
+
+  # Publish the exact packages validated above instead of rebuilding different bits.
+  # Forks, pull requests, and ordinary feature branches cannot enter this job or
+  # access its NuGet credential.
+  publish:
+    name: Publish approved upstream release
+    needs: build
+    if: >-
+      github.repository == 'tgjones/gemini' &&
+      github.event_name == 'push' &&
+      (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
+    runs-on: windows-2025
+    timeout-minutes: 15
+
+    steps:
+      - name: Set up .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          dotnet-version: ${{ needs.build.outputs.dotnet-version }}
+
+      - name: Download validated packages
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: nuget-packages
+          path: build/packages
+
+      - name: Publish to NuGet
+        shell: pwsh
+        env:
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_TOKEN)) {
+            throw 'The guarded upstream publication job requires the NUGET_TOKEN secret.'
+          }
+
+          dotnet nuget push "build\packages\*.nupkg" `
+            --source https://api.nuget.org/v3/index.json `
+            --api-key $env:NUGET_TOKEN
