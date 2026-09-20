@@ -32,6 +32,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemini.Modules.GraphEditor"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{87C5CCCC-7448-4802-B35F-C0BEA3FF880D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compatibility", "Compatibility", "{80B06549-982F-5858-B5D8-F248B6FD4422}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MahApps.Net10DragHost", "..\eng\compatibility\MahApps.Net10DragHost\MahApps.Net10DragHost.csproj", "{DE3AD73A-59B9-48F3-AEEF-1BD431C8FE71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,12 +78,17 @@ Global
 		{F8204886-1F61-4247-B7B2-EA5E518162F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8204886-1F61-4247-B7B2-EA5E518162F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8204886-1F61-4247-B7B2-EA5E518162F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3AD73A-59B9-48F3-AEEF-1BD431C8FE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3AD73A-59B9-48F3-AEEF-1BD431C8FE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3AD73A-59B9-48F3-AEEF-1BD431C8FE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3AD73A-59B9-48F3-AEEF-1BD431C8FE71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{250E5DC8-DEE7-428E-8FE6-EAFDD70977EE} = {87C5CCCC-7448-4802-B35F-C0BEA3FF880D}
+		{DE3AD73A-59B9-48F3-AEEF-1BD431C8FE71} = {80B06549-982F-5858-B5D8-F248B6FD4422}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C029961-F2EC-49C8-997C-35C6469CF7B5}

@@ -29,7 +29,7 @@
         "Caliburn.Micro": "4.0.210",
         "Dirkster.AvalonDock.Themes.VS2013": "4.60.0",
         "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78",
-        "MahApps.Metro": "2.4.9",
+        "MahApps.Metro": "2.4.11",
         "System.ComponentModel.Composition": "6.0.0"
       }
     },
