@@ -1,8 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;net7.0-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net7.0-windows;net462;net10.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
+    <!-- SDK 10 otherwise prunes Drawing.Common from retained WPF targets that still need its compile assets. -->
+    <RestoreEnablePackagePruning Condition="'$(TargetFramework)' == 'net6.0-windows' Or '$(TargetFramework)' == 'net7.0-windows'">false</RestoreEnablePackagePruning>
     <PackageTags>core WPF MVVM AvalonDock Caliburn Micro Visual Studio IDE Shell inspector</PackageTags>
     <Description>Inspector module for Gemini, providing a flexible PropertyGrid-esque tool window.</Description>
   </PropertyGroup>
@@ -31,7 +33,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
