@@ -265,18 +265,30 @@ namespace Gemini.Tests.Modules.Shell
 
             public IObservableCollection<ITool> Tools { get; private set; }
 
+            public System.Threading.Tasks.Task InitializationTask
+            {
+                get { return System.Threading.Tasks.Task.CompletedTask; }
+            }
+
             public bool RegisterTool(ITool tool)
             {
                 return false;
             }
 
-            public void ShowTool<TTool>()
+            public System.Threading.Tasks.Task ShowToolAsync<TTool>()
                 where TTool : ITool
             {
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
-            public void ShowTool(ITool model)
+            public System.Threading.Tasks.Task ShowToolAsync(ITool model)
             {
+                return System.Threading.Tasks.Task.CompletedTask;
+            }
+
+            public System.Threading.Tasks.Task CloseToolAsync(ITool tool)
+            {
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
             public Task OpenDocumentAsync(IDocument model)

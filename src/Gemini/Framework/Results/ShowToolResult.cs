@@ -48,7 +48,19 @@ namespace Gemini.Framework.Results
                 return System.Threading.Tasks.Task.CompletedTask;
             };
 
-            _shell.ShowTool(tool);
+            ObserveShowToolAsync(tool);
+        }
+
+        private async void ObserveShowToolAsync(TTool tool)
+        {
+            try
+            {
+                await _shell.ShowToolAsync(tool);
+            }
+            catch (Exception exception)
+            {
+                OnCompleted(exception, false);
+            }
         }
     }
 }

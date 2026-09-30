@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
-using Gemini.Framework.Threading;
 
 namespace Gemini.Modules.PropertyGrid.Commands
 {
@@ -19,8 +18,7 @@ namespace Gemini.Modules.PropertyGrid.Commands
 
         public override Task Run(Command command)
         {
-            _shell.ShowTool<IPropertyGrid>();
-            return TaskUtility.Completed;
+            return _shell.ShowToolAsync<IPropertyGrid>();
         }
     }
 }

@@ -58,10 +58,13 @@ namespace Gemini.Framework
         // Tool windows should always reopen on app start by default.
         public override bool ShouldReopenOnStart => true;
 
+        /// <summary>
+        /// Routes close through the shell because docked tools are registered there
+        /// rather than parented by a Caliburn conductor.
+        /// </summary>
         public override Task TryCloseAsync(bool? dialogResult = null)
         {
-            IsVisible = false;
-            return base.TryCloseAsync(dialogResult);
+            return IoC.Get<IShell>().CloseToolAsync(this);
         }
     };
 }

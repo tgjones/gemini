@@ -17,8 +17,8 @@ namespace Gemini.Demo.Modules.FilterDesigner
         public async Task Activate(IShell shell)
         {
             await shell.OpenDocumentAsync(IoC.Get<GraphViewModel>());
-            shell.ShowTool<IInspectorTool>();
-            shell.ShowTool<IToolbox>();
+            await shell.ShowToolAsync<IInspectorTool>();
+            await shell.ShowToolAsync<IToolbox>();
         }
     }
 }

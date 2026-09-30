@@ -37,6 +37,31 @@ Caliburn 5 also replaces the obsolete `OnInitializeAsync` extension point with
 Code that retries initialization after a failure must recreate the failed
 screen rather than changing Caliburn's lifecycle flags.
 
+## Asynchronous shell and startup readiness
+
+`IShell.ShowTool` has been replaced by the awaitable `ShowToolAsync` overloads,
+and parentless docking tools route close requests through `CloseToolAsync`.
+Document open, document close, tool show/close, and active-layout binding
+transitions are serialized in arrival order. Callers should await these methods
+so lifecycle failures are observed; a failed transition does not prevent later
+queued transitions from running. The shell evaluates a tool guard once, closes
+the tool without unregistering it, and preserves a vetoed tool as visible and
+active.
+
+Gemini tools are registered by the shell rather than parented by a Caliburn
+conductor. `Tool.TryCloseAsync` therefore routes through the shell-owned close
+operation, which awaits the guard once and updates visibility and selection
+only after successful deactivation. The tool remains registered for reopening.
+
+`IShell.InitializationTask` represents view-dependent shell readiness. It
+completes after global resources, module pre-initialization and initialization,
+theme selection, layout restore or default item creation, and every module's
+`PostInitializeAsync` have completed. It faults when any of those startup steps
+fails. `IMainWindow.ShellActivationTask` similarly exposes activation of the
+shell conductor. The default `AppBootstrapper` awaits root display, shell
+activation, and shell initialization in that order and treats a failure as a
+fatal startup error.
+
 ## Release policy
 
 This package family starts the Gemini 1.1 beta line. Removing net6/net7 and

@@ -253,18 +253,30 @@ namespace Gemini.Tests.Framework.Results
                 get { return _openEntered.Task; }
             }
 
+            public System.Threading.Tasks.Task InitializationTask
+            {
+                get { return System.Threading.Tasks.Task.CompletedTask; }
+            }
+
             public bool RegisterTool(Gemini.Framework.ITool tool)
             {
                 return false;
             }
 
-            public void ShowTool<TTool>()
+            public System.Threading.Tasks.Task ShowToolAsync<TTool>()
                 where TTool : Gemini.Framework.ITool
             {
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
-            public void ShowTool(Gemini.Framework.ITool model)
+            public System.Threading.Tasks.Task ShowToolAsync(Gemini.Framework.ITool model)
             {
+                return System.Threading.Tasks.Task.CompletedTask;
+            }
+
+            public System.Threading.Tasks.Task CloseToolAsync(Gemini.Framework.ITool tool)
+            {
+                return System.Threading.Tasks.Task.CompletedTask;
             }
 
             public System.Threading.Tasks.Task OpenDocumentAsync(Gemini.Framework.IDocument model)
