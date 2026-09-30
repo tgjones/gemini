@@ -112,6 +112,58 @@ namespace Gemini.Tests.Framework.Results
         }
 
         [STATestMethod]
+        [Timeout(10000)]
+        public async System.Threading.Tasks.Task OpenDocumentResult_Execute_WithPath_CompletesAfterEditorOperation()
+        {
+            var markers = new List<string>();
+            var document = new TestDocument();
+            var shell = new GatedShell(markers);
+            var editorOpeningService = new GatedEditorOpeningService(document, markers);
+            var result = new OpenDocumentResult("document.txt");
+            var completionEvent = new System.Threading.Tasks.TaskCompletionSource<object>(
+                System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
+            var completionCount = 0;
+            ResultCompletionEventArgs completionArgs = null;
+            ((IOpenResult<Gemini.Framework.IDocument>)result).OnConfigure =
+                delegate(Gemini.Framework.IDocument configured)
+                {
+                    Assert.AreSame(document, configured);
+                    markers.Add("Configure");
+                };
+            result.Completed += delegate(object sender, ResultCompletionEventArgs eventArgs)
+            {
+                completionCount++;
+                completionArgs = eventArgs;
+                markers.Add("Completed");
+                completionEvent.SetResult(null);
+            };
+
+            using (ComposeShell(result, shell, editorOpeningService))
+            {
+                ((IResult)result).Execute(new CoroutineExecutionContext());
+                await editorOpeningService.OpenEntered;
+
+                CollectionAssert.AreEqual(
+                    new[] { "Configure", "EditorOperation" },
+                    markers);
+                Assert.AreEqual("document.txt", editorOpeningService.OpenedPath);
+                Assert.AreEqual(0, shell.OpenDocumentCallCount);
+                Assert.AreEqual(0, completionCount);
+
+                editorOpeningService.CompleteOpen();
+                await completionEvent.Task;
+            }
+
+            CollectionAssert.AreEqual(
+                new[] { "Configure", "EditorOperation", "Completed" },
+                markers);
+            Assert.AreEqual(1, completionCount);
+            Assert.IsNotNull(completionArgs);
+            Assert.IsNull(completionArgs.Error);
+            Assert.IsFalse(completionArgs.WasCancelled);
+        }
+
+        [STATestMethod]
         [DoNotParallelize]
         [Timeout(10000)]
         public async System.Threading.Tasks.Task OpenDocumentResult_Execute_WithNullProvidedDocument_CompletesOnceAsCancelled()
@@ -169,14 +221,88 @@ namespace Gemini.Tests.Framework.Results
 
         private static System.ComponentModel.Composition.Hosting.CompositionContainer ComposeShell(
             OpenDocumentResult result,
-            Gemini.Framework.Services.IShell shell)
+            Gemini.Framework.Services.IShell shell,
+            Gemini.Framework.Services.IEditorOpeningService editorOpeningService = null)
         {
             var container = new System.ComponentModel.Composition.Hosting.CompositionContainer();
             var batch = new System.ComponentModel.Composition.Hosting.CompositionBatch();
             System.ComponentModel.Composition.AttributedModelServices.AddExportedValue(batch, shell);
+            editorOpeningService = editorOpeningService ?? new UnexpectedEditorOpeningService();
+            System.ComponentModel.Composition.AttributedModelServices.AddExportedValue(
+                batch,
+                editorOpeningService);
             container.Compose(batch);
             System.ComponentModel.Composition.AttributedModelServices.SatisfyImportsOnce(container, result);
             return container;
+        }
+
+        private sealed class GatedEditorOpeningService :
+            Gemini.Framework.Services.IEditorOpeningService
+        {
+            private readonly Gemini.Framework.IDocument _document;
+            private readonly List<string> _markers;
+            private readonly System.Threading.Tasks.TaskCompletionSource<Gemini.Framework.IDocument> _openGate;
+            private readonly System.Threading.Tasks.TaskCompletionSource<object> _openEntered;
+
+            public GatedEditorOpeningService(
+                Gemini.Framework.IDocument document,
+                List<string> markers)
+            {
+                _document = document;
+                _markers = markers;
+                _openGate = new System.Threading.Tasks.TaskCompletionSource<Gemini.Framework.IDocument>(
+                    System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
+                _openEntered = new System.Threading.Tasks.TaskCompletionSource<object>(
+                    System.Threading.Tasks.TaskCreationOptions.RunContinuationsAsynchronously);
+            }
+
+            public string OpenedPath { get; private set; }
+
+            public System.Threading.Tasks.Task OpenEntered
+            {
+                get { return _openEntered.Task; }
+            }
+
+            public System.Threading.Tasks.Task<Gemini.Framework.IDocument> OpenFileAsync(
+                string path,
+                Action<Gemini.Framework.IDocument> configure = null)
+            {
+                OpenedPath = path;
+                configure?.Invoke(_document);
+                _markers.Add("EditorOperation");
+                _openEntered.SetResult(null);
+                return _openGate.Task;
+            }
+
+            public System.Threading.Tasks.Task<Gemini.Framework.IDocument> NewFileAsync(
+                Gemini.Framework.Services.IEditorProvider editorProvider,
+                string name)
+            {
+                throw new InvalidOperationException("Unexpected new editor call.");
+            }
+
+            public void CompleteOpen()
+            {
+                _openGate.SetResult(_document);
+            }
+        }
+
+        private sealed class UnexpectedEditorOpeningService :
+            Gemini.Framework.Services.IEditorOpeningService
+        {
+            public System.Threading.Tasks.Task<Gemini.Framework.IDocument> OpenFileAsync(
+                string path,
+                Action<Gemini.Framework.IDocument> configure = null)
+            {
+                throw new InvalidOperationException("Unexpected editor opening service call.");
+            }
+
+            public System.Threading.Tasks.Task<Gemini.Framework.IDocument> NewFileAsync(
+                Gemini.Framework.Services.IEditorProvider editorProvider,
+                string name)
+            {
+                throw new InvalidOperationException("Unexpected editor opening service call.");
+            }
         }
 
         private sealed class TestDocument : Gemini.Framework.Document

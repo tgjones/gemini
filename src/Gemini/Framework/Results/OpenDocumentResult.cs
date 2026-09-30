@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
-using Gemini.Modules.Shell.Commands;
 
 namespace Gemini.Framework.Results
 {
@@ -15,6 +15,7 @@ namespace Gemini.Framework.Results
 #pragma warning disable 649
 #pragma warning disable IDE0044 // Add readonly modifier
         [Import] private IShell _shell;
+        [Import] private IEditorOpeningService _editorOpeningService;
 #pragma warning restore IDE0044 // Add readonly modifier
 #pragma warning restore 649
 
@@ -35,33 +36,20 @@ namespace Gemini.Framework.Results
 
         public override void Execute(CoroutineExecutionContext context)
         {
-            var editor = _editor ??
-                (string.IsNullOrEmpty(_path)
-                    ? (IDocument)IoC.GetInstance(_editorType, null)
-                    :  GetEditor(_path));
+            if (!string.IsNullOrEmpty(_path))
+            {
+                _ = ExecutePathAsync();
+                return;
+            }
 
+            var editor = _editor ?? (IDocument)IoC.GetInstance(_editorType, null);
             if (editor == null)
             {
                 OnCompleted(null, true);
                 return;
             }
 
-            if (_setData != null)
-                _setData(editor);
-
-            if (_onConfigure != null)
-                _onConfigure(editor);
-
-            editor.Deactivated += (s, e) =>
-            {
-                if (e.WasClosed)
-                {
-                    if (_onShutDown != null)
-                        _onShutDown(editor);
-                }
-
-                return System.Threading.Tasks.Task.CompletedTask;
-            };
+            ConfigureEditor(editor);
 
             _shell
                 .OpenDocumentAsync(editor)
@@ -71,9 +59,35 @@ namespace Gemini.Framework.Results
                 });
         }
 
-        private static IDocument GetEditor(string path)
+        private async Task ExecutePathAsync()
         {
-            return OpenFileCommandHandler.GetEditor(path).Result;
+            try
+            {
+                await _editorOpeningService.OpenFileAsync(_path, ConfigureEditor);
+                OnCompleted(null, false);
+            }
+            catch (OperationCanceledException)
+            {
+                OnCompleted(null, true);
+            }
+            catch (Exception exception)
+            {
+                OnCompleted(exception, false);
+            }
+        }
+
+        private void ConfigureEditor(IDocument editor)
+        {
+            _setData?.Invoke(editor);
+            _onConfigure?.Invoke(editor);
+
+            editor.Deactivated += (sender, eventArgs) =>
+            {
+                if (eventArgs.WasClosed)
+                    _onShutDown?.Invoke(editor);
+
+                return Task.CompletedTask;
+            };
         }
     }
 }

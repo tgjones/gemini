@@ -62,6 +62,18 @@ shell conductor. The default `AppBootstrapper` awaits root display, shell
 activation, and shell initialization in that order and treats a failure as a
 fatal startup error.
 
+## Truthful editor opening
+
+`IEditorOpeningService` is the shared MEF service for opening existing files and
+creating new editor documents. Its task completes only after both shell
+presentation and the provider's `Open` or `New` task complete. Views that are
+already loaded are recognized immediately.
+
+Callers must await the returned task. Shell and provider faults or cancellation
+remain observable. `OpenFileAsync` returns a faulted, non-null task with
+`NotSupportedException` when no editor provider handles the path. Path-based
+`OpenDocumentResult` operations use the same service.
+
 ## Release policy
 
 This package family starts the Gemini 1.1 beta line. Removing net6/net7 and

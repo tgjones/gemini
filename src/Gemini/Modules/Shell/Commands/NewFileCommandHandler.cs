@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
-using System.Windows;
-using Caliburn.Micro;
 using Gemini.Framework.Commands;
 using Gemini.Framework.Services;
 using Gemini.Properties;
@@ -14,15 +12,15 @@ namespace Gemini.Modules.Shell.Commands
     {
         private int _newFileCounter = 1;
 
-        private readonly IShell _shell;
+        private readonly IEditorOpeningService _editorOpeningService;
         private readonly IEditorProvider[] _editorProviders;
 
         [ImportingConstructor]
         public NewFileCommandHandler(
-            IShell shell,
+            IEditorOpeningService editorOpeningService,
             [ImportMany] IEditorProvider[] editorProviders)
         {
-            _shell = shell;
+            _editorOpeningService = editorOpeningService;
             _editorProviders = editorProviders;
         }
 
@@ -51,30 +49,18 @@ namespace Gemini.Modules.Shell.Commands
 
         public async Task Run(Command command)
         {
-            var tag = (NewFileTag) command.Tag;
-            var editor = tag.EditorProvider.Create();
+            var tag = (NewFileTag)command.Tag;
+            var name = string.Format(
+                Resources.FileNewUntitled,
+                (_newFileCounter++) + tag.FileType.FileExtension);
 
-            var viewAware = (IViewAware)editor;
-            viewAware.ViewAttached += (sender, e) =>
-            {
-                var frameworkElement = (FrameworkElement)e.View;
-
-                RoutedEventHandler loadedHandler = null;
-                loadedHandler = async (sender2, e2) =>
-                {
-                    frameworkElement.Loaded -= loadedHandler;
-                    await tag.EditorProvider.New(editor, string.Format(Resources.FileNewUntitled, (_newFileCounter++) + tag.FileType.FileExtension));
-                };
-                frameworkElement.Loaded += loadedHandler;
-            };
-
-            await _shell.OpenDocumentAsync(editor);
+            await _editorOpeningService.NewFileAsync(tag.EditorProvider, name);
         }
 
         private class NewFileTag
         {
             public IEditorProvider EditorProvider;
             public EditorFileType FileType;
-        };
-    };
+        }
+    }
 }
