@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0-windows;net7.0-windows;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;net7.0-windows;net462;net10.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <PackageId>GeminiWpf</PackageId>
     <Title>Gemini</Title>

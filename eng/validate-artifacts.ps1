@@ -14,7 +14,8 @@ reading the validation implementation. The script verifies:
 - both demo shaders were compiled for every retained target framework;
 - exactly eight primary and eight symbol packages were produced;
 - every primary package contains one assembly for each retained framework;
-- nuspec dependency groups and dependency versions match the declared contract;
+- nuspec dependency groups and target-specific dependency versions match the
+  declared contract;
 - all internal Gemini dependencies use the same NBGV-calculated version; and
 - every symbol package contains the matching portable PDBs.
 
@@ -137,10 +138,22 @@ Assert-Condition -Condition (Test-Path -LiteralPath $ContractPath -PathType Leaf
 
 $contract = Get-Content -LiteralPath $ContractPath -Raw | ConvertFrom-Json
 $expectedFrameworks = @($contract.frameworks)
+$expectedNuspecFrameworks = @($expectedFrameworks | ForEach-Object nuspec)
 $expectedPackages = @{}
 foreach ($packageDefinition in @($contract.packages)) {
     Assert-Condition -Condition (-not $expectedPackages.ContainsKey($packageDefinition.id)) `
         -Message "Duplicate package ID '$($packageDefinition.id)' in $ContractPath."
+
+    # Overrides are complete external-dependency sets keyed by the emitted
+    # nuspec TFM. Reject unknown keys so a typo cannot silently use defaults.
+    $frameworkOverrides = $packageDefinition.PSObject.Properties['externalDependenciesByFramework']
+    if ($null -ne $frameworkOverrides) {
+        foreach ($frameworkOverride in $frameworkOverrides.Value.PSObject.Properties) {
+            Assert-Condition -Condition ($frameworkOverride.Name -in $expectedNuspecFrameworks) `
+                -Message "Package '$($packageDefinition.id)' has an external dependency override for unknown framework '$($frameworkOverride.Name)'."
+        }
+    }
+
     $expectedPackages[$packageDefinition.id] = $packageDefinition
 }
 
@@ -210,15 +223,30 @@ foreach ($package in $packages) {
             -Actual $actualGroupFrameworks `
             -Description "$packageId dependency groups"
 
+        # Internal package relationships remain identical for every TFM and use
+        # the coherent version read from the package currently being inspected.
         $expectedDependencies = @{}
         foreach ($internalDependency in @($definition.internalDependencies)) {
             $expectedDependencies[$internalDependency] = $packageVersion
         }
-        foreach ($externalDependency in $definition.externalDependencies.PSObject.Properties) {
-            $expectedDependencies[$externalDependency.Name] = [string] $externalDependency.Value
-        }
 
         foreach ($group in $groups) {
+            # Start with a fresh set for each nuspec group. A framework override
+            # replaces the full external set, so an empty object asserts none.
+            $expectedGroupDependencies = $expectedDependencies.Clone()
+            $expectedExternalDependencies = $definition.externalDependencies
+            $frameworkOverrides = $definition.PSObject.Properties['externalDependenciesByFramework']
+            if ($null -ne $frameworkOverrides) {
+                $frameworkOverride = $frameworkOverrides.Value.PSObject.Properties[[string] $group.targetFramework]
+                if ($null -ne $frameworkOverride) {
+                    $expectedExternalDependencies = $frameworkOverride.Value
+                }
+            }
+
+            foreach ($externalDependency in $expectedExternalDependencies.PSObject.Properties) {
+                $expectedGroupDependencies[$externalDependency.Name] = [string] $externalDependency.Value
+            }
+
             $actualDependencies = @{}
             foreach ($dependency in @($group.dependency)) {
                 $dependencyId = [string] $dependency.id
@@ -228,11 +256,11 @@ foreach ($package in $packages) {
             }
 
             Assert-SetEqual `
-                -Expected @($expectedDependencies.Keys) `
+                -Expected @($expectedGroupDependencies.Keys) `
                 -Actual @($actualDependencies.Keys) `
                 -Description "$packageId dependencies for $($group.targetFramework)"
 
-            foreach ($dependency in $expectedDependencies.GetEnumerator()) {
+            foreach ($dependency in $expectedGroupDependencies.GetEnumerator()) {
                 Assert-Condition -Condition ($actualDependencies[$dependency.Key] -ceq $dependency.Value) `
                     -Message "$packageId dependency '$($dependency.Key)' in $($group.targetFramework) has version '$($actualDependencies[$dependency.Key])'; expected '$($dependency.Value)'."
             }

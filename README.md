@@ -61,10 +61,10 @@ on other modules, but this is taken care of by the NuGet package dependency syst
 
 ## Continuous builds
 
-GitHub Actions builds every push and pull request for the existing `net462`,
-`net6.0-windows`, and `net7.0-windows` targets. Successful runs provide the
-validated NuGet and symbol packages as a downloadable workflow artifact.
-Publication remains restricted to approved upstream releases. See
+GitHub Actions builds every push and pull request for the `net462`,
+`net6.0-windows`, `net7.0-windows`, and `net10.0-windows` targets. Successful
+runs provide the validated NuGet and symbol packages as a downloadable workflow
+artifact. Publication remains restricted to approved upstream releases. See
 [the CI workflow](.github/workflows/ci.yml) for the exact build and release
 contract.
 
