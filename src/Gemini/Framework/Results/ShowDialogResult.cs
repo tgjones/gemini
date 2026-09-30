@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Composition;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 
 namespace Gemini.Framework.Results
@@ -23,22 +24,51 @@ namespace Gemini.Framework.Results
 
         public override void Execute(CoroutineExecutionContext context)
         {
-            var window = _windowLocator();
+            var execution = BeginExecution();
 
-            _setData?.Invoke(window);
+            try
+            {
+                var window = _windowLocator();
+                _setData?.Invoke(window);
+                _onConfigure?.Invoke(window);
 
-            _onConfigure?.Invoke(window);
+                var dialogTask = WindowManager.ShowDialogAsync(window);
+                _ = ObserveDialogAsync(execution, dialogTask, window);
+            }
+            catch (OperationCanceledException)
+            {
+                execution.TryComplete(null, true);
+            }
+            catch (Exception exception)
+            {
+                execution.TryComplete(exception, false);
+            }
+        }
 
-            WindowManager
-                .ShowDialogAsync(window)
-                .ContinueWith(t =>
-                {
-                    var result = t.Result.GetValueOrDefault();
+        private async Task ObserveDialogAsync(
+            ResultExecution execution,
+            Task<bool?> dialogTask,
+            TWindow window)
+        {
+            bool? result;
+            try
+            {
+                result = await dialogTask.ConfigureAwait(false);
+            }
+            catch (Exception exception)
+            {
+                if (dialogTask.IsCanceled)
+                    execution.TryComplete(null, true);
+                else
+                    execution.TryComplete(exception, false);
 
-                    _onShutDown?.Invoke(window);
+                return;
+            }
 
-                    OnCompleted(null, !result);
-                });
+            execution.TryComplete(
+                null,
+                !result.GetValueOrDefault(),
+                delegate { _onShutDown?.Invoke(window); });
         }
     }
 }

@@ -74,6 +74,29 @@ remain observable. `OpenFileAsync` returns a faulted, non-null task with
 `NotSupportedException` when no editor provider handles the path. Path-based
 `OpenDocumentResult` operations use the same service.
 
+## Coroutine result completion
+
+Each open/show coroutine result execution publishes at most one terminal
+outcome, even when task completion and close events race. Completion returns to
+the captured synchronization context. Successful completion has no error,
+canceled tasks set `WasCancelled`, and faulted tasks preserve the original
+exception. Synchronous location and configuration failures follow the same
+completion path.
+
+The result lifetimes remain intentionally distinct:
+
+- `OpenDocumentResult` completes after document presentation and editor opening
+  finish. Its one-shot close handler remains only to invoke `OnShutDown`.
+- `ShowToolResult` and `ShowWindowResult` complete when the shown item closes.
+  A faulted or canceled show task completes them immediately instead.
+- `ShowDialogResult` completes when the dialog task returns. `false` and `null`
+  are user cancellation; a canceled task is cancellation, while a faulted task
+  remains an error.
+
+Exceptions from `OnConfigure` are result errors. `OnShutDown` errors are result
+errors while the result is awaiting close or dialog return; for a document whose
+result has already completed, they fault the later close lifecycle task.
+
 ## Release policy
 
 This package family starts the Gemini 1.1 beta line. Removing net6/net7 and

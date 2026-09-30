@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Gemini.Framework.Services;
@@ -11,6 +12,7 @@ namespace Gemini.Framework.Results
         private readonly IDocument _editor;
         private readonly Type _editorType;
         private readonly string _path;
+        private System.Action _detachShutdownHandler;
 
 #pragma warning disable 649
 #pragma warning disable IDE0044 // Add readonly modifier
@@ -36,43 +38,52 @@ namespace Gemini.Framework.Results
 
         public override void Execute(CoroutineExecutionContext context)
         {
-            if (!string.IsNullOrEmpty(_path))
-            {
-                _ = ExecutePathAsync();
-                return;
-            }
+            var execution = BeginExecution();
+            DetachShutdownHandler();
+            System.Action detachShutdownHandler = null;
 
-            var editor = _editor ?? (IDocument)IoC.GetInstance(_editorType, null);
-            if (editor == null)
-            {
-                OnCompleted(null, true);
-                return;
-            }
-
-            ConfigureEditor(editor);
-
-            _shell
-                .OpenDocumentAsync(editor)
-                .ContinueWith(t =>
-                {
-                    OnCompleted(null, false);
-                });
-        }
-
-        private async Task ExecutePathAsync()
-        {
             try
             {
-                await _editorOpeningService.OpenFileAsync(_path, ConfigureEditor);
-                OnCompleted(null, false);
+                Task openTask;
+                if (!string.IsNullOrEmpty(_path))
+                {
+                    openTask = _editorOpeningService.OpenFileAsync(
+                        _path,
+                        delegate(IDocument editor)
+                        {
+                            ConfigureEditor(editor);
+                            detachShutdownHandler = AttachShutdownHandler(editor);
+                        });
+                }
+                else
+                {
+                    var editor = _editor ?? (IDocument)IoC.GetInstance(_editorType, null);
+                    if (editor == null)
+                    {
+                        execution.TryComplete(null, true);
+                        return;
+                    }
+
+                    ConfigureEditor(editor);
+                    detachShutdownHandler = AttachShutdownHandler(editor);
+                    openTask = _shell.OpenDocumentAsync(editor);
+                }
+
+                _ = ObserveTaskAsync(
+                    execution,
+                    openTask,
+                    true,
+                    onFailure: delegate { detachShutdownHandler?.Invoke(); });
             }
             catch (OperationCanceledException)
             {
-                OnCompleted(null, true);
+                detachShutdownHandler?.Invoke();
+                execution.TryComplete(null, true);
             }
             catch (Exception exception)
             {
-                OnCompleted(exception, false);
+                detachShutdownHandler?.Invoke();
+                execution.TryComplete(exception, false);
             }
         }
 
@@ -80,14 +91,19 @@ namespace Gemini.Framework.Results
         {
             _setData?.Invoke(editor);
             _onConfigure?.Invoke(editor);
+        }
 
-            editor.Deactivated += (sender, eventArgs) =>
-            {
-                if (eventArgs.WasClosed)
-                    _onShutDown?.Invoke(editor);
+        private System.Action AttachShutdownHandler(IDocument editor)
+        {
+            var detach = SubscribeToClosed(editor, editor, null);
+            var previous = Interlocked.Exchange(ref _detachShutdownHandler, detach);
+            previous?.Invoke();
+            return detach;
+        }
 
-                return Task.CompletedTask;
-            };
+        private void DetachShutdownHandler()
+        {
+            Interlocked.Exchange(ref _detachShutdownHandler, null)?.Invoke();
         }
     }
 }

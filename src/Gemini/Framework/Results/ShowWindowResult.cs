@@ -23,28 +23,26 @@ namespace Gemini.Framework.Results
 
         public override void Execute(CoroutineExecutionContext context)
         {
-            var window = _windowLocator();
+            var execution = BeginExecution();
 
-            if (_setData != null)
-                _setData(window);
-
-            if (_onConfigure != null)
-                _onConfigure(window);
-
-            window.Deactivated += (s, e) =>
+            try
             {
-                if (e.WasClosed)
-                {
-                    if (_onShutDown != null)
-                        _onShutDown(window);
+                var window = _windowLocator();
+                _setData?.Invoke(window);
+                _onConfigure?.Invoke(window);
 
-                    OnCompleted(null, false);
-                }
-
-                return System.Threading.Tasks.Task.CompletedTask;
-            };
-
-            WindowManager.ShowWindowAsync(window);
+                execution.RegisterCleanup(SubscribeToClosed(window, window, execution));
+                var showTask = WindowManager.ShowWindowAsync(window);
+                _ = ObserveTaskAsync(execution, showTask, false);
+            }
+            catch (OperationCanceledException)
+            {
+                execution.TryComplete(null, true);
+            }
+            catch (Exception exception)
+            {
+                execution.TryComplete(exception, false);
+            }
         }
     }
 }
