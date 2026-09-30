@@ -20,6 +20,17 @@ namespace Gemini.Modules.Shell.Services
         Corrupt
     }
 
+    /// <summary>Describes the outcome of a transactional layout-state write.</summary>
+    public enum LayoutItemStateSaveStatus
+    {
+        /// <summary>The complete destination was committed.</summary>
+        Success,
+        /// <summary>The destination was committed with one or more omitted item payloads.</summary>
+        Partial,
+        /// <summary>The destination was not replaced.</summary>
+        Failed
+    }
+
     /// <summary>Identifies restored items that require post-parse shell lifecycle work.</summary>
     public sealed class LayoutItemStateRestorePlan
     {
@@ -133,4 +144,54 @@ namespace Gemini.Modules.Shell.Services
         }
     }
 
+    /// <summary>Returns the transactional save outcome and any omitted-item details.</summary>
+    public sealed class LayoutItemStateSaveResult
+    {
+        private LayoutItemStateSaveResult(
+            LayoutItemStateSaveStatus status,
+            string details,
+            Exception exception)
+        {
+            Status = status;
+            Details = details;
+            Exception = exception;
+        }
+
+        public LayoutItemStateSaveStatus Status { get; }
+
+        public string Details { get; }
+
+        public Exception Exception { get; }
+
+        public static LayoutItemStateSaveResult Success()
+        {
+            return new LayoutItemStateSaveResult(
+                LayoutItemStateSaveStatus.Success,
+                null,
+                null);
+        }
+
+        public static LayoutItemStateSaveResult Partial(
+            string details,
+            Exception exception = null)
+        {
+            return new LayoutItemStateSaveResult(
+                LayoutItemStateSaveStatus.Partial,
+                details,
+                exception);
+        }
+
+        public static LayoutItemStateSaveResult Failed(
+            Exception exception,
+            string details = null)
+        {
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
+
+            return new LayoutItemStateSaveResult(
+                LayoutItemStateSaveStatus.Failed,
+                details,
+                exception);
+        }
+    }
 }

@@ -313,7 +313,7 @@ namespace Gemini.Tests.Modules.Shell
         }
 
         [TestMethod]
-        public void SaveState_WithOneReopenableTool_WritesItemEnvelopeBeforeLayoutBytes()
+        public void SaveState_WithOneReopenableTool_WritesCompleteEnvelopeBeforeLayoutBytes()
         {
             using (var directory = new TestDirectory())
             {
@@ -327,7 +327,7 @@ namespace Gemini.Tests.Modules.Shell
                     shellView,
                     stateFile);
 
-                Assert.IsTrue(result);
+                Assert.AreEqual(LayoutItemStateSaveStatus.Success, result.Status);
                 Assert.AreEqual(1, tool.SaveStateCallCount);
                 Assert.AreEqual(1, shellView.SaveLayoutCallCount);
 
@@ -345,6 +345,98 @@ namespace Gemini.Tests.Modules.Shell
                     CollectionAssert.AreEqual(LayoutBytes, reader.ReadBytes(LayoutBytes.Length));
                     Assert.AreEqual(reader.BaseStream.Length, reader.BaseStream.Position);
                 }
+            }
+        }
+
+        [TestMethod]
+        public void SaveState_ItemPayloadFailure_IsPartialAndLeavesSkippableEnvelope()
+        {
+            using (var directory = new TestDirectory())
+            {
+                var stateFile = directory.GetPath("layout-state.bin");
+                var expectedException = new InvalidOperationException("item save failed");
+                var tool = new TestTool(ToolStateBytes)
+                {
+                    SaveException = expectedException
+                };
+                var persister = new LayoutItemStatePersister();
+
+                var result = persister.SaveState(
+                    new TestShell(tools: new[] { tool }),
+                    new RecordingShellView(LayoutBytes),
+                    stateFile);
+
+                Assert.AreEqual(LayoutItemStateSaveStatus.Partial, result.Status);
+                Assert.AreSame(expectedException, result.Exception);
+                using (var reader = new BinaryReader(File.OpenRead(stateFile)))
+                {
+                    Assert.AreEqual(1, reader.ReadInt32());
+                    reader.ReadString();
+                    reader.ReadString();
+                    Assert.AreEqual(0L, reader.ReadInt64());
+                    CollectionAssert.AreEqual(LayoutBytes, reader.ReadBytes(LayoutBytes.Length));
+                }
+            }
+        }
+
+        [TestMethod]
+        public void SaveState_ExistingDestination_ReplacesStateAndPreservesDeterministicBackup()
+        {
+            using (var directory = new TestDirectory())
+            {
+                var stateFile = directory.GetPath("layout-state.bin");
+                var backupFile = stateFile + LayoutItemStatePersister.BackupFileSuffix;
+                var oldState = new byte[] { 0x10, 0x20, 0x30 };
+                File.WriteAllBytes(stateFile, oldState);
+                File.WriteAllBytes(backupFile, new byte[] { 0xFF });
+                var tool = new TestTool(ToolStateBytes);
+                var persister = new LayoutItemStatePersister();
+
+                var result = persister.SaveState(
+                    new TestShell(tools: new[] { tool }),
+                    new RecordingShellView(LayoutBytes),
+                    stateFile);
+
+                Assert.AreEqual(LayoutItemStateSaveStatus.Success, result.Status);
+                CollectionAssert.AreEqual(oldState, File.ReadAllBytes(backupFile));
+                CollectionAssert.AreNotEqual(oldState, File.ReadAllBytes(stateFile));
+                Assert.IsFalse(File.Exists(
+                    stateFile + LayoutItemStatePersister.TemporaryFileSuffix));
+            }
+        }
+
+        [TestMethod]
+        public void SaveState_ReplacementFailure_PreservesOldStateAndCleansOnlyKnownTemp()
+        {
+            using (var directory = new TestDirectory())
+            {
+                var stateFile = directory.GetPath("layout-state.bin");
+                var oldState = new byte[] { 0x44, 0x55, 0x66 };
+                File.WriteAllBytes(stateFile, oldState);
+                var shellView = new RecordingShellView(LayoutBytes);
+                var persister = new LayoutItemStatePersister();
+                LayoutItemStateSaveResult result;
+
+                using (new FileStream(
+                    stateFile,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.None))
+                {
+                    result = persister.SaveState(
+                        new TestShell(tools: new[] { new TestTool(ToolStateBytes) }),
+                        shellView,
+                        stateFile);
+                }
+
+                Assert.AreEqual(LayoutItemStateSaveStatus.Failed, result.Status);
+                Assert.IsInstanceOfType<IOException>(result.Exception);
+                Assert.AreEqual(1, shellView.SaveLayoutCallCount);
+                CollectionAssert.AreEqual(oldState, File.ReadAllBytes(stateFile));
+                Assert.IsFalse(File.Exists(
+                    stateFile + LayoutItemStatePersister.TemporaryFileSuffix));
+                Assert.IsFalse(File.Exists(
+                    stateFile + LayoutItemStatePersister.BackupFileSuffix));
             }
         }
 
@@ -469,11 +561,18 @@ namespace Gemini.Tests.Modules.Shell
 
             public bool IsVisible { get; set; }
 
+            public Exception SaveException { get; set; }
+
             public int SaveStateCallCount { get; private set; }
 
             public void SaveState(BinaryWriter writer)
             {
                 SaveStateCallCount++;
+                if (SaveException != null)
+                {
+                    writer.Write((byte)0xFF);
+                    throw SaveException;
+                }
                 writer.Write(_stateBytes);
             }
 
@@ -559,6 +658,8 @@ namespace Gemini.Tests.Modules.Shell
 
             public Exception LoadException { get; set; }
 
+            public Exception SaveException { get; set; }
+
             public int SaveLayoutCallCount { get; private set; }
 
             public int LoadLayoutCallCount { get; private set; }
@@ -592,6 +693,8 @@ namespace Gemini.Tests.Modules.Shell
             public void SaveLayout(Stream stream)
             {
                 SaveLayoutCallCount++;
+                if (SaveException != null)
+                    throw SaveException;
                 stream.Write(_layoutBytes, 0, _layoutBytes.Length);
             }
 

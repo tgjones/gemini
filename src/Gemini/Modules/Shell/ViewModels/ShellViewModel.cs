@@ -300,7 +300,9 @@ namespace Gemini.Modules.Shell.ViewModels
             // requests that occur when _closing is true.
             _closing = true;
 
-            _layoutItemStatePersister.SaveState(this, _shellView, StateFile);
+            var saveResult = _layoutItemStatePersister.SaveState(this, _shellView, StateFile);
+            if (saveResult.Status != LayoutItemStateSaveStatus.Success)
+                OnStateSaveWarning(saveResult);
 
             await base.OnDeactivateAsync(close, cancellationToken);
         }
@@ -321,6 +323,14 @@ namespace Gemini.Modules.Shell.ViewModels
         protected virtual void OnStateRestoreWarning(LayoutItemStateLoadResult result)
         {
             Trace.TraceWarning(FormatPersistenceWarning("Layout state restore", result.Details, result.Exception));
+        }
+
+        /// <summary>
+        /// Reports a partial or failed transactional state save.
+        /// </summary>
+        protected virtual void OnStateSaveWarning(LayoutItemStateSaveResult result)
+        {
+            Trace.TraceWarning(FormatPersistenceWarning("Layout state save", result.Details, result.Exception));
         }
 
         private Task QueueTransition(Func<Task> transition)

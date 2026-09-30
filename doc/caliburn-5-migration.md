@@ -85,6 +85,14 @@ Hidden tools are registered without activation; visible tools are activated
 once. Serializer callbacks never start background work and never outlive the
 state stream.
 
+Layout saves are transactional. The complete envelope and AvalonDock layout are
+written and flushed to `<state-file>.tmp` in the destination directory before
+the destination is replaced or moved. When a destination already exists, its
+previous contents are copied to the deterministic `<state-file>.bak` rollback
+file before replacement. A file-level failure leaves the destination intact.
+An individual item state failure remains a partial save with a skippable
+zero-length payload.
+
 ## Truthful editor opening
 
 `IEditorOpeningService` is the shared MEF service for opening existing files and

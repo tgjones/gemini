@@ -927,12 +927,12 @@ namespace Gemini.Tests.Modules.Shell
                 _loadState = loadState;
             }
 
-            public bool SaveState(
+            public LayoutItemStateSaveResult SaveState(
                 IShell shell,
                 IShellView shellView,
                 string fileName)
             {
-                return true;
+                return LayoutItemStateSaveResult.Success();
             }
 
             public Task<LayoutItemStateLoadResult> LoadStateAsync(
