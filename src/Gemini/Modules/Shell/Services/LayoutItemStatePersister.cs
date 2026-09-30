@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -131,77 +133,289 @@ namespace Gemini.Modules.Shell.Services
             return true;
         }
 
+        public async Task<LayoutItemStateLoadResult> LoadStateAsync(
+            IShell shell,
+            IShellView shellView,
+            string fileName)
+        {
+            FileStream stream;
+            try
+            {
+                stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            }
+            catch (FileNotFoundException)
+            {
+                return LayoutItemStateLoadResult.NotFound(
+                    "Layout state file was not found at '" + fileName + "'.");
+            }
+            catch (DirectoryNotFoundException)
+            {
+                return LayoutItemStateLoadResult.NotFound(
+                    "Layout state directory was not found for '" + fileName + "'.");
+            }
+            catch (Exception exception)
+            {
+                return LayoutItemStateLoadResult.Failed(
+                    exception,
+                    "Could not open layout state file '" + fileName + "'.");
+            }
+
+            ParsedLayoutState parsedState;
+            try
+            {
+                using (stream)
+                using (var reader = new BinaryReader(stream, Encoding.UTF8, true))
+                {
+                    parsedState = ParseState(reader, shellView, shell);
+                }
+            }
+            catch (Exception exception)
+            {
+                return LayoutItemStateLoadResult.Corrupt(
+                    exception,
+                    "Layout state file '" + fileName + "' could not be parsed; the original file was preserved.");
+            }
+
+            var failedItems = new List<ILayoutItem>();
+            foreach (var item in parsedState.Items)
+            {
+                var asyncRestorer = item as IAsyncLayoutItemStateRestorer;
+                if (asyncRestorer == null)
+                    continue;
+
+                try
+                {
+                    await asyncRestorer.RestoreStateAsync();
+                }
+                catch (Exception exception)
+                {
+                    failedItems.Add(item);
+                    parsedState.AddPartialFailure(
+                        string.Format(
+                            "Could not restore content for layout item '{0}': {1}",
+                            item.ContentId,
+                            exception.Message),
+                        exception);
+                }
+            }
+
+            var documents = parsedState.Documents
+                .Where(x => !ContainsReference(failedItems, x))
+                .ToArray();
+            var tools = parsedState.Tools
+                .Where(x => !ContainsReference(failedItems, x))
+                .ToArray();
+
+            foreach (var failedItem in failedItems)
+            {
+                var failedDocument = failedItem as IDocument;
+                if (failedDocument != null)
+                    shell.Documents.Remove(failedDocument);
+
+                var failedTool = failedItem as ITool;
+                if (failedTool != null)
+                    shell.Tools.Remove(failedTool);
+            }
+
+            var selectedItem = ContainsReference(failedItems, parsedState.SelectedItem)
+                ? null
+                : parsedState.SelectedItem;
+            var restorePlan = new LayoutItemStateRestorePlan(
+                documents,
+                tools.Where(x => x.IsVisible),
+                selectedItem);
+
+            return parsedState.HasPartialFailures
+                ? LayoutItemStateLoadResult.Partial(
+                    restorePlan,
+                    string.Join(Environment.NewLine, parsedState.PartialFailureDetails),
+                    parsedState.FirstPartialFailure)
+                : LayoutItemStateLoadResult.Success(restorePlan);
+        }
+
+        private static ParsedLayoutState ParseState(
+            BinaryReader reader,
+            IShellView shellView,
+            IShell shell)
+        {
+            var parsedState = new ParsedLayoutState();
+            var layoutItems = new Dictionary<string, ILayoutItem>();
+            var count = reader.ReadInt32();
+            if (count < 0)
+                throw new InvalidDataException("The persisted layout item count cannot be negative.");
+
+            for (var i = 0; i < count; i++)
+            {
+                var typeName = reader.ReadString();
+                var contentId = reader.ReadString();
+                var payloadLength = reader.ReadInt64();
+                if (payloadLength < 0 || payloadLength > reader.BaseStream.Length - reader.BaseStream.Position)
+                {
+                    throw new InvalidDataException(string.Format(
+                        "The persisted payload length for layout item '{0}' is invalid.",
+                        contentId));
+                }
+
+                var stateEndPosition = reader.BaseStream.Position + payloadLength;
+                ILayoutItem contentInstance = null;
+                try
+                {
+                    var contentType = Type.GetType(typeName, false);
+                    if (contentType == null)
+                    {
+                        parsedState.AddPartialFailure(string.Format(
+                            "The persisted layout item type '{0}' for '{1}' is unavailable.",
+                            typeName,
+                            contentId));
+                    }
+                    else
+                    {
+                        contentInstance = IoC.GetInstance(contentType, null) as ILayoutItem;
+                        if (contentInstance == null)
+                        {
+                            parsedState.AddPartialFailure(string.Format(
+                                "The persisted layout item type '{0}' for '{1}' could not be created.",
+                                typeName,
+                                contentId));
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    parsedState.AddPartialFailure(
+                        string.Format(
+                            "The persisted layout item '{0}' could not be created: {1}",
+                            contentId,
+                            exception.Message),
+                        exception);
+                }
+
+                var itemLoaded = false;
+                if (contentInstance != null)
+                {
+                    try
+                    {
+                        contentInstance.LoadState(reader);
+                        if (reader.BaseStream.Position > stateEndPosition)
+                        {
+                            throw new InvalidDataException(string.Format(
+                                "Layout item '{0}' read beyond its persisted payload.",
+                                contentId));
+                        }
+
+                        itemLoaded = true;
+                    }
+                    catch (Exception exception)
+                    {
+                        parsedState.AddPartialFailure(
+                            string.Format(
+                                "Could not load persisted payload for layout item '{0}': {1}",
+                                contentId,
+                                exception.Message),
+                            exception);
+                    }
+                }
+
+                reader.BaseStream.Seek(stateEndPosition, SeekOrigin.Begin);
+                if (!itemLoaded)
+                    continue;
+
+                if (layoutItems.ContainsKey(contentId))
+                {
+                    parsedState.AddPartialFailure(
+                        "The persisted layout contains duplicate content ID '" + contentId + "'.");
+                    continue;
+                }
+
+                layoutItems.Add(contentId, contentInstance);
+                parsedState.Items.Add(contentInstance);
+            }
+
+            // Register the already-created instances synchronously so ItemsSource binds
+            // AvalonDock's deserialized nodes. Async content and activation run afterward.
+            shellView.LoadLayout(
+                reader.BaseStream,
+                tool =>
+                {
+                    shell.RegisterTool(tool);
+                    parsedState.AddTool(tool);
+                },
+                document =>
+                {
+                    if (!ContainsReference(shell.Documents, document))
+                        shell.Documents.Add(document);
+                    parsedState.AddDocument(document);
+                },
+                layoutItems);
+
+            return parsedState;
+        }
+
         private static Type GetTypeFromContractNameAsILayoutItem(ExportAttribute attribute)
         {
-            string typeName;
-            if ((typeName = attribute.ContractName) == null)
+            var typeName = attribute.ContractName;
+            if (typeName == null)
                 return null;
 
             var type = Type.GetType(typeName);
-            return typeof(ILayoutItem).IsAssignableFrom(type) ? type : null;
+            return type != null && typeof(ILayoutItem).IsAssignableFrom(type) ? type : null;
         }
 
-        public bool LoadState(IShell shell, IShellView shellView, string fileName)
+        private static bool ContainsReference<T>(IEnumerable<T> items, T candidate)
+            where T : class
         {
-            var layoutItems = new Dictionary<string, ILayoutItem>();
-
-            if (!File.Exists(fileName))
-            {
+            if (candidate == null)
                 return false;
-            }
 
-            try
+            return items.Any(x => ReferenceEquals(x, candidate));
+        }
+
+        private sealed class ParsedLayoutState
+        {
+            public ParsedLayoutState()
             {
-                using (var reader = new BinaryReader(new FileStream(fileName, FileMode.Open, FileAccess.Read)))
-                {
-                    int count = reader.ReadInt32();
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        string typeName = reader.ReadString();
-                        string contentId = reader.ReadString();
-                        long stateEndPosition = reader.ReadInt64();
-                        stateEndPosition += reader.BaseStream.Position;
-
-                        var contentType = Type.GetType(typeName);
-                        bool skipStateData = true;
-
-                        if (contentType != null)
-                        {
-                            var contentInstance = IoC.GetInstance(contentType, null) as ILayoutItem;
-
-                            if (contentInstance != null)
-                            {
-                                layoutItems.Add(contentId, contentInstance);
-
-                                try
-                                {
-                                    contentInstance.LoadState(reader);
-                                    skipStateData = false;
-                                }
-                                catch
-                                {
-                                    skipStateData = true;
-                                }
-                            }
-                        }
-
-                        // Skip state data block if we couldn't read it.
-                        if (skipStateData)
-                        {
-                            reader.BaseStream.Seek(stateEndPosition, SeekOrigin.Begin);
-                        }
-                    }
-
-                    shellView.LoadLayout(reader.BaseStream, t => shell.RegisterTool(t), d => shell.OpenDocumentAsync(d).Wait(), layoutItems);
-                }
+                Items = new List<ILayoutItem>();
+                Documents = new List<IDocument>();
+                Tools = new List<ITool>();
+                PartialFailureDetails = new List<string>();
             }
-            catch
+
+            public List<ILayoutItem> Items { get; }
+
+            public List<IDocument> Documents { get; }
+
+            public List<ITool> Tools { get; }
+
+            public List<string> PartialFailureDetails { get; }
+
+            public Exception FirstPartialFailure { get; private set; }
+
+            public ILayoutItem SelectedItem { get; private set; }
+
+            public bool HasPartialFailures => PartialFailureDetails.Count != 0;
+
+            public void AddDocument(IDocument document)
             {
-                return false;
+                if (!ContainsReference(Documents, document))
+                    Documents.Add(document);
+                if (document.IsSelected)
+                    SelectedItem = document;
             }
 
-            return true;
+            public void AddTool(ITool tool)
+            {
+                if (!ContainsReference(Tools, tool))
+                    Tools.Add(tool);
+                if (tool.IsSelected)
+                    SelectedItem = tool;
+            }
+
+            public void AddPartialFailure(string details, Exception exception = null)
+            {
+                PartialFailureDetails.Add(details);
+                if (FirstPartialFailure == null && exception != null)
+                    FirstPartialFailure = exception;
+            }
         }
     }
 }

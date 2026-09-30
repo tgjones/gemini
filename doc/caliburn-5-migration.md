@@ -62,6 +62,29 @@ shell conductor. The default `AppBootstrapper` awaits root display, shell
 activation, and shell initialization in that order and treats a failure as a
 fatal startup error.
 
+## Persisted layout recovery
+
+Layout loading now returns an awaitable, explicit outcome instead of a Boolean.
+`NotFound` opens the module defaults. `Failed` and `Corrupt` preserve the
+unreadable state file in place, report the failure through the shell warning
+hook, and then open defaults without making startup fatal. `Partial` reports the
+skipped item, retains every usable document and tool, and does not replace the
+recovered layout with defaults. Missing plug-in types and invalid item payloads
+are partial recovery; malformed envelopes and AvalonDock deserialization errors
+are corrupt recovery.
+
+`ILayoutItem.LoadState(BinaryReader)` and AvalonDock's serialization callbacks
+remain synchronous and stream-scoped. Layout items that need asynchronous
+content loading can additionally implement `IAsyncLayoutItemStateRestorer`;
+that work runs after parsing and before restored items become ready.
+
+Shell readiness now waits for asynchronous item content restoration, ordered
+document presentation, visible-tool activation, and final persisted selection
+before module `PostInitializeAsync` and `IShell.InitializationTask` complete.
+Hidden tools are registered without activation; visible tools are activated
+once. Serializer callbacks never start background work and never outlive the
+state stream.
+
 ## Truthful editor opening
 
 `IEditorOpeningService` is the shared MEF service for opening existing files and

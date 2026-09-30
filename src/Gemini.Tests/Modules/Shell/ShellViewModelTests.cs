@@ -13,12 +13,14 @@ using Gemini.Framework.Themes;
 using Gemini.Modules.Shell.Services;
 using Gemini.Modules.Shell.ViewModels;
 using Gemini.Modules.Shell.Views;
+using Gemini.Tests.TestInfrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Action = System.Action;
 
 namespace Gemini.Tests.Modules.Shell
 {
     [STATestClass]
+    [DoNotParallelize]
     public class ShellViewModelTests
     {
         [TestMethod]
@@ -228,6 +230,161 @@ namespace Gemini.Tests.Modules.Shell
 
         [TestMethod]
         [Timeout(10000)]
+        public async Task InitializationTask_NotFound_UsesDefaultsWithoutWarning()
+        {
+            var defaultDocument = new TestDocument();
+            var module = new TestModule(
+                () => { },
+                () => { },
+                () => Task.CompletedTask,
+                new[] { defaultDocument });
+            var shell = CreateInitializationShell(
+                new[] { module },
+                TestThemeManager.WithCurrentTheme(),
+                new TestStatePersister(() => LayoutItemStateLoadResult.NotFound()));
+            await ActivateShellAsync(shell);
+
+            shell.LoadView(new TestShellView());
+            await shell.InitializationTask;
+
+            Assert.AreEqual(1, shell.Documents.Count);
+            Assert.AreSame(defaultDocument, shell.Documents[0]);
+            Assert.AreSame(defaultDocument, shell.ActiveItem);
+            Assert.AreEqual(0, shell.RestoreWarnings.Count);
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
+        public async Task InitializationTask_PartialRestore_RegistersHiddenToolsAndRestoresOrderedSelection()
+        {
+            var hiddenTool = new TestTool { IsVisible = false };
+            var visibleTool = new TestTool { IsVisible = true };
+            var selectedDocument = new TestDocument { IsSelected = true };
+            var secondDocument = new TestDocument();
+            var defaultDocument = new TestDocument();
+            var module = new TestModule(
+                () => { },
+                () => { },
+                () => Task.CompletedTask,
+                new[] { defaultDocument });
+            var restorePlan = new LayoutItemStateRestorePlan(
+                new[] { selectedDocument, secondDocument },
+                new[] { visibleTool },
+                selectedDocument);
+            var shell = CreateInitializationShell(
+                new[] { module },
+                TestThemeManager.WithCurrentTheme(),
+                new TestStatePersister(model =>
+                {
+                    model.RegisterTool(hiddenTool);
+                    model.RegisterTool(visibleTool);
+                    return Task.FromResult(LayoutItemStateLoadResult.Partial(
+                        restorePlan,
+                        "one persisted plug-in was unavailable"));
+                }));
+            await ActivateShellAsync(shell);
+
+            shell.LoadView(new TestShellView());
+            await shell.InitializationTask;
+
+            Assert.AreEqual(2, shell.Tools.Count);
+            Assert.AreSame(hiddenTool, shell.Tools[0]);
+            Assert.AreSame(visibleTool, shell.Tools[1]);
+            Assert.AreEqual(0, hiddenTool.ActivationCount);
+            Assert.AreEqual(1, visibleTool.ActivationCount);
+            Assert.AreEqual(2, shell.Documents.Count);
+            Assert.IsFalse(shell.Documents.Contains(defaultDocument));
+            Assert.AreSame(selectedDocument, shell.Documents[0]);
+            Assert.AreSame(secondDocument, shell.Documents[1]);
+            Assert.AreSame(selectedDocument, shell.ActiveItem);
+            Assert.AreSame(selectedDocument, shell.ActiveLayoutItem);
+            Assert.IsTrue(selectedDocument.IsSelected);
+            Assert.AreEqual(1, shell.RestoreWarnings.Count);
+            Assert.AreEqual(LayoutItemStateLoadStatus.Partial, shell.RestoreWarnings[0].Status);
+            Assert.AreEqual(1, module.PostInitializeCallCount);
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
+        public async Task InitializationTask_AwaitsAsyncItemContentRestoreBeforePresentationAndPostInitialize()
+        {
+            var document = new DelayedStateDocument();
+            var module = TestModule.Empty;
+            var shell = CreateInitializationShell(
+                new[] { module },
+                TestThemeManager.WithCurrentTheme(),
+                new LayoutItemStatePersister());
+            WritePersistedDocumentState(
+                shell.StateFile,
+                typeof(DelayedStateDocument).AssemblyQualifiedName,
+                "delayed-document",
+                "restored-file.cs");
+            var shellView = new TestShellView((stream, addTool, addDocument, items) =>
+            {
+                Assert.IsTrue(stream.CanRead);
+                var restoredDocument = (IDocument)items["delayed-document"];
+                restoredDocument.IsSelected = true;
+                addDocument(restoredDocument);
+            });
+
+            try
+            {
+                using (new IoCOverrideScope(
+                    (type, key) => type == typeof(DelayedStateDocument) ? document : null,
+                    type => Enumerable.Empty<object>(),
+                    instance => { }))
+                {
+                    await ActivateShellAsync(shell);
+                    shell.LoadView(shellView);
+                    await document.RestoreEntered;
+
+                    Assert.IsFalse(shell.InitializationTask.IsCompleted);
+                    Assert.AreEqual(1, shell.Documents.Count);
+                    Assert.AreSame(document, shell.Documents[0]);
+                    Assert.AreEqual(0, module.PostInitializeCallCount);
+                    Assert.AreEqual("restored-file.cs", document.PendingPath);
+
+                    document.CompleteRestore();
+                    await shell.InitializationTask;
+
+                    Assert.AreEqual("restored-file.cs", document.RestoredPath);
+                    Assert.AreEqual(1, shell.Documents.Count);
+                    Assert.AreSame(document, shell.ActiveItem);
+                    Assert.AreEqual(1, module.PostInitializeCallCount);
+                }
+            }
+            finally
+            {
+                if (File.Exists(shell.StateFile))
+                    File.Delete(shell.StateFile);
+            }
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
+        public async Task InitializationTask_EqualRestoredDocuments_RegistersEachReference()
+        {
+            var first = new EqualDocument();
+            var second = new EqualDocument();
+            var restorePlan = new LayoutItemStateRestorePlan(
+                new IDocument[] { first, second },
+                new ITool[0],
+                first);
+            var shell = CreateInitializationShell(
+                new[] { TestModule.Empty },
+                TestThemeManager.WithCurrentTheme(),
+                new TestStatePersister(() => LayoutItemStateLoadResult.Success(restorePlan)));
+
+            shell.LoadView(new TestShellView());
+            await shell.InitializationTask;
+
+            Assert.AreEqual(2, shell.Documents.Count);
+            Assert.AreSame(first, shell.Documents[0]);
+            Assert.AreSame(second, shell.Documents[1]);
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
         public async Task InitializationTask_WaitsForPostInitializeAsync_AndRunsOnlyOnce()
         {
             var markers = new List<string>();
@@ -248,7 +405,7 @@ namespace Gemini.Tests.Modules.Shell
             var shell = CreateInitializationShell(
                 new[] { module },
                 TestThemeManager.WithCurrentTheme(),
-                new TestStatePersister(() => false));
+                new TestStatePersister(() => LayoutItemStateLoadResult.NotFound()));
             await ActivateShellAsync(shell);
 
             shell.LoadView(new TestShellView());
@@ -279,7 +436,7 @@ namespace Gemini.Tests.Modules.Shell
             var shell = CreateInitializationShell(
                 new[] { module },
                 TestThemeManager.WithCurrentTheme(),
-                new TestStatePersister(() => false));
+                new TestStatePersister(() => LayoutItemStateLoadResult.NotFound()));
             await ActivateShellAsync(shell);
 
             shell.LoadView(new TestShellView());
@@ -297,7 +454,7 @@ namespace Gemini.Tests.Modules.Shell
             var shell = CreateInitializationShell(
                 new[] { TestModule.Empty },
                 themeManager,
-                new TestStatePersister(() => false));
+                new TestStatePersister(() => LayoutItemStateLoadResult.NotFound()));
             await ActivateShellAsync(shell);
 
             shell.LoadView(new TestShellView());
@@ -328,24 +485,56 @@ namespace Gemini.Tests.Modules.Shell
 
         [TestMethod]
         [Timeout(10000)]
-        public async Task InitializationTask_UnreadablePersistedState_FallsBackToDefaults()
+        public async Task InitializationTask_CorruptPersistedState_WarnsAndFallsBackToDefaults()
         {
+            var defaultDocument = new TestDocument();
+            var expectedException = new InvalidDataException("truncated state");
+            var module = new TestModule(
+                () => { },
+                () => { },
+                () => Task.CompletedTask,
+                new[] { defaultDocument });
             var shell = CreateInitializationShell(
-                new[] { TestModule.Empty },
+                new[] { module },
                 TestThemeManager.WithCurrentTheme(),
-                new TestStatePersister(() => false));
-            File.WriteAllText(shell.StateFile, "invalid state");
+                new TestStatePersister(() => LayoutItemStateLoadResult.Corrupt(
+                    expectedException,
+                    "state was corrupt")));
+            await ActivateShellAsync(shell);
 
-            try
+            shell.LoadView(new TestShellView());
+            await shell.InitializationTask;
+
+            Assert.AreEqual(1, shell.Documents.Count);
+            Assert.AreSame(defaultDocument, shell.Documents[0]);
+            Assert.AreSame(defaultDocument, shell.ActiveItem);
+            Assert.AreEqual(1, shell.RestoreWarnings.Count);
+            Assert.AreEqual(LayoutItemStateLoadStatus.Corrupt, shell.RestoreWarnings[0].Status);
+            Assert.AreSame(expectedException, shell.RestoreWarnings[0].Exception);
+        }
+
+        private static void WritePersistedDocumentState(
+            string fileName,
+            string typeName,
+            string contentId,
+            string persistedPath)
+        {
+            byte[] payload;
+            using (var payloadStream = new MemoryStream())
+            using (var payloadWriter = new BinaryWriter(payloadStream))
             {
-                await ActivateShellAsync(shell);
-
-                shell.LoadView(new TestShellView());
-                await shell.InitializationTask;
+                payloadWriter.Write(persistedPath);
+                payloadWriter.Flush();
+                payload = payloadStream.ToArray();
             }
-            finally
+
+            using (var writer = new BinaryWriter(File.Create(fileName)))
             {
-                File.Delete(shell.StateFile);
+                writer.Write(1);
+                writer.Write(typeName);
+                writer.Write(contentId);
+                writer.Write((long)payload.Length);
+                writer.Write(payload);
             }
         }
 
@@ -383,6 +572,9 @@ namespace Gemini.Tests.Modules.Shell
 
             public int ActivateItemCallCount { get; private set; }
 
+            public List<LayoutItemStateLoadResult> RestoreWarnings { get; }
+                = new List<LayoutItemStateLoadResult>();
+
             public override string StateFile => _stateFile;
 
             public override Task ActivateItemAsync(
@@ -401,6 +593,11 @@ namespace Gemini.Tests.Modules.Shell
             public void CompleteActivation(IDocument document, bool success)
             {
                 OnActivationProcessed(document, success);
+            }
+
+            protected override void OnStateRestoreWarning(LayoutItemStateLoadResult result)
+            {
+                RestoreWarnings.Add(result);
             }
         }
 
@@ -440,6 +637,38 @@ namespace Gemini.Tests.Modules.Shell
                 await base.OnActivatedAsync(cancellationToken);
             }
         }
+
+        private sealed class DelayedStateDocument : TestDocument, IAsyncLayoutItemStateRestorer
+        {
+            private readonly TaskCompletionSource<object> _restoreEntered =
+                new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            private readonly TaskCompletionSource<object> _restoreGate =
+                new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+
+            public Task RestoreEntered => _restoreEntered.Task;
+
+            public string PendingPath { get; private set; }
+
+            public string RestoredPath { get; private set; }
+
+            public override void LoadState(BinaryReader reader)
+            {
+                PendingPath = reader.ReadString();
+            }
+
+            public async Task RestoreStateAsync()
+            {
+                _restoreEntered.TrySetResult(null);
+                await _restoreGate.Task;
+                RestoredPath = PendingPath;
+            }
+
+            public void CompleteRestore()
+            {
+                _restoreGate.TrySetResult(null);
+            }
+        }
+
         private sealed class ReactivatingDocument : TestDocument
         {
             private readonly TaskCompletionSource<object> _secondActivationEntered =
@@ -559,11 +788,26 @@ namespace Gemini.Tests.Modules.Shell
             }
         }
 
+        private sealed class EqualDocument : Document
+        {
+            public override bool Equals(object obj)
+            {
+                return obj is EqualDocument;
+            }
+
+            public override int GetHashCode()
+            {
+                return 0;
+            }
+        }
+
         private sealed class TestModule : IModule
         {
             private readonly Action _preInitialize;
             private readonly Action _initialize;
             private readonly Func<Task> _postInitialize;
+            private readonly IEnumerable<IDocument> _defaultDocuments;
+            private readonly IEnumerable<Type> _defaultTools;
 
             public static TestModule Empty => new TestModule(
                 () => { },
@@ -573,21 +817,23 @@ namespace Gemini.Tests.Modules.Shell
             public TestModule(
                 Action preInitialize,
                 Action initialize,
-                Func<Task> postInitialize)
+                Func<Task> postInitialize,
+                IEnumerable<IDocument> defaultDocuments = null,
+                IEnumerable<Type> defaultTools = null)
             {
                 _preInitialize = preInitialize;
                 _initialize = initialize;
                 _postInitialize = postInitialize;
+                _defaultDocuments = defaultDocuments ?? Enumerable.Empty<IDocument>();
+                _defaultTools = defaultTools ?? Enumerable.Empty<Type>();
             }
 
             public IEnumerable<ResourceDictionary> GlobalResourceDictionaries
                 => Enumerable.Empty<ResourceDictionary>();
 
-            public IEnumerable<IDocument> DefaultDocuments
-                => Enumerable.Empty<IDocument>();
+            public IEnumerable<IDocument> DefaultDocuments => _defaultDocuments;
 
-            public IEnumerable<Type> DefaultTools
-                => Enumerable.Empty<Type>();
+            public IEnumerable<Type> DefaultTools => _defaultTools;
 
             public int PreInitializeCallCount { get; private set; }
 
@@ -669,32 +915,61 @@ namespace Gemini.Tests.Modules.Shell
 
         private sealed class TestStatePersister : ILayoutItemStatePersister
         {
-            private readonly Func<bool> _loadState;
+            private readonly Func<IShell, Task<LayoutItemStateLoadResult>> _loadState;
 
-            public TestStatePersister(Func<bool> loadState)
+            public TestStatePersister(Func<LayoutItemStateLoadResult> loadState)
+                : this(shell => Task.FromResult(loadState()))
+            {
+            }
+
+            public TestStatePersister(Func<IShell, Task<LayoutItemStateLoadResult>> loadState)
             {
                 _loadState = loadState;
             }
 
-            public bool SaveState(IShell shell, IShellView shellView, string fileName)
+            public bool SaveState(
+                IShell shell,
+                IShellView shellView,
+                string fileName)
             {
                 return true;
             }
 
-            public bool LoadState(IShell shell, IShellView shellView, string fileName)
+            public Task<LayoutItemStateLoadResult> LoadStateAsync(
+                IShell shell,
+                IShellView shellView,
+                string fileName)
             {
-                return _loadState();
+                return _loadState(shell);
             }
         }
 
+        private delegate void LayoutLoadAction(
+            Stream stream,
+            Action<ITool> addTool,
+            Action<IDocument> addDocument,
+            Dictionary<string, ILayoutItem> items);
+
         private sealed class TestShellView : IShellView
         {
+            private readonly LayoutLoadAction _loadLayout;
+
+            public TestShellView(LayoutLoadAction loadLayout = null)
+            {
+                _loadLayout = loadLayout;
+            }
+
             public void LoadLayout(
                 Stream stream,
                 Action<ITool> addToolCallback,
                 Action<IDocument> addDocumentCallback,
                 Dictionary<string, ILayoutItem> itemsState)
             {
+                _loadLayout?.Invoke(
+                    stream,
+                    addToolCallback,
+                    addDocumentCallback,
+                    itemsState);
             }
 
             public void SaveLayout(Stream stream)

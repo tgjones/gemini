@@ -161,18 +161,32 @@ namespace Gemini.Modules.Shell.ViewModels
             }
 
             _shellView = shellView;
-            if (!_layoutItemStatePersister.LoadState(
+            var restoreResult = await _layoutItemStatePersister.LoadStateAsync(
                 this,
                 _shellView,
-                StateFile))
+                StateFile);
+
+            if (restoreResult.Status != LayoutItemStateLoadStatus.Success
+                && restoreResult.Status != LayoutItemStateLoadStatus.NotFound)
             {
-                foreach (var defaultDocument in modules.SelectMany(x => x.DefaultDocuments))
-                    await OpenDocumentAsync(defaultDocument);
-                foreach (var defaultTool in modules.SelectMany(x => x.DefaultTools))
-                {
-                    await ShowToolAsync(
-                        (ITool)IoC.GetInstance(defaultTool, null));
-                }
+                OnStateRestoreWarning(restoreResult);
+            }
+
+            switch (restoreResult.Status)
+            {
+                case LayoutItemStateLoadStatus.Success:
+                case LayoutItemStateLoadStatus.Partial:
+                    await RestoreLayoutAsync(restoreResult.RestorePlan);
+                    break;
+
+                case LayoutItemStateLoadStatus.NotFound:
+                case LayoutItemStateLoadStatus.Failed:
+                case LayoutItemStateLoadStatus.Corrupt:
+                    await OpenDefaultLayoutAsync(modules);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             foreach (var module in modules)
@@ -304,9 +318,78 @@ namespace Gemini.Modules.Shell.ViewModels
             Trace.TraceError(exception.ToString());
         }
 
+        protected virtual void OnStateRestoreWarning(LayoutItemStateLoadResult result)
+        {
+            Trace.TraceWarning(FormatPersistenceWarning("Layout state restore", result.Details, result.Exception));
+        }
+
         private Task QueueTransition(Func<Task> transition)
         {
             return _transitionCoordinator.Enqueue(transition);
+        }
+
+        private async Task OpenDefaultLayoutAsync(IEnumerable<IModule> modules)
+        {
+            foreach (var defaultDocument in modules.SelectMany(x => x.DefaultDocuments))
+                await OpenDocumentAsync(defaultDocument);
+            foreach (var defaultTool in modules.SelectMany(x => x.DefaultTools))
+                await ShowToolAsync((ITool)IoC.GetInstance(defaultTool, null));
+        }
+
+        private async Task RestoreLayoutAsync(LayoutItemStateRestorePlan restorePlan)
+        {
+            foreach (var document in restorePlan.Documents)
+                RegisterDocument(document);
+
+            foreach (var tool in restorePlan.VisibleTools)
+            {
+                RegisterTool(tool);
+                await QueueTransition(() => ActivateRestoredToolAsync(tool));
+            }
+
+            if (restorePlan.SelectedItem != null)
+            {
+                await QueueTransition(
+                    () => ApplyRestoredSelectionAsync(restorePlan.SelectedItem));
+            }
+        }
+
+        private bool RegisterDocument(IDocument document)
+        {
+            if (Documents.Any(existing => ReferenceEquals(existing, document)))
+                return false;
+
+            Items.Add(document);
+            return true;
+        }
+
+        private async Task ApplyRestoredSelectionAsync(ILayoutItem item)
+        {
+            var document = item as IDocument;
+            if (document != null)
+            {
+                await ActivateItemAsync(document, CancellationToken.None);
+                document.IsSelected = true;
+                return;
+            }
+
+            var tool = item as ITool;
+            if (tool == null || !tool.IsVisible)
+                return;
+
+            if (!tool.IsActive)
+                await tool.ActivateAsync(CancellationToken.None);
+            tool.IsSelected = true;
+            SetActiveLayoutItemFromTransition(tool);
+        }
+
+        private static string FormatPersistenceWarning(
+            string operation,
+            string details,
+            Exception exception)
+        {
+            var message = string.IsNullOrEmpty(details) ? operation + " did not succeed." : details;
+            return exception == null ? message : message + Environment.NewLine + exception;
         }
 
         private async Task ApplyActiveLayoutItemBindingAsync(ILayoutItem item)
@@ -340,6 +423,12 @@ namespace Gemini.Modules.Shell.ViewModels
             tool.IsSelected = false;
             if (ReferenceEquals(_activeLayoutItem, tool))
                 SetActiveLayoutItemFromTransition(null);
+        }
+
+        private static async Task ActivateRestoredToolAsync(ITool tool)
+        {
+            if (!tool.IsActive)
+                await tool.ActivateAsync(CancellationToken.None);
         }
 
         private void SetActiveLayoutItemFromTransition(ILayoutItem item)

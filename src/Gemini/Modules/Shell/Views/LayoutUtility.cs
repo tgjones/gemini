@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using Gemini.Framework;
 using AvalonDock;
 using AvalonDock.Layout;
@@ -37,13 +36,9 @@ namespace Gemini.Modules.Shell.Views
 
                         if (tool != null && anchorable != null)
                         {
-                            addToolCallback(tool);
                             tool.IsVisible = anchorable.IsVisible;
-
-                            if (anchorable.IsVisible)
-                                tool.ActivateAsync(CancellationToken.None).Wait();
-
                             tool.IsSelected = e.Model.IsSelected;
+                            addToolCallback(tool);
 
                             return;
                         }
@@ -65,13 +60,7 @@ namespace Gemini.Modules.Shell.Views
                     e.Cancel = true;
                 };
 
-            try
-            {
-                layoutSerializer.Deserialize(stream);
-            }
-            catch
-            {
-            }
+            layoutSerializer.Deserialize(stream);
         }
     }
 }
