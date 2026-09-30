@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj" />
     <ProjectReference Include="..\Gemini\Gemini.csproj" />
   </ItemGroup>
 

@@ -150,6 +150,14 @@ Exceptions from `OnConfigure` are result errors. `OnShutDown` errors are result
 errors while the result is awaiting close or dialog return; for a document whose
 result has already completed, they fault the later close lifecycle task.
 
+## Retained MEF and Inspector conventions
+
+MEF priority catalogs remain ahead of main catalogs so the first single-service
+resolution is the application override. Document exports that represent a new
+editor instance retain `PartCreationPolicy(CreationPolicy.NonShared)`, and
+missing required imports remain visible as composition failures rather than
+being converted into fallback instances.
+
 ## Release policy
 
 This package family starts the Gemini 1.1 beta line. Removing net6/net7 and
