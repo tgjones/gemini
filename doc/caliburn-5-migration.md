@@ -62,6 +62,28 @@ shell conductor. The default `AppBootstrapper` awaits root display, shell
 activation, and shell initialization in that order and treats a failure as a
 fatal startup error.
 
+## Close guards and lifecycle state
+
+Dirty document outcomes remain distinct. **Save** closes only after the save
+completes; a canceled Save As remains a veto. **Discard** closes without
+clearing the dirty state first, while **Cancel** leaves the document active.
+Save faults and task cancellation remain observable to the caller. Undo history
+is retained when close is vetoed or saving does not complete, and is disposed
+when the document closes.
+
+Shell state is saved only for an actual `close=true` deactivation. Ordinary
+deactivation neither latches the shutdown guard nor writes state, so the shell
+can reactivate and accept later document activation. A failed close clears the
+shutdown guard; successful close keeps it latched for the last-nonactive-
+document AvalonDock workaround. Partial or failed transactional state saves
+continue through the existing warning hook.
+
+Applications that add an exit confirmation after deriving from the shell must
+await `base.CanCloseAsync` first. Only after every child guard allows close
+should application confirmation run. Coroutine bridges should complete task
+continuations asynchronously, preserve user cancellation, and surface
+`ResultCompletionEventArgs.Error` as a task fault.
+
 ## Persisted layout recovery
 
 Layout loading now returns an awaitable, explicit outcome instead of a Boolean.

@@ -230,6 +230,83 @@ namespace Gemini.Tests.Modules.Shell
 
         [TestMethod]
         [Timeout(10000)]
+        public async Task DeactivateAsync_NonClose_DoesNotSaveOrSuppressLaterActivation()
+        {
+            var persister = new TestStatePersister(() => LayoutItemStateLoadResult.NotFound());
+            var shell = new TestShellViewModel();
+            SetPrivateField(shell, "_layoutItemStatePersister", persister);
+            await ActivateShellAsync(shell);
+            var first = new TestDocument();
+            await shell.OpenDocumentAsync(first);
+
+            await ((IDeactivate)shell).DeactivateAsync(false, CancellationToken.None);
+
+            Assert.AreEqual(0, persister.SaveStateCallCount);
+            Assert.IsFalse(shell.IsActive);
+
+            await ActivateShellAsync(shell);
+            var second = new TestDocument();
+            await shell.OpenDocumentAsync(second);
+
+            Assert.AreSame(second, shell.ActiveItem);
+            Assert.AreEqual(1, second.ActivationCount);
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
+        public async Task DeactivateAsync_CloseFailure_ResetsClosingAndPreservesSaveWarning()
+        {
+            var saveResult = LayoutItemStateSaveResult.Partial("one item could not be saved");
+            var persister = new TestStatePersister(
+                () => LayoutItemStateLoadResult.NotFound(),
+                () => saveResult);
+            var shell = new TestShellViewModel();
+            SetPrivateField(shell, "_layoutItemStatePersister", persister);
+            await ActivateShellAsync(shell);
+            var expectedException = new InvalidOperationException("document close failed");
+            await shell.OpenDocumentAsync(new FaultingCloseDocument(expectedException));
+
+            var actualException = await Assert.ThrowsExactlyAsync<InvalidOperationException>(
+                async () => await ((IDeactivate)shell).DeactivateAsync(
+                    true,
+                    CancellationToken.None));
+
+            Assert.AreSame(expectedException, actualException);
+            Assert.AreEqual(1, persister.SaveStateCallCount);
+            Assert.AreEqual(1, shell.SaveWarnings.Count);
+            Assert.AreSame(saveResult, shell.SaveWarnings[0]);
+
+            var succeeding = new TestDocument();
+            await shell.OpenDocumentAsync(succeeding);
+
+            Assert.AreSame(succeeding, shell.ActiveItem);
+            Assert.AreEqual(1, succeeding.ActivationCount);
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
+        public async Task DeactivateAsync_Close_IgnoresActivationFromLastNonActiveDocument()
+        {
+            var persister = new TestStatePersister(() => LayoutItemStateLoadResult.NotFound());
+            var shell = new TestShellViewModel();
+            SetPrivateField(shell, "_layoutItemStatePersister", persister);
+            await ActivateShellAsync(shell);
+            var unexpected = new TestDocument();
+            var nonActive = new ActivationRequestOnCloseDocument(shell, unexpected);
+            var active = new TestDocument();
+            await shell.OpenDocumentAsync(nonActive);
+            await shell.OpenDocumentAsync(active);
+
+            await ((IDeactivate)shell).DeactivateAsync(true, CancellationToken.None);
+
+            Assert.AreEqual(1, persister.SaveStateCallCount);
+            Assert.AreEqual(0, unexpected.ActivationCount);
+            Assert.IsFalse(shell.Documents.Contains(unexpected));
+            Assert.AreEqual(0, shell.Documents.Count);
+        }
+
+        [TestMethod]
+        [Timeout(10000)]
         public async Task InitializationTask_NotFound_UsesDefaultsWithoutWarning()
         {
             var defaultDocument = new TestDocument();
@@ -575,6 +652,9 @@ namespace Gemini.Tests.Modules.Shell
             public List<LayoutItemStateLoadResult> RestoreWarnings { get; }
                 = new List<LayoutItemStateLoadResult>();
 
+            public List<LayoutItemStateSaveResult> SaveWarnings { get; }
+                = new List<LayoutItemStateSaveResult>();
+
             public override string StateFile => _stateFile;
 
             public override Task ActivateItemAsync(
@@ -598,6 +678,11 @@ namespace Gemini.Tests.Modules.Shell
             protected override void OnStateRestoreWarning(LayoutItemStateLoadResult result)
             {
                 RestoreWarnings.Add(result);
+            }
+
+            protected override void OnStateSaveWarning(LayoutItemStateSaveResult result)
+            {
+                SaveWarnings.Add(result);
             }
         }
 
@@ -635,6 +720,50 @@ namespace Gemini.Tests.Modules.Shell
                 ActivationCount++;
                 await _shell.ShowToolAsync(_tool);
                 await base.OnActivatedAsync(cancellationToken);
+            }
+        }
+
+        private sealed class FaultingCloseDocument : TestDocument
+        {
+            private readonly Exception _exception;
+
+            public FaultingCloseDocument(Exception exception)
+            {
+                _exception = exception;
+            }
+
+            protected override Task OnDeactivateAsync(
+                bool close,
+                CancellationToken cancellationToken)
+            {
+                if (close)
+                    throw _exception;
+
+                return base.OnDeactivateAsync(false, cancellationToken);
+            }
+        }
+
+        private sealed class ActivationRequestOnCloseDocument : TestDocument
+        {
+            private readonly ShellViewModel _shell;
+            private readonly IDocument _requestedDocument;
+
+            public ActivationRequestOnCloseDocument(
+                ShellViewModel shell,
+                IDocument requestedDocument)
+            {
+                _shell = shell;
+                _requestedDocument = requestedDocument;
+            }
+
+            protected override async Task OnDeactivateAsync(
+                bool close,
+                CancellationToken cancellationToken)
+            {
+                if (close)
+                    await _shell.ActivateItemAsync(_requestedDocument, cancellationToken);
+                await base.OnDeactivateAsync(close, cancellationToken);
+                await base.OnDeactivateAsync(close, cancellationToken);
             }
         }
 
@@ -916,23 +1045,32 @@ namespace Gemini.Tests.Modules.Shell
         private sealed class TestStatePersister : ILayoutItemStatePersister
         {
             private readonly Func<IShell, Task<LayoutItemStateLoadResult>> _loadState;
+            private readonly Func<LayoutItemStateSaveResult> _saveState;
 
-            public TestStatePersister(Func<LayoutItemStateLoadResult> loadState)
-                : this(shell => Task.FromResult(loadState()))
+            public TestStatePersister(
+                Func<LayoutItemStateLoadResult> loadState,
+                Func<LayoutItemStateSaveResult> saveState = null)
+                : this(shell => Task.FromResult(loadState()), saveState)
             {
             }
 
-            public TestStatePersister(Func<IShell, Task<LayoutItemStateLoadResult>> loadState)
+            public TestStatePersister(
+                Func<IShell, Task<LayoutItemStateLoadResult>> loadState,
+                Func<LayoutItemStateSaveResult> saveState = null)
             {
                 _loadState = loadState;
+                _saveState = saveState ?? (() => LayoutItemStateSaveResult.Success());
             }
+
+            public int SaveStateCallCount { get; private set; }
 
             public LayoutItemStateSaveResult SaveState(
                 IShell shell,
                 IShellView shellView,
                 string fileName)
             {
-                return LayoutItemStateSaveResult.Success();
+                SaveStateCallCount++;
+                return _saveState();
             }
 
             public Task<LayoutItemStateLoadResult> LoadStateAsync(

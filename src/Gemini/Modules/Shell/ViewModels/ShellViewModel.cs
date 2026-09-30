@@ -276,35 +276,29 @@ namespace Gemini.Modules.Shell.ViewModels
             bool close,
             CancellationToken cancellationToken)
         {
-            // Workaround for a complex bug that occurs when
-            // (a) the window has multiple documents open, and
-            // (b) the last document is NOT active
-            // 
-            // The issue manifests itself with a crash in
-            // the call to base.ActivateItem(item), above,
-            // saying that the collection can't be changed
-            // in a CollectionChanged event handler.
-            // 
-            // The issue occurs because:
-            // - Caliburn.Micro sees the window is closing, and calls Items.Clear()
-            // - AvalonDock handles the CollectionChanged event, and calls Remove()
-            //   on each of the open documents.
-            // - If removing a document causes another to become active, then AvalonDock
-            //   sets a new ActiveContent.
-            // - We have a WPF binding from Caliburn.Micro's ActiveItem to AvalonDock's
-            //   ActiveContent property, so ActiveItem gets updated.
-            // - The document no longer exists in Items, beacuse that collection was cleared,
-            //   but Caliburn.Micro helpfully adds it again - which causes the crash.
-            //
-            // My workaround is to use the following _closing variable, and ignore activation
-            // requests that occur when _closing is true.
+            // During a real close, Caliburn clears Items while AvalonDock may echo a
+            // new active document. Ignore those echoes, but keep ordinary deactivation
+            // reusable and clear the latch if close fails so a later close can retry.
+            if (!close)
+            {
+                await base.OnDeactivateAsync(false, cancellationToken);
+                return;
+            }
+
             _closing = true;
+            try
+            {
+                var saveResult = _layoutItemStatePersister.SaveState(this, _shellView, StateFile);
+                if (saveResult.Status != LayoutItemStateSaveStatus.Success)
+                    OnStateSaveWarning(saveResult);
 
-            var saveResult = _layoutItemStatePersister.SaveState(this, _shellView, StateFile);
-            if (saveResult.Status != LayoutItemStateSaveStatus.Success)
-                OnStateSaveWarning(saveResult);
-
-            await base.OnDeactivateAsync(close, cancellationToken);
+                await base.OnDeactivateAsync(true, cancellationToken);
+            }
+            catch
+            {
+                _closing = false;
+                throw;
+            }
         }
 
         public void Close()

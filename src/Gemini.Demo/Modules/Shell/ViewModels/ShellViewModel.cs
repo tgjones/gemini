@@ -19,13 +19,41 @@ namespace Gemini.Demo.Modules.Shell.ViewModels
             ViewLocator.AddNamespaceMapping(typeof(ShellViewModel).Namespace, typeof(ShellView).Namespace);
         }
 
-        public override Task<bool> CanCloseAsync(CancellationToken cancellationToken)
+        public override async Task<bool> CanCloseAsync(CancellationToken cancellationToken)
         {
-            var tcs = new TaskCompletionSource<bool>();
+            if (!await base.CanCloseAsync(cancellationToken))
+                return false;
 
-            Coroutine.BeginExecute(CanClose().GetEnumerator(), null, (s, e) => tcs.SetResult(!e.WasCancelled));
+            cancellationToken.ThrowIfCancellationRequested();
+            return await ExecuteCanCloseCoroutineAsync(CanClose(), cancellationToken);
+        }
 
-            return tcs.Task;
+        private static async Task<bool> ExecuteCanCloseCoroutineAsync(
+            IEnumerable<IResult> results,
+            CancellationToken cancellationToken)
+        {
+            var completion = new TaskCompletionSource<bool>(
+                TaskCreationOptions.RunContinuationsAsynchronously);
+
+            using (cancellationToken.Register(() => completion.TrySetCanceled()))
+            {
+                try
+                {
+                    Coroutine.BeginExecute(results.GetEnumerator(), null, delegate(object sender, ResultCompletionEventArgs eventArgs)
+                    {
+                        if (eventArgs.Error != null)
+                            completion.TrySetException(eventArgs.Error);
+                        else
+                            completion.TrySetResult(!eventArgs.WasCancelled);
+                    });
+                }
+                catch (Exception exception)
+                {
+                    completion.TrySetException(exception);
+                }
+
+                return await completion.Task;
+            }
         }
 
         private IEnumerable<IResult> CanClose()
