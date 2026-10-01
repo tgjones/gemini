@@ -6,16 +6,6 @@
       "build": "net462"
     },
     {
-      "nuspec": "net6.0-windows7.0",
-      "asset": "net6.0-windows7.0",
-      "build": "net6.0-windows"
-    },
-    {
-      "nuspec": "net7.0-windows7.0",
-      "asset": "net7.0-windows7.0",
-      "build": "net7.0-windows"
-    },
-    {
       "nuspec": "net10.0-windows7.0",
       "asset": "net10.0-windows7.0",
       "build": "net10.0-windows"
