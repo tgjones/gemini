@@ -31,6 +31,7 @@ namespace Gemini.Tests.Framework
                 wasActiveInHandler = window.IsActive;
                 markers.Add("Activated");
                 activated.TrySetResult(true);
+                return Task.CompletedTask;
             };
 
             await ((IActivate)window).ActivateAsync(CancellationToken.None);
@@ -101,10 +102,10 @@ namespace Gemini.Tests.Framework
                 _markers = markers;
             }
 
-            protected override Task OnInitializeAsync(CancellationToken cancellationToken)
+            protected override Task OnInitializedAsync(CancellationToken cancellationToken)
             {
                 _markers.Add("Initialize");
-                return base.OnInitializeAsync(cancellationToken);
+                return base.OnInitializedAsync(cancellationToken);
             }
 
             protected override Task OnDeactivateAsync(

@@ -3,14 +3,21 @@
     {
       "nuspec": ".NETFramework4.6.2",
       "asset": "net462",
-      "build": "net462"
+      "build": "net462",
+      "lockFileTarget": "net462"
     },
     {
       "nuspec": "net10.0-windows7.0",
       "asset": "net10.0-windows7.0",
-      "build": "net10.0-windows"
+      "build": "net10.0-windows",
+      "lockFileTarget": "net10.0-windows"
     }
   ],
+  "resolvedDependencies": {
+    "Caliburn.Micro": "5.0.258",
+    "Caliburn.Micro.Core": "5.0.258",
+    "Microsoft.Xaml.Behaviors.Wpf": "1.1.135"
+  },
   "shaders": [
     "AddEffect.ps",
     "MultiplyEffect.ps"
@@ -21,7 +28,7 @@
       "assembly": "Gemini",
       "internalDependencies": [],
       "externalDependencies": {
-        "Caliburn.Micro": "4.0.210",
+        "Caliburn.Micro": "5.0.258",
         "Dirkster.AvalonDock.Themes.VS2013": "4.60.0",
         "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78",
         "MahApps.Metro": "2.4.11",

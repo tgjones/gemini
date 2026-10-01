@@ -104,6 +104,64 @@ namespace Gemini.Tests.Modules.Settings
             }
         }
 
+        [TestMethod]
+        [Timeout(10000)]
+        public async Task ActivateAsync_InitializationFailure_RequiresFreshInstanceForRetry()
+        {
+            var expectedException = new InvalidOperationException("settings discovery failed");
+            var failDiscovery = true;
+            var scope = new IoCOverrideScope(
+                delegate(Type serviceType, string key)
+                {
+                    throw new InvalidOperationException(
+                        "Unexpected single-instance request for " + serviceType.FullName + ".");
+                },
+                delegate(Type serviceType)
+                {
+                    if (failDiscovery && serviceType == typeof(ISettingsEditorAsync))
+                        throw expectedException;
+
+                    if (serviceType == typeof(ISettingsEditorAsync) ||
+                        serviceType == typeof(ISettingsEditor))
+                    {
+                        return new object[0];
+                    }
+
+                    throw new InvalidOperationException(
+                        "Unexpected multi-instance request for " + serviceType.FullName + ".");
+                },
+                delegate(object instance)
+                {
+                    throw new InvalidOperationException(
+                        "Unexpected build-up request for " + instance.GetType().FullName + ".");
+                });
+
+            try
+            {
+                var failedViewModel = new SettingsViewModel();
+
+                var actualException = await Assert.ThrowsExactlyAsync<InvalidOperationException>(
+                    async () => await ((IActivate)failedViewModel)
+                        .ActivateAsync(CancellationToken.None));
+
+                Assert.AreSame(expectedException, actualException);
+                Assert.IsTrue(failedViewModel.IsInitialized);
+                Assert.IsNull(failedViewModel.Pages);
+
+                failDiscovery = false;
+                var replacementViewModel = new SettingsViewModel();
+                await ((IActivate)replacementViewModel).ActivateAsync(CancellationToken.None);
+
+                Assert.AreNotSame(failedViewModel, replacementViewModel);
+                Assert.IsNotNull(replacementViewModel.Pages);
+                Assert.AreEqual(0, replacementViewModel.Pages.Count);
+            }
+            finally
+            {
+                scope.Dispose();
+            }
+        }
+
         private sealed class TestAsyncSettingsEditor : ISettingsEditorAsync
         {
             public TestAsyncSettingsEditor(string settingsPageName, string settingsPagePath)

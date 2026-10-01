@@ -63,10 +63,14 @@ on other modules, but this is taken care of by the NuGet package dependency syst
 
 GitHub Actions builds every push and pull request for the `net462` and
 `net10.0-windows` targets. Successful runs provide the validated NuGet and
-symbol packages as a downloadable workflow artifact. Publication remains
-restricted to approved upstream releases. See
-[the CI workflow](.github/workflows/ci.yml) for the exact build and release
-contract.
+symbol packages as a downloadable workflow artifact. The modern build uses
+Caliburn.Micro 5.0.258 and MahApps.Metro 2.4.11; net6/net7 remain available
+from the legacy package line. Publication remains restricted to approved
+upstream releases. See [the CI workflow](.github/workflows/ci.yml) for the exact
+build and release contract.
+
+Applications and extensions moving from the previous package line should read
+the [Caliburn Micro 5 migration notes](doc/caliburn-5-migration.md).
 
 ## What does it do?
 

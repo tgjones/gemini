@@ -17,7 +17,9 @@ reading the validation implementation. The script verifies:
 - nuspec dependency groups and target-specific dependency versions match the
   declared contract;
 - all internal Gemini dependencies use the same NBGV-calculated version; and
-- every symbol package contains the matching portable PDBs.
+- every symbol package contains the matching portable PDBs; and
+- a package-only external host restores, builds, and runs against the expected
+  Caliburn dependency graph for every retained framework.
 
 Any framework, package, assembly, or dependency change must update the
 declarative contract deliberately. This prevents partial per-framework packages
@@ -35,6 +37,10 @@ Directory containing the Release output for Gemini.Demo. Defaults to
 Path to the declarative package contract. Defaults to
 `eng\package-contract.json`.
 
+.PARAMETER CompatibilityProjectPath
+Path to the package-only Caliburn compatibility host. Defaults to
+`eng\compatibility\Caliburn5PackageHost\Caliburn5PackageHost.csproj`.
+
 .EXAMPLE
 ./eng/validate-artifacts.ps1
 
@@ -44,7 +50,8 @@ Validates outputs produced in their standard repository locations.
 param(
     [string] $PackagePath,
     [string] $DemoOutputPath,
-    [string] $ContractPath
+    [string] $ContractPath,
+    [string] $CompatibilityProjectPath
 )
 
 Set-StrictMode -Version Latest
@@ -64,9 +71,14 @@ if ([string]::IsNullOrWhiteSpace($ContractPath)) {
     $ContractPath = Join-Path $PSScriptRoot 'package-contract.json'
 }
 
+if ([string]::IsNullOrWhiteSpace($CompatibilityProjectPath)) {
+    $CompatibilityProjectPath = Join-Path $PSScriptRoot 'compatibility\Caliburn5PackageHost\Caliburn5PackageHost.csproj'
+}
+
 $PackagePath = [System.IO.Path]::GetFullPath($PackagePath)
 $DemoOutputPath = [System.IO.Path]::GetFullPath($DemoOutputPath)
 $ContractPath = [System.IO.Path]::GetFullPath($ContractPath)
+$CompatibilityProjectPath = [System.IO.Path]::GetFullPath($CompatibilityProjectPath)
 
 # Assertion helpers include missing and unexpected values in failures so CI logs
 # identify the contract difference without requiring artifact inspection.
@@ -104,6 +116,20 @@ function Assert-SetEqual {
         -Message "$Description mismatch. Missing: [$($missing -join ', ')]. Unexpected: [$($unexpected -join ', ')]."
 }
 
+function Invoke-DotNet {
+    param(
+        [Parameter(Mandatory)]
+        [string[]] $Arguments,
+
+        [Parameter(Mandatory)]
+        [string] $Description
+    )
+
+    & dotnet @Arguments
+    Assert-Condition -Condition ($LASTEXITCODE -eq 0) `
+        -Message "$Description failed with exit code $LASTEXITCODE."
+}
+
 function Get-NuspecMetadata {
     param(
         [Parameter(Mandatory)]
@@ -135,6 +161,8 @@ Assert-Condition -Condition (Test-Path -LiteralPath $DemoOutputPath -PathType Co
     -Message "Demo output directory does not exist: $DemoOutputPath"
 Assert-Condition -Condition (Test-Path -LiteralPath $ContractPath -PathType Leaf) `
     -Message "Package contract does not exist: $ContractPath"
+Assert-Condition -Condition (Test-Path -LiteralPath $CompatibilityProjectPath -PathType Leaf) `
+    -Message "Compatibility project does not exist: $CompatibilityProjectPath"
 
 $contract = Get-Content -LiteralPath $ContractPath -Raw | ConvertFrom-Json
 $expectedFrameworks = @($contract.frameworks)
@@ -297,5 +325,51 @@ $distinctVersions = @($actualVersions | Sort-Object -Unique)
 Assert-Condition -Condition ($distinctVersions.Count -eq 1) `
     -Message "Expected one coherent package version, found: $($distinctVersions -join ', ')."
 
+$packageVersion = $distinctVersions[0]
+$nuGetConfigPath = Join-Path $repositoryRoot 'src\NuGet.config'
+Invoke-DotNet `
+    -Description 'Package-only compatibility restore' `
+    -Arguments @(
+        'restore',
+        $CompatibilityProjectPath,
+        '--configfile',
+        $nuGetConfigPath,
+        "-p:RestoreAdditionalProjectSources=$PackagePath",
+        "-p:GeminiPackageVersion=$packageVersion"
+    )
+
+$compatibilityProjectDirectory = Split-Path -Parent $CompatibilityProjectPath
+$assetsPath = Join-Path $compatibilityProjectDirectory 'obj\project.assets.json'
+Assert-Condition -Condition (Test-Path -LiteralPath $assetsPath -PathType Leaf) `
+    -Message "Compatibility restore did not create $assetsPath."
+
+$assets = Get-Content -LiteralPath $assetsPath -Raw | ConvertFrom-Json
+foreach ($framework in $expectedFrameworks) {
+    $targetProperty = $assets.targets.PSObject.Properties[$framework.lockFileTarget]
+    Assert-Condition -Condition ($null -ne $targetProperty) `
+        -Message "Compatibility assets are missing target '$($framework.lockFileTarget)'."
+
+    $resolvedPackages = @($targetProperty.Value.PSObject.Properties.Name)
+    foreach ($dependency in $contract.resolvedDependencies.PSObject.Properties) {
+        $expectedIdentity = "$($dependency.Name)/$($dependency.Value)"
+        Assert-Condition -Condition ($expectedIdentity -cin $resolvedPackages) `
+            -Message "Compatibility target '$($framework.lockFileTarget)' is missing resolved package '$expectedIdentity'."
+    }
+
+    Invoke-DotNet `
+        -Description "Package-only compatibility run for $($framework.build)" `
+        -Arguments @(
+            'run',
+            '--project',
+            $CompatibilityProjectPath,
+            '--configuration',
+            'Release',
+            '--framework',
+            $framework.build,
+            '--no-restore',
+            "-p:GeminiPackageVersion=$packageVersion"
+        )
+}
+
 $shaderCount = $expectedFrameworks.Count * @($contract.shaders).Count
-Write-Host "Validated $shaderCount compiled shaders and $($expectedPackages.Count) packages with symbols at version $($distinctVersions[0])."
+Write-Host "Validated $shaderCount compiled shaders, $($expectedPackages.Count) packages with symbols, and the package-only Caliburn host at version $packageVersion."
