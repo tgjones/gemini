@@ -45,6 +45,28 @@ Caliburn 5 also replaces the obsolete `OnInitializeAsync` extension point with
 Code that retries initialization after a failure must recreate the failed
 screen rather than changing Caliburn's lifecycle flags.
 
+## Related dependency migration records
+
+Dependency changes are recorded as migrations rather than a mutable inventory.
+Add a new subsection for each later transition so consumers can follow every
+upgrade path without rewriting earlier guidance.
+
+### AvalonDock 4.60.0 to 4.74.1
+
+This migration replaces the coherent AvalonDock engine and VS2013 theme pair
+with version 4.74.1. The `net48` and `net10.0-windows` Gemini packages resolve
+the matching native assets instead of a compatible older framework group. The
+classic `DockingManager`, XML serializer entry point, and Light/Dark/Blue
+resource URIs remain in use; this transition does not cover AvalonDock 5.
+
+AvalonDock's assembly version changes from 4.60.0.0 to 4.74.1.0. Rebuild and
+test external controls or extensions that reference AvalonDock directly rather
+than assuming binary compatibility from a successful Gemini source build.
+Preserve the complete old Gemini state file and its matching application,
+module, extension, and dependency binaries during rollout. AvalonDock XML is
+only the trailing section of that state file and is not a complete rollback
+artifact by itself.
+
 ## Asynchronous shell and startup readiness
 
 `IShell.ShowTool` has been replaced by the awaitable `ShowToolAsync` overloads,

@@ -19,7 +19,8 @@ reading the validation implementation. The script verifies:
 - all internal Gemini dependencies use the same NBGV-calculated version; and
 - every symbol package contains the matching portable PDBs; and
 - a package-only external host restores, builds, and runs against the expected
-  Caliburn dependency graph for every retained framework.
+  Caliburn dependency graph and exact native AvalonDock assets for every
+  retained framework.
 
 Any framework, package, assembly, or dependency change must update the
 declarative contract deliberately. This prevents partial per-framework packages
@@ -38,7 +39,7 @@ Path to the declarative package contract. Defaults to
 `eng\package-contract.json`.
 
 .PARAMETER CompatibilityProjectPath
-Path to the package-only Caliburn compatibility host. Defaults to
+Path to the package-only compatibility host. Defaults to
 `eng\compatibility\Caliburn5PackageHost\Caliburn5PackageHost.csproj`.
 
 .EXAMPLE
@@ -327,18 +328,28 @@ Assert-Condition -Condition ($distinctVersions.Count -eq 1) `
 
 $packageVersion = $distinctVersions[0]
 $nuGetConfigPath = Join-Path $repositoryRoot 'src\NuGet.config'
+$compatibilityProjectDirectory = Split-Path -Parent $CompatibilityProjectPath
+$geminiPackagePath = Join-Path $PackagePath "GeminiWpf.$packageVersion.nupkg"
+Assert-Condition -Condition (Test-Path -LiteralPath $geminiPackagePath -PathType Leaf) `
+    -Message "Gemini package does not exist: $geminiPackagePath"
+
+# Key validation restores by package content. Distinct working-tree payloads can
+# share an ID/version, but each must be restored and inspected independently.
+$geminiPackageHash = (Get-FileHash -LiteralPath $geminiPackagePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$compatibilityPackagesPath = Join-Path $compatibilityProjectDirectory "obj\package-validation\$geminiPackageHash"
 Invoke-DotNet `
     -Description 'Package-only compatibility restore' `
     -Arguments @(
         'restore',
         $CompatibilityProjectPath,
+        '--force-evaluate',
         '--configfile',
         $nuGetConfigPath,
         "-p:RestoreAdditionalProjectSources=$PackagePath",
+        "-p:RestorePackagesPath=$compatibilityPackagesPath",
         "-p:GeminiPackageVersion=$packageVersion"
     )
 
-$compatibilityProjectDirectory = Split-Path -Parent $CompatibilityProjectPath
 $assetsPath = Join-Path $compatibilityProjectDirectory 'obj\project.assets.json'
 Assert-Condition -Condition (Test-Path -LiteralPath $assetsPath -PathType Leaf) `
     -Message "Compatibility restore did not create $assetsPath."
@@ -356,6 +367,33 @@ foreach ($framework in $expectedFrameworks) {
             -Message "Compatibility target '$($framework.lockFileTarget)' is missing resolved package '$expectedIdentity'."
     }
 
+    foreach ($assetExpectation in $framework.resolvedAssets.PSObject.Properties) {
+        $dependency = $contract.resolvedDependencies.PSObject.Properties[$assetExpectation.Name]
+        Assert-Condition -Condition ($null -ne $dependency) `
+            -Message "Asset expectation '$($assetExpectation.Name)' has no resolved dependency version."
+
+        $expectedIdentity = "$($assetExpectation.Name)/$($dependency.Value)"
+        $resolvedPackage = $targetProperty.Value.PSObject.Properties[$expectedIdentity]
+        Assert-Condition -Condition ($null -ne $resolvedPackage) `
+            -Message "Compatibility target '$($framework.lockFileTarget)' has no asset data for '$expectedIdentity'."
+
+        $compile = $resolvedPackage.Value.PSObject.Properties['compile']
+        $runtime = $resolvedPackage.Value.PSObject.Properties['runtime']
+        Assert-Condition -Condition ($null -ne $compile) `
+            -Message "Compatibility target '$($framework.lockFileTarget)' has no compile assets for '$expectedIdentity'."
+        Assert-Condition -Condition ($null -ne $runtime) `
+            -Message "Compatibility target '$($framework.lockFileTarget)' has no runtime assets for '$expectedIdentity'."
+
+        Assert-SetEqual `
+            -Expected @([string] $assetExpectation.Value) `
+            -Actual @($compile.Value.PSObject.Properties.Name) `
+            -Description "$expectedIdentity compile assets for $($framework.lockFileTarget)"
+        Assert-SetEqual `
+            -Expected @([string] $assetExpectation.Value) `
+            -Actual @($runtime.Value.PSObject.Properties.Name) `
+            -Description "$expectedIdentity runtime assets for $($framework.lockFileTarget)"
+    }
+
     Invoke-DotNet `
         -Description "Package-only compatibility run for $($framework.build)" `
         -Arguments @(
@@ -367,9 +405,10 @@ foreach ($framework in $expectedFrameworks) {
             '--framework',
             $framework.build,
             '--no-restore',
+            "-p:RestorePackagesPath=$compatibilityPackagesPath",
             "-p:GeminiPackageVersion=$packageVersion"
         )
 }
 
 $shaderCount = $expectedFrameworks.Count * @($contract.shaders).Count
-Write-Host "Validated $shaderCount compiled shaders, $($expectedPackages.Count) packages with symbols, and the package-only Caliburn host at version $packageVersion."
+Write-Host "Validated $shaderCount compiled shaders, $($expectedPackages.Count) packages with symbols, exact resolved assets, and the package-only compatibility host at version $packageVersion."

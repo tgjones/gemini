@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compatibility baseline for the AvalonDock 4.60 writer. Preserve this
+     document as-is and add a new fixture for each distinct writer contract. -->
+<LayoutRoot>
+  <RootPanel Orientation="Vertical">
+    <LayoutPanel Orientation="Horizontal">
+      <LayoutAnchorablePane Name="LeftPane" DockWidth="240">
+        <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Left tool" IsSelected="True" ContentId="fixture-tool-left" />
+      </LayoutAnchorablePane>
+      <LayoutDocumentPane>
+        <LayoutDocument Title="Primary document" ContentId="fixture-document-primary" />
+        <LayoutDocument Title="Secondary document" IsSelected="True" IsLastFocusedDocument="True" ContentId="fixture-document-secondary" />
+      </LayoutDocumentPane>
+      <LayoutAnchorablePane Name="RightPane" DockWidth="310">
+        <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Right tool" IsSelected="True" ContentId="fixture-tool-right" />
+      </LayoutAnchorablePane>
+    </LayoutPanel>
+    <LayoutAnchorablePane Name="BottomPane" DockHeight="180">
+      <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Bottom tool" IsSelected="True" ContentId="fixture-tool-bottom" />
+    </LayoutAnchorablePane>
+  </RootPanel>
+  <TopSide />
+  <RightSide />
+  <LeftSide />
+  <BottomSide />
+  <FloatingWindows>
+    <LayoutAnchorableFloatingWindow>
+      <LayoutAnchorablePaneGroup Orientation="Horizontal">
+        <LayoutAnchorablePane Name="FloatingPane">
+          <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Floating tool" IsSelected="True" ContentId="fixture-tool-floating" FloatingLeft="120" FloatingTop="80" FloatingWidth="420" FloatingHeight="260" />
+        </LayoutAnchorablePane>
+      </LayoutAnchorablePaneGroup>
+    </LayoutAnchorableFloatingWindow>
+  </FloatingWindows>
+  <Hidden>
+    <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="Hidden tool" IsSelected="True" ContentId="fixture-tool-hidden" />
+  </Hidden>
+</LayoutRoot>

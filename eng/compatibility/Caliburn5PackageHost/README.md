@@ -1,4 +1,4 @@
-# Caliburn 5 package-only compatibility host
+# Gemini package-only compatibility host
 
 This is durable package-validation infrastructure, not a transient migration
 probe. Project-reference builds cannot prove that a packed `GeminiWpf` package
@@ -11,12 +11,14 @@ version is supplied by the validator after the coherent family has been
 inspected. This verifies the consumer boundary that a normal solution build
 cannot cover:
 
-- NuGet selects Gemini and the expected Caliburn.Micro Platform, Core, and
-  Microsoft.Xaml.Behaviors.Wpf packages for each target;
-- an external extension compiles against the Caliburn 5 asynchronous
-  `Activated` event contract; and
-- the expected Gemini, Caliburn Core, and Caliburn Platform assemblies load at
-  runtime.
+- NuGet selects Gemini and the complete external dependency graph declared for
+  each target in `eng\package-contract.json`;
+- the validator rejects framework fallback by requiring the exact native
+  compile and runtime assets declared by that contract;
+- an external extension compiles against the public lifecycle event contract;
+  and
+- representative framework, docking, serialization, and theme APIs load and
+  execute from the resolved package graph.
 
 The host can be removed only when another package-only consumer fixture covers
 the same restore, compile, public-contract, dependency-graph, and runtime

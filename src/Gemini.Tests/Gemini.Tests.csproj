@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Gemini\Gemini.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\AvalonDock460\CompleteLayout.xml"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
