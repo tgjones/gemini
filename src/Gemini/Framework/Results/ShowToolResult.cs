@@ -27,28 +27,26 @@ namespace Gemini.Framework.Results
 
         public override void Execute(CoroutineExecutionContext context)
         {
-            var tool = _toolLocator();
+            var execution = BeginExecution();
 
-            if (_setData != null)
-                _setData(tool);
-
-            if (_onConfigure != null)
-                _onConfigure(tool);
-
-            tool.Deactivated += (s, e) =>
+            try
             {
-                if (e.WasClosed)
-                {
-                    if (_onShutDown != null)
-                        _onShutDown(tool);
+                var tool = _toolLocator();
+                _setData?.Invoke(tool);
+                _onConfigure?.Invoke(tool);
 
-                    OnCompleted(null, false);
-                }
-
-                return System.Threading.Tasks.Task.CompletedTask;
-            };
-
-            _shell.ShowTool(tool);
+                execution.RegisterCleanup(SubscribeToClosed(tool, tool, execution));
+                var showTask = _shell.ShowToolAsync(tool);
+                _ = ObserveTaskAsync(execution, showTask, false);
+            }
+            catch (OperationCanceledException)
+            {
+                execution.TryComplete(null, true);
+            }
+            catch (Exception exception)
+            {
+                execution.TryComplete(exception, false);
+            }
         }
     }
 }

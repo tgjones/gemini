@@ -15,6 +15,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
 #pragma warning disable 659
     public class CodeEditorViewModel : PersistedDocument,
+        IAsyncLayoutItemStateRestorer,
         ICommandHandler<ShowLineNumbersCommandDefinition>,
         ICommandHandler<ShowEndOfLineCommandDefinition>,
         ICommandHandler<ShowSpacesCommandDefinition>,
@@ -24,6 +25,7 @@ namespace Gemini.Modules.CodeEditor.ViewModels
     {
         private readonly LanguageDefinitionManager _languageDefinitionManager;
         private bool _delayedViewLoaded;
+        private string _restoredFilePath;
         private string _originalText;
         private ICodeEditorView _view;
 
@@ -43,9 +45,18 @@ namespace Gemini.Modules.CodeEditor.ViewModels
             writer.Write(FilePath);
         }
 
+        // Capture only the path while the reader is valid. Actual loading is deferred so
+        // normal view readiness can be awaited after layout deserialization completes.
         public override void LoadState(BinaryReader reader)
         {
-            Load(reader.ReadString());
+            _restoredFilePath = reader.ReadString();
+        }
+
+        public Task RestoreStateAsync()
+        {
+            var filePath = _restoredFilePath;
+            _restoredFilePath = null;
+            return Load(filePath);
         }
 
         protected override void OnViewLoaded(object view)

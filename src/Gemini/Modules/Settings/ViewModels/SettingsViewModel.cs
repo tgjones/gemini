@@ -34,9 +34,9 @@ namespace Gemini.Modules.Settings.ViewModels
             }
         }
 
-        protected override async Task OnInitializeAsync(CancellationToken cancellationToken)
+        protected override async Task OnInitializedAsync(CancellationToken cancellationToken)
         {
-            await base.OnInitializeAsync(cancellationToken);
+            await base.OnInitializedAsync(cancellationToken);
 
             var pages = new List<SettingsPageViewModel>();
 

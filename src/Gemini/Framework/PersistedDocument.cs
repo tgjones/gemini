@@ -45,7 +45,7 @@ namespace Gemini.Framework
         {
             if (IsDirty)
             {
-                var response = MessageBox.Show(string.Format(Resources.DocumentDirtyCloseConfirmText, FileName), Resources.DocumentDirtyCloseConfirmTitle, MessageBoxButton.YesNoCancel);
+                var response = PromptToSaveChanges();
                 if (response == MessageBoxResult.Cancel)
                 {
                     return false;
@@ -57,6 +57,17 @@ namespace Gemini.Framework
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Prompts for Save, Discard, or Cancel. Cancel vetoes the pending close.
+        /// </summary>
+        protected virtual MessageBoxResult PromptToSaveChanges()
+        {
+            return MessageBox.Show(
+                string.Format(Resources.DocumentDirtyCloseConfirmText, FileName),
+                Resources.DocumentDirtyCloseConfirmTitle,
+                MessageBoxButton.YesNoCancel);
         }
 
         private void UpdateDisplayName()

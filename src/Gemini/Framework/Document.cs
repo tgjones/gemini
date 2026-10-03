@@ -128,11 +128,25 @@ namespace Gemini.Framework
             await DoSaveAs(persistedDocument);
 	    }
 
-	    private static async Task DoSaveAs(IPersistedDocument persistedDocument)
+	    private async Task DoSaveAs(IPersistedDocument persistedDocument)
 	    {
-            // Show user dialog to choose filename.
-            var dialog = new SaveFileDialog();
-            dialog.FileName = persistedDocument.FileName;
+            var filePath = PromptForSaveFilePath(persistedDocument);
+            if (filePath == null)
+                return;
+
+            await persistedDocument.Save(filePath);
+	    }
+
+        /// <summary>
+        /// Returns the chosen path, or <see langword="null"/> when the user cancels.
+        /// Cancellation leaves a new document unsaved and vetoes a pending dirty close.
+        /// </summary>
+        protected virtual string PromptForSaveFilePath(IPersistedDocument persistedDocument)
+        {
+            var dialog = new SaveFileDialog
+            {
+                FileName = persistedDocument.FileName
+            };
             var filter = string.Empty;
 
             var fileExtension = Path.GetExtension(persistedDocument.FileName);
@@ -142,17 +156,9 @@ namespace Gemini.Framework
             if (fileType != null)
                 filter = fileType.Name + "|*" + fileType.FileExtension + "|";
 
-            filter += "All Files|*.*";
-            dialog.Filter = filter;
-
-            if (dialog.ShowDialog() != true)
-                return;
-
-            var filePath = dialog.FileName;
-
-            // Save file.
-            await persistedDocument.Save(filePath);
-	    }
+            dialog.Filter = filter + "All Files|*.*";
+            return dialog.ShowDialog() == true ? dialog.FileName : null;
+        }
 
         protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
         {

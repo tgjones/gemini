@@ -194,10 +194,40 @@ namespace Gemini
         protected override void BuildUp(object instance)
             => Container.SatisfyImportsOnce(instance);
 
-        protected override void OnStartup(object sender, StartupEventArgs e)
+        protected override async void OnStartup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(sender, e);
-            DisplayRootViewForAsync<IMainWindow>();
+            try
+            {
+                base.OnStartup(sender, e);
+                await DisplayRootViewForAsync<IMainWindow>();
+
+                var mainWindow = (IMainWindow)GetInstance(typeof(IMainWindow), null);
+                await mainWindow.ShellActivationTask;
+                await mainWindow.Shell.InitializationTask;
+            }
+            catch (Exception exception)
+            {
+                HandleFatalStartupException(exception);
+            }
+        }
+
+        /// <summary>
+        /// Handles failures from root display, shell activation, or shell initialization.
+        /// The default implementation reports the failure and terminates the application.
+        /// </summary>
+        protected virtual void HandleFatalStartupException(Exception exception)
+        {
+            if (exception == null)
+                throw new ArgumentNullException(nameof(exception));
+
+            try
+            {
+                MessageBox.Show(exception.ToString(), "GeminiWpf startup failure");
+            }
+            finally
+            {
+                Application.Current?.Shutdown(-1);
+            }
         }
 
         protected override IEnumerable<Assembly> SelectAssemblies()

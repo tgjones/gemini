@@ -8,7 +8,6 @@
 #   without changing the projects' runtime or API contracts.
 # - Nerdbank.GitVersioning runs through the repository's pinned MSBuild package;
 #   a separate CLI action would introduce a second versioning-tool version.
-# - No test command is present because this repository has no test projects.
 name: CI
 
 on:
@@ -47,6 +46,11 @@ jobs:
 
       - name: Build solution
         run: dotnet build src\Gemini.sln --configuration Release --no-restore
+
+      - name: Test characterization harness
+        run: |
+          dotnet test --project src\Gemini.Tests\Gemini.Tests.csproj --configuration Release --framework net462 --no-build --no-restore
+          dotnet test --project src\Gemini.Tests\Gemini.Tests.csproj --configuration Release --framework net10.0-windows --no-build --no-restore
 
       - name: Pack libraries
         run: dotnet pack src\Gemini.sln --configuration Release --no-build --no-restore --output build\packages
