@@ -49,7 +49,7 @@ jobs:
 
       - name: Test characterization harness
         run: |
-          dotnet test --project src\Gemini.Tests\Gemini.Tests.csproj --configuration Release --framework net462 --no-build --no-restore
+          dotnet test --project src\Gemini.Tests\Gemini.Tests.csproj --configuration Release --framework net48 --no-build --no-restore
           dotnet test --project src\Gemini.Tests\Gemini.Tests.csproj --configuration Release --framework net10.0-windows --no-build --no-restore
 
       - name: Pack libraries

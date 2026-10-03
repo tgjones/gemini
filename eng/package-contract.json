@@ -1,10 +1,10 @@
 {
   "frameworks": [
     {
-      "nuspec": ".NETFramework4.6.2",
-      "asset": "net462",
-      "build": "net462",
-      "lockFileTarget": "net462"
+      "nuspec": ".NETFramework4.8",
+      "asset": "net48",
+      "build": "net48",
+      "lockFileTarget": "net48"
     },
     {
       "nuspec": "net10.0-windows7.0",
