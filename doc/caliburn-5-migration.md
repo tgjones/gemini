@@ -1,14 +1,21 @@
 # Caliburn Micro 5 migration
 
-Gemini's Caliburn Micro 5 package line targets `net462` and
-`net10.0-windows`. Applications that require the previous net6/net7 assets
-must remain on the earlier Gemini package line.
+Gemini's Caliburn Micro 5 package line targets `net48` and
+`net10.0-windows`. Applications that require the previous `net462`, net6, or
+net7 assets must remain on an earlier Gemini package line.
 
 Caliburn.Micro 5.0.258 does not publish a native net6 or net7 WPF Platform
 asset group. NuGet can select its net462 Platform fallback for those targets,
 but reports `NU1701`; the Core package's netstandard2.0 asset does not replace
 the WPF Platform assembly. Gemini therefore does not publish new supported
 net6/net7 targets on that warning-bearing fallback.
+
+The `net48` Gemini asset uses Caliburn.Micro's compatible .NET Framework
+Platform asset. Building that lane requires the .NET Framework 4.8 targeting
+pack, and running it requires .NET Framework 4.8. Retarget and rebuild
+Framework applications and extensions before adopting this package line;
+retaining an older runtime while loading the new Gemini assembly is not a
+supported migration path.
 
 ## Package and extension compatibility
 
@@ -29,13 +36,36 @@ viewModel.Activated += async (sender, args) =>
 ```
 
 An extension compiled against the Caliburn 4 event accessor is not considered
-binary compatible merely because Gemini still provides a `net462` asset.
-Rebuild and test extensions against the new package before deployment.
+binary compatible merely because Gemini still provides a .NET Framework
+asset. Rebuild and test extensions against the new `net48` package before
+deployment.
 
 Caliburn 5 also replaces the obsolete `OnInitializeAsync` extension point with
 `OnInitializedAsync`. The new hook runs after `IsInitialized` becomes `true`.
 Code that retries initialization after a failure must recreate the failed
 screen rather than changing Caliburn's lifecycle flags.
+
+## Related dependency migration records
+
+Dependency changes are recorded as migrations rather than a mutable inventory.
+Add a new subsection for each later transition so consumers can follow every
+upgrade path without rewriting earlier guidance.
+
+### AvalonDock 4.60.0 to 4.74.1
+
+This migration replaces the coherent AvalonDock engine and VS2013 theme pair
+with version 4.74.1. The `net48` and `net10.0-windows` Gemini packages resolve
+the matching native assets instead of a compatible older framework group. The
+classic `DockingManager`, XML serializer entry point, and Light/Dark/Blue
+resource URIs remain in use; this transition does not cover AvalonDock 5.
+
+AvalonDock's assembly version changes from 4.60.0.0 to 4.74.1.0. Rebuild and
+test external controls or extensions that reference AvalonDock directly rather
+than assuming binary compatibility from a successful Gemini source build.
+Preserve the complete old Gemini state file and its matching application,
+module, extension, and dependency binaries during rollout. AvalonDock XML is
+only the trailing section of that state file and is not a complete rollback
+artifact by itself.
 
 ## Asynchronous shell and startup readiness
 
@@ -160,6 +190,7 @@ being converted into fallback instances.
 
 ## Release policy
 
-This package family starts the Gemini 1.1 beta line. Removing net6/net7 and
-changing an inherited public lifecycle event are breaking package-contract
-changes. The previous 1.0 beta four-target family remains the rollback path.
+This package family starts the Gemini 1.1 beta line. Raising the Framework
+floor to .NET Framework 4.8, removing net6/net7, and changing an inherited
+public lifecycle event are breaking package-contract changes. The previous
+1.0 beta four-target family remains the rollback path.

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net462;net10.0-windows</TargetFrameworks>
+    <TargetFrameworks>net48;net10.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IsPackable>false</IsPackable>
@@ -64,11 +64,11 @@
     <PackageReference Include="JeremyAnsel.HLSL.Targets" Version="1.0.9" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework) != 'net462'">
+  <ItemGroup Condition="$(TargetFramework) != 'net48'">
     <PackageReference Include="HelixToolkit.Core.Wpf" Version="2.10.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework) == 'net462'">
+  <ItemGroup Condition="$(TargetFramework) == 'net48'">
     <PackageReference Include="HelixToolkit.Wpf" Version="2.10.0" />
   </ItemGroup>
 
