@@ -5,9 +5,16 @@
       "asset": "net48",
       "build": "net48",
       "lockFileTarget": "net48",
+      "resolvedDependencies": {
+        "System.Text.Json": "10.0.12"
+      },
       "resolvedAssets": {
         "Dirkster.AvalonDock": "lib/net48/AvalonDock.dll",
-        "Dirkster.AvalonDock.Themes.VS2013": "lib/net48/AvalonDock.Themes.VS2013.dll"
+        "Dirkster.AvalonDock.Core": "lib/netstandard2.0/AvalonDock.Core.dll",
+        "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
+        "Dirkster.AvalonDock.Themes.VS": "lib/net48/AvalonDock.Themes.VS.dll",
+        "Dirkster.AvalonDock.Themes.VS2013": "lib/net48/AvalonDock.Themes.VS2013.dll",
+        "System.Text.Json": "lib/net462/System.Text.Json.dll"
       }
     },
     {
@@ -15,8 +22,12 @@
       "asset": "net10.0-windows7.0",
       "build": "net10.0-windows",
       "lockFileTarget": "net10.0-windows",
+      "resolvedDependencies": {},
       "resolvedAssets": {
         "Dirkster.AvalonDock": "lib/net10.0-windows7.0/AvalonDock.dll",
+        "Dirkster.AvalonDock.Core": "lib/netstandard2.0/AvalonDock.Core.dll",
+        "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
+        "Dirkster.AvalonDock.Themes.VS": "lib/net10.0-windows7.0/AvalonDock.Themes.VS.dll",
         "Dirkster.AvalonDock.Themes.VS2013": "lib/net10.0-windows7.0/AvalonDock.Themes.VS2013.dll"
       }
     }
@@ -25,8 +36,11 @@
     "Caliburn.Micro": "5.0.258",
     "Caliburn.Micro.Core": "5.0.258",
     "Microsoft.Xaml.Behaviors.Wpf": "1.1.135",
-    "Dirkster.AvalonDock": "4.74.1",
-    "Dirkster.AvalonDock.Themes.VS2013": "4.74.1"
+    "Dirkster.AvalonDock": "5.0.1",
+    "Dirkster.AvalonDock.Core": "5.0.1",
+    "Dirkster.AvalonDock.Serializer.Xml": "5.0.1",
+    "Dirkster.AvalonDock.Themes.VS": "5.0.1",
+    "Dirkster.AvalonDock.Themes.VS2013": "5.0.1"
   },
   "shaders": [
     "AddEffect.ps",
@@ -39,7 +53,8 @@
       "internalDependencies": [],
       "externalDependencies": {
         "Caliburn.Micro": "5.0.258",
-        "Dirkster.AvalonDock.Themes.VS2013": "4.74.1",
+        "Dirkster.AvalonDock.Serializer.Xml": "5.0.1",
+        "Dirkster.AvalonDock.Themes.VS2013": "5.0.1",
         "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78",
         "MahApps.Metro": "2.4.11",
         "System.ComponentModel.Composition": "6.0.0"

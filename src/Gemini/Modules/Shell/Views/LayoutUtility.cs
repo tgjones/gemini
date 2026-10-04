@@ -4,7 +4,7 @@ using System.IO;
 using Gemini.Framework;
 using AvalonDock;
 using AvalonDock.Layout;
-using AvalonDock.Layout.Serialization;
+using AvalonDock.Serializer.Xml;
 
 namespace Gemini.Modules.Shell.Views
 {
@@ -37,7 +37,7 @@ namespace Gemini.Modules.Shell.Views
                         if (tool != null && anchorable != null)
                         {
                             tool.IsVisible = anchorable.IsVisible;
-                            tool.IsSelected = e.Model.IsSelected;
+                            tool.IsSelected = anchorable.IsSelected;
                             addToolCallback(tool);
 
                             return;

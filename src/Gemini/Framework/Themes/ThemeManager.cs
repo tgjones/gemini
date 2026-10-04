@@ -63,38 +63,90 @@ namespace Gemini.Framework.Themes
                 return true; // Nothing to do, avoid full repaint of mainwindow
             }
 
-            CurrentTheme = theme;
+            var applicationResources = CreateApplicationResources(theme);
+            var windowResources = CreateUriResources(theme.MainWindowResources);
+            var windowResourceDictionary =
+                mainWindow.Resources.MergedDictionaries[0];
 
+            bool applicationDictionaryCreated = false;
             if (_applicationResourceDictionary == null)
             {
                 _applicationResourceDictionary = new ResourceDictionary();
                 Application.Current.Resources.MergedDictionaries.Add(_applicationResourceDictionary);
+                applicationDictionaryCreated = true;
             }
-            _applicationResourceDictionary.BeginInit();
-            _applicationResourceDictionary.MergedDictionaries.Clear();
 
-            var windowResourceDictionary = mainWindow.Resources.MergedDictionaries[0];
-            windowResourceDictionary.BeginInit();
-            windowResourceDictionary.MergedDictionaries.Clear();
+            var previousApplicationResources =
+                _applicationResourceDictionary.MergedDictionaries.ToArray();
+            var previousWindowResources =
+                windowResourceDictionary.MergedDictionaries.ToArray();
 
-            foreach (var uri in theme.ApplicationResources)
-                _applicationResourceDictionary.MergedDictionaries.Add(new ResourceDictionary
+            try
+            {
+                ReplaceMergedDictionaries(
+                    _applicationResourceDictionary,
+                    applicationResources);
+                ReplaceMergedDictionaries(
+                    windowResourceDictionary,
+                    windowResources);
+            }
+            catch
+            {
+                ReplaceMergedDictionaries(
+                    _applicationResourceDictionary,
+                    previousApplicationResources);
+                ReplaceMergedDictionaries(
+                    windowResourceDictionary,
+                    previousWindowResources);
+                if (applicationDictionaryCreated)
                 {
-                    Source = uri
-                });
+                    Application.Current.Resources.MergedDictionaries.Remove(
+                        _applicationResourceDictionary);
+                    _applicationResourceDictionary = null;
+                }
+                throw;
+            }
 
-            foreach (var uri in theme.MainWindowResources)
-                windowResourceDictionary.MergedDictionaries.Add(new ResourceDictionary
-                {
-                    Source = uri
-                });
-
-            _applicationResourceDictionary.EndInit();
-            windowResourceDictionary.EndInit();
-
+            CurrentTheme = theme;
             RaiseCurrentThemeChanged(EventArgs.Empty);
 
             return true;
+        }
+
+        private static ResourceDictionary[] CreateApplicationResources(ITheme theme)
+        {
+            var resources = new List<ResourceDictionary>();
+            var avalonDockResources =
+                BuiltInThemeResources.CreateAvalonDockDictionary(theme);
+            if (avalonDockResources != null)
+                resources.Add(avalonDockResources);
+            resources.AddRange(CreateUriResources(theme.ApplicationResources));
+            return resources.ToArray();
+        }
+
+        private static ResourceDictionary[] CreateUriResources(
+            IEnumerable<Uri> resourceUris)
+        {
+            return resourceUris
+                .Select(uri => new ResourceDictionary { Source = uri })
+                .ToArray();
+        }
+
+        private static void ReplaceMergedDictionaries(
+            ResourceDictionary owner,
+            IEnumerable<ResourceDictionary> resources)
+        {
+            owner.BeginInit();
+            try
+            {
+                owner.MergedDictionaries.Clear();
+                foreach (var resource in resources)
+                    owner.MergedDictionaries.Add(resource);
+            }
+            finally
+            {
+                owner.EndInit();
+            }
         }
 
         private void RaiseCurrentThemeChanged(EventArgs args)
