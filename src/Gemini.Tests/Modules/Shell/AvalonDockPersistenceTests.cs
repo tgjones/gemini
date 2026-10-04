@@ -24,8 +24,11 @@ namespace Gemini.Tests.Modules.Shell
     [DoNotParallelize]
     public sealed class AvalonDockPersistenceTests
     {
-        private const string FixtureHash =
+        private const string Complete460FixtureHash =
             "7697172D53DC8F9ADFDE8DF4ADC6F52AE4BA323A7E45DC336ADCFB7AFC2CCA13";
+
+        private const string Complete4741StateFixtureHash =
+            "58FF3ED46BD9E545C15D8A9B81CD9475CC404B3F690D7EE326FD80C40DBBB7D4";
 
         private static readonly string[] FixtureDocumentIds =
         {
@@ -46,7 +49,7 @@ namespace Gemini.Tests.Modules.Shell
         [TestMethod]
         public void Complete460Fixture_NormalizedBytesMatchCapturedImmutableBaseline()
         {
-            var normalizedFixture = File.ReadAllText(GetFixturePath())
+            var normalizedFixture = File.ReadAllText(Get460FixturePath())
                 .Replace("\r\n", "\n");
 
             string actualHash;
@@ -57,13 +60,81 @@ namespace Gemini.Tests.Modules.Shell
                     .Replace("-", string.Empty);
             }
 
-            Assert.AreEqual(FixtureHash, actualHash);
+            Assert.AreEqual(Complete460FixtureHash, actualHash);
             Assert.Contains(
                 "fixture-tool-floating",
                 normalizedFixture);
             Assert.Contains(
                 "<Hidden>",
                 normalizedFixture);
+        }
+
+        // Intent: make the whole pre-v5 Gemini envelope an immutable compatibility input.
+        [TestMethod]
+        public void Complete4741StateFixture_BytesMatchCapturedImmutableBaseline()
+        {
+            byte[] fixture = File.ReadAllBytes(Get4741StateFixturePath());
+            string actualHash;
+            using (var algorithm = SHA256.Create())
+            {
+                actualHash = BitConverter.ToString(algorithm.ComputeHash(fixture))
+                    .Replace("-", string.Empty);
+            }
+
+            Assert.AreEqual(Complete4741StateFixtureHash, actualHash);
+            using (var reader = new BinaryReader(new MemoryStream(fixture, false)))
+            {
+                Assert.AreEqual(8, reader.ReadInt32());
+            }
+        }
+
+        // Intent: prove a complete pre-v5 state restores payloads and layout semantics together.
+        [TestMethod]
+        public async Task Complete4741StateFixture_LoadStateAsync_RestoresWholeState()
+        {
+            var expectedView = CreateCompleteRuntimeView(RuntimeItems.CreateSource());
+            var expectedSnapshot = CreateSemanticSnapshot(GetManager(expectedView).Layout);
+            var restoredItems = RuntimeItems.CreateSource();
+            var documentQueue = new Queue<PersistentTestDocument>(
+                restoredItems.Documents);
+            var toolQueue = new Queue<PersistentTestTool>(
+                restoredItems.Tools);
+            var shell = new TestShell();
+            var view = new ShellView();
+            LayoutItemStateLoadResult result;
+
+            using (new IoCOverrideScope(
+                (type, key) =>
+                {
+                    if (type == typeof(PersistentTestDocument))
+                        return documentQueue.Dequeue();
+                    if (type == typeof(PersistentTestTool))
+                        return toolQueue.Dequeue();
+                    return null;
+                },
+                type => Enumerable.Empty<object>(),
+                instance => { }))
+            {
+                result = await new LayoutItemStatePersister().LoadStateAsync(
+                    shell,
+                    view,
+                    Get4741StateFixturePath());
+            }
+
+            Assert.AreEqual(LayoutItemStateLoadStatus.Success, result.Status);
+            Assert.AreEqual(2, result.RestorePlan.Documents.Count);
+            Assert.AreEqual(5, result.RestorePlan.VisibleTools.Count);
+            Assert.AreEqual(2, shell.Documents.Count);
+            Assert.AreEqual(6, shell.Tools.Count);
+            Assert.AreSame(restoredItems.HiddenTool, result.RestorePlan.SelectedItem);
+            Assert.IsFalse(restoredItems.HiddenTool.IsVisible);
+            Assert.AreEqual("document-primary", restoredItems.PrimaryDocument.StateMarker);
+            Assert.AreEqual("document-secondary", restoredItems.SecondaryDocument.StateMarker);
+            Assert.AreEqual("tool-floating", restoredItems.FloatingTool.StateMarker);
+            Assert.AreEqual("tool-hidden", restoredItems.HiddenTool.StateMarker);
+            Assert.AreEqual(
+                expectedSnapshot,
+                CreateSemanticSnapshot(GetManager(view).Layout));
         }
 
         // Intent: prove legacy ContentIds still reconnect every document and tool model.
@@ -441,7 +512,7 @@ namespace Gemini.Tests.Modules.Shell
                 args.Content = "restored:" + args.Model.ContentId;
             };
             using (var stream = new FileStream(
-                GetFixturePath(),
+                Get460FixturePath(),
                 FileMode.Open,
                 FileAccess.Read,
                 FileShare.Read))
@@ -452,13 +523,22 @@ namespace Gemini.Tests.Modules.Shell
             return new FixtureLoadResult(manager, callbackIds);
         }
 
-        private static string GetFixturePath()
+        private static string Get460FixturePath()
         {
             return Path.Combine(
                 AppContext.BaseDirectory,
                 "TestData",
                 "AvalonDock460",
                 "CompleteLayout.xml");
+        }
+
+        private static string Get4741StateFixturePath()
+        {
+            return Path.Combine(
+                AppContext.BaseDirectory,
+                "TestData",
+                "AvalonDock4741",
+                "ApplicationState.bin");
         }
 
         private static ShellView CreateCompleteRuntimeView(RuntimeItems items)

@@ -17,6 +17,10 @@
   <ItemGroup>
     <None Update="TestData\AvalonDock460\CompleteLayout.xml"
           CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData\AvalonDock4741\ApplicationState.bin"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData\AvalonDock4741\README.md"
+          CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
