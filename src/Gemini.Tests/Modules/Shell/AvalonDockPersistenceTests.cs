@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml;
 using AvalonDock;
 using AvalonDock.Layout;
-using AvalonDock.Layout.Serialization;
+using AvalonDock.Serializer.Xml;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -29,6 +30,9 @@ namespace Gemini.Tests.Modules.Shell
 
         private const string Complete4741StateFixtureHash =
             "58FF3ED46BD9E545C15D8A9B81CD9475CC404B3F690D7EE326FD80C40DBBB7D4";
+
+        private const string Complete501StateFixtureHash =
+            "3218BBB44DC60EB8AFEA2C6BD8E1B768CD6DEF54F246F5C964E2DCFCED6D527F";
 
         private static readonly string[] FixtureDocumentIds =
         {
@@ -73,68 +77,34 @@ namespace Gemini.Tests.Modules.Shell
         [TestMethod]
         public void Complete4741StateFixture_BytesMatchCapturedImmutableBaseline()
         {
-            byte[] fixture = File.ReadAllBytes(Get4741StateFixturePath());
-            string actualHash;
-            using (var algorithm = SHA256.Create())
-            {
-                actualHash = BitConverter.ToString(algorithm.ComputeHash(fixture))
-                    .Replace("-", string.Empty);
-            }
+            AssertCompleteStateFixtureHash(
+                Get4741StateFixturePath(),
+                Complete4741StateFixtureHash);
+        }
 
-            Assert.AreEqual(Complete4741StateFixtureHash, actualHash);
-            using (var reader = new BinaryReader(new MemoryStream(fixture, false)))
-            {
-                Assert.AreEqual(8, reader.ReadInt32());
-            }
+        // Intent: freeze v5 writer output separately instead of overwriting rollback evidence.
+        [TestMethod]
+        public void Complete501StateFixture_BytesMatchCapturedImmutableWriterOutput()
+        {
+            AssertCompleteStateFixtureHash(
+                Get501StateFixturePath(),
+                Complete501StateFixtureHash);
         }
 
         // Intent: prove a complete pre-v5 state restores payloads and layout semantics together.
         [TestMethod]
         public async Task Complete4741StateFixture_LoadStateAsync_RestoresWholeState()
         {
-            var expectedView = CreateCompleteRuntimeView(RuntimeItems.CreateSource());
-            var expectedSnapshot = CreateSemanticSnapshot(GetManager(expectedView).Layout);
-            var restoredItems = RuntimeItems.CreateSource();
-            var documentQueue = new Queue<PersistentTestDocument>(
-                restoredItems.Documents);
-            var toolQueue = new Queue<PersistentTestTool>(
-                restoredItems.Tools);
-            var shell = new TestShell();
-            var view = new ShellView();
-            LayoutItemStateLoadResult result;
+            await AssertCompleteStateFixtureRestoresWholeState(
+                Get4741StateFixturePath());
+        }
 
-            using (new IoCOverrideScope(
-                (type, key) =>
-                {
-                    if (type == typeof(PersistentTestDocument))
-                        return documentQueue.Dequeue();
-                    if (type == typeof(PersistentTestTool))
-                        return toolQueue.Dequeue();
-                    return null;
-                },
-                type => Enumerable.Empty<object>(),
-                instance => { }))
-            {
-                result = await new LayoutItemStatePersister().LoadStateAsync(
-                    shell,
-                    view,
-                    Get4741StateFixturePath());
-            }
-
-            Assert.AreEqual(LayoutItemStateLoadStatus.Success, result.Status);
-            Assert.AreEqual(2, result.RestorePlan.Documents.Count);
-            Assert.AreEqual(5, result.RestorePlan.VisibleTools.Count);
-            Assert.AreEqual(2, shell.Documents.Count);
-            Assert.AreEqual(6, shell.Tools.Count);
-            Assert.AreSame(restoredItems.HiddenTool, result.RestorePlan.SelectedItem);
-            Assert.IsFalse(restoredItems.HiddenTool.IsVisible);
-            Assert.AreEqual("document-primary", restoredItems.PrimaryDocument.StateMarker);
-            Assert.AreEqual("document-secondary", restoredItems.SecondaryDocument.StateMarker);
-            Assert.AreEqual("tool-floating", restoredItems.FloatingTool.StateMarker);
-            Assert.AreEqual("tool-hidden", restoredItems.HiddenTool.StateMarker);
-            Assert.AreEqual(
-                expectedSnapshot,
-                CreateSemanticSnapshot(GetManager(view).Layout));
+        // Intent: prove v5 writer output is a complete, readable Gemini state envelope.
+        [TestMethod]
+        public async Task Complete501StateFixture_LoadStateAsync_RestoresWholeState()
+        {
+            await AssertCompleteStateFixtureRestoresWholeState(
+                Get501StateFixturePath());
         }
 
         // Intent: prove legacy ContentIds still reconnect every document and tool model.
@@ -400,7 +370,7 @@ namespace Gemini.Tests.Modules.Shell
 
         // Intent: reject corrupt layouts before callbacks or partial replacement expose bad state.
         [TestMethod]
-        public void LoadLayout_MalformedXml_ThrowsInvalidOperationWithValueArgumentAndNoCallbacks()
+        public void LoadLayout_MalformedXml_ThrowsInvalidOperationWithXmlCauseAndNoCallbacks()
         {
             var view = new ShellView();
             var manager = GetManager(view);
@@ -418,9 +388,8 @@ namespace Gemini.Tests.Modules.Shell
                     tool => toolCallbacks++,
                     document => documentCallbacks++,
                     new Dictionary<string, ILayoutItem>()));
-                var baseException = Assert.IsInstanceOfType<ArgumentNullException>(
+                Assert.IsInstanceOfType<XmlException>(
                     exception.GetBaseException());
-                Assert.AreEqual("value", baseException.ParamName);
             }
 
             Assert.AreEqual(0, documentCallbacks);
@@ -539,6 +508,82 @@ namespace Gemini.Tests.Modules.Shell
                 "TestData",
                 "AvalonDock4741",
                 "ApplicationState.bin");
+        }
+
+        private static string Get501StateFixturePath()
+        {
+            return Path.Combine(
+                AppContext.BaseDirectory,
+                "TestData",
+                "AvalonDock501",
+                "ApplicationState.bin");
+        }
+
+        private static void AssertCompleteStateFixtureHash(
+            string fixturePath,
+            string expectedHash)
+        {
+            byte[] fixture = File.ReadAllBytes(fixturePath);
+            string actualHash;
+            using (var algorithm = SHA256.Create())
+            {
+                actualHash = BitConverter.ToString(algorithm.ComputeHash(fixture))
+                    .Replace("-", string.Empty);
+            }
+
+            Assert.AreEqual(expectedHash, actualHash);
+            using (var reader = new BinaryReader(new MemoryStream(fixture, false)))
+            {
+                Assert.AreEqual(8, reader.ReadInt32());
+            }
+        }
+
+        private static async Task AssertCompleteStateFixtureRestoresWholeState(
+            string fixturePath)
+        {
+            var expectedView = CreateCompleteRuntimeView(RuntimeItems.CreateSource());
+            var expectedSnapshot = CreateSemanticSnapshot(GetManager(expectedView).Layout);
+            var restoredItems = RuntimeItems.CreateSource();
+            var documentQueue = new Queue<PersistentTestDocument>(
+                restoredItems.Documents);
+            var toolQueue = new Queue<PersistentTestTool>(
+                restoredItems.Tools);
+            var shell = new TestShell();
+            var view = new ShellView();
+            LayoutItemStateLoadResult result;
+
+            using (new IoCOverrideScope(
+                (type, key) =>
+                {
+                    if (type == typeof(PersistentTestDocument))
+                        return documentQueue.Dequeue();
+                    if (type == typeof(PersistentTestTool))
+                        return toolQueue.Dequeue();
+                    return null;
+                },
+                type => Enumerable.Empty<object>(),
+                instance => { }))
+            {
+                result = await new LayoutItemStatePersister().LoadStateAsync(
+                    shell,
+                    view,
+                    fixturePath);
+            }
+
+            Assert.AreEqual(LayoutItemStateLoadStatus.Success, result.Status);
+            Assert.AreEqual(2, result.RestorePlan.Documents.Count);
+            Assert.AreEqual(5, result.RestorePlan.VisibleTools.Count);
+            Assert.AreEqual(2, shell.Documents.Count);
+            Assert.AreEqual(6, shell.Tools.Count);
+            Assert.AreSame(restoredItems.HiddenTool, result.RestorePlan.SelectedItem);
+            Assert.IsFalse(restoredItems.HiddenTool.IsVisible);
+            Assert.AreEqual("document-primary", restoredItems.PrimaryDocument.StateMarker);
+            Assert.AreEqual("document-secondary", restoredItems.SecondaryDocument.StateMarker);
+            Assert.AreEqual("tool-floating", restoredItems.FloatingTool.StateMarker);
+            Assert.AreEqual("tool-hidden", restoredItems.HiddenTool.StateMarker);
+            Assert.AreEqual(
+                expectedSnapshot,
+                CreateSemanticSnapshot(GetManager(view).Layout));
         }
 
         private static ShellView CreateCompleteRuntimeView(RuntimeItems items)

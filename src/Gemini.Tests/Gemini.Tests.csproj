@@ -21,6 +21,10 @@
           CopyToOutputDirectory="PreserveNewest" />
     <None Update="TestData\AvalonDock4741\README.md"
           CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData\AvalonDock501\ApplicationState.bin"
+          CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData\AvalonDock501\README.md"
+          CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

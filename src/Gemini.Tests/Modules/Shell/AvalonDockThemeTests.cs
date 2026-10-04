@@ -26,36 +26,50 @@ namespace Gemini.Tests.Modules.Shell
         [DataRow("LightTheme", "LightTheme.xaml", "#FFEEEEF2")]
         [DataRow("DarkTheme", "DarkTheme.xaml", "#FF2D2D30")]
         [DataRow("BlueTheme", "BlueTheme.xaml", "#FFD6DBE9")]
-        public void ApplicationResources_VendorAndGeminiUris_LoadInDeclaredOrder(
+        public void ApplicationResources_GeneratedVendorAndGeminiUri_LoadInDeclaredOrder(
             string themeTypeName,
             string resourceName,
             string expectedMenuBackground)
         {
             EnsurePackUriParser();
             var theme = CreateTheme(themeTypeName);
+            using (var host = new ThemeHost())
+            {
+                var manager = new ThemeManager(new[] { theme });
+                try
+                {
+                    Assert.IsTrue(manager.SetCurrentTheme(themeTypeName));
 
-            var resourceUris = theme.ApplicationResources.ToArray();
-            var vendorDictionary = LoadDictionary(resourceUris[0]);
-            var geminiDictionary = LoadDictionary(resourceUris[1]);
+                    var resourceUris = theme.ApplicationResources.ToArray();
+                    var owner = Application.Current.Resources.MergedDictionaries.Last();
+                    var vendorDictionary = owner.MergedDictionaries[0];
+                    var geminiDictionary = owner.MergedDictionaries[1];
 
-            Assert.AreEqual(2, resourceUris.Length);
-            Assert.AreEqual(
-                "pack://application:,,,/AvalonDock.Themes.VS2013;component/" + resourceName,
-                resourceUris[0].OriginalString);
-            Assert.AreEqual(
-                "pack://application:,,,/Gemini;component/Themes/VS2013/" + resourceName,
-                resourceUris[1].OriginalString);
-            Assert.AreEqual(2, vendorDictionary.MergedDictionaries.Count);
-            Assert.AreEqual(1, geminiDictionary.MergedDictionaries.Count);
-            Assert.IsInstanceOfType<Viewbox>(vendorDictionary["DockAnchorableRight"]);
-            Assert.AreEqual(
-                (Color)ColorConverter.ConvertFromString(expectedMenuBackground),
-                Assert.IsInstanceOfType<SolidColorBrush>(
-                    geminiDictionary["MenuDefaultBackground"]).Color);
-            Assert.AreEqual(
-                typeof(ButtonBase),
-                Assert.IsInstanceOfType<Style>(
-                    geminiDictionary["ToolBarButtonStyleBase"]).TargetType);
+                    Assert.AreEqual(1, resourceUris.Length);
+                    Assert.AreEqual(
+                        "pack://application:,,,/Gemini;component/Themes/VS2013/" +
+                        resourceName,
+                        resourceUris[0].OriginalString);
+                    Assert.IsNull(vendorDictionary.Source);
+                    Assert.AreEqual(resourceUris[0], geminiDictionary.Source);
+                    Assert.IsInstanceOfType<Viewbox>(
+                        vendorDictionary["DockAnchorableRight"]);
+                    Assert.AreEqual(
+                        (Color)ColorConverter.ConvertFromString(expectedMenuBackground),
+                        Assert.IsInstanceOfType<SolidColorBrush>(
+                            Application.Current.Resources[
+                                "MenuDefaultBackground"]).Color);
+                    Assert.AreEqual(
+                        typeof(ButtonBase),
+                        Assert.IsInstanceOfType<Style>(
+                            Application.Current.Resources[
+                                "ToolBarButtonStyleBase"]).TargetType);
+                }
+                finally
+                {
+                    DetachThemeSettingsListener(manager);
+                }
+            }
         }
 
         // Intent: keep failed lookups inert and repeated live switches deterministic.
@@ -146,50 +160,153 @@ namespace Gemini.Tests.Modules.Shell
             }
         }
 
+        // Intent: preserve the public URI-only ITheme extension contract for third-party themes.
+        [TestMethod]
+        public void SetCurrentTheme_ExternalUriOnlyTheme_DoesNotInjectVendorResources()
+        {
+            EnsurePackUriParser();
+            using (var host = new ThemeHost())
+            {
+                var manager = new ThemeManager(new ITheme[]
+                {
+                    new ExternalUriOnlyTheme()
+                });
+                try
+                {
+                    Assert.IsTrue(
+                        manager.SetCurrentTheme(nameof(ExternalUriOnlyTheme)));
+
+                    var owner =
+                        Application.Current.Resources.MergedDictionaries.Last();
+                    Assert.AreEqual(1, owner.MergedDictionaries.Count);
+                    Assert.AreEqual(
+                        ExternalUriOnlyTheme.ResourceUri,
+                        owner.MergedDictionaries[0].Source);
+                    Assert.IsFalse(owner.Contains("DockAnchorableRight"));
+                    Assert.AreEqual(
+                        (Color)ColorConverter.ConvertFromString("#FFEEEEF2"),
+                        Assert.IsInstanceOfType<SolidColorBrush>(
+                            owner["MenuDefaultBackground"]).Color);
+                }
+                finally
+                {
+                    DetachThemeSettingsListener(manager);
+                }
+            }
+        }
+
+        // Intent: prevent a malformed theme from exposing partial resources or a false change event.
+        [TestMethod]
+        public void SetCurrentTheme_FailedMaterialization_PreservesCurrentThemeAndResources()
+        {
+            EnsurePackUriParser();
+            using (var host = new ThemeHost())
+            {
+                var lightTheme = new LightTheme();
+                var manager = new ThemeManager(new ITheme[]
+                {
+                    lightTheme,
+                    new MissingWindowResourceTheme()
+                });
+                try
+                {
+                    int changeCount = 0;
+                    manager.CurrentThemeChanged += (sender, args) => changeCount++;
+                    Assert.IsTrue(manager.SetCurrentTheme(nameof(LightTheme)));
+                    var owner =
+                        Application.Current.Resources.MergedDictionaries.Last();
+                    var applicationResources =
+                        owner.MergedDictionaries.ToArray();
+                    var windowResources =
+                        host.WindowThemeDictionary.MergedDictionaries.ToArray();
+                    Exception failure = null;
+
+                    try
+                    {
+                        manager.SetCurrentTheme(
+                            nameof(MissingWindowResourceTheme));
+                    }
+                    catch (Exception exception)
+                    {
+                        failure = exception;
+                    }
+
+                    Assert.IsNotNull(failure);
+                    Assert.AreSame(lightTheme, manager.CurrentTheme);
+                    Assert.AreEqual(1, changeCount);
+                    CollectionAssert.AreEqual(
+                        applicationResources,
+                        owner.MergedDictionaries.ToArray());
+                    CollectionAssert.AreEqual(
+                        windowResources,
+                        host.WindowThemeDictionary.MergedDictionaries.ToArray());
+                }
+                finally
+                {
+                    DetachThemeSettingsListener(manager);
+                }
+            }
+        }
+
         // Intent: probe cross-assembly keys and types most likely to break during theme upgrades.
         [TestMethod]
         public void SelectedThemeResources_DockingMenuToolbarInspectorAndConverters_ResolveConcreteTypes()
         {
             EnsurePackUriParser();
-            var themeDictionary = LoadDictionary(
-                new LightTheme().ApplicationResources.First());
-            var geminiDictionary = LoadDictionary(
-                new LightTheme().ApplicationResources.Last());
-            var inspectorResources = LoadDictionary(new Uri(
-                "pack://application:,,,/Gemini.Modules.Inspector;component/Resources/Resources.xaml"));
-            var inspectorTheme = LoadDictionary(new Uri(
-                "pack://application:,,,/Gemini.Modules.Inspector;component/Themes/Generic.xaml"));
-            var shellView = new ShellView();
+            using (var host = new ThemeHost())
+            {
+                var manager = new ThemeManager(new ITheme[]
+                {
+                    new LightTheme()
+                });
+                try
+                {
+                    Assert.IsTrue(manager.SetCurrentTheme(nameof(LightTheme)));
+                    var inspectorResources = LoadDictionary(new Uri(
+                        "pack://application:,,,/Gemini.Modules.Inspector;component/Resources/Resources.xaml"));
+                    var inspectorTheme = LoadDictionary(new Uri(
+                        "pack://application:,,,/Gemini.Modules.Inspector;component/Themes/Generic.xaml"));
+                    var shellView = new ShellView();
 
-            Assert.IsInstanceOfType<Viewbox>(themeDictionary["DockDocumentBottom"]);
-            Assert.AreEqual(
-                typeof(MenuItem),
-                Assert.IsInstanceOfType<Style>(
-                    geminiDictionary["MetroMenuItem"]).TargetType);
-            Assert.AreEqual(
-                typeof(ButtonBase),
-                Assert.IsInstanceOfType<Style>(
-                    geminiDictionary["ToolBarButtonStyleBase"]).TargetType);
-            Assert.IsInstanceOfType<InspectorItemTemplateSelector>(
-                inspectorResources["InspectorItemTemplateSelector"]);
-            Assert.IsInstanceOfType<InverseBoolConverter>(
-                inspectorResources["InverseBoolConverter"]);
-            Assert.IsInstanceOfType<BoolToVisibilityConverter>(
-                inspectorResources["BoolToVisibilityConverter"]);
-            Assert.AreEqual(
-                typeof(SimpleGridSplitter),
-                Assert.IsInstanceOfType<Style>(
-                    inspectorTheme[typeof(SimpleGridSplitter)]).TargetType);
-            Assert.AreEqual(
-                typeof(NumericTextBox),
-                Assert.IsInstanceOfType<Style>(
-                    inspectorTheme[typeof(NumericTextBox)]).TargetType);
-            Assert.IsInstanceOfType<NullableValueConverter>(
-                shellView.Resources["NullableValueConverter"]);
-            Assert.IsInstanceOfType<TruncateMiddleConverter>(
-                shellView.Resources["TruncateMiddleConverter"]);
-            Assert.IsInstanceOfType<BoolToVisibilityConverter>(
-                shellView.Resources["BoolToVisibilityConverter"]);
+                    Assert.IsInstanceOfType<Viewbox>(
+                        Application.Current.Resources["DockDocumentBottom"]);
+                    Assert.AreEqual(
+                        typeof(MenuItem),
+                        Assert.IsInstanceOfType<Style>(
+                            Application.Current.Resources[
+                                "MetroMenuItem"]).TargetType);
+                    Assert.AreEqual(
+                        typeof(ButtonBase),
+                        Assert.IsInstanceOfType<Style>(
+                            Application.Current.Resources[
+                                "ToolBarButtonStyleBase"]).TargetType);
+                    Assert.IsInstanceOfType<InspectorItemTemplateSelector>(
+                        inspectorResources["InspectorItemTemplateSelector"]);
+                    Assert.IsInstanceOfType<InverseBoolConverter>(
+                        inspectorResources["InverseBoolConverter"]);
+                    Assert.IsInstanceOfType<BoolToVisibilityConverter>(
+                        inspectorResources["BoolToVisibilityConverter"]);
+                    Assert.AreEqual(
+                        typeof(SimpleGridSplitter),
+                        Assert.IsInstanceOfType<Style>(
+                            inspectorTheme[
+                                typeof(SimpleGridSplitter)]).TargetType);
+                    Assert.AreEqual(
+                        typeof(NumericTextBox),
+                        Assert.IsInstanceOfType<Style>(
+                            inspectorTheme[typeof(NumericTextBox)]).TargetType);
+                    Assert.IsInstanceOfType<NullableValueConverter>(
+                        shellView.Resources["NullableValueConverter"]);
+                    Assert.IsInstanceOfType<TruncateMiddleConverter>(
+                        shellView.Resources["TruncateMiddleConverter"]);
+                    Assert.IsInstanceOfType<BoolToVisibilityConverter>(
+                        shellView.Resources["BoolToVisibilityConverter"]);
+                }
+                finally
+                {
+                    DetachThemeSettingsListener(manager);
+                }
+            }
         }
 
         private static void AssertThemeSwitch(
@@ -206,10 +323,9 @@ namespace Gemini.Tests.Modules.Shell
             Assert.AreEqual(expectedThemeType, manager.CurrentTheme.GetType());
             var owner = Application.Current.Resources.MergedDictionaries
                 .Single(dictionary => dictionary.MergedDictionaries.Count == 2);
-            Assert.AreEqual(
-                "pack://application:,,,/AvalonDock.Themes.VS2013;component/" +
-                expectedResourceName,
-                owner.MergedDictionaries[0].Source.OriginalString);
+            Assert.IsNull(owner.MergedDictionaries[0].Source);
+            Assert.IsInstanceOfType<Viewbox>(
+                owner.MergedDictionaries[0]["DockAnchorableRight"]);
             Assert.AreEqual(
                 "pack://application:,,,/Gemini;component/Themes/VS2013/" +
                 expectedResourceName,
@@ -241,6 +357,43 @@ namespace Gemini.Tests.Modules.Shell
                         nameof(themeTypeName),
                         themeTypeName,
                         "Unknown built-in theme.");
+            }
+        }
+
+        private sealed class ExternalUriOnlyTheme : ITheme
+        {
+            public static readonly Uri ResourceUri = new Uri(
+                "pack://application:,,,/Gemini;component/Themes/VS2013/LightTheme.xaml");
+
+            public string Name => "External URI-only";
+
+            public IEnumerable<Uri> ApplicationResources
+            {
+                get { yield return ResourceUri; }
+            }
+
+            public IEnumerable<Uri> MainWindowResources
+            {
+                get { yield break; }
+            }
+        }
+
+        private sealed class MissingWindowResourceTheme : ITheme
+        {
+            public string Name => "Missing window resource";
+
+            public IEnumerable<Uri> ApplicationResources
+            {
+                get { yield return ExternalUriOnlyTheme.ResourceUri; }
+            }
+
+            public IEnumerable<Uri> MainWindowResources
+            {
+                get
+                {
+                    yield return new Uri(
+                        "pack://application:,,,/Gemini;component/Themes/VS2013/Missing.xaml");
+                }
             }
         }
 
