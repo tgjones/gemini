@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Gemini.Modules.CodeEditor" Version="$(GeminiPackageVersion)" />
     <PackageReference Include="GeminiWpf" Version="$(GeminiPackageVersion)" />
   </ItemGroup>
 
