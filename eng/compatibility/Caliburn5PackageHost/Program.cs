@@ -3,8 +3,10 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using AvalonDock;
-using AvalonDock.Layout.Serialization;
+using AvalonDock.Serializer.Xml;
+using AvalonDock.Themes;
 using Caliburn.Micro;
 using Gemini.Framework;
 
@@ -27,22 +29,43 @@ namespace Caliburn5PackageHost
                     return 1;
             }
 
-            var theme = new ResourceDictionary
+            var theme = new Vs2013LightTheme().ThemeResourceDictionary;
+            var expectedAvalonDockVersion = new Version(5, 0, 1, 0);
+            var avalonDockAssemblies = new[]
             {
-                Source = new Uri(
-                    "pack://application:,,,/AvalonDock.Themes.VS2013;component/LightTheme.xaml",
-                    UriKind.Absolute)
+                typeof(DockingManager).Assembly,
+                Assembly.Load("AvalonDock.Core"),
+                typeof(XmlLayoutSerializer).Assembly,
+                Assembly.Load("AvalonDock.Themes.VS"),
+                typeof(Vs2013LightTheme).Assembly
             };
-            var themeAssembly = Assembly.Load("AvalonDock.Themes.VS2013");
-            var expectedAvalonDockVersion = new Version(4, 74, 1, 0);
+            var expectedAvalonDockAssemblyNames = new[]
+            {
+                "AvalonDock",
+                "AvalonDock.Core",
+                "AvalonDock.Serializer.Xml",
+                "AvalonDock.Themes.VS",
+                "AvalonDock.Themes.VS2013"
+            };
+            for (int i = 0; i < avalonDockAssemblies.Length; i++)
+            {
+                var assemblyName = avalonDockAssemblies[i].GetName();
+                Console.WriteLine(
+                    "{0} {1}",
+                    assemblyName.Name,
+                    assemblyName.Version);
+                if (assemblyName.Name != expectedAvalonDockAssemblyNames[i] ||
+                    assemblyName.Version != expectedAvalonDockVersion)
+                {
+                    return 1;
+                }
+            }
 
             return typeof(WindowBase).Assembly.GetName().Name == "Gemini"
                 && typeof(Screen).Assembly.GetName().Name == "Caliburn.Micro.Core"
                 && typeof(BootstrapperBase).Assembly.GetName().Name == "Caliburn.Micro.Platform"
-                && typeof(DockingManager).Assembly.GetName().Version == expectedAvalonDockVersion
-                && themeAssembly.GetName().Version == expectedAvalonDockVersion
                 && manager.Layout != null
-                && theme.MergedDictionaries.Count > 0
+                && theme["DockAnchorableRight"] is Viewbox
                 ? 0
                 : 1;
         }

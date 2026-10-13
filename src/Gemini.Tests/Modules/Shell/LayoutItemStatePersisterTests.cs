@@ -288,6 +288,57 @@ namespace Gemini.Tests.Modules.Shell
             }
         }
 
+        // Intent: keep a duplicate content ID from replacing the first valid restored item.
+        [TestMethod]
+        public async Task LoadStateAsync_DuplicateContentId_ReturnsPartialAndKeepsFirstItem()
+        {
+            using (var directory = new TestDirectory())
+            {
+                string stateFile = directory.GetPath("layout-state.bin");
+                using (var writer = new BinaryWriter(File.Create(stateFile)))
+                {
+                    writer.Write(2);
+                    writer.Write(typeof(EqualDocument).AssemblyQualifiedName);
+                    writer.Write("duplicate-document");
+                    writer.Write(0L);
+                    writer.Write(typeof(EqualDocument).AssemblyQualifiedName);
+                    writer.Write("duplicate-document");
+                    writer.Write(0L);
+                    writer.Write(LayoutBytes);
+                }
+
+                var first = new EqualDocument();
+                var second = new EqualDocument();
+                var instances = new Queue<EqualDocument>(
+                    new[] { first, second });
+                var shell = new TestShell();
+                var shellView = new RecordingShellView(LayoutBytes)
+                {
+                    LoadAction = (addTool, addDocument, items) =>
+                        addDocument((IDocument)items["duplicate-document"])
+                };
+
+                using (CreateIoCScope(type =>
+                    type == typeof(EqualDocument)
+                        ? instances.Dequeue()
+                        : null))
+                {
+                    var result = await new LayoutItemStatePersister().LoadStateAsync(
+                        shell,
+                        shellView,
+                        stateFile);
+
+                    Assert.AreEqual(LayoutItemStateLoadStatus.Partial, result.Status);
+                    StringAssert.Contains(result.Details, "duplicate content ID");
+                    Assert.AreEqual(1, shell.Documents.Count);
+                    Assert.AreSame(first, shell.Documents[0]);
+                    Assert.AreEqual(1, result.RestorePlan.Documents.Count);
+                    Assert.AreSame(first, result.RestorePlan.Documents[0]);
+                    Assert.AreEqual(0, instances.Count);
+                }
+            }
+        }
+
         [TestMethod]
         public async Task LoadStateAsync_LayoutSerializerFailure_ReturnsCorruptWithOriginalException()
         {

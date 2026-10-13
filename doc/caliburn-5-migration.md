@@ -67,6 +67,28 @@ module, extension, and dependency binaries during rollout. AvalonDock XML is
 only the trailing section of that state file and is not a complete rollback
 artifact by itself.
 
+### AvalonDock 4.74.1 to 5.0.1
+
+This migration replaces the AvalonDock 4 package pair with the coherent 5.0.1
+package family. Gemini directly references the VS2013 theme and XML serializer
+packages. Their transitive graph supplies the engine, Core, and VS theme
+assemblies. The `net48` graph also resolves `System.Text.Json` 10.0.12, while
+the `net10.0-windows` graph uses the runtime's JSON implementation.
+
+AvalonDock 5 moves `XmlLayoutSerializer` to `AvalonDock.Serializer.Xml` and
+replaces the old VS2013 theme resource URIs with generated dictionaries.
+Gemini bridges its built-in Light, Dark, and Blue themes to those generated
+dictionaries before merging Gemini's own URI resources, so Gemini overrides
+remain authoritative. The public URI-based `ITheme` contract is unchanged;
+third-party themes continue to load only the resource URIs they declare.
+
+External controls and extensions that reference AvalonDock directly must be
+rebuilt against assembly version 5.0.1.0. Rollback requires reinstalling the
+complete 4.74.1 Gemini package, module, extension, and AvalonDock dependency
+family together with a preserved 4.74.1 complete-state file. A state file
+written by the AvalonDock 5 application is not claimed to be readable by the
+4.74.1 application.
+
 ## Asynchronous shell and startup readiness
 
 `IShell.ShowTool` has been replaced by the awaitable `ShowToolAsync` overloads,

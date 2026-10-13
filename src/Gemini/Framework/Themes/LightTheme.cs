@@ -33,7 +33,6 @@ namespace Gemini.Framework.Themes
         {
             get
             {
-                yield return new Uri("pack://application:,,,/AvalonDock.Themes.VS2013;component/LightTheme.xaml");
                 yield return new Uri("pack://application:,,,/Gemini;component/Themes/VS2013/LightTheme.xaml");
             }
         }

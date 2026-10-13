@@ -19,8 +19,8 @@ reading the validation implementation. The script verifies:
 - all internal Gemini dependencies use the same NBGV-calculated version; and
 - every symbol package contains the matching portable PDBs; and
 - a package-only external host restores, builds, and runs against the expected
-  Caliburn dependency graph and exact native AvalonDock assets for every
-  retained framework.
+  Caliburn dependency graph, framework-specific dependencies, and exact
+  AvalonDock assets for every retained framework.
 
 Any framework, package, assembly, or dependency change must update the
 declarative contract deliberately. This prevents partial per-framework packages
@@ -168,6 +168,17 @@ Assert-Condition -Condition (Test-Path -LiteralPath $CompatibilityProjectPath -P
 $contract = Get-Content -LiteralPath $ContractPath -Raw | ConvertFrom-Json
 $expectedFrameworks = @($contract.frameworks)
 $expectedNuspecFrameworks = @($expectedFrameworks | ForEach-Object nuspec)
+
+# Track the union so every target can reject dependencies declared only for
+# another framework instead of validating only packages that should be present.
+$targetSpecificDependencyNames = [System.Collections.Generic.HashSet[string]]::new()
+foreach ($framework in $expectedFrameworks) {
+    foreach ($dependency in $framework.resolvedDependencies.PSObject.Properties) {
+        Assert-Condition -Condition ($null -eq $contract.resolvedDependencies.PSObject.Properties[$dependency.Name]) `
+            -Message "Resolved dependency '$($dependency.Name)' cannot be both common and framework-specific."
+        $null = $targetSpecificDependencyNames.Add($dependency.Name)
+    }
+}
 $expectedPackages = @{}
 foreach ($packageDefinition in @($contract.packages)) {
     Assert-Condition -Condition (-not $expectedPackages.ContainsKey($packageDefinition.id)) `
@@ -361,18 +372,38 @@ foreach ($framework in $expectedFrameworks) {
         -Message "Compatibility assets are missing target '$($framework.lockFileTarget)'."
 
     $resolvedPackages = @($targetProperty.Value.PSObject.Properties.Name)
+
+    # Each target inherits the common graph and adds only its declared
+    # framework-specific dependencies.
+    $expectedResolvedDependencies = @{}
     foreach ($dependency in $contract.resolvedDependencies.PSObject.Properties) {
-        $expectedIdentity = "$($dependency.Name)/$($dependency.Value)"
+        $expectedResolvedDependencies[$dependency.Name] = [string] $dependency.Value
+    }
+    foreach ($dependency in $framework.resolvedDependencies.PSObject.Properties) {
+        $expectedResolvedDependencies[$dependency.Name] = [string] $dependency.Value
+    }
+
+    foreach ($dependency in $expectedResolvedDependencies.GetEnumerator()) {
+        $expectedIdentity = "$($dependency.Key)/$($dependency.Value)"
         Assert-Condition -Condition ($expectedIdentity -cin $resolvedPackages) `
             -Message "Compatibility target '$($framework.lockFileTarget)' is missing resolved package '$expectedIdentity'."
     }
 
+    foreach ($dependencyName in $targetSpecificDependencyNames) {
+        if (-not $expectedResolvedDependencies.ContainsKey($dependencyName)) {
+            $unexpectedIdentities = @(
+                $resolvedPackages | Where-Object { $_ -like "$dependencyName/*" }
+            )
+            Assert-Condition -Condition ($unexpectedIdentities.Count -eq 0) `
+                -Message "Compatibility target '$($framework.lockFileTarget)' unexpectedly resolves framework-specific package '$dependencyName': [$($unexpectedIdentities -join ', ')]."
+        }
+    }
+
     foreach ($assetExpectation in $framework.resolvedAssets.PSObject.Properties) {
-        $dependency = $contract.resolvedDependencies.PSObject.Properties[$assetExpectation.Name]
-        Assert-Condition -Condition ($null -ne $dependency) `
+        Assert-Condition -Condition ($expectedResolvedDependencies.ContainsKey($assetExpectation.Name)) `
             -Message "Asset expectation '$($assetExpectation.Name)' has no resolved dependency version."
 
-        $expectedIdentity = "$($assetExpectation.Name)/$($dependency.Value)"
+        $expectedIdentity = "$($assetExpectation.Name)/$($expectedResolvedDependencies[$assetExpectation.Name])"
         $resolvedPackage = $targetProperty.Value.PSObject.Properties[$expectedIdentity]
         Assert-Condition -Condition ($null -ne $resolvedPackage) `
             -Message "Compatibility target '$($framework.lockFileTarget)' has no asset data for '$expectedIdentity'."
