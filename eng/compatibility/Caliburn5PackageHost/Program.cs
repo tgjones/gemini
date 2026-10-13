@@ -37,7 +37,7 @@ namespace Caliburn5PackageHost
 
             var theme = new Vs2013LightTheme().ThemeResourceDictionary;
             var expectedAvalonDockVersion = new Version(5, 0, 1, 0);
-            var expectedAvalonEditVersion = new Version(6, 0, 0, 0);
+            var expectedAvalonEditVersion = new Version(6, 3, 1, 120);
             var avalonDockAssemblies = new[]
             {
                 typeof(DockingManager).Assembly,

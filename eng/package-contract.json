@@ -9,7 +9,7 @@
         "System.Text.Json": "10.0.12"
       },
       "resolvedAssets": {
-        "AvalonEdit": "lib/net45/ICSharpCode.AvalonEdit.dll",
+        "AvalonEdit": "lib/net462/ICSharpCode.AvalonEdit.dll",
         "Dirkster.AvalonDock": "lib/net48/AvalonDock.dll",
         "Dirkster.AvalonDock.Core": "lib/netstandard2.0/AvalonDock.Core.dll",
         "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
@@ -25,7 +25,7 @@
       "lockFileTarget": "net10.0-windows",
       "resolvedDependencies": {},
       "resolvedAssets": {
-        "AvalonEdit": "lib/netcoreapp3.0/ICSharpCode.AvalonEdit.dll",
+        "AvalonEdit": "lib/net8.0-windows7.0/ICSharpCode.AvalonEdit.dll",
         "Dirkster.AvalonDock": "lib/net10.0-windows7.0/AvalonDock.dll",
         "Dirkster.AvalonDock.Core": "lib/netstandard2.0/AvalonDock.Core.dll",
         "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
@@ -35,7 +35,7 @@
     }
   ],
   "resolvedDependencies": {
-    "AvalonEdit": "6.0.0",
+    "AvalonEdit": "6.3.1.120",
     "Caliburn.Micro": "5.0.258",
     "Caliburn.Micro.Core": "5.0.258",
     "Microsoft.Xaml.Behaviors.Wpf": "1.1.135",
@@ -82,7 +82,7 @@
         "GeminiWpf"
       ],
       "externalDependencies": {
-        "AvalonEdit": "6.0.0"
+        "AvalonEdit": "6.3.1.120"
       }
     },
     {
