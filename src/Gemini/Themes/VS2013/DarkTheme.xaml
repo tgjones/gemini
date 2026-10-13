@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Controls/Merged.xaml" />
@@ -170,6 +170,19 @@
     <SolidColorBrush x:Key="TextBox.Selection.InactiveBackground" Color="#335C87"/>
     <SolidColorBrush x:Key="TextBox.Caret" Color="#F1F1F1"/>
 
+    <!--Text Editor - AvalonEdit-->
+    <SolidColorBrush x:Key="Editor.Foreground" Color="#FFF1F1F1" />
+    <SolidColorBrush x:Key="Editor.Background" Color="#333337" />
+    <SolidColorBrush x:Key="Editor.LineNumbersForeground" Color="#FF929292" />
+    <SolidColorBrush x:Key="Editor.CurrentLineBackground" Color="#333337" />
+    <SolidColorBrush x:Key="Editor.CurrentLineBorder" Color="#464646" />
+    <SolidColorBrush x:Key="Editor.NonPrintableCharacter" Color="#2FFFFFFF" />
+    <SolidColorBrush x:Key="Editor.LinkTextForeground" Color="#FFE5C365" />
+    <SolidColorBrush x:Key="Editor.LinkTextBackground" Color="Transparent" />
+    <SolidColorBrush x:Key="Editor.SelectionBrush" Color="#335C87" Opacity="0.7"/>
+    <SolidColorBrush x:Key="Editor.SelectionBorder" Color="#50ffffff" />
+    <SolidColorBrush x:Key="Editor.SelectionForeground" Color="#FFF1F1F1" />
+    
     <!-- Slider -->
     <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#404044"/>
     <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#0099FF"/>
