@@ -6,11 +6,12 @@ namespace Gemini.Modules.CodeEditor.Controls
 {
     public class CodeEditor : TextEditor
     {
+        private SearchPanel OwnedSearchPanel { get; }
+
         public CodeEditor()
         {
             ApplySettings();
-            Loaded += (s, e) => SearchPanel.Install(this);
-            DocumentChanged += (s, e) => SearchPanel.Install(this);
+            OwnedSearchPanel = SearchPanel.Install(this);
         }
 
         public void ApplySettings()

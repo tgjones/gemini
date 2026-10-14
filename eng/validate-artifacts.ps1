@@ -19,8 +19,8 @@ reading the validation implementation. The script verifies:
 - all internal Gemini dependencies use the same NBGV-calculated version; and
 - every symbol package contains the matching portable PDBs; and
 - a package-only external host restores, builds, and runs against the expected
-  Caliburn dependency graph, framework-specific dependencies, and exact
-  AvalonDock assets for every retained framework.
+  Caliburn and CodeEditor dependency graphs, framework-specific dependencies,
+  and exact AvalonDock and AvalonEdit assets for every retained framework.
 
 Any framework, package, assembly, or dependency change must update the
 declarative contract deliberately. This prevents partial per-framework packages
@@ -344,10 +344,26 @@ $geminiPackagePath = Join-Path $PackagePath "GeminiWpf.$packageVersion.nupkg"
 Assert-Condition -Condition (Test-Path -LiteralPath $geminiPackagePath -PathType Leaf) `
     -Message "Gemini package does not exist: $geminiPackagePath"
 
-# Key validation restores by package content. Distinct working-tree payloads can
-# share an ID/version, but each must be restored and inspected independently.
-$geminiPackageHash = (Get-FileHash -LiteralPath $geminiPackagePath -Algorithm SHA256).Hash.ToLowerInvariant()
-$compatibilityPackagesPath = Join-Path $compatibilityProjectDirectory "obj\package-validation\$geminiPackageHash"
+# Key validation restores by the complete package-family content. Distinct
+# working-tree payloads can share IDs and versions, so every primary package
+# must participate in cache identity before the host restores any of them.
+$packageHashManifest = @(
+    $packages | ForEach-Object {
+        $hash = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+        "$($_.Name):$hash"
+    }
+)
+$manifestBytes = [System.Text.Encoding]::UTF8.GetBytes(
+    $packageHashManifest -join "`n")
+$hashAlgorithm = [System.Security.Cryptography.SHA256]::Create()
+try {
+    $packageFamilyHash = [System.BitConverter]::ToString(
+        $hashAlgorithm.ComputeHash($manifestBytes)).Replace('-', '').ToLowerInvariant()
+}
+finally {
+    $hashAlgorithm.Dispose()
+}
+$compatibilityPackagesPath = Join-Path $compatibilityProjectDirectory "obj\package-validation\$packageFamilyHash"
 Invoke-DotNet `
     -Description 'Package-only compatibility restore' `
     -Arguments @(

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -9,6 +10,11 @@ using AvalonDock.Serializer.Xml;
 using AvalonDock.Themes;
 using Caliburn.Micro;
 using Gemini.Framework;
+using Gemini.Modules.CodeEditor;
+using Gemini.Modules.CodeEditor.Controls;
+using Gemini.Modules.CodeEditor.Views;
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace Caliburn5PackageHost
 {
@@ -31,6 +37,7 @@ namespace Caliburn5PackageHost
 
             var theme = new Vs2013LightTheme().ThemeResourceDictionary;
             var expectedAvalonDockVersion = new Version(5, 0, 1, 0);
+            var expectedAvalonEditVersion = new Version(6, 3, 1, 120);
             var avalonDockAssemblies = new[]
             {
                 typeof(DockingManager).Assembly,
@@ -61,9 +68,23 @@ namespace Caliburn5PackageHost
                 }
             }
 
+            var codeEditor = new ExternalCodeEditor();
+            ICodeEditorView codeEditorView = new ExternalCodeEditorView(codeEditor);
+            ILanguageDefinition languageDefinition = new ExternalLanguageDefinition(
+                HighlightingManager.Instance.GetDefinition("C#"));
+            var avalonEditAssemblyName = typeof(TextEditor).Assembly.GetName();
+            Console.WriteLine(
+                "{0} {1}",
+                avalonEditAssemblyName.Name,
+                avalonEditAssemblyName.Version);
+
             return typeof(WindowBase).Assembly.GetName().Name == "Gemini"
                 && typeof(Screen).Assembly.GetName().Name == "Caliburn.Micro.Core"
                 && typeof(BootstrapperBase).Assembly.GetName().Name == "Caliburn.Micro.Platform"
+                && avalonEditAssemblyName.Name == "ICSharpCode.AvalonEdit"
+                && avalonEditAssemblyName.Version == expectedAvalonEditVersion
+                && codeEditorView.TextEditor == codeEditor
+                && languageDefinition.SyntaxHighlighting != null
                 && manager.Layout != null
                 && theme["DockAnchorableRight"] is Viewbox
                 ? 0
@@ -74,6 +95,44 @@ namespace Caliburn5PackageHost
         {
             public Task OnActivatedAsync(object sender, ActivationEventArgs eventArgs)
                 => Task.CompletedTask;
+        }
+
+        private sealed class ExternalCodeEditor : CodeEditor
+        {
+        }
+
+        private sealed class ExternalCodeEditorView : ICodeEditorView
+        {
+            internal ExternalCodeEditorView(TextEditor textEditor)
+            {
+                TextEditor = textEditor;
+            }
+
+            public TextEditor TextEditor { get; }
+
+            public void ApplySettings()
+            {
+                ((CodeEditor)TextEditor).ApplySettings();
+            }
+        }
+
+        private sealed class ExternalLanguageDefinition : ILanguageDefinition
+        {
+            internal ExternalLanguageDefinition(
+                IHighlightingDefinition syntaxHighlighting)
+            {
+                Name = "External C#";
+                FileExtensions = new[] { ".external-cs" };
+                SyntaxHighlighting = syntaxHighlighting;
+            }
+
+            public string Name { get; }
+
+            public IEnumerable<string> FileExtensions { get; set; }
+
+            public IHighlightingDefinition SyntaxHighlighting { get; }
+
+            public string CustomSyntaxHighlightingFileName { get; set; }
         }
     }
 }

@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AvalonEdit" Version="6.0.0" />
+    <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
   </ItemGroup>
 
   <ItemGroup>
