@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Media;
 using Caliburn.Micro;
 using Gemini.Framework;
 using Gemini.Framework.Services;
@@ -106,6 +107,42 @@ namespace Gemini.Tests.Modules.Inspector
             }
         }
 
+        [TestMethod]
+        public void ColorEditor_OpenChangeClose_GroupsOneUndoAction()
+        {
+            var original = Colors.CornflowerBlue;
+            var changed = Colors.Goldenrod;
+            var document = new TestDocument();
+            var shell = new ControlledShell { ActiveLayoutItem = document };
+            var descriptor = new CountingPropertyDescriptor(
+                original,
+                original,
+                typeof(Color));
+
+            using (CreateIoCScope(shell))
+            using (var editor = new ColorEditorViewModel
+            {
+                BoundPropertyDescriptor = new BoundPropertyDescriptor(
+                    new object(),
+                    descriptor)
+            })
+            {
+                editor.Opened();
+                editor.Value = Colors.DarkSeaGreen;
+                editor.Value = changed;
+                editor.Closed();
+
+                Assert.IsTrue(editor.IsUndoEnabled);
+                Assert.AreEqual(1, document.UndoRedoManager.ActionStack.Count);
+                Assert.AreEqual(1, document.UndoRedoManager.UndoActionCount);
+                Assert.AreEqual(changed, descriptor.CurrentValue);
+
+                document.UndoRedoManager.Undo(1);
+
+                Assert.AreEqual(original, descriptor.CurrentValue);
+            }
+        }
+
         private static IoCOverrideScope CreateIoCScope(IShell shell)
         {
             return new IoCOverrideScope(
@@ -144,13 +181,23 @@ namespace Gemini.Tests.Modules.Inspector
         private sealed class CountingPropertyDescriptor : PropertyDescriptor
         {
             private readonly object _defaultValue;
+            private readonly Type _propertyType;
             private object _value;
 
             public CountingPropertyDescriptor(object value, object defaultValue)
+                : this(value, defaultValue, typeof(object))
+            {
+            }
+
+            public CountingPropertyDescriptor(
+                object value,
+                object defaultValue,
+                Type propertyType)
                 : base("Value", new Attribute[0])
             {
                 _value = value;
                 _defaultValue = defaultValue;
+                _propertyType = propertyType;
             }
 
             public int CanResetCallCount { get; private set; }
@@ -167,7 +214,7 @@ namespace Gemini.Tests.Modules.Inspector
 
             public override bool IsReadOnly => false;
 
-            public override Type PropertyType => typeof(object);
+            public override Type PropertyType => _propertyType;
 
             public override bool CanResetValue(object component)
             {
