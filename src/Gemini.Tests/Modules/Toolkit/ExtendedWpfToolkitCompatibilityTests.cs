@@ -22,7 +22,7 @@ namespace Gemini.Tests.Modules.Toolkit
     public sealed class ExtendedWpfToolkitCompatibilityTests
     {
         private static readonly Version ExpectedToolkitVersion =
-            new Version(4, 6, 78, 0);
+            new Version(5, 0, 129, 0);
 
         [TestMethod]
         public void AssemblyIdentityAndRequiredTemplateParts_RemainStable()

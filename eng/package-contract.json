@@ -32,7 +32,7 @@
         "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
         "Dirkster.AvalonDock.Themes.VS": "lib/net10.0-windows7.0/AvalonDock.Themes.VS.dll",
         "Dirkster.AvalonDock.Themes.VS2013": "lib/net10.0-windows7.0/AvalonDock.Themes.VS2013.dll",
-        "DotNetProjects.Extended.Wpf.Toolkit": "lib/netcoreapp3.0/DotNetProjects.Wpf.Extended.Toolkit.dll"
+        "DotNetProjects.Extended.Wpf.Toolkit": "lib/net8.0-windows7.0/DotNetProjects.Wpf.Extended.Toolkit.dll"
       }
     }
   ],
@@ -46,7 +46,7 @@
     "Dirkster.AvalonDock.Serializer.Xml": "5.0.1",
     "Dirkster.AvalonDock.Themes.VS": "5.0.1",
     "Dirkster.AvalonDock.Themes.VS2013": "5.0.1",
-    "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78"
+    "DotNetProjects.Extended.Wpf.Toolkit": "5.0.129"
   },
   "shaders": [
     "AddEffect.ps",
@@ -61,7 +61,7 @@
         "Caliburn.Micro": "5.0.258",
         "Dirkster.AvalonDock.Serializer.Xml": "5.0.1",
         "Dirkster.AvalonDock.Themes.VS2013": "5.0.1",
-        "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78",
+        "DotNetProjects.Extended.Wpf.Toolkit": "5.0.129",
         "MahApps.Metro": "2.4.11",
         "System.ComponentModel.Composition": "6.0.0"
       }
