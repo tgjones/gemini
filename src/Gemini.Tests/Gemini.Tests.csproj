@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Gemini.Modules.CodeEditor\Gemini.Modules.CodeEditor.csproj" />
     <ProjectReference Include="..\Gemini.Modules.Inspector\Gemini.Modules.Inspector.csproj" />
+    <ProjectReference Include="..\Gemini.Modules.PropertyGrid\Gemini.Modules.PropertyGrid.csproj" />
     <ProjectReference Include="..\Gemini\Gemini.csproj" />
   </ItemGroup>
 

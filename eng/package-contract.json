@@ -15,6 +15,7 @@
         "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
         "Dirkster.AvalonDock.Themes.VS": "lib/net48/AvalonDock.Themes.VS.dll",
         "Dirkster.AvalonDock.Themes.VS2013": "lib/net48/AvalonDock.Themes.VS2013.dll",
+        "DotNetProjects.Extended.Wpf.Toolkit": "lib/net40/DotNetProjects.Wpf.Extended.Toolkit.dll",
         "System.Text.Json": "lib/net462/System.Text.Json.dll"
       }
     },
@@ -30,7 +31,8 @@
         "Dirkster.AvalonDock.Core": "lib/netstandard2.0/AvalonDock.Core.dll",
         "Dirkster.AvalonDock.Serializer.Xml": "lib/netstandard2.0/AvalonDock.Serializer.Xml.dll",
         "Dirkster.AvalonDock.Themes.VS": "lib/net10.0-windows7.0/AvalonDock.Themes.VS.dll",
-        "Dirkster.AvalonDock.Themes.VS2013": "lib/net10.0-windows7.0/AvalonDock.Themes.VS2013.dll"
+        "Dirkster.AvalonDock.Themes.VS2013": "lib/net10.0-windows7.0/AvalonDock.Themes.VS2013.dll",
+        "DotNetProjects.Extended.Wpf.Toolkit": "lib/netcoreapp3.0/DotNetProjects.Wpf.Extended.Toolkit.dll"
       }
     }
   ],
@@ -43,7 +45,8 @@
     "Dirkster.AvalonDock.Core": "5.0.1",
     "Dirkster.AvalonDock.Serializer.Xml": "5.0.1",
     "Dirkster.AvalonDock.Themes.VS": "5.0.1",
-    "Dirkster.AvalonDock.Themes.VS2013": "5.0.1"
+    "Dirkster.AvalonDock.Themes.VS2013": "5.0.1",
+    "DotNetProjects.Extended.Wpf.Toolkit": "4.6.78"
   },
   "shaders": [
     "AddEffect.ps",

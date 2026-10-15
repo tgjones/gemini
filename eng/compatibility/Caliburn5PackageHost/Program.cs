@@ -15,6 +15,8 @@ using Gemini.Modules.CodeEditor.Controls;
 using Gemini.Modules.CodeEditor.Views;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
+using Xceed.Wpf.Toolkit;
+using Xceed.Wpf.Toolkit.PropertyGrid;
 
 namespace Caliburn5PackageHost
 {
@@ -38,6 +40,7 @@ namespace Caliburn5PackageHost
             var theme = new Vs2013LightTheme().ThemeResourceDictionary;
             var expectedAvalonDockVersion = new Version(5, 0, 1, 0);
             var expectedAvalonEditVersion = new Version(6, 3, 1, 120);
+            var expectedToolkitVersion = new Version(4, 6, 78, 0);
             var avalonDockAssemblies = new[]
             {
                 typeof(DockingManager).Assembly,
@@ -77,6 +80,33 @@ namespace Caliburn5PackageHost
                 "{0} {1}",
                 avalonEditAssemblyName.Name,
                 avalonEditAssemblyName.Version);
+            var toolkitAssemblyName = typeof(PropertyGrid).Assembly.GetName();
+            var toolkitPublicKeyToken = BitConverter.ToString(
+                    toolkitAssemblyName.GetPublicKeyToken())
+                .Replace("-", string.Empty)
+                .ToLowerInvariant();
+            Console.WriteLine(
+                "{0} {1}",
+                toolkitAssemblyName.Name,
+                toolkitAssemblyName.Version);
+            var colorPicker = new ColorPicker
+            {
+                SelectedColor = System.Windows.Media.Colors.CornflowerBlue
+            };
+            var colorCanvas = new ColorCanvas
+            {
+                SelectedColor = System.Windows.Media.Colors.Goldenrod
+            };
+            var collectionControl = new CollectionControl
+            {
+                ItemsSource = new List<string> { "one" },
+                ItemsSourceType = typeof(List<string>)
+            };
+            var geminiTheme = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "pack://application:,,,/Gemini;component/Themes/VS2013/LightTheme.xaml")
+            };
 
             return typeof(WindowBase).Assembly.GetName().Name == "Gemini"
                 && typeof(Screen).Assembly.GetName().Name == "Caliburn.Micro.Core"
@@ -85,6 +115,16 @@ namespace Caliburn5PackageHost
                 && avalonEditAssemblyName.Version == expectedAvalonEditVersion
                 && codeEditorView.TextEditor == codeEditor
                 && languageDefinition.SyntaxHighlighting != null
+                && toolkitAssemblyName.Name == "DotNetProjects.Wpf.Extended.Toolkit"
+                && toolkitAssemblyName.Version == expectedToolkitVersion
+                && toolkitPublicKeyToken == "3e4669d2f30244f4"
+                && typeof(ColorPicker).Assembly == typeof(PropertyGrid).Assembly
+                && typeof(ColorCanvas).Assembly == typeof(PropertyGrid).Assembly
+                && typeof(CollectionControl).Assembly == typeof(PropertyGrid).Assembly
+                && colorPicker.SelectedColor == System.Windows.Media.Colors.CornflowerBlue
+                && colorCanvas.SelectedColor == System.Windows.Media.Colors.Goldenrod
+                && collectionControl.Items.Count == 1
+                && geminiTheme[typeof(ColorCanvas)] is Style
                 && manager.Layout != null
                 && theme["DockAnchorableRight"] is Viewbox
                 ? 0
